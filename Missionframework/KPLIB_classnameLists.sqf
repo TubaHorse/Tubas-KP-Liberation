@@ -401,6 +401,26 @@ KPLIB_param_supportModule_artyVeh = [
     "uns_Type55_mortar"
 ];
 
+// Classnames of cruise missile vehicles, which should be added to the support module
+KPLIB_param_supportModule_missileVeh = [
+    "EF_B_MRAP_01_AT_MJTF_Des",
+    "EF_B_MRAP_01_AT_MJTF_Wdl",
+    "EF_B_MRAP_01_AT_NATO",
+    "EF_B_MRAP_01_AT_NATO_Des",
+    "EF_B_MRAP_01_AT_NATO_T",
+    "EF_B_CombatBoat_AT_CTRG",
+    "EF_B_CombatBoat_AT_MJTF_Des",
+    "EF_B_CombatBoat_AT_MJTF_Wdl",
+    "EF_B_CombatBoat_AT_NATO_Des",
+    "EF_B_CombatBoat_AT_NATO",
+    "EF_B_CombatBoat_AT_NATO_T",
+    "EF_O_CombatBoat_AT_OPF",
+    "EF_O_CombatBoat_AT_OPF_T",
+    "EF_O_CombatBoat_AT_OPF_R",
+    "EF_I_CombatBoat_AT_AAF",
+    "B_Ship_MRLS_01_F"
+];
+
 // Objects which are spawned as intel objects for pickup
 KPLIB_intelObjectClasses = [
     "Land_Document_01_F",

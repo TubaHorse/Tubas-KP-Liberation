@@ -117,6 +117,12 @@ KPLIB_objectInits = [
         {if (KPLIB_param_supportModule > 0) then {KPLIB_param_supportModule_arty synchronizeObjectsAdd [_this];};}
     ],
 
+    // Add valid cruise missile vehicles to support module, if system is enabled & EF is loaded
+    [
+        KPLIB_param_supportModule_missileVeh,
+        {if (KPLIB_param_supportModule > 0 && !isNull KPLIB_param_supportModule_missile) then {KPLIB_param_supportModule_missile synchronizeObjectsAdd [_this];};}
+    ],
+
     // Disable autocombat (if set in parameters) and fleeing
     [
         ["Man"],
