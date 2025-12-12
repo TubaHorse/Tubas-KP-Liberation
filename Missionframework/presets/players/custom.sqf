@@ -98,6 +98,7 @@ KPLIB_b_vehLight = [
     ["B_MRAP_01_F",100,0,50],                                           // Hunter
     ["B_MRAP_01_hmg_F",100,40,50],                                      // Hunter (HMG)
     ["B_MRAP_01_gmg_F",100,60,50],                                      // Hunter (GMG)
+    ["EF_B_MRAP_01_AT_NATO",100,200,50],                                // Hunter (AT, Titan NLOS)
     ["I_MRAP_03_F",100,0,50],                                           // Strider
     ["I_MRAP_03_hmg_F",100,40,50],                                      // Strider (HMG)
     ["I_MRAP_03_gmg_F",100,60,50],                                      // Strider (GMG)

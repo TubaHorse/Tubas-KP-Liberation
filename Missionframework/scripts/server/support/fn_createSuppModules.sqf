@@ -52,7 +52,7 @@ publicVariable "KPLIB_param_supportModule_missile";
     [KPLIB_param_supportModule_req] call BIS_fnc_moduleSupportsInitRequester;
     [KPLIB_param_supportModule_arty] call BIS_fnc_moduleSupportsInitProvider;
     
-    // Only init EF module if it exists
+    // Only init EF module if it exists and there are crewed vehicles synced
     if (!isNull KPLIB_param_supportModule_missile) then {
         [KPLIB_param_supportModule_missile] call EF_fnc_moduleNLOS;
     };
