@@ -276,7 +276,17 @@ boats_names = [
     "uns_PBR_M10",
     "uns_pbr_mk18",
     "uns_pbr",
-    "UNS_Zodiac_W"
+    "UNS_Zodiac_W",
+    "EF_B_CombatBoat_AT_CTRG",
+    "EF_B_CombatBoat_AT_MJTF_Des",
+    "EF_B_CombatBoat_AT_MJTF_Wdl",
+    "EF_B_CombatBoat_AT_NATO_Des",
+    "EF_B_CombatBoat_AT_NATO",
+    "EF_B_CombatBoat_AT_NATO_T",
+    "EF_O_CombatBoat_AT_OPF",
+    "EF_O_CombatBoat_AT_OPF_T",
+    "EF_O_CombatBoat_AT_OPF_R",
+    "EF_I_CombatBoat_AT_AAF"
 ];
 
 // Classnames of artillery vehicles, which should be added to the support module
