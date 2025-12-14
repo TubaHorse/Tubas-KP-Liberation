@@ -91,9 +91,11 @@ switch (KPLIB_presetCivilians) do {
 KPLIB_b_allSquads = [
     [KPLIB_b_squadLight,200,0,0],
     [KPLIB_b_squadInf,300,0,0],
+    [KPLIB_b_squadMarine,200,0,0],
     [KPLIB_b_squadAT,200,250,0],
     [KPLIB_b_squadAA,200,250,0],
     [KPLIB_b_squadRecon,250,0,0],
+    [KPLIB_b_squadQRF,160,0,0], // Only 8 men in this squad, so reduced cost as if 1 man = 20 supp
     [KPLIB_b_squadPara,200,0,0]
 ];
 
@@ -101,8 +103,10 @@ KPLIB_b_allSquads = [
 KPLIB_b_squadNames = [
     localize "STR_LIGHT_RIFLE_SQUAD",
     localize "STR_RIFLE_SQUAD",
+    localize "STR_MARINE_SQUAD",
     localize "STR_AT_SQUAD",
     localize "STR_AA_SQUAD",
+    localize "STR_QRF_SQUAD",
     localize "STR_RECON_SQUAD",
     localize "STR_PARA_SQUAD"
 ];
@@ -124,7 +128,7 @@ KPLIB_b_squadAT                 = KPLIB_b_squadAT                   select {[_x]
 KPLIB_b_squadAA                 = KPLIB_b_squadAA                   select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_b_squadRecon              = KPLIB_b_squadRecon                select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_b_squadPara               = KPLIB_b_squadPara                 select {[_x] call KPLIB_fnc_checkClass};
-KPLIB_b_vehToUnlock                  = KPLIB_b_vehToUnlock                    select {[_x] call KPLIB_fnc_checkClass};
+KPLIB_b_vehToUnlock             = KPLIB_b_vehToUnlock               select {[_x] call KPLIB_fnc_checkClass};
 
 // Opfor
 KPLIB_o_militiaInfantry         = KPLIB_o_militiaInfantry           select {[_x] call KPLIB_fnc_checkClass};

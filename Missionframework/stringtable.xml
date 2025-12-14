@@ -655,6 +655,10 @@
             <Korean>화기분대</Korean>
             <Czech>Těžké útočné družstvo</Czech>
         </Key>
+        <Key ID="STR_MARINE_SQUAD">
+            <Original>Marine Rifle Squad</Original>
+            <Russian>Морской Стрелковый Отряд</Russian>
+        </Key>
         <Key ID="STR_AT_SQUAD">
             <Original>AT Squad</Original>
             <French>Escouade AT</French>
@@ -696,6 +700,9 @@
             <Portuguese>Grupo de Combate de Reconhecimento</Portuguese>
             <Korean>정찰팀</Korean>
             <Czech>Průzkumné družstvo</Czech>
+        </Key>
+        <Key ID="STR_QRF_SQUAD">
+            <Original>QRF Squad</Original>
         </Key>
         <Key ID="STR_PARA_SQUAD">
             <Original>Paratroopers Squad</Original>

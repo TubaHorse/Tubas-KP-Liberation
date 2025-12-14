@@ -14,6 +14,20 @@
         "workshopId": "1578862234"
     },
     {
+        "sourceFolder": "CDLC_kp_liberation.Altis",
+        "missionName": "CDLC_kp_liberation",
+        "map": "Altis",
+        "configFile": "KPLIB_config.sqf",
+        "variables": {
+            "KPLIB_preset_blufor": 0,
+            "KPLIB_preset_opfor": 0,
+            "KPLIB_preset_resistance": 0,
+            "KPLIB_preset_civilians": 0,
+            "KPLIB_arsenal": 0
+        },
+        "workshopId": ""
+    },
+    {
         "sourceFolder": "kp_liberation.Chernarus",
         "missionName": "kp_liberation",
         "map": "Chernarus",
@@ -203,6 +217,20 @@
             "KPLIB_arsenal": 0
         },
         "workshopId": "884703460"
+    },
+    {
+        "sourceFolder": "CDLC_kp_liberation.Tanoa",
+        "missionName": "CDLC_kp_liberation",
+        "map": "Tanoa",
+        "configFile": "KPLIB_config.sqf",
+        "variables": {
+            "KPLIB_preset_blufor": 1,
+            "KPLIB_preset_opfor": 1,
+            "KPLIB_preset_resistance": 1,
+            "KPLIB_preset_civilians": 1,
+            "KPLIB_arsenal": 0
+        },
+        "workshopId": ""
     },
     {
         "sourceFolder": "kp_liberation.xcam_taunus",
