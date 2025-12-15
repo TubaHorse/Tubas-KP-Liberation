@@ -25,9 +25,19 @@ while {true} do {
         KPLIB_potato01 setDamage 0;
         KPLIB_potato01 allowdamage true;
         [KPLIB_potato01] call KPLIB_fnc_addObjectInit;
+        [
+         KPLIB_potato01,
+            ["MJTF",1], 
+            true
+        ] call BIS_fnc_initVehicle;
     };
     [KPLIB_potato01] call KPLIB_fnc_clearCargo;
     KPLIB_potato01 setVariable ["ace_medical_isMedicalVehicle", true, true];
+    [
+        KPLIB_potato01,
+        ["MJTF",1], 
+        true
+    ] call BIS_fnc_initVehicle;
     publicVariable "KPLIB_potato01";
 
     // Wait until huron is destroyed to respawn it
