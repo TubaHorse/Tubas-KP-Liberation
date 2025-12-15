@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=1159;
+		nextID=1183;
 	};
 	class Camera
 	{
-		pos[]={244.57408,54.558495,1218.6719};
-		dir[]={0.18618439,-0.22087124,0.95736688};
-		up[]={0.042164106,0.97530305,0.21680936};
-		aside[]={0.98160982,0,-0.19089904};
+		pos[]={342.75153,81.21627,1913.934};
+		dir[]={-0.70795405,-0.37218976,0.60027957};
+		up[]={-0.2838859,0.92815411,0.24071003};
+		aside[]={0.6467402,5.2130781e-07,0.76274711};
 	};
 };
 binarizationWanted=0;
@@ -19154,12 +19154,29 @@ class Mission
 		class Item298
 		{
 			dataType="Marker";
-			position[]={256.81467,78.286942,1317.4974};
+			position[]={256.815,78.287003,1317.4969};
 			name="huronmarker";
 			text="Spartan 01";
 			type="b_air";
 			id=4421;
-			atlOffset=68.590027;
+			atlOffset=68.590088;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ENH_markerShape";
+					expression="if (_value != 'NONE' && isServer) then {_this setMarkerShape _value}";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="NONE";
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item299
 		{
@@ -19183,8 +19200,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={245.5925,9.6971903,1333.5131};
-				angles[]={0,3.1695511,0};
+				position[]={245.592,9.6975975,1333.5129};
+				angles[]={0,3.1695528,0};
 			};
 			side="Empty";
 			flags=4;
@@ -19194,6 +19211,7 @@ class Mission
 			};
 			id=4426;
 			type="Land_ClutterCutter_small_F";
+			atlOffset=0.00040721893;
 		};
 		class Item301
 		{
@@ -19249,7 +19267,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={205.783,-9.9182129e-05,1371.8929};
+				position[]={297.48032,0,1297.7394};
 				angles[]={0.12320279,6.129509,0.019181168};
 			};
 			side="Empty";
@@ -19259,14 +19277,14 @@ class Mission
 			};
 			id=4490;
 			type="Land_ClutterCutter_small_F";
-			atlOffset=65.520004;
+			atlOffset=61.459805;
 		};
 		class Item307
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={282.82077,0,1362.6046};
+				position[]={298.9595,0,1336.3063};
 				angles[]={0.1246805,6.2766151,0.00082346675};
 			};
 			side="Empty";
@@ -19276,7 +19294,7 @@ class Mission
 			};
 			id=4491;
 			type="Land_ClutterCutter_small_F";
-			atlOffset=63.670097;
+			atlOffset=59.486855;
 		};
 		class Item308
 		{
@@ -19364,6 +19382,7 @@ class Mission
 					side="Empty";
 					class Attributes
 					{
+						init="_this setVariable [""KPLIB_preplaced"", true, true];";
 					};
 					id=4636;
 					type="B_Boat_Transport_01_F";
@@ -19380,6 +19399,7 @@ class Mission
 					side="Empty";
 					class Attributes
 					{
+						init="_this setVariable [""KPLIB_preplaced"", true, true];";
 					};
 					id=4638;
 					type="B_Boat_Transport_01_F";
@@ -19413,8 +19433,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={245.55701,0.18973316,1326.106};
-								angles[]={0,0.028431412,0};
+								position[]={245.55701,0.18998718,1326.106};
 							};
 							side="Empty";
 							class Attributes
@@ -19423,19 +19442,35 @@ class Mission
 							};
 							id=4628;
 							type="Land_ClutterCutter_small_F";
-							atlOffset=1.7267308;
+							atlOffset=1.7269849;
 						};
 						class Item1
 						{
 							dataType="Marker";
-							position[]={379.37762,-5.9076872,2002.1482};
+							position[]={379.37799,-5.908,2002.1479};
 							name="liberty_marker";
 							text="USS Liberty";
 							type="b_naval";
 							colorName="ColorWEST";
-							angle=80.775032;
 							id=4629;
-							atlOffset=49.021595;
+							atlOffset=49.021305;
+							class CustomAttributes
+							{
+								class Attribute0
+								{
+									property="ENH_markerShape";
+									expression="if (_value != 'NONE' && isServer) then {_this setMarkerShape _value}";
+									class Value
+									{
+										class data
+										{
+											singleType="STRING";
+											value="NONE";
+										};
+									};
+								};
+								nAttributes=1;
+							};
 						};
 						class Item2
 						{
@@ -21053,8 +21088,8 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={238.39993,9.6969109,1306.9778};
-						angles[]={0,0.0017754333,0};
+						position[]={238.39999,9.6972809,1306.978};
+						angles[]={0,3.1415927,0};
 					};
 					side="Empty";
 					flags=4;
@@ -21064,6 +21099,7 @@ class Mission
 					};
 					id=4747;
 					type="Land_ClutterCutter_small_F";
+					atlOffset=0.00037002563;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -21087,17 +21123,17 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={245.78445,9.6969109,1299.5482};
-						angles[]={0,0.0017754333,0};
+						position[]={245.784,9.6968384,1299.548};
+						angles[]={0,3.1415927,0};
 					};
 					side="Empty";
-					flags=4;
 					class Attributes
 					{
 						name="littlebird_1";
 					};
 					id=4748;
 					type="Land_ClutterCutter_small_F";
+					atlOffset=11.233836;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -21121,17 +21157,17 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={253.17926,9.6969109,1306.876};
-						angles[]={0,0.0017754333,0};
+						position[]={253.179,9.6966057,1306.876};
+						angles[]={0,3.1415927,0};
 					};
 					side="Empty";
-					flags=4;
 					class Attributes
 					{
 						name="littlebird_2";
 					};
 					id=4749;
 					type="Land_ClutterCutter_small_F";
+					atlOffset=11.233603;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -21152,6 +21188,7 @@ class Mission
 				};
 			};
 			id=4746;
+			atlOffset=11.23383;
 		};
 	};
 	class Connections
