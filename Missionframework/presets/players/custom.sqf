@@ -420,37 +420,33 @@ KPLIB_b_squadPara = [
     Which base locks a vehicle is randomized on the first start of the campaign.
 */
 KPLIB_b_vehToUnlock = [
-    "rhsusf_mkvsoc",                                                    // Mk.V SOCOM
-    "rhsusf_m1a1aim_tuski_wd",                                          // M1A1SA (Tusk I)
+    "EF_B_MRAP_01_AT_MJTF_Des",
+    "EF_B_MRAP_01_LAAD_MJTF_Des",
+    "B_APC_Wheeled_01_atgm_lxWS",
+    "B_APC_Wheeled_01_mortar_lxWS",
+    "EF_B_AAV9_50mm_MJTF_Des",
+    "EF_B_CombatBoat_HMG_MJTF_Des",
+    "EF_B_CombatBoat_AT_MJTF_Des",
+    "B_APC_Tracked_01_AA_F",
+    "B_AFV_Wheeled_01_cannon_F",                                        // Rhino
+    "B_AFV_Wheeled_01_up_cannon_F",                                     // Rhino 
     "B_MBT_01_TUSK_F",                                                  // M2A4 Slammer UP
-    "rhsusf_m1a2sep1tuskiiwd_usarmy",                                   // M1A2SEPv1 (Tusk II)
-    "BWA3_Leopard2_Fleck",                                              // MBT Leopard 2A6M
     "B_MBT_01_arty_F",                                                  // M4 Scorcher
-    "rhsusf_m109_usarmy",                                               // M109A6
     "B_MBT_01_mlrs_F",                                                  // M5 Sandstorm MLRS
+    "B_Heli_light_03_dynamicLoadout_RF",                                // Hellcat
     "B_Heli_Attack_01_dynamicLoadout_F",                                // AH-99 Blackfoot
-    "RHS_AH64D_wd",                                                     // AH-64D (Multi-Role)
-    "BWA3_Tiger_RMK_Universal",                                         // UH Tiger RMK (Universal)
-    "B_UAV_02_dynamicLoadout_F",                                        // MQ-4A Greyhawk
+    "EF_B_AH99J_MJTF_Des",                                              // AH-99J
+    "B_Heli_Attack_01_pylons_dynamicLoadout_F",                         // AH-99 Blackfoot (stub-wings)
+    "B_Heli_Transport_01_pylons_F",                                     // UH-80 Ghosthawk (pylons)
+    "TH_Heli_Transport_01_pylons_laser_DAP_F",                          // MH-80M Ghosthawk DAP
     "B_T_UAV_03_dynamicLoadout_F",                                      // MQ-12 Falcon
     "B_UAV_05_F",                                                       // UCAV Sentinel
     "B_Plane_CAS_01_dynamicLoadout_F",                                  // A-164 Wipeout (CAS)
-    "I_Plane_Fighter_04_F",                                             // A-149 Gryphon
-    "RHS_A10",                                                          // A-10A (CAS)
-    "USAF_MQ9",                                                         // MQ-9 Reaper
-    "USAF_A10",                                                         // A-10C Thunderbolt II
-    "USAF_F22",                                                         // F-22A Raptor
-    "USAF_F22_EWP_AA",                                                  // F-22A Raptor (EWP-AA)
-    "USAF_F22_EWP_AG",                                                  // F-22A Raptor (EWP-AG)
-    "USAF_F22_Heavy",                                                   // F-22A Raptor (Heavy)
-    "USAF_F35A_STEALTH",                                                // F-35A Lightning II
-    "USAF_F35A",                                                        // F-35A Lightning II (Heavy)
-    "FIR_F15C",                                                         // F-15C Eagle
-    "FIR_F15D",                                                         // F-15D Eagle
-    "FIR_F15E",                                                         // F-15E Strike Eagle
-    "JS_JC_FA18E",                                                      // F/A-18 E Super Hornet
-    "JS_JC_FA18F",                                                      // F/A-18 F Super Hornet
     "B_Plane_Fighter_01_F",                                             // F/A-181 Black Wasp II
     "B_Plane_Fighter_01_Stealth_F",                                     // F/A-181 Black Wasp II (Stealth)
-    "B_T_VTOL_01_armed_F"                                               // V-44 X Blackfish (Armed)
+    "B_T_VTOL_01_armed_F",                                              // V-44 X Blackfish (Armed)
+    "B_TwinMortar_RF",                                                  // 120mm Twin Mortar
+    "qav_ripsaw_Mk44",                                                  // Mk44 Ripsaw
+    "qav_abramsx",                                                      // Abrams X
+    "B_SAM_System_03_F"
 ];
