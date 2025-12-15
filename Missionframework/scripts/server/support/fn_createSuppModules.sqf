@@ -51,9 +51,18 @@ publicVariable "KPLIB_param_supportModule_missile";
     ["Init provider on server", "SUPPORTMODULES"] call KPLIB_fnc_log;
     [KPLIB_param_supportModule_req] call BIS_fnc_moduleSupportsInitRequester;
     [KPLIB_param_supportModule_arty] call BIS_fnc_moduleSupportsInitProvider;
-    // Only init EF module if it exists
+
+    // Wait for players to be synced before calling missile update
     if (!isNull KPLIB_param_supportModule_missile) then {
-        [KPLIB_param_supportModule_missile] call EF_fnc_moduleNLOS;
+        [] spawn {
+            // Wait for at least one player to be synced to requester
+            waitUntil {
+                sleep 1;
+                count (synchronizedObjects KPLIB_param_supportModule_req select {isPlayer _x}) > 0
+            };
+            diag_log format ["MISSILE: Found %1 players synced to requester", count (synchronizedObjects KPLIB_param_supportModule_req select {isPlayer _x})];
+            [] execVM "scripts\server\support\fn_updateCruiseMissiles.sqf";
+        };
     };
     
     // Hide the three HQ entities created at zero pos. BIS scripts only hides them local for the creator

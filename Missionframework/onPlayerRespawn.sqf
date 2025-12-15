@@ -36,36 +36,16 @@ if ([
     
     // Link player to support modules
     [player, KPLIB_param_supportModule_req, KPLIB_param_supportModule_arty] call BIS_fnc_addSupportLink;
-    
-    // Only link and init missile module if EF is loaded
     if (!isNull KPLIB_param_supportModule_missile) then {
         [player, KPLIB_param_supportModule_req, KPLIB_param_supportModule_missile] call BIS_fnc_addSupportLink;
         
-        // Only call if there are missile vehicles synchronized
-        private _missileVehicles = synchronizedObjects KPLIB_param_supportModule_missile select {
-            private _o = _x;
-            ["LandVehicle", "Air", "Ship"] findIf {_o isKindOf _x} > -1
-        };
-        
-        if (count _missileVehicles > 0) then {
-            [KPLIB_param_supportModule_missile] call EF_fnc_moduleNLOS;
-        };
+        [] remoteExec ["execVM", 2, "scripts\server\support\fn_updateCruiseMissiles.sqf"];
     };
     // Init modules, if newly joined and not client host
     if (isNull _oldUnit && !isServer) then {
         [KPLIB_param_supportModule_req] call BIS_fnc_moduleSupportsInitRequester;
         [KPLIB_param_supportModule_arty] call BIS_fnc_moduleSupportsInitProvider;
-        
-        // Only call EF if there are missile vehicles synchronized
-        if (!isNull KPLIB_param_supportModule_missile) then {
-            private _missileVehicles = synchronizedObjects KPLIB_param_supportModule_missile select {
-                private _o = _x;
-                ["LandVehicle", "Air", "Ship"] findIf {_o isKindOf _x} > -1
-            };
-            
-            if (count _missileVehicles > 0) then {
-                [KPLIB_param_supportModule_missile] call EF_fnc_moduleNLOS;
-            };
-        };
+
+        [] remoteExec ["execVM", 2, "scripts\server\support\fn_updateCruiseMissiles.sqf"];
     };
 };
