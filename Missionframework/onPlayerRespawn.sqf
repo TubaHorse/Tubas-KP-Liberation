@@ -39,13 +39,13 @@ if ([
     if (!isNull KPLIB_param_supportModule_missile) then {
         [player, KPLIB_param_supportModule_req, KPLIB_param_supportModule_missile] call BIS_fnc_addSupportLink;
         
-        [] remoteExec ["execVM", 2, "scripts\server\support\fn_updateCruiseMissiles.sqf"];
+        ["scripts\server\support\fn_updateCruiseMissiles.sqf"] remoteExec ["execVM", 2];
     };
     // Init modules, if newly joined and not client host
     if (isNull _oldUnit && !isServer) then {
         [KPLIB_param_supportModule_req] call BIS_fnc_moduleSupportsInitRequester;
         [KPLIB_param_supportModule_arty] call BIS_fnc_moduleSupportsInitProvider;
 
-        [] remoteExec ["execVM", 2, "scripts\server\support\fn_updateCruiseMissiles.sqf"];
+        ["scripts\server\support\fn_updateCruiseMissiles.sqf"] remoteExec ["execVM", 2];
     };
 };

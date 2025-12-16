@@ -122,37 +122,36 @@ KPLIB_objectInits = [
         KPLIB_param_supportModule_missileVeh,
         {
             if (KPLIB_param_supportModule > 0 && !isNull KPLIB_param_supportModule_missile) then {
-                // Check if already has a gunner (vehicles spawned with crew via "manned" option)
-                if (!isNull gunner _this) then {
+                diag_log format ["MISSILE INIT: _this is: %1, typeOf: %2, isKindOf LandVehicle: %3", _this, typeOf _this, _this isKindOf "LandVehicle"];
+                
+                // Only sync if it's actually a vehicle
+                if (_this isKindOf "LandVehicle") then {
                     KPLIB_param_supportModule_missile synchronizeObjectsAdd [_this];
-                    diag_log format ["MISSILE: Synced %1 (has gunner)", _this];
-                    [] execVM "scripts\server\support\fn_updateCruiseMissiles.sqf";
-                } else {
-                    diag_log format ["MISSILE: Vehicle %1 has no gunner yet, adding event handlers", _this];
-                };
-                
-                // Add GetIn handler to catch when crew enters later
-                _this addEventHandler ["GetIn", {
-                    params ["_vehicle", "_role"];
-                    if (_role == "gunner" && !(_vehicle in synchronizedObjects KPLIB_param_supportModule_missile)) then {
-                        KPLIB_param_supportModule_missile synchronizeObjectsAdd [_vehicle];
-                        diag_log format ["MISSILE: Synced %1 (gunner entered)", _vehicle];
-                        [] execVM "scripts\server\support\fn_updateCruiseMissiles.sqf";
-                    };
-                }];
-                
-                // Add GetOut handler to desync when gunner leaves
-                _this addEventHandler ["GetOut", {
-                    params ["_vehicle", "_role"];
-                    if (_role == "gunner") then {
-                        KPLIB_param_supportModule_missile synchronizeObjectsRemove [_vehicle];
-                        diag_log format ["MISSILE: Desynced %1 (gunner left)", _vehicle];
-                        [] spawn {
-                            sleep 0.5;
+                    diag_log format ["MISSILE INIT: Synced VEHICLE %1", _this];
+                    
+                    // Add GetIn handler
+                    _this addEventHandler ["GetIn", {
+                        params ["_vehicle", "_role", "_unit"];
+                        diag_log format ["MISSILE EVENT: GetIn fired - Vehicle: %1, Role: %2", _vehicle, _role];
+                        if (_role == "gunner") then {
+                            // Always trigger update when gunner gets in, regardless of sync status
                             [] execVM "scripts\server\support\fn_updateCruiseMissiles.sqf";
                         };
-                    };
-                }];
+                    }];
+
+                    _this addEventHandler ["GetOut", {
+                        params ["_vehicle", "_role"];
+                        if (_role == "gunner") then {
+                            [] spawn {
+                                sleep 0.5;
+                                [] execVM "scripts\server\support\fn_updateCruiseMissiles.sqf";
+                            };
+                        };
+                    }];
+
+                } else {
+                    diag_log format ["MISSILE INIT: ERROR - _this is NOT a vehicle! It's a %1", typeOf _this];
+                };
             };
         }
     ],
