@@ -6303,7 +6303,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="this setFlagTexture ""res\flag_kp_co.paa"";";
+				init="this setFlagTexture ""Images\flag_kp_co.paa"";";
 			};
 			id=620;
 			type="Flag_White_F";

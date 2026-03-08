@@ -29819,7 +29819,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="this setFlagTexture ""res\flag_kp_co.paa"";";
+				init="this setFlagTexture ""Images\flag_kp_co.paa"";";
 			};
 			id=5133;
 			type="Flag_White_F";

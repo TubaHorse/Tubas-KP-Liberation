@@ -2,7 +2,7 @@
     File: fn_getOpforSpawnPointSAM.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-09-29
-    Last Update: 2026-03-05
+    Last Update: 2026-03-08
     License: MIT License - http://www.opensource.org/licenses/MIT
     Description:
         Gets a random opfor spawn point marker name respecting following conditions:
@@ -73,7 +73,14 @@ private ["_valid", "_current", "_distances"];
 
     // Make sure that there is an opfor sector in sensible range to spawn
     if (_valid) then {
-        if ((KPLIB_sectors_all - KPLIB_sectors_player) findIf {((markerPos _current) distance2D (markerPos _x)) < 2000} < 0) then {
+        if ((KPLIB_sectors_all - KPLIB_sectors_player) findIf {((markerPos _current) distance2D (markerPos _x)) < 3000} < 0) then {
+            _valid = false;
+        };
+    };
+
+    // Don't spawn near opfor sectors
+    if (_valid) then {
+        if ((KPLIB_sectors_all - KPLIB_sectors_player) findIf {((markerPos _current) distance2D (markerPos _x)) > 700} < 0) then {
             _valid = false;
         };
     };

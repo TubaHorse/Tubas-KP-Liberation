@@ -3,7 +3,7 @@
     File: fn_buildEachFrame.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 11/11/2025
-    Last update: 22/02/2026
+    Last update: 08/03/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -105,7 +105,7 @@ KPLIB_doBuild_eachFrame = addMissionEventHandler ["EachFrame", {
         _object setVariable ["KPLIB_BUILD_canBuild", false]; // Change value
         if ((_distanceFromFob > _maxDist) && {_typeNumber != BUILDTYPE_FOB}) then {_object setVariable ["KPLIB_BUILD_isObjectInArea", false]} else {_object setVariable ["KPLIB_BUILD_isObjectInArea", true]}; // Change value
 
-        _object hideObject true; // Hide object
+        //_object hideObject true; // Hide object
         drawIcon3D
         [
             "a3\3den\data\displays\display3den\panelright\modemarkers_ca.paa",
@@ -119,9 +119,19 @@ KPLIB_doBuild_eachFrame = addMissionEventHandler ["EachFrame", {
             0.05, 
             "PuristaMedium"
         ];
+        private _hiddenSelection = getArray(configOf _object >> "hiddenSelections");
+        {
+            _object setObjectMaterial [_x, "\a3\data_f\default.rvmat"];
+            _object setObjectTexture [_x, "#(rgb,8,8,3)color(1,0,0,1)"];
+        }forEach _hiddenSelection;
     } else {
         _object setVariable ["KPLIB_BUILD_canBuild", true]; // Change value
         _object setVariable ["KPLIB_BUILD_isObjectInArea", true]; // Change value
-        if (isObjectHidden _object) then {_object hideObject false}; // Show object
+        private _hiddenSelection = getArray(configOf _object >> "hiddenSelections");
+        {
+            _object setObjectMaterial [_x, "\a3\data_f\default.rvmat"];
+            _object setObjectTexture [_x, "#(rgb,8,8,3)color(0,1,0,1)"];
+        }forEach _hiddenSelection;
+        //if (isObjectHidden _object) then {_object hideObject false}; // Show object
     };
 }, [_object, _player, _centerPos, KPLIB_range_fob, _buildType]];

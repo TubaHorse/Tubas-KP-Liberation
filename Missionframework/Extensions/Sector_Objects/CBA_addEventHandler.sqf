@@ -2,34 +2,37 @@
 ["KPLIB_createSectorObjects", {
     params["_sector"];
 
-    if (isNil "KPLIB_sectorsObjectsToManage") then {KPLIB_sectorsObjectsToManage = createHashMap};
-
-    private _objects = [_sector] call KPLIB_fnc_createSectorObjects;
-    [format["Sector: %1, Objects Count: %2", _sector, count _objects], "SECTOR OBJECTS CREATION"] call KPLIB_fnc_log;
-    
     // Check for not deleted registered objects
-    private _initObjects = [];
-    if (_sector in KPLIB_sectorMapObject_hashMap) then {
-        _initObjects = KPLIB_sectorMapObject_hashMap get _sector;
+    if !(isNil "KPLIB_sectorMapObject_hashMap") then {
+
+        if (isNil "KPLIB_sectorsObjectsToManage") then {KPLIB_sectorsObjectsToManage = createHashMap};
+
+        private _objects = [_sector] call KPLIB_fnc_createSectorObjects;
+        [format["Sector: %1, Objects Count: %2", _sector, count _objects], "SECTOR OBJECTS CREATION"] call KPLIB_fnc_log;
+
+        private _initObjects = [];
+        if (_sector in KPLIB_sectorMapObject_hashMap) then {
+            _initObjects = KPLIB_sectorMapObject_hashMap get _sector;
+        };
+
+        _objects = _objects + _initObjects;
+        // Create static weapons
+        private _staticWeapons = [_sector, _objects] call KPLIB_fnc_createStaticWeapons;
+
+        // Create static vehicle
+        private _staticVehicles = [_sector, _objects] call KPLIB_fnc_createStaticVehicles;
+
+        // Add all sectors objects into hashmaps to be deleted later
+        {
+            if (_sector in KPLIB_sectorsObjectsToManage) then {
+                private _objectsArray = KPLIB_sectorsObjectsToManage get _sector;
+                _objectsArray pushBack _x;
+                KPLIB_sectorsObjectsToManage set [_sector, _objectsArray]
+            } else {
+                KPLIB_sectorsObjectsToManage set [_sector, [_x]]
+            }
+        }forEach (_objects + _staticWeapons + _staticVehicles);
     };
-
-    _objects = _objects + _initObjects;
-    // Create static weapons
-    private _staticWeapons = [_sector, _objects] call KPLIB_fnc_createStaticWeapons;
-
-    // Create static vehicle
-    private _staticVehicles = [_sector, _objects] call KPLIB_fnc_createStaticVehicles;
-
-    // Add all sectors objects into hashmaps to be deleted later
-    {
-        if (_sector in KPLIB_sectorsObjectsToManage) then {
-            private _objectsArray = KPLIB_sectorsObjectsToManage get _sector;
-            _objectsArray pushBack _x;
-            KPLIB_sectorsObjectsToManage set [_sector, _objectsArray]
-        } else {
-            KPLIB_sectorsObjectsToManage set [_sector, [_x]]
-        }
-    }forEach (_objects + _staticWeapons + _staticVehicles);
 }] call CBA_fnc_addEventHandler;
 
 // Delete sector objects

@@ -5,7 +5,9 @@ Welcome to PiG's Liberation. This fork of APR is aimed to add several features b
 
 The majority of the gameplay is the same, but there are more to it. Check the [CHANGELOG](https://github.com/PiG13BR/KP-Liberation-PIG/blob/v0.97.0-PIG-UNSTABLE/CHANGELOG.md) for further details.
 
-There are new system in `Extensions` folder, some of them you can find details in README.md files. 
+There are new system in `Extensions` folder, some of them you can find details in README.md files.
+
+Please, read the addition notes below.
 
 ## DEVKIT
 The devkit had some small additions, but still uses the same logic that you can follow in [official tutorial page](https://github.com/KillahPotatoes/KP-Liberation/wiki/EN_Devkit).
@@ -29,6 +31,8 @@ Below are listed the additions so far, all optional:
 - Not only vehicles are unlockable per sector, but also arsenal items. Check the files in `Extensions\Lock_Arsenal`.
 - You can choose what sector unlocks each elite vehicle in the presets (read the commentary before `KPLIB_b_vehToUnlock` in the `default.sqf` file).
 - It should be compatible with saves from 0.96.8, but it's not guaranteed.
+- There is a mission parameters that enables FOB redeploy cost, subtracting resources. For a particular FOB, you can build two barracks (in the build support label) to stop from taking resources for each redeploy. Also, the barracks are required to be able to buy AI units.
+- It's possible to create unique sectors events (`Extensions\Sector_Events`).
 
 Zeus Module:
 - The zeus has no more restrictions, and as default it has to be accessed via admin logged. There is a whitelist for players for it in the `KPLIB_whitelist.sqf` file (KPLIB_whitelist_zeus), that creates a game master module for each logged player.

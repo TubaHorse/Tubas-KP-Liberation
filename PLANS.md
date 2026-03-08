@@ -17,3 +17,4 @@
 - Refactor enemy reinforcements based on points + enemy readiness. Closest military base + nearby sectors (i.e: factories) = more points.
 - Rearming friendly vehicles will cost ammo supplies
 - Fortify system for liberation. Like a FOB, but smaller and just to build defenses. Use transportable storage for center. Names: Outpost? Checkpoint?
+- Mission parameter for auto-registering of terrain objects to spawn static weapons.
