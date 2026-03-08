@@ -233,7 +233,7 @@ class Mission
 						class data
 						{
 							singleType="STRING";
-							value="commandant";
+							value="#adminLogged";
 						};
 					};
 				};
@@ -285,7 +285,7 @@ class Mission
 						class data
 						{
 							singleType="SCALAR";
-							value=0;
+							value=3;
 						};
 					};
 				};

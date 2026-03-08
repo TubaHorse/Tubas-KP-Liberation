@@ -46,7 +46,7 @@ Zeus Module:
 ## REQUIRED ADD-ONS
 - [CBA_A3](https://steamcommunity.com/sharedfiles/filedetails/?id=450814997)
 
-## RECOMMENDED ADD-ONS.
+## RECOMMENDED ADD-ONS
 - [ACE](https://steamcommunity.com/sharedfiles/filedetails/?id=463939057)
 - [LAMBS_Danger.fsm (DEV)](https://steamcommunity.com/sharedfiles/filedetails/?id=2434257231)
 - [Sling Load Rigging](https://steamcommunity.com/sharedfiles/filedetails/?id=2128676112)

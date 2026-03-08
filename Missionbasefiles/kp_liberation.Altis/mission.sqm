@@ -272,14 +272,8 @@ class Mission
 					{
 						class data
 						{
-							class type
-							{
-								type[]=
-								{
-									"STRING"
-								};
-							};
-							value="commandant";
+							singleType="STRING";
+							value="#adminLogged";
 						};
 					};
 				};
@@ -291,13 +285,7 @@ class Mission
 					{
 						class data
 						{
-							class type
-							{
-								type[]=
-								{
-									"SCALAR"
-								};
-							};
+							singleType="SCALAR";
 							value=0;
 						};
 					};
@@ -310,13 +298,7 @@ class Mission
 					{
 						class data
 						{
-							class type
-							{
-								type[]=
-								{
-									"STRING"
-								};
-							};
+							singleType="STRING";
 							value="OVERLORD";
 						};
 					};
@@ -329,13 +311,7 @@ class Mission
 					{
 						class data
 						{
-							class type
-							{
-								type[]=
-								{
-									"BOOL"
-								};
-							};
+							singleType="BOOL";
 							value=1;
 						};
 					};
@@ -348,14 +324,8 @@ class Mission
 					{
 						class data
 						{
-							class type
-							{
-								type[]=
-								{
-									"SCALAR"
-								};
-							};
-							value=0;
+							singleType="SCALAR";
+							value=3;
 						};
 					};
 				};
