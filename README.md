@@ -3,7 +3,7 @@
 ## DESCRIPTION
 Welcome to PiG's Liberation. This fork of APR is aimed to add several features but maintaining the original feeling of Liberation. This is **not** an overhaul of the gamemode.
 
-The majority of the gameplay is the same, but there are more to it. Check the [CHANGELOG]() for further details.
+The majority of the gameplay is the same, but there are more to it. Check the [CHANGELOG](https://github.com/PiG13BR/KP-Liberation-PIG/blob/v0.97.0-PIG-UNSTABLE/CHANGELOG.md) for further details.
 
 There are new system in `Extensions` folder, some of them you can find details in README.md files. 
 
@@ -21,9 +21,9 @@ Below are listed the additions so far, all optional:
 
 ## ADDITIONAL NOTES
 - Presets are now mission parameters.
-- The IA logistics in the current version is turned off because of the resources management changes for storages. There are a bunch of codes related to that in the logistic script and I don't want to touch it right now.
+- The AI logistics in the current version is turned off because of the resources management changes for storages. There are a bunch of codes related to that in the logistic script and I don't want to touch it right now.
 - It takes about 60 seconds from the server start to add actions to the objects.
-- You can send information about factory and FOB resources to a discord channel. Information [here]().
+- You can send information about factory and FOB resources to a discord channel. Information [here](https://github.com/PiG13BR/KP-Liberation-PIG/tree/v0.97.0-PIG-UNSTABLE/Missionframework/Extensions/Discord_Log).
 - The arsenal was divided into two options: shared and whitelist by role/classnames. The first one is the default option (the same arsenal items for everyone), and the second one, the arsenal items are shared by roles. Access `Presets\Arsenal\roles_presets\...` to configure the whitelist option. Don't forget to change mission parameters to enable it.
 - Player and enemy presets now have a `default.sqf` file, that it reads before the actual selected preset. It was created to make new additions for the presets without requiring to edit every file.
 - Not only vehicles are unlockable per sector, but also arsenal items. Check the files in `Extensions\Lock_Arsenal`.
