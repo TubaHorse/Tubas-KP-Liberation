@@ -1,58 +1,138 @@
-
-KPLIB_init = false;
 KPLIB_endgame = 0;
 KPLIB_respawn_marker = "respawn";
 
 // Version of the KP Liberation framework
-KPLIB_version = [0, 96, "8apr"];
+KPLIB_version = [0, 97, "0pig"];
 
 enableSaving [false, false];
 
-if (isDedicated) then {debug_source = "Server";} else {debug_source = name player;};
+if (isDedicated) then {KPLIB_debugSource = "Server";} else {KPLIB_debugSource = name player;};
 
+// Init sector variables
 [] call KPLIB_fnc_initSectors;
+
 if (!isServer) then {waitUntil {!isNil "KPLIB_initServerDone"};};
-[] call compile preprocessFileLineNumbers "KPLIB_config.sqf";
-[] call compile preprocessFileLineNumbers "KPLIB_whitelists.sqf";
-[] call compile preprocessFileLineNumbers "KPLIB_transportConfigs.sqf";
-[] call compile preprocessFileLineNumbers "KPLIB_classnameLists.sqf";
-[] call compile preprocessFileLineNumbers "scripts\shared\fetch_params.sqf";
-[] call compile preprocessFileLineNumbers "presets\init_presets.sqf";
-[] call compile preprocessFileLineNumbers "KPLIB_objectInits.sqf";
 
-// Check if CBA is running
-if (!KPPLM_CBA) then {
-    ["CBA_A3 not loaded. Aborting Mission! KPLib_APR requires CBA!!!"] call BIS_fnc_error;
-    ["CBA_A3 not loaded. This mission requires CBA to run properly."] remoteExec ["hint", 0, true];
-    sleep 1;
-    endMission "END2";
-    false;
+// Read configuration
+[] call compile preprocessFileLineNumbers 'Configurations\KPLIB_config.sqf';
+
+// Read whitelist
+[] call compile preprocessFileLineNumbers 'Configurations\KPLIB_whitelists.sqf';
+
+// Read transport configuration (to carry crate resources)
+[] call compile preprocessFileLineNumbers 'Configurations\KPLIB_transportConfigs.sqf';
+
+// Read misc classname list
+[] call compile preprocessFileLineNumbers 'Configurations\KPLIB_classnameLists.sqf';
+
+// Get mission parameters and transform them into usable variables
+[] call compile preprocessFileLineNumbers 'Scripts\Shared\fetch_params.sqf';
+
+// Read presets
+[] call compile preprocessFileLineNumbers 'Presets\init_presets.sqf';
+
+// Read objects inits
+[] call compile preprocessFileLineNumbers 'Configurations\KPLIB_objectInits.sqf';
+
+// Call init shared (scripts shared between client and server)
+[] call compile preprocessFileLineNumbers 'Scripts\Shared\init_shared.sqf';
+
+// Static weapons configuration
+[] call compile preprocessFileLineNumbers 'Extensions\Sector_Objects\KPLIB_staticsConfigs.sqf';
+
+// Lock arsenal items by sector
+if (KPLIB_param_lockArsenal > 0) then {
+    [] call compile preprocessFileLineNumbers 'Extensions\Lock_Arsenal\init_presets.sqf';
 };
 
-// Activate selected player menu. If CBA isn't loaded -> fallback to GREUH
-if (KPPLM_CBA && KPLIB_param_playerMenu) then {
-    [] call KPPLM_fnc_postInit;
-} else {
-    [] execVM "GREUH\scripts\GREUH_activate.sqf";
+// Sector events
+if (KPLIB_param_sectorEvents > 0) then {
+    [] call compile preprocessFileLineNumbers 'Extensions\Sector_Events\init_events.sqf';
 };
 
-// Temperature and humidity changes
-[{
-    ace_weather_humidityShift = 25;
-    ace_weather_temperatureShift = 27;
-},[], 1] call CBA_fnc_waitAndExecute;
+// Set up CBA event handlers
+[] call compile preprocessFileLineNumbers 'CBA_addEventHandler.sqf';
 
-[] call compile preprocessFileLineNumbers "scripts\shared\init_shared.sqf";
+// Set up CBA settings
+[] call compile preprocessFileLineNumbers 'CBA_initSettings.sqf';
 
+// Load saved game and initiate server scripts
 if (isServer) then {
-    [] call compile preprocessFileLineNumbers "scripts\server\init_server.sqf";
+    [] call KPLIB_fnc_loadSavedGame; 
+    [] call compile preprocessFileLineNumbers "Scripts\Server\init_server.sqf";
+
+    if (isDedicated) then {KPLIB_debugSource = "Server";} else {KPLIB_debugSource = name player;};
+
+    setViewDistance 1600;
+
+    // Execute fnc_reviveInit again (by default it executes in postInit)
+    if ((isNil {player getVariable "bis_revive_ehHandleHeal"} || isDedicated) && !(bis_reviveParam_mode == 0)) then {
+        [] call bis_fnc_reviveInit;
+    };
+
+    if !(KPLIB_param_playerMenu) then {
+        // Dynamic groups
+        ["Initialize"] call BIS_fnc_dynamicGroups;	
+    };
+
+    addMissionEventHandler ["GroupCreated", {
+        params ["_group"];
+
+        if (side _group != KPLIB_side_enemy) exitWith {};
+
+        _group addEventHandler ["CombatModeChanged", {
+            params ["_group", "_newMode"];
+
+            if (_newMode == "COMBAT") then {
+                _group enableIRLasers true
+            } else {
+                _group enableIRLasers false
+            };
+        }];
+    }];
+
+    waitUntil {sleep 0.1; time > 30};
+
+    KPLIB_initServerDone = true;
+    publicVariable "KPLIB_initServerDone";
+
+    0 spawn {
+        while {KPLIB_endgame == 0} do {
+            sleep 1;
+            [
+                // ["task",value]
+                ["UpdateDetails","KP Liberation 0.97.0pig"],
+                ["UpdateState",""],
+                ["UpdateLargeImageKey",""],
+                ["UpdateSmallImageKey",""],
+                ["UpdatePartySize",count playableUnits],
+                ["UpdatePartyMax",getNumber(missionConfigFile >> "Header" >> "maxPlayers")]
+            ] call (missionNameSpace getVariable ["DiscordRichPresence_fnc_update",{}]);
+        };
+    };
 };
 
-if (!isDedicated && !hasInterface && isMultiplayer) then {
-    execVM "scripts\server\offloading\hc_manager.sqf";
-};
+// Supply dump preset
+[] call compile preprocessFileLineNumbers 'Extensions\Supply_Menu\init_presets.sqf';
 
 if (!isDedicated && hasInterface) then {
+
+    KPLIB_debugSource = name player;
+    enableSaving [false, false];
+
+    // Check if CBA is running
+    if (!KPLIB_CBA) exitWith {
+        ["CBA_A3 not loaded. Aborting Mission! KP LIBERATION PIG requires CBA!!!"] call BIS_fnc_error;
+        ["CBA_A3 not loaded. This mission requires CBA to run properly.", true, 5] remoteExec ["KPLIB_fnc_hint", 0, true];
+        sleep 1;
+        endMission "END2";
+        false;
+    };
+
+    if (!isDedicated && !hasInterface && isMultiplayer) then {
+        execVM "Scripts\Server\offloading\hc_manager.sqf";
+    };
+
     // Get mission version and readable world name for Discord rich presence
     [
         ["UpdateDetails", [localize "STR_MISSION_VERSION", "on", getText (configfile >> "CfgWorlds" >> worldName >> "description")] joinString " "]
@@ -60,68 +140,24 @@ if (!isDedicated && hasInterface) then {
 
     // Add EH for curator to add kill manager and object init recognition for zeus spawned units/vehicles
     {
-        _x addEventHandler ["CuratorObjectPlaced", {[_this select 1] call KPLIB_fnc_handlePlacedZeusObject;}];
+        _x addEventHandler ["CuratorObjectPlaced", {[_this select 0, _this select 1] call KPLIB_fnc_handlePlacedZeusObject;}];
     } forEach allCurators;
 
-    waitUntil {alive player};
-    if (debug_source != name player) then {debug_source = name player};
-    [] call compile preprocessFileLineNumbers "scripts\client\init_client.sqf";
-} else {
-    setViewDistance 1600;
+    waitUntil {sleep 1; alive player};
+
+    // Client init
+    [] call compile preprocessFileLineNumbers "Scripts\Client\init_client.sqf";
+
+    if !(KPLIB_param_playerMenu) then {
+        // Dynamic groups
+    ["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;	
+    };
+
+    // Execute fnc_reviveInit again (by default it executes in postInit)
+    if ((isNil {player getVariable "bis_revive_ehHandleHeal"} || isDedicated) && !(bis_reviveParam_mode == 0)) then {
+        [] call bis_fnc_reviveInit;
+    };
 };
 
-// Execute fnc_reviveInit again (by default it executes in postInit)
-if ((isNil {player getVariable "bis_revive_ehHandleHeal"} || isDedicated) && !(bis_reviveParam_mode == 0)) then {
-    [] call bis_fnc_reviveInit;
-};
-
-///////////////////////////////////////////////
-// ----- Clean and give default equipment -----
-///////////////////////////////////////////////
-if ( isServer) then {
-    private _playableUnits = playableUnits + switchableUnits;
-
-    // Get the default uniform for the first unit type in the list of buildable infantry units
-    private _basic_uniform = KPLIB_b_basic_uniform;
-    {
-        [
-            [_x,_basic_uniform],
-            {
-                //  Some commands are Local Argument, so they have to be executed remotely
-                //  Because the unit controlled by the player belongs to the player's computer (Local Argument), it cannot be removed without remote
-                params ["_unit","_basic_uniform"];
-
-                // clear all equipment
-                removeHeadgear _unit;                      // Clear Headgear
-                removeGoggles _unit;                       // Clear face gear (glasses...etc)
-                removeAllAssignedItems _unit;              // Clear equipable items
-                removeAllWeapons _unit;                    // Clear primary weapons, secondary weapons, launchers
-                removeAllContainers _unit;                 // Clear Clothes, Vests, Backpacks
-
-                _unit addUniform _basic_uniform;     // given a specific uniform
-                //_unit addWeapon "Rangefinder";    //  Binoculars/Night Vision Goggles are classified under Weapons...
-                {
-                    _unit linkItem _x;            //  Add and automatically equip special props
-                } foreach [
-                    "ItemCompass",
-                    //"ItemGPS",
-                    "ItemMap",
-                    "ItemWatch"
-                ];
-            }
-        ] remoteExec ["call",owner _x];  // Directly specify the computer of the player who belongs to the unit to execute, avoiding unnecessary broadcast
-        //  TODO : Should AI units be filtered out so that they are not thrown into remoteExec to occupy resources?
-    } foreach _playableUnits;
-};
-////////////////////////////////
-
+["INIT DONE", "INIT"] call KPLIB_fnc_log;
 KPLIB_init = true;
-
-// Notify clients that server is ready
-if (isServer) then {
-    KPLIB_initServerDone = true;
-    publicVariable "KPLIB_initServerDone";
-};
-
-//VAM_GUI: For changing camo and vehicle appearence without Zeus:
-[] execVM "VAM_GUI\VAM_GUI_init.sqf";

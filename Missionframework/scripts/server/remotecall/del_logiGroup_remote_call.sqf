@@ -11,3 +11,4 @@ _temp = _temp - [_groupToDelete];
 } forEach _temp;
 
 KPLIB_logistics = +_temp;
+publicVariable "KPLIB_logistics";

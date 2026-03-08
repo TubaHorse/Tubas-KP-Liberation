@@ -14,3 +14,5 @@ KPLIB_logistics append [[
     -1,             // Time left in current status
     0               // Special Flag (0 unload, 1 load, 2 no storage, 3 no ressources)
 ]];
+
+publicVariable "KPLIB_logistics";

@@ -36,5 +36,6 @@ if (dorepackage > 0) then {
         private _fobTruck = KPLIB_b_fobTruck createVehicle _spawnpos;
         [_fobTruck] call KPLIB_fnc_addObjectInit;
     };
-    hint localize "STR_FOB_REPACKAGE_HINT";
+
+    [localize "STR_FOB_REPACKAGE_HINT", false, 3] call KPLIB_fnc_hint;
 };

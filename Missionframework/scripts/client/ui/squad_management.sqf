@@ -225,17 +225,17 @@ while { dialog && alive player } do {
                 deleteVehicle ((units _tempgmp) select 0);
                 _selectedmember setDamage 0;
 
-                hint localize 'STR_RESUPPLY_OK';
+                [localize 'STR_RESUPPLY_OK', false, 3] call KPLIB_fnc_hint;
                 _resupplied = true;
             } else {
-                hint localize 'STR_RESUPPLY_KO';
+                [localize 'STR_RESUPPLY_KO', true, 3] call KPLIB_fnc_hint;
             };
         };
 
         if (KPLIB_squadaction == 2) then {
             deleteVehicle _selectedmember;
             _resupplied = true;
-            hint localize 'STR_REMOVE_OK';
+            [localize 'STR_REMOVE_OK', false, 3] call KPLIB_fnc_hint;
         };
 
         if (KPLIB_squadaction == 3) then {

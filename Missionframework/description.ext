@@ -37,7 +37,7 @@ briefingName = $STR_MISSION_TITLE;
 
 // Path to image which will be displayed when the mission is highlighted on the mission selection screen.
 // Image should be .paa format and in 2:1 aspect ratio – ideally 1024x512 (Arma 3).
-overviewPicture = "res\lib.paa";
+overviewPicture = "Images\lib.paa";
 
 // Text to be displayed below the overviewPicture on the mission selection screen
 overviewText = $STR_MISSION_OVERVIEW;
@@ -53,7 +53,7 @@ onLoadName = $STR_MISSION_TITLE;
 
 // You can define a picture to be shown while the mission is loaded.
 // The path is relative to the mission folder.
-loadScreen = "res\lib.paa";
+loadScreen = "Images\lib.paa";
 
 // Displays a message while the mission is loading below the loadScreen picture.
 onLoadMission = $STR_MISSION_ONLOAD;
@@ -189,6 +189,9 @@ showMap = 1;
 // Enable or disable availability of createVehicleLocal
 unsafeCVL = 1;
 
+// Skip briefing
+briefing = 0;
+
 
 /*
     ----- Task Settings -----
@@ -217,19 +220,18 @@ class CfgDebriefing {
 };
 
 class CfgDiscordRichPresence {
-    applicationID="698133766975258664";
-    defaultDetails="";
-    defaultState="Preparing...";
-    defaultLargeImageKey="liberation_logo";
-    defaultLargeImageText="KP Liberation";
-    defaultSmallImageKey="arma3_logo";
+    applicationID="1459325132584652946";
+    defaultDetails="KP Liberation 0.97.0pig";
+    defaultState="Standing by....";
+    defaultLargeImageKey="";
+    defaultLargeImageText="";
+    defaultSmallImageKey="";
     defaultSmallImageText="Arma 3";
     useTimeElapsed=1;
 };
 
 class CfgFunctions {
     #include "CfgFunctions.hpp"
-    #include "KP\KPPLM\KPPLM_functions.hpp"
 };
 
 class CfgRespawnTemplates {
@@ -237,35 +239,44 @@ class CfgRespawnTemplates {
 };
 
 class CfgTaskDescriptions {
-    #include "scripts\client\tutorial\CfgTaskDescriptions.hpp"
+    #include "Scripts\Client\tutorial\CfgTaskDescriptions.hpp"
 };
 
-#include "ui\liberation_interface.hpp"
-#include "ui\liberation_notifications.hpp"
-#include "ui\mission_params.hpp"
+#include "Interface\liberation_interface.hpp"
+#include "mission_params.hpp"
 
-#include "GREUH\UI\GREUH_interface.hpp"
-#include "KP\KPGUI\KPGUI_defines.hpp"
-#include "KP\KPPLM\ui\KPPLM_dialog.hpp"
-
-#include "VAM_GUI\defines.hpp"
-#include "VAM_GUI\VAM_GUI_controls.hpp"
-#include "VAM_GUI\VAM_GUI_classes.hpp"
+#include "Extensions\VAM_GUI\defines.hpp"
+#include "Extensions\VAM_GUI\VAM_GUI_controls.hpp"
+#include "Extensions\VAM_GUI\VAM_GUI_classes.hpp"
 
 class ACEX_Fortify_Presets {
     class KPLIB_Fortify {
         displayName = "KPLIB Fortify";
         objects[] = {
-            {"Land_BagFence_Round_F", 5},
-            {"Land_BagFence_Short_F", 5},
-            {"Land_BagFence_Long_F", 10},
-            {"Land_Plank_01_4m_F", 10},
-            {"Land_BagBunker_Small_F", 25},
-            {"Land_Razorwire_F", 10},
-            {"RoadBarrier_F", 1},
-            {"RoadCone_F", 1},
-            {"Land_Campfire_F", 1},
-            {"CamoNet_wdl_open_F", 30}
+            {"Land_BagFence_Round_F", 0},
+            {"Land_BagFence_Short_F", 0},
+            {"Land_BagFence_Long_F", 0},
+            {"Land_Plank_01_4m_F", 0},
+            {"Land_BagBunker_Small_F", 0},
+            {"Land_Razorwire_F", 0},
+            {"RoadBarrier_F", 0},
+            {"RoadCone_F", 0},
+            {"Land_Campfire_F", 0},
+            {"CamoNet_wdl_open_F", 0}
         };
     };
+};
+
+#include "Extensions\Pylon_Manager\ui\RscPylonManagerMenu.hpp"
+#include "Extensions\Arty_Menu\ui\RscArtyMenu.hpp"
+#include "Extensions\Supply_Menu\ui\RscSupplyMenu.hpp"
+
+class cfgSounds {
+    sounds[] = {};
+    
+    #include "cfgSounds.hpp"
+};
+
+class CfgNotifications {
+    #include "cfgNotifications.hpp"
 };

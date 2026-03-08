@@ -11,20 +11,24 @@ switch (_notiftype) do {
         waitUntil {!isNil "secondary_objective_position_marker"};
         waitUntil {count secondary_objective_position_marker > 0};
         waitUntil {secondary_objective_position_marker distance zeropos > 1000};
-        ["lib_intel_fob", [markertext ([10000, secondary_objective_position_marker] call KPLIB_fnc_getNearestSector)]] call BIS_fnc_showNotification;
-        _secondary_marker = createMarkerLocal ["secondarymarker", secondary_objective_position_marker];
-        _secondary_marker setMarkerColorLocal KPLIB_color_enemyActive;
-        _secondary_marker setMarkerTypeLocal "hd_unknown";
+        //["lib_intel_fob", [markertext ([10000, secondary_objective_position_marker] call KPLIB_fnc_getNearestSector)]] call BIS_fnc_showNotification;
+        
+        //_secondary_marker = createMarkerLocal ["secondarymarker", secondary_objective_position_marker];
+        //_secondary_marker setMarkerColorLocal KPLIB_color_enemyActive;
+        //_secondary_marker setMarkerTypeLocal "hd_unknown";
 
         _secondary_marker_zone = createMarkerLocal ["secondarymarkerzone", secondary_objective_position_marker];
         _secondary_marker_zone setMarkerColorLocal KPLIB_color_enemyActive;
         _secondary_marker_zone setMarkerShapeLocal "ELLIPSE";
         _secondary_marker_zone setMarkerBrushLocal "FDiagonal";
         _secondary_marker_zone setMarkerSizeLocal [1500,1500];
+
+        [KPLIB_side_player, "fob_hunting", [localize "STR_TASK_FOBHUNTING_DESCRIPTION", localize "STR_TASK_FOBHUNTING_TITLE"], secondary_objective_position_marker, "unknown"] call KPLIB_fnc_taskCreation;
     };
     case 3: {
-        ["lib_secondary_fob_destroyed"] call BIS_fnc_showNotification;
-        deleteMarkerLocal "secondarymarker";
+        //["lib_secondary_fob_destroyed"] call BIS_fnc_showNotification;
+        ["fob_hunting", "SUCCEEDED",true] call BIS_fnc_taskSetState;
+        //deleteMarkerLocal "secondarymarker";
         deleteMarkerLocal "secondarymarkerzone";
         secondary_objective_position_marker = [];
     };

@@ -40,6 +40,7 @@ KPLIB_b_mobileRespawn   = ["B_Truck_01_medical_F","B_T_Truck_01_medical_F"];
 KPLIB_b_potato01        = "B_Heli_Transport_03_unarmed_F";              // This is Potato 01, a multipurpose mobile respawn as a helicopter.
 KPLIB_b_crewUnit        = "B_crew_F";                                   // This defines the crew for vehicles.
 KPLIB_b_heliPilotUnit   = "B_Helipilot_F";                              // This defines the pilot for helicopters.
+KPLIB_b_crewStatic      = "B_Soldier_F";                                // This defines the crew for static weapons.
 KPLIB_b_addHeli         = "B_Heli_Light_01_F";                          // These are the additional helicopters which spawn on the Freedom or at Chimera base.
 KPLIB_b_addBoat         = "B_Boat_Transport_01_F";                      // These are the boats which spawn at the stern of the Freedom.
 KPLIB_b_logiTruck       = "B_Truck_01_transport_F";                     // These are the trucks which are used in the logistic convoy system.
@@ -448,40 +449,54 @@ KPLIB_b_squadPara = [
 /*
     --- Vehicles to unlock ---
     Classnames below have to be unlocked by capturing military bases.
-    Which base locks a vehicle is randomized on the first start of the campaign.
+    Which base locks a vehicle can selected or randomized on the first start of the campaign.
+        0: vehicle classname <STRING>
+        1: sector which locks the vehicle <STRING>
+    Example:
+        ["vehicle_classname", "military_1"]
+    If an empty string ("") is left in the sector selection, it will be randomized.
 */
 KPLIB_b_vehToUnlock = [
-    "rhsusf_mkvsoc",                                                    // Mk.V SOCOM
-    "rhsusf_m1a1aim_tuski_wd",                                          // M1A1SA (Tusk I)
-    "B_MBT_01_TUSK_F",                                                  // M2A4 Slammer UP
-    "rhsusf_m1a2sep1tuskiiwd_usarmy",                                   // M1A2SEPv1 (Tusk II)
-    "BWA3_Leopard2_Fleck",                                              // MBT Leopard 2A6M
-    "B_MBT_01_arty_F",                                                  // M4 Scorcher
-    "rhsusf_m109_usarmy",                                               // M109A6
-    "B_MBT_01_mlrs_F",                                                  // M5 Sandstorm MLRS
-    "B_Heli_Attack_01_dynamicLoadout_F",                                // AH-99 Blackfoot
-    "RHS_AH64D_wd",                                                     // AH-64D (Multi-Role)
-    "BWA3_Tiger_RMK_Universal",                                         // UH Tiger RMK (Universal)
-    "B_UAV_02_dynamicLoadout_F",                                        // MQ-4A Greyhawk
-    "B_T_UAV_03_dynamicLoadout_F",                                      // MQ-12 Falcon
-    "B_UAV_05_F",                                                       // UCAV Sentinel
-    "B_Plane_CAS_01_dynamicLoadout_F",                                  // A-164 Wipeout (CAS)
-    "I_Plane_Fighter_04_F",                                             // A-149 Gryphon
-    "RHS_A10",                                                          // A-10A (CAS)
-    "USAF_MQ9",                                                         // MQ-9 Reaper
-    "USAF_A10",                                                         // A-10C Thunderbolt II
-    "USAF_F22",                                                         // F-22A Raptor
-    "USAF_F22_EWP_AA",                                                  // F-22A Raptor (EWP-AA)
-    "USAF_F22_EWP_AG",                                                  // F-22A Raptor (EWP-AG)
-    "USAF_F22_Heavy",                                                   // F-22A Raptor (Heavy)
-    "USAF_F35A_STEALTH",                                                // F-35A Lightning II
-    "USAF_F35A",                                                        // F-35A Lightning II (Heavy)
-    "FIR_F15C",                                                         // F-15C Eagle
-    "FIR_F15D",                                                         // F-15D Eagle
-    "FIR_F15E",                                                         // F-15E Strike Eagle
-    "JS_JC_FA18E",                                                      // F/A-18 E Super Hornet
-    "JS_JC_FA18F",                                                      // F/A-18 F Super Hornet
-    "B_Plane_Fighter_01_F",                                             // F/A-181 Black Wasp II
-    "B_Plane_Fighter_01_Stealth_F",                                     // F/A-181 Black Wasp II (Stealth)
-    "B_T_VTOL_01_armed_F"                                               // V-44 X Blackfish (Armed)
+    ["rhsusf_mkvsoc",""],                                               // Mk.V SOCOM
+    ["rhsusf_m1a1aim_tuski_wd",""],                                     // M1A1SA (Tusk I)
+    ["B_MBT_01_TUSK_F",""],                                             // M2A4 Slammer UP
+    ["rhsusf_m1a2sep1tuskiiwd_usarmy",""],                              // M1A2SEPv1 (Tusk II)
+    ["BWA3_Leopard2_Fleck",""],                                         // MBT Leopard 2A6M
+    ["B_MBT_01_arty_F",""],                                             // M4 Scorcher
+    ["rhsusf_m109_usarmy",""],                                          // M109A6
+    ["B_MBT_01_mlrs_F",""],                                             // M5 Sandstorm MLRS
+    ["B_Heli_Attack_01_dynamicLoadout_F",""],                           // AH-99 Blackfoot
+    ["RHS_AH64D_wd",""],                                                // AH-64D (Multi-Role)
+    ["BWA3_Tiger_RMK_Universal",""],                                    // UH Tiger RMK (Universal)
+    ["B_UAV_02_dynamicLoadout_F",""],                                   // MQ-4A Greyhawk
+    ["B_T_UAV_03_dynamicLoadout_F",""],                                 // MQ-12 Falcon
+    ["B_UAV_05_F",""],                                                  // UCAV Sentinel
+    ["B_Plane_CAS_01_dynamicLoadout_F",""],                             // A-164 Wipeout (CAS)
+    ["I_Plane_Fighter_04_F",""],                                        // A-149 Gryphon
+    ["RHS_A10",""],                                                     // A-10A (CAS)
+    ["USAF_MQ9",""],                                                    // MQ-9 Reaper
+    ["USAF_A10",""],                                                    // A-10C Thunderbolt II
+    ["USAF_F22",""],                                                    // F-22A Raptor
+    ["USAF_F22_EWP_AA",""],                                             // F-22A Raptor (EWP-AA)
+    ["USAF_F22_EWP_AG",""],                                             // F-22A Raptor (EWP-AG)
+    ["USAF_F22_Heavy",""],                                              // F-22A Raptor (Heavy)
+    ["USAF_F35A_STEALTH",""],                                           // F-35A Lightning II
+    ["USAF_F35A",""],                                                   // F-35A Lightning II (Heavy)
+    ["FIR_F15C",""],                                                    // F-15C Eagle
+    ["FIR_F15D",""],                                                    // F-15D Eagle
+    ["FIR_F15E",""],                                                    // F-15E Strike Eagle
+    ["JS_JC_FA18E",""],                                                 // F/A-18 E Super Hornet
+    ["JS_JC_FA18F",""],                                                 // F/A-18 F Super Hornet
+    ["B_Plane_Fighter_01_F",""],                                        // F/A-181 Black Wasp II
+    ["B_Plane_Fighter_01_Stealth_F",""],                                // F/A-181 Black Wasp II (Stealth)
+    ["B_T_VTOL_01_armed_F",""]                                          // V-44 X Blackfish (Armed)
 ];
+
+
+
+
+
+
+
+
+

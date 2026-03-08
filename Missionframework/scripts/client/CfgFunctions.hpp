@@ -1,10 +1,10 @@
 class client_misc {
-    file = "scripts\client\misc";
+    file = "Scripts\Client\misc";
 
     class initArsenal                   {};
 };
 class client_tutorial {
-    file = "scripts\client\tutorial";
+    file = "Scripts\Client\tutorial";
 
     class handleCrateStorageTask        {};
     class handleHealCivTask             {};

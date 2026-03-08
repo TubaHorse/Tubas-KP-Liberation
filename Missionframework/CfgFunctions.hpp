@@ -1,109 +1,275 @@
 class KPLIB {
-    class functions {
-        file = "functions";
 
+    class Blufor {
+        file = "Functions\blufor";
+
+        class getBluforRatio            {};
+        class getGroupType              {};
+        class getLocalCap               {};
+        class getMobileRespawns         {};
+        class getMobileRespawnName      {};
+        class isClassUAV                {};
+        class potatoScan                {};
+        class setVehicleCaptured        {};
+        class setVehicleSeized          {};
+        
+    };
+    class Battlegroup {
+        file = "Functions\battlegroup";
+
+        class battlegroupAttack         {};
+        class battlegroupAttackHeli     {};
+        class battlegroupIncoming       {};
+        class battlegroupInfantry       {};
+        class battlegroupJet            {};
+        class battlegroupLandVehicle    {};
+        class battlegroupParatroopers   {};
+        class battlegroupTransportHeli  {};
+        class handleLandTransport       {};
+        class spawnBattlegroup          {};
+        class spawnInfCargo             {};
+    };
+    class Cargo {
+        file = "Functions\cargo";
+
+        class addParadropAction         {};
+        class doLoadCrate               {};
+        class doParadropCrate           {};
+        class doUnloadCrate             {};
+        class setCargoVehConfig         {};
+    };
+    class Curator {
+        file = "Functions\curator";
+
+        class handlePlacedZeusObject    {};
+        class enforceZeusWhitelist      {};
+    };
+    class Fob {
+        file = "Functions\fob";
         class addActionsFob             {};
+        class getFobName                {};
+        class getFobResources           {};
+        class getNearestFob             {};
+        class setFobMass                {};
+
+    };
+    class Gear {
+        file = "Functions\gear";
+
+        class checkGear                 {};
+        class checkWeaponCargo          {};
+        class crawlAllItems             {};
+        class getLoadout                {};
+        class getWeaponComponents       {};
+        class isRadio                   {};
+        class setLoadout                {};
+        class swapInventory             {};
+    };
+    class Misc {
+        file = "Functions\misc";
+
+        class ace_isAwake               {};
         class addActionsFullHeal        {};
-        class addActionsPlayer          {};
-        class addArtyToSupport          {};
         class addObjectInit             {};
         class addRopeAttachEh           {};
         class allowCrewInImmobile       {};
         class checkClass                {};
-        class checkCrateValue           {};
-        class checkGear                 {};
-        class checkWeaponCargo          {};
         class cleanOpforVehicle         {};
         class clearCargo                {};
-        class crAddAceAction            {};
-        class crateFromStorage          {};
-        class crateToStorage            {};
-        class crawlAllItems             {};
+        class clearGarbage              {};
         class createClearance           {};
         class createClearanceConfirm    {};
-        class createCrate               {};
-        class createManagedUnit         {};
-        class crGetMulti                {};
-        class crGlobalMsg               {};
-        class doSave                    {};
+        class despawnGroup              {};
+        class despawnObject             {};
         class fullHeal                  {};
-        class fillStorage               {};
-        class forceBluforCrew           {};
         class getAdaptiveVehicle        {};
-        class getBluforRatio            {};
-        class getCommander              {};
-        class getCrateHeight            {};
-        class getFobName                {};
-        class getFobResources           {};
-        class getGroupType              {};
-        class getLessLoadedHC           {};
-        class getLoadout                {};
-        class getLocalCap               {};
-        class getLocationName           {};
         class getMilitaryId             {};
-        class getMobileRespawns         {};
-        class getMobileRespawnName      {};
-        class getNearbyPlayers          {};
-        class getNearestBluforObjective {};
-        class getNearestFob             {};
-        class getNearestSector          {};
-        class getNearestTower           {};
         class getNearestViVTransport    {};
         class getOpforCap               {};
         class getOpforFactor            {};
-        class getOpforSpawnPoint        {};
-        class getOpforSpawnPointSAM     {};
-        class getPlayerCount            {};
         class getResistanceTier         {};
-        class getSaveableParam          {};
-        class getSaveData               {};
-        class getSectorOwnership        {};
-        class getSectorRange            {};
-        class getSquadComp              {};
-        class getStoragePositions       {};
         class getUnitPositionId         {};
         class getUnitsCount             {};
-        class getWeaponComponents       {};
-        class handlePlacedZeusObject    {};
+        class hint                      {};
+        class lambs_enableReinforcements{};
+        class protectObject             {};
+        class setLoadableViV            {};
+        class skipBriefing              {preInit = 1;};
+
+    };
+    class Player {
+        file = "Functions\player";
+
+        class addActionsPlayer          {};
+        class addPlayerEH               {};
+        class enforceCmdrWhitelist      {};
+        class getNearbyPlayers          {};
+        class getCommander              {};
+        class getPlayerCount            {};
         class hasPermission             {};
+
+    };
+    class Prisonner {
+        file = "Functions\prisonner";
+
+        class addActionCapture          {};
+        class addActionDeliver          {};
+        class prisonnerCheckPFH         {};
+        class prisonnerDeliver          {};
+        class prisonnerEscape           {};
+        class setCapturable             {};
+    };
+    class Production {
+        file = "Functions\production";
+
+        class addFactoryProduction      {};
+        class changeFactoryProduction   {};
+        class factoriesBlock            {};
+        class factoryBlockedPFH         {};
+        class factoryBuildFacility      {};
+        class factoryProduceResource    {};
+        class factoryProductionInit     {};
+        class factoryProductionPFH      {};
+        class registerStorageSector     {};
+        class selectFactoryToBlock      {};
+        class setFactoryFacility        {};
+        class updateProductionValues    {};
+    };
+    class Civilian_Reputation {
+        file = "Functions\reputation";
+
+        class crAddAceAction            {};
+        class crGetMulti                {};
+        class crGlobalMsg               {}; 
+    };
+    class Resources {
+        file = "Functions\resources";
+
+        class addActionsCrate           {};
+        class doRecycle                 {};
+        class recalculateResources      {};
+        class recalculateResourcesInit  {};
+        class recalculateResourcesPFH   {};
+        class recycleResources          {};
+        class restoreResources          {};
+        class subtractResources         {};
+    };
+    class Save {
+        file = "Functions\Save";
+
+        class autoSavePFH               {};
+        class doSave                    {};
+        class getSaveableParam          {};
+        class getSaveData               {};
+        class loadSavedGame             {};
+    }
+    class Sector {
+        file = "Functions\sector";
+
+        class activateSector            {};
+        class deactivateSector          {};
+        class findSectorGarrisons       {};
+        class getBluforObjective        {};
+        class getLocationName           {};
+        class getNearestBase            {};
+        class getNearestBluforObjective {};
+        class getNearestSector          {};
+        class getNearestTower           {};
+        class getSectorOwnership        {};
+        class getSectorRange            {};
         class initSectors               {};
         class isCapitalActive           {};
-        class isClassUAV                {};
-        class isRadio                   {};
-        class lambs_enableReinforcements{};
-        class log                       {};
-        class potatoScan                {};
-        class protectObject             {};
-        class secondsToTimer            {};
-        class setDiscordState           {};
-        class setFobMass                {};
-        class setLoadableViV            {};
-        class setLoadout                {};
-        class setVehicleCaptured        {};
-        class setVehicleSeized          {};
-        class sortStorage               {};
-        class spawnBuildingSquad        {};
+        class liberatedSector           {};
+        class manageSectorPFH           {};
+        class prepareSector             {};
+        class replenishOutpost          {};
+        class sectorCapitalSpawns       {};
+        class sectorCitySpawns          {};
+        class sectorFactorySpawns       {};
+        class sectorOutpostSpawns       {};
+        class sectorMilitarySpawns      {};
+        class sectorTowerSpawns         {};
+        class spawnBoatPatrol           {};
+        
+    };
+    class Spawn {
+        file = "Functions\spawn";
+
+        class createCrate               {};
+        class createCrew                {};
+        class createManagedUnit         {};
+        class forceBluforCrew           {};
+        class getOpforRoadSpawnPoint    {};
+        class getOpforSpawnPoint        {};
+        class getSquadComp              {};
+        class spawnBuildingGarrison     {};
         class spawnCivilians            {};
+        class spawnGarrisonUnit         {};
         class spawnGuerillaGroup        {};
-        class spawnMilitaryPostSquad    {};
+        class spawnGuerInFactory        {};
         class spawnMilitiaCrew          {};
         class spawnRegularSquad         {};
         class spawnVehicle              {};
-        class swapInventory             {};
-    };
-    class functions_curator {
-        file = "functions\curator";
 
-        class initCuratorHandlers       {
-            postInit = 1;
-        };
-        class requestZeus               {};
     };
+    class Storage {
+        file = "Functions\storage";
+
+        class addActionsStorage         {};
+        class checkCrateValue           {};
+        class crateFromStorage          {};
+        class crateToStorage            {};
+        class fillStorage               {};
+        class getCrateHeight            {};
+        class getStorageLimit           {};
+        class getStorageValues          {};
+        class isStorageFull             {};
+
+    };
+    class System {
+        file = "Functions\system";
+        
+        class log                       {};
+        class secondsToTimer            {};
+        class setDiscordState           {};
+        class getLessLoadedHC           {};
+        class taskCreation              {};
+    }; 
     class functions_ui {
-        file = "functions\ui";
+        file = "Functions\ui";
 
         class overlayUpdateResources    {};
     };
-    #include "scripts\client\CfgFunctions.hpp"
-    #include "scripts\server\CfgFunctions.hpp"
+    class TeamSpeak {
+        file = "Extensions\TeamSpeak"
+
+        class TeamSpeakCheck            {};
+    };
+
+
+    #include "Functions\do_build\cfgFunctions.hpp"
+
+    #include "Scripts\Client\CfgFunctions.hpp"
+    #include "Scripts\Server\CfgFunctions.hpp"
+
+    // Interfaces
+    #include "Interface\Build\cfgFunctions.hpp"
+    #include "Interface\Production\cfgFunctions.hpp"
+    #include "Interface\Recycle\cfgFunctions.hpp"
+    #include "Interface\Redeploy\cfgFunctions.hpp"
+
+    // Extensions
+    #include "Extensions\Arty_Framework\cfgFunctions.hpp"
+    #include "Extensions\Arty_Menu\cfgFunctions.hpp"
+    #include "Extensions\Clear_Brushes\cfgFunctions.hpp"
+    #include "Extensions\Enemy_Fighters\cfgFunctions.hpp"
+    #include "Extensions\Lock_Arsenal\cfgFunctions.hpp"
+    #include "Extensions\Player_Menu\KPPLM\KPPLM_functions.hpp"
+    #include "Extensions\Pylon_Manager\cfgFunctions.hpp"
+    #include "Extensions\Rally_Point\cfgFunctions.hpp"
+    #include "Extensions\SAM_Sites\cfgFunctions.hpp"
+    #include "Extensions\Sector_Objects\cfgFunctions.hpp"
+    #include "Extensions\Sector_Events\cfgFunctions.hpp"
+    #include "Extensions\Supply_Menu\cfgFunctions.hpp"
+    #include "Extensions\Discord_Log\cfgFunctions.hpp"
 };

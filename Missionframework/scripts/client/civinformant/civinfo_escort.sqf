@@ -3,7 +3,7 @@ scriptName "civinfo_escort";
 params ["_informant"];
 private [ "_nearestfob", "_is_near_fob", "_grp" ];
 
-if (KPLIB_civinfo_debug > 0) then {[format ["civinfo_escort called on: %1 - Parameters: [%2]", debug_source, _informant], "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
+if (KPLIB_civinfo_debug > 0) then {[format ["civinfo_escort called on: %1 - Parameters: [%2]", KPLIB_debugSource, _informant], "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
 
 _is_near_fob = false;
 
@@ -40,8 +40,8 @@ if (alive _informant) then {
     if (KPLIB_civinfo_debug > 0) then {["civinfo_escort -> Informant at FOB", "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
     sleep 600;
     if (isNull objectParent _informant) then {deleteVehicle _informant} else {(objectParent _informant) deleteVehicleCrew _informant};
-    if (KPLIB_civinfo_debug > 0) then {[format ["civinfo_escort finished by: %1", debug_source], "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
+    if (KPLIB_civinfo_debug > 0) then {[format ["civinfo_escort finished by: %1", KPLIB_debugSource], "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
 } else {
-    if (KPLIB_civinfo_debug > 0) then {[format ["civinfo_escort failed by: %1 - Informant isn't alive", debug_source], "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
+    if (KPLIB_civinfo_debug > 0) then {[format ["civinfo_escort failed by: %1 - Informant isn't alive", KPLIB_debugSource], "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
     [3] remoteExec ["civinfo_notifications"];
 };

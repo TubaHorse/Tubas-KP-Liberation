@@ -1,5 +1,64 @@
 # Changelog
 
+## 0.97.0 (07/03/2026)
+* Added Extension: Enemy artillery.
+* Added Extension: Artillery menu for the players as a replacer for the BIS support module.
+* Added Extension: Clear bushes/trees action for the players (from the clear brush Ampersand).
+* Added Extension: Lock/Unlock arsenal items by sectors.
+* Added Extension: Pylon Manager for air assets.
+* Added Extension: Rally point system (BF2:PR inspired).
+* Added Extension: Enemy SAM Sites (inspired by Nicoman's SAM turrets manager)
+* Added Extension: Sector custom events.
+* Added Extension: Sector object and static weapons manager.
+* Added Extension: Teamspeak Connection verifier. ( It checks what is the server name you are connected to. Task Force Radio + Acre2)
+* Added Extension: Discord log, print info from all your captured factories into the server log, and a parser sends the info to discord (needs manual config, example.py provided).
+* Added Extension: Enemy Jet fighter spawns cycle on player flying an aircraft.
+* Added: New build framework to replace `do_build.sqf`. 
+* Added: More client and server CBA events.
+* Added: Arsenal whitelist by role.
+* Added: Mission parameters options for the additions.
+* Added: Paradrop supply action for air assets.
+* Added: Default enemy and player presets to handle new variables.
+* Added: Outpost sector to spawn enemy position.
+* Added: Clear garbage action for the commander role. Available near FOB and Op. base.
+* Added: Some CBA Settings under category KP Liberation.
+* Added: Supply Menu/Virtual dump logistic for items with its own preset configuration.
+* Added: Presets in mission parameters (https://github.com/KillahPotatoes/KP-Liberation/pull/973).
+* Added: Enemies have a chance to surrender when flashbanged indoor. 
+* Added: Ace fortify, buyable crates with Fortify token inside, players with fortify tool + token can build in a 50 meters radius of said crate.
+* Added: Zeus Whitelist as an option to give players access to the game master module.
+* Added: Guerrilla can seize factory sectors at negative reputation level and stop resource production.
+* Tweaked: AI Prices, before almost all of them didn't use ammo, now it has a little of an ammo cost.
+* Tweaked: Folder and files reorganization.
+* Tweaked: Battlegroup framework.
+* Tweaked: Build Menu interface.
+* Tweaked: Redeploy Menu interface and framework.
+* Tweaked: Production Menu interface and framework.
+* Tweaked: Recycle interface.
+* Tweaked: Sector activation framework.
+* Tweaked: Some scripts with CBA functions.
+* Tweaked: Storage, supply, unload, unflip and recycle actions.
+* Tweaked: Sector's building garrisons.
+* Tweaked: Prisonner and intel scripts.
+* Tweaked: Resource manager.
+* Tweaked: Mission makers can now add a tag (supply, ammo or fuel) to a factory as the first resource that can produce.
+* Tweaked: Resources management. Now the resources are stored virtually in a variable for each storage.
+* Tweaked: Moved KP Player Menu to extensions. Added BIS Dynamic Groups as default.
+* Tweaked: Civilian reputation now gives build menu discount/surcharge (fatrefrigerator's idea).
+* Tweaked: FOB templates with static weapons and garrisons spawns.
+* Tweaked: FOB Hunting with task framework.
+* Tweaked: Civilian reputation can decrease production time above certain value.
+* Tweaked: Briefing Skip (Forced).
+* Tweaked: Replaced build actions with mouse and keyboard interaction.
+* Removed: Push supply action.
+* Removed: GREUH player menu.
+* Removed: Useless enemy patrols.
+* Removed: Useless civilians patrols between sectors.
+* Removed: Infantry only battlegroup.
+* Removed: Zeus mission parameters, init and request.
+* Removed: Commander whitelist mission parameter. Directly whitelist detection by checking the array.
+* Fixed: Collision with carrying supply crates.
+
 ## 0.96.8 (TBD)
 * Added: Czech translation. Thanks to [MJVEVERUSKA](https://github.com/MJVEVERUSKA)
 * Added: Ability to carry ressource crates.

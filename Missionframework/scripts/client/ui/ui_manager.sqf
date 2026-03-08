@@ -118,11 +118,10 @@ while {true} do {
         if (_uiticks % 25 == 0) then {
 
             if (!isNil "KPLIB_sectors_active" && ([] call KPLIB_fnc_getOpforCap >= KPLIB_cap_enemySide)) then {
-
                 (_overlay displayCtrl (517)) ctrlShow true;
 
                 if (!_KPLIB_sectors_active_hint) then {
-                    hint localize "STR_OVERLOAD_HINT";
+                    [localize 'STR_OVERLOAD_HINT', true, 5] call KPLIB_fnc_hint;
                     _KPLIB_sectors_active_hint = true;
                 };
 
@@ -139,7 +138,7 @@ while {true} do {
             };
 
             _nearest_active_sector = [KPLIB_range_sectorActivation] call KPLIB_fnc_getNearestSector;
-            if ( _nearest_active_sector != "" ) then {
+            if ( _nearest_active_sector != "" && !(_nearest_active_sector in KPLIB_sectors_filler)) then {
                 _zone_size = KPLIB_range_sectorCapture;
                 if ( _nearest_active_sector in KPLIB_sectors_capital ) then {
                     _zone_size = KPLIB_range_sectorCapture * 1.4;

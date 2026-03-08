@@ -8,7 +8,7 @@ if (_mission_index < 0) exitWith {false};
 
 if (isNil "KPLIB_secondary_starting") then { KPLIB_secondary_starting = false;};
 if (KPLIB_secondary_starting) exitWith {["Multiple calls to start secondary mission : shouldn't be possible, isn't allowed", "ERROR"] call KPLIB_fnc_log;};
-if (isNil "used_positions") then {used_positions = [];};
+if (isNil "KPLIB_usedOpforSpawnPoints") then {KPLIB_usedOpforSpawnPoints = [];};
 
 KPLIB_secondary_starting = true; publicVariable "KPLIB_secondary_starting";
 

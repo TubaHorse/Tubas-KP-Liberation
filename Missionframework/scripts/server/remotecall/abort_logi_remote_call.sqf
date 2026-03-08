@@ -6,7 +6,11 @@ private ["_time","_nextState"];
 
 logiError = 0;
 
-if ((((KPLIB_logistics select _index) select 7) == 0) || (((KPLIB_logistics select _index) select 7) == 5) || (((KPLIB_logistics select _index) select 7) == 6)) exitWith {logiError = 1;(localize "STR_LOGISTIC_STANDBY_ERROR") remoteExec ["hint",_clientID]; _clientID publicVariableClient "logiError";};
+if ((((KPLIB_logistics select _index) select 7) == 0) || (((KPLIB_logistics select _index) select 7) == 5) || (((KPLIB_logistics select _index) select 7) == 6)) exitWith {
+    logiError = 1;
+    [localize "STR_LOGISTIC_STANDBY_ERROR", true, 3] remoteExec ["KPLIB_fnc_hint", _clientID]; 
+    _clientID publicVariableClient "logiError";
+};
 
 switch ((KPLIB_logistics select _index) select 7) do {
     case 1;
@@ -38,3 +42,5 @@ KPLIB_logistics set [_index,[
     _time,
     0
 ]];
+
+publicVariable "KPLIB_logistics";

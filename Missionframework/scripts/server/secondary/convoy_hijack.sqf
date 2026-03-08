@@ -1,7 +1,7 @@
 private _convoy_destinations_markers = [];
-private _load_box_fnc = compile preprocessFileLineNumbers "scripts\client\ammoboxes\do_load_box.sqf";
+private _load_box_fnc = compile preprocessFileLineNumbers "Scripts\Client\ammoboxes\do_load_box.sqf";
 
-while { count _convoy_destinations_markers < 3 } do { _convoy_destinations_markers pushback ([2000,999999,false] call KPLIB_fnc_getOpforSpawnPoint); };
+while { count _convoy_destinations_markers < 3 } do { _convoy_destinations_markers pushback ([2000,999999,false] call KPLIB_fnc_getOpforRoadSpawnPoint); };
 
 private _couldnt_spawn = false;
 { if ( _x == "" ) exitWith { _couldnt_spawn = true; }; } foreach _convoy_destinations_markers;
@@ -16,6 +16,8 @@ private _spawnpos = _convoy_destinations select 0;
 private _scout_vehicle = [_spawnpos getPos [30, 0], KPLIB_o_mrap, true, false] call KPLIB_fnc_spawnVehicle;
 private _escort_vehicle = [_spawnpos getPos [10, 0], selectRandom KPLIB_o_armyVehiclesLight, true, false] call KPLIB_fnc_spawnVehicle;
 private _transport_vehicle = [_spawnpos getPos [10, 180], KPLIB_o_transportTruckAmmo, true, false] call KPLIB_fnc_spawnVehicle;
+
+[_transport_vehicle] call KPLIB_fnc_setCargoVehConfig;
 
 private _boxes_amount = 0;
 {

@@ -5,7 +5,7 @@ params ["_unit", ["_sector", ""], ["_forceNoLAMBS", false]];
 private _sectorPos = (markerPos _sector);
 //Check LAMBS_Danger.fsm is running. if running, skip KPLIB built in troop garrisoning and call lambs wp garrisoning.
 
-private _checkLAMBS = isClass (configfile >> "CfgPatches" >> "lambs_wp");
+private _checkLAMBS = KPLIB_LAMBS;
 if (_forceNoLAMBS) then {_checkLAMBS = false};
 
 if (_checkLAMBS) then {

@@ -2,7 +2,7 @@
     File: fn_spawnSectorIntel.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-05-01
-    Last Update: 2020-05-06
+    Last Update: 2025-11-23
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -32,7 +32,7 @@ if !(_sector in KPLIB_sectorIntelSpawned) then {
 
     if !(_buildings isEqualTo []) then {
         private _positions = [];
-        {_positions append _x;} forEach (_buildings apply {[_x] call BIS_fnc_buildingPositions});
+        {_positions append _x;} forEach (_buildings apply {[_x] call CBA_fnc_buildingPositions});
 
         if ((count _positions) >= (_amount * 4)) then {
             private _spawnPos = [];
@@ -44,6 +44,7 @@ if !(_sector in KPLIB_sectorIntelSpawned) then {
                 _obj setdir (random 360);
                 _obj setPosATL _spawnPos;
                 _obj allowDamage false;
+                [_obj] call KPLIB_fnc_addObjectInit;
             };
         };
     };

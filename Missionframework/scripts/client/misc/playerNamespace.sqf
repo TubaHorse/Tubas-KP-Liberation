@@ -9,12 +9,14 @@
         Tracks player state values to provide this information for other scripts.
 */
 
+// ToDo: get rid of this.
+
 scriptName "KPLIB_playerNamespace";
 
-waitUntil {!isNil "one_synchro_done"};
-waitUntil {!isNil "one_eco_done"};
-waitUntil {one_synchro_done};
-waitUntil {one_eco_done};
+//waitUntil {!isNil "one_synchro_done"};
+//waitUntil {!isNil "one_eco_done"};
+//waitUntil {one_synchro_done};
+//waitUntil {one_eco_done};
 
 private _fobPos = [0, 0, 0];
 private _fobDist = 99999;
@@ -51,12 +53,15 @@ while {true} do {
     if (KPLIB_param_mobileRespawn) then {
         player setVariable ["KPLIB_isNearMobRespawn", !((player nearEntities [(KPLIB_b_mobileRespawns)+ [KPLIB_b_potato01], 10]) isEqualTo [])];
     };
+    
+    // Is near supply dump
+    player setVariable ["KPLIB_isNearDump", !((player nearEntities [KPLIB_b_supplyDump, 10]) isEqualTo [])];
 
     // Is near startbase
     player setVariable ["KPLIB_isNearStart", (player distance2d startbase) < 200];
 
     // Nearest activated sector and possible production data
-    player setVariable ["KPLIB_nearProd", KPLIB_production param [KPLIB_production findIf {(_x select 1) isEqualTo ([100] call KPLIB_fnc_getNearestSector)}, []]];
+    player setVariable ["KPLIB_nearProd", KPLIB_production getOrDefault [[100] call KPLIB_fnc_getNearestSector, []]];
     player setVariable ["KPLIB_nearSector", [KPLIB_range_sectorActivation] call KPLIB_fnc_getNearestSector];
 
     // Zeus module synced to player

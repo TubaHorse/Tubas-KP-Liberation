@@ -16,5 +16,5 @@ if (_permissionIdx isEqualTo -1) exitWith {};
 
 if !([_permissionIdx] call KPLIB_fnc_hasPermission) exitWith {
     moveOut player;
-    hint localize (_permissibleVehicles select _permissionIdx select 1);
+    [localize (_permissibleVehicles select _permissionIdx select 1), true, 5] call KPLIB_fnc_hint;
 };

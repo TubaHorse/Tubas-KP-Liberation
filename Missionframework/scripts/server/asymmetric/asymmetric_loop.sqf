@@ -4,7 +4,7 @@ waitUntil {!isNil "KPLIB_saveLoaded"};
 waitUntil {!isNil "KPLIB_civ_rep"};
 waitUntil {KPLIB_saveLoaded};
 
-if (KPLIB_asymmetric_debug > 0) then {[format ["Loop spawned on: %1", debug_source], "ASYMMETRIC"] call KPLIB_fnc_log;};
+if (KPLIB_asymmetric_debug > 0) then {[format ["Loop spawned on: %1", KPLIB_debugSource], "ASYMMETRIC"] call KPLIB_fnc_log;};
 
 KPLIB_asymmetric_sectors = [];
 

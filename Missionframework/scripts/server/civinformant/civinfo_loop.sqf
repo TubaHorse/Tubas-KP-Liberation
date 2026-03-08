@@ -2,7 +2,7 @@ scriptName "civinfo_loop";
 
 waitUntil {sleep 10; ({_x in KPLIB_sectors_city || _x in KPLIB_sectors_capital} count KPLIB_sectors_player) > 0};
 
-if (KPLIB_civinfo_debug > 0) then {[format ["Loop spawned on: %1", debug_source], "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
+if (KPLIB_civinfo_debug > 0) then {[format ["Loop spawned on: %1", KPLIB_debugSource], "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
 
 while {true} do {
     uiSleep (KPLIB_civinfo_min + round (random (KPLIB_civinfo_max - KPLIB_civinfo_min)));
@@ -52,7 +52,7 @@ while {true} do {
         _informant setVariable ["KPLIB_prisonner_surrendered", true, true];
         _chemlight = _chemClass createVehicle (getPos _informant);
 
-        if (KPLIB_civinfo_debug > 0) then {[format ["Informant %1 spawned on: %2 - Position: %3", name _informant, debug_source, getPos _informant], "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
+        if (KPLIB_civinfo_debug > 0) then {[format ["Informant %1 spawned on: %2 - Position: %3", name _informant, KPLIB_debugSource, getPos _informant], "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
 
         [0, [((((getPos _informant) select 0) + 125) - random 250),((((getPos _informant) select 1) + 125) - random 250),0]] remoteExec ["civinfo_notifications"];
 
@@ -134,7 +134,7 @@ while {true} do {
         waitUntil {!alive _informant || _timeover};
         
         if (!alive _informant && _not_under_control) exitWith {
-            if (KPLIB_civinfo_debug > 0) then {[format ["civinfo_loop is reset by: %1 - Informant isn't alive", debug_source], "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
+            if (KPLIB_civinfo_debug > 0) then {[format ["civinfo_loop is reset by: %1 - Informant isn't alive", KPLIB_debugSource], "CIVINFO"] remoteExecCall ["KPLIB_fnc_log", 2];};
             [3] remoteExec ["civinfo_notifications"];
         };
         if (_timeover) exitWith {

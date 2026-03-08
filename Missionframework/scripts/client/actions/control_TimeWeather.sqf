@@ -14,11 +14,11 @@ if (KPLIB_control_TimeWeather > 0) then {
         KPLIB_inProgress_TimeWeather = true;
         private _countdown = 15;
         for "_i" from _countdown to 1 step -1 do {
-            [format [localize "STR_FOB_TW_ACTION_TIMESKIP_COUNTDOWN", _countdown]] remoteExec ["hint",-2];
+            [format [localize "STR_FOB_TW_ACTION_TIMESKIP_COUNTDOWN", _countdown], true, 3] remoteExec ["KPLIB_fnc_hint", -2];
             _countdown = _countdown - 1;
             sleep 1;
         };
-        [localize "STR_FOB_TW_ACTION_TIMESKIP_START"] remoteExec ["hint",-2];
+        [localize "STR_FOB_TW_ACTION_TIMESKIP_START", true, 3] remoteExec ["KPLIB_fnc_hint", -2];
         if !(daytime < 16 && daytime > 8) then {
             private ["_currentHour", "_currentDate", "_newDate", "_nextDate", "_currentYear", "_currentDateNum", "_nextDateNum"];
             _currentHour = daytime;
@@ -37,7 +37,7 @@ if (KPLIB_control_TimeWeather > 0) then {
             };
             [_newDate, true, true] call BIS_fnc_setDate;
             sleep 5;
-            [localize "STR_FOB_TW_ACTION_TIMESKIP_DONE_MORNING"] remoteExec ["hint",-2];
+            [localize "STR_FOB_TW_ACTION_TIMESKIP_DONE_MORNING", true, 3] remoteExec ["KPLIB_fnc_hint", -2];
         } else {
             private ["_currentHour", "_currentDate", "_newDate", "_nextDate", "_currentYear", "_currentDateNum", "_nextDateNum"];
             _currentHour = daytime;
@@ -56,13 +56,13 @@ if (KPLIB_control_TimeWeather > 0) then {
             };
             [_newDate, true, true] call BIS_fnc_setDate;
             sleep 5;
-            [localize "STR_FOB_TW_ACTION_TIMESKIP_DONE_NIGHT"] remoteExec ["hint",-2];
+            [localize "STR_FOB_TW_ACTION_TIMESKIP_DONE_NIGHT", true, 3] remoteExec ["KPLIB_fnc_hint", -2];
         };
         KPLIB_inProgress_TimeWeather = false;
     };
 
     if (KPLIB_control_TimeWeather == 2) then {
         [240, 0] remoteExecCall ["setFog", 2];
-        [localize "STR_FOB_TW_ACTION_CLEARFOG_DONE"] remoteExec ["hint",-2];
+        [localize "STR_FOB_TW_ACTION_CLEARFOG_DONE", true, 3] remoteExec ["KPLIB_fnc_hint", -2];
     };
 };

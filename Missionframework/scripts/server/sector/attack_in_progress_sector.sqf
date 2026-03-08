@@ -53,26 +53,16 @@ if ( KPLIB_endgame == 0 ) then {
         ["KPLIB_ResetBattleGroups"] call CBA_fnc_serverEvent;
         [] spawn KPLIB_fnc_doSave;
         stats_sectors_lost = stats_sectors_lost + 1;
-        {
-            if (_sector in _x) exitWith {
-                if ((count (_x select 3)) == 3) then {
-                    {
-                        detach _x;
-                        deleteVehicle _x;
-                    } forEach (attachedObjects ((nearestObjects [((_x select 3) select 0), [KPLIB_b_smallStorage], 10]) select 0));
 
-                    deleteVehicle ((nearestObjects [((_x select 3) select 0), [KPLIB_b_smallStorage], 10]) select 0);
-                };
-                KPLIB_production = KPLIB_production - [_x];
-            };
-        } forEach KPLIB_production;
+        ["KPLIB_removeArsenalItems", [_sector]] call CBA_fnc_globalEvent;
+        ["KPLIB_removeFactoryProduction", _sector] call CBA_fnc_serverEvent;
     } else {
         [_sector, 3] remoteExec ["remote_call_sector"];
         {
             if (captive _x) then {
-                [_x, true] spawn prisonner_ai;
+                [_x, true] call KPLIB_fnc_setCapturable;
             } else {
-                [_x] spawn prisonner_ai;
+                [_x] call KPLIB_fnc_setCapturable;
             };
         } foreach (((markerpos _sector) nearEntities ["CAManBase", KPLIB_range_sectorCapture * 0.8]) select {side group _x == KPLIB_side_enemy});
     };

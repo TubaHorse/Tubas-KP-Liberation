@@ -52,5 +52,5 @@ if ((_price_s > 0) || (_price_a > 0) || (_price_f > 0)) then {
         if ((_price_s == 0) && (_price_a == 0) && (_price_f == 0)) exitWith {};
     } forEach _storage_areas;
 };
-please_recalculate = true;
+["KPLIB_recalculateResources", []] call CBA_fnc_serverEvent;
 stats_vehicles_recycled = stats_vehicles_recycled + 1;

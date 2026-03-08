@@ -1,11 +1,12 @@
 scriptName "sector_manager";
 
 waitUntil {!isNil "KPLIB_saveLoaded"};
-waitUntil {!isNil "KPLIB_vehicle_to_military_base_links"};
+waitUntil {!isNil "KPLIB_sector_vehicleLinks"};
 waitUntil {!isNil "KPLIB_sectors_player"};
 waitUntil {KPLIB_saveLoaded};
 
 private _vehicle_unlock_markers = [];
+private _arsenal_unlock_markers = [];
 private _cfg = configFile >> "cfgVehicles";
 
 {
@@ -15,7 +16,17 @@ private _cfg = configFile >> "cfgVehicles";
     _marker setMarkerColorLocal KPLIB_color_enemy;
     _marker setMarkerTypeLocal "mil_pickup";
     _vehicle_unlock_markers pushback [_marker, _base];
-} forEach KPLIB_vehicle_to_military_base_links;
+} forEach KPLIB_sector_vehicleLinks;
+
+{    
+    private _sector = _x;
+    private _marker = createMarkerLocal [format ["arsenalunlockmarker%1", _sector], [(markerpos _sector) select 0, ((markerpos _sector) select 1) - 125]];
+    _marker setMarkerTextLocal "Arsenal+";
+    _marker setMarkerColorLocal KPLIB_color_enemy;
+    _marker setMarkerTypeLocal "mil_pickup";
+    _marker setMarkerSizeLocal [0.8, 0.8];
+    _arsenal_unlock_markers pushback [_marker, _sector];
+}forEach KPLIB_sector_arsenalLink;
 
 private _sector_count = -1;
 
@@ -34,5 +45,10 @@ while {true} do {
         _x params ["_marker", "_base"];
         _marker setMarkerColorLocal ([KPLIB_color_enemy, KPLIB_color_player] select (_base in KPLIB_sectors_player));
     } forEach _vehicle_unlock_markers;
+
+    {
+        _x params ["_marker", "_sector"];
+        _marker setMarkerColorLocal ([KPLIB_color_enemy, KPLIB_color_player] select (_sector in KPLIB_sectors_player));
+    } forEach _arsenal_unlock_markers;
     _sector_count = count KPLIB_sectors_player;
 };

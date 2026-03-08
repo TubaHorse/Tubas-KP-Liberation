@@ -44,10 +44,22 @@ if (KPLIB_sectors_fob isEqualTo []) then {
         sleep 10;
     };
 
+    // Create parachute function
+    private _fnc_createParachute = {
+        // Author: Bohemia Interactive, mharis001
+        params ["_object", "_attachPos"];
+
+        private _parachute = createVehicle ["B_Parachute_02_F", _object, [], 0, "NONE"];
+        _parachute setDir getDir _object;
+        _parachute setVelocity [0, 0, -1];
+
+        _object attachTo [_parachute, _attachPos];
+    };
+
     // Spawn start resource crates and attach them to parachutes
     KPLIB_startCrates = [];
     private _crate = objNull;
-    for "_i" from 1 to 6 do {
+    for "_i" from 1 to 9 do {
         _crate = createVehicle [
             (KPLIB_crates select (_i % 3)),
             [((KPLIB_sectors_fob select 0) select 0), ((KPLIB_sectors_fob select 0) select 1), 150],
@@ -56,15 +68,16 @@ if (KPLIB_sectors_fob isEqualTo []) then {
             "FLY"
         ];
         [_crate, true] call KPLIB_fnc_clearCargo;
-        _crate setVariable ["KPLIB_crate_value", 100, true];
+        _crate setVariable ["KPLIB_crateValue", 100, true];
         [_crate, 500] remoteExec ["setMass", _crate];
-        [objNull, _crate] call BIS_fnc_curatorObjectEdited;
+        [_crate, [0, 0, -1.3]] call _fnc_createParachute;
         _crate lockInventory true;
         if (KPLIB_ace) then {
             [_crate, true, [0, 1.5, 0], 0] remoteExec ["ace_dragging_fnc_setCarryable"];
             _crate setVariable ["ace_cargo_noRename", true];
         };
         KPLIB_startCrates pushBack _crate;
+        ["KPLIB_addActionsCrate", _crate] call CBA_fnc_globalEventJIP;
     };
     
     publicVariable "KPLIB_startCrates";

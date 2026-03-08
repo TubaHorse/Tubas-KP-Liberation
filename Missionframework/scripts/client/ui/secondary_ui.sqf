@@ -22,12 +22,12 @@ waitUntil { dialog };
 private [ "_oldchoice", "_images", "_briefings", "_missioncost" ];
 
 _images = [
-    "res\secondary\fob_hunting.jpg",
-    "res\secondary\convoy_hijack.jpg",
-    "res\secondary\sar.jpg",
-    "res\secondary\hum_aid.jpg",
-    "res\secondary\bingo_fuel.jpg",
-    "res\secondary\rearm_outpost.jpg"
+    "Images\secondary\fob_hunting.jpg",
+    "Images\secondary\convoy_hijack.jpg",
+    "Images\secondary\sar.jpg",
+    "Images\secondary\hum_aid.jpg",
+    "Images\secondary\bingo_fuel.jpg",
+    "Images\secondary\rearm_outpost.jpg"
 ];
 
 _briefings = [
@@ -81,9 +81,7 @@ if ( dostartsecondary == 1 ) then {
     if !(([2000,999999,false] call KPLIB_fnc_getOpforSpawnPoint) isEqualTo "") then {
         [_index] remoteExec ["start_secondary_remote_call", 2];
     } else {
-        hint "There is not enough enemy territory left for secondary missions.";
-        uiSleep 2;
-        hintSilent "";
+        ["There is not enough enemy territory left for secondary missions", true, 3] call KPLIB_fnc_hint;
     }
 };
 

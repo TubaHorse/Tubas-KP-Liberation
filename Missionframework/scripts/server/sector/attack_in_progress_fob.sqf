@@ -57,9 +57,9 @@ if ( KPLIB_endgame == 0 ) then {
         [_thispos, 3] remoteExec ["remote_call_fob"];
         {
             if (captive _x) then {
-                [_x, true] spawn prisonner_ai;
+                [_x, true] call KPLIB_fnc_setCapturable;
             } else {
-                [_x] spawn prisonner_ai;
+                [_x] call KPLIB_fnc_setCapturable;
             };
         } foreach ((_thispos nearEntities ["CAManBase", KPLIB_range_sectorCapture * 0.8]) select {side group _x == KPLIB_side_enemy});
     };

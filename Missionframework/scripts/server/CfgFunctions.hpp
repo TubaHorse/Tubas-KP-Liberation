@@ -1,11 +1,11 @@
 class server_highcommand {
-    file = "scripts\server\highcommand";
+    file = "Scripts\Server\highcommand";
 
     class highcommand                   {ext = ".fsm";};
 };
 
 class server_sector {
-    file = "scripts\server\sector";
+    file = "Scripts\Server\sector";
 
     class destroyFob                    {};
     class sectorMonitor                 {ext = ".fsm";};
@@ -14,7 +14,7 @@ class server_sector {
 };
 
 class server_support {
-    file = "scripts\server\support";
+    file = "Scripts\Server\support";
 
     class createSuppModules             {};
 };

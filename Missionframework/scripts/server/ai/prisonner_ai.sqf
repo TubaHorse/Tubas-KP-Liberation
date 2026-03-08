@@ -25,7 +25,7 @@ if ((side group _unit == KPLIB_side_enemy) && (_unit isKindOf "CAManBase") && (a
         _unit setVariable ["KPLIB_prisonner_surrendered", true, true];
 
         if (KPLIB_ace) then {
-            ["ace_captives_setSurrendered", [_unit, true], _unit] remoteExecCall ["CBA_fnc_targetEvent", 2];
+            ["ace_captives_setSurrendered", [_unit, true], _unit] call CBA_fnc_targetEvent;
         } else {
             _unit disableAI "ANIM";
             _unit disableAI "MOVE";
@@ -33,49 +33,10 @@ if ((side group _unit == KPLIB_side_enemy) && (_unit isKindOf "CAManBase") && (a
             sleep 2;
             _unit setCaptive true;
         };
-        waitUntil {
-            sleep 1;
-            private _isCaptured = _unit getVariable ["KPLIB_prisonner_captured", false];
-            private _isCuffed = _unit getVariable ["ace_captives_isHandcuffed", false];
-            !alive _unit || _isCaptured || _isCuffed
-        };
 
-        if (alive _unit) then {
-            private _CapturedPlayer = _unit getVariable ["KPLIB_prisonner_whois", objNull];
-            if (isNull _capturedPlayer) then {
-                private _players = allPlayers;
-                private _nearestPlayer = player;
-                private _minDistance = 100;
-                {
-                    private _distance = _unit distance _x;
-                    if (_distance < _minDistance) then {
-                        _minDistance = _distance;
-                        _nearestPlayer = _x;
-                    };
-                } forEach _players;
-                _CapturedPlayer = _nearestPlayer;
-            };
-            [[_unit], group _CapturedPlayer] remoteExecCall ["joinSilent"];
-            if (KPLIB_ace) then {
-                private _isCuffed = _unit getVariable ["ace_captives_isHandcuffed", false];
-                if (_isCuffed) then {
-                    _unit setVariable ["KPLIB_prisonner_captured", true, true];
-                } else {
-                    ["ace_captives_setSurrendered", [_unit, false], _unit] remoteExecCall ["CBA_fnc_targetEvent", 2];
-                };
-            } else {
-                _unit setCaptive false;
-                _unit enableAI "ANIM";
-                _unit enableAI "MOVE";
-                sleep 1;
-                _unit playmove "AmovPercMstpSsurWnonDnon_AmovPercMstpSnonWnonDnon";
-                sleep 2;
-                [_unit, ""] remoteExecCall ["switchMove"];
-            };
-            sleep 1;
-            doStop _unit;
-            _unit doFollow _CapturedPlayer;
-            [_unit] remoteExec ["remote_call_prisonner", _unit];
-        };
+        // Add capture action (vanilla). ACE is handled by its listen events.
+        if (!KPLIB_ace) then {["KPLIB_addActionCapture", _unit] call CBA_fnc_globalEventJIP;};
+
+        [_unit] call KPLIB_fnc_prisonnerCheckPFH;
     };
 };

@@ -5,7 +5,7 @@ private [ "_dialog", "_backpack", "_backpackcontents" ];
 if ( isNil "KPLIB_last_halo_jump" ) then { KPLIB_last_halo_jump = -6000; };
 
 if ( KPLIB_param_halo > 1 && ( KPLIB_last_halo_jump + ( KPLIB_param_halo * 60 ) ) >= time ) exitWith {
-    hint format [ localize "STR_HALO_DENIED_COOLDOWN", ceil ( ( ( KPLIB_last_halo_jump + ( KPLIB_param_halo * 60 ) ) - time ) / 60 ) ];
+    [format [ localize "STR_HALO_DENIED_COOLDOWN", ceil ( ( ( KPLIB_last_halo_jump + ( KPLIB_param_halo * 60 ) ) - time ) / 60 ) ], true, 3] call KPLIB_fnc_hint;
 };
 
 _dialog = createDialog "liberation_halo";

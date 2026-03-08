@@ -1,26 +1,50 @@
-# KP Liberation APR 
-Apricot_ale's Fork of KP Liberation
+# KP LIBERATION PIG
 
-[![license](https://img.shields.io/github/license/KillahPotatoes/KP-Liberation.svg)](https://github.com/KillahPotatoes/KP-Liberation/blob/master/LICENSE.md)
+## DESCRIPTION
+Welcome to PiG's Liberation. This fork of APR is aimed to add several features but maintaining the original feeling of Liberation. This is **not** an overhaul of the gamemode.
 
-This fork is a uniquely modified version of [KP Liberation](https://github.com/KillahPotatoes/KP-Liberation), incorporating several pull requests (PRs) that have already been submitted.
+The majority of the gameplay is the same, but there are more to it. Check the [CHANGELOG]() for further details.
 
-### Required Add-ons
+There are new system in `Extensions` folder, some of them you can find details in README.md files. 
+
+## DEVKIT
+The devkit had some small additions, but still uses the same logic that you can follow in [official tutorial page](https://github.com/KillahPotatoes/KP-Liberation/wiki/EN_Devkit).
+
+Below are listed the additions so far, all optional:
+- New sector: Outpost (marker name: `outpost`). This is an invisible sector aimed to be a filler. It spawns some patrol units and garrisons. Doesn't spawn vehicles.
+- Factory sector: You can choose what the factory can produce at start by adding `supply`, `ammo` or `fuel` in the marker name (i.e: `factory_supply_1`).
+- Enemy road spawn points (marker name: `spawn_opfor_road_point`). Enemy vehicles will use them, also for the convoy objective.
+
+## DISCLAIMERS
+- [LICENSE](https://github.com/KillahPotatoes/KP-Liberation/blob/master/LICENSE.md).
+- This mission is only a continued project based on the original, but most likely abandoned, mission from [GreuhZbug](https://github.com/GreuhZbug).
+
+## ADDITIONAL NOTES
+- Presets are now mission parameters.
+- The IA logistics in the current version is turned off because of the resources management changes for storages. There are a bunch of codes related to that in the logistic script and I don't want to touch it right now.
+- It takes about 60 seconds from the server start to add actions to the objects.
+- You can send information about factory and FOB resources to a discord channel. Information [here]().
+- The arsenal was divided into two options: shared and whitelist by role/classnames. The first one is the default option (the same arsenal items for everyone), and the second one, the arsenal items are shared by roles. Access `Presets\Arsenal\roles_presets\...` to configure the whitelist option. Don't forget to change mission parameters to enable it.
+- Player and enemy presets now have a `default.sqf` file, that it reads before the actual selected preset. It was created to make new additions for the presets without requiring to edit every file.
+- Not only vehicles are unlockable per sector, but also arsenal items. Check the files in `Extensions\Lock_Arsenal`.
+- You can choose what sector unlocks each elite vehicle in the presets (read the commentary before `KPLIB_b_vehToUnlock` in the `default.sqf` file).
+
+Zeus Module:
+- The zeus has no more restrictions, and as default it has to be accessed via admin logged. There is a whitelist for players for it in the `KPLIB_whitelist.sqf` file (KPLIB_whitelist_zeus), that creates a game master module for each logged player.
+- It's highly recommended that you use the whitelist, because as tested, using it fixed some issues related to not having access to zeus in respawns.
+
+## CREDITS
+- [GREUH](https://github.com/GreuhZbug) and [KillahPotatoes](https://github.com/KillahPotatoes/);
+- [Apricot](https://github.com/Apricot-ale/) for making a stable fork to work with;
+- [FernandimModelador](https://github.com/FernandimModelador) for helping me debug scripts and solve issues.
+
+## REQUIRED ADD-ONS
 - [CBA_A3](https://steamcommunity.com/sharedfiles/filedetails/?id=450814997)
 
-### Recommended Add-ons
+## RECOMMENDED ADD-ONS.
 - [ACE](https://steamcommunity.com/sharedfiles/filedetails/?id=463939057)
-- [LAMBS Danger.fsm](https://steamcommunity.com/sharedfiles/filedetails/?id=1858075458)
-
-### Presets
-The included presets are outdated. We recommend using customizations to create your own presets. This fork serves as a base for customizing missions.
-
-### About This Fork
-This project started as a fix for critical bugs and improvements needed in KP Liberation that had not been released since version 0.96.7a. Essentially, the internal version is v0.96.7a+ (currently, 0.96.8a+++). It is a compilation of elements from 0.96.8 that were in development and PRs that were not merged.
-
-While it may seem less advanced compared to Liberation RX and other variants, this fork primarily aims to improve KP Liberation without significantly altering the gameplay. After reviewing several other forks, some simple yet effective improvements have been included. This fork is designed to be a foundation for further modifications, ensuring no major changes are present.
-
-All licenses and rights of this fork comply with the original KP Liberation.
-
-### Recommended Another Fork
-I personally recommend [Moist-Liberation-APR](https://github.com/moistbois/Moist-Liberation-APR), which includes more extensive elements in addition to this fork.
+- [LAMBS_Danger.fsm (DEV)](https://steamcommunity.com/sharedfiles/filedetails/?id=2434257231)
+- [Sling Load Rigging](https://steamcommunity.com/sharedfiles/filedetails/?id=2128676112)
+- [cTab 1erGTD](https://steamcommunity.com/sharedfiles/filedetails/?id=2262006564)
+- [Better CAS Environment (BCE)](https://steamcommunity.com/sharedfiles/filedetails/?id=2853828143)
+- [IADS Coordinater (Beta)](https://steamcommunity.com/sharedfiles/filedetails/?id=3670705586)

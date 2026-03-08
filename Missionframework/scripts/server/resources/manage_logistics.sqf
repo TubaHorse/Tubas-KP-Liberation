@@ -6,6 +6,12 @@ waitUntil {KPLIB_saveLoaded};
 
 ["Logistic management started", "LOGISTIC"] call KPLIB_fnc_log;
 
+if (true) exitWith {["Exiting logistic management. Fixes required for the new resource management system.", "LOGISTIC"] call KPLIB_fnc_log;};
+
+#define SUPPLY_INDEX 0
+#define AMMO_INDEX 1
+#define FUEL_INDEX 2
+
 KPLIB_convoy_ambush_inProgress = false;
 KPLIB_convoy_ambush_check = 0;
 private _start = 0;
@@ -27,7 +33,7 @@ while {KPLIB_endgame == 0} do {
                     if ((_x select 8) > 1) then {
                         switch (_x select 7) do {case 1: {_locPos = 2; _locRes = 4;}; case 3: {_locPos = 3; _locRes = 5;};};
                         switch (_x select 9) do {case 2: {_x set [9,0];}; case 3: {_x set [9,1];};};
-                        private _storage_areas = nearestObjects [(_x select _locPos), [KPLIB_b_smallStorage, KPLIB_b_largeStorage], 150];
+                        private _storage_areas = nearestObjects [(_x select _locPos), [KPLIB_b_smallStorage, KPLIB_b_largeStorage, KPLIB_b_transStorage], 150];
 
                         if (((_x select 9) == 0) && !((_x select 6) isEqualTo [0,0,0])) then {
 
@@ -35,84 +41,90 @@ while {KPLIB_endgame == 0} do {
 
                             private _toProcess = ceil ((ceil (((_x select 6) select 0) / 100)) + (ceil (((_x select 6) select 1) / 100)) + (ceil (((_x select 6) select 2) / 100)));
                             if (_toProcess > 3) then {_toProcess = 3;};
-                            private _spaceSum = 0;
+                            private _storages = [];
                             {
-                                if (typeOf _x == KPLIB_b_largeStorage) then {
-                                    _spaceSum = _spaceSum + (count KPLIB_large_storage_positions) - (count (attachedObjects _x));
-                                };
-                                if (typeOf _x == KPLIB_b_smallStorage) then {
-                                    _spaceSum = _spaceSum + (count KPLIB_small_storage_positions) - (count (attachedObjects _x));
-                                };
+                                if ([_x] call KPLIB_fnc_isStorageFull) then {continue}; // Skip iteration
+
+                                private _storageLimit = [_x] call KPLIB_fnc_getStorageLimit;
+                                if (_sum >= _storageLimit) then {continue}; // Skip iteration
+
+                                // Pushback storage with space
+                                _storages pushBack _x;
                             } forEach _storage_areas;
 
-                            if (_spaceSum < _toProcess) exitWith {_x set [9,2];};
+                            if (_storages isEqualTo []) exitWith {_x set [9,2];};
 
                             _x set [8,((_x select 8) - 1)];
                             private _currentIndex = _forEachIndex;
                             private _processed = 0;
                             while {_processed < _toProcess} do {
                                 {
-                                    private _space = 0;
-                                    if (typeOf _x == KPLIB_b_largeStorage) then {
-                                        _space = (count KPLIB_large_storage_positions) - (count (attachedObjects _x));
-                                    };
-                                    if (typeOf _x == KPLIB_b_smallStorage) then {
-                                        _space = (count KPLIB_small_storage_positions) - (count (attachedObjects _x));
-                                    };
+                                    private _resources = [_x] call KPLIB_fnc_getStorageValues;
+                                    _resources params ["_supply", "_ammo", "_fuel"];
+                                    private _sum = _supply + _ammo + _fuel;
 
-                                    if ((_space > 0) && ((((_tempLogistics select _currentIndex) select 6) select 0) > 0)) then {
-                                        private _amount = 100;
-                                        if (((((_tempLogistics select _currentIndex) select 6) select 0) / 100) < 1) then {
-                                            _amount = ((_tempLogistics select _currentIndex) select 6) select 0;
+                                    private _storageLimit = [_x] call KPLIB_fnc_getStorageLimit;
+
+                                    private _supplies = (((_tempLogistics select _currentIndex) select 6) select 0);
+                                    private _ammo = (((_tempLogistics select _currentIndex) select 6) select 1);
+                                    private _fuel = (((_tempLogistics select _currentIndex) select 6) select 2);
+
+                                    if (_supplies > 0) then {
+                                        private _amount = _supplies;
+                                        if (_sum + _amount > _storageLimit) then {
+                                            private _adjust = (_sum + _amount) - _storageLimit;
+                                            _amount = _amount - _adjust; // Only the necessary amount to fill storage
                                         };
                                         (_tempLogistics select _currentIndex) set [6,
-                                            [(((_tempLogistics select _currentIndex) select 6) select 0) - _amount,
-                                            (((_tempLogistics select _currentIndex) select 6) select 1),
-                                            (((_tempLogistics select _currentIndex) select 6) select 2)]
+                                            [_supplies - _amount,
+                                            _ammo,
+                                            _fuel]
                                         ];
-                                        private _crate = [KPLIB_b_crateSupply, _amount, getPos _x] call KPLIB_fnc_createCrate;
-                                        [_crate, _x] call KPLIB_fnc_crateToStorage;
+                                        _resources set [SUPPLY_INDEX, _supply + _amount];
+
                                         _processed = _processed + 1;
-                                        _space = _space - 1;
                                     };
+                                    _x setVariable ["KPLIB_storageResources", _resources, true];
                                     if (_processed >= _toProcess) exitWith {};
 
-                                    if ((_space > 0) && ((((_tempLogistics select _currentIndex) select 6) select 1) > 0)) then {
-                                        private _amount = 100;
-                                        if (((((_tempLogistics select _currentIndex) select 6) select 1) / 100) < 1) then {
-                                            _amount = ((_tempLogistics select _currentIndex) select 6) select 1;
+                                    if (_ammo > 0) then {
+                                        private _amount = _ammo;
+                                        if (_sum + _amount > _storageLimit) then {
+                                            private _adjust = (_sum + _amount) - _storageLimit;
+                                            _amount = _amount - _adjust; // Only the necessary amount to fill storage
                                         };
                                         (_tempLogistics select _currentIndex) set [6,
-                                                [(((_tempLogistics select _currentIndex) select 6) select 0),
-                                                (((_tempLogistics select _currentIndex) select 6) select 1) - _amount,
-                                                (((_tempLogistics select _currentIndex) select 6) select 2)]
-                                            ];
-                                        private _crate = [KPLIB_b_crateAmmo, _amount, getPos _x] call KPLIB_fnc_createCrate;
-                                        [_crate, _x] call KPLIB_fnc_crateToStorage;
+                                            [_supplies,
+                                            _ammo - _amount,
+                                            _fuel]
+                                        ];
+                                        _resources set [AMMO_INDEX, _ammo + _amount];
+
                                         _processed = _processed + 1;
-                                        _space = _space - 1;
                                     };
+                                    _x setVariable ["KPLIB_storageResources", _resources, true];
                                     if (_processed >= _toProcess) exitWith {};
 
-                                    if ((_space > 0) && ((((_tempLogistics select _currentIndex) select 6) select 2) > 0)) then {
-                                        private _amount = 100;
-                                        if (((((_tempLogistics select _currentIndex) select 6) select 2) / 100) < 1) then {
-                                            _amount = ((_tempLogistics select _currentIndex) select 6) select 2;
+                                    if (_fuel > 0) then {
+                                        private _amount = _fuel;
+                                        if (_sum + _amount > _storageLimit) then {
+                                            private _adjust = (_sum + _amount) - _storageLimit;
+                                            _amount = _amount - _adjust; // Only the necessary amount to fill storage
                                         };
                                         (_tempLogistics select _currentIndex) set [6,
-                                                [(((_tempLogistics select _currentIndex) select 6) select 0),
-                                                (((_tempLogistics select _currentIndex) select 6) select 1),
-                                                (((_tempLogistics select _currentIndex) select 6) select 2) - _amount]
-                                            ];
-                                        private _crate = [KPLIB_b_crateFuel, _amount, getPos _x] call KPLIB_fnc_createCrate;
-                                        [_crate, _x] call KPLIB_fnc_crateToStorage;
+                                            [_supplies,
+                                            _ammo,
+                                            _fuel - _amount]
+                                        ];
+                                        _resources set [FUEL_INDEX, _fuel + _amount];
+
                                         _processed = _processed + 1;
-                                        _space = _space - 1;
                                     };
+                                    _x setVariable ["KPLIB_storageResources", _resources, true];
                                     if (_processed >= _toProcess) exitWith {};
                                 } forEach _storage_areas;
                             };
-                            please_recalculate = true;
+                            ["KPLIB_recalculateResources", []] call CBA_fnc_serverEvent;
                             if (KPLIB_logistic_debug > 0) then {[format ["Logistic Group Update: %1", _x], "LOGISTIC"] call KPLIB_fnc_log;};
                         } else {
                             _x set [9,1];
@@ -129,9 +141,9 @@ while {KPLIB_endgame == 0} do {
                             {
                                 {
                                     switch ((typeOf _x)) do {
-                                        case KPLIB_b_crateSupply: {_supplyValue = _supplyValue + (_x getVariable ["KPLIB_crate_value",0]);};
-                                        case KPLIB_b_crateAmmo: {_ammoValue = _ammoValue + (_x getVariable ["KPLIB_crate_value",0]);};
-                                        case KPLIB_b_crateFuel: {_fuelValue = _fuelValue + (_x getVariable ["KPLIB_crate_value",0]);};
+                                        case KPLIB_b_crateSupply: {_supplyValue = _supplyValue + (_x getVariable ["KPLIB_crateValue",0]);};
+                                        case KPLIB_b_crateAmmo: {_ammoValue = _ammoValue + (_x getVariable ["KPLIB_crateValue",0]);};
+                                        case KPLIB_b_crateFuel: {_fuelValue = _fuelValue + (_x getVariable ["KPLIB_crateValue",0]);};
                                         default {[format ["Invalid object (%1) at storage area", (typeOf _x)], "ERROR"] call KPLIB_fnc_log;};
                                     };
                                 } forEach (attachedObjects _x);
@@ -208,14 +220,14 @@ while {KPLIB_endgame == 0} do {
                                 reverse _storedCrates;
 
                                 {
-                                    private _crateValue = _x getVariable ["KPLIB_crate_value",0];
+                                    private _crateValue = _x getVariable ["KPLIB_crateValue",0];
 
                                     switch ((typeOf _x)) do {
                                         case KPLIB_b_crateSupply: {
                                             if (_getSupply > 0) then {
                                                 if (_crateValue > _getSupply) then {
                                                     _crateValue = _crateValue - _getSupply;
-                                                    _x setVariable ["KPLIB_crate_value", _crateValue, true];
+                                                    _x setVariable ["KPLIB_crateValue", _crateValue, true];
                                                     _getSupply = 0;
                                                 } else {
                                                     detach _x;
@@ -228,7 +240,7 @@ while {KPLIB_endgame == 0} do {
                                             if (_getAmmo > 0) then {
                                                 if (_crateValue > _getAmmo) then {
                                                     _crateValue = _crateValue - _getAmmo;
-                                                    _x setVariable ["KPLIB_crate_value", _crateValue, true];
+                                                    _x setVariable ["KPLIB_crateValue", _crateValue, true];
                                                     _getAmmo = 0;
                                                 } else {
                                                     detach _x;
@@ -241,7 +253,7 @@ while {KPLIB_endgame == 0} do {
                                             if (_getFuel > 0) then {
                                                 if (_crateValue > _getFuel) then {
                                                     _crateValue = _crateValue - _getFuel;
-                                                    _x setVariable ["KPLIB_crate_value", _crateValue, true];
+                                                    _x setVariable ["KPLIB_crateValue", _crateValue, true];
                                                     _getFuel = 0;
                                                 } else {
                                                     detach _x;
@@ -356,7 +368,7 @@ while {KPLIB_endgame == 0} do {
                     if ((_x select 8) > 1) then {
                         _locPos = switch (_x select 7) do {case 5: {2}; case 6: {3};};
                         _x set [9,0];
-                        private _storage_areas = nearestObjects [(_x select _locPos), [KPLIB_b_smallStorage, KPLIB_b_largeStorage], 150];
+                        private _storage_areas = nearestObjects [(_x select _locPos), [KPLIB_b_smallStorage, KPLIB_b_largeStorage, KPLIB_b_transStorage], 150];
 
                         if ((count (_storage_areas)) == 0) exitWith {_x set [9,2];};
 
@@ -439,7 +451,7 @@ while {KPLIB_endgame == 0} do {
                                 if (_processed >= _toProcess) exitWith {};
                             } forEach _storage_areas;
                         };
-                        please_recalculate = true;
+                        ["KPLIB_recalculateResources", []] call CBA_fnc_serverEvent;
 
                         if (KPLIB_logistic_debug > 0) then {[format ["Logistic Group Update: %1", _x], "LOGISTIC"] call KPLIB_fnc_log;};
                     } else {
@@ -459,6 +471,7 @@ while {KPLIB_endgame == 0} do {
         } forEach _tempLogistics;
 
         KPLIB_logistics = +_tempLogistics;
+        publicVariable "KPLIB_logistics";
 
         if (KPLIB_logistic_debug > 0) then {[format ["Logistic interval finished - Time needed: %1 seconds", diag_tickTime - _start], "LOGISTIC"] call KPLIB_fnc_log;};
     };

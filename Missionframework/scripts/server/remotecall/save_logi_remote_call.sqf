@@ -27,7 +27,10 @@ if (_dest_a isEqualTo _dest_b) then {
     ) exitWith {logiError = 1;}
 } forEach KPLIB_logistics;
 
-if (logiError == 1) exitWith {(localize "STR_LOGISTIC_SAVE_ERROR") remoteExec ["hint",_clientID]; _clientID publicVariableClient "logiError";};
+if (logiError == 1) exitWith {
+    [localize "STR_LOGISTIC_SAVE_ERROR", true, 3] remoteExec ["KPLIB_fnc_hint", _clientID];
+    _clientID publicVariableClient "logiError";
+};
 
 private _time = ceil (((ceil ((_ress_a select 0) / 100)) + (ceil ((_ress_a select 1) / 100)) + (ceil ((_ress_a select 2) / 100))) / 3);
 
@@ -49,3 +52,4 @@ KPLIB_logistics set [_index,[
     _time,
     0
 ]];
+publicVariable "KPLIB_logistics";

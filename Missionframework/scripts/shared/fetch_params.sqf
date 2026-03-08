@@ -1,9 +1,15 @@
 #include "defines.hpp"
 
+// Check if CBA is running
+if (isClass (configFile >> "CfgPatches" >> "cba_main")) then {KPLIB_CBA = true} else {KPLIB_CBA = false};
+// Check if Lambs is running
+if (isClass (configfile >> "CfgPatches" >> "lambs_wp")) then {KPLIB_LAMBS = true; ["LAMBS_danger detected.", "MOD"] call KPLIB_fnc_log;} else {KPLIB_LAMBS = false};
 // Check if ACE is running
 if (isClass (configfile >> "CfgPatches" >> "ace_common")) then {KPLIB_ace = true; ["ACE detected. Deactivating resupply script from Liberation.", "MOD"] call KPLIB_fnc_log;} else {KPLIB_ace = false};
 // Check if ACE Medical is running
 if (isClass (configfile >> "CfgPatches" >> "ace_medical")) then {KPLIB_ace_med = true; ["ACE Medical detected. switch some script for ACE Medical.", "MOD"] call KPLIB_fnc_log;} else {KPLIB_ace_med = false};
+// Check if KP Ranks is running
+if (isClass (configFile >> "CfgPatches" >> "KP_Ranks")) then {KPPLM_KPR = true} else {KPPLM_KPR = false};
 // Check if KLPQ is running
 if (isClass (configfile >> "CfgPatches" >> "klpq_musicRadio")) then {KPLIB_klpq = true;} else {KPLIB_klpq = false};
 
@@ -39,6 +45,16 @@ if(isServer) then {
             ["Save/Load has no valid value", "PARAM"] call KPLIB_fnc_log;
         };
     };
+
+    // Presets
+    ["--- Presets ---", "PARAM"] call KPLIB_fnc_log;
+    GET_PARAM(KPLIB_presetPlayer, "BLUFORPreset", 0);
+    GET_PARAM(KPLIB_presetEnemy, "OPFORPreset", 0);
+    GET_PARAM(KPLIB_presetResistance, "guerPreset", 0);
+    GET_PARAM(KPLIB_presetCivilians, "civPreset", 0);
+    GET_PARAM(KPLIB_param_useArsenalPreset, "ArsenalUsePreset", 1);
+    GET_PARAM(KPLIB_presetArsenal, "arsenalPreset", 0);
+    GET_PARAM(KPLIB_presetArsenalWhitelist, "arsenalWhiteListPreset", 0);
 
     // Mission Options
     ["--- Mission Options ---", "PARAM"] call KPLIB_fnc_log;
@@ -80,11 +96,24 @@ if(isServer) then {
         GET_PARAM(bis_reviveParam_forceRespawnDuration, "ReviveForceRespawnDuration", 10);
     };
 
+    // Extension Options
+    ["--- Extension Options ---", "PARAM"] call KPLIB_fnc_log;
+    GET_PARAM_BOOL(KPLIB_param_enemyArtillery, "EnemyArtillery", 1);
+    GET_PARAM_BOOL(KPLIB_param_ArtyMenu, "ArtyMenu", 1);
+    GET_PARAM_BOOL(KPLIB_param_clearBrush, "ClearBrushes", 1);
+    GET_PARAM_BOOL(KPLIB_param_enemyFighters, "EnemyFighters", 1);
+    GET_PARAM(KPLIB_param_lockArsenal, "LockArsenal", 0);
+    GET_PARAM_BOOL(KPLIB_param_pylonManager, "PylonManager", 1);
+    GET_PARAM_BOOL(KPLIB_param_rallyPoint, "RallyPoint", 1);
+    GET_PARAM(KPLIB_param_SAMSite, "SAMSites", 1);
+    GET_PARAM(KPLIB_param_SectorEvents, "SectorEvents", 0);
+    GET_PARAM(KPLIB_param_respawnCost, "RespawnCost", 0);
+    GET_PARAM_BOOL(KPLIB_param_VAMGUI, "VAMGUI", 1);
+
     // Gameplay Options
     ["--- Gameplay Options ---", "PARAM"] call KPLIB_fnc_log;
     GET_PARAM_BOOL(KPLIB_param_fatigue, "Fatigue", 1);
     GET_PARAM_BOOL(KPLIB_param_weaponSway, "WeaponSway", 1);
-    GET_PARAM_BOOL(KPLIB_param_useArsenalPreset, "ArsenalUsePreset", 1);
     GET_PARAM_BOOL(KPLIB_param_mapMarkers, "MapMarkers", 1);
     GET_PARAM_BOOL(KPLIB_param_mobileRespawn, "MobileRespawn", 1);
     GET_PARAM(KPLIB_param_mobileRespawnCooldown, "RespawnCooldown", 900);
@@ -101,20 +130,18 @@ if(isServer) then {
     GET_PARAM_BOOL(KPLIB_param_clearCargo, "ClearCargo", 1);
     GET_PARAM(KPLIB_param_allowEnemiesInImmobile, "AllowEnemiesInImmobile", 50);
     GET_PARAM(KPLIB_param_maxDespawnDelay, "DelayDespawnMax", 5);
-    GET_PARAM_BOOL(KPLIB_param_zeusLimited, "LimitedZeus", 1);
-    GET_PARAM_BOOL(KPLIB_param_zeusCommander, "CommanderZeus", 1);
     GET_PARAM_BOOL(KPLIB_param_zeusAddEnemies, "ZeusAddEnemies", 1);
     GET_PARAM_BOOL(KPLIB_param_highCommand, "HighCommand", 1);
     GET_PARAM(KPLIB_param_supportModule, "SuppMod", 1);
     GET_PARAM_BOOL(KPLIB_param_tutorial, "Tutorial", 1);
-
+    GET_PARAM_BOOL(KPLIB_param_airActiveSector, "airActiveSector", 0);
+    
     // Technical Options
     ["--- Technical Options ---", "PARAM"] call KPLIB_fnc_log;
     GET_PARAM_BOOL(KPLIB_param_permissions, "Permissions", 1);
     GET_PARAM(KPLIB_param_vehicleCleanup, "CleanupVehicles", 2);
     GET_PARAM_BOOL(KPLIB_param_introCinematic, "Introduction", 1);
     GET_PARAM_BOOL(KPLIB_param_deployCinematic, "DeploymentCinematic", 1);
-    GET_PARAM_BOOL(KPLIB_param_cmdrWhitelist, "Whitelist", 0);
     GET_PARAM(KPLIB_param_restart, "ServerRestart", 0);
 
     GREUH_allow_mapmarkers = KPLIB_param_mapMarkers; publicVariable "GREUH_allow_mapmarkers";
@@ -224,9 +251,147 @@ if (!isDedicated && hasInterface) then {
     // Create diary section for an overview of actual mission parameters
     player createDiarySubject ["parameters", "Mission Parameters"];
 
-    private _param = localize "STR_PARAMS_UNITCAP";
-    private _value = (format ["%1", KPLIB_param_unitcap * 100]) + "%";
-    private _text = format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+    private _value = 0;
+    private _text = "";
+    
+    _param = localize "STR_PARAMS_BLUFORPRESET";
+    switch (KPLIB_presetPlayer) do {
+        case 1: {_value = "Apex Tanoa";};
+        case 2: {_value = "3cb BAF (MTP)";};
+        case 3: {_value = "3cb BAF (Desert)";};
+        case 4: {_value = "BWMod Bundeswehr (Flecktarn)";};
+        case 5: {_value = "BWMod Bundeswehr (Tropentarn)";};
+        case 6: {_value = "RHS USAF (Woodland)";};
+        case 7: {_value = "RHS USAF (Desert)";};
+        case 8: {_value = "RHS AFRF (VDV/MSV)";};
+        case 9: {_value = "Germany West (Global Mobilization)";};
+        case 10: {_value = "Germany West Winter (Global Mobilization)";};
+        case 11: {_value = "Germany East (Global Mobilization)";};
+        case 12: {_value = "Germany East Winter (Global Mobilization)";};
+        case 13: {_value = "CSAT Brown";};
+        case 14: {_value = "CSAT Green";};
+        case 15: {_value = "Unsung US";};
+        case 16: {_value = "CUP British Armed Forces (Desert)";};
+        case 17: {_value = "CUP British Armed Forces (Woodland)";};
+        case 18: {_value = "CUP US Marine Corps (Desert)";};
+        case 19: {_value = "CUP US Marine Corps (Woodland)";};
+        case 20: {_value = "CUP US Army (Desert)";};
+        case 21: {_value = "CUP US Army (Woodland)";};
+        case 22: {_value = "CUP Chernarus Defense Force";};
+        case 23: {_value = "CUP Army of the Czech Republic (Desert)";};
+        case 24: {_value = "CUP Army of the Czech Republic (Woodland)";};
+        case 25: {_value = "CUP Chernarussian Movement of the Red Star";};
+        case 26: {_value = "CUP Sahrani Liberation Army";};
+        case 27: {_value = "CUP Takistani Army";};
+        case 28: {_value = "SFP (Woodland)";};
+        case 29: {_value = "SFP (Desert)";};
+        case 30: {_value = "LDF (Contact DLC)";};
+        case 31: {_value = "CUP AAF Deserters mix (AAF, Aegis Task Force and CTRG)";};
+        default {_value = "Default (Vanilla NATO)"};
+    };
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_PARAMS_OPFORPRESET";
+    switch (KPLIB_presetEnemy) do {
+        case 1: {_value = "Apex Tanoa";};
+        case 2: {_value = "RHS AFRF (EMR/MSV)";};
+        case 3: {_value = "Project OPFOR (Takistan)";};
+        case 4: {_value = "Project OPFOR (Islamic State)";};
+        case 5: {_value = "Project OPFOR (Sahrani)";};
+        case 6: {_value = "AAF";};
+        case 7: {_value = "NATO";};
+        case 8: {_value = "Germany West (Global Mobilization)";};
+        case 9: {_value = "Germany West Winter (Global Mobilization)";};
+        case 10: {_value = "Germany East (Global Mobilization)";};
+        case 11: {_value = "Germany East Winter (Global Mobilization)";};
+        case 12: {_value = "Unsung NVA";};
+        case 13: {_value = "CUP Sahrani Liberation Army";};
+        case 14: {_value = "CUP Takistani Army";};
+        case 15: {_value = "CUP Chernarussian Movement of the Red Star";};
+        case 16: {_value = "CUP Armed Forces of the Russian Federation (MSV - EMR)";};
+        case 17: {_value = "CUP Armed Forces of the Russian Federation (Modern MSV)";};
+        case 18: {_value = "CUP Chernarus Defense Force";};
+        case 19: {_value = "CUP British Armed Forces (Desert)";};
+        case 20: {_value = "CUP British Armed Forces (Woodland)";};
+        case 21: {_value = "CUP AAF";};
+        default {_value = "Default (Vanilla CSAT)"};
+    };
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_PARAMS_GUERPRESET";
+    switch (KPLIB_presetResistance) do {
+        case 1: {_value = "Apex Tanoa (apex vanilla Syndikat)";};
+        case 2: {_value = "RHS GREF";};
+        case 3: {_value = "Project OPFOR (Middle Eastern)";};
+        case 4: {_value = "Project OPFOR (Sahrani)";};
+        case 5: {_value = "Germany (Global Mobilization)";};
+        case 6: {_value = "Unsung";};
+        case 7: {_value = "CUP Takistani Locals";};
+        case 8: {_value = "CUP National Party of Chernarus";};
+        case 9: {_value = "CUP FIA";};
+        default {_value = "Default Vanilla FIA"};
+    };
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_PARAMS_CIVPRESET";
+    switch (KPLIB_presetCivilians) do {
+        case 1: {_value = "Apex Tanoa (apex vanilla)";};
+        case 2: {_value = "Project OPFOR (Middle Eastern)";};
+        case 3: {_value = "RDS Civilians";};
+        case 4: {_value = "Germany (Global Mobilization)";};
+        case 5: {_value = "CUP Takistani Civilians";};
+        case 6: {_value = "Unsung";};
+        case 7: {_value = "CUP Chernarussian Civilians";};
+        case 8: {_value = "CUP ACW";};
+        default {_value = "Default Vanilla"};
+    };
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_PARAMS_ARSENALUSEPRESET";
+    switch (KPLIB_param_useArsenalPreset) do {
+        case 1: {_value = localize "STR_PARAMS_USEPRESET";};
+        case 2: {_value = localize "STR_PARAMS_ARSENAL_WHITELIST";};
+        default {_value = localize "STR_PARAMS_NORESTRICTIONS";};
+    };
+
+    _param = localize "STR_PARAMS_ARSENALPRESET";
+    switch (KPLIB_param_useArsenalPreset) do {
+        case 1: {};
+        case 2: {};
+        default {};
+    };
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_PARAMS_ARSENALPRESET";
+    switch (KPLIB_presetArsenal) do {
+        case 1: {_value = "Custom arsenal preset (Presets\Arsenal\custom.sqf)";};
+        case 2: {_value = "RHS USAF arsenal preset",;};
+        case 3: {_value = "3cbBAF and RHS USAF arsenal preset";};
+        case 4: {_value = "GM West arsenal preset";};
+        case 5: {_value = "GM East arsenal preset";};
+        case 6: {_value = "CSAT arsenal preset";};
+        case 7: {_value = "Unsung US arsenal preset";};
+        case 8: {_value = "SFP arsenal preset";};
+        case 9: {_value = "BWMod arsenal preset";};
+        case 10: {_value = "NATO MTP arsenal preset";};
+        case 11: {_value = "NATO Tropic arsenal preset";};
+        case 12: {_value = "NATO Woodland arsenal preset";};
+        case 13: {_value = "CSAT Hex arsenal preset";};
+        case 14: {_value = "CSAT Green Hex arsenal preset";};
+        case 15: {_value = "AAF arsenal preset";};
+        case 16: {_value = "LDF arsenal preset";};
+        default {_value = "Blacklist method (Presets\Arsenal\blacklist.sqf)"};
+    };
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+    
+    _param = localize "STR_PARAMS_ARSENALWHITELIST_PRESET";
+    switch (KPLIB_presetArsenalWhitelist) do {
+        default {_value = "Custom Preset (Presets\Arsenal\roles_presets\custom.sqf)"};
+    };
+    
+    _param = localize "STR_PARAMS_UNITCAP";
+    _value = (format ["%1", KPLIB_param_unitcap * 100]) + "%";
+    _text = format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_PARAMS_DIFFICULTY";
     switch (KPLIB_param_difficulty) do {
@@ -320,8 +485,8 @@ if (!isDedicated && hasInterface) then {
     _value = if (KPLIB_param_directArsenal) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
-    _param = localize "STR_PARAMS_PLAYERMENU";
-    _value = if (KPLIB_param_playerMenu) then {localize "STR_PARAMS_PLAYERMENU_KP";} else {localize "STR_PARAMS_PLAYERMENU_GREUH";};
+    _param = localize "STR_PARAMS_PLAYERMENU_KP";
+    _value = if (KPLIB_param_playerMenu) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_KPPLM_DISABLED";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_PARAMS_VICTORYCONDITION";
@@ -334,6 +499,68 @@ if (!isDedicated && hasInterface) then {
     };
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
+    _param = localize "STR_TITLE_ENEMYARTILLERY";
+    _value = if (KPLIB_param_enemyArtillery) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_ARTY_MENU_TITLE";
+    _value = if (KPLIB_param_ArtyMenu) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_CLEAR_BRUSHES_TITLE";
+    _value = if (KPLIB_param_clearBrush) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+    
+    _param = localize "STR_ENEMY_FIGHTER_TITLE";
+    _value = if (KPLIB_param_enemyFighters) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_LOCK_ARSENAL_TITLE";
+    switch (KPLIB_param_lockArsenal) do {
+        case 1: {_value = localize "STR_LOCK_ARSENAL_DEFAULT"};
+        default {_value = localize "STR_PARAMS_DISABLED"};
+    };
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_TITLE_PYLONMANAGER";
+    _value = if (KPLIB_param_pylonManager) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_TITLE_RALLYPOINT";
+    _value = if (KPLIB_param_rallyPoint) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_SAM_TITLE";
+    switch (KPLIB_param_SAMSite) do {
+        case 1: {_value = localize "STR_PARAMS_SAM_ENABLED_DEFAULT"};
+        case 2: {_value = localize "STR_PARAMS_SAM_ENABLED_CUSTOM"};
+        default {_value = localize "STR_PARAMS_DISABLED"};
+    };
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_SECTOR_EVENTS_TITLE";
+        switch (KPLIB_param_SectorEvents) do {
+        case 1: {_value = localize "STR_SECTOR_EVENTS_CUSTOM"};
+        case 2: {_value = localize "STR_SECTOR_EVENTS_ALTIS"};
+        default {_value = localize "STR_PARAMS_DISABLED"};
+    };
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+    
+    _param = localize "STR_PARAMS_RESPAWNCOST";
+    switch (KPLIB_param_respawnCost) do {
+        case 1: {_value = localize "STR_PARAMS_RESPAWNCOST_1"};
+        case 2: {_value = localize "STR_PARAMS_RESPAWNCOST_2"};
+        case 3: {_value = localize "STR_PARAMS_RESPAWNCOST_3"};
+        case 4: {_value = localize "STR_PARAMS_RESPAWNCOST_4"};
+        Case 5: {_value = localize "STR_PARAMS_RESPAWNCOST_5"};
+        default {_value = localize "STR_PARAMS_DISABLED"};
+    };
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_VAM_GUI_TITLE";
+    _value = if (KPLIB_param_VAMGUI) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+   
     _param = localize "STR_A3_ReviveMode";
     _value = if (bis_reviveParam_mode == 1) then {localize "STR_A3_EnabledForAllPlayers";} else {localize "STR_A3_Disabled";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
@@ -384,8 +611,6 @@ if (!isDedicated && hasInterface) then {
     _value = if (KPLIB_param_weaponSway) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
-    _param = localize "STR_PARAMS_ARSENALUSEPRESET";
-    _value = if (KPLIB_param_useArsenalPreset) then {localize "STR_PARAMS_USEPRESET";} else {localize "STR_PARAMS_NORESTRICTIONS";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_PARAMS_MAPMARKERS";
@@ -460,14 +685,6 @@ if (!isDedicated && hasInterface) then {
     _value = if (KPLIB_param_maxDespawnDelay == 0) then {localize "STR_PARAMS_DISABLED";} else {KPLIB_param_maxDespawnDelay;};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
-    _param = localize "STR_PARAM_COMMANDERZEUS";
-    _value = if (KPLIB_param_zeusCommander) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
-    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
-
-    _param = localize "STR_PARAM_LIMITEDZEUS";
-    _value = if (KPLIB_param_zeusLimited) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
-    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
-
     _param = localize "STR_PARAM_ZEUSADDENEMIES";
     _value = if (KPLIB_param_zeusAddEnemies) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
@@ -486,6 +703,10 @@ if (!isDedicated && hasInterface) then {
 
     _param = localize "STR_PARAM_TUTORIAL";
     _value = if (KPLIB_param_tutorial) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_PARAM_AIR_ACTIVESECTOR";
+    _value = if (KPLIB_param_airActiveSector) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_PERMISSIONS_PARAM";
@@ -507,10 +728,6 @@ if (!isDedicated && hasInterface) then {
 
     _param = localize "STR_PARAMS_DEPLOYMENTCAMERA";
     _value = if (KPLIB_param_deployCinematic) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
-    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
-
-    _param = localize "STR_WHITELIST_PARAM";
-    _value = if (KPLIB_param_cmdrWhitelist) then {localize "STR_WHITELIST_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_RESTART_PARAM";

@@ -1,13 +1,13 @@
 params ["_sector"];
 
-if (KPLIB_asymmetric_debug > 0) then {[format ["asym_sector_ambush.sqf for %1 spawned on: %2 - Time: %3", markerText _sector, debug_source, diag_tickTime], "ASYMMETRIC"] remoteExecCall ["KPLIB_fnc_log", 2];};
+if (KPLIB_asymmetric_debug > 0) then {[format ["asym_sector_ambush.sqf for %1 spawned on: %2 - Time: %3", markerText _sector, KPLIB_debugSource, diag_tickTime], "ASYMMETRIC"] remoteExecCall ["KPLIB_fnc_log", 2];};
 
 waitUntil {sleep 1; _sector in KPLIB_asymmetric_sectors};
 
 private _buildings = (nearestObjects [(markerPos _sector), ["House"], 75]) select {(alive _x) && !((typeOf _x) in KPLIB_cr_ign_buildings)};
 private _positions = [];
 {
-    _positions = _positions + ([_x] call BIS_fnc_buildingPositions);
+    _positions = _positions + ([_x] call CBA_fnc_buildingPositions);
 } forEach _buildings;
 
 if (KPLIB_asymmetric_debug > 0) then {[format ["asym_sector_ambush.sqf -> Found %1 suitable buildings in %2 - Time: %3", count _buildings, markerText _sector, diag_tickTime], "ASYMMETRIC"] remoteExecCall ["KPLIB_fnc_log", 2];};

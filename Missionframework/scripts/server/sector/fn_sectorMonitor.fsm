@@ -1,9 +1,9 @@
-/*%FSM<COMPILE "C:\Games\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, KPLIB Sector Monitor">*/
+/*%FSM<COMPILE "scriptedFSM.cfg, KPLIB Sector Monitor">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Author__KPLIB_Dev",0,250,0.000000,0.000000,100.000000,50.000000,0.000000,"Author:" \n "KPLIB Dev Team"};
 item1[] = {"save_loaded_",4,218,0.000000,75.000000,100.000000,125.000000,0.000000,"save loaded?"};
-item2[] = {"Init",2,250,0.000000,150.000000,100.000000,200.000000,0.000000,"Init"};
+item2[] = {"Init",2,250,-1.771652,162.401611,98.228348,212.401611,0.000000,"Init"};
 item3[] = {"not_server_",4,218,125.000000,0.000000,225.000000,50.000000,1.000000,"not server?"};
 item4[] = {"Exit",1,250,250.000000,0.000000,350.000000,50.000000,0.000000,"Exit"};
 item5[] = {"_",8,218,0.000000,225.000000,100.000000,275.000000,0.000000,""};
@@ -12,7 +12,7 @@ item7[] = {"_",8,218,0.000000,375.000000,100.000000,425.000000,0.000000,""};
 item8[] = {"Get_next_sector",2,250,0.000000,450.000000,100.000000,500.000000,0.000000,"Get next sector" \n "to check"};
 item9[] = {"cap_not_reached",4,218,0.000000,525.000000,100.000000,575.000000,0.000000,"cap not" \n "reached?"};
 item10[] = {"Get_adjusted_sector",2,250,0.000000,600.000000,100.000000,650.000000,0.000000,"Get adjusted" \n "sector range"};
-item11[] = {"blufor_near_",4,218,0.000000,675.000000,100.000000,725.000000,1.000000,"blufor near?"};
+item11[] = {"blufor_near_",4,4314,0.000000,675.000000,100.000000,725.000000,1.000000,"blufor near?"};
 item12[] = {"_",8,218,125.000000,600.000000,225.000000,650.000000,0.000000,""};
 item13[] = {"Sector_checked",2,250,250.000000,450.000000,350.000000,500.000000,0.000000,"Sector" \n "checked"};
 item14[] = {"Activate_sector",2,250,0.000000,750.000000,100.000000,800.000000,0.000000,"Activate sector"};
@@ -51,8 +51,8 @@ link22[] = {19,6};
 link23[] = {20,21};
 link24[] = {21,15};
 link25[] = {22,23};
-globals[] = {0.000000,0,0,0,0,640,480,1,27,6316128,1,-462.464111,712.458435,919.987671,76.941620,1232,884,1};
-window[] = {2,-1,-1,-1,-1,915,156,1596,156,3,1250};
+globals[] = {0.000000,0,0,0,0,640,480,1,27,6316128,1,-287.153229,379.064331,876.544678,372.475830,756,572,1};
+window[] = {2,-1,-1,-1,-1,785,26,1412,26,3,774};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -132,7 +132,7 @@ class FSM
                         name = "Exit";
                         itemno = 4;
                         init = /*%FSM<STATEINIT""">*/"[" \n
-                         "    format [""Sector Monitor was started on %1"", debug_source]," \n
+                         "    format [""Sector Monitor was started on %1"", KPLIB_debugSource]," \n
                          "    ""FSM ABORT""" \n
                          "] remoteExecCall [""KPLIB_fnc_log"", 2];"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -146,7 +146,7 @@ class FSM
                 {
                         name = "Start_new_monitoring";
                         itemno = 6;
-                        init = /*%FSM<STATEINIT""">*/"_allSectors = KPLIB_sectors_all - KPLIB_sectors_player;" \n
+                        init = /*%FSM<STATEINIT""">*/"_allSectors = (KPLIB_sectors_all + KPLIB_sectors_filler) - KPLIB_sectors_player;" \n
                          "_allSectors = _allSectors - KPLIB_sectors_active;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -205,7 +205,21 @@ class FSM
                                         priority = 1.000000;
                                         to="Activate_sector";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"([markerPos _sector, _range, KPLIB_side_player] call KPLIB_fnc_getUnitsCount) > 0"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"private _pos = markerPos _sector;" \n
+                                         "" \n
+                                         "private _amount = KPLIB_side_player countSide ((_pos nearEntities [""CAManBase"", _range]) select {!(captive _x) && ((getpos _x) select 2 < 500) && lifeState _x != ""INCAPACITATED""});" \n
+                                         "{" \n
+                                         "    _amount = _amount + (KPLIB_side_player countSide (crew _x));" \n
+                                         "} forEach ((_pos nearEntities [[""Car"", ""Tank"", ""Helicopter"", ""Ship""], _range]) select {((getpos _x) select 2 < 500) && count (crew _x) > 0});" \n
+                                         "" \n
+                                         "if (KPLIB_param_airActiveSector) then {" \n
+                                         "	{" \n
+                                         "    	_amount = _amount + (KPLIB_side_player countSide (crew _x));" \n
+                                         "	} forEach ((_pos nearEntities [[""Plane""], _range]) select {((getpos _x) select 2 < 500) && count (crew _x) > 0});" \n
+                                         "};" \n
+                                         "" \n
+                                         "_amount > 0" \n
+                                         ""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -277,11 +291,7 @@ class FSM
                          "_hc = [] call KPLIB_fnc_getLessLoadedHC;" \n
                          "" \n
                          "// Start sector manager on HC or server" \n
-                         "if (isNull _hc) then {" \n
-                         "    [_sector] spawn manage_one_sector;" \n
-                         "} else {" \n
-                         "    [_sector] remoteExec [""manage_one_sector"", _hc];" \n
-                         "};" \n
+                         "[""KPLIB_manageSector"", _sector] call CBA_fnc_serverEvent;" \n
                          "" \n
                          "// Spawn resource crates" \n
                          "if (_sector in KPLIB_sectors_factory || _sector in KPLIB_sectors_city) then {" \n

@@ -1,5 +1,7 @@
 scriptName "open_logistic";
 
+if (true) exitWith {["Logistic management system requires some fixes.", true, 5] call KPLIB_fnc_hint;}
+
 private ["_dialog", "_logi_count", "_listselect", "_selectedGroup", "_detailControls", "_nearfob", "_logi_destinations", "_mapdisplay", "_tempvariable"];
 
 _dialog = createDialog "liberation_logistic";
@@ -19,7 +21,11 @@ _logi_destinations = [];
 } forEach KPLIB_fob_resources;
 
 {
-    _logi_destinations pushBack [(_x select 0), (markerPos (_x select 1)), (_x select 9), (_x select 10), (_x select 11)];
+    private _sector = _x;
+
+    private _storageArray = _y # 2;
+    private _producing = _y # 6;
+    _logi_destinations pushBack [(_y # 0), (markerPos _sector), (_y # 8), (_y # 9), (_y # 10)];
 } forEach KPLIB_production;
 
 _logi_destinations sort true;
@@ -93,7 +99,7 @@ while {dialog && (alive player)} do {
             [_listselect, ((_logi_destinations select lbCurSel 758024) select 1), [parseNumber ctrlText 758025,parseNumber ctrlText 758026,parseNumber ctrlText 758027], ((_logi_destinations select lbCurSel 758029) select 1), [parseNumber ctrlText 758030,parseNumber ctrlText 758031,parseNumber ctrlText 758032], clientOwner] remoteExec ["save_logi_remote_call",2];
             waitUntil {sleep 0.5; (!(_selectedGroup isEqualTo (KPLIB_logistics select _listselect))) || (logiError == 1)};
         } else {
-            hint localize "STR_LOGISTIC_SAVE_ERROR";
+            [localize "STR_LOGISTIC_SAVE_ERROR", true, 3] call KPLIB_fnc_hint;
         };
     };
 

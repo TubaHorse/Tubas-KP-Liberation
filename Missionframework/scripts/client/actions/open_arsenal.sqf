@@ -35,8 +35,6 @@ if (KPLIB_ace && KPLIB_param_arsenalType) then {
     };
 };
 
-_loadouts_data sort true;
-
 waitUntil { dialog };
 
 if ( count _loadouts_data > 0 ) then {
@@ -92,12 +90,12 @@ while { dialog && (alive player) && edit_loadout == 0 } do {
             [player, [profileNamespace, _loaded_loadout]] call BIS_fnc_loadInventory;
         };
 
-        if (KPLIB_param_useArsenalPreset) then {
+        if (KPLIB_param_useArsenalPreset > 0) then {
             if ([_backpack] call KPLIB_fnc_checkGear) then {
-                hint format [ localize "STR_HINT_LOADOUT_LOADED", _loaded_loadout param [0]];
+                [format [localize "STR_HINT_LOADOUT_LOADED", _loaded_loadout param [0]], false, 3] call KPLIB_fnc_hint;
             };
         } else {
-            hint format [ localize "STR_HINT_LOADOUT_LOADED", _loaded_loadout param [0]];
+            [format [localize "STR_HINT_LOADOUT_LOADED", _loaded_loadout param [0]], false, 3] call KPLIB_fnc_hint;
         };
 
         if ( exit_on_load == 1 ) then {
@@ -108,7 +106,7 @@ while { dialog && (alive player) && edit_loadout == 0 } do {
 
     if ( respawn_loadout > 0 ) then {
         KPLIB_respawn_loadout = [ player, ["repetitive"] ] call KPLIB_fnc_getLoadout;
-        hint localize "STR_MAKE_RESPAWN_LOADOUT_HINT";
+        [localize "STR_MAKE_RESPAWN_LOADOUT_HINT", false, 3] call KPLIB_fnc_hint;
         respawn_loadout = 0;
     };
 
@@ -116,7 +114,7 @@ while { dialog && (alive player) && edit_loadout == 0 } do {
         private _playerselected = ( _loadplayers select load_from_player ) select 1;
         if ( alive _playerselected ) then {
             [player,  [_playerselected, ["repetitive"]] call KPLIB_fnc_getLoadout] call KPLIB_fnc_setLoadout;
-            hint format [ localize "STR_LOAD_PLAYER_LOADOUT_HINT", name _playerselected ];
+            [format [ localize "STR_LOAD_PLAYER_LOADOUT_HINT", name _playerselected ], false, 3] call KPLIB_fnc_hint;
         };
         load_from_player = -1;
     };
@@ -133,7 +131,7 @@ if ( edit_loadout > 0 ) then {
         [ "Open", false ] spawn BIS_fnc_arsenal;
     };
 
-    if (KPLIB_param_useArsenalPreset) then {
+    if (KPLIB_param_useArsenalPreset > 0) then {
         uiSleep 5;
         private _arsenalDisplay = ["RSCDisplayArsenal", "ace_arsenal_display"] select (KPLIB_ace && KPLIB_param_arsenalType);
         waitUntil {sleep 1; isNull (uinamespace getvariable [_arsenalDisplay, displayNull])};

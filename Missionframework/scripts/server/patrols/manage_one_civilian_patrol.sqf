@@ -25,36 +25,28 @@ while { KPLIB_endgame == 0 } do {
         _spawnsector = selectRandom _usable_sectors;
 
         _grp = createGroup [KPLIB_side_civilian, true];
-        if ( random 100 < 33) then {
-            _civnumber = 1 + (floor (random 2));
-            while { count units _grp < _civnumber } do {
-                [selectRandom KPLIB_c_units, markerPos _spawnsector, _grp, "PRIVATE", 0.5] call KPLIB_fnc_createManagedUnit;
-            };
-            _grpspeed = "LIMITED";
-        } else {
 
-            _nearestroad = objNull;
-            while { isNull _nearestroad } do {
-                _nearestroad = [(markerPos (_spawnsector)) getPos [random (100), random (360)], 200, []] call BIS_fnc_nearestRoad;
-                sleep 1;
-            };
-
-            _spawnpos = getpos _nearestroad;
-
-            [selectRandom KPLIB_c_units, _spawnpos, _grp, "PRIVATE", 0.5] call KPLIB_fnc_createManagedUnit;
-            _civveh = (selectRandom KPLIB_c_vehicles) createVehicle _spawnpos;
-            _civveh setpos _spawnpos;
-            _civveh addMPEventHandler ["MPKilled", {
-                params ["_unit", "_killer"];
-                ["KPLIB_manageKills", [_unit, _killer]] call CBA_fnc_localEvent;
-            }];
-            _civveh addEventHandler ["HandleDamage", { private [ "_damage" ]; if (( side (_this select 3) != KPLIB_side_player ) && ( side (_this select 3) != KPLIB_side_enemy )) then { _damage = 0 } else { _damage = _this select 2 }; _damage } ];
-            ((units _grp) select 0) moveInDriver _civveh;
-            ((units _grp) select 0) disableAI "FSM";
-            ((units _grp) select 0) disableAI "AUTOCOMBAT";
-            _grpspeed = "LIMITED";
-
+        _nearestroad = objNull;
+        while { isNull _nearestroad } do {
+            _nearestroad = [(markerPos (_spawnsector)) getPos [random (100), random (360)], 200, []] call BIS_fnc_nearestRoad;
+            sleep 1;
         };
+
+        _spawnpos = getPosATL _nearestroad;
+
+        [selectRandom KPLIB_c_units, _spawnpos, _grp, "PRIVATE", 0.5] call KPLIB_fnc_createManagedUnit;
+        _civveh = createVehicle [(selectRandom KPLIB_c_vehicles), _spawnpos, [], 10, "NONE"];
+        _civveh limitSpeed 50;
+        //_civveh setVehiclePosition [_spawnpos, [], 5, "NONE"];
+        _civveh addMPEventHandler ["MPKilled", {
+            params ["_unit", "_killer"];
+            ["KPLIB_manageKills", [_unit, _killer]] call CBA_fnc_localEvent;
+        }];
+        _civveh addEventHandler ["HandleDamage", { private [ "_damage" ]; if (( side (_this select 3) != KPLIB_side_player ) && ( side (_this select 3) != KPLIB_side_enemy )) then { _damage = 0 } else { _damage = _this select 2 }; _damage } ];
+        ((units _grp) select 0) moveInDriver _civveh;
+        ((units _grp) select 0) disableAI "FSM";
+        ((units _grp) select 0) disableAI "AUTOCOMBAT";
+        _grpspeed = "LIMITED";
 
         { _x addEventHandler ["HandleDamage", { private [ "_damage" ]; if (( side (_this select 3) != KPLIB_side_player ) && ( side (_this select 3) != KPLIB_side_enemy )) then { _damage = 0 } else { _damage = _this select 2 }; _damage } ]; } foreach units _grp;
 

@@ -6,8 +6,9 @@
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Localization contributors:
-        English | Updated: 0.96.8apr
+        English | Updated: 0.97.0pig
             KP Liberation Dev Team  - https://github.com/KillahPotatoes
+            PiG13BR                 - https://github.com/PiG13BR
 
         Chinese Simplified | Updated: pre 0.96.7a
             Nercon                  - https://github.com/nercon
@@ -25,9 +26,10 @@
         Italian | Updated: 0.96.8
             k4s0                    - https://github.com/k4s0
 
-        Portuguese | Updated: pre 0.96.7a
+        Portuguese | Updated: 0.97.0pig
             NomadRomeo              - https://github.com/NomadRomeo
             AngusDLX                - https://github.com/AngusDLX
+            PiG13BR                 - https://github.com/PiG13BR
 
         Russian | Updated: pre 0.96.7a
             _KOC_                   - Constantin.rogozin@ya.ru
@@ -45,14 +47,15 @@
 
         Japanese | Updated: 0.96.8apr
             Apricot_ale             - https://github.com/Apricot-ale
+        
 -->
 <Project name="Liberation">
     <Package name="Liberation">
         <Key ID="STR_MISSION_TITLE">
-            <Original>CTI 34 KP Liberation v0.96.8apr</Original>
+            <Original>CTI 34 KP Liberation v0.97.0pig</Original>
         </Key>
         <Key ID="STR_MISSION_VERSION">
-            <Original>v0.96.8apr</Original>
+            <Original>v0.97.0pig</Original>
         </Key>
         <Key ID="STR_MISSION_DESCRIPTION">
             <Original>Liberate the region from the enemy oppression! Strategy will be key! Good luck soldiers.</Original>
@@ -73,13 +76,13 @@
             <Original>[GREUH] and the Killah Potatoes present</Original>
         </Key>
         <Key ID="STR_MISSION_AUTHOR">
-            <Original>[GREUH] Zbug &amp; McKeewa, KP Liberation Dev Team, Apricot_ale, MoistBois</Original>
+            <Original>[GREUH] Zbug &amp; McKeewa, KP Liberation Dev Team, Apricot_ale, MoistBois, PiG13BR</Original>
         </Key>
         <Key ID="STR_MISSION_OVERVIEW">
             <Original>APR Tweaked KP Liberation!&lt;br/&gt;Check github.com/Apricot-ale/KP-Liberation-APR to more info.</Original>
         </Key>
         <Key ID="STR_MISSION_ONLOAD">
-            <Original>github.com/Apricot-ale/KP-Liberation-APR</Original>
+            <Original>PiG13BR Liberation</Original>
         </Key>
         <Key ID="STR_HURON01_NAME">
             <Original>Spartan 01</Original>
@@ -112,6 +115,10 @@
             <Korean>배치</Korean>
             <Czech>Výsadek</Czech>
             <Japanese>出撃</Japanese>
+        </Key>
+        <Key ID="STR_Deploy_BaseName">
+            <Original>Operation Base</Original>
+            <Portuguese>Base de Operações</Portuguese>
         </Key>
         <Key ID="STR_Deploy_InProgress">
             <Original>Deployment in progress ...</Original>
@@ -429,7 +436,7 @@
             <Japanese>-- 貨物を積載</Japanese>
         </Key>
         <Key ID="STR_ACTION_UNLOAD_BOX">
-            <Original>-- UNLOAD CRATES</Original>
+            <Original>-- UNLOAD CRATE</Original>
             <French>-- DECHARGER MUNITIONS</French>
             <German>-- KISTEN ABLADEN</German>
             <Spanish>-- DESCARGAR CAJA DE MUNICIÓN</Spanish>
@@ -476,6 +483,18 @@
             <Czech>-- NELZE NALOŽIT</Czech>
             <Japanese>-- 積載可能な車両が近くにありません</Japanese>
         </Key>
+        <Key ID="STR_ACTION_PARADROP">
+            <Original>Paradrop Crates</Original>
+            <Portuguese>Paradrop Crates</Portuguese>
+        </Key>
+        <Key ID="STR_PARADROP_ALTHINT">
+            <Original>Altitude required:</Original>
+            <Portuguese>Altitude requerida:</Portuguese>
+        </Key>
+        <Key ID="STR_PARADROP_SPEEDHINT">
+            <Original>Speed required:</Original>
+            <Portuguese>Velocidade requerida</Portuguese>
+        </Key>
         <Key ID="STR_BOX_LOADED">
             <Original>Ammo box successfully loaded on the transport vehicle.</Original>
             <French>La caisse de munitions a été chargée sur le véhicule de transport.</French>
@@ -490,6 +509,18 @@
             <Korean>군수물자를 수송차량에 성공적으로 적재하였습니다.</Korean>
             <Czech>Bedna úspěšně naložena do vozidla.</Czech>
             <Japanese>貨物の積載を完了しました。</Japanese>
+        </Key>
+        <Key ID="STR_CRATE_LOADED">
+            <Original>Crate successfully loaded on the transport vehicle.</Original>
+            <Portuguese>Caixa carregada com sucesso no veículo de transporte.</Portuguese>
+        </Key>
+        <Key ID="STR_CRATE_UNLOADED">
+            <Original>The crate was successfully unloaded from the transport vehicle.</Original>
+            <Portuguese>A Caixas foi descarregada com sucesso no veículo de transporte.</Portuguese>
+        </Key>
+        <Key ID="STR_TRANSPORT_CARGO_WARNING">
+            <Original>This vehicle is transporting cargo.</Original>
+            <Portuguese>Esse veículo está transportando carga.</Portuguese>
         </Key>
         <Key ID="STR_BOX_UNLOADED">
             <Original>Ammo box successfully unloaded from the transport vehicle.</Original>
@@ -662,6 +693,10 @@
             <Czech>Zde Nelze postavit nové FOB, musí být vzdáleno %1 metrů od jakékoliv zabratelné zóny. Nejbližší zóna je vzdálena %2 metrů.</Czech>
             <Japanese>FOBをここに設置することはできません。 %1 メートル以上他のセクターから離す必要があります。 最も近いセクターは %2 にあります。</Japanese>
         </Key>
+        <Key ID="STR_FOB_BUILDING_IMPOSSIBLE_GRADIENT">
+            <Original>Can't deploy a new FOB here, find a more suitable terrain (flatter)</Original>
+            <Portuguese>Não é possível instalar a FOB aqui, encontre um terreno mais adequado (mais plano).</Portuguese>
+        </Key>
         <Key ID="STR_BUILD_ERROR_WATER">
             <Original>Can't build on water.</Original>
             <French>Impossible de construire sur l'eau.</French>
@@ -721,6 +756,36 @@
             <Korean>전초기지 설치차량</Korean>
             <Czech>FOB Náklaďák</Czech>
             <Japanese>FOB トラック</Japanese>
+        </Key>
+        <Key ID="STR_FORTIFY_SMALL_ENTRY">
+            <Original>Small fortify box</Original>
+            <French>Petite caisse de fortification</French>
+            <German>Kleine Befestigungskiste</German>
+            <Spanish>Caja pequeña de fortificación</Spanish>
+            <Russian>Малый ящик укреплений</Russian>
+            <Italian>Piccola cassa di fortificazione</Italian>
+            <Chinesesimp>小型工事箱</Chinesesimp>
+            <Chinese>小型工事箱</Chinese>
+            <Turkish>Küçük tahkimat kutusu</Turkish>
+            <Portuguese>Caixa pequena de fortificação</Portuguese>
+            <Korean>소형 방어 상자</Korean>
+            <Czech>Malá fortifikační bedna</Czech>
+            <Japanese>小型要塞化ボックス</Japanese>
+        </Key>
+        <Key ID="STR_FORTIFY_MEDIUM_ENTRY">
+            <Original>Medium fortify box</Original>
+            <French>Caisse moyenne de fortification</French>
+            <German>Mittlere Befestigungskiste</German>
+            <Spanish>Caja mediana de fortificación</Spanish>
+            <Russian>Средний ящик укреплений</Russian>
+            <Italian>Cassa media di fortificazione</Italian>
+            <Chinesesimp>中型工事箱</Chinesesimp>
+            <Chinese>中型工事箱</Chinese>
+            <Turkish>Orta tahkimat kutusu</Turkish>
+            <Portuguese>Caixa média de fortificação</Portuguese>
+            <Korean>중형 방어 상자</Korean>
+            <Czech>Střední fortifikační bedna</Czech>
+            <Japanese>中型要塞化ボックス</Japanese>
         </Key>
         <Key ID="STR_RESPAWN_TRUCK">
             <Original>Mobile respawn</Original>
@@ -1022,6 +1087,18 @@
             <Czech>-- ZAJMOUT</Czech>
             <Japanese>-- 捕虜にする</Japanese>
         </Key>
+        <Key ID="STR_DELIVER_POW">
+            <Original>-- DELIVER POW</Original>
+            <Portuguese>-- ENTREGAR PRISIONEIRO</Portuguese>
+        </Key>
+        <Key ID="STR_POW_HINT">
+            <Original>Escort this POW to a FOB</Original>
+            <Portuguese>Escolte este priosioneiro a uma FOB</Portuguese>
+        </Key>
+        <Key ID="STR_POW_KILLED">
+            <Original>Player %1 killed a POW.</Original>
+            <Portuguese>Jogador %1 matou um prisoneiro de guerra.</Portuguese>
+        </Key>
         <Key ID="STR_SQUAD_MEMBER">
             <Original>Squad member</Original>
             <French>Membre d'escouade</French>
@@ -1246,6 +1323,14 @@
             <Korean>거점 %1 이 안정화 되었습니다.</Korean>
             <Czech>%1 už není v nebezpečí.</Czech>
             <Japanese>%1 の脅威は去りました。</Japanese>
+        </Key>
+        <Key ID="STR_NOTIFICATION_ENEMYPOS_TITLE">
+            <Original>Enemy position</Original>
+            <Portuguese>Posição inimiga</Portuguese>
+        </Key>
+        <Key ID="STR_NOTIFICATION_ENEMYPOS_DESTROYED_TEXT">
+            <Original>Enemy position destroyed near grid %1.</Original>
+            <Portuguese>Posição inimiga destruída perto do grid %1.</Portuguese>
         </Key>
         <Key ID="STR_NOTIFICATION_FOBBUILT_TITLE">
             <Original>NEW FOB BUILT</Original>
@@ -2301,6 +2386,10 @@
             <Czech>ZAMČENO OD</Czech>
             <Japanese>ロックされています:</Japanese>
         </Key>
+        <Key ID="STR_INF_BARRACKS_REQUIRED">
+            <Original>REQUIRED BARRACKS</Original>
+            <Portuguese>ALOJAMENTOS REQUERIDOS</Portuguese>
+        </Key>
         <Key ID="STR_VEHICLE_UNLOCKED">
             <Original>UNLOCKED BY</Original>
             <French>DEVEROUILLE PAR</French>
@@ -2315,6 +2404,18 @@
             <Korean>차량잠금해제</Korean>
             <Czech>ODEMKNUTO OD</Czech>
             <Japanese>アンロックされました:</Japanese>
+        </Key>
+        <Key ID="STR_VEHICLE_CANNOT_ENTER">
+            <Original>You cannot enter this vehicle</Original>
+            <Portuguese>Você não pode entrar neste veículo</Portuguese>
+        </Key>
+        <Key ID="STR_INVENTORY_CANNOT_USE_WEAPON">
+            <Original>You cannot use the weapon %1</Original>
+            <Portuguese>Você não pode usar a arma %1</Portuguese>
+        </Key>
+        <Key ID="STR_INVENTORY_CANNOT_USE_ITEM">
+            <Original>You cannot use the item %1</Original>
+            <Portuguese>Você nao pode usar o item %1</Portuguese>
         </Key>
         <Key ID="STR_SQUAD_MANAGEMENT">
             <Original>SQUAD MANAGEMENT</Original>
@@ -3304,23 +3405,6 @@
             <Czech>Maximální zpoždění deaktivace sektoru (začíná se zvyšovat po 5. aktivační minutě)</Czech>
             <Japanese>最大セクター不活性化遅延(5番目の活性化後に増加し始めます)</Japanese>
         </Key>
-        <Key ID="STR_PARAM_LIMITEDZEUS">
-            <Original>Limited Zeus interface</Original>
-            <German>Eingeschränkte Zeus Funktionen</German>
-            <Spanish>Interface de Zeus limitada</Spanish>
-            <Russian>Ограниченный интерфейс Zeus</Russian>
-            <Italian>Limita interfaccia Zeus</Italian>
-            <Korean>제한된 제우스 인터페이스</Korean>
-            <Turkish>Sınırlı Zeus Arayüzü</Turkish>
-            <Czech>Omezené rozhraní Zeus</Czech>
-            <Japanese>ZEUSインターフェイスの制限</Japanese>
-        </Key>
-        <Key ID="STR_PARAM_COMMANDERZEUS">
-            <Original>Zeus for Commander</Original>
-            <German>Zeus für Kommandant</German>
-            <Italian>Zeus per Comandante</Italian>
-            <Japanese>指揮官用ZEUS</Japanese>
-        </Key>
         <Key ID="STR_PARAM_ALLOW_ENEMIES_IN_IMMOBILE">
             <Original>Chance that enemies will stay in immobile/damaged vehicles</Original>
             <German>Chance, dass Feinde in fahrunfähigen/beschädigten Fahrzeugen verbleiben</German>
@@ -4045,19 +4129,19 @@
             <Japanese>前線基地攻撃 (FOB Hunting)</Japanese>
         </Key>
         <Key ID="STR_SECONDARY_BRIEFING0">
-            <Original>&lt;t size='1.3' color='#ffa000'&gt;FOB HUNTING&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;OPFOR forces use an array of small logistic bases situated behind the front lines. Destroying those assets would greatly disrupt the OPFOR supply lines and impair their capacity to react to our actions.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Your mission is to destroy all supply assets (trucks, containers) at the objective by any means at your disposal. Unfortunately our intelligence is not able to provide you with a precise position for the base, you will have to locate the objective in the red zone on your map.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: OPFOR alert level reduced by 40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Original>
-            <French>&lt;t size='1.3' color='#ffa000'&gt;CHASSE A LA FOB&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Les forces de l'OPFOR utilisent des bases logistiques situées derrière la ligne de front. Détruire ces objectifs pertubera les lignes d'approvisionnement de l'OPFOR et les empêchera de réagir efficacement à nos actions.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Votre mission est de détruire tous les équipements logistiques (camions, containers) présents sur l'objectif. Malheureusement nos renseignements ne permettent pas de vous donner la position précise de la base, vous devrez la chercher dans la zone rouge visible sur votre carte.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Coût: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Récompense: niveau d'alerte de l'OPFOR réduit de 40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</French>
-            <German>&lt;t size='1.3' color='#ffa000'&gt;FOB JAGD&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Die OPFOR Streitkräfte benutzen ein Netzwerk von kleineren Nachschubbasen hinter den Frontlinien. Diese zu zerstören würden die OPFOR Nachschublinien und ihre Reaktionsmöglichkeiten stark einschränken.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Ihr Auftrag ist es alle Nachschubkapazitäten (Container und Trucks) zu zerstören. Leider ist unser Geheimdienst nicht in der Lage, Ihnen die genaue Position des Ortes mitzuteilen. Sie werden das Ziel innerhalb der makierten roten Zone auf der Karte suchen müssen.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Kosten: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Belohnung: OPFOR Alarmstatus wird um 40% reduziert&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</German>
-            <Spanish>&lt;t size='1.3' color='#ffa000'&gt;CAZA DE FOB&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Las fuerzas del OPFOR utilizan una red de bases logísticas situadas tras las líneas enemigas. Destruir estos recursos interrunpira las líneas de abastecimiento del enemigo y entorpecerán su capacidad para responder a tus acciones.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Tu misión consiste en destruir todos los recursos (camiones, containers) en el objetivo por cualquier medio que esté en tus manos. Desafortunadamente nuestra inteligencia no permite obtener una localización precisa de la base, deberás encontrarla dentro de la zona marcada en rojo en el mapa.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa: nivel de alerta del OPFOR reducido en un 40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Spanish>
-            <Russian>&lt;t size='1.3' color='#ffa000'&gt;ОХОТА НА FOB&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Силы OPFOR используют небольшие базы снабжения, расположенные за линией фронта. Уничтожение материальных средств этих баз значительно нарушит связи снабжения OPFOR и ухудшит их способность реагировать на ваши действия.&lt;/t&gt;&lt;br/&gt;&lt;t size='1'&gt;Ваша миссия состоит в том, чтобы уничтожить на базах все средства снабжения (грузовики, контейнеры) любыми средствами, находящимися в вашем распоряжении. К сожалению, наша разведка не в состоянии предоставить вам точное положение этих баз, вам придется найти их самостоятельно. Ищите базы снабжения в районе красной зоны, отмеченной на вашей карте.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Стоимость: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Награда: уровень обеспокоенности OPFOR уменьшится на 40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Russian>
-            <Italian>&lt;t size='1.3' color='#ffa000'&gt;CACCIA ALLA FOB&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Le forze OPFOR utilizzano una serie di piccole basi logistiche situate dietro il fronte. Distruggere tali basi serve ad interrompere le linee di alimentazione OPFOR e mettere in pericolo la loro capacità di reagire alle nostre azioni.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;La vostra missione è di distruggere tutte le attività di approvvigionamento (camion, contenitori) presso l 'obiettivo con ogni mezzo a vostra disposizione. Purtroppo la nostra intelligence non è in grado di fornire una posizione precisa della base, si dovrà individuare l'obiettivo all'interno della zona rossa sulla mappa.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Ricompensa: livello di allerta OPFOR ridotto del 40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Italian>
-            <Chinesesimp>&lt;t size='1.3' color='#ffa000'&gt;狩猎前哨&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;敌军部队在阵地后方建有一组小型后勤基地。摧毁这些设施将会极大的打击敌军的补给线，并拖慢他们的反应速度。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;你的任务是不惜一切代价摧毁目标区域所有补给物资（卡车、集装箱）。遗憾的是我们的情报部门无法为你提供这些基地的准确位置，你必须在地图的红色区域中自行搜索目标。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;花费：15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;奖励：敌军警戒等级降低40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Chinesesimp>
-            <Chinese>&lt;t size='1.3' color='#ffa000'&gt;獵殺前線基地&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;敵方在陣地後建立了一組小型前線基地作為後勤用，一旦成功摧毀他們將能給予敵軍補給線致命性的打擊、並使他們對我們的進攻感到措手不及。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;遺憾的是我們的情報單位並沒有辦法掌握確切位置，你的任務是在地圖上的紅色區域中尋找到敵方前線基地並摧毀所有基地內的補給物資（卡車、貨櫃）。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;花費：15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;獎勵：敵方警戒度降低 40 %&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Chinese>
-            <Turkish>&lt;t size='1.3' color='#ffa000'&gt;FOB AVLAMA&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;OPFOR kuvvetlerinin cephenin gerisinde birkaç küçük lojistik üsleri var. Bu üsleri yok etmek erzak tedariklerini zorlaştırıp, bizim hareketlerimize cevap verme kapasitelerini azaltıcaktır.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Göreviniz, elinizdeki imkanlarla bu üslerdeki bütün erzak sandıklarını ve araçları yok etmek. Ne yazıkki elimizdeki istihbarat bu üslerin tam konumlarını saptamaya yetmiyor, üssü haritanızdaki kırmızı bölgede sizin bulmanız lazım.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Maliyet: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Ödül: OPFOR uyarı seviyesi %40 a düşecek.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Turkish>
-            <Portuguese>&lt;t size='1.3' color='#ffa000'&gt;CAÇA À FOB&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;As forças de oposição (FOROP) utilizam um conjunto de pequenas bases de logística situadas além do fronte de batalha. Destruindo tais recursos desestabilizaria consideravelmente suas linhas de suprimento e afetaria sua capacidade de reagir às nossas ações.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Sua missão é destruir todas as fontes de recurso (caminhões, contêineres) que estão no objetivo, a qualquer custo. Infelizmente, nossa inteligência não foi capaz de fornecer dados da localização precisa da base. Dessa forma, você deverá localizar o objetivo dentro da zona vermelha identificada em seu mapa.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa: Alerta das forças de oposição reduzidos em 40%.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Portuguese>
-            <Korean>&lt;t size='1.3' color='#ffa000'&gt;병참기지 기습&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;현재 적군은 후방지역에 병참 기지를 운영하고 있습니다. 이 병참 기지를 파괴하면 전방 적군의 작전 수행능력을 저하시켜 아군의 작전 행동에 대응할 수 있는 역량이 약해질 것입니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;아군의 작전 목표는 모든 군수물자을 파괴하는 것입니다.(트럭, 컨테이너 등) 아쉽게도 아군 정찰팀이 해당지역을 정찰하였으나 찾지 못하여 정확한 위치를 제공할 수 없기 때문에 당신의 지도에 표기된 빨간 영역 안에 위치한 적군 병참 기지를 찾아야 합니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;소모되는 정보 점수: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;보상: 경고 수준이 40% 감소합니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Korean>
-            <Czech>&lt;t size='1.3' color='#ffa000'&gt;HON NA FOB&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Jednotky OPFOR používají řadu menších logistických základen za hlavní linii. Zničení těchto prostředků výrazně naruší zásobováni OPFOR jednotek a naruší jejich schopnost reagovat na naše akce.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Cílem mise je zničit všechny zásobovací prostředky (náklaďáky, kontejnery) libovolnými prostředky. Bohužel naše rozvědka není schopna vám poskytnout přesnou polohou pro základny, budete ji muset najít v červené zóně na mapě.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cena: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Odměna: Snížení bojové pohotovosti OPFOR o 40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Czech>
-            <Japanese>&lt;t size='1.3' color='#ffa000'&gt;前線基地攻撃&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;敵軍部隊は小規模な物流基地を後方に設置している。 これらの資源を破壊すれば敵補給船への打撃を与え、敵軍の警戒度を下げることが出来るはずだ。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;諸君の任務は目標に存在するすべての補給用品(トラックやコンテナ)の破壊だ。 残念ながら我々の情報網では敵基地の正確な位置を特定するには至らなかった。 諸君には赤い範囲内で目標を捜索し、破壊してほしい。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;費用: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;報酬: 敵部隊警戒度が 40% 低下。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Japanese>
+            <Original>&lt;t size='1.3' color='#ffa000'&gt;FOB HUNTING&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;OPFOR forces use an array of small logistic bases situated behind the front lines. Destroying those assets would greatly disrupt the OPFOR supply lines and impair their capacity to react to our actions.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Your mission is to destroy all supply assets (trucks, containers) at the objective by any means at your disposal. Unfortunately our intelligence is not able to provide you with a precise position for the base, you will have to locate the objective in the red zone on your map.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: OPFOR alert level reduced by 40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Original>
+            <French>&lt;t size='1.3' color='#ffa000'&gt;CHASSE A LA FOB&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Les forces de l'OPFOR utilisent des bases logistiques situées derrière la ligne de front. Détruire ces objectifs pertubera les lignes d'approvisionnement de l'OPFOR et les empêchera de réagir efficacement à nos actions.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Votre mission est de détruire tous les équipements logistiques (camions, containers) présents sur l'objectif. Malheureusement nos renseignements ne permettent pas de vous donner la position précise de la base, vous devrez la chercher dans la zone rouge visible sur votre carte.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Coût: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Récompense: niveau d'alerte de l'OPFOR réduit de 40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</French>
+            <German>&lt;t size='1.3' color='#ffa000'&gt;FOB JAGD&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Die OPFOR Streitkräfte benutzen ein Netzwerk von kleineren Nachschubbasen hinter den Frontlinien. Diese zu zerstören würden die OPFOR Nachschublinien und ihre Reaktionsmöglichkeiten stark einschränken.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Ihr Auftrag ist es alle Nachschubkapazitäten (Container und Trucks) zu zerstören. Leider ist unser Geheimdienst nicht in der Lage, Ihnen die genaue Position des Ortes mitzuteilen. Sie werden das Ziel innerhalb der makierten roten Zone auf der Karte suchen müssen.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Kosten: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Belohnung: OPFOR Alarmstatus wird um 40% reduziert&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</German>
+            <Spanish>&lt;t size='1.3' color='#ffa000'&gt;CAZA DE FOB&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Las fuerzas del OPFOR utilizan una red de bases logísticas situadas tras las líneas enemigas. Destruir estos recursos interrunpira las líneas de abastecimiento del enemigo y entorpecerán su capacidad para responder a tus acciones.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Tu misión consiste en destruir todos los recursos (camiones, containers) en el objetivo por cualquier medio que esté en tus manos. Desafortunadamente nuestra inteligencia no permite obtener una localización precisa de la base, deberás encontrarla dentro de la zona marcada en rojo en el mapa.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa: nivel de alerta del OPFOR reducido en un 40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Spanish>
+            <Russian>&lt;t size='1.3' color='#ffa000'&gt;ОХОТА НА FOB&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Силы OPFOR используют небольшие базы снабжения, расположенные за линией фронта. Уничтожение материальных средств этих баз значительно нарушит связи снабжения OPFOR и ухудшит их способность реагировать на ваши действия.&lt;/t&gt;&lt;br/&gt;&lt;t size='1'&gt;Ваша миссия состоит в том, чтобы уничтожить на базах все средства снабжения (грузовики, контейнеры) любыми средствами, находящимися в вашем распоряжении. К сожалению, наша разведка не в состоянии предоставить вам точное положение этих баз, вам придется найти их самостоятельно. Ищите базы снабжения в районе красной зоны, отмеченной на вашей карте.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Стоимость: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Награда: уровень обеспокоенности OPFOR уменьшится на 40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Russian>
+            <Italian>&lt;t size='1.3' color='#ffa000'&gt;CACCIA ALLA FOB&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Le forze OPFOR utilizzano una serie di piccole basi logistiche situate dietro il fronte. Distruggere tali basi serve ad interrompere le linee di alimentazione OPFOR e mettere in pericolo la loro capacità di reagire alle nostre azioni.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;La vostra missione è di distruggere tutte le attività di approvvigionamento (camion, contenitori) presso l 'obiettivo con ogni mezzo a vostra disposizione. Purtroppo la nostra intelligence non è in grado di fornire una posizione precisa della base, si dovrà individuare l'obiettivo all'interno della zona rossa sulla mappa.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Ricompensa: livello di allerta OPFOR ridotto del 40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Italian>
+            <Chinesesimp>&lt;t size='1.3' color='#ffa000'&gt;狩猎前哨&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;敌军部队在阵地后方建有一组小型后勤基地。摧毁这些设施将会极大的打击敌军的补给线，并拖慢他们的反应速度。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;你的任务是不惜一切代价摧毁目标区域所有补给物资（卡车、集装箱）。遗憾的是我们的情报部门无法为你提供这些基地的准确位置，你必须在地图的红色区域中自行搜索目标。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;花费：15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;奖励：敌军警戒等级降低40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Chinesesimp>
+            <Chinese>&lt;t size='1.3' color='#ffa000'&gt;獵殺前線基地&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;敵方在陣地後建立了一組小型前線基地作為後勤用，一旦成功摧毀他們將能給予敵軍補給線致命性的打擊、並使他們對我們的進攻感到措手不及。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;遺憾的是我們的情報單位並沒有辦法掌握確切位置，你的任務是在地圖上的紅色區域中尋找到敵方前線基地並摧毀所有基地內的補給物資（卡車、貨櫃）。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;花費：15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;獎勵：敵方警戒度降低 40 %&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Chinese>
+            <Turkish>&lt;t size='1.3' color='#ffa000'&gt;FOB AVLAMA&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;OPFOR kuvvetlerinin cephenin gerisinde birkaç küçük lojistik üsleri var. Bu üsleri yok etmek erzak tedariklerini zorlaştırıp, bizim hareketlerimize cevap verme kapasitelerini azaltıcaktır.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Göreviniz, elinizdeki imkanlarla bu üslerdeki bütün erzak sandıklarını ve araçları yok etmek. Ne yazıkki elimizdeki istihbarat bu üslerin tam konumlarını saptamaya yetmiyor, üssü haritanızdaki kırmızı bölgede sizin bulmanız lazım.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Maliyet: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Ödül: OPFOR uyarı seviyesi %40 a düşecek.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Turkish>
+            <Portuguese>&lt;t size='1.3' color='#ffa000'&gt;CAÇA À FOB&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;As forças de oposição (FOROP) utilizam um conjunto de pequenas bases de logística situadas além do fronte de batalha. Destruindo tais recursos desestabilizaria consideravelmente suas linhas de suprimento e afetaria sua capacidade de reagir às nossas ações.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Sua missão é destruir todas as fontes de recurso (caminhões, contêineres) que estão no objetivo, a qualquer custo. Infelizmente, nossa inteligência não foi capaz de fornecer dados da localização precisa da base. Dessa forma, você deverá localizar o objetivo dentro da zona vermelha identificada em seu mapa.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa: Alerta das forças de oposição reduzidos em 40%.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Portuguese>
+            <Korean>&lt;t size='1.3' color='#ffa000'&gt;병참기지 기습&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;현재 적군은 후방지역에 병참 기지를 운영하고 있습니다. 이 병참 기지를 파괴하면 전방 적군의 작전 수행능력을 저하시켜 아군의 작전 행동에 대응할 수 있는 역량이 약해질 것입니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;아군의 작전 목표는 모든 군수물자을 파괴하는 것입니다.(트럭, 컨테이너 등) 아쉽게도 아군 정찰팀이 해당지역을 정찰하였으나 찾지 못하여 정확한 위치를 제공할 수 없기 때문에 당신의 지도에 표기된 빨간 영역 안에 위치한 적군 병참 기지를 찾아야 합니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;소모되는 정보 점수: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;보상: 경고 수준이 40% 감소합니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Korean>
+            <Czech>&lt;t size='1.3' color='#ffa000'&gt;HON NA FOB&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Jednotky OPFOR používají řadu menších logistických základen za hlavní linii. Zničení těchto prostředků výrazně naruší zásobováni OPFOR jednotek a naruší jejich schopnost reagovat na naše akce.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Cílem mise je zničit všechny zásobovací prostředky (náklaďáky, kontejnery) libovolnými prostředky. Bohužel naše rozvědka není schopna vám poskytnout přesnou polohou pro základny, budete ji muset najít v červené zóně na mapě.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cena: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Odměna: Snížení bojové pohotovosti OPFOR o 40%&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Czech>
+            <Japanese>&lt;t size='1.3' color='#ffa000'&gt;前線基地攻撃&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;敵軍部隊は小規模な物流基地を後方に設置している。 これらの資源を破壊すれば敵補給船への打撃を与え、敵軍の警戒度を下げることが出来るはずだ。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;諸君の任務は目標に存在するすべての補給用品(トラックやコンテナ)の破壊だ。 残念ながら我々の情報網では敵基地の正確な位置を特定するには至らなかった。 諸君には赤い範囲内で目標を捜索し、破壊してほしい。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;費用: 15&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;報酬: 敵部隊警戒度が 40% 低下。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Japanese>
         </Key>
         <Key ID="STR_SECONDARY_MISSION1">
             <Original>Convoy Hijack</Original>
@@ -4075,19 +4159,19 @@
             <Japanese>輸送車列強襲 (Convoy Hijack)</Japanese>
         </Key>
         <Key ID="STR_SECONDARY_BRIEFING1">
-            <Original>&lt;t size='1.3' color='#ffa000'&gt;CONVOY HIJACK&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;OPFOR forces use road convoys to resupply their defensive positions. Intercepting one of these convoys would effectively disrupt their supply lines, and we could use the occasion to retrieve an hefty amount of resources.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Your mission is to stop the OPFOR convoy by any means necessary. You can destroy it, or hijack it to retrieve all the ammunition you can grab. The target will be spotted on your map.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: OPFOR alert level reduced by 15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Side reward: All the resources you can retrieve.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Original>
-            <French>&lt;t size='1.3' color='#ffa000'&gt;INTERCEPTION DE CONVOI&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Les forces de l'OPFOR utilisent des convois routiers pour réaprovisionner leurs positions. Intercepter un de ces convois pertuberait leurs lignes d'approvisionnement, et nous pourrions utiliser l'occasion pour récupérer une grande quantité de munitions.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Votre mission est de stopper le convoi de l'OPFOR par tous les moyens nécessaires. Vous pouvez le détruire, ou le stopper pour récupérer un maximum de munitions. La cible sera marquée sur votre carte.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Coût: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Récompense: niveau d'alerte de l'OPFOR réduit de 15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Récompense secondaire: toutes les munitions que vous pourrez récupérer.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</French>
-            <German>&lt;t size='1.3' color='#ffa000'&gt;KONVOI HINTERHALT&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Die OPFOR Streitkräfte benutzen Straßenkonvois um ihre Verteidigungspositionen zu versorgen. Diese Konvois abzufangen würden ihre Nachschublinien effektiv unterbrechen und außerdem könnten wir die Möglichkeit nutzen, um selbst eine große Menge an Munition zu erbeuten.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Ihr Auftrag ist es, den OPFOR Konvoi auf jede erdenkliche Weise zu stoppen. Sie können ihn zerstören oder übernehmen, um soviel Munition wie möglich zu erbeuten. Das Ziel wird auf Ihrer Karte aufgeklärt.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Kosten: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Belohnung: OPFOR Alarmstatus wird um 15% reduziert&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Weitere Belohnung: Soviel Munition wie Sie erbeuten können.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</German>
-            <Spanish>&lt;t size='1.3' color='#ffa000'&gt;INTERCEPTAR EL CONVOY&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Las fuerzas OPFOR utilizan convoys de carretera para reabastecer sus posiciones defensivas. Interceptar uno de estos convoy rompería de forma efectiva sus líneas de suministro, y podríamos aprovechar la ocasión para obtener una buena cantidad de munición.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Tu misión consiste en parar ese convoy por cualquier medio. Puedes destruirlo o capturarlo para capturar toda la munición que sea posible. El objetivo aparecerá marcado en el mapa.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Coste: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa: Nivel de alerta OPFOR reducido 15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa secundaria: Toda la munición que puedas traer.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Spanish>
-            <Russian>&lt;t size='1.3' color='#ffa000'&gt;ПЕРЕХВАТ КОНВОЯ&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Силы OPFOR используют автоколонны для снабжения своих оборонительных позиций. Перехват одного из этих конвоев эффективно нарушил бы их связи снабжения, и мы могли бы использовать эту возможность для получения большого количество вооружения.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Ваша задача состоит в том, чтобы остановить конвой OPFOR любой ценой. Вы можете уничтожить его, или захватить его для получения ресурса вооружения. Цель будет отмечена на вашей карте.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Стоимость: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Награда: уровень обеспокоенности OPFOR уменьшится на 15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Дополнительная награда: Всё вооружение, которое можно получить за утилизацию груза конвоя.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Russian>
-            <Italian>&lt;t size='1.3' color='#ffa000'&gt;INTERCETTA IL CONVOGLIO&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Le forze OPFOR utilizzano convogli stradali per rifornire le loro posizioni difensive. Intercettare uno di questi convogli potrebbe effettivamente distruggere le loro linee di rifornimento, e potete sfruttare l'occasione per recuperare una notevole quantità di munizioni.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;La tua missione è quella di fermare il convoglio OPFOR con ogni mezzo necessario. Si può distruggerlo, o dirottarlo e recuperare tutte le munizioni. L'obiettivo sarà evidenziato sulla mappa.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Ricompensa: livello di allerta OPFOR ridotto del 15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Seconda ricompensa: è possibile recuperare tutte le munizioni.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Italian>
-            <Chinesesimp>&lt;t size='1.3' color='#ffa000'&gt;劫掠车队&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;敌军部队的防御位置通过地面车队进行补给。拦截这种车队可以有效打击他们的补给线，而这也是让我们截获弹药的大好机会。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;你的任务是不惜一切代价拦截敌军车队。由你决定是摧毁还是截获所有的弹药。目标将会标示在你的地图上。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;花费：10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;奖励：敌军警戒等级降低15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;次要奖励：你能截获的所有弹药。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Chinesesimp>
-            <Chinese>&lt;t size='1.3' color='#ffa000'&gt;攔截車隊&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;敵方正透過補給車隊來為他們的防禦陣線進行補給，攔截車隊將能有效打擊他們的補給線，而這也是我們從敵軍繳獲彈藥資源的大好機會。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;你的任務是攔截車隊，你可以自行決定要摧毀或是掠奪車隊上的所有彈藥，情報單位將會協助標示目標位置與目標可能前往的路徑點在你的地圖上。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;花費：10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;獎勵：敵軍警戒度降低 15 %&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;次要獎勵：所有你能從車隊上所繳獲的彈藥資源。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Chinese>
-            <Turkish>&lt;t size='1.3' color='#ffa000'&gt;KONVOY KAÇIRMA&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;OPFOR kuvvetleri savundukları bölgelere konvoylar ile mühimmat sağlıyor. Bu konvoyları durdurmak, hem o bölgelere olan desteği azaltır, hemde kendinize mühimmat sağlamanıza yardımcı olur.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Göreviniz, elinizdeki imkanlarla OPFOR konvoyunu durdumak. Konvoyun hepsini yok edebilirsizin. Eğer mühimmat ele geçirmek isterseniz ise araçları kaçırabilirsiniz. Hedef haritanızda işaretlenecektir.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Maliyet: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Ödül: OPFOR uyarı seviyesi %15 azalıcaktır.&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Yan ödül: Kurtardığınız mühimmatlar.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Turkish>
-            <Portuguese>&lt;t size='1.3' color='#ffa000'&gt;INTERCEPTAÇÃO DE COMBOIO&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;As forças de oposição (FOROP) utilizam comboios terrestres para reabastecer suas posições defensivas. Interceptando um desses comboios afetaria efetivamente suas linhas de suprimento, e poderíamos usar a ocasião para recuperar uma grande quantidade de munições.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Sua missão é deter o comboio das forças de oposição utilizando qualquer meio possível. Você pode destruí-lo ou sequestrá-lo para recuperar toda a munição que conseguir transportar. O alvo será identificado em coordenadas específicas no seu mapa.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa: Nível de alerta das forças de oposição reduzido em 15%.&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa aliada: Toda a munição que conseguir.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Portuguese>
-            <Korean>&lt;t size='1.3' color='#ffa000'&gt;수송부대 무력화&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;현재 적군은 수송부대를 동원하여 그들의 방어 거점에 군수물자를 수송하고 있습니다. 수송부대 중 하나를 공격하여 그들의 보급선을 끊고, 많은 양의 군수물자를 노획하십시요.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;아군의 임무는 수단과 방법을 가리지 않고 적 수송부대를 멈추게 하는 것입니다. 군수물자를 파괴할 것인지, 노획하여 아군의 군수물자로 확보할 것인지는 당신의 선택입니다. 당신의 지도에 위치가 표시될 것입니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;소모되는 정보 점수: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;보상: 경고 수준이 15% 감소합니다.&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;추가 보상: 수송부대에서 노획할 수 있는 모든 군수물자.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Korean>
-            <Czech>&lt;t size='1.3' color='#ffa000'&gt;PŘEPADENÍ KONVOJE&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Jednotky OPFOR používají konvoje k zásobení obraných pozic. Přerušením jediného konvoje můžete efektivně narušit zásobování, a také můžeme využít teto příležitosti k získání značného množství munice.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Cílem mise je zastavit konvoj libovolnými prostředky. Můžete je zničit nebo zajmout a získat tak munici. Pozice konvoje bude zaznačena do mapy.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cena: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Odměna: Bojová pohotovost OPFOR snížena o 15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Vedlejší odměna: Veškerá munice kterou zvládnete odnést.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Czech>
-            <Japanese>&lt;t size='1.3' color='#ffa000'&gt;輸送車列強襲&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;敵軍部隊は車列を用い防衛地点への補給を行っている。 この車列を襲撃すれば奴らの補給網に打撃を与えられるだろう。 そのうえ、敵の資源を接収することが出来るかもしれない。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;諸君の任務は敵軍補給車列をいかなる手を使ってでも停止させることだ。 車両を破壊、もしくは強奪し資源を基地へ持ち帰れ。 目標は発見され次第マップに記載される。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;費用: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;報酬: 敵部隊警戒度が 15% 低下。&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;副次報酬: 手に入れた資源全て。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Japanese>
+            <Original>&lt;t size='1.3' color='#ffa000'&gt;CONVOY HIJACK&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;OPFOR forces use road convoys to resupply their defensive positions. Intercepting one of these convoys would effectively disrupt their supply lines, and we could use the occasion to retrieve an hefty amount of resources.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Your mission is to stop the OPFOR convoy by any means necessary. You can destroy it, or hijack it to retrieve all the ammunition you can grab. The target will be spotted on your map.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: OPFOR alert level reduced by 15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Side reward: All the resources you can retrieve.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Original>
+            <French>&lt;t size='1.3' color='#ffa000'&gt;INTERCEPTION DE CONVOI&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Les forces de l'OPFOR utilisent des convois routiers pour réaprovisionner leurs positions. Intercepter un de ces convois pertuberait leurs lignes d'approvisionnement, et nous pourrions utiliser l'occasion pour récupérer une grande quantité de munitions.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Votre mission est de stopper le convoi de l'OPFOR par tous les moyens nécessaires. Vous pouvez le détruire, ou le stopper pour récupérer un maximum de munitions. La cible sera marquée sur votre carte.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Coût: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Récompense: niveau d'alerte de l'OPFOR réduit de 15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Récompense secondaire: toutes les munitions que vous pourrez récupérer.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</French>
+            <German>&lt;t size='1.3' color='#ffa000'&gt;KONVOI HINTERHALT&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Die OPFOR Streitkräfte benutzen Straßenkonvois um ihre Verteidigungspositionen zu versorgen. Diese Konvois abzufangen würden ihre Nachschublinien effektiv unterbrechen und außerdem könnten wir die Möglichkeit nutzen, um selbst eine große Menge an Munition zu erbeuten.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Ihr Auftrag ist es, den OPFOR Konvoi auf jede erdenkliche Weise zu stoppen. Sie können ihn zerstören oder übernehmen, um soviel Munition wie möglich zu erbeuten. Das Ziel wird auf Ihrer Karte aufgeklärt.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Kosten: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Belohnung: OPFOR Alarmstatus wird um 15% reduziert&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Weitere Belohnung: Soviel Munition wie Sie erbeuten können.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</German>
+            <Spanish>&lt;t size='1.3' color='#ffa000'&gt;INTERCEPTAR EL CONVOY&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Las fuerzas OPFOR utilizan convoys de carretera para reabastecer sus posiciones defensivas. Interceptar uno de estos convoy rompería de forma efectiva sus líneas de suministro, y podríamos aprovechar la ocasión para obtener una buena cantidad de munición.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Tu misión consiste en parar ese convoy por cualquier medio. Puedes destruirlo o capturarlo para capturar toda la munición que sea posible. El objetivo aparecerá marcado en el mapa.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Coste: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa: Nivel de alerta OPFOR reducido 15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa secundaria: Toda la munición que puedas traer.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Spanish>
+            <Russian>&lt;t size='1.3' color='#ffa000'&gt;ПЕРЕХВАТ КОНВОЯ&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Силы OPFOR используют автоколонны для снабжения своих оборонительных позиций. Перехват одного из этих конвоев эффективно нарушил бы их связи снабжения, и мы могли бы использовать эту возможность для получения большого количество вооружения.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Ваша задача состоит в том, чтобы остановить конвой OPFOR любой ценой. Вы можете уничтожить его, или захватить его для получения ресурса вооружения. Цель будет отмечена на вашей карте.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Стоимость: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Награда: уровень обеспокоенности OPFOR уменьшится на 15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Дополнительная награда: Всё вооружение, которое можно получить за утилизацию груза конвоя.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Russian>
+            <Italian>&lt;t size='1.3' color='#ffa000'&gt;INTERCETTA IL CONVOGLIO&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Le forze OPFOR utilizzano convogli stradali per rifornire le loro posizioni difensive. Intercettare uno di questi convogli potrebbe effettivamente distruggere le loro linee di rifornimento, e potete sfruttare l'occasione per recuperare una notevole quantità di munizioni.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;La tua missione è quella di fermare il convoglio OPFOR con ogni mezzo necessario. Si può distruggerlo, o dirottarlo e recuperare tutte le munizioni. L'obiettivo sarà evidenziato sulla mappa.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Ricompensa: livello di allerta OPFOR ridotto del 15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Seconda ricompensa: è possibile recuperare tutte le munizioni.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Italian>
+            <Chinesesimp>&lt;t size='1.3' color='#ffa000'&gt;劫掠车队&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;敌军部队的防御位置通过地面车队进行补给。拦截这种车队可以有效打击他们的补给线，而这也是让我们截获弹药的大好机会。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;你的任务是不惜一切代价拦截敌军车队。由你决定是摧毁还是截获所有的弹药。目标将会标示在你的地图上。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;花费：10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;奖励：敌军警戒等级降低15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;次要奖励：你能截获的所有弹药。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Chinesesimp>
+            <Chinese>&lt;t size='1.3' color='#ffa000'&gt;攔截車隊&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;敵方正透過補給車隊來為他們的防禦陣線進行補給，攔截車隊將能有效打擊他們的補給線，而這也是我們從敵軍繳獲彈藥資源的大好機會。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;你的任務是攔截車隊，你可以自行決定要摧毀或是掠奪車隊上的所有彈藥，情報單位將會協助標示目標位置與目標可能前往的路徑點在你的地圖上。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;花費：10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;獎勵：敵軍警戒度降低 15 %&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;次要獎勵：所有你能從車隊上所繳獲的彈藥資源。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Chinese>
+            <Turkish>&lt;t size='1.3' color='#ffa000'&gt;KONVOY KAÇIRMA&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;OPFOR kuvvetleri savundukları bölgelere konvoylar ile mühimmat sağlıyor. Bu konvoyları durdurmak, hem o bölgelere olan desteği azaltır, hemde kendinize mühimmat sağlamanıza yardımcı olur.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Göreviniz, elinizdeki imkanlarla OPFOR konvoyunu durdumak. Konvoyun hepsini yok edebilirsizin. Eğer mühimmat ele geçirmek isterseniz ise araçları kaçırabilirsiniz. Hedef haritanızda işaretlenecektir.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Maliyet: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Ödül: OPFOR uyarı seviyesi %15 azalıcaktır.&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Yan ödül: Kurtardığınız mühimmatlar.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Turkish>
+            <Portuguese>&lt;t size='1.3' color='#ffa000'&gt;INTERCEPTAÇÃO DE COMBOIO&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;As forças de oposição (FOROP) utilizam comboios terrestres para reabastecer suas posições defensivas. Interceptando um desses comboios afetaria efetivamente suas linhas de suprimento, e poderíamos usar a ocasião para recuperar uma grande quantidade de munições.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Sua missão é deter o comboio das forças de oposição utilizando qualquer meio possível. Você pode destruí-lo ou sequestrá-lo para recuperar toda a munição que conseguir transportar. O alvo será identificado em coordenadas específicas no seu mapa.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa: Nível de alerta das forças de oposição reduzido em 15%.&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa aliada: Toda a munição que conseguir.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Portuguese>
+            <Korean>&lt;t size='1.3' color='#ffa000'&gt;수송부대 무력화&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;현재 적군은 수송부대를 동원하여 그들의 방어 거점에 군수물자를 수송하고 있습니다. 수송부대 중 하나를 공격하여 그들의 보급선을 끊고, 많은 양의 군수물자를 노획하십시요.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;아군의 임무는 수단과 방법을 가리지 않고 적 수송부대를 멈추게 하는 것입니다. 군수물자를 파괴할 것인지, 노획하여 아군의 군수물자로 확보할 것인지는 당신의 선택입니다. 당신의 지도에 위치가 표시될 것입니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;소모되는 정보 점수: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;보상: 경고 수준이 15% 감소합니다.&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;추가 보상: 수송부대에서 노획할 수 있는 모든 군수물자.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Korean>
+            <Czech>&lt;t size='1.3' color='#ffa000'&gt;PŘEPADENÍ KONVOJE&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Jednotky OPFOR používají konvoje k zásobení obraných pozic. Přerušením jediného konvoje můžete efektivně narušit zásobování, a také můžeme využít teto příležitosti k získání značného množství munice.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Cílem mise je zastavit konvoj libovolnými prostředky. Můžete je zničit nebo zajmout a získat tak munici. Pozice konvoje bude zaznačena do mapy.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cena: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Odměna: Bojová pohotovost OPFOR snížena o 15%&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Vedlejší odměna: Veškerá munice kterou zvládnete odnést.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Czech>
+            <Japanese>&lt;t size='1.3' color='#ffa000'&gt;輸送車列強襲&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;敵軍部隊は車列を用い防衛地点への補給を行っている。 この車列を襲撃すれば奴らの補給網に打撃を与えられるだろう。 そのうえ、敵の資源を接収することが出来るかもしれない。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;諸君の任務は敵軍補給車列をいかなる手を使ってでも停止させることだ。 車両を破壊、もしくは強奪し資源を基地へ持ち帰れ。 目標は発見され次第マップに記載される。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;費用: 10&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;報酬: 敵部隊警戒度が 15% 低下。&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;副次報酬: 手に入れた資源全て。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\convoy_obj.jpg'/&gt;&lt;/t&gt;</Japanese>
         </Key>
         <!-- Added in v0.922 -->
         <Key ID="STR_PARAM_BLUFOR_DEFENDERS">
@@ -4181,43 +4265,43 @@
             <Japanese>捜索救難 (Search and Rescue)</Japanese>
         </Key>
         <Key ID="STR_SECONDARY_BRIEFING2">
-            <Original>&lt;t size='1.3' color='#ffa000'&gt;SEARCH AND RESCUE&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;We have lost contact with a recon helicopter on mission behind the enemy lines. We believe the chopper was shot down by hostile forces.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;The helicopter may have crashlanded anywhere in a large zone around its last known position. Your mission is to retrieve the chopper crew and their precious intel. Hostile forces may have found them first, so you must be quick, careful, and ready to engage.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: 20 intel points (10 for each crew alive).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Original>
-            <French>&lt;t size='1.3' color='#ffa000'&gt;RECHERCHE ET SAUVETAGE&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Nous avons perdu le contact avec un helicoptère de reconnaissance en mission derrière les lignes ennemies. Il a probablement été abattu par les forces hostiles.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;L'hélicopter a pu finir sa course dans une large zone autour de sa dernière position connue. Votre mission est de retrouver l'équipage et sa précieuse intel. Les forces hostiles les auront peut-être déjà retrouvés, votre action doit donc être rapide et décisive.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cout: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Récompense: 20 points d'intel (10 pour chaque équipage vivant).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</French>
-            <German>&lt;t size='1.3' color='#ffa000'&gt;SUCHEN UND ZERSTÖREN&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Wir haben den Kontakt mit einem Aufklärungshelikopter, der auf einer Mission hinter feindlichen Linien war, verloren. Wir vermuten, dass der Helikotper von feindlichen Kräften abgeschossen wurde.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Der Helikopter muss irgendwo in einem größeren Bereich um seine letzte bekannte Position notgelandet sein. Ihr Auftrag ist es, die Besatzung zu finden und deren Aufklärungsbericht zu beschaffen. Feindliche Kräfte könnten sie bereits gefunden haben, also müssen sie schnell, vorsichtig und auf alles vorbereitet sein.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: 20 intel points (10 for each crew alive).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</German>
-            <Spanish>&lt;t size='1.3' color='#ffa000'&gt;BÚSQUEDA Y RESCATE&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Hemos perdido contacto con un helicóptero de reconocimiento durante una misión tras las líneas enemigas. Creemos que el helicóptero ha sido derribado por las fuerzas hostiles.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;El helicóptero habría aterrizado forzosamente en alguna parte alrededor de su última posición conocida. Tu misión consiste en traer de vuelta a su tripulación y a la preciada información de interligencia que allí se encuentra. Las fuerzas hostiles pueden haberlos encontrado antes, así que hay que ser rápidos, cuidadosos y estar preparados para enfrentarse.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Coste: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa: 20 puntos de intel (10 por cada tripulante).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Spanish>
-            <Russian>&lt;t size='1.3' color='#ffa000'&gt;НАЙТИ И СПАСТИ&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Мы потеряли связь с вертолетом спецотряда, на задании в тылу врага. Мы считаем, что вертолет был сбит вражескими силами.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Вертолет, возможно, упал где-то в большой зоне вокруг последнего известного положения. Ваша миссия состоит в том, чтобы спасти экипаж вертолета и их драгоценные разведданные. Враги, возможно, нашли их первыми, поэтому вы должны быть быстрым, внимательным, и готовы к битве.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Стоимость: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Награда: 20 разведданных (10 за каждого живого экипажа вертолета)&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Russian>
-            <Italian>&lt;t size='1.3' color='#ffa000'&gt;CERCA E SOCCORRI&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Abbiamo perso il contatto con un elicottero da ricognizione in missione dietro le linee nemiche. Riteniamo che l'elicottero sia stato abbattuto da forze ostili.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;L'elicottero può essersi schiantato ovunque in una vasta zona attorno alla sua ultima posizione nota. La vostra missione è quella di recuperare l'equipaggio  e la loro preziosa Intel. Forze ostili possono averli trovati prima di voi, quindi è necessario essere rapidi, attenti e pronto a tutto.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;20 Punti Intel (10 per ogni membro in vita).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Italian>
-            <Chinesesimp>&lt;t size='1.3' color='#ffa000'&gt;搜索与营救&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;我军一架侦察直升机在敌后执行任务时失联了。我们有理由相信是敌军打下了它。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;直升机有可能坠落在其最后已知位置的一大片地区中。你的任务是营救机组成员和他们宝贵的情报。敌军部队很有可能已经抓捕了他们，因此你必须尽快、谨慎的行动，并做好交战的准备。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;花费：8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;奖励：20情报点（每名幸存组员价值10点）。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Chinesesimp>
-            <Chinese>&lt;t size='1.3' color='#ffa000'&gt;搜索與營救&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;我們的一架直升機在敵後進行任務時失去了聯繫，我们有理由相信是敵軍打下了它。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;戰情單位已經協助標示出直升機的最後已知地区，你的任務是前往進行搜索並營救出直升機機組員們與他們任務中取得的寶貴情報。敵軍部隊很有可能已經派出部隊前往搜捕他們，所有你們亦須盡快而謹慎的行動，時刻做好交戰的準備。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;花費：8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;獎勵：20 點情報點（每位倖存的機組員價值 10 點情報點）。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Chinese>
-            <Turkish>&lt;t size='1.3' color='#ffa000'&gt;ARA VE KURTAR&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Dost bir keşif helikopterini düşman sahasında kaybettik. Helikopterin düşman kuvvetleri tarafından vurulduğuna inanıyoruz.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Helikopter son görülen yerde düştüğünü biliyoruz. Göreviniz helikopter personelini bulup ve taşıdığı önemli istihbaratı getirmenizdir. Düşman kuvvetler onu önceden bulabilirler dikkatli olun ve saldırıya açık olun.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Ödül: 20 istihbarat puanı (Her yaşayan kişi için 10).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Turkish>
-            <Portuguese>&lt;t size='1.3' color='#ffa000'&gt;BUSCA E RESGATE&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Perdemos contato com um helicóptero de reconhecimento presente em uma missão atrás das linhas inimigas. Acreditamos que o helicóptero foi abatido por forças hostis.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;O helicóptero pode ter feito um pouso forçado em local próximo de sua última posição conhecida. Sua missão é recuperar a tripulação do helicóptero e sua preciosa inteligência. Forças hostis podem tê-los localizado primeiro, portanto seja rápido, cuidadoso e esteja pronto para engajar o inimigo.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa: 20 pontos de inteligência (10 para cada membro vivo da tripulação).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Portuguese>
-            <Korean>&lt;t size='1.3' color='#ffa000'&gt;수색 및 구출&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;적군 후방지역에서 정찰임무를 수행하던 아군 정찰기와 교신이 끊어졌습니다. 현 상황으로 판단할때 적군에게 격추당한 것 같습니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;아군의 임무는 마지막 교신 위치를 중심으로 아군 정찰기의 흔적을 찾는 것입니다. 적군이 먼저 발견하기전에 아군 정찰기의 흔적을 찾아 승무원 구출 및 다른 정보들을 획득, 복귀해야 합니다. 교전이 벌어질 수 있습니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;소요되는 정보 점수: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;보상: 정보 점수가 20점 추가됩니다. 또한 구출한 인원 1명당 정보 점수가 10점 추가됩니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Korean>
-            <Czech>&lt;t size='1.3' color='#ffa000'&gt;ZÁCHRANNÁ MISE&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Ztratili jsme kontakt s průzkumným vrtulníkem za nepřátelskými liniemi. Věříme že ji sestřelily nepřátelské jednotky.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Vrtulník mohl havarovat kdekoliv ve velké vzdálenosti od místa kde jsme s ní ztratily kontakt. Cílem mise je najít a zachránit přeživší posádku. Nepřátelské jednotky tam mohou být jako první, proto musíme jednat rychle, opatrně a být připraveni k boji.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cena: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Odměna: 20 zpravodajských bodů (10 za každého člena posádky).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Czech>
-            <Japanese>&lt;t size='1.3' color='#ffa000'&gt;捜索救難&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;我々の偵察ヘリコプターとの連絡が敵前線の後方で断たれた。 恐らく敵軍部隊に撃墜させられたものと思われる。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;ヘリコプターは最後に連絡のあったこの地域のどこかに不時着した可能性がある。 諸君の任務はヘリコプター乗員を救出し彼らの入手した情報を回収することだ。 恐らく敵軍部隊は彼らを先に発見し拘束している可能性がある。 そのため注意深く・素早い救助が必要となる。 交戦することを想定せよ。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;費用: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;報酬: 20 情報ポイント (乗員一人当たり10ポイント)&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Japanese>
+            <Original>&lt;t size='1.3' color='#ffa000'&gt;SEARCH AND RESCUE&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;We have lost contact with a recon helicopter on mission behind the enemy lines. We believe the chopper was shot down by hostile forces.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;The helicopter may have crashlanded anywhere in a large zone around its last known position. Your mission is to retrieve the chopper crew and their precious intel. Hostile forces may have found them first, so you must be quick, careful, and ready to engage.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: 20 intel points (10 for each crew alive).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Original>
+            <French>&lt;t size='1.3' color='#ffa000'&gt;RECHERCHE ET SAUVETAGE&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Nous avons perdu le contact avec un helicoptère de reconnaissance en mission derrière les lignes ennemies. Il a probablement été abattu par les forces hostiles.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;L'hélicopter a pu finir sa course dans une large zone autour de sa dernière position connue. Votre mission est de retrouver l'équipage et sa précieuse intel. Les forces hostiles les auront peut-être déjà retrouvés, votre action doit donc être rapide et décisive.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cout: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Récompense: 20 points d'intel (10 pour chaque équipage vivant).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</French>
+            <German>&lt;t size='1.3' color='#ffa000'&gt;SUCHEN UND ZERSTÖREN&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Wir haben den Kontakt mit einem Aufklärungshelikopter, der auf einer Mission hinter feindlichen Linien war, verloren. Wir vermuten, dass der Helikotper von feindlichen Kräften abgeschossen wurde.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Der Helikopter muss irgendwo in einem größeren Bereich um seine letzte bekannte Position notgelandet sein. Ihr Auftrag ist es, die Besatzung zu finden und deren Aufklärungsbericht zu beschaffen. Feindliche Kräfte könnten sie bereits gefunden haben, also müssen sie schnell, vorsichtig und auf alles vorbereitet sein.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: 20 intel points (10 for each crew alive).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</German>
+            <Spanish>&lt;t size='1.3' color='#ffa000'&gt;BÚSQUEDA Y RESCATE&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Hemos perdido contacto con un helicóptero de reconocimiento durante una misión tras las líneas enemigas. Creemos que el helicóptero ha sido derribado por las fuerzas hostiles.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;El helicóptero habría aterrizado forzosamente en alguna parte alrededor de su última posición conocida. Tu misión consiste en traer de vuelta a su tripulación y a la preciada información de interligencia que allí se encuentra. Las fuerzas hostiles pueden haberlos encontrado antes, así que hay que ser rápidos, cuidadosos y estar preparados para enfrentarse.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Coste: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa: 20 puntos de intel (10 por cada tripulante).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Spanish>
+            <Russian>&lt;t size='1.3' color='#ffa000'&gt;НАЙТИ И СПАСТИ&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Мы потеряли связь с вертолетом спецотряда, на задании в тылу врага. Мы считаем, что вертолет был сбит вражескими силами.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Вертолет, возможно, упал где-то в большой зоне вокруг последнего известного положения. Ваша миссия состоит в том, чтобы спасти экипаж вертолета и их драгоценные разведданные. Враги, возможно, нашли их первыми, поэтому вы должны быть быстрым, внимательным, и готовы к битве.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Стоимость: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Награда: 20 разведданных (10 за каждого живого экипажа вертолета)&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Russian>
+            <Italian>&lt;t size='1.3' color='#ffa000'&gt;CERCA E SOCCORRI&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Abbiamo perso il contatto con un elicottero da ricognizione in missione dietro le linee nemiche. Riteniamo che l'elicottero sia stato abbattuto da forze ostili.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;L'elicottero può essersi schiantato ovunque in una vasta zona attorno alla sua ultima posizione nota. La vostra missione è quella di recuperare l'equipaggio  e la loro preziosa Intel. Forze ostili possono averli trovati prima di voi, quindi è necessario essere rapidi, attenti e pronto a tutto.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;20 Punti Intel (10 per ogni membro in vita).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Italian>
+            <Chinesesimp>&lt;t size='1.3' color='#ffa000'&gt;搜索与营救&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;我军一架侦察直升机在敌后执行任务时失联了。我们有理由相信是敌军打下了它。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;直升机有可能坠落在其最后已知位置的一大片地区中。你的任务是营救机组成员和他们宝贵的情报。敌军部队很有可能已经抓捕了他们，因此你必须尽快、谨慎的行动，并做好交战的准备。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;花费：8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;奖励：20情报点（每名幸存组员价值10点）。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Chinesesimp>
+            <Chinese>&lt;t size='1.3' color='#ffa000'&gt;搜索與營救&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;我們的一架直升機在敵後進行任務時失去了聯繫，我们有理由相信是敵軍打下了它。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;戰情單位已經協助標示出直升機的最後已知地区，你的任務是前往進行搜索並營救出直升機機組員們與他們任務中取得的寶貴情報。敵軍部隊很有可能已經派出部隊前往搜捕他們，所有你們亦須盡快而謹慎的行動，時刻做好交戰的準備。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;花費：8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;獎勵：20 點情報點（每位倖存的機組員價值 10 點情報點）。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Chinese>
+            <Turkish>&lt;t size='1.3' color='#ffa000'&gt;ARA VE KURTAR&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Dost bir keşif helikopterini düşman sahasında kaybettik. Helikopterin düşman kuvvetleri tarafından vurulduğuna inanıyoruz.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Helikopter son görülen yerde düştüğünü biliyoruz. Göreviniz helikopter personelini bulup ve taşıdığı önemli istihbaratı getirmenizdir. Düşman kuvvetler onu önceden bulabilirler dikkatli olun ve saldırıya açık olun.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Ödül: 20 istihbarat puanı (Her yaşayan kişi için 10).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Turkish>
+            <Portuguese>&lt;t size='1.3' color='#ffa000'&gt;BUSCA E RESGATE&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Perdemos contato com um helicóptero de reconhecimento presente em uma missão atrás das linhas inimigas. Acreditamos que o helicóptero foi abatido por forças hostis.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;O helicóptero pode ter feito um pouso forçado em local próximo de sua última posição conhecida. Sua missão é recuperar a tripulação do helicóptero e sua preciosa inteligência. Forças hostis podem tê-los localizado primeiro, portanto seja rápido, cuidadoso e esteja pronto para engajar o inimigo.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Recompensa: 20 pontos de inteligência (10 para cada membro vivo da tripulação).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Portuguese>
+            <Korean>&lt;t size='1.3' color='#ffa000'&gt;수색 및 구출&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;적군 후방지역에서 정찰임무를 수행하던 아군 정찰기와 교신이 끊어졌습니다. 현 상황으로 판단할때 적군에게 격추당한 것 같습니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;아군의 임무는 마지막 교신 위치를 중심으로 아군 정찰기의 흔적을 찾는 것입니다. 적군이 먼저 발견하기전에 아군 정찰기의 흔적을 찾아 승무원 구출 및 다른 정보들을 획득, 복귀해야 합니다. 교전이 벌어질 수 있습니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;소요되는 정보 점수: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;보상: 정보 점수가 20점 추가됩니다. 또한 구출한 인원 1명당 정보 점수가 10점 추가됩니다.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Korean>
+            <Czech>&lt;t size='1.3' color='#ffa000'&gt;ZÁCHRANNÁ MISE&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Ztratili jsme kontakt s průzkumným vrtulníkem za nepřátelskými liniemi. Věříme že ji sestřelily nepřátelské jednotky.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Vrtulník mohl havarovat kdekoliv ve velké vzdálenosti od místa kde jsme s ní ztratily kontakt. Cílem mise je najít a zachránit přeživší posádku. Nepřátelské jednotky tam mohou být jako první, proto musíme jednat rychle, opatrně a být připraveni k boji.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cena: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Odměna: 20 zpravodajských bodů (10 za každého člena posádky).&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Czech>
+            <Japanese>&lt;t size='1.3' color='#ffa000'&gt;捜索救難&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;我々の偵察ヘリコプターとの連絡が敵前線の後方で断たれた。 恐らく敵軍部隊に撃墜させられたものと思われる。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;ヘリコプターは最後に連絡のあったこの地域のどこかに不時着した可能性がある。 諸君の任務はヘリコプター乗員を救出し彼らの入手した情報を回収することだ。 恐らく敵軍部隊は彼らを先に発見し拘束している可能性がある。 そのため注意深く・素早い救助が必要となる。 交戦することを想定せよ。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;費用: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;報酬: 20 情報ポイント (乗員一人当たり10ポイント)&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\fob_obj.jpg'/&gt;&lt;/t&gt;</Japanese>
         </Key>
         <Key ID="STR_SECONDARY_MISSION3">
             <Original>Humanitarian Aid</Original>
             <Japanese>人道支援 (Humanitarian Aid)</Japanese>
         </Key>
         <Key ID="STR_SECONDARY_BRIEFING3">
-            <Original>&lt;t size='1.3' color='#ffa000'&gt;HUMANITARIAN AID&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Local civilians in our occupied sector are requesting supplies as humanitarian aid. This is an opportunity for us to show compassion and empathy towards the people of this region. They may eventually act as guerrilla allies and support us in our attacks.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Your mission is to transport and deliver our supplies to the requested sector. Resources required are 200 supplies (2 crates). Load the supplies onto the vehicle, head to the target location, and unload upon arrival.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;br/&gt;200 Supplies (2 crates)&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: increase in Civil Reputation by 10pt.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\humaid_obj.jpg'/&gt;&lt;/t&gt;</Original>
-            <Japanese>&lt;t size='1.3' color='#ffa000'&gt;人道支援&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;我々の占領したセクターの地元市民が支援物資としてサプライを要求している。 我々がこの地域の市民に対して友好的であることをを示すチャンスだ。 彼らは最終的には我々の攻撃に加勢するゲリラとして活動してくれるかもしれない。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;諸君の任務は要請のあったセクターに我々のサプライを輸送し、譲渡することだ。 資源は200サプライ (最低2箱) 必要となる。 車両に物資を積み込み目標地点に向かい到着したら荷下ろしすれば良い。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;費用: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;br/&gt;200 サプライ (最低2箱)&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;報酬: 市民評価が10ポイント上昇。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\humaid_obj.jpg'/&gt;&lt;/t&gt;</Japanese>
+            <Original>&lt;t size='1.3' color='#ffa000'&gt;HUMANITARIAN AID&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Local civilians in our occupied sector are requesting supplies as humanitarian aid. This is an opportunity for us to show compassion and empathy towards the people of this region. They may eventually act as guerrilla allies and support us in our attacks.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Your mission is to transport and deliver our supplies to the requested sector. Resources required are 200 supplies (2 crates). Load the supplies onto the vehicle, head to the target location, and unload upon arrival.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;br/&gt;200 Supplies (2 crates)&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: increase in Civil Reputation by 10pt.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\humaid_obj.jpg'/&gt;&lt;/t&gt;</Original>
+            <Japanese>&lt;t size='1.3' color='#ffa000'&gt;人道支援&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;我々の占領したセクターの地元市民が支援物資としてサプライを要求している。 我々がこの地域の市民に対して友好的であることをを示すチャンスだ。 彼らは最終的には我々の攻撃に加勢するゲリラとして活動してくれるかもしれない。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;諸君の任務は要請のあったセクターに我々のサプライを輸送し、譲渡することだ。 資源は200サプライ (最低2箱) 必要となる。 車両に物資を積み込み目標地点に向かい到着したら荷下ろしすれば良い。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;費用: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;br/&gt;200 サプライ (最低2箱)&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;報酬: 市民評価が10ポイント上昇。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\humaid_obj.jpg'/&gt;&lt;/t&gt;</Japanese>
         </Key>
         <Key ID="STR_SECONDARY_MISSION4">
             <Japanese>燃料切れ (Bingo Fuel)</Japanese>
             <Original>Bingo Fuel</Original>
         </Key>
         <Key ID="STR_SECONDARY_BRIEFING4">
-            <Japanese>&lt;t size='1.3' color='#ffa000'&gt;燃料切れ&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;我々の占領した友好的な工場が燃料を要請している。 燃料があれば工場は我々の為に各種の資源をすぐさま生産してくれるだろう。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;諸君の任務は要請のあった工場に我々の燃料を輸送し、譲渡することだ。 資源は200燃料 (最低2箱) 必要となる。 車両に物資を積み込み目標地点に向かい到着したら荷下ろしすれば良い。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;費用: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;br/&gt;200 燃料 (最低2箱)&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;報酬: ランダムな資源最大6個。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\humaid_obj.jpg'/&gt;&lt;/t&gt;</Japanese>
-            <Original>&lt;t size='1.3' color='#ffa000'&gt;BINGO FUEL&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Our occupied friendly factories are requesting fuel. With fuel, the factories will quickly produce various resources for us.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Your mission is to transport and deliver our fuel to the requested sector. Resources required are 200 fuel (2 crates). Load the fuel onto the vehicle, head to the target location, and unload upon arrival.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;br/&gt;200 Fuel (2 crates)&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: 6x Random resources.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\humaid_obj.jpg'/&gt;&lt;/t&gt;</Original>
+            <Japanese>&lt;t size='1.3' color='#ffa000'&gt;燃料切れ&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;我々の占領した友好的な工場が燃料を要請している。 燃料があれば工場は我々の為に各種の資源をすぐさま生産してくれるだろう。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;諸君の任務は要請のあった工場に我々の燃料を輸送し、譲渡することだ。 資源は200燃料 (最低2箱) 必要となる。 車両に物資を積み込み目標地点に向かい到着したら荷下ろしすれば良い。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;費用: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;br/&gt;200 燃料 (最低2箱)&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;報酬: ランダムな資源最大6個。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\humaid_obj.jpg'/&gt;&lt;/t&gt;</Japanese>
+            <Original>&lt;t size='1.3' color='#ffa000'&gt;BINGO FUEL&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Our occupied friendly factories are requesting fuel. With fuel, the factories will quickly produce various resources for us.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Your mission is to transport and deliver our fuel to the requested sector. Resources required are 200 fuel (2 crates). Load the fuel onto the vehicle, head to the target location, and unload upon arrival.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;br/&gt;200 Fuel (2 crates)&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: 6x Random resources.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\humaid_obj.jpg'/&gt;&lt;/t&gt;</Original>
         </Key>
         <Key ID="STR_SECONDARY_MISSION5">
             <Japanese>前哨基地補給 (Outpost Rearming)</Japanese>
             <Original>Outpost Rearming</Original>
         </Key>
         <Key ID="STR_SECONDARY_BRIEFING5">
-            <Japanese>&lt;t size='1.3' color='#ffa000'&gt;前哨基地補給&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;友軍の軍事基地が弾薬を要請している。 弾薬があれば敵軍の注意や戦力を分散し、敵の警戒度を減少させることが出来るかもしれない。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;諸君の任務は要請のあった軍事基地に我々の弾薬を輸送し、譲渡することだ。 資源は200弾薬 (最低2箱) 必要となる。 車両に物資を積み込み目標地点に向かい到着したら荷下ろしすれば良い。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;費用: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;br/&gt;200 弾薬 (最低2箱)&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;報酬: 敵部隊警戒度が 8ポイント 低下。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\humaid_obj.jpg'/&gt;&lt;/t&gt;</Japanese>
-            <Original>&lt;t size='1.3' color='#ffa000'&gt;OUTPOST REARMING&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Friendly military outpost request ammunition. Ammunition may help to disperse the attention and forces of OPFOR and reduce the OPFOR alert level.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Your mission is to transport and deliver our ammunition to the requested sector. Resources required are 200 ammunition (2 crates). Load the ammunitions onto the vehicle, head to the target location, and unload upon arrival.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;br/&gt;200 Ammunition (2 crates)&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: OPFOR alert level reduced by 8pt&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='res\secondary\humaid_obj.jpg'/&gt;&lt;/t&gt;</Original>
+            <Japanese>&lt;t size='1.3' color='#ffa000'&gt;前哨基地補給&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;友軍の軍事基地が弾薬を要請している。 弾薬があれば敵軍の注意や戦力を分散し、敵の警戒度を減少させることが出来るかもしれない。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;諸君の任務は要請のあった軍事基地に我々の弾薬を輸送し、譲渡することだ。 資源は200弾薬 (最低2箱) 必要となる。 車両に物資を積み込み目標地点に向かい到着したら荷下ろしすれば良い。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;費用: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;br/&gt;200 弾薬 (最低2箱)&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;報酬: 敵部隊警戒度が 8ポイント 低下。&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\humaid_obj.jpg'/&gt;&lt;/t&gt;</Japanese>
+            <Original>&lt;t size='1.3' color='#ffa000'&gt;OUTPOST REARMING&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Friendly military outpost request ammunition. Ammunition may help to disperse the attention and forces of OPFOR and reduce the OPFOR alert level.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1'&gt;Your mission is to transport and deliver our ammunition to the requested sector. Resources required are 200 ammunition (2 crates). Load the ammunitions onto the vehicle, head to the target location, and unload upon arrival.&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='1.15' color='#00a0ff'&gt;Cost: 8&lt;img image='\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa'/&gt;&lt;br/&gt;200 Ammunition (2 crates)&lt;/t&gt;&lt;br/&gt;&lt;t size='1.15' color='#ffa000'&gt;Reward: OPFOR alert level reduced by 8pt&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='10'&gt;&lt;img image='Images\secondary\humaid_obj.jpg'/&gt;&lt;/t&gt;</Original>
         </Key>
         <!-- Added in v0.924 -->
         <Key ID="STR_PARAM_SQUAD_SIZE">
@@ -4343,11 +4427,11 @@
             <Japanese>旗（キラーポテト）</Japanese>
         </Key>
         <Key ID="STR_SMALL_STORAGE">
-            <Original>Small storage area</Original>
+            <Original>Small storage</Original>
             <German>Kleiner Lagerbereich</German>
             <Spanish>Almacén pequeño</Spanish>
             <Russian>Маленький склад</Russian>
-            <Italian>Area deposito piccola</Italian>
+            <Italian>Deposito piccola</Italian>
             <Chinesesimp>小型货物仓储区</Chinesesimp>
             <Chinese>小型貨物倉儲區</Chinese>
             <Turkish>Küçük depo</Turkish>
@@ -4357,11 +4441,11 @@
             <Japanese>小型倉庫</Japanese>
         </Key>
         <Key ID="STR_LARGE_STORAGE">
-            <Original>Large storage area</Original>
+            <Original>Large storage</Original>
             <German>Großer Lagerbereich</German>
             <Spanish>Almacén grande</Spanish>
             <Russian>Большой склад</Russian>
-            <Italian>Area deposito grande</Italian>
+            <Italian>Deposito grande</Italian>
             <Chinesesimp>大型货物仓储区</Chinesesimp>
             <Chinese>大型貨物倉儲區</Chinese>
             <Turkish>Büyük depo</Turkish>
@@ -4369,6 +4453,10 @@
             <Korean>대형 저장 창고</Korean>
             <Czech>Velká skladovací plocha</Czech>
             <Japanese>大型倉庫</Japanese>
+        </Key>
+        <Key ID="STR_TRANS_STORAGE">
+            <Original>Transportable storage</Original>
+            <Portuguese>Depósito Transportável</Portuguese>
         </Key>
         <Key ID="STR_RECYCLE_BUILDING">
             <Original>Salvage Depot</Original>
@@ -4384,7 +4472,7 @@
             <Czech>Opravárenské Depo</Czech>
             <Japanese>サルベージデポ</Japanese>
         </Key>
-        <Key ID="STR_HELI_BUILDING">
+        <Key ID="STR_AIRCONTROL_BUILDING">
             <Original>Flight Control</Original>
             <German>Flugkontrolle</German>
             <Spanish>Torre de Control Aéreo</Spanish>
@@ -4425,6 +4513,10 @@
             <Korean>비행기 제조 슬롯</Korean>
             <Czech>Slot pro výrobu letadel</Czech>
             <Japanese>航空機製造スロット</Japanese>
+        </Key>
+        <Key ID="STR_BARRACK_ENTRY">
+			<Original>Barrack</Original>
+			<Portuguese>Alojamento</Portuguese>
         </Key>
         <Key ID="STR_BOX_CANTSTORE">
             <Original>There is no free storage area nearby.</Original>
@@ -4495,6 +4587,10 @@
             <Korean>-- 연료(F) 내리기</Korean>
             <Czech>-- VYLOŽIT BEDNU S PALIVEM</Czech>
             <Japanese>-- 燃料を取り出す</Japanese>
+        </Key>
+        <Key ID="STR_ACTION_CHECK_RESOURCES">
+            <Original>-- CHECK STORAGE CONTENT</Original>
+            <Portuguese>-- CHECAR CONTEÚDO DO DEPÓSITO</Portuguese>
         </Key>
         <Key ID="STR_ACTION_CRATE_VALUE">
             <Original>-- CHECK CONTENT</Original>
@@ -4635,6 +4731,10 @@
             <Korean>허용 금지 항목 :\n%1</Korean>
             <Czech>Následující věci nejsou dovoleny:\n%1</Czech>
             <Japanese>このアイテムは許可されていません:\n%1</Japanese>
+        </Key>
+        <Key ID="STR_ARSENAL_UNLOCK_LIST">
+            <Original>Items to unlock:</Original>
+            <Portuguese>Itens para desbloquear:</Portuguese>
         </Key>
         <Key ID="STR_PRODUCTION_ACTION">
             <Original>-- Production Settings</Original>
@@ -4874,6 +4974,14 @@
             <Czech>Vyberte produkci</Czech>
             <Japanese>生産する資源</Japanese>
         </Key>
+        <Key ID="STR_PRODUCTION_BOOST">
+            <Original>Production Boost (Civilian Reputation >= %1%%)</Original>
+            <Portuguese>Impulso na produção (Reputação civil >= %1%%)</Portuguese>
+        </Key>
+        <Key ID="STR_PRODUCTION_BOOST_ACTIVATED">
+            <Original>Production 2x faster</Original>
+            <Portuguese>Produção 2x mais rápido</Portuguese>
+        </Key>
         <Key ID="STR_PRODUCTION_SAVED">
             <Original>Sector setting saved.</Original>
             <German>Sektoreinstellung gespeichert.</German>
@@ -4887,6 +4995,22 @@
             <Korean>설정 저장</Korean>
             <Czech>Nastavení sektoru uloženo</Czech>
             <Japanese>セクター設定を保存</Japanese>
+        </Key>
+        <Key ID="STR_FACTORY_SEIZED_TITLE">
+            <Original>Factory Seized</Original>
+            <Portuguese>Fábrica Capturada</Portuguese>
+        </Key>
+        <Key ID="STR_FACTORY_SEIZED">
+            <Original>%1 was seized by resistance fighters. Storage removed.</Original>
+            <Portuguese>%1 foi capturado pela resistência. O depósito foi removido.</Portuguese>
+        </Key>
+        <Key ID="STR_FACTORY_SEIZED_TEXT">
+            <Original>This factory was seized by resistance fighters</Original>
+            <Portuguese>Essa fábrica foi capturada pela resistência local</Portuguese>
+        </Key>
+        <Key ID="STR_FACTORY_LIBERATED">
+            <Original>%1 is not under resistance control anymore.</Original>
+            <Portuguese>%1 não está mais sob controle da resistência local.</Portuguese>
         </Key>
         <Key ID="STR_SECSTORAGEBUILD_ACTION">
             <Original>-- Build storage --</Original>
@@ -4953,7 +5077,7 @@
             <Chinesesimp>该战区内没有所需的工厂。</Chinesesimp>
             <Chinese>該戰區內沒有所需的工廠。</Chinese>
             <Turkish>İstenilen üretim sektörde kurulu değil.</Turkish>
-            <Portuguese>É necessária uma fábrica não construída neste setor</Portuguese>
+            <Portuguese>A instalação necessária não está construída neste setor.</Portuguese>
             <Korean>이 지역에는 생산에 필요한 공장이 없습니다.</Korean>
             <Czech>Továrna nemůže být postavena v sektoru.</Czech>
             <Japanese>生産に必要な設備が セクターに建築されていません。</Japanese>
@@ -5689,36 +5813,8 @@
             <Czech>&lt;br/&gt;&lt;br/&gt;Když hráč použije roli Velitele, získá přístup k rozhraní Zeus stisknutím odpovídající klávesy (ve výchozím nastavení Y). Toto rozhraní umožňuje velení přátelských sil v zobrazení 3D nebo mapy.&lt;br/&gt; &lt;br/&gt;Navíc komandér získá přístup postavit vozidla s posádkou nebo celé předvytvořené družstva.&lt;br/&gt; &lt;br/&gt;Tato role je důležitá, a jako taková dává přímý přístup k spravování produkce v sektorech a logistice AI. Pokud budete stát na FOB, dostanete možnosti "Nastavení produkce" a "Logistický přehled".&lt;br/&gt; &lt;br/&gt; První vám dá možnost nastavit která továrna bude produkovat kterou surovinu, jako také detailní přehled.&lt;br/&gt; &lt;br/&gt; Písmena vám dovolí rozkazovat AI logistickým konvojům, kde můžete "Přidat" logistické skupiny, koupit jakékoliv množství náklaďáků na skupinu a přikázat jim převážet specifické množství surovin napříč celou oblastí pro vás.&lt;br/&gt; &lt;br/&gt;</Czech>
             <Japanese>&lt;br/&gt;&lt;br/&gt;プレイヤーが司令官役割を使用すると、対応するキー（デフォルトではY）を押すことでZeusインターフェースにアクセスできます。このインターフェースにより、3Dまたはマップビューで友好部隊を指揮することができます。&lt;br/&gt; &lt;br/&gt;さらに、司令官は、クルー付きの車両や完全に作成された分隊などの追加の製造オプションを取得できます。&lt;br/&gt; &lt;br/&gt;この役割は今では必須であり、生産セクターの管理とAIロジスティクスへの直接的なアクセスを提供するためです。あなたがFOBに配置されているということを考慮すると、「生産設定」と「物流管理」のオプションが表示されます。&lt;br/&gt; &lt;br/&gt;前者は、どの工場がどの資源を生産するかを決定し、現在の詳細な概要を示す能力を提供します。&lt;br/&gt; &lt;br/&gt;後者は、AIロジスティクス輸送隊を指揮でき、輸送グループを「追加」し、グループごとにトラックの数量を購入し、特定の量の資源を地域全体で移動させることができます。&lt;br/&gt; &lt;br/&gt;</Japanese>
         </Key>
-        <Key ID="STR_PARAMS_ARSENALUSEPRESET">
-            <Original>Arsenal mode</Original>
-            <German>Arsenalmodus</German>
-            <Spanish>Modo Arsenal</Spanish>
-            <Russian>Режим арсенала</Russian>
-            <Italian>Modalità Arsenale</Italian>
-            <Chinesesimp>军火库模式</Chinesesimp>
-            <Chinese>軍火庫模式</Chinese>
-            <Turkish>Ekipman(Arsenal) modu</Turkish>
-            <Portuguese>Modo do Arsenal</Portuguese>
-            <Korean>무기고 모델</Korean>
-            <Czech>Nastavení Zbrojnice</Czech>
-            <Japanese>アーセナルの仕様</Japanese>
-        </Key>
-        <Key ID="STR_PARAMS_NORESTRICTIONS">
-            <Original>No restrictions</Original>
-            <German>Keine Einschränkungen</German>
-            <Spanish>Sin restricciones</Spanish>
-            <Russian>Без ограничений</Russian>
-            <Italian>Senza Restrizioni</Italian>
-            <Chinesesimp>无限制</Chinesesimp>
-            <Chinese>無限制</Chinese>
-            <Turkish>Kısıtlama yok</Turkish>
-            <Portuguese>Sem restrições</Portuguese>
-            <Korean>제한 없음</Korean>
-            <Czech>Bez Omezení</Czech>
-            <Japanese>無制限</Japanese>
-        </Key>
         <Key ID="STR_PARAMS_USEPRESET">
-            <Original>Use preset from config</Original>
+            <Original>Shared Arsenal Config</Original>
             <German>Benutze Preset aus Konfiguration</German>
             <Spanish>Usar pre-definición desde configuracion</Spanish>
             <Russian>Использовать предустановки из конфигурации</Russian>
@@ -6903,6 +6999,7 @@
         <Key ID="STR_PARAMS_ARSENAL_BI">
             <Original>BI arsenal</Original>
             <German>BI Arsenal</German>
+            <Portuguese>Arsenal BI</Portuguese>
             <Spanish>Arsenal BI</Spanish>
             <Russian>Арсенал BI</Russian>
             <Italian>BI Arsenale</Italian>
@@ -6913,6 +7010,7 @@
         <Key ID="STR_PARAMS_ARSENAL_ACE">
             <Original>ACE arsenal</Original>
             <German>ACE Arsenal</German>
+            <Portuguese>Arsenal ACE</Portuguese>
             <Spanish>Arsenal ACE</Spanish>
             <Russian>Арсенал ACE</Russian>
             <Italian>ACE Arsenale</Italian>
@@ -6923,6 +7021,7 @@
         <Key ID="STR_PARAMS_VICTORYCONDITION">
             <Original>Victory Condition</Original>
             <German>Siegesbedingung</German>
+            <Portuguese>Condição de vitória</Portuguese>
             <Spanish>Condición de Victoria</Spanish>
             <Russian>Условие для победы</Russian>
             <Italian>Condizioni di vittoria</Italian>
@@ -6933,6 +7032,7 @@
         <Key ID="STR_PARAMS_VICTORYCONDITION_0">
             <Original>All capitals</Original>
             <German>Alle Hauptstädte</German>
+            <Portuguese>Todos as capitais</Portuguese>
             <Spanish>Todas las capitales</Spanish>
             <Russian>Все столицы</Russian>
             <Italian>Tutte le capitali</Italian>
@@ -6943,6 +7043,7 @@
         <Key ID="STR_PARAMS_VICTORYCONDITION_1">
             <Original>All capitals and military bases</Original>
             <German>Alle Hauptstädte und Militärbasen</German>
+            <Portuguese>Todos as capitais e bases militares</Portuguese>
             <Spanish>Todas las capitales y bases militares</Spanish>
             <Russian>Все столицы и военные базы</Russian>
             <Italian>Tutte le capitali e le basi militari</Italian>
@@ -6953,6 +7054,7 @@
         <Key ID="STR_PARAMS_VICTORYCONDITION_2">
             <Original>All capitals and 60% of the sectors</Original>
             <German>Alle Hauptstädte und 60% der Sektoren</German>
+            <Portuguese>Todos as capitais e 60% dos setores</Portuguese>
             <Spanish>Todas las capitales y 60% de los sectores</Spanish>
             <Russian>Все столицы и 60% секторов</Russian>
             <Italian>Tutte le capitali e il 60% dei settori</Italian>
@@ -6963,6 +7065,7 @@
         <Key ID="STR_PARAMS_VICTORYCONDITION_3">
             <Original>All capitals and 80% of the sectors</Original>
             <German>Alle Hauptstädte und 80% der Sektoren</German>
+            <Portuguese>Todos as capitais e 80% dos setores</Portuguese>
             <Spanish>TOdas las capitales y 80% de los sectores</Spanish>
             <Russian>Все столицы и 80% секторов</Russian>
             <Italian>Tutte le capitali e l'80% dei settori</Italian>
@@ -6973,12 +7076,37 @@
         <Key ID="STR_PARAMS_VICTORYCONDITION_4">
             <Original>All sectors</Original>
             <German>Alle Sektoren</German>
+            <Portuguese>Todos os setores</Portuguese>
             <Spanish>Todos los sectores</Spanish>
             <Russian>Все секторы</Russian>
             <Italian>Tutti i settori</Italian>
             <Korean>모든 거점</Korean>
             <Czech>Všechny sektory</Czech>
             <Japanese>全セクター</Japanese>
+        </Key>
+        <Key ID="STR_PARAMS_RESPAWNCOST">
+            <Original>FOB Respawn/Redeploy Cost</Original>
+            <Portuguese>Custo de Teleportar para uma FOB</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_RESPAWNCOST_1">
+            <Original>20 (Supply, Ammo, Fuel)</Original>
+            <Portuguese>20 (Suprimento, Munição, Combustível)</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_RESPAWNCOST_2">
+            <Original>40 (Supply, Ammo, Fuel)</Original>
+            <Portuguese>40 (Suprimento, Munição, Combustível)</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_RESPAWNCOST_3">
+            <Original>60 (Supply, Ammo, Fuel)</Original>
+            <Portuguese>60 (Suprimento, Munição, Combustível)</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_RESPAWNCOST_4">
+            <Original>80 (Supply, Ammo, Fuel)</Original>
+            <Portuguese>80 (Suprimento, Munição, Combustível)</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_RESPAWNCOST_5">
+            <Original>100 (Supply, Ammo, Fuel)</Original>
+            <Portuguese>100 (Suprimento, Munição, Combustível)</Portuguese>
         </Key>
         <Key ID="STR_VICTORY_TITLE">
             <Original>CAMPAIGN COMPLETED</Original>
@@ -7626,29 +7754,13 @@
             <Czech>FOB Nákladní auto</Czech>
             <Japanese>FOB トラック</Japanese>
         </Key>
-        <Key ID="STR_PARAMS_PLAYERMENU">
-            <Original>Client options variant</Original>
-            <German>Spielermenü Variante</German>
-            <Spanish>Variantes de opciones de cliente</Spanish>
-            <Italian>Opzioni client</Italian>
-            <Czech>Vybrat možnost klienta</Czech>
-            <Japanese>クライアント設定の種類</Japanese>
-        </Key>
-        <Key ID="STR_PARAMS_PLAYERMENU_GREUH">
-            <Original>GREUH Extended Options</Original>
-            <German>GREUH Erweiterte Optionen</German>
-            <Spanish>GREHU Opciones Extendidas</Spanish>
-            <Italian>GREHU Opzioni Avanzate</Italian>
-            <Czech>GREUH Rozšířené možnosti</Czech>
-            <Japanese>GREUH 拡張オプション</Japanese>
-        </Key>
         <Key ID="STR_PARAMS_PLAYERMENU_KP">
-            <Original>KP Player Menu (requires CBA)</Original>
-            <German>KP Spielermenü (benötigt CBA)</German>
-            <Spanish>Menú de jugador KP (requiere CBA)</Spanish>
-            <Italian>Menu di gioco KP (richiede CBA)</Italian>
-            <Czech>KP Player Menu (vyžaduje CBA)</Czech>
-            <Japanese>KP プレイヤーメニュー (CBAを要求)</Japanese>
+            <Original>KP Player Menu</Original>
+            <German>KP Spielermenü</German>
+            <Spanish>Menú de jugador KP</Spanish>
+            <Italian>Menu di gioco KP</Italian>
+            <Czech>KP Player Menu</Czech>
+            <Japanese>KP プレイヤーメニュー</Japanese>
         </Key>
         <Key ID="STR_CONFIRM_CLEARANCE_TITLE">
             <Original>Are you sure?</Original>
@@ -7724,6 +7836,10 @@
             <Czech>Výukový program Ingame</Czech>
             <Italian>Tutorial in gioco</Italian>
             <Japanese>チュートリアル</Japanese>
+        </Key>
+        <Key ID="STR_PARAM_AIR_ACTIVESECTOR">
+            <Original>Airplanes can active sectors</Original>
+            <Portuguese>Aviões podem ativar setores</Portuguese>
         </Key>
         <Key ID="STR_TUTORIAL_CRATE">
             <Original>Crate</Original>
@@ -7941,467 +8057,1166 @@
             <Italian>Accesso diretto all'arsenale senza KPLIB Loadout Dialog</Italian>
             <Japanese>KPLIB ロードアウトダイアログなしで直接アーセナルを開く</Japanese>
         </Key>
+        <Key ID="STR_DEPLOY_DISABLED">
+            <Original>DISABLED</Original>
+            <Portuguese>DESABILITADO</Portuguese>
+        </Key>
+        <Key ID="STR_DEPLOY_NORESOURCES">
+            <Original>No resources available in the FOB %1 to redeploy</Original>
+            <Portuguese>Não há recursos disponíveis na FOB %1 para o realocamento</Portuguese>
+        </Key>
+        <Key ID="STR_DEPLOY_COST_WARNING">
+            <Original>This redeploy will cost %1 of each resource for the FOB %2</Original>
+            <Portuguese>Essa realocação ira custar %1 de cada recurso para a FOB %2</Portuguese>
+        </Key>
+        <Key ID="STR_DEPLOY_NOCOST_WARNING">
+            <Original>This redeploy won't have resources costs</Original>
+            <Portuguese>Essa realocação não custará recursos</Portuguese>
+        </Key>
         <Key ID="STR_DEPLOY_UNDERATTACK">
-            <Original>UNDER ATTACK</Original>
-            <German>WIRD ANGEGRIFFEN</German>
-            <Italian>SOTTO ATTACCO</Italian>
+            <Original>Under Attack!</Original>
+            <German>Wird Angegriffen!</German>
+            <Italian>Sotto Attacco!</Italian>
             <Japanese>攻撃下</Japanese>
+            <Portuguese>Inimigos atacando!</Portuguese>
         </Key>
-    </Package>
-    <Package name="KPPLM">
-        <Key ID="STR_KPPLM_ACTIONOPEN">
-            <Chinese>-- KP 玩家選單 --</Chinese>
-            <Spanish>-- Menú de Jugador KP --</Spanish>
-            <German>-- KP Spielermenü --</German>
-            <Italian>-- KP Menu Giocatore --</Italian>
-            <Portuguese>-- KP Menu do Jogador --</Portuguese>
-            <Czech>-- KP Player Nabídka --</Czech>
-            <Original>-- KP Player Menu --</Original>
-            <Japanese>-- KP プレイヤー メニュー --</Japanese>
+        <Key ID="STR_DEPLOY_ENEMIESNEARBY">
+            <Original>Enemies nearby</Original>
+            <Portuguese>Inimigos perto</Portuguese>
         </Key>
-        <Key ID="STR_KPPLM_TITLE">
-            <Chinese>KP 玩家選單</Chinese>
-            <Spanish>Menú de Jugador KP</Spanish>
-            <German>KP Spielermenü</German>
-            <Italian>KP Menu Giocatore</Italian>
-            <Portuguese>KP Menu do Jogador</Portuguese>
-            <Czech>KP Player Nabídka</Czech>
-            <Original>KP Player Menu</Original>
-            <Japanese>KP プレーヤー メニュー</Japanese>
+        <Key ID="STR_CLEARGARBAGE_ACTION">
+            <Original>-- CLEAR DEAD UNITS --</Original>
+            <Portuguese>-- LIMPAR UNIDADES MORTAS --</Portuguese>
         </Key>
-        <Key ID="STR_KPPLM_LABELPLAYER">
-            <Chinese>玩家資訊</Chinese>
-            <Spanish>Información de Jugador</Spanish>
-            <German>Spielerinformationen</German>
-            <Italian>Informazioni Giocatore</Italian>
-            <Portuguese>Informação do Jogador</Portuguese>
-            <Czech>Informace o hráči</Czech>
-            <Original>Player Information</Original>
-            <Japanese>プレイヤー情報</Japanese>
+        <Key ID="STR_GARBAGE_CLEARED">
+            <Original>Successful cleaning</Original>
+            <Portuguese>Limpeza bem sucedida</Portuguese>
         </Key>
-        <Key ID="STR_KPPLM_RANK">
-            <Chinese>階級</Chinese>
-            <Spanish>Rango:</Spanish>
-            <German>Dienstgrad:</German>
-            <Italian>Grado:</Italian>
-            <Portuguese>Rank:</Portuguese>
-            <Czech>Hodnost:</Czech>
-            <Original>Rank:</Original>
-            <Japanese>階級:</Japanese>
+        <Key ID="STR_VEHICLES_CLEARED">
+            <Original>Deleted Vehicles</Original>
+            <Portuguese>Veículos Deletados</Portuguese>
         </Key>
-        <Key ID="STR_KPPLM_SCORE">
-            <Chinese>得分</Chinese>
-            <Spanish>Puntaje:</Spanish>
-            <German>Punkte:</German>
-            <Italian>Punteggio:</Italian>
-            <Portuguese>Pontuação:</Portuguese>
-            <Czech>Skóre:</Czech>
-            <Original>Score:</Original>
-            <Japanese>スコア：</Japanese>
+        <Key ID="STR_UNITS_CLEARED">
+            <Original>Deleted Units</Original>
+            <Portuguese>Unidades Deletadas</Portuguese>
         </Key>
-        <Key ID="STR_KPPLM_PLAYTIME">
-            <Chinese>遊戲時間</Chinese>
-            <Spanish>Tiempo de juego:</Spanish>
-            <German>Spielzeit:</German>
-            <Italian>Tempo di gioco:</Italian>
-            <Portuguese>Tempo de jogo:</Portuguese>
-            <Czech>Čas hraní:</Czech>
-            <Original>Playtime:</Original>
-            <Japanese>プレイ時間:</Japanese>
+        <Key ID="STR_PARAMS_EXTENSIONOPTIONS">
+            <Original>== EXTENSIONS ==</Original>
+            <Portuguese>== EXTENSÕES ==</Portuguese>
         </Key>
-        <Key ID="STR_KPPLM_NORANKS">
-            <Chinese>KP Ranks 模組未裝載</Chinese>
-            <Spanish>KP Ranks mod no ha sido cargado</Spanish>
-            <German>KP Ranks Mod nicht geladen</German>
-            <Italian>KP Ranks Mod non caricata</Italian>
-            <Portuguese>O mod KP Ranks não está carregado</Portuguese>
-            <Czech>KP Ranks mod nebyl načten</Czech>
-            <Original>KP Ranks mod not loaded</Original>
-            <Japanese>KP Ranks mod が読み込まれていません</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_LABELGROUPS">
-            <Chinese>團隊管理</Chinese>
-            <Spanish>Administración de grupo</Spanish>
-            <German>Gruppenverwaltung</German>
-            <Italian>Gestione Gruppo</Italian>
-            <Portuguese>Gerenciar Grupo</Portuguese>
-            <Czech>Správa skupiny</Czech>
-            <Original>Group Management</Original>
-            <Japanese>グループ管理</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_CREATE">
-            <German>Erstellen</German>
-            <Italian>Crea</Italian>
-            <Spanish>Crear</Spanish>
-            <Portuguese>Criar</Portuguese>
-            <Czech>Vytvořit</Czech>
-            <Original>Create</Original>
-            <Japanese>作成</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_JOIN">
-            <Chinese>加入</Chinese>
-            <Spanish>Unirse</Spanish>
-            <German>Beitreten</German>
-            <Italian>Entra</Italian>
-            <Portuguese>Juntar-se</Portuguese>
-            <Czech>Připojit se</Czech>
-            <Original>Join</Original>
-            <Japanese>参加</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_RENAME">
-            <Chinese>重新命名</Chinese>
-            <Spanish>Renombrar</Spanish>
-            <German>Umbenennen</German>
-            <Italian>Rinomina</Italian>
-            <Portuguese>Renomear</Portuguese>
-            <Czech>Přejmenovat</Czech>
-            <Original>Rename</Original>
-            <Japanese>名前変更</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_LABELVIEW">
-            <Chinese>視距設定</Chinese>
-            <Spanish>Configuración de distancia de visión</Spanish>
-            <German>Sichtweiteneinstellungen</German>
-            <Italian>Visualizza settaggi distanza</Italian>
-            <Portuguese>Distância de Visão</Portuguese>
-            <Czech>Nastavení vzdálenosti</Czech>
-            <Original>View Distance Settings</Original>
-            <Japanese>描画距離設定</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_VIEWFOOT">
-            <Chinese>m 步兵視野</Chinese>
-            <Spanish>m a pie</Spanish>
-            <German>m zu Fuß</German>
-            <Italian>m su piedi</Italian>
-            <Portuguese>m A pé</Portuguese>
-            <Czech>Pěšák</Czech>
-            <Original>m on foot</Original>
-            <Japanese>m (歩兵)</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_VIEWVEHICLE">
-            <Chinese>m 地面載具視野</Chinese>
-            <Spanish>m en vehículos de tierra</Spanish>
-            <German>m in Bodenfahrzeugen</German>
-            <Italian>m nei veicoli di terra</Italian>
-            <Portuguese>m em veículos terrestres</Portuguese>
-            <Czech>Vozidla</Czech>
-            <Original>m in ground vehicles</Original>
-            <Japanese>m (地上車両)</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_VIEWAIR">
-            <Chinese>m 空中載具視野</Chinese>
-            <Spanish>m en vehículos de aire</Spanish>
-            <German>m in Luftfahrzeugen</German>
-            <Italian>m nei veivoli</Italian>
-            <Portuguese>m em veículos aéreos</Portuguese>
-            <Czech>Letectvo</Czech>
-            <Original>m in air vehicles</Original>
-            <Japanese>m (航空機)</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_LABELMISC">
-            <Chinese>細項設定</Chinese>
-            <Spanish>Configuración miscelanea</Spanish>
-            <German>Sonstige Einstellungen</German>
-            <Italian>Settaggi Vari</Italian>
-            <Portuguese>Outras Configurações</Portuguese>
-            <Czech>Různé nastavení</Czech>
-            <Original>Misc Settings</Original>
-            <Japanese>その他の設定</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TEXTTERRAIN">
-            <Chinese>地形細節</Chinese>
-            <Spanish>Detalle de terreno:</Spanish>
-            <German>Terraindetail:</German>
-            <Italian>Dettaglio terreno:</Italian>
-            <Portuguese>Detalhe do terreno:</Portuguese>
-            <Czech>Detail terénu:</Czech>
-            <Original>Terrain detail:</Original>
-            <Japanese>地形表現:</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TERRAINLOW">
-            <Chinese>低</Chinese>
-            <Spanish>Bajo</Spanish>
-            <German>Niedrig</German>
-            <Italian>Basso</Italian>
-            <Portuguese>Baixo</Portuguese>
-            <Czech>Nízký</Czech>
-            <Original>Low</Original>
-            <Japanese>低い</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TERRAINSTANDARD">
-            <Chinese>標準</Chinese>
-            <Spanish>Estandard</Spanish>
-            <German>Standard</German>
-            <Italian>Standard</Italian>
-            <Portuguese>Padrão</Portuguese>
-            <Czech>Normální</Czech>
-            <Original>Standard</Original>
-            <Japanese>標準</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TERRAINHIGH">
-            <Chinese>高</Chinese>
-            <Spanish>Alto</Spanish>
-            <German>Hoch</German>
-            <Italian>Alto</Italian>
-            <Portuguese>Alto</Portuguese>
-            <Czech>Vysoký</Czech>
-            <Original>High</Original>
-            <Japanese>高い</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TERRAINVHIGH">
-            <Chinese>非常高</Chinese>
-            <Spanish>Muy alto</Spanish>
-            <German>Sehr Hoch</German>
-            <Italian>Molto Alto</Italian>
-            <Portuguese>Muito Alto</Portuguese>
-            <Czech>Velmi vysoký</Czech>
-            <Original>Very High</Original>
-            <Japanese>非常に高い</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TERRAINULTRA">
-            <Chinese>極高</Chinese>
-            <Spanish>Ultra</Spanish>
-            <German>Ultra</German>
-            <Italian>Ultra</Italian>
-            <Portuguese>Ultra</Portuguese>
-            <Czech>Ultra</Czech>
-            <Original>Ultra</Original>
-            <Japanese>ウルトラ</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TEXTTPV">
-            <Chinese>自動第三人稱視角</Chinese>
-            <Spanish>Cámara auto 3era persona:</Spanish>
-            <German>Auto 3rd-Person-Sicht:</German>
-            <Italian>Vista in 3° persona automatica</Italian>
-            <Portuguese>Câmera auto em 3º pessoa:</Portuguese>
-            <Czech>Pohled z třetí osoby:</Czech>
-            <Original>Auto 3rd person view:</Original>
-            <Japanese>自動三人称視点:</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TPDISABLED">
-            <Chinese>關閉</Chinese>
-            <Spanish>Desabilitar</Spanish>
-            <German>Deaktiviert</German>
-            <Italian>Disattivo</Italian>
-            <Portuguese>Desativado</Portuguese>
-            <Czech>Zakázáno</Czech>
-            <Original>Disabled</Original>
-            <Japanese>無効</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TPVAIR">
-            <Chinese>空中載具</Chinese>
-            <Spanish>Vehículos de aire</Spanish>
-            <German>Luftfahrzeuge</German>
-            <Italian>Veivoli</Italian>
-            <Portuguese>Veículos aéreos</Portuguese>
-            <Czech>Letectvo</Czech>
-            <Original>Air vehicles</Original>
-            <Japanese>航空機</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TPVLAND">
-            <Chinese>地面載具</Chinese>
-            <Spanish>Vehículos de tierra</Spanish>
-            <German>Bodenfahrzeuge</German>
-            <Italian>Veicoli di terra</Italian>
-            <Portuguese>Veículos terrestres</Portuguese>
-            <Czech>Pozemní vozidla</Czech>
-            <Original>Ground vehicles</Original>
-            <Japanese>地上車両</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TPVALL">
-            <Chinese>所有載具</Chinese>
-            <Spanish>Todos los vehículos</Spanish>
-            <German>Alle Fahrzeuge</German>
-            <Italian>Tutti i veicoli</Italian>
-            <Portuguese>Todos os veículos</Portuguese>
-            <Czech>Všechna vozidla</Czech>
-            <Original>All vehicles</Original>
-            <Japanese>すべての車両</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TEXTRADIO">
-            <Chinese>關閉文字聊天：</Chinese>
-            <Spanish>Deshabilitar conversaciones de radio:</Spanish>
-            <German>KI Funk deaktivieren:</German>
-            <Italian>Disattiva chat radio:</Italian>
-            <Portuguese>Desativar comm's de rádio:</Portuguese>
-            <Czech>Zakázat rádiový chat:</Czech>
-            <Original>Disable radio chatter:</Original>
-            <Japanese>ラジオの発言を無効化:</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_RADIONO">
-            <Chinese>否</Chinese>
-            <Spanish>No</Spanish>
-            <German>Nein</German>
-            <Italian>No</Italian>
-            <Portuguese>Não</Portuguese>
-            <Czech>Ne</Czech>
-            <Original>No</Original>
-            <Japanese>いいえ</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_RADIOVOICE">
-            <Chinese>只有語音通訊</Chinese>
-            <Spanish>Voz</Spanish>
-            <German>Stimme</German>
-            <Italian>Voce</Italian>
-            <Portuguese>Voz</Portuguese>
-            <Czech>hlas</Czech>
-            <Original>Voice</Original>
-            <Japanese>音声</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_RADIOALL">
-            <Chinese>語音+文字通訊</Chinese>
-            <Spanish>Voz + Chat</Spanish>
-            <German>Stimme + Chat</German>
-            <Italian>Voce + Chat</Italian>
-            <Portuguese>Voz + Chat</Portuguese>
-            <Czech>Hlas + chat</Czech>
-            <Original>Voice + Chat</Original>
-            <Japanese>音声 + テキスト</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TEXTSOUND">
-            <Chinese>載具內音量：</Chinese>
-            <Spanish>Volumen en vehículo:</Spanish>
-            <German>Lautstärke im Fahrzeug:</German>
-            <Italian>Suono dentro i veicoli:</Italian>
-            <Portuguese>Volume dentro do veículo:</Portuguese>
-            <Czech>Hlasitost ve vozidle:</Czech>
-            <Original>In vehicle volume:</Original>
-            <Japanese>車内での音量:</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_APPLY">
-            <Chinese>使用</Chinese>
-            <Spanish>Aplicar</Spanish>
-            <German>Anwenden</German>
-            <Italian>Apllica</Italian>
-            <Portuguese>Aplicar</Portuguese>
-            <Czech>Potvrdit</Czech>
-            <Original>Apply</Original>
-            <Japanese>適用</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_TTSOUND">
-            <Chinese>如果你有使用ACE模組，聲音設定將會被ACE的覆蓋</Chinese>
-            <Spanish>Los ajustes de sonido han sido sobreescritos por ACE, si debieras usarlos.</Spanish>
-            <German>Die Lautstärkeanpassung wird durch ACE überschrieben, wenn du es nutzen solltest.</German>
-            <Italian>Le impostazioni audio sono sovrascritte dalla ACE, se decidi di utilizzarla</Italian>
-            <Portuguese>O ajuste de som é sobrescrito pelo ACE se você usar ele.</Portuguese>
-            <Czech>Úprava zvuku je přepsána ACE, pokud ji použijete.</Czech>
-            <Original>The sound adjustment is overwritten by ACE, if you should use it.</Original>
-            <Japanese>ACEを使用する場合、サウンド調整はACEによって上書きされます。</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_NOTLEADER">
-            <Chinese>你不是這個團隊的隊長</Chinese>
-            <Spanish>No eres el líder en el grupo.</Spanish>
-            <German>Du bist nicht der Anführer dieser Gruppe.</German>
-            <Italian>Non sei il leader di questo gruppo.</Italian>
-            <Portuguese>Você não é o lider desse grupo.</Portuguese>
-            <Czech>Nejste vůdce této skupiny.</Czech>
-            <Original>You're not the leader of this group.</Original>
-            <Japanese>あなたはこのグループのリーダーではありません。</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_NOLVLSYSTEM">
-            <Chinese>陞階系統關閉</Chinese>
-            <Spanish>Sistema de niveles desactivado</Spanish>
-            <German>Levelsystem deaktiviert</German>
-            <Italian>sistema di livellamento disabilitato</Italian>
-            <Portuguese>Sistema de níveis desativado</Portuguese>
-            <Czech>Vyrovnávací systém zakázán</Czech>
-            <Original>Leveling system disabled</Original>
-            <Japanese>レベリングシステム無効</Japanese>
-        </Key>
-        <Key ID="STR_KPPLM_VERSION">
-            <German>KP Spielermenü v1.0.2\nvon Wyqer</German>
-            <Italian>KP Player Menu v1.0.2\nby Wyqer</Italian>
-            <Spanish>Menú de Jugador KP v1.0.2\npor Wyqer</Spanish>
-            <Czech>KP Player Menu v1.0.2\nby Wyqer</Czech>
-            <Original>KP Player Menu v1.0.2\nby Wyqer</Original>
-            <Japanese>KP プレイヤー メニュー v1.0.2\nby Wyqer</Japanese>
-        </Key>
-    </Package>
-    <Package name="VAM">
-        <Key ID="STR_VAM_INITIALIZED">
-            <Original>Vehicle Appearance Manager initialized</Original>
-            <Korean>차량 형상 관리자 불러오기 및 초기화 완료</Korean>
-            <Japanese>車両外観マネージャーが初期化されました</Japanese>
-        </Key>
-        <Key ID="STR_VAM_MAIN_MENU_NAME">
-            <Original>Vehicle Appearance Manager</Original>
-            <Korean>차량 형상 관리자</Korean>
-            <Japanese>車両外観マネージャー</Japanese>
-        </Key>
-        <Key ID="STR_VAM_RESET_VEHICLE">
-            <Original>Reset</Original>
-            <Korean>초기화</Korean>
-            <Japanese>リセット</Japanese>
-        </Key>
-        <Key ID="STR_VAM_CONFIRM_MENU">
-            <Original>Confirm</Original>
-            <Korean>확인</Korean>
-            <Japanese>確定</Japanese>
-        </Key>
-        <Key ID="STR_VAM_CURRENT_VEHICLE">
-            <Original>Current Vehicle :</Original>
-            <Korean>현  재    차  량 :</Korean>
-            <Japanese>現 在 の 車 両 :</Japanese>
-        </Key>
-        <Key ID="STR_VAM_FOB_CONDITION_CHECK_FAILED">
-            <Original>You should be in %1 m from FOB.</Original>
-            <Korean>FOB에서 %1m 안에 있어야 합니다.</Korean>
-            <Japanese>FOBから %1 m 以内にいる必要があります。</Japanese>
-        </Key>
-        <Key ID="STR_VAM_COMPLETE_RESET">
-            <Original>Reset complete</Original>
-            <Korean>초기화 완료</Korean>
-            <Japanese>リセット完了</Japanese>
-        </Key>
-        <Key ID="STR_VAM_CAMOUFLAGE">
-            <Original>Camoufluge</Original>
-            <Korean>위장</Korean>
-            <Japanese>迷彩</Japanese>
-        </Key>
-        <Key ID="STR_VAM_COMPONENT">
-            <Original>Component</Original>
-            <Korean>구성품</Korean>
-            <Japanese>部品</Japanese>
-        </Key>
-        <Key ID="STR_VAM_NO_CAMOUFLAGE">
-            <Original>There is no camouflage.</Original>
-            <Korean>위장이 없습니다.</Korean>
-            <Japanese>迷彩はありません。</Japanese>
-        </Key>
-        <Key ID="STR_VAM_NO_COMPONENT">
-            <Original>There is no component.</Original>
-            <Korean>구성품이 없습니다.</Korean>
-            <Japanese>部品はありません。</Japanese>
-        </Key>
-        <Key ID="STR_VAM_MARID_V1_NOTICE">
-            <Original>Your Marid is outdated one.\nVehicle component setup may not be loaded next time.\nPlease contact with your server admin.</Original>
-            <Korean>당신의 마리드는 오래된 것입니다.\n다음 번에 차량 구성품 설정을 불러올 수 없을 것입니다.\n해당 서버 관리자와 연락을 취해보십시오.</Korean>
-            <Japanese>あなたのMarid APCは古いものです。\n次回から車両コンポーネントのセットアップがロードされない可能性があります。\nサーバー管理者にお問い合わせください。</Japanese>
-        </Key>
-        <Key ID="STR_VAM_BLUFOR_CAMO">
-            <Original>BLUFOR</Original>
-            <Korean>청군</Korean>
-            <Japanese>同盟軍</Japanese>
-        </Key>
-        <Key ID="STR_VAM_GREEN_CAMO">
-            <Original>Green</Original>
-            <Korean>녹색</Korean>
-            <Japanese>緑</Japanese>
-        </Key>
-        <Key ID="STR_VAM_BLACK_CAMO">
-            <Original>Black</Original>
-            <Korean>검정색</Korean>
-            <Japanese>黒</Japanese>
-        </Key>
-        <Key ID="STR_VAM_AAF_CAMO">
-            <Original>AAF</Original>
-            <Korean>AAF</Korean>
-            <Japanese>AAF</Japanese>
-        </Key>
-        <Key ID="STR_VAM_DARK_GREEN_CAMO">
-            <Original>Dark Green</Original>
-            <Korean>어두운 녹색</Korean>
-            <Japanese>深緑</Japanese>
-        </Key>
+        
+
+        <Container name="Presets">
+            <Key ID="STR_PARAMS_PRESET_CUSTOMIZATION">
+                <English>== PRESET CUSTOMIZATION ==</English>
+            </Key>
+            <Key ID="STR_PARAMS_ARSENALUSEPRESET">
+                <Original>Arsenal Mode</Original>
+                <German>Arsenalmodus</German>
+                <Spanish>Modo Arsenal</Spanish>
+                <Russian>Режим арсенала</Russian>
+                <Italian>Modalità Arsenale</Italian>
+                <Chinesesimp>军火库模式</Chinesesimp>
+                <Chinese>軍火庫模式</Chinese>
+                <Turkish>Ekipman(Arsenal) modu</Turkish>
+                <Portuguese>Modo do Arsenal</Portuguese>
+                <Korean>무기고 모델</Korean>
+                <Czech>Nastavení Zbrojnice</Czech>
+            </Key>
+            <Key ID="STR_PARAMS_NORESTRICTIONS">
+                <Original>No restrictions</Original>
+                <German>Keine Einschränkungen</German>
+                <Spanish>Sin restricciones</Spanish>
+                <Russian>Без ограничений</Russian>
+                <Italian>Senza Restrizioni</Italian>
+                <Chinesesimp>无限制</Chinesesimp>
+                <Chinese>無限制</Chinese>
+                <Turkish>Kısıtlama yok</Turkish>
+                <Portuguese>Sem restrições</Portuguese>
+                <Korean>제한 없음</Korean>
+                <Czech>Bez Omezení</Czech>
+            </Key>
+            <Key ID="STR_PARAMS_ARSENAL_WHITELIST">
+                <Original>Arsenal Role Whitelist</Original>
+                <Portuguese>Arsenal Filtrado por Função</Portuguese>
+            </Key>
+            <Key ID="STR_PARAMS_BLUFORPRESET">
+                <English>BLUFOR Preset</English>
+            </Key>
+            <Key ID="STR_PARAMS_OPFORPRESET">
+                <English>OPFOR Preset</English>
+            </Key>
+            <Key ID="STR_PARAMS_GUERPRESET">
+                <English>Guerilla Preset</English>
+            </Key>
+            <Key ID="STR_PARAMS_CIVPRESET">
+                <English>Civilian Preset</English>
+            </Key>
+            <Key ID="STR_PARAMS_ARSENALPRESET">
+                <English>Arsenal Preset (Shared Arsenal)</English>
+                <Portuguese>Arsenal Preset (Arsenal Compartilhado)</Portuguese>
+            </Key>
+            <Key ID="STR_PARAMS_ARSENALWHITELIST_PRESET">
+                <English>Arsenal Preset (Role Whitelist)</English>
+                <Portuguese>Arsenal Preset (Filtrado por Função)</Portuguese>
+            </Key>
+        </Container>
+
+
+        <Container name="TASKS">
+            <Key ID="STR_TASK_FOBHUNTING_TITLE">
+                <Original>Find and Destroy Enemy FOB</Original>
+                <Portuguese>Encontre e Destrua a FOB Inimiga</Portuguese>
+            </Key>
+            <Key ID="STR_TASK_FOBHUNTING_DESCRIPTION">
+                <Original>Search the marked area for the enemy FOB. To complete this objective, you need to destroy any logistics inside the FOB (ammo and/or fuel containers/vehicles).</Original>
+                <Portuguese>Procure na área marcada a FOB inimiga. Para complentar este objetivo, você precisa destruir qualquer tipo de logística dentro da FOB (containers/veículos de munição e/ou combustível).</Portuguese>
+            </Key>
+        </Container>
+
+        <Container name="KPPLM">
+            <Key ID="STR_KPPLM_ACTIONOPEN">
+                <Chinese>-- KP 玩家選單 --</Chinese>
+                <Spanish>-- Menú de Jugador KP --</Spanish>
+                <German>-- KP Spielermenü --</German>
+                <Italian>-- KP Menu Giocatore --</Italian>
+                <Portuguese>-- KP Menu do Jogador --</Portuguese>
+                <Czech>-- KP Player Nabídka --</Czech>
+                <Original>-- KP Player Menu --</Original>
+                <Japanese>-- KP プレイヤー メニュー --</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TITLE">
+                <Chinese>KP 玩家選單</Chinese>
+                <Spanish>Menú de Jugador KP</Spanish>
+                <German>KP Spielermenü</German>
+                <Italian>KP Menu Giocatore</Italian>
+                <Portuguese>KP Menu do Jogador</Portuguese>
+                <Czech>KP Player Nabídka</Czech>
+                <Original>KP Player Menu</Original>
+                <Japanese>KP プレーヤー メニュー</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_LABELPLAYER">
+                <Chinese>玩家資訊</Chinese>
+                <Spanish>Información de Jugador</Spanish>
+                <German>Spielerinformationen</German>
+                <Italian>Informazioni Giocatore</Italian>
+                <Portuguese>Informação do Jogador</Portuguese>
+                <Czech>Informace o hráči</Czech>
+                <Original>Player Information</Original>
+                <Japanese>プレイヤー情報</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_RANK">
+                <Chinese>階級</Chinese>
+                <Spanish>Rango:</Spanish>
+                <German>Dienstgrad:</German>
+                <Italian>Grado:</Italian>
+                <Portuguese>Rank:</Portuguese>
+                <Czech>Hodnost:</Czech>
+                <Original>Rank:</Original>
+                <Japanese>階級:</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_SCORE">
+                <Chinese>得分</Chinese>
+                <Spanish>Puntaje:</Spanish>
+                <German>Punkte:</German>
+                <Italian>Punteggio:</Italian>
+                <Portuguese>Pontuação:</Portuguese>
+                <Czech>Skóre:</Czech>
+                <Original>Score:</Original>
+                <Japanese>スコア：</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_PLAYTIME">
+                <Chinese>遊戲時間</Chinese>
+                <Spanish>Tiempo de juego:</Spanish>
+                <German>Spielzeit:</German>
+                <Italian>Tempo di gioco:</Italian>
+                <Portuguese>Tempo de jogo:</Portuguese>
+                <Czech>Čas hraní:</Czech>
+                <Original>Playtime:</Original>
+                <Japanese>プレイ時間:</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_NORANKS">
+                <Chinese>KP Ranks 模組未裝載</Chinese>
+                <Spanish>KP Ranks mod no ha sido cargado</Spanish>
+                <German>KP Ranks Mod nicht geladen</German>
+                <Italian>KP Ranks Mod non caricata</Italian>
+                <Portuguese>O mod KP Ranks não está carregado</Portuguese>
+                <Czech>KP Ranks mod nebyl načten</Czech>
+                <Original>KP Ranks mod not loaded</Original>
+                <Japanese>KP Ranks mod が読み込まれていません</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_LABELGROUPS">
+                <Chinese>團隊管理</Chinese>
+                <Spanish>Administración de grupo</Spanish>
+                <German>Gruppenverwaltung</German>
+                <Italian>Gestione Gruppo</Italian>
+                <Portuguese>Gerenciar Grupo</Portuguese>
+                <Czech>Správa skupiny</Czech>
+                <Original>Group Management</Original>
+                <Japanese>グループ管理</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_CREATE">
+                <German>Erstellen</German>
+                <Italian>Crea</Italian>
+                <Spanish>Crear</Spanish>
+                <Portuguese>Criar</Portuguese>
+                <Czech>Vytvořit</Czech>
+                <Original>Create</Original>
+                <Japanese>作成</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_JOIN">
+                <Chinese>加入</Chinese>
+                <Spanish>Unirse</Spanish>
+                <German>Beitreten</German>
+                <Italian>Entra</Italian>
+                <Portuguese>Juntar-se</Portuguese>
+                <Czech>Připojit se</Czech>
+                <Original>Join</Original>
+                <Japanese>参加</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_RENAME">
+                <Chinese>重新命名</Chinese>
+                <Spanish>Renombrar</Spanish>
+                <German>Umbenennen</German>
+                <Italian>Rinomina</Italian>
+                <Portuguese>Renomear</Portuguese>
+                <Czech>Přejmenovat</Czech>
+                <Original>Rename</Original>
+                <Japanese>名前変更</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_LABELVIEW">
+                <Chinese>視距設定</Chinese>
+                <Spanish>Configuración de distancia de visión</Spanish>
+                <German>Sichtweiteneinstellungen</German>
+                <Italian>Visualizza settaggi distanza</Italian>
+                <Portuguese>Distância de Visão</Portuguese>
+                <Czech>Nastavení vzdálenosti</Czech>
+                <Original>View Distance Settings</Original>
+                <Japanese>描画距離設定</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_VIEWFOOT">
+                <Chinese>m 步兵視野</Chinese>
+                <Spanish>m a pie</Spanish>
+                <German>m zu Fuß</German>
+                <Italian>m su piedi</Italian>
+                <Portuguese>m A pé</Portuguese>
+                <Czech>Pěšák</Czech>
+                <Original>m on foot</Original>
+                <Japanese>m (歩兵)</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_VIEWVEHICLE">
+                <Chinese>m 地面載具視野</Chinese>
+                <Spanish>m en vehículos de tierra</Spanish>
+                <German>m in Bodenfahrzeugen</German>
+                <Italian>m nei veicoli di terra</Italian>
+                <Portuguese>m em veículos terrestres</Portuguese>
+                <Czech>Vozidla</Czech>
+                <Original>m in ground vehicles</Original>
+                <Japanese>m (地上車両)</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_VIEWAIR">
+                <Chinese>m 空中載具視野</Chinese>
+                <Spanish>m en vehículos de aire</Spanish>
+                <German>m in Luftfahrzeugen</German>
+                <Italian>m nei veivoli</Italian>
+                <Portuguese>m em veículos aéreos</Portuguese>
+                <Czech>Letectvo</Czech>
+                <Original>m in air vehicles</Original>
+                <Japanese>m (航空機)</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_LABELMISC">
+                <Chinese>細項設定</Chinese>
+                <Spanish>Configuración miscelanea</Spanish>
+                <German>Sonstige Einstellungen</German>
+                <Italian>Settaggi Vari</Italian>
+                <Portuguese>Outras Configurações</Portuguese>
+                <Czech>Různé nastavení</Czech>
+                <Original>Misc Settings</Original>
+                <Japanese>その他の設定</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TEXTTERRAIN">
+                <Chinese>地形細節</Chinese>
+                <Spanish>Detalle de terreno:</Spanish>
+                <German>Terraindetail:</German>
+                <Italian>Dettaglio terreno:</Italian>
+                <Portuguese>Detalhe do terreno:</Portuguese>
+                <Czech>Detail terénu:</Czech>
+                <Original>Terrain detail:</Original>
+                <Japanese>地形表現:</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TERRAINLOW">
+                <Chinese>低</Chinese>
+                <Spanish>Bajo</Spanish>
+                <German>Niedrig</German>
+                <Italian>Basso</Italian>
+                <Portuguese>Baixo</Portuguese>
+                <Czech>Nízký</Czech>
+                <Original>Low</Original>
+                <Japanese>低い</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TERRAINSTANDARD">
+                <Chinese>標準</Chinese>
+                <Spanish>Estandard</Spanish>
+                <German>Standard</German>
+                <Italian>Standard</Italian>
+                <Portuguese>Padrão</Portuguese>
+                <Czech>Normální</Czech>
+                <Original>Standard</Original>
+                <Japanese>標準</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TERRAINHIGH">
+                <Chinese>高</Chinese>
+                <Spanish>Alto</Spanish>
+                <German>Hoch</German>
+                <Italian>Alto</Italian>
+                <Portuguese>Alto</Portuguese>
+                <Czech>Vysoký</Czech>
+                <Original>High</Original>
+                <Japanese>高い</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TERRAINVHIGH">
+                <Chinese>非常高</Chinese>
+                <Spanish>Muy alto</Spanish>
+                <German>Sehr Hoch</German>
+                <Italian>Molto Alto</Italian>
+                <Portuguese>Muito Alto</Portuguese>
+                <Czech>Velmi vysoký</Czech>
+                <Original>Very High</Original>
+                <Japanese>非常に高い</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TERRAINULTRA">
+                <Chinese>極高</Chinese>
+                <Spanish>Ultra</Spanish>
+                <German>Ultra</German>
+                <Italian>Ultra</Italian>
+                <Portuguese>Ultra</Portuguese>
+                <Czech>Ultra</Czech>
+                <Original>Ultra</Original>
+                <Japanese>ウルトラ</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TEXTTPV">
+                <Chinese>自動第三人稱視角</Chinese>
+                <Spanish>Cámara auto 3era persona:</Spanish>
+                <German>Auto 3rd-Person-Sicht:</German>
+                <Italian>Vista in 3° persona automatica</Italian>
+                <Portuguese>Câmera auto em 3º pessoa:</Portuguese>
+                <Czech>Pohled z třetí osoby:</Czech>
+                <Original>Auto 3rd person view:</Original>
+                <Japanese>自動三人称視点:</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TPDISABLED">
+                <Chinese>關閉</Chinese>
+                <Spanish>Desabilitar</Spanish>
+                <German>Deaktiviert</German>
+                <Italian>Disattivo</Italian>
+                <Portuguese>Desativado</Portuguese>
+                <Czech>Zakázáno</Czech>
+                <Original>Disabled</Original>
+                <Japanese>無効</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TPVAIR">
+                <Chinese>空中載具</Chinese>
+                <Spanish>Vehículos de aire</Spanish>
+                <German>Luftfahrzeuge</German>
+                <Italian>Veivoli</Italian>
+                <Portuguese>Veículos aéreos</Portuguese>
+                <Czech>Letectvo</Czech>
+                <Original>Air vehicles</Original>
+                <Japanese>航空機</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TPVLAND">
+                <Chinese>地面載具</Chinese>
+                <Spanish>Vehículos de tierra</Spanish>
+                <German>Bodenfahrzeuge</German>
+                <Italian>Veicoli di terra</Italian>
+                <Portuguese>Veículos terrestres</Portuguese>
+                <Czech>Pozemní vozidla</Czech>
+                <Original>Ground vehicles</Original>
+                <Japanese>地上車両</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TPVALL">
+                <Chinese>所有載具</Chinese>
+                <Spanish>Todos los vehículos</Spanish>
+                <German>Alle Fahrzeuge</German>
+                <Italian>Tutti i veicoli</Italian>
+                <Portuguese>Todos os veículos</Portuguese>
+                <Czech>Všechna vozidla</Czech>
+                <Original>All vehicles</Original>
+                <Japanese>すべての車両</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TEXTRADIO">
+                <Chinese>關閉文字聊天：</Chinese>
+                <Spanish>Deshabilitar conversaciones de radio:</Spanish>
+                <German>KI Funk deaktivieren:</German>
+                <Italian>Disattiva chat radio:</Italian>
+                <Portuguese>Desativar comm's de rádio:</Portuguese>
+                <Czech>Zakázat rádiový chat:</Czech>
+                <Original>Disable radio chatter:</Original>
+                <Japanese>ラジオの発言を無効化:</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_RADIONO">
+                <Chinese>否</Chinese>
+                <Spanish>No</Spanish>
+                <German>Nein</German>
+                <Italian>No</Italian>
+                <Portuguese>Não</Portuguese>
+                <Czech>Ne</Czech>
+                <Original>No</Original>
+                <Japanese>いいえ</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_RADIOVOICE">
+                <Chinese>只有語音通訊</Chinese>
+                <Spanish>Voz</Spanish>
+                <German>Stimme</German>
+                <Italian>Voce</Italian>
+                <Portuguese>Voz</Portuguese>
+                <Czech>hlas</Czech>
+                <Original>Voice</Original>
+                <Japanese>音声</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_RADIOALL">
+                <Chinese>語音+文字通訊</Chinese>
+                <Spanish>Voz + Chat</Spanish>
+                <German>Stimme + Chat</German>
+                <Italian>Voce + Chat</Italian>
+                <Portuguese>Voz + Chat</Portuguese>
+                <Czech>Hlas + chat</Czech>
+                <Original>Voice + Chat</Original>
+                <Japanese>音声 + テキスト</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TEXTSOUND">
+                <Chinese>載具內音量：</Chinese>
+                <Spanish>Volumen en vehículo:</Spanish>
+                <German>Lautstärke im Fahrzeug:</German>
+                <Italian>Suono dentro i veicoli:</Italian>
+                <Portuguese>Volume dentro do veículo:</Portuguese>
+                <Czech>Hlasitost ve vozidle:</Czech>
+                <Original>In vehicle volume:</Original>
+                <Japanese>車内での音量:</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_APPLY">
+                <Chinese>使用</Chinese>
+                <Spanish>Aplicar</Spanish>
+                <German>Anwenden</German>
+                <Italian>Apllica</Italian>
+                <Portuguese>Aplicar</Portuguese>
+                <Czech>Potvrdit</Czech>
+                <Original>Apply</Original>
+                <Japanese>適用</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_TTSOUND">
+                <Chinese>如果你有使用ACE模組，聲音設定將會被ACE的覆蓋</Chinese>
+                <Spanish>Los ajustes de sonido han sido sobreescritos por ACE, si debieras usarlos.</Spanish>
+                <German>Die Lautstärkeanpassung wird durch ACE überschrieben, wenn du es nutzen solltest.</German>
+                <Italian>Le impostazioni audio sono sovrascritte dalla ACE, se decidi di utilizzarla</Italian>
+                <Portuguese>O ajuste de som é sobrescrito pelo ACE se você usar ele.</Portuguese>
+                <Czech>Úprava zvuku je přepsána ACE, pokud ji použijete.</Czech>
+                <Original>The sound adjustment is overwritten by ACE, if you should use it.</Original>
+                <Japanese>ACEを使用する場合、サウンド調整はACEによって上書きされます。</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_NOTLEADER">
+                <Chinese>你不是這個團隊的隊長</Chinese>
+                <Spanish>No eres el líder en el grupo.</Spanish>
+                <German>Du bist nicht der Anführer dieser Gruppe.</German>
+                <Italian>Non sei il leader di questo gruppo.</Italian>
+                <Portuguese>Você não é o lider desse grupo.</Portuguese>
+                <Czech>Nejste vůdce této skupiny.</Czech>
+                <Original>You're not the leader of this group.</Original>
+                <Japanese>あなたはこのグループのリーダーではありません。</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_NOLVLSYSTEM">
+                <Chinese>陞階系統關閉</Chinese>
+                <Spanish>Sistema de niveles desactivado</Spanish>
+                <German>Levelsystem deaktiviert</German>
+                <Italian>sistema di livellamento disabilitato</Italian>
+                <Portuguese>Sistema de níveis desativado</Portuguese>
+                <Czech>Vyrovnávací systém zakázán</Czech>
+                <Original>Leveling system disabled</Original>
+                <Japanese>レベリングシステム無効</Japanese>
+            </Key>
+            <Key ID="STR_KPPLM_VERSION">
+                <German>KP Spielermenü v1.0.2\nvon Wyqer</German>
+                <Italian>KP Player Menu v1.0.2\nby Wyqer</Italian>
+                <Spanish>Menú de Jugador KP v1.0.2\npor Wyqer</Spanish>
+                <Czech>KP Player Menu v1.0.2\nby Wyqer</Czech>
+                <Original>KP Player Menu v1.0.2\nby Wyqer</Original>
+                <Japanese>KP プレイヤー メニュー v1.0.2\nby Wyqer</Japanese>
+            </Key>
+        </Container>
+
+
+        <Container name="VAM">
+            <Key ID="STR_VAM_INITIALIZED">
+                <Original>Vehicle Appearance Manager initialized</Original>
+                <Korean>차량 형상 관리자 불러오기 및 초기화 완료</Korean>
+                <Japanese>車両外観マネージャーが初期化されました</Japanese>
+            </Key>
+            <Key ID="STR_VAM_MAIN_MENU_NAME">
+                <Original>Vehicle Appearance Manager</Original>
+                <Korean>차량 형상 관리자</Korean>
+                <Japanese>車両外観マネージャー</Japanese>
+            </Key>
+            <Key ID="STR_VAM_RESET_VEHICLE">
+                <Original>Reset</Original>
+                <Korean>초기화</Korean>
+                <Japanese>リセット</Japanese>
+            </Key>
+            <Key ID="STR_VAM_CONFIRM_MENU">
+                <Original>Confirm</Original>
+                <Korean>확인</Korean>
+                <Japanese>確定</Japanese>
+            </Key>
+            <Key ID="STR_VAM_CURRENT_VEHICLE">
+                <Original>Current Vehicle :</Original>
+                <Korean>현  재    차  량 :</Korean>
+                <Japanese>現 在 の 車 両 :</Japanese>
+            </Key>
+            <Key ID="STR_VAM_FOB_CONDITION_CHECK_FAILED">
+                <Original>You should be in %1 m from FOB.</Original>
+                <Korean>FOB에서 %1m 안에 있어야 합니다.</Korean>
+                <Japanese>FOBから %1 m 以内にいる必要があります。</Japanese>
+            </Key>
+            <Key ID="STR_VAM_COMPLETE_RESET">
+                <Original>Reset complete</Original>
+                <Korean>초기화 완료</Korean>
+                <Japanese>リセット完了</Japanese>
+            </Key>
+            <Key ID="STR_VAM_CAMOUFLAGE">
+                <Original>Camoufluge</Original>
+                <Korean>위장</Korean>
+                <Japanese>迷彩</Japanese>
+            </Key>
+            <Key ID="STR_VAM_COMPONENT">
+                <Original>Component</Original>
+                <Korean>구성품</Korean>
+                <Japanese>部品</Japanese>
+            </Key>
+            <Key ID="STR_VAM_NO_CAMOUFLAGE">
+                <Original>There is no camouflage.</Original>
+                <Korean>위장이 없습니다.</Korean>
+                <Japanese>迷彩はありません。</Japanese>
+            </Key>
+            <Key ID="STR_VAM_NO_COMPONENT">
+                <Original>There is no component.</Original>
+                <Korean>구성품이 없습니다.</Korean>
+                <Japanese>部品はありません。</Japanese>
+            </Key>
+            <Key ID="STR_VAM_MARID_V1_NOTICE">
+                <Original>Your Marid is outdated one.\nVehicle component setup may not be loaded next time.\nPlease contact with your server admin.</Original>
+                <Korean>당신의 마리드는 오래된 것입니다.\n다음 번에 차량 구성품 설정을 불러올 수 없을 것입니다.\n해당 서버 관리자와 연락을 취해보십시오.</Korean>
+                <Japanese>あなたのMarid APCは古いものです。\n次回から車両コンポーネントのセットアップがロードされない可能性があります。\nサーバー管理者にお問い合わせください。</Japanese>
+            </Key>
+            <Key ID="STR_VAM_BLUFOR_CAMO">
+                <Original>BLUFOR</Original>
+                <Korean>청군</Korean>
+                <Japanese>同盟軍</Japanese>
+            </Key>
+            <Key ID="STR_VAM_GREEN_CAMO">
+                <Original>Green</Original>
+                <Korean>녹색</Korean>
+                <Japanese>緑</Japanese>
+            </Key>
+            <Key ID="STR_VAM_BLACK_CAMO">
+                <Original>Black</Original>
+                <Korean>검정색</Korean>
+                <Japanese>黒</Japanese>
+            </Key>
+            <Key ID="STR_VAM_AAF_CAMO">
+                <Original>AAF</Original>
+                <Korean>AAF</Korean>
+                <Japanese>AAF</Japanese>
+            </Key>
+            <Key ID="STR_VAM_DARK_GREEN_CAMO">
+                <Original>Dark Green</Original>
+                <Korean>어두운 녹색</Korean>
+                <Japanese>深緑</Japanese>
+            </Key>
+            <Key ID="STR_VAM_GUI_TITLE">
+                <Original>Vehicle Appearance Manager</Original>
+                <Portuguese>Gerenciador de Aparencia de Veículos</Portuguese>
+            </Key>
+        </Container>
+        <Container name="Team Speak">
+            <Key ID="STR_TS_TITLE">
+                <Original>Enable Team Speak Verification</Original>
+                <Portuguese>Ativar Verificaçao Team Speak</Portuguese>
+            </Key>
+            <Key ID="STR_TS_SERVER">
+                <Original>Team Speak Server Name</Original>
+                <Portuguese>Nome do servidor Team Speak</Portuguese>
+            </Key>
+            <Key ID="STR_TS_SERVER_IP">
+                <Original>Team Speak Server IP</Original>
+                <Portuguese>IP do servidor Team Speak</Portuguese>
+            </Key>
+            <Key ID="STR_TS3_MESSAGE">
+                <Original>&lt;t size='4' color='#ff0000'&gt;TS CONNECTION REQUIRED&lt;/t&gt;&lt;br/&gt;&lt;t size='2.2'&gt;Current: %1&lt;/t&gt;&lt;br/&gt;&lt;t size='2.2'&gt;Required: %2&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='2' color='#5865F2'&gt;%3&lt;/t&gt;&lt;br/&gt;&lt;t size='2'&gt;Type the invite!&lt;/t&gt;</Original>
+                <Portuguese>&lt;t size='4' color='#ff0000'&gt;CONEXÃO TS NECESSÁRIA&lt;/t&gt;&lt;br/&gt;&lt;t size='2.2'&gt;Atual: %1&lt;/t&gt;&lt;br/&gt;&lt;t size='2.2'&gt;Obrigatório: %2&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;&lt;t size='2' color='#5865F2'&gt;%3&lt;/t&gt;&lt;br/&gt;&lt;t size='2'&gt;Digite o Convite!&lt;/t&gt;</Portuguese>
+            </Key>
+            <Key ID="STR_TS_DISCORD">
+                <Original>Discord Invite</Original>
+                <Portuguese>Convite Discord</Portuguese>
+            </Key>
+        </Container> 
+        <Container name="Factory Logging Discord">
+            <Key ID="STR_FDC_TITLE">
+                <Original>Logs to discord</Original>
+                <Portuguese>Logs para o Discord</Portuguese>
+            </Key>
+            <Key ID="STR_FDC_DESC">
+                <Original>Export captured factory data to RPT for Python parsing</Original>
+                <Portuguese>Exporta info de fabricas para RPT para Python parsing</Portuguese>
+            </Key>
+        </Container> 
+        <Container name="Enemy Artillery">
+            <Key ID="STR_TITLE_ENEMYARTILLERY">
+                <Original>Enemy Artillery</Original>
+                <Portuguese>Artilharia Inimiga</Portuguese>
+            </Key>
+            <Key ID="STR_NOTIFICATION_ENEMYARTILLERY">
+                <Original>Hostile artillery spotted near %1.</Original>
+                <Portuguese>Artilharia inimiga avistada perto de %1</Portuguese>
+            </Key>
+            <Key ID="STR_NOTIFICATION_ENEMYARTILLERY_FIRING">
+                <Original>Hostile artillery is targeting your position!</Original>
+                <Portuguese>Artilharia Inimiga está direcionando os tiros para sua posição!</Portuguese>
+            </Key>
+            <Key ID="STR_NOTIFICATION_ENEMYARTILLERY_DESTROYED">
+                <Original>Hostile artillery position destroyed.</Original>
+                <Portuguese>Posição da artilharia inimiga destruída</Portuguese>
+            </Key>
+        </Container>
+
+        <Container name="Clear Brushes">
+            <Key ID="STR_CLEAR_BRUSHES_TITLE">
+                <Original>Clear Brush/Trees Action</Original>
+                <Portuguese>Ação para Derrubar Vegetação/Árvores</Portuguese>
+            </Key>
+            <Key ID="STR_CLEAR_BRUSHES_SETTING_REQUIRE_ITEM">
+                <Original>Requires Entrenching Tool</Original>
+                <Portuguese>Requer Ferramenta de Trincheira</Portuguese>
+            </Key>
+            <Key ID="STR_CLEAR_BRUSHES_SETTING_COEF_DESCRIPTION">
+                <Original>Time coeficient to Clear Brushes</Original>
+                <Portuguese>Coeficiente de Tempo para derrubar</Portuguese>
+            </Key>
+            <Key ID="STR_CLEAR_BRUSHES_SETTING_COEF_TOOLTIP">
+                <Original>Change this value to change the time coeficient to clear brushes/trees</Original>
+                <Portuguese>Aumente ou diminua o coeficiente de tempo para derrubar arbustos e árvores</Portuguese>
+            </Key>
+        </Container>
+
+
+        <Container name="Enemy Fighter">
+            <Key ID="STR_TITLE_ENEMYFIGHTER">
+                <Original>Enemy Fighter</Original>
+                <Portuguese>Caça Inimigo</Portuguese>
+            </Key>
+            <Key ID="STR_NOTIFICATION_ENEMYFIGHTER">
+                <Original>Enemy fighter inbound!</Original>
+                <Portuguese>Caça inimigo a caminho!</Portuguese>
+            </Key>
+            <Key ID="STR_NOTIFICATION_ENEMYFIGHTER_DESTROYED">
+                <Original>Enemy fighter destroyed</Original>
+                <Portuguese>Caça inimigo destruído</Portuguese>
+            </Key>
+            <Key ID="STR_ENEMY_FIGHTER_TITLE">
+                <Original>Enemy Fighters</Original>
+                <Portuguese>Caças Inimigos</Portuguese>
+            </Key>
+        </Container>
+
+
+        <Container name="SAM Sites">
+            <Key ID="STR_SAM_TITLE">
+                <Original>Enemy SAM Sites</Original>
+                <Portuguese>Posições de sistema anti-aéreo inimigo</Portuguese>
+            </Key>
+            <Key ID="STR_PARAMS_SAM_ENABLED_DEFAULT">
+                <Original>Enabled (Default configuration)</Original>
+                <Portuguese>Ativado (Configuração padrão)</Portuguese>
+            </Key>
+            <Key ID="STR_PARAMS_SAM_ENABLED_CUSTOM">
+                <Original>Enabled (Range/Altitude limiter)</Original>
+                <Portuguese>Ativado (Limite no Alcance/Altura)</Portuguese>
+            </Key>
+            <Key ID="STR_DISABLE_OPTION">
+                <Original>Disable</Original>
+                <Portuguese>Desativar</Portuguese>
+            </Key>
+            <Key ID="STR_TITLE_ENEMYSAM">
+                <Original>Enemy SAM Site</Original>
+                <Portuguese>Bateria anti-aérea inimiga</Portuguese>
+            </Key>
+            <Key ID="STR_NOTIFICATION_ENEMYSAM_DESTROYED">
+                <Original>Hostile SAM position destroyed</Original>
+                <Portuguese>Bateria anti-aérea inimiga destruída</Portuguese>
+            </Key>
+            <Key ID="STR_SAMSITE_SETTING_MAXSITES_DESCRIPTION">
+                <Original>Maximum SAM Sites</Original>
+                <Portuguese>Quantidade Máxima de Posições SAM</Portuguese>
+            </Key>
+            <Key ID="STR_SAMSITE_SETTING_MAXSITES_TOOLTIP">
+                <Original>Maximum number of SAM sites that can coexist in the game session</Original>
+                <Portuguese>Quantidade máxima de posições de SAM que podem coexistir na sessão</Portuguese>
+            </Key>
+            <Key ID="STR_SAMSITE_SETTING_MAXRANGE_DESCRIPTION">
+                <Original>Radar Target Range</Original>
+                <Portuguese>Alcance do Radar</Portuguese>
+            </Key>
+            <Key ID="STR_SAMSITE_SETTING_MAXRANGE_TOOLTIP">
+                <Original>Maximum SAM radar target range in meters</Original>
+                <Portuguese>Alcance máximo do radar para detectar aeronaves, em metros</Portuguese>
+            </Key>
+            <Key ID="STR_SAMSITE_SETTING_MINALT_DESCRIPTION">
+                <Original>Altitude Radar Targeting</Original>
+                <Portuguese>Altitude Requerida para Detecção</Portuguese>
+            </Key>
+            <Key ID="STR_SAMSITE_SETTING_MINALT_TOOLTIP">
+                <Original>Required minimum plane altitude to be targeted in meters</Original>
+                <Portuguese>Altitude mínima requerida das aeronaves para serem detectadas por radares</Portuguese>
+            </Key>
+        </Container>
+
+
+        <Container name="Lock Arsenal by Sector">
+            <Key ID="STR_LOCK_ARSENAL_TITLE">
+                <Original>Lock Arsenal by Sectors</Original>
+                <Portuguese>Bloquear Arsenal por Setor</Portuguese>
+            </Key>
+            <Key ID="STR_LOCK_ARSENAL_DEFAULT">
+                <Original>Custom (Configuration Required)</Original>
+                <Portuguese>Personalizado (Requer configuração)</Portuguese>
+            </Key>
+        </Container>
+
+        <Container name="Sector events">
+            <Key ID="STR_SECTOR_EVENTS_TITLE">
+                <Original>Custom Sector Events</Original>
+                <Portuguese>Eventos de Setores Costumizados</Portuguese>
+            </Key>
+            <Key ID="STR_SECTOR_EVENTS_CUSTOM">
+                <Original>Custom (Configuration Required)</Original>
+                <Portuguese>Custom (Requer Configuração)</Portuguese>
+            </Key>
+            <Key ID="STR_SECTOR_EVENTS_ALTIS">
+                <Original>Altis Custom Events</Original>
+                <Portuguese>Altis Custom Events</Portuguese>
+            </Key>
+        </Container>
+
+
+        <Container name="Arty Menu">
+			<Key ID="STR_ARTY_MENU_ACTION">
+				<Original>Open Artillery Menu</Original>
+				<Portuguese>Abrir Menu de Artilharia</Portuguese>
+			</Key>
+			<Key ID="STR_ARTY_MENU_TITLE">
+				<Original>Artillery Menu</Original>
+				<Portuguese>Menu de Artilharia</Portuguese>
+			</Key>
+			<Key ID="STR_MENU_ARTILLERY">
+				<Original>Artillery</Original>
+				<Portuguese>Artilharia</Portuguese>
+			</Key>
+			<Key ID="STR_MENU_AMMUNITION">
+				<Original>Ammunition</Original>
+				<Portuguese>Munição</Portuguese>
+			</Key>
+			<Key ID="STR_MENU_ROUNDS">
+				<Original>Rounds</Original>
+				<Portuguese>Tiros</Portuguese>
+			</Key>
+			<Key ID="STR_MENU_FIRE">
+				<Original>Fire</Original>
+				<Portuguese>Atirar</Portuguese>
+			</Key>
+			<Key ID="STR_MENU_CLOSE">
+				<Original>Close</Original>
+				<Portuguese>Fechar</Portuguese>
+			</Key>
+            <Key ID="STR_ARTYMENU_SETTING_ITEMS_DESCRIPTION">
+				<Original>Required items to open the artillery menu</Original>
+                <Portuguese>Items requeridos para abrir o menu de artilharia</Portuguese>
+			</Key>
+            <Key ID="STR_ARTYMENU_SETTING_ITEMS_TOOLTIP">
+				<Original>Put here classnames of required invetory items '['item_1', 'item_2']' that the player must have. Leave empty '[]' if you want to disable this option</Original>
+                <Portuguese>Coloque aqui classnames de itens requeridos '['item_1', 'item_2']' no inventário do jogador. Deixe em branco '[]' se quiser desativar essa configuração</Portuguese>
+			</Key>
+		</Container>
+
+
+		<Container name="Arty Menu Functions">
+			<Key ID="STR_NOARTY_AVAILABLE">
+				<Original>No artillery available</Original>
+				<Portuguese>Nenhuma artilharia disponível</Portuguese>
+			</Key>
+            <Key ID="STR_ARTY_OCUPIED">
+				<Original>Someone is using the artillery menu</Original>
+				<Portuguese>Alguém está usando o menu de artilharia</Portuguese>
+			</Key>
+            
+			<Key ID="STR_SELECT_ARTY">
+				<Original>Select the artillery piece</Original>
+				<Portuguese>Selecione uma artilharia</Portuguese>
+			</Key>
+			<Key ID="STR_SELECT_AMMO">
+				<Original>Select the ammo type</Original>
+				<Portuguese>Selecione um tipo de munição</Portuguese>
+			</Key>
+			<Key ID="STR_SELECT_ROUNDS">
+				<Original>Select how many rounds</Original>
+				<Portuguese>Selecione quantos tiros</Portuguese>
+			</Key>
+			<Key ID="STR_SELECT_POSITION">
+				<Original>Select a position in the map</Original>
+				<Portuguese>Selecione uma posição no mapa</Portuguese>
+			</Key>
+			<Key ID="STR_ARTY_BUSY">
+				<Original>The artillery is busy right now</Original>
+				<Portuguese>A artilharia está ocupada</Portuguese>
+			</Key>
+			<Key ID="STR_ARTY_RANGE">
+				<Original>The target is out of artillery range</Original>
+				<Portuguese>O alvo está fora do alcance da artilharia</Portuguese>
+			</Key>
+			<Key ID="STR_ARTY_MARKER_TARGET">
+				<Original>Target</Original>
+				<Portuguese>Alvo</Portuguese>
+			</Key>
+			<Key ID="STR_ARTY_MARKER_FIRE">
+				<Original>Artillery Fire %1 (%2s)</Original>
+				<Portuguese>Fogo de Artilharia</Portuguese>
+			</Key>
+			<Key ID="STR_ARTY_AMMO_HANDLING_ERROR">
+				<Original>[ERROR] You need to deactivate ammo handling for mortars</Original>
+				<Portuguese>[ERRO] Você precisa desativar o manejo individual de munição para morteiros</Portuguese>
+			</Key>
+		</Container>
+
+
+        <Container name="Pylon Manager">
+            <Key ID="STR_ACTION_PYLONMANAGER">
+				<Original>Pylon Manager</Original>
+				<Portuguese>Gerenciar Pilones</Portuguese>
+			</Key>
+            <Key ID="STR_TITLE_PYLONMANAGER">
+				<Original>Pylon Management</Original>
+				<Portuguese>Gerenciamento de Pilones</Portuguese>
+			</Key>
+            <Key ID="STR_TITLE_SETTING_INVERT_CAMERA">
+				<Original>Invert camera controls</Original>
+				<Portuguese>Inverter controles da camera</Portuguese>
+			</Key>
+            <Key ID="STR_PYLONMANAGER_SETTING_NEARBYOBJECTS_DESCRIPTION">
+				<Original>Required nearby object</Original>
+				<Portuguese>Objeto requerido perto</Portuguese>
+			</Key>
+            <Key ID="STR_PYLONMANAGER_SETTING_NEARBYOBJECTS_TOOLTIP">
+				<Original>The aircraft must be near of the provided object in the list</Original>
+				<Portuguese>A aéronave precisa estar perto do objeto que está na lista</Portuguese>
+			</Key>
+        </Container>
+
+
+        <Container name="Rally Point">
+            <Key ID="STR_TITLE_RALLYPOINT">
+				<Original>Rally Point System</Original>
+				<Portuguese>Sistema de Rally Point</Portuguese>
+			</Key>
+			<Key ID="STR_RALLYPOINT_DEPLOYING_PROGRESS">
+				<Original>Deploying Rally Point...</Original>
+				<Portuguese>Colocando Rally Point...</Portuguese>
+			</Key>
+            <Key ID="STR_RALLYPOINT_DEPLOYED">
+				<Original>Rally point deployed</Original>
+				<Portuguese>Rally point colocado</Portuguese>
+			</Key>
+			<Key ID="STR_RALLYPOINT_DEPLOY_FAILED">
+				<Original>Couldn't deploy rally point</Original>
+                <Portuguese>Não foi possível colocar o rally point</Portuguese>
+			</Key>
+            <Key ID="STR_RALLYPOINT_DEPLOY_CANCELLED">
+				<Original>Rally point deployment cancelled</Original>
+                <Portuguese>Ação cancelada</Portuguese>
+			</Key>
+			<Key ID="STR_RALLYPOINT_SETTING_MEMBERS_DESCRIPTION">
+				<Original>Members Required</Original>
+                <Portuguese>Membros Requeridos</Portuguese>
+			</Key>
+            <Key ID="STR_RALLYPOINT_SETTING_MEMBERS_TOOLTIP">
+				<Original>Required members close to the leader's position to deploy the rally point</Original>
+                <Portuguese>Membros requeridos perto para colocar o rally point</Portuguese>
+			</Key>
+			<Key ID="STR_RALLYPOINT_SETTING_DISABLE">
+				<Original>Disable this configuration</Original>
+                <Portuguese>Desabilitar essa configuração</Portuguese>
+			</Key>
+			<Key ID="STR_RALLYPOINT_SETTING_MEMBERS_REQUIRED">
+				<Original>%1 member(s) required</Original>
+                <Portuguese>%1 membro(s) próximo(s)</Portuguese>
+			</Key>
+            <Key ID="STR_RALLYPOINT_SETTING_COOLDOWN_DESCRIPTION">
+				<Original>Rally Point Auto Deletion/Cooldown</Original>
+                <Portuguese>Deletar Rally Point Automaticamente/Tempo de recarga</Portuguese>
+			</Key>
+            <Key ID="STR_RALLYPOINT_SETTING_COOLDOWN_TOOLTIP">
+				<Original>The spawned rally point will be automatically deleted after certain time / Cooldown to deploy rally point again</Original>
+                <Portuguese>O rally point colocado seja deletado automaticamente após certo tempo / Tempo de recarga para que o rally point possa ser colocado novamente</Portuguese>
+			</Key>
+            <Key ID="STR_RALLYPOINT_SETTING_TIMER_OPTIONS">
+				<Original>%1 Minutes</Original>
+                <Portuguese>%1 Minutos</Portuguese>
+			</Key>
+			<Key ID="STR_RALLYPOINT_SETTING_ITEMS_DESCRIPTION">
+				<Original>Required Items</Original>
+                <Portuguese>Items Requeridos</Portuguese>
+			</Key>
+			<Key ID="STR_RALLYPOINT_SETTING_ITEMS_TOOLTIP">
+				<Original>Put here classnames of required invetory items '['item_1', 'item_2']' that the player must have to be able to deploy a rally point. Leave empty '[]' if you want to disable this option</Original>
+                <Portuguese>Coloque aqui classnames de itens requeridos '['item_1', 'item_2']' no inventário do jogador para que possa colocar o rally point. Deixe em branco '[]' se quiser desativar essa configuração</Portuguese>
+			</Key>
+		</Container>
+
+
+        <Container name="PIG's Build Menu">
+			<Key ID="STR_BUILD_MENU_CAMERA_ASSIST">
+				<Original>Building Camera Assist</Original>
+				<Portuguese>Camera Auxiliadora</Portuguese>
+			</Key>
+            <Key ID="STR_BUILD_MODE_ACTIONS">
+				<Original>MODE ACTIONS (SCROLL)</Original>
+				<Portuguese>AÇÕES COM SCROLL</Portuguese>
+			</Key>
+			<Key ID="STR_BUILD_ACTION_BUILD">
+				<Original>BUILD</Original>
+				<Portuguese>CONSTRUIR</Portuguese>
+                <French>CONSTRUTIRE</French>
+                <German>BAUEN</German>
+                <Spanish>CONSTRUIR</Spanish>
+                <Russian>Поставить</Russian>
+                <Italian>COSTRUISCI</Italian>
+                <Chinesesimp>建造</Chinesesimp>
+                <Chinese>-建造</Chinese>
+                <Turkish>KUR</Turkish>
+                <Korean>건설(설치)</Korean>
+                <Czech>Postavit</Czech>
+                <Japanese>製造</Japanese>
+			</Key>
+			<Key ID="STR_BUILD_ACTION_BUILDREPEAT">
+				<Original>BUILD AND REPEAT</Original>
+				<Portuguese>COPIAR CONSTRUÇÃO</Portuguese>
+                <French>CONSTRUIRE ET RÉPÉTER</French>
+                <German>BAUEN UND WIEDERHOLEN</German>
+                <Spanish>CONSTRUIR Y REPETIR</Spanish> 
+                <Russian>Поставить и Повторить</Russian>
+                <Italian>COSTRUISCI E RIPETI</Italian> 
+                <Chinesesimp>建造并重复</Chinesesimp>
+                <Chinese>建造並重複</Chinese>
+                <Turkish>KUR VE TEKRARLA</Turkish>
+                <Korean>반복 건설(설치)</Korean>
+                <Czech>Postavit a Opakovat</Czech> 
+                <Japanese>連続して製造</Japanese>
+			</Key>
+			<Key ID="STR_BUILD_ACTION_CANCEL">
+				<Original>CANCEL BUILD</Original>
+				<Portuguese>CANCELAR</Portuguese>
+                <French>ANNULER</French>
+                <German>ABBRECHEN</German>
+                <Spanish>CANCELAR</Spanish>
+                <Russian>-- Отмена</Russian>
+                <Italian>ANNULLA</Italian>
+                <Chinesesimp>取消</Chinesesimp>
+                <Chinese>-- 取消</Chinese>
+                <Turkish>İPTAL</Turkish>
+                <Korean>취소</Korean>
+                <Czech>Zrušit</Czech>
+                <Japanese>取消</Japanese>
+			</Key>
+            <Key ID="STR_BUILD_ACTION_HEIGHT">
+				<Original>HEIGHT</Original>
+				<Portuguese>ALTURA</Portuguese>
+			</Key>
+            <Key ID="STR_BUILD_ACTION_ROTATE">
+				<Original>ROTATE</Original>
+				<Portuguese>ROTAR</Portuguese>
+			</Key>
+            <Key ID="STR_BUILD_ACTION_YMODE">
+				<Original>FOWARD/BACKWARD</Original>
+				<Portuguese>PARA FRENTE/PARA TRÁS</Portuguese>
+			</Key>
+			<Key ID="STR_BUILD_ACTION_ALIGNMENT">
+				<Original>CHANGE ALIGNMENT</Original>
+				<Portuguese>MUDAR ALINHAMENTO</Portuguese>
+			</Key>
+            <Key ID="STR_BUILD_ACTION_SNAP">
+				<Original>SNAP TO GROUND</Original>
+				<Portuguese>GRUDAR NO CHÃO</Portuguese>
+			</Key>
+            <Key ID="STR_BUILD_ACTION_BOOST">
+				<Original>BOOST</Original>
+				<Portuguese>IMPULSIONAR</Portuguese>
+			</Key>
+			<Key ID="STR_BUILD_ACTION_CAMERA_ASSIST">
+				<Original>CAMERA ASSIST</Original>
+				<Portuguese>ASSISTENTE (CAMERA)</Portuguese>
+			</Key>
+			<Key ID="STR_BUILD_ACTION_DELETE">
+				<Original>DELETE</Original>
+				<Portuguese>DELETAR</Portuguese>
+			</Key>
+		</Container>
+
+
+        <Container name="Supply Menu">
+			<Key ID="STR_SUPPLY_MENU_TITLE">
+				<Original>Supply Menu</Original>
+				<Portuguese>Suprimentos</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_ALL">
+				<Original>All</Original>
+				<Portuguese>Todos</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_ALL_ITEMS_TOOLTIP">
+				<Original>All Items</Original>
+				<Portuguese>Todos os itens</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_WEAPONS_TOOLTIP">
+				<Original>Rifles and Pistols</Original>
+				<Portuguese>Suprimentos</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_MAGAZINES_TOOLTIP">
+				<Original>Magazines</Original>
+				<Portuguese>Cartuchos e munições</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_LAUNCHERS_TOOLTIP">
+				<Original>Launchers</Original>
+				<Portuguese>Lança-foguetes ou descartáveis</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_ACCESSORIES_TOOLTIP">
+				<Original>Weapon's accessories</Original>
+				<Portuguese>Acessórios de armas</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_THROWABLES_TOOLTIP">
+				<Original>Throwables items</Original>
+				<Portuguese>Itens jogáveis</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_EXPLOSIVES_TOOLTIP">
+				<Original>Explosives</Original>
+				<Portuguese>Explosivos</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_TOOLS_TOOLTIP">
+				<Original>Tools</Original>
+				<Portuguese>Ferramentas</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_MEDICAL_TOOLTIP">
+				<Original>Medical items</Original>
+				<Portuguese>Itens médicos</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_HEADGEAR_TOOLTIP">
+				<Original>Headgear / Glasses / Nightvision</Original>
+				<Portuguese>Capacetes / Óculos / Visão-Noturna </Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_UNIFORMS_TOOLTIP">
+				<Original>Uniforms</Original>
+				<Portuguese>Uniformes</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_VESTS_TOOLTIP">
+				<Original>Vests</Original>
+				<Portuguese>Coletes</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_BACKPACKS_TOOLTIP">
+				<Original>Backpacks</Original>
+				<Portuguese>Mochilas</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_BINOCULARS_TOOLTIP">
+				<Original>Binoculars</Original>
+				<Portuguese>Binóculos</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_RADIO_TOOLTIP">
+				<Original>Communication / GPS / Terminals</Original>
+				<Portuguese>Comunicação / GPS / Terminais</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_MISC_TOOLTIP">
+				<Original>Non-filtered items</Original>
+				<Portuguese>Itens não filtrados</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_PLACEMENT_IMPOSSIBLE">
+				<Original>You can't place it here</Original>
+				<Portuguese>Você não pode colocar aqui</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_CRATE_FULL">
+				<Original>Crate is Full </Original>
+				<Portuguese>A caixa está cheia</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_ADD_DENIED_DUMP">
+				<Original>Couldn't add the item from the supply dump</Original>
+				<Portuguese>Não foi possível adicionar o item no depósito</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_NO_MORE_ITEMS">
+				<Original>No more items of this kind left</Original>
+				<Portuguese>Não há mais itens desse tipo sobrando</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_EDITING_CRATE">
+				<Original>Someone is editing this crate</Original>
+				<Portuguese>Alguém já está editando essa caixa</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_YOUR_CRATE">
+				<Original>%1 (Your Crate)</Original>
+				<Portuguese>%1 (Sua caixa)</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_TRANSFER_TITLE">
+				<Original>Transfer Cargo</Original>
+				<Portuguese>Transferir Itens</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_DUMP_TITLE">
+				<Original>Supply Dump</Original>
+				<Portuguese>Depósito</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_ITEM">
+				<Original>Item</Original>
+				<Portuguese>Item</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_AMOUNT">
+				<Original>Amount</Original>
+				<Portuguese>Qtd.</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_CLOSE">
+				<Original>Close</Original>
+				<Portuguese>Fechar</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_MENU_AMOUNT_ITEMS">
+				<Original>Amount of items</Original>
+				<Portuguese>Qtd. de itens</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_TRANSFER_RIGHT">
+				<Original>Transfer item to the right</Original>
+				<Portuguese>Transferir item para a direita</Portuguese>
+			</Key>
+			<Key ID="STR_SUPPLY_TRANSFER_LEFT">
+				<Original>Transfer item to the left</Original>
+				<Portuguese>Transferir item para a esquerda</Portuguese>
+			</Key>
+            <Key ID="STR_SUPPLY_SETTING_IGNOREWEIGHT_TITLE">
+				<Original>Ignore crate's weight</Original>
+				<Portuguese>Ignorar peso da caixa</Portuguese>
+			</Key>
+            <Key ID="STR_SUPPLY_SETTING_IGNOREWEIGHT_TOOLTIP">
+				<Original>If checked, the carryable function will ignore the crate's weight.</Original>
+				<Portuguese>Se marcado, a função de carregar irá ignorar o peso da caixa.</Portuguese>
+			</Key>
+            <Key ID="STR_SUPPLY_SETTING_WEIGHTCOEF_TITLE">
+				<Original>Weight Coeficient</Original>
+				<Portuguese>Coeficiente de peso</Portuguese>
+			</Key>
+            <Key ID="STR_SUPPLY_SETTING_WEIGHTCOEF_TOOLTIP">
+				<Original>Set the limit in which the player can carry the crate. 0.3 means 30% of the cargo with items, when reached, the players can't carry it anymore. If you want to ignore weight, select the option 1 (100%).</Original>
+				<Portuguese>Coloque um limite de peso no qual o jogador poderá carregar a caixa. 0.3 significa 30% de peso. Quando chega a esse valor, os jogadores não poderão carregar a caixa. Deixe em 1 (100%) para ignorar o peso completamente.</Portuguese>
+			</Key>
+            <Key ID="STR_SUPPLY_DUMP_ENTRY">
+				<Original>Supply Dump</Original>
+				<Portuguese>Depósito de suprimentos</Portuguese>
+			</Key>
+        </Container>
     </Package>
 </Project>

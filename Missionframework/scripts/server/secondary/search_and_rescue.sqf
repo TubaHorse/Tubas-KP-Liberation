@@ -1,7 +1,7 @@
 
 private _spawn_marker = [ 2000, 999999, false ] call KPLIB_fnc_getOpforSpawnPoint;
 if ( _spawn_marker == "" ) exitWith {["Could not find position for search and rescue mission", "ERROR"] call KPLIB_fnc_log;};
-used_positions pushbackUnique _spawn_marker;
+KPLIB_usedOpforSpawnPoints pushbackUnique _spawn_marker;
 
 private _helopos = (markerPos _spawn_marker) getPos [random 200, random 360];
 private _helowreck = KPLIB_sarWreck createVehicle _helopos;
@@ -26,7 +26,7 @@ sleep 2;
 
 private _pilotUnits = units _pilotsGrp;
 {
-    [ _x, true] spawn prisonner_ai;
+    [ _x, true] call KPLIB_fnc_setCapturable;
     _x setDir (random 360);
     sleep 0.5
 } foreach (_pilotUnits);
