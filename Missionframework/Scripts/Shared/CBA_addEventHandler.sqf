@@ -154,7 +154,7 @@
     _this addAction [
         "<t color='#FFFF00'>" + localize "STR_INTEL" + "</t>",
         {
-            ["KPLIB_intelYield", [_this # 0]] call CBA_fnc_serverEvent;
+            ["KPLIB_intelYield", (_this # 0)] call CBA_fnc_serverEvent;
         },
         "",
         -849,
