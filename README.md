@@ -9,13 +9,15 @@ There are new system in `Extensions` folder, some of them you can find details i
 
 Please, read the addition notes below.
 
+Feel free to report issues and make pull requests, I eventually will take a look at them.
+
 ## DEVKIT
 The devkit had some small additions, but still uses the same logic that you can follow in [official tutorial page](https://github.com/KillahPotatoes/KP-Liberation/wiki/EN_Devkit).
 
 Below are listed the additions so far, all optional:
 - New sector: Outpost (marker name: `outpost`). This is an invisible sector aimed to be a filler. It spawns some patrol units and garrisons. Doesn't spawn vehicles.
 - Factory sector: You can choose what the factory can produce at start by adding `supply`, `ammo` or `fuel` in the marker name (i.e: `factory_supply_1`).
-- Enemy road spawn points (marker name: `spawn_opfor_road_point`). Enemy vehicles will use them, also for the convoy objective.
+- Enemy road spawn points (marker name: `spawn_opfor_road_point`). Enemy vehicles will use them. This marker will also be used for the convoy secondary objective.
 
 ## DISCLAIMERS
 - [LICENSE](https://github.com/KillahPotatoes/KP-Liberation/blob/master/LICENSE.md).
@@ -33,6 +35,7 @@ Below are listed the additions so far, all optional:
 - It should be compatible with saves from 0.96.8, but it's not guaranteed.
 - There is a mission parameters that enables FOB redeploy cost, subtracting resources. For a particular FOB, you can build two barracks (in the build support label) to stop from taking resources for each redeploy. Also, the barracks are required to be able to buy AI units.
 - It's possible to create unique sectors events (`Extensions\Sector_Events`).
+- You can redeploy near your squadmates by using the new rally point system (`Extensions\Rally_Point`).
 
 Zeus Module:
 - The zeus has no more restrictions, and as default it has to be accessed via admin logged. There is a whitelist for players for it in the `KPLIB_whitelist.sqf` file (KPLIB_whitelist_zeus), that creates a game master module for each logged player.

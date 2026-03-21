@@ -21,7 +21,7 @@ params [
 
 private _possibleBluforObjectives = [];
 
-private _objectivesToCheck = KPLIB_sectors_fob + ((KPLIB_sectors_player - KPLIB_sectors_outpost) apply {markerPos _x});
+private _objectivesToCheck = KPLIB_sectors_fob + ((KPLIB_sectors_player - KPLIB_sectors_filler) apply {markerPos _x});
 
 {
     private _valid = true;

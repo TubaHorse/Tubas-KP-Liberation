@@ -97,7 +97,7 @@ if (KPLIB_ace) then {
     [
         "PIG_SupplyMenu_Setting_ignoreWeight", 
         "CHECKBOX", 
-        [localize "STR_SUPPLY_SETTING_IGNOREWEIGHT_TITLE", localize "STR_SUPPLY_SETTING_IGNOREWEIGHT"], 
+        [localize "STR_SUPPLY_SETTING_IGNOREWEIGHT_TITLE", localize "STR_SUPPLY_SETTING_IGNOREWEIGHT_TOOLTIP"], 
         ["KP Liberation", localize "STR_SUPPLY_MENU_TITLE"], 
         true
     ] call CBA_fnc_addSetting;

@@ -486,7 +486,7 @@ if (!isDedicated && hasInterface) then {
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_PARAMS_PLAYERMENU_KP";
-    _value = if (KPLIB_param_playerMenu) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_KPPLM_DISABLED";};
+    _value = if (KPLIB_param_playerMenu) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_PARAMS_VICTORYCONDITION";

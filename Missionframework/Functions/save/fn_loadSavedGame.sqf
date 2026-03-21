@@ -2,7 +2,7 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 21/02/2026
+    Last Update: 21/03/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -868,6 +868,8 @@ if (KPLIB_param_lockArsenal > 0 && !isNil "KPLIB_b_lockedArsenal") then {
     KPLIB_sector_arsenalLink = _lockedArsenalHash;
     publicVariable "KPLIB_sector_arsenalLink";
 };
+
+if (KPLIB_sector_arsenalLink isEqualType []) then {KPLIB_sector_arsenalLink = createHashMapFromArray []};
 
 publicVariable "KPLIB_permissions";
 KPLIB_saveLoaded = true; publicVariable "KPLIB_saveLoaded";

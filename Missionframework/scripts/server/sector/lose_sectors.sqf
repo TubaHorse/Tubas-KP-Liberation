@@ -15,7 +15,7 @@ while { KPLIB_endgame == 0 } do {
             [ _x ] call attack_in_progress_sector;
         };
         sleep 0.5;
-    } foreach KPLIB_sectors_player;
+    } foreach (KPLIB_sectors_player - KPLIB_sectors_filler);
 
     {
         _ownership = [ _x ] call KPLIB_fnc_getSectorOwnership;
@@ -25,6 +25,6 @@ while { KPLIB_endgame == 0 } do {
         sleep 0.5;
     } foreach KPLIB_sectors_fob;
 
-    sleep 1;
+    sleep 30;
 
 };
