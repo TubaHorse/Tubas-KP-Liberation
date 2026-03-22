@@ -2,7 +2,7 @@
     File: fn_getBluforObjective.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 05/11/2025
-    Last Update: 05/11/2025
+    Last Update: 21/03/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:

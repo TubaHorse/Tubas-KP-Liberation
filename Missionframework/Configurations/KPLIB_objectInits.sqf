@@ -339,14 +339,16 @@ KPLIB_objectInits = [
                 _this addEventHandler ["GetIn", {
                     params ["_vehicle", "_role", "_unit", "_turret"];
                     
-                    if ((_role == "driver") && {side _unit == KPLIB_side_player}) then {
+                    if ((_role == "driver") && {side (group _unit) == KPLIB_side_player}) then {
                         if (isNil "KPLIB_playerAircrafts") then {
                             KPLIB_playerAircrafts = [];
                             publicVariable "KPLIB_playerAircrafts";
                         };
 
                         KPLIB_playerAircrafts pushBack _vehicle;
-                        [_vehicle] call KPLIB_fnc_enemyAirScheduler;
+                        publicVariable "KPLIB_playerAircrafts";
+
+                        [_vehicle] call KPLIB_fnc_enemyFighterPFH;
                     };
                 }];
 
@@ -354,12 +356,14 @@ KPLIB_objectInits = [
                     params ["_vehicle", "_role", "_unit", "_turret", "_isEject"];
                     _vehicle setVariable ["KPLIB_playerInAircraft", false];
                     KPLIB_playerAircrafts deleteAt (KPLIB_playerAircrafts find _vehicle);
+                    publicVariable "KPLIB_playerAircrafts";
                 }];
 
                 _this addEventHandler ["Killed", {
                     params ["_unit", "_killer", "_instigator", "_useEffects"];
                     _unit setVariable ["KPLIB_playerInAircraft", nil];
                     KPLIB_playerAircrafts deleteAt (KPLIB_playerAircrafts find _unit);
+                    publicVariable "KPLIB_playerAircrafts";
                 }]; 
             }
         }

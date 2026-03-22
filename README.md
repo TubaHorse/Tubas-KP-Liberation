@@ -36,10 +36,11 @@ Below are listed the additions so far, all optional:
 - There is a mission parameters that enables FOB redeploy cost, subtracting resources. For a particular FOB, you can build two barracks (in the build support label) to stop from taking resources for each redeploy. Also, the barracks are required to be able to buy AI units.
 - It's possible to create unique sectors events (`Extensions\Sector_Events`).
 - You can redeploy near your squadmates by using the new rally point system (`Extensions\Rally_Point`).
-
-Zeus Module:
-- The zeus has no more restrictions, and as default it has to be accessed via admin logged. There is a whitelist for players for it in the `KPLIB_whitelist.sqf` file (KPLIB_whitelist_zeus), that creates a game master module for each logged player.
-- It's highly recommended that you use the whitelist, because as tested, using it fixed some issues related to not having access to zeus in respawns.
+- With the new resource management, you can set the resources value for a particular container by just messing with its variable, where the array corresponds to `[supply, ammo, fuel]`: 
+    - `storageOject setVariable ["KPLIB_storageResources", [0,0,0], true];`
+- Zeus Module:
+    - The zeus has no more restrictions, and as default it has to be accessed via admin logged. There is a whitelist for players for it in the `KPLIB_whitelist.sqf` file (KPLIB_whitelist_zeus), that creates a game master module for each logged player.
+    - It's highly recommended that you use the whitelist, because as tested, using it fixed some issues related to not having access to zeus in respawns.
 
 ## CREDITS
 - [GREUH](https://github.com/GreuhZbug) and [KillahPotatoes](https://github.com/KillahPotatoes/);

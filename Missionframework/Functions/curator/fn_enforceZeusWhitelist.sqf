@@ -2,7 +2,7 @@
     File: fn_handlePlacedZeusObject.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 18/02/2026
-    Last Update: 19/02/2026
+    Last Update: 22/03/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -67,6 +67,11 @@ addMissionEventHandler ["HandleDisconnect", {
         deleteVehicle _zeus;
         missionNamespace setVariable [format["KPLIB_zeus_%1", _uid], nil];
     };
+}];
+
+_zeus addEventHandler ["CuratorObjectPlaced", {
+    params ["_curator", "_entity"];
+    [_curator, _entity] call KPLIB_fnc_handlePlacedZeusObject;
 }];
 
 true

@@ -2,7 +2,7 @@
     File: fn_enemyFighterPFH.sqf
     Author: PiG13BR - (https://github.com/PiG13BR)
     Date: 04/02/2026
-    Last update: 01/03/2026
+    Last update: 22/03/2026
 
     Description:
         Runs a CBA PFH to check some conditions to spawn an enemy fighter
@@ -26,7 +26,6 @@ _vehicle setVariable ["KPLIB_playerInAircraft", true];
         if (!(isNil "_tower") && ({alive _x} count (crew _air) > 0) && {((getPosATL _air) # 2) >= 150}) then {    
             [
                 {
-                    //[getPosASL _this] call KPLIB_fnc_callEnemyFighter
                     ["KPLIB_callEnemyFighter", getPosASL _this] call CBA_fnc_serverEvent;
                 }, _air, (30 + random 30)
             ] call CBA_fnc_waitAndExecute;

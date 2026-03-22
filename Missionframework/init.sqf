@@ -139,9 +139,11 @@ if (!isDedicated && hasInterface) then {
     ] call (missionNamespace getVariable ["DiscordRichPresence_fnc_update", {}]);
 
     // Add EH for curator to add kill manager and object init recognition for zeus spawned units/vehicles
-    {
-        _x addEventHandler ["CuratorObjectPlaced", {[_this select 0, _this select 1] call KPLIB_fnc_handlePlacedZeusObject;}];
-    } forEach allCurators;
+    if (count KPLIB_whitelist_Zeus < 1) then {
+        {
+            _x addEventHandler ["CuratorObjectPlaced", {[_this select 0, _this select 1] call KPLIB_fnc_handlePlacedZeusObject;}];
+        } forEach allCurators;
+    };
 
     waitUntil {sleep 1; alive player};
 
