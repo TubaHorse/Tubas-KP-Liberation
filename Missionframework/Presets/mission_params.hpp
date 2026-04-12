@@ -12,26 +12,26 @@ class PresetCustomization {
 };
 class BLUFORPreset {
     title = $STR_PARAMS_BLUFORPRESET;
-    values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
-    texts[] = {"Default (Vanilla NATO)", "Apex Tanoa", "3cb BAF (MTP)", "3cb BAF (Desert)", "BWMod Bundeswehr (Flecktarn)", "BWMod Bundeswehr (Tropentarn)", "RHS USAF (Woodland)", "RHS USAF (Desert)", "RHS AFRF (VDV/MSV)", "Germany West (Global Mobilization)", "Germany West Winter (Global Mobilization)", "Germany East (Global Mobilization)", "Germany East Winter (Global Mobilization)", "CSAT Brown", "CSAT Green", "Unsung US", "CUP British Armed Forces (Desert)", "CUP British Armed Forces (Woodland)", "CUP US Marine Corps (Desert)", "CUP US Marine Corps (Woodland)", "CUP US Army (Desert)", "CUP US Army (Woodland)", "CUP Chernarus Defense Force", "CUP Army of the Czech Republic (Desert)", "CUP Army of the Czech Republic (Woodland)", "CUP Chernarussian Movement of the Red Star", "CUP Sahrani Liberation Army", "CUP Takistani Army", "SFP (Woodland)", "SFP (Desert)", "LDF (Contact DLC)", "CUP AAF Deserters mix (AAF, Aegis Task Force and CTRG)"};
+    values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
+    texts[] = {"Default (Vanilla NATO)", $STR_PARAMS_CUSTOMPRESET, "Apex Tanoa", "3cb BAF (MTP)", "3cb BAF (Desert)", "BWMod Bundeswehr (Flecktarn)", "BWMod Bundeswehr (Tropentarn)", "RHS USAF (Woodland)", "RHS USAF (Desert)", "RHS AFRF (VDV/MSV)", "Germany West (Global Mobilization)", "Germany West Winter (Global Mobilization)", "Germany East (Global Mobilization)", "Germany East Winter (Global Mobilization)", "CSAT Brown", "CSAT Green", "Unsung US", "CUP British Armed Forces (Desert)", "CUP British Armed Forces (Woodland)", "CUP US Marine Corps (Desert)", "CUP US Marine Corps (Woodland)", "CUP US Army (Desert)", "CUP US Army (Woodland)", "CUP Chernarus Defense Force", "CUP Army of the Czech Republic (Desert)", "CUP Army of the Czech Republic (Woodland)", "CUP Chernarussian Movement of the Red Star", "CUP Sahrani Liberation Army", "CUP Takistani Army", "SFP (Woodland)", "SFP (Desert)", "LDF (Contact DLC)", "CUP AAF Deserters mix (AAF, Aegis Task Force and CTRG)"};
     default = 0;
 };
 class OPFORPreset {
     title = $STR_PARAMS_OPFORPRESET;
-    values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21};
-    texts[] = {"Default (Vanilla CSAT)", "Apex Tanoa", "RHS AFRF (EMR/MSV)", "Project OPFOR (Takistan)", "Project OPFOR (Islamic State)", "Project OPFOR (Sahrani)", "AAF", "NATO", "Germany West (Global Mobilization)", "Germany West Winter (Global Mobilization)", "Germany East (Global Mobilization)", "Germany East Winter (Global Mobilization)", "Unsung NVA", "CUP Sahrani Liberation Army", "CUP Takistani Army", "CUP Chernarussian Movement of the Red Star", "CUP Armed Forces of the Russian Federation (MSV - EMR)", "CUP Armed Forces of the Russian Federation (Modern MSV)", "CUP Chernarus Defense Force", "CUP British Armed Forces (Desert)", "CUP British Armed Forces (Woodland)", "CUP AAF"};
+    values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
+    texts[] = {"Default (Vanilla CSAT)", $STR_PARAMS_CUSTOMPRESET, "Apex Tanoa", "RHS AFRF (EMR/MSV)", "Project OPFOR (Takistan)", "Project OPFOR (Islamic State)", "Project OPFOR (Sahrani)", "AAF", "NATO", "Germany West (Global Mobilization)", "Germany West Winter (Global Mobilization)", "Germany East (Global Mobilization)", "Germany East Winter (Global Mobilization)", "Unsung NVA", "CUP Sahrani Liberation Army", "CUP Takistani Army", "CUP Chernarussian Movement of the Red Star", "CUP Armed Forces of the Russian Federation (MSV - EMR)", "CUP Armed Forces of the Russian Federation (Modern MSV)", "CUP Chernarus Defense Force", "CUP British Armed Forces (Desert)", "CUP British Armed Forces (Woodland)", "CUP AAF"};
     default = 0;
 };
 class guerPreset {
     title = $STR_PARAMS_GUERPRESET;
-    values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    texts[] = {"Default Vanilla FIA", "Apex Tanoa (apex vanilla Syndikat)", "RHS GREF", "Project OPFOR (Middle Eastern)", "Project OPFOR (Sahrani)", "Germany (Global Mobilization)", "Unsung", "CUP Takistani Locals", "CUP National Party of Chernarus", "CUP FIA"};
+    values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    texts[] = {"Default Vanilla FIA", $STR_PARAMS_CUSTOMPRESET, "Apex Tanoa (apex vanilla Syndikat)", "RHS GREF", "Project OPFOR (Middle Eastern)", "Project OPFOR (Sahrani)", "Germany (Global Mobilization)", "Unsung", "CUP Takistani Locals", "CUP National Party of Chernarus", "CUP FIA"};
     default = 0;
 };
 class civPreset {
     title = $STR_PARAMS_CIVPRESET;
-    values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-    texts[] = {"Default Vanilla", "Apex Tanoa (apex vanilla)", "Project OPFOR (Middle Eastern)", "RDS Civilians", "Germany (Global Mobilization)", "Unsung", "CUP Takistani Civilians", "CUP Chernarussian Civilians", "CUP ACW"};
+    values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    texts[] = {"Default Vanilla Civilians", $STR_PARAMS_CUSTOMPRESET, "Apex Tanoa (apex vanilla)", "Project OPFOR (Middle Eastern)", "RDS Civilians", "Germany (Global Mobilization)", "Unsung", "CUP Takistani Civilians", "CUP Chernarussian Civilians", "CUP ACW"};
     default = 0;
 };
 class ArsenalUsePreset {

@@ -8160,6 +8160,10 @@
                 <English>Arsenal Preset (Role Whitelist)</English>
                 <Portuguese>Arsenal Preset (Filtrado por Função)</Portuguese>
             </Key>
+            <Key ID="STR_PARAMS_CUSTOMPRESET">
+                <English>Custom Preset</English>
+                <Portuguese>Preset Personalizado</Portuguese>
+            </Key>
         </Container>
 
 

@@ -11,7 +11,6 @@ kp_vehicle_permissions = compile preprocessFileLineNumbers "Scripts\Client\misc\
 
 [player] call KPLIB_fnc_enforceCmdrWhitelist;
 [player] call KPLIB_fnc_enforceZeusWhitelist;
-[] call KPLIB_fnc_enforceZeusWhitelist;
 if (KPLIB_param_mapMarkers) then {execVM "Scripts\Client\markers\empty_vehicles_marker.sqf";};
 execVM "Scripts\Client\markers\fob_markers.sqf";
 if (!KPLIB_param_highCommand && KPLIB_param_mapMarkers) then {execVM "Scripts\Client\markers\group_icons.sqf";};
@@ -57,9 +56,3 @@ if (KPLIB_param_rallyPoint && KPLIB_ace) then {
 if (KPLIB_param_VAMGUI) then {
     [] call compile preprocessFileLineNumbers 'Extensions\VAM_GUI\VAM_GUI_init.sqf'
 };
-
-/*
-// Create a zeus interface for the player to access
-if ((getPlayerUID player) in KPLIB_whitelist_Zeus) then {
-    [player] call KPLIB_fnc_initZeusPlayer;
-}

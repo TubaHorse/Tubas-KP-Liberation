@@ -2,7 +2,7 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 21/03/2026
+    Last Update: 10/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -343,55 +343,6 @@ if (!isNil "_saveData") then {
     {
         [_x select 0, _x select 1] call KPLIB_fnc_createClearance;
     } forEach KPLIB_clearances;
-
-    // Zeus whitelist and addons
-    if (count KPLIB_whitelist_Zeus > 0) then {
-        /*
-            // All addons
-            private _addons = [];
-            private _cfgPatches = configfile >> "cfgpatches";
-            for "_i" from 0 to (count _cfgPatches - 1) do {
-                private _class = _cfgPatches select _i;
-                if (isclass _class) then {_addons set [count _addons, configname _class];};
-            };
-
-            activateAddons _addons;
-        */
-
-        // Take out from Sa-Matra's note in activateAddons biki page
-        _fnc_prepareClassAddons = {
-            private _class = toLowerANSI _this;
-
-            // To avoid double checks
-            if(isNil"KPLIB_addonCheckedClasses") then {KPLIB_addonCheckedClasses = createHashMap;};
-            if(_class in KPLIB_addonCheckedClasses) exitWith {};
-
-            // Finding missing addons
-            private _needed = (unitAddons _class) apply {toLowerANSI _x};
-            private _active = activatedAddons;
-            private _missing = _needed - (_needed arrayIntersect _active);
-            if(count _missing > 0) then {
-                // Adding everything again, engine will figure it out itself
-                _active append _missing;
-                activateAddons _active;
-            };
-
-            KPLIB_addonCheckedClasses set [_class, _needed];
-        };
-        
-        private _classes = KPLIB_b_inf_classes + KPLIB_b_allVeh_classes + KPLIB_b_support_classes + KPLIB_b_deco_classes + KPLIB_o_allVeh_classes + KPLIB_o_allStatics_classes + KPLIB_o_allSAM_classes + KPLIB_o_inf_classes + KPLIB_r_units + KPLIB_r_vehicles + KPLIB_c_units + KPLIB_c_vehicles;
-        //private _addons = [];
-        {
-            _x call _fnc_prepareClassAddons;
-        }forEach _classes;
-
-        // Whitelist detected, deleting all existing modules
-        ["Zeus whitelist detected", "ZEUS WHITELIST"] call KPLIB_fnc_log;
-        {
-            [format["Deleting curator %1", _x], "ZEUS WHITELIST"] call KPLIB_fnc_log;
-            deleteVehicle _x
-        }forEach allCurators;
-    };
 
     // Collection array for all objects which are loaded
     private _spawnedObjects = [];

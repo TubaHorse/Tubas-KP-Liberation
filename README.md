@@ -42,6 +42,10 @@ Below are listed the additions so far, all optional:
     - The zeus has no more restrictions, and as default it has to be accessed via admin logged. There is a whitelist for players for it in the `KPLIB_whitelist.sqf` file (KPLIB_whitelist_zeus), that creates a game master module for each logged player.
     - It's highly recommended that you use the whitelist, because as tested, using it fixed some issues related to not having access to zeus in respawns.
 
+- Resources Management:
+    - In previous versions of the KP LIBERATION, the players would store the crates in plataforms, and those crates would be visible for them. Now the resources in storages (fob and factories) are just numbers in a variable, the crates are deleted when stored and its resource value saved virtually. The crate with its value is created again when you want to unload the choosen resource.
+    - This was changed because creates are objects and can take performance. The crates are just a way to transport the resources.
+
 ## CREDITS
 - [GREUH](https://github.com/GreuhZbug) and [KillahPotatoes](https://github.com/KillahPotatoes/);
 - [Apricot](https://github.com/Apricot-ale/) for making a stable fork to work with;
