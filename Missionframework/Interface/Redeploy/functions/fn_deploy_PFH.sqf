@@ -2,7 +2,7 @@
     File: fn_deploy_PFH.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 04/11/2025
-    Last Update: 21/11/2025
+    Last Update: 12/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -41,29 +41,32 @@ KPLIB_REDEPLOY_pfhandle = [
         };
 
         if (KPLIB_param_respawnCost > 0) then {
-            ([_objectPos] call KPLIB_fnc_deploy_playerCanRedeploy) params ["_canRespawn", "_fobName"];
+            ([_objectPos] call KPLIB_fnc_deploy_playerCanRedeploy) params ["_canRespawn", "_baseName"];
 
             private _barracks = ([_objectPos] call KPLIB_fnc_deploy_barracksNearby);
-            // Respawn cost (FOB)
+            private _closestBase = [_objectPos] call KPLIB_fnc_getNearestPlayerBase;
+            private _fobNearby = (KPLIB_player_fobs findIf {_closestBase distance2D _x < KPLIB_range_fob}) >= 0;
+
+            // Respawn cost (FOB/Outpost)
             if (!_canRespawn && !_barracks) then {
                 _buttonControl ctrlSetText (localize "STR_DEPLOY_DISABLED");
                 _buttonControl ctrlEnable false;
-                _buttonControl ctrlSetTooltip format [localize "STR_DEPLOY_NORESOURCES", _fobName];
+                _buttonControl ctrlSetTooltip format [localize "STR_DEPLOY_NORESOURCES", _baseName];
             } else {
-                if (_fobName isNotEqualTo "") then {
+                if (_baseName isNotEqualTo "") then {
                     // Check for barracks
-                    if (_barracks) then {
+                    if (_barracks && _fobNearby) then {
                         _buttonControl ctrlSetText (localize "STR_DEPLOY_BUTTON");
                         _buttonControl ctrlEnable true;
                         _buttonControl ctrlSetTooltip (localize "STR_DEPLOY_NOCOST_WARNING");
                     } else {
-                        // Fob nearby and no barracks, warn costs
+                        // Fob or Outpost nearby or fob nearby and no barracks. Warn costs.
                         _buttonControl ctrlSetText (localize "STR_DEPLOY_BUTTON");
                         _buttonControl ctrlEnable true;
-                        _buttonControl ctrlSetTooltip  format [localize "STR_DEPLOY_COST_WARNING", KPLIB_param_respawnCost, _fobName];
+                        _buttonControl ctrlSetTooltip format [localize "STR_DEPLOY_COST_WARNING", KPLIB_param_respawnCost, _baseName];
                     };
                 } else {
-                    // No fob nearby
+                    // No fob/Outpost nearby
                     _buttonControl ctrlSetText (localize "STR_DEPLOY_BUTTON");
                     _buttonControl ctrlEnable true;
                     _buttonControl ctrlSetTooltip (localize "STR_DEPLOY_NOCOST_WARNING");

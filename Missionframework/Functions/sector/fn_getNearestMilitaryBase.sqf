@@ -1,5 +1,5 @@
 /*
-    File: fn_getNearestBase.sqf
+    File: fn_getNearestMilitaryBase.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 20/12/2025
     Last Update: 20/12/2025

@@ -3,7 +3,7 @@
     File: fn_deploy_loadMenu.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 04/11/2025
-    Last Update: 17/11/2025
+    Last Update: 12/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -23,6 +23,7 @@ _old_fullmap = 0;
 KPLIB_respawnPositionsList = [];
 
 localNamespace setVariable ["KPLIB_playerDeploying", player];
+player setVariable ["KPLIB_playerOnRedeploy", true];
 
 // Controls
 private _loadoutsComboCtrl = _display displayCtrl DEPLOY_LOADOUTS_COMBO;

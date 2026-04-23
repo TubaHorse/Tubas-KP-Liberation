@@ -18,7 +18,7 @@
         -
 */
 
-params[["_object", objNull, [objnull]], ["_player", player, [objNull]], ["_centerPos", [0,0,0], []]];
+params[["_object", objNull, [objnull]], ["_player", player, [objNull]], ["_centerPos", [0,0,0], []], ["_buildRange", KPLIB_range_fob, [0]]];
 
 if (isNull _object) exitWith {["Object is null"] call BIS_fnc_error};
 if (_centerPos isEqualTo [0,0,0]) exitWith {["Center position is [0,0,0]"] call BIS_fnc_error};
@@ -134,4 +134,4 @@ KPLIB_doBuild_eachFrame = addMissionEventHandler ["EachFrame", {
         }forEach _hiddenSelection;
         //if (isObjectHidden _object) then {_object hideObject false}; // Show object
     };
-}, [_object, _player, _centerPos, KPLIB_range_fob, _buildType]];
+}, [_object, _player, _centerPos, _buildRange, _buildType]];

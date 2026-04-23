@@ -243,11 +243,8 @@ class CfgTaskDescriptions {
 };
 
 #include "Interface\liberation_interface.hpp"
+#include "Extensions\extensions_interface.hpp"
 #include "mission_params.hpp"
-
-#include "Extensions\VAM_GUI\defines.hpp"
-#include "Extensions\VAM_GUI\VAM_GUI_controls.hpp"
-#include "Extensions\VAM_GUI\VAM_GUI_classes.hpp"
 
 class ACEX_Fortify_Presets {
     class KPLIB_Fortify {
@@ -266,10 +263,6 @@ class ACEX_Fortify_Presets {
         };
     };
 };
-
-#include "Extensions\Pylon_Manager\ui\RscPylonManagerMenu.hpp"
-#include "Extensions\Arty_Menu\ui\RscArtyMenu.hpp"
-#include "Extensions\Supply_Menu\ui\RscSupplyMenu.hpp"
 
 class cfgSounds {
     sounds[] = {};

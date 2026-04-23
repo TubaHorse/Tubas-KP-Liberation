@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.97.1 (23/03/2026)
+* Added Extension: Enemy QRF from military bases based on tower detection. 
+* Added Extension: Commander can edit FOB/Outpost names (for Outpost and FOB).
+* Added: Players can build Outposts.
+* Added: `get_presets.sqf` file. It reads the presets selected on mission parameters.
+* Added: Readme file for presets to help mission makers understand them.
+* Added: Some new main functions for the new features.
+* Tweaked: FOB build limit reduced. Each builded FOB will add costs to the next box/truck.
+* Tweaked: Added KPLIB tag to Armor/Air/Inf weights variables. Added more weight for Armor and Air kills.
+* Tweaked: FOB variable (KPLIB_sectors_fob to KPLIB_player_fobs).
+* Tweaked: Force change of classname of storages to be containers.
+* Tweaked: Some KP functions to be more adapted for the new features.
+* Tweaked: Adding objects by zeus generates logs.
+* Tweaked: Repack FOB interface.
+* Tweaked: Changed the filler/invisible sector `outpost` to `filler_inf`. `filler` will be the main tag if more of those types are created in the future.
+* Tweaked: FOB/Outpost markers update by CBA Event Handler.
+* Tweaked: More enemy vehicle spawn on capitals and military sectors.
+* Tweaked: Enemy fighters PFH now directly checks for player's side aircrafts on air.
+* Removed: Enemy fighter notifications.
+* Removed: ACE Fortify compatibility.
+* Removed: Some KP Liberation script files no longer required for the current version.
+* Fixed: Moving/Destroying a FOB changed the names of the others existing bases.
+* Fixed: Changing ACE DBAL laser modes was removing the accessory from the player's weapon (Reported by Hunter).
+* Fixed: Boats spawning on puddles (Reported by Dooby).
+* Fixed: KP Player menu not showing up (Reported by Preflop).
+* Fixed: Unable to repeat building using the new build actions (Reported by Fernandim).
+
 ## 0.97.0 (07/03/2026)
 * Added Extension: Enemy artillery.
 * Added Extension: Artillery menu for the players as a replacer for the BIS support module.
@@ -50,6 +77,8 @@
 * Tweaked: Civilian reputation can decrease production time above certain value.
 * Tweaked: Briefing Skip (Forced).
 * Tweaked: Replaced build actions with mouse and keyboard interaction.
+* Tweaked: More resources spawns at first builded FOB.
+* Tweaked: Adding objects by zeus generates logs.
 * Removed: Push supply action.
 * Removed: GREUH player menu.
 * Removed: Useless enemy patrols.

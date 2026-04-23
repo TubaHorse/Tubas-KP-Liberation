@@ -18,7 +18,7 @@ _logi_destinations = [];
 
 {
     _logi_destinations pushBack [(format ["FOB %1", KPLIB_militaryAlphabet select _forEachIndex]), (_x select 0), (_x select 1), (_x select 2), (_x select 3)];
-} forEach KPLIB_fob_resources;
+} forEach KPLIB_base_resources;
 
 {
     private _sector = _x;

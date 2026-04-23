@@ -1,6 +1,6 @@
 scriptName "lose_sectors";
 
-waitUntil { !isNil "KPLIB_sectors_fob" };
+waitUntil { !isNil "KPLIB_player_fobs" };
 waitUntil { !isNil "KPLIB_sectors_player" };
 
 sleep 5;
@@ -8,14 +8,14 @@ sleep 5;
 attack_in_progress = false;
 
 while { KPLIB_endgame == 0 } do {
-
+    
     {
         _ownership = [ markerpos _x ] call KPLIB_fnc_getSectorOwnership;
         if ( _ownership == KPLIB_side_enemy ) then {
             [ _x ] call attack_in_progress_sector;
         };
         sleep 0.5;
-    } foreach (KPLIB_sectors_player - KPLIB_sectors_filler);
+    } foreach (KPLIB_sectors_player - KPLIB_fillers_all);
 
     {
         _ownership = [ _x ] call KPLIB_fnc_getSectorOwnership;
@@ -23,7 +23,7 @@ while { KPLIB_endgame == 0 } do {
             [ _x ] call attack_in_progress_fob;
         };
         sleep 0.5;
-    } foreach KPLIB_sectors_fob;
+    } foreach (KPLIB_player_fobs + KPLIB_player_outposts);
 
     sleep 30;
 

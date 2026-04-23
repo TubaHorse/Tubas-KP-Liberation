@@ -3,7 +3,7 @@
     File: fn_spawnBuildedObject.sqf
     Author: PiG13BR (https://github.com/PiG13BR), FernandimModelador https://github.com/FernandimModelador
     Date: 28/08/2025
-    Last update: 04/03/2026
+    Last update: 14/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -43,9 +43,7 @@ if (_vector) then {
 };
 
 // Add object init
-if (_buildType != BUILDTYPE_FOB && {_buildType != BUILDTYPE_FACTORY_STORAGE}) then {
-    [_objectSpawned] call KPLIB_fnc_addObjectInit;
-};
+[_objectSpawned] call KPLIB_fnc_addObjectInit;
 
 // Clear cargo
 [_objectSpawned] call KPLIB_fnc_clearCargo;
@@ -63,7 +61,7 @@ if ((unitIsUAV _objectSpawned) || _withCrew) then {
 };
 
 // Get build type
-if(_buildType != BUILDTYPE_BUILDING && {_buildType != BUILDTYPE_FOB} && {_buildType != BUILDTYPE_FACTORY_STORAGE}) then {
+if(_buildType != BUILDTYPE_BUILDING && {_buildType != BUILDTYPE_FOB} && {_buildType != BUILDTYPE_OUTPOST} && {_buildType != BUILDTYPE_FACTORY_STORAGE}) then {
     _objectSpawned addMPEventHandler ["MPKilled", {
         params ["_unit", "_killer"];
         ["KPLIB_manageKills", [_unit, _killer]] call CBA_fnc_localEvent;
@@ -93,6 +91,13 @@ if(_buildType == BUILDTYPE_FOB) then {
     _objectSpawned setVectorUp [0,0,1]; // VectorUp
 
     ["KPLIB_fobBuilded", [_objectSpawned, false]] call CBA_fnc_serverEvent;
+};
+
+// FOB Builded
+if(_buildType == BUILDTYPE_OUTPOST) then {
+    _objectSpawned setVectorUp [0,0,1]; // VectorUp
+
+    ["KPLIB_outpostBuilded", [_objectSpawned, false]] call CBA_fnc_serverEvent;
 };
 
 // Factory storage builded

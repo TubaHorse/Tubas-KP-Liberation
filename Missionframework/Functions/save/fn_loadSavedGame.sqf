@@ -2,7 +2,7 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 10/04/2026
+    Last Update: 23/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -83,21 +83,26 @@ private _allCrates = [];
 */
 
 // Enemy weight for anti air
-air_weight = 33;
+KPLIB_airWeight = 33;
 // Enemy weight for anti armor
-armor_weight = 33;
+KPLIB_armorWeight = 33;
 // Blufor sectors
 KPLIB_sectors_player = [];
 // Enemy combat readiness (0-100)
 KPLIB_enemyReadiness = 0;
 // All FOBs
-KPLIB_sectors_fob = [];
+KPLIB_player_fobs = [];
+// All Outposts
+KPLIB_player_outposts = [];
+// Create variables for cosmutizable FOB/outposts names. Use military alphabet as default.
+KPLIB_fobNames = [];
+KPLIB_outpostNames = [];
 // Player permissions data
 KPLIB_permissions = [];
 // Vehicle unlock links
 KPLIB_sector_vehicleLinks = [];
 // Enemy weight for anti infantry
-infantry_weight = 33;
+KPLIB_infantryWeight = 33;
 // Civilian reputation value (-100 - +100)
 KPLIB_civ_rep = 0;
 // Clearances
@@ -158,6 +163,7 @@ stats_civilians_healed = 0;
 stats_civilians_killed = 0;
 stats_civilians_killed_by_players = 0;
 stats_fobs_built = 0;
+stats_outposts_built = 0;
 stats_fobs_lost = 0;
 stats_fuel_produced = 0;
 stats_fuel_spent = 0;
@@ -210,7 +216,7 @@ if (!isNil "_saveData") then {
         _aiGroups                                   = _saveData select  6;
         KPLIB_sectors_player                        = _saveData select  7;
         KPLIB_enemyReadiness                        = _saveData select  8;
-        KPLIB_sectors_fob                           = _saveData select  9;
+        KPLIB_player_fobs                           = _saveData select  9;
         KPLIB_permissions                           = _saveData select 10;
         KPLIB_sector_vehicleLinks                   = _saveData select 11;
         KPLIB_civ_rep                               = _saveData select 12;
@@ -226,6 +232,10 @@ if (!isNil "_saveData") then {
         KPLIB_sectorLiberated                       = _saveData param [22, []];
         KPLIB_sector_arsenalLink                    = _saveData param [23, []];
         KPLIB_blockedFactories                      = _saveData param [24, []];
+        KPLIB_player_outposts                       = _saveData param [25, []];
+        KPLIB_fobNames                              = _saveData param [26, KPLIB_militaryAlphabet];
+        KPLIB_outpostNames                          = _saveData param [27, KPLIB_militaryAlphabet];
+
 
         stats_ammo_produced                         = _stats select  0;
         stats_ammo_spent                            = _stats select  1;
@@ -271,7 +281,7 @@ if (!isNil "_saveData") then {
         ["Save data from version: pre 0.96.5", "SAVE"] call KPLIB_fnc_log;
 
         KPLIB_sectors_player                        = _saveData select  0;
-        KPLIB_sectors_fob                           = _saveData select  1;
+        KPLIB_player_fobs                           = _saveData select  1;
         _objectsToSave                              = _saveData select  2;
         _dateTime                                   = _saveData select  3;
         KPLIB_enemyReadiness                        = _saveData select  4;
@@ -317,9 +327,9 @@ if (!isNil "_saveData") then {
     };
 
     // Extract weigths from collection array
-    infantry_weight = _weights select 0;
-    armor_weight = _weights select 1;
-    air_weight = _weights select 2;
+    KPLIB_infantryWeight = _weights select 0;
+    KPLIB_armorWeight = _weights select 1;
+    KPLIB_airWeight = _weights select 2;
 
     // Set correct resistance standing
     private _resistanceEnemy = [0, 1] select (KPLIB_civ_rep < 25);
@@ -650,7 +660,7 @@ if (!isNil "_saveData") then {
     
     // Check for captured outposts that can be replenished (mission closed before replenishment happened)
     {
-        if !(_x in KPLIB_sectors_outpost) then {continue};
+        if !(_x in KPLIB_fillers_patrol) then {continue};
         [_x] call KPLIB_fnc_replenishOutpost
     }forEach KPLIB_sectors_player;
 
@@ -693,10 +703,13 @@ if (!isNil "_saveData") then {
     ["Save nil", "SAVE"] call KPLIB_fnc_log;
 };
 
+if (KPLIB_fobNames isEqualTo []) then {KPLIB_fobNames = KPLIB_militaryAlphabet};
+if (KPLIB_outpostNames isEqualTo []) then {KPLIB_outpostNames = KPLIB_militaryAlphabet};
+
 publicVariable "stats_civilian_vehicles_seized";
 publicVariable "stats_ieds_detonated";
 publicVariable "KPLIB_sectors_player";
-publicVariable "KPLIB_sectors_fob";
+publicVariable "KPLIB_player_fobs";
 publicVariable "KPLIB_sectorsUnderAttack";
 publicVariable "KPLIB_clearances";
 publicVariable "KPLIB_logistics";
@@ -704,6 +717,9 @@ publicVariable "KPLIB_production";
 publicVariable "KPLIB_production_markers";
 publicVariable "KPLIB_sector_storage";
 publicVariable "KPLIB_blockedFactories";
+publicVariable "KPLIB_player_outposts";
+publicVariable "KPLIB_fobNames";
+publicVariable "KPLIB_outpostNames";
 
 // Check for deleted military sectors or deleted classnames in the locked vehicles array
 KPLIB_sector_vehicleLinks = KPLIB_sector_vehicleLinks select {

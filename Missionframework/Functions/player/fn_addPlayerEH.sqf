@@ -2,7 +2,7 @@
     File: fn_addPlayerEH.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 13/11/2025
-    Last Update: 19/01/2026
+    Last Update: 20/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -23,6 +23,9 @@ if (isDedicated) exitWith {};
 private _slotItemHandle = _player addEventHandler ["SlotItemChanged", {
 	params ["_unit", "_name", "_slot", "_assigned", "_weapon"];
 
+    // Ace DBAL compat
+    if ((toLowerANSI _name) find "ace_dbal_a3" >= 0) then {_name = "ace_dbal_a3"};
+  
     if (_assigned && {(KPLIB_arsenalAllowed find (toLowerANSI _name)) < 0 && {(_name find "TFAR") < 0}}) then { 
         if (_weapon isNotEqualTo "") then {
             // Some weapon acc 
@@ -146,6 +149,7 @@ if (!KPLIB_param_weaponSway) then {
 };
 
 // Main map display EH for locked arsenal
+/*
 if (count KPLIB_sector_arsenalLink > 0) then {
     [{
         !isNull (findDisplay 46)
@@ -182,3 +186,65 @@ if (count KPLIB_sector_arsenalLink > 0) then {
         }];
     }] call CBA_fnc_waitUntilAndExecute;
 };
+*/
+
+// Show what arsenal items can be unlocked by capturing the sector by clicking on the Arsenal+ marker
+if (count KPLIB_sector_arsenalLink > 0) then {
+    addMissionEventHandler ["MapSingleClick", {
+        params["", "_pos"];
+
+        private _sector = [300, _pos] call KPLIB_fnc_getNearestSector;
+        if (_sector in (keys KPLIB_sector_arsenalLink)) then {
+            private _items = KPLIB_sector_arsenalLink get _sector;
+            _items = _items apply {
+                private _name = "";
+                if (isClass(configFile >> "cfgWeapons" >> _x)) then {
+                    _name = getText(configFile >> "cfgWeapons" >> _x >> "displayName");
+                };
+
+                if (isClass(configFile >> "cfgMagazines" >> _x)) then {
+                    _name = getText(configFile >> "cfgMagazines" >> _x >> "displayName");
+                };
+
+                if (isClass(configFile >> "cfgVehicles" >> _x)) then {
+                    _name = getText(configFile >> "cfgVehicles" >> _x >> "displayName");
+                };
+                _name
+            }; 
+            [parseText (format[["<t size='1.5'>", localize "STR_ARSENAL_UNLOCK_LIST", "</t><br/>", "%1", "<br/>"] joinString "", _items joinString "<br/>"]), true, 7] call KPLIB_fnc_hint;
+        };
+    }];
+};
+
+// Link nearest military bases to a tower
+addMissionEventHandler ["Map", {
+    params["_opened"];
+    
+    if (_opened) then {
+        KPLIB_drawEH = ((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["Draw", {
+            private _player =  player;
+
+            private _tower = [getPosATL _player, KPLIB_side_enemy, KPLIB_range_radioTowerScan] call KPLIB_fnc_getNearestTower;
+            
+            if !(isNil "_tower") then {
+                // Find all sectors in range
+                private _sectorsInRange = ((KPLIB_sectors_all - [_tower]) - KPLIB_sectors_player) select {((markerPos _x) distance2D (markerPos _tower)) < KPLIB_range_radioTowerScan};
+
+                if (count _sectorsInRange < 1) then {continue}; // Skip
+                
+                // Find all military bases within tower range
+                private _militaryBases = (KPLIB_sectors_military arrayIntersect _sectorsInRange);
+                if (count _militaryBases > 0) then {
+                    // Draw lines between tower > bases
+                    {
+                        private _milPos = markerPos _x;
+                        (_this # 0) drawLine [markerPos _tower, _milPos, [1,0,0,1]];
+                    }forEach _militaryBases
+                };
+            };
+
+        }];
+    } else {
+        ((findDisplay 12) displayCtrl 51) ctrlRemoveEventHandler ["Draw", KPLIB_drawEH]
+    };
+}]

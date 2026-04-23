@@ -2,7 +2,7 @@
     File: fn_artilleryFobTargetingPFH.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 23/11/2024 
-    Last Update: 14/12/2025
+    Last Update: 14/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -24,7 +24,7 @@
     };
 
     // Enemy arty available but no fobs found, try again
-    if (KPLIB_sectors_fob isEqualTo []) exitWith {
+    if (KPLIB_player_fobs isEqualTo []) exitWith {
         [_handler] call CBA_fnc_removePerFrameHandler;
         [] call KPLIB_fnc_artilleryFobTargeting; // Run it again to gain a random sleep time
     };
@@ -32,9 +32,16 @@
     // Check if there are FOBs with players on it
     private _possibleTargetFobs = [];
     
-    _possibleTargetFobs = KPLIB_sectors_fob select {
-        count ([_x, KPLIB_range_fob] call KPLIB_fnc_getNearbyPlayers) > ceil(([] call KPLIB_fnc_getPlayerCount)/2)
-        //count ((_x nearEntities KPLIB_range_fob) select {(isPlayer _x) && {alive _x} && {[_x] call KPLIB_fnc_ace_isAwake}}) > ceil(([] call KPLIB_fnc_getPlayerCount)/2)
+    private _playerCount = ceil(([] call KPLIB_fnc_getPlayerCount)/2);
+    
+    // Player count too low
+    if (_playerCount < 3) exitWith {
+        [_handler] call CBA_fnc_removePerFrameHandler;
+        [] call KPLIB_fnc_artilleryFobTargeting; // Run it again to gain a random sleep time
+    };
+    _possibleTargetFobs = KPLIB_player_fobs select {
+       
+        count ([_x, KPLIB_range_fob] call KPLIB_fnc_getNearbyPlayers) > _playerCount
     };
 
     // No fobs with players on it

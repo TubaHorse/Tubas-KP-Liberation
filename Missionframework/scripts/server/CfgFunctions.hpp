@@ -7,7 +7,6 @@ class server_highcommand {
 class server_sector {
     file = "Scripts\Server\sector";
 
-    class destroyFob                    {};
     class sectorMonitor                 {ext = ".fsm";};
     class spawnSectorCrates             {};
     class spawnSectorIntel              {};

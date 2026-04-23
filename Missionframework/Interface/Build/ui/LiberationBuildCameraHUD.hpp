@@ -14,7 +14,7 @@ class KPLIB_BUILD_RscBuildPiP
             idc = -1;
             style = ST_BACKGROUND;
             font = "RobotoCondensedBold";
-            x = 0.762407 * safezoneW + safezoneX;
+            x = 0.662407 * safezoneW + safezoneX;
             w = 0.223046 * safezoneW;
             y = 0.205935 * safezoneH + safezoneY;
             h = 0.280062 * safezoneH;
@@ -39,7 +39,7 @@ class KPLIB_BUILD_RscBuildPiP
             idc = -1;
             style = ST_PICTURE;
             font = "RobotoCondensedBold";
-            x = 0.768967 * safezoneW + safezoneX;
+            x = 0.668967 * safezoneW + safezoneX;
             w = 0.209925 * safezoneW;
             y = 0.261947 * safezoneH + safezoneY;
             h = 0.210047 * safezoneH;
@@ -63,7 +63,7 @@ class KPLIB_BUILD_RscBuildPiP
         {
             idc = 37100;
             font = "PuristaBold";
-            x = 0.768967 * safezoneW + safezoneX;
+            x = 0.668967 * safezoneW + safezoneX;
             y = 0.219938 * safezoneH + safezoneY;
             w = 0.209925 * safezoneW;
             h = 0.0280062 * safezoneH;

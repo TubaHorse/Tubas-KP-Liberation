@@ -36,12 +36,12 @@ if (!isNil "KPLIB_usedOpforSpawnPoints") then {
 }; 
  
 // Get a FOB to be the center position 
-if (isNil "KPLIB_sectors_fob" || {KPLIB_sectors_fob isEqualTo []}) exitWith { ["No FOB found", "WARNING"] call KPLIB_fnc_log; ""}; 
+if (isNil "KPLIB_player_fobs" || {KPLIB_player_fobs isEqualTo []}) exitWith { ["No FOB found", "WARNING"] call KPLIB_fnc_log; ""}; 
  
 // Get FOBS near the front by getting the nearest opfor sector 
 private _enemy_sectors = KPLIB_sectors_all - KPLIB_sectors_player; 
 
-private _possibleFobs = KPLIB_sectors_fob select { 
+private _possibleFobs = KPLIB_player_fobs select { 
     private _pos = _x;
     private _found = false; 
     {  
@@ -76,6 +76,13 @@ private _possibleSpawns = [];
             _check = false; 
         } 
     }forEach KPLIB_sectors_player; 
+
+    // Check marker distances from player's outposts
+    {
+        if (((markerPos _current) distance2d _x < (_min) max 2000)) then {
+            _check = false;
+        }
+    }forEach KPLIB_player_outposts;
  
     if (!_check) then { continue };
  

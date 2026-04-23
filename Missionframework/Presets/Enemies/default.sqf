@@ -99,12 +99,12 @@ KPLIB_o_armyVehiclesLight = [
     "O_APC_Tracked_02_cannon_F"                                         // BTR-K Kamysh
 ];
 
-// All enemy anti-air vehicles
+// All enemy anti-air vehicles. Used in general spawning.
 KPLIB_o_antiAirVehicles = [
     "O_APC_Tracked_02_AA_F"                                             // ZSU-39 Tigris
 ];
 
-// All enemy tank vehicles. Used in enemy adapative spawns and for static/trenched.
+// All enemy tank vehicles. Used in enemy adapative spawns and for static/trenched and QRF.
 KPLIB_o_tankVehicles = [
     "O_MBT_02_cannon_F",                                                // T-100 Varsuk
     "O_MBT_04_cannon_F",                                                // T-140 Angara

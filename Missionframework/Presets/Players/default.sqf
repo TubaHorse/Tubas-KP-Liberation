@@ -33,6 +33,8 @@ KPLIB_b_fobBuilding     = "Land_Cargo_HQ_V1_F";                         // This 
 KPLIB_b_fobBox          = "B_Slingload_01_Cargo_F";                     // This is the FOB as a container.
 KPLIB_b_fobTruck        = "B_Truck_01_box_F";                           // This is the FOB as a vehicle.
 KPLIB_b_arsenal         = "B_supplyCrate_F";                            // This is the virtual arsenal as portable supply crates.
+KPLIB_b_outpostBox      = "Land_Cargo10_military_green_F";              // This is the Outpost as a container.
+KPLIB_b_outpostBuilding = "Land_BagBunker_Large_F";                     // This is the Outpost building.
 
 // This is the mobile respawn (and medical) truck.
 KPLIB_b_mobileRespawn   = ["B_Truck_01_medical_F","B_T_Truck_01_medical_F"];
@@ -56,8 +58,6 @@ KPLIB_b_crateAmmo       = "B_CargoNet_01_ammo_F";                       // This 
 KPLIB_b_crateFuel       = "CargoNet_01_barrels_F";                      // This defines the fuel crates.
 KPLIB_b_supplyDump      = "Land_Cargo20_military_green_F";              // This defines supply dump for the supply menu
 KPLIB_b_barrack         = "Land_Cargo_House_V1_F";                      // The building defined to unlock FOB redeploy and IA/squads buying
-KPLIB_b_fortify_small   = "Box_GEN_Equip_F";                            // This defines small crate for usage with Ace fortify
-KPLIB_b_fortify_medium  = "I_EAF_supplyCrate_F";                        // This defines medium crate for usage with Ace fortify
 
 // Basic uniform to spawn with
 KPLIB_b_basic_uniform = "U_B_CombatUniform_mcam";
@@ -261,9 +261,7 @@ KPLIB_b_vehStatic = [
     ["B_Mortar_01_F",80,150,0],                                         // Mk6 Mortar
     ["RHS_M119_WD",100,200,0],                                          // M119A2
     ["B_Radar_System_01_F",700,0,0],                                    // AN/MPQ-105 Radar
-    ["B_SAM_System_03_F",250,500,0],                                    // MIM-145 Defender
-    [KPLIB_b_fortify_small,50,0,0],                                     // Fortify Small crate
-    [KPLIB_b_fortify_medium,100,0,0]                                    // Fortify Medium crate
+    ["B_SAM_System_03_F",250,500,0]                                     // MIM-145 Defender
 ];
 
 KPLIB_b_objectsDeco = [
@@ -363,6 +361,7 @@ KPLIB_b_vehSupport = [
     [(KPLIB_b_mobileRespawn select 1),200,0,100],
     [KPLIB_b_fobBox,500,500,0],
     [KPLIB_b_fobTruck,500,500,75],
+    [KPLIB_b_outpostBox,300,300,0],
     [KPLIB_b_smallStorage,0,0,0],
     [KPLIB_b_largeStorage,0,0,0],
     [KPLIB_b_transStorage,100,0,0],

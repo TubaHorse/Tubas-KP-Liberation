@@ -2,7 +2,7 @@
     File: fn_sectorTowerSpawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 11/02/2026
+    Last Update: 16/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -48,6 +48,8 @@ if (KPLIB_enemyReadiness > 80) then {_squad4 = ([_infType] call KPLIB_fnc_getSqu
     };
 
     _sectorUnits = _sectorUnits + (units _grp);
+
+    _grp setVariable ["KPLIB_enemy_grpPatrol", true, true];
 
     sleep 1;
 }forEach [_squad1, _squad2, _squad3, _squad4];

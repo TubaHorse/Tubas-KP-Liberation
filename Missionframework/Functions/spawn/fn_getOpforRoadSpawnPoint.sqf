@@ -2,7 +2,7 @@
     File: fn_getOpforRoadSpawnPoint.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 07/11/2025
-    Last Update: 13/01/2026
+    Last Update: 12/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -58,17 +58,17 @@ private ["_valid", "_current", "_distances"];
     };
 
     if (_valid) then {
-        // Fetch distances to FOBs
-        _distances = (KPLIB_sectors_fob apply {(markerPos _current) distance2d _x}) select {_x < _max};
+        // Fetch distances to FOBs and outposts
+        _distances = ((KPLIB_player_fobs + KPLIB_player_outposts) apply {(markerPos _current) distance2d _x}) select {_x < _max};
 
         // Fetch distances to blufor sectors
         _distances append ((KPLIB_sectors_player apply {(markerPos _current) distance2d (markerPos _x)}) select {_x < _max});
 
-        // Invalid, if all sectors and FOBs are further away than given max distance
+        // Invalid, if all sectors and bases are further away than given max distance
         if (_distances isEqualTo []) then {
             _valid = false;
         } else {
-            // Invalid, if one sector or FOB is closer than min distance
+            // Invalid, if one sector or base is closer than min distance
             _distances sort true;
             if ((_distances select 0) < _min) then {
                 _valid = false;

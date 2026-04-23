@@ -10,6 +10,7 @@ class Do_Build
     class cancelBuilding {};
     class deleteBuildVariables {};
     class doBuildFob {};
+    class doBuildOutpost {};
     class doSectorBuild {};
     class manageBuildHUD {};
     class spawnBuildedObject {};

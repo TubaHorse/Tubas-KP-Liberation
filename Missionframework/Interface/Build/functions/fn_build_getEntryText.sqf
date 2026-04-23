@@ -3,7 +3,7 @@
     File: fn_build_getEntryText.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR, FernandimModelador https://github.com/FernandimModelador
     Date: 10/11/2025
-    Last Update: 28/01/2026
+    Last Update: 12/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -48,9 +48,10 @@ if (_class in KPLIB_b_mobileRespawns) then {
 if (_buildType == BUILDTYPE_SUPPORT) then {
     // Support names
     switch (_class) do {
-        case KPLIB_b_fobBox: {_entryText = localize "STR_FOBBOX";};
+        case KPLIB_b_fobBox: {_entryText = localize "STR_FOB_BOX";};
         case KPLIB_b_arsenal: {if (KPLIB_param_mobileArsenal) then {_entryText = localize "STR_ARSENAL_BOX";};};
-        case KPLIB_b_fobTruck: {_entryText = localize "STR_FOBTRUCK";};
+        case KPLIB_b_fobTruck: {_entryText = localize "STR_FOB_TRUCK";};
+        case KPLIB_b_outpostBox: {_entryText = localize "STR_OUTPOST_BOX";};
         case KPLIB_b_smallStorage: {_entryText = localize "STR_SMALL_STORAGE";};
         case KPLIB_b_largeStorage: {_entryText = localize "STR_LARGE_STORAGE";};
         case KPLIB_b_transStorage: {_entryText = localize "STR_TRANS_STORAGE";};
@@ -67,19 +68,6 @@ if (_buildType == BUILDTYPE_SUPPORT) then {
         case "Flag_White_F": {_entryText = localize "STR_INDIV_FLAG";};
         default {};
     }
-};
-
-// New statements made for Fortify crates and UAV crate
-if (_buildType == BUILDTYPE_DEFENCE) then {
-    switch (_class) do {
-        case KPLIB_b_fortify_small: {_entryText = localize "STR_FORTIFY_SMALL_ENTRY";};
-        case KPLIB_b_fortify_medium: {_entryText = localize "STR_FORTIFY_MEDIUM_ENTRY";};
-        default {};
-    };
-} else {
-    switch (_class) do {
-        default {};
-    };
 };
 
 _entryText

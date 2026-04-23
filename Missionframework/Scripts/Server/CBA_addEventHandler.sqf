@@ -83,3 +83,39 @@
 ["KPLIB_enemyReinforcements", {
     _this spawn reinforcements_manager;
 }] call CBA_fnc_addEventHandler;
+
+// FOB/Outpost markers
+["KPLIB_updateBaseMarkers", {
+        if (isNil "KPLIB_player_fobMarkers") then {
+            KPLIB_player_fobMarkers = [];
+        };
+        if (isNil "KPLIB_player_outpostMarkers") then {
+            KPLIB_player_outpostMarkers = [];
+        };
+
+        {deleteMarker _x;} forEach (KPLIB_player_fobMarkers + KPLIB_player_outpostMarkers);
+
+        for "_idx" from 0 to ((count KPLIB_player_fobs) - 1) do {
+            private _pos = (KPLIB_player_fobs select _idx);
+            if (_pos isEqualTo [0,0,0]) then {continue}; // Ignore
+            private _marker = createMarker [format ["fobmarker%1", _idx], markers_reset];
+            _marker setMarkerType "b_hq";
+            _marker setMarkerSize [1.5, 1.5];
+            _marker setMarkerPos _pos;
+            _marker setMarkerText format ["FOB %1", KPLIB_fobNames select _idx];
+            _marker setMarkerColor "ColorYellow";
+            KPLIB_player_fobMarkers pushback _marker;
+        };
+
+        for "_idx" from 0 to ((count KPLIB_player_outposts) - 1) do {
+            private _pos = (KPLIB_player_outposts select _idx);
+            if (_pos isEqualTo [0,0,0]) then {continue}; // Ignore
+            private _marker = createMarker [format ["outpostmarker%1", _idx], markers_reset];
+            _marker setMarkerType "b_hq";
+            _marker setMarkerSize [1.2, 1.2];
+            _marker setMarkerPos _pos;
+            _marker setMarkerText format ["Outpost %1", KPLIB_outpostNames select _idx];
+            _marker setMarkerColor "ColorYellow";
+            KPLIB_player_outpostMarkers pushback _marker;
+        };
+}] call CBA_fnc_addEventHandler;

@@ -12,6 +12,7 @@
         _vehClass - vehicle classname [STRING, defaults to ""]
         _sector - spawn point or sector reference [STRING, defaults to ""]
         _targetPos - position to attack [POSITION, defaults to []]
+        _notify - notify players [BOOL, defaults to true]
 
     Returns:
         Group spawned [GROUP]

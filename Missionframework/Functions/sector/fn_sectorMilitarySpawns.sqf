@@ -2,7 +2,7 @@
     File: fn_sectorMilitarySpawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 03/02/2026
+    Last Update: 22/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -35,9 +35,9 @@ private _infType = "army";
 private _squad1 = ([_infType] call KPLIB_fnc_getSquadComp);
 private _squad2 = ([_infType] call KPLIB_fnc_getSquadComp);
 private _squad3 = [];
+private _squad4 = [];
 if (KPLIB_param_unitcap >= 1.5) then {_squad3 = ([_infType] call KPLIB_fnc_getSquadComp);};
 if ((random 100) > (33 / KPLIB_param_difficulty)) then {_squad4 = ([_infType] call KPLIB_fnc_getSquadComp);};
-_squad4 = ([] call KPLIB_fnc_getSquadComp);
 
 // Spawn squads
 {
@@ -52,27 +52,28 @@ _squad4 = ([] call KPLIB_fnc_getSquadComp);
 
     _sectorUnits = _sectorUnits + (units _grp);
 
+    _grp setVariable ["KPLIB_enemy_grpPatrol", true, true];
+
     sleep 1;
 }forEach [_squad1, _squad2, _squad3, _squad4];
 
 // Select vehicles to spawn
 // Heavy vehicles
-private _vehToSpawn = [];
-if (KPLIB_enemyReadiness > 20) then {
+private _vehToSpawn = [([] call KPLIB_fnc_getAdaptiveVehicle), ([] call KPLIB_fnc_getAdaptiveVehicle)];
+if (KPLIB_enemyReadiness > 25) then {
     _vehToSpawn pushback ([] call KPLIB_fnc_getAdaptiveVehicle);
+};
+if (KPLIB_enemyReadiness > 50) then {
     _vehToSpawn pushback ([] call KPLIB_fnc_getAdaptiveVehicle);
-    if ((random 100) > (33 / KPLIB_param_difficulty)) then {
-        _vehToSpawn pushback ([] call KPLIB_fnc_getAdaptiveVehicle);
-    };
+};
+if (KPLIB_enemyReadiness > 75) then {
+    _vehToSpawn pushback ([] call KPLIB_fnc_getAdaptiveVehicle);
 };
 
-// Select vehicles to spawn
-private _vehToSpawn = [([] call KPLIB_fnc_getAdaptiveVehicle), ([] call KPLIB_fnc_getAdaptiveVehicle)];
 if ((random 100) > (33 / KPLIB_param_difficulty)) then {
     _vehToSpawn pushback ([] call KPLIB_fnc_getAdaptiveVehicle);
 };
 if ((random 100) > (66 / KPLIB_param_difficulty)) then {
-    _vehToSpawn pushback ([] call KPLIB_fnc_getAdaptiveVehicle);
     _vehToSpawn pushback ([] call KPLIB_fnc_getAdaptiveVehicle);
 };
 
@@ -84,6 +85,8 @@ if ((random 100) > (66 / KPLIB_param_difficulty)) then {
     
     // Dir
     _vehicle setDir (_sectorPos getDir _vehicle);
+
+    (group(effectiveCommander _vehicle)) setVariable ["KPLIB_enemy_vehPatrol", true, false]; 
 
     sleep 1;
 }forEach _vehToSpawn;

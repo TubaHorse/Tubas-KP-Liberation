@@ -2,7 +2,7 @@
     File: fn_createClearanceConfirm.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-04-10
-    Last Update: 2020-04-10
+    Last Update: 2026-04-12
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -28,11 +28,16 @@ if (_centerPos isEqualTo [0, 0, 0]) exitWith {["Zero position given"] call BIS_f
 if (_radius isEqualTo 0) exitWith {["Zero radius given"] call BIS_fnc_error; false};
 if (!canSuspend) exitWith {_this spawn KPLIB_fnc_createClearanceConfirm};
 
+private _name = switch (true) do {
+    case (_centerPos in KPLIB_player_outposts) : {"Outpost"};
+    default {"FOB"};
+};
+
 private _text = format [
     localize "STR_CONFIRM_CLEARANCE_TEXT",
     count (nearestTerrainObjects [_centerPos, [], _radius, false, true]),
     floor _radius,
-    ["FOB", [_centerPos] call KPLIB_fnc_getFobName] joinString " "
+    [_name, [_centerPos] call KPLIB_fnc_getBaseName] joinString " "
 ];
 
 private _confirmed = [

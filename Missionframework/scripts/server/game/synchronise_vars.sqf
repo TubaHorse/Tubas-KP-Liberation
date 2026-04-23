@@ -3,7 +3,7 @@ scriptName "synchronise_vars";
 sync_vars = []; publicVariable "sync_vars";
 
 waitUntil{!isNil "KPLIB_saveLoaded"};
-waitUntil{!isNil "KPLIB_fob_resources"};
+waitUntil{!isNil "KPLIB_base_resources"};
 waitUntil{!isNil "KPLIB_supplies_global"};
 waitUntil{!isNil "KPLIB_ammo_global"};
 waitUntil{!isNil "KPLIB_fuel_global"};
@@ -17,12 +17,12 @@ waitUntil{!isNil "resources_intel"};
 waitUntil{!isNil "infantry_cap"};
 waitUntil{!isNil "KPLIB_civ_rep"};
 waitUntil{!isNil "KPLIB_guerilla_strength"};
-waitUntil{!isNil "infantry_weight"};
-waitUntil{!isNil "armor_weight"};
-waitUntil{!isNil "air_weight"};
+waitUntil{!isNil "KPLIB_infantryWeight"};
+waitUntil{!isNil "KPLIB_armorWeight"};
+waitUntil{!isNil "KPLIB_airWeight"};
 waitUntil {KPLIB_saveLoaded};
 
-private _KPLIB_fob_resources_old = [];
+private _KPLIB_base_resources_old = [];
 private _KPLIB_supplies_global_old = -1;
 private _KPLIB_ammo_global_old = -1;
 private _KPLIB_fuel_global_old = -1;
@@ -36,13 +36,13 @@ private _resources_intel_old = -999;
 private _infantry_cap_old = -999;
 private _KPLIB_civ_rep_old = -999;
 private _KPLIB_guerilla_strength_old = -999;
-private _infantry_weight_old = -1;
-private _armor_weight_old = -1;
-private _air_weight_old = -1;
+private _KPLIB_infantryWeight_old = -1;
+private _KPLIB_armorWeight_old = -1;
+private _KPLIB_airWeight_old = -1;
 
 while {true} do {
     waitUntil {sleep 0.25;
-        !(_KPLIB_fob_resources_old isEqualTo KPLIB_fob_resources)
+        !(_KPLIB_base_resources_old isEqualTo KPLIB_base_resources)
         || _KPLIB_supplies_global_old != KPLIB_supplies_global
         || _KPLIB_ammo_global_old != KPLIB_ammo_global
         || _KPLIB_fuel_global_old != KPLIB_fuel_global
@@ -56,16 +56,16 @@ while {true} do {
         || _infantry_cap_old != infantry_cap
         || _KPLIB_civ_rep_old != KPLIB_civ_rep
         || _KPLIB_guerilla_strength_old != KPLIB_guerilla_strength
-        || _infantry_weight_old != infantry_weight
-        || _armor_weight_old != armor_weight
-        || _air_weight_old != air_weight
+        || _KPLIB_infantryWeight_old != KPLIB_infantryWeight
+        || _KPLIB_armorWeight_old != KPLIB_armorWeight
+        || _KPLIB_airWeight_old != KPLIB_airWeight
     };
 
     if (KPLIB_guerilla_strength < 0) then {KPLIB_guerilla_strength = 0;};
 
     sleep 0.25;
     sync_vars = [
-        KPLIB_fob_resources,
+        KPLIB_base_resources,
         KPLIB_supplies_global,
         KPLIB_ammo_global,
         KPLIB_fuel_global,
@@ -79,13 +79,13 @@ while {true} do {
         infantry_cap,
         KPLIB_civ_rep,
         KPLIB_guerilla_strength,
-        infantry_weight,
-        armor_weight,
-        air_weight
+        KPLIB_infantryWeight,
+        KPLIB_armorWeight,
+        KPLIB_airWeight
     ];
     publicVariable "sync_vars";
 
-    _KPLIB_fob_resources_old = +KPLIB_fob_resources;
+    _KPLIB_base_resources_old = +KPLIB_base_resources;
     _KPLIB_supplies_global_old = KPLIB_supplies_global;
     _KPLIB_ammo_global_old = KPLIB_ammo_global;
     _KPLIB_fuel_global_old = KPLIB_fuel_global;
@@ -99,7 +99,7 @@ while {true} do {
     _infantry_cap_old = infantry_cap;
     _KPLIB_civ_rep_old = KPLIB_civ_rep;
     _KPLIB_guerilla_strength_old = KPLIB_guerilla_strength;
-    _infantry_weight_old = infantry_weight;
-    _armor_weight_old = armor_weight;
-    _air_weight_old = air_weight;
+    _KPLIB_infantryWeight_old = KPLIB_infantryWeight;
+    _KPLIB_armorWeight_old = KPLIB_armorWeight;
+    _KPLIB_airWeight_old = KPLIB_airWeight;
 };

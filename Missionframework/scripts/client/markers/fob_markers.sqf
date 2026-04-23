@@ -1,29 +1,49 @@
 scriptName "fob_markers";
 
+// ToDo: make a function, call this (on load saved game, fob/outpost builded, fob/outpost destroyed)
+
 waitUntil {!isNil "KPLIB_saveLoaded"};
-waitUntil {!isNil "KPLIB_sectors_fob"};
+waitUntil {!isNil "KPLIB_player_fobs"};
 waitUntil {KPLIB_saveLoaded};
 
 uiSleep 3;
 
-private _markers = [];
+private _markers_fob = [];
 private _markers_mobilespawns = [];
+private _markers_outpost = [];
 
 while {true} do {
-    if (count _markers != count KPLIB_sectors_fob) then {
-        {deleteMarkerLocal _x;} forEach _markers;
-        _markers = [];
+    /*
+    if (count _markers_fob != count KPLIB_player_fobs) then {
+        {deleteMarkerLocal _x;} forEach _markers_fob;
+        _markers_fob = [];
 
-        for "_idx" from 0 to ((count KPLIB_sectors_fob) - 1) do {
+        for "_idx" from 0 to ((count KPLIB_player_fobs) - 1) do {
             private _marker = createMarkerLocal [format ["fobmarker%1", _idx], markers_reset];
             _marker setMarkerTypeLocal "b_hq";
             _marker setMarkerSizeLocal [1.5, 1.5];
-            _marker setMarkerPosLocal (KPLIB_sectors_fob select _idx);
-            _marker setMarkerTextLocal format ["FOB %1",KPLIB_militaryAlphabet select _idx];
+            _marker setMarkerPosLocal (KPLIB_player_fobs select _idx);
+            _marker setMarkerTextLocal format ["FOB %1", KPLIB_fobNames select _idx];
             _marker setMarkerColorLocal "ColorYellow";
-            _markers pushback _marker;
+            _markers_fob pushback _marker;
         };
     };
+
+    if (count _markers_outpost != count KPLIB_player_outposts) then {
+        {deleteMarkerLocal _x;} forEach _markers_outpost;
+        _markers_outpost = [];
+
+        for "_idx" from 0 to ((count KPLIB_player_outposts) - 1) do {
+            private _marker = createMarkerLocal [format ["outpostmarker%1", _idx], markers_reset];
+            _marker setMarkerTypeLocal "b_hq";
+            _marker setMarkerSizeLocal [1.2, 1.2];
+            _marker setMarkerPosLocal (KPLIB_player_outposts select _idx);
+            _marker setMarkerTextLocal format ["Outpost %1", KPLIB_outpostNames select _idx];
+            _marker setMarkerColorLocal "ColorYellow";
+            _markers_outpost pushback _marker;
+        };
+    };
+    */
 
     if (KPLIB_param_mobileRespawn) then {
         private _respawn_trucks = [] call KPLIB_fnc_getMobileRespawns;

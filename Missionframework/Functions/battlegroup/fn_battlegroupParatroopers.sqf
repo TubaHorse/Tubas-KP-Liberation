@@ -13,6 +13,7 @@
         _planeClass - vehicle classname [STRING, defaults to ""]
         _marker - spawn point or sector reference [STRING, defaults to ""]
         _targetPos - position to attack [ARRAY, defaults to []]
+        _notify - notify players [BOOL, defaults to true]
 
     Returns:
         Group spawned [GROUP]

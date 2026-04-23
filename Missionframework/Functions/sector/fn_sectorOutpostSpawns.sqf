@@ -2,7 +2,7 @@
     File: fn_sectorOutpostSpawns.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 17/12/2025
-    Last Update: 03/02/2026
+    Last Update: 16/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -52,6 +52,8 @@ if (KPLIB_param_unitcap >= 1.25) then {_squad2 = ([_infType] call KPLIB_fnc_getS
     };
 
     _sectorUnits = _sectorUnits + (units _grp);
+
+    _grp setVariable ["KPLIB_enemy_grpPatrol", true, true];
 
     sleep 1;
 }forEach [_squad1, _squad2];

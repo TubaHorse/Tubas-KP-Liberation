@@ -2,7 +2,7 @@
     File: fn_despawnGroup.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 18/09/2024 
-    Last Update: 03/12/2025 
+    Last Update: 18/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -37,7 +37,7 @@ _group setVariable ["KPLIB_inDespawner", true];
 			if ((_blufor_unit distance _x) < 1200) exitWith { _near_units = true };
 		}forEach units _group;
 		
-	} forEach (allUnits select {(alive _x) && (side _x == KPLIB_side_player)});
+	} forEach (allUnits select {(alive _x) && (side (group _x) == KPLIB_side_player)});
 
 	private _despawn = call {
 		if (_near_units) exitWith {false};

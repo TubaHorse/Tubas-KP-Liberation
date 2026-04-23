@@ -2,7 +2,7 @@
     File: fn_getOpforCap.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2019-12-03
-    Last Update: 2026-03-21
+    Last Update: 2026-15-04
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -19,7 +19,7 @@ private _unitsCap = [];
 
 {
     // Get closest sector
-    private _sector = [KPLIB_range_sectorCapture * 1.4, getPosATL _x, false, true] call KPLIB_fnc_getNearestSector;
+    private _sector = [KPLIB_range_sectorCapture * 1.4, getPosATL _x, [], true] call KPLIB_fnc_getNearestSector;
     if (isNil "_sector") then {continue};
 
     _unitsCap pushBackUnique _x;

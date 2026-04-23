@@ -18,7 +18,7 @@
 
 params ["_unit", ["_force_surrender", false]];
 
-if (KPLIB_sectors_fob isEqualTo []) exitWith {};
+if (KPLIB_player_fobs isEqualTo []) exitWith {};
 
 // define who do not surrender
 if ((!_force_surrender) && ((random 100) > KPLIB_surrender_chance)) exitWith {};

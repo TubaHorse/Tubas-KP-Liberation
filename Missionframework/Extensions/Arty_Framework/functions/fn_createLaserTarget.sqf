@@ -43,7 +43,7 @@ if (_targetObject isEqualTo objNull) then {
 	_realVehTargets = _targetArea nearEntities [(KPLIB_b_vehHeavy + KPLIB_b_vehAir) apply {_x select 0}, 125];
 
 	// FOB?
-	if (_targetArea in KPLIB_sectors_fob) then {
+	if (_targetArea in KPLIB_player_fobs) then {
 		// Find valuable structures aswell
 		_structureTargets = nearestObjects [_targetArea, [KPLIB_b_airControl, KPLIB_b_slotPlane, KPLIB_b_logiStation], KPLIB_range_fob];
 		// Filter it

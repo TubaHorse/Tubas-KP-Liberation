@@ -20,16 +20,16 @@ private _adaptativeVeh = selectRandom ([KPLIB_o_armyVehicles, KPLIB_o_armyVehicl
 private _selected = false;
 private _randomchance = 0;
 
-if (armor_weight > 40 && !_selected) then {
-    private _randomchance = (armor_weight - 50) * 1.4;
+if (KPLIB_armorWeight > 40 && !_selected) then {
+    private _randomchance = (KPLIB_armorWeight - 50) * 1.4;
     if ((random 100) < _randomchance) then {
         _selected = true;
         _adaptativeVeh = selectRandom KPLIB_o_tankVehicles;
     };
 };
 
-if (air_weight > 40 && !_selected) then {
-    private _randomchance = (air_weight - 40) * 1.4;
+if (KPLIB_airWeight > 40 && !_selected) then {
+    private _randomchance = (KPLIB_airWeight - 40) * 1.4;
     if ((random 100) < _randomchance) then {
         _selected = true;
         _adaptativeVeh = selectRandom KPLIB_o_antiAirVehicles;

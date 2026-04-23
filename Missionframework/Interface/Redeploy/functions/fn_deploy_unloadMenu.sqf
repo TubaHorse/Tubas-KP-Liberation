@@ -2,7 +2,7 @@
     File: fn_deploy_createMenuRsc.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 04/11/2025
-    Last Update: 05/01/2026
+    Last Update: 12/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -41,9 +41,9 @@ if (KPLIB_param_mobileRespawn && (KPLIB_respawn_time > time)) then {
 
 localNamespace setVariable ["KPLIB_loadoustData", nil];
 localNamespace getVariable ["KPLIB_playerDeploying", nil];
+player setVariable ["KPLIB_playerOnRedeploy", false];
 
 if (_player distance2D (markerPos "respawn") < 100) then {
     // If player is still near respawn point, reload GUI
     [] call KPLIB_fnc_deploy_createMenuRsc;
 };
-

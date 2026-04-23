@@ -5,7 +5,6 @@ class Arty_Menu
 	class addArtyMenuAction {};
 	class createArtyMenuRsc {};
 	class fireArty {};
-	class getArtilleryRanges {};
 	class manageArtyMenu {};
 	class registerArtyPiece {};
 }

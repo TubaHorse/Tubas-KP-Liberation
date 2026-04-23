@@ -2,7 +2,7 @@
 	File: fn_createCrew.sqf
 	Author: PiG13BR - https://github.com/PiG13BR/
 	Date: 26/08/2024 
-	Last Update: 07/12/2025 
+	Last Update: 20/04/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:

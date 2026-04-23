@@ -46,12 +46,19 @@ class KPLIB {
     };
     class Fob {
         file = "Functions\fob";
+        
         class addActionsFob             {};
-        class getFobName                {};
-        class getFobResources           {};
+        class addActionsOutpost         {};
+        class createFob                 {};
+        class createOutpost             {};
+        class destroyFob                {};
+        class destroyOutpost            {};
+        class getBaseName               {};
+        class getBaseResources          {};
         class getNearestFob             {};
+        class getNearestPlayerBase      {};
+        class getNearestBuildPos        {};
         class setFobMass                {};
-
     };
     class Gear {
         file = "Functions\gear";
@@ -84,6 +91,7 @@ class KPLIB {
         class fullHeal                  {};
         class getAdaptiveVehicle        {};
         class getMilitaryId             {};
+        class getNearbyEntities         {};
         class getNearestViVTransport    {};
         class getOpforCap               {};
         class getOpforFactor            {};
@@ -171,9 +179,9 @@ class KPLIB {
         class findSectorGarrisons       {};
         class getBluforObjective        {};
         class getLocationName           {};
-        class getNearestBase            {};
         class getNearestBluforObjective {};
         class getNearestSector          {};
+        class getNearestMilitaryBase    {};
         class getNearestTower           {};
         class getSectorOwnership        {};
         class getSectorRange            {};
@@ -257,12 +265,16 @@ class KPLIB {
     #include "Interface\Production\cfgFunctions.hpp"
     #include "Interface\Recycle\cfgFunctions.hpp"
     #include "Interface\Redeploy\cfgFunctions.hpp"
+    #include "Interface\Repackage\cfgFunctions.hpp"
 
     // Extensions
     #include "Extensions\Arty_Framework\cfgFunctions.hpp"
     #include "Extensions\Arty_Menu\cfgFunctions.hpp"
+    #include "Extensions\Base_Name\cfgFunctions.hpp"
     #include "Extensions\Clear_Brushes\cfgFunctions.hpp"
+    #include "Extensions\Discord_Log\cfgFunctions.hpp"
     #include "Extensions\Enemy_Fighters\cfgFunctions.hpp"
+    #include "Extensions\Enemy_QRF\cfgFunctions.hpp"
     #include "Extensions\Lock_Arsenal\cfgFunctions.hpp"
     #include "Extensions\Player_Menu\KPPLM\KPPLM_functions.hpp"
     #include "Extensions\Pylon_Manager\cfgFunctions.hpp"
@@ -271,5 +283,9 @@ class KPLIB {
     #include "Extensions\Sector_Objects\cfgFunctions.hpp"
     #include "Extensions\Sector_Events\cfgFunctions.hpp"
     #include "Extensions\Supply_Menu\cfgFunctions.hpp"
-    #include "Extensions\Discord_Log\cfgFunctions.hpp"
+};
+
+class KPPLM {
+    // Extensions
+    #include "Extensions\Player_Menu\KPPLM\KPPLM_functions.hpp"
 };

@@ -2,7 +2,7 @@
     File: fn_registerSectorObject.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 20/12/2024
-    Last Update: 20/12/2025
+    Last Update: 15/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -40,7 +40,7 @@ params [
 	_this params ["_object", "_canGarrison", "_initDelete"];
 
 	// Find the nearest sector
-	private _sector = [KPLIB_objectsGrabber_radius, getPosATL _object, true] call KPLIB_fnc_getNearestSector;
+	private _sector = [KPLIB_objectsGrabber_radius, getPosATL _object, (KPLIB_sectors_all + KPLIB_fillers_all)] call KPLIB_fnc_getNearestSector;
 
     if (_sector isEqualTo "") exitWith {
         [format ["%1 in position %2 is too far away from any sectors. Deleting the object.", (typeOf _object), (getPos _object)], "REGISTERING OBJECT FAILED"] call KPLIB_fnc_log; 
@@ -63,7 +63,7 @@ params [
         _initDelete = false; // ToDo: Find something to get reference of the spawned object to disable garrison. Array position doesn't work good.
 		// Because a deleted object will give a <NULL-OBJECT> in the garrison array, save the position of the object instead to find a match later.
         private _objectPos = [round parseNumber (((getPosATL _object) # 0) toFixed 2), round parseNumber (((getPosATL _object) # 1) toFixed 2), round parseNumber (((getPosATL _object) # 2) toFixed 2)];
-        private _sector = [_radius, getPosATL _object, true] call KPLIB_fnc_getNearestSector;
+        private _sector = [_radius, getPosATL _object, (KPLIB_sectors_all + KPLIB_fillers_all)] call KPLIB_fnc_getNearestSector;
 
         if !(_sector in KPLIB_GarrisonsBlacklist_HashMap) then {
         // Create a new key with a value

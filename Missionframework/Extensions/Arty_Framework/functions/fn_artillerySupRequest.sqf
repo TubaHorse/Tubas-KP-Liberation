@@ -1,8 +1,8 @@
 /*
 	File: fn_artillerySupRequest.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
-	Date: 2024-09-10
-	Last Update: 2025-04-16
+	Date: 10/09/2024
+	Last Update: 20/04/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -110,7 +110,7 @@ if ((_visibility > 0.1) && {_knowsAbout > 1.5}) then {
 	if ((getNumber(configFile >> "CfgVehicles" >> (typeOf (vehicle _target)) >> "ArtilleryScanner")) == 1) exitWith {}; // Let the counter battery handle artillery fire
 
 	if ((toLower (typeOf (vehicle _target))) in KPLIB_allLandVeh_classes) then {
-		if ((((typeOf (vehicle _target)) isKindOf "Tank") || {(typeOf (vehicle _target)) isKindOf "WheeledAPC"} || {(typeOf (vehicle _target)) isKindOf "TrackedAPC"} || {(typeOf (vehicle _target)) isKindOf "Wheeled_APC_F"}) && !((typeOf (vehicle _target)) isKindOf "Air")) then {
+		if ((((typeOf (vehicle _target)) isKindOf "Tank") || {(typeOf (vehicle _target)) isKindOf "Wheeled_APC_F"} || {(typeOf (vehicle _target)) isKindOf "TrackedAPC"} || {(typeOf (vehicle _target)) isKindOf "Wheeled_APC_F"}) && !((typeOf (vehicle _target)) isKindOf "Air")) then {
 			// Heavy vehicle
 			private _ammoType = [["CLUSTER", 1 + (random 2)], ["LG", 1 + (random 1)], objNull, _target] selectRandomWeighted [0.5, 0.9];
 			_ammoType params 

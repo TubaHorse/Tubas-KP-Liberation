@@ -46,11 +46,16 @@ waitUntil {
 if ( KPLIB_endgame == 0 ) then {
     if ( _attacktime <= 1 && ( [ _thispos ] call KPLIB_fnc_getSectorOwnership == KPLIB_side_enemy ) ) then {
         [_thispos, 2] remoteExec ["remote_call_fob"];
+
         sleep 3;
-        KPLIB_sectors_fob = KPLIB_sectors_fob - [_thispos];
-        publicVariable "KPLIB_sectors_fob";
+
         ["KPLIB_ResetBattleGroups"] call CBA_fnc_serverEvent;
-        [_thispos] call KPLIB_fnc_destroyFob;
+        
+        switch (true) do {
+            case (_thispos in KPLIB_player_outposts) : {[_thispos] call KPLIB_fnc_destroyOutpost;};
+            default {[_thispos] call KPLIB_fnc_destroyFob;};
+        };
+        
         [] spawn KPLIB_fnc_doSave;
         stats_fobs_lost = stats_fobs_lost + 1;
     } else {

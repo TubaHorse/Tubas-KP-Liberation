@@ -24,7 +24,7 @@ if (_state isEqualTo "") then {
     _state = "In the field";
     [] call {
         if (player getVariable ["KPLIB_isNearStart", false]) exitWith {_state = "Startbase";};
-        if !(player getVariable ["KPLIB_fobName", ""] isEqualTo "") exitWith {_state = player getVariable "KPLIB_fobName";};
+        if !(player getVariable ["KPLIB_currentBaseName", ""] isEqualTo "") exitWith {_state = player getVariable "KPLIB_currentBaseName";};
     };
 };
 

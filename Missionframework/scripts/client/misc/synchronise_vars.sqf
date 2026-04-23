@@ -8,7 +8,7 @@ waitUntil {!isNil "sync_vars"};
 while {true} do {
     waitUntil {sleep 0.2; (count sync_vars) > 0};
 
-    KPLIB_fob_resources = sync_vars select 0;
+    KPLIB_base_resources = sync_vars select 0;
     KPLIB_supplies_global = sync_vars select 1;
     KPLIB_ammo_global = sync_vars select 2;
     KPLIB_fuel_global = sync_vars select 3;
@@ -22,9 +22,9 @@ while {true} do {
     infantry_cap = sync_vars select 11;
     KPLIB_civ_rep = sync_vars select 12;
     KPLIB_guerilla_strength = sync_vars select 13;
-    infantry_weight = sync_vars select 14;
-    armor_weight = sync_vars select 15;
-    air_weight = sync_vars select 16;
+    KPLIB_infantryWeight = sync_vars select 14;
+    KPLIB_armorWeight = sync_vars select 15;
+    KPLIB_airWeight = sync_vars select 16;
 
     sync_vars = [];
     one_synchro_done = true;

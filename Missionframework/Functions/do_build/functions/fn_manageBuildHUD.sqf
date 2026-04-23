@@ -5,7 +5,7 @@
     File: fn_manageBuildHUD.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 21/02/2026
-    Last update: 07/03/2026
+    Last update: 12/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -76,6 +76,13 @@ _cameraTextCtrl ctrlSetTextColor [0,1,0,1];
 
 // Camera on (default)
 [_player] call KPLIB_fnc_buildCameraAssist;
+
+// Unshow cancel control if it's a FOB or Outpost
+private _buildType = localNamespace getVariable ["KPLIB_BUILD_buildType", 1];
+if (_buildType == BUILDTYPE_FOB || _buildType == BUILDTYPE_OUTPOST) then {
+    //_cancelTextCtrl ctrlshow false;
+    _cancelTextCtrl ctrlSetTextColor [0.4,0.4,0.4,1];
+};
 
 // Update scroll information
 private _mouseZchanged = (findDisplay MISSION_IDD) displayAddEventHandler ["MouseZChanged", {
@@ -245,18 +252,21 @@ private _mouseButtonDownEH = (findDisplay MISSION_IDD) displayAddEventHandler ["
 
     private _object = localNamespace getVariable ["KPLIB_BUILD_preplacedObject", objNull];
     private _player = localNamespace getVariable ["KPLIB_BUILD_player", objNull];
+    private _buildType = localNamespace getVariable ["KPLIB_BUILD_buildType", 1];
 
     if (_button > 0) then {
         // Cancel
-        [_object] call KPLIB_fnc_cancelBuilding;
-        "KPLIB_BUILD_hudLayer" cutRsc ["RemoveRsc","PLAIN",5, false];
-        
-        // Select previous weapon
-        private _previousWeapon = _player getVariable "KPLIB_BUILD_previousWeapon";
+        if (_buildType != BUILDTYPE_FOB && _buildType != BUILDTYPE_OUTPOST) then {
+            [_object] call KPLIB_fnc_cancelBuilding;
+            "KPLIB_BUILD_hudLayer" cutRsc ["RemoveRsc","PLAIN",5, false];
+            
+            // Select previous weapon
+            private _previousWeapon = _player getVariable "KPLIB_BUILD_previousWeapon";
 
-        if (!isNil "_previousWeapon") then {
-            _player selectWeapon _previousWeapon;
-            _player setVariable ["KPLIB_BUILD_previousWeapon", nil, true];
+            if (!isNil "_previousWeapon") then {
+                _player selectWeapon _previousWeapon;
+                _player setVariable ["KPLIB_BUILD_previousWeapon", nil, true];
+            };
         };
     } else {
         private _canBuild = _object getVariable ["KPLIB_BUILD_canBuild", true]; // Change value

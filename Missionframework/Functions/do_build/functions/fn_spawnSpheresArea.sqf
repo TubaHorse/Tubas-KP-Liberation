@@ -2,7 +2,7 @@
     File: fn_spawnShepresArea.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 28/08/2025
-    Last update: 10/11/2025
+    Last update: 15/03/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -15,11 +15,9 @@
     Returns:
         -
 */
-params[["_fobPos", [0,0,0], [[]]], ["_player", player, [ObjNull]]];
+params[["_fobPos", [0,0,0], [[]]], ["_range", KPLIB_range_fob, [0]], ["_player", player, [ObjNull]]];
 
 if (_fobPos isEqualTo [0,0,0]) exitWith {["Position is [0,0,0]"] call BIS_fnc_error};
-
-private _range = KPLIB_range_fob;
 
 private _fob_spheres = [];
 for "_i" from 1 to 36 do {

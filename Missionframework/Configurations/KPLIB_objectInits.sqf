@@ -51,6 +51,20 @@ KPLIB_objectInits = [
         }
     ],
 
+    // Add ViV and build action to Outpost box
+    [
+        [KPLIB_b_outpostBox],
+        {
+            [{
+                time > 60
+            }, {
+                params ["_outpostBox"];
+
+                ["KPLIB_outpostActions", [_outpostBox]] call CBA_fnc_globalEventJIP
+            }, [_this]] call CBA_fnc_waitUntilAndExecute;      
+        }
+    ],
+
     // Add FOB building damage handler override and repack action
     [
         [KPLIB_b_fobBuilding],
@@ -62,6 +76,21 @@ KPLIB_objectInits = [
                 params ["_fob"];
 
                 ["KPLIB_fobActions", [_fob]] call CBA_fnc_globalEventJIP
+            }, [_this]] call CBA_fnc_waitUntilAndExecute;
+        }
+    ],
+
+    // Add Outpost building damage handler override and repack action
+    [
+        [KPLIB_b_outpostBuilding],
+        {
+            _this addEventHandler ["HandleDamage", {0}];
+            [{
+                time > 60
+            }, {
+                params ["_outpost"];
+
+                ["KPLIB_outpostActions", [_outpost]] call CBA_fnc_globalEventJIP
             }, [_this]] call CBA_fnc_waitUntilAndExecute;
         }
     ],
@@ -340,30 +369,28 @@ KPLIB_objectInits = [
                     params ["_vehicle", "_role", "_unit", "_turret"];
                     
                     if ((_role == "driver") && {side (group _unit) == KPLIB_side_player}) then {
-                        if (isNil "KPLIB_playerAircrafts") then {
-                            KPLIB_playerAircrafts = [];
-                            publicVariable "KPLIB_playerAircrafts";
+                        if (isNil "KPLIB_bluforAircrafts") then {
+                            KPLIB_bluforAircrafts = [];
+                            publicVariable "KPLIB_bluforAircrafts";
                         };
 
-                        KPLIB_playerAircrafts pushBack _vehicle;
-                        publicVariable "KPLIB_playerAircrafts";
-
-                        [_vehicle] call KPLIB_fnc_enemyFighterPFH;
+                        KPLIB_bluforAircrafts pushBack _vehicle;
+                        publicVariable "KPLIB_bluforAircrafts";
                     };
                 }];
 
                 _this addEventHandler ["GetOut", {
                     params ["_vehicle", "_role", "_unit", "_turret", "_isEject"];
                     _vehicle setVariable ["KPLIB_playerInAircraft", false];
-                    KPLIB_playerAircrafts deleteAt (KPLIB_playerAircrafts find _vehicle);
-                    publicVariable "KPLIB_playerAircrafts";
+                    KPLIB_bluforAircrafts deleteAt (KPLIB_bluforAircrafts find _vehicle);
+                    publicVariable "KPLIB_bluforAircrafts";
                 }];
 
                 _this addEventHandler ["Killed", {
-                    params ["_unit", "_killer", "_instigator", "_useEffects"];
-                    _unit setVariable ["KPLIB_playerInAircraft", nil];
-                    KPLIB_playerAircrafts deleteAt (KPLIB_playerAircrafts find _unit);
-                    publicVariable "KPLIB_playerAircrafts";
+                    params ["_plane", "_killer", "_instigator", "_useEffects"];
+                    _plane setVariable ["KPLIB_playerInAircraft", nil];
+                    KPLIB_bluforAircrafts deleteAt (KPLIB_bluforAircrafts find _plane);
+                    publicVariable "KPLIB_bluforAircrafts";
                 }]; 
             }
         }
@@ -425,26 +452,6 @@ KPLIB_objectInits = [
         ["Air"],
         {
             _this setVehicleReceiveRemoteTargets true
-        }
-    ],
-
-    // Fortify
-    [
-        [KPLIB_b_fortify_small],
-        {
-            [KPLIB_side_player, 0, [["Land_BagFence_Long_F", 5], ["Land_SandbagBarricade_01_half_F", 5], ["Land_Razorwire_F", 5], ["Land_Rampart_F", 5]]] call ace_fortify_fnc_registerObjects;
-            _this addItemCargoGlobal ["ACE_FortifyToken", 50]; // 250$
-            [KPLIB_side_player, 0, false] call ace_fortify_fnc_updateBudget;
-            ace_fortify_locations pushBack [_this, 50, 50, 0, false];
-        }
-    ],
-    [
-        [KPLIB_b_fortify_medium],
-        {
-            [KPLIB_side_player, 0, [["Land_BagFence_Long_F", 5], ["Land_SandbagBarricade_01_half_F", 5], ["Land_Razorwire_F", 5], ["Land_Rampart_F", 5], ["Land_SandbagBarricade_01_hole_F", 50], ["Land_BagBunker_Small_F", 50], ["Land_bagBunker_Large_F", 50], ["Land_DragonsTeeth_01_4x2_new_F", 50]]] call ace_fortify_fnc_registerObjects;
-            _this addItemCargoGlobal ["ACE_FortifyToken", 60]; // 300$
-            [KPLIB_side_player, 0, false] call ace_fortify_fnc_updateBudget;
-            ace_fortify_locations pushBack [_this, 50, 50, 0, false];
         }
     ]
 ];

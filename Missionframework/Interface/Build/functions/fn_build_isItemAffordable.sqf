@@ -2,7 +2,7 @@
     File: fn_build_isItemAffordable.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 10/11/2025
-    Last Update: 01/02/2026
+    Last Update: 22/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -21,12 +21,24 @@ params[["_itemToCheck", [], [[]]]];
 if (_itemToCheck isEqualTo []) exitWith {false};
 
 // Get item cost
+private _itemClass = _itemToCheck # 0;
+if !(_itemClass isEqualType []) then {
+    _itemClass = toLowerANSI (_itemToCheck # 0);
+};
 private _supplies = _itemToCheck # 1;
 private _ammo = _itemToCheck # 2;
 private _fuel = _itemToCheck # 3;
 
 // Update values based on civilian reputation
 private _priceAdd = -(KPLIB_civ_rep/1000);
+
+// Update cost to box and truck fob/outpost containers per fob builded
+if (_itemClass in ([KPLIB_b_fobBox, KPLIB_b_fobTruck] apply {toLowerANSI _x})) then {
+    private _fobsBuilded = count (KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]});
+    _supplies = _supplies * _fobsBuilded;
+    _ammo = _ammo * _fobsBuilded;
+    _fuel = _fuel * _fobsBuilded;
+};
 
 if (_priceAdd < 0) then {
     if (_supplies > 0) then {_supplies = (_supplies - round(_supplies * abs(_priceAdd))) max 0;};
@@ -39,27 +51,31 @@ if (_priceAdd < 0) then {
 };
 
 // Check fob available supplies
-private _nearfob = [] call KPLIB_fnc_getNearestFob;
-private _fobData = KPLIB_fob_resources select {((_x select 0) distance _nearfob) < KPLIB_range_fob};
+private _nearBase = [] call KPLIB_fnc_getNearestPlayerBase;
+private _range = switch (true) do {
+    case (_nearBase in KPLIB_player_outposts) : {KPLIB_range_outpost};
+    default {KPLIB_range_fob};
+};
+private _baseData = KPLIB_base_resources select {((_x select 0) distance _nearBase) < _range};
 
 private _affordable = false;
 
-(_fobData # 0) params ["", "_fobSupplies", "_fobAmmo", "_fobFuel"];
+(_baseData # 0) params ["", "_fobSupplies", "_fobAmmo", "_fobFuel"];
 
 if (((_supplies == 0 ) || (_supplies <= _fobSupplies)) && ((_ammo == 0 ) || (_ammo <= _fobAmmo)) && ((_fuel == 0 ) || (_fuel <= _fobFuel))) then {
     // Squad Comp
-    if ((_itemToCheck # 0) isEqualType []) then {
+    if (_itemClass isEqualType []) then {
         _affordable = true
     } else {
         // Others
-        if ((toLowerANSI (_itemToCheck # 0)) in KPLIB_b_air_classes && !([_itemToCheck # 0] call KPLIB_fnc_isClassUAV)) then {
+        if (_itemClass in KPLIB_b_air_classes && !([_itemToCheck # 0] call KPLIB_fnc_isClassUAV)) then {
         
-            if (KPLIB_b_airControl_near && ((((_itemToCheck # 0) isKindOf "Helicopter") && (KPLIB_heli_count < KPLIB_heli_slots)) || (((_itemToCheck # 0) isKindOf "Plane") && (KPLIB_plane_count < KPLIB_plane_slots)))) then {
+            if (KPLIB_b_airControl_near && (((_itemClass isKindOf "Helicopter") && (KPLIB_heli_count < KPLIB_heli_slots)) || ((_itemClass isKindOf "Plane") && (KPLIB_plane_count < KPLIB_plane_slots)))) then {
                 _affordable = true;
             };
 
         } else {
-            if (!((toLowerANSI (_itemToCheck # 0)) in KPLIB_airSlots) || (((toLowerANSI (_itemToCheck # 0)) in KPLIB_airSlots) && KPLIB_b_airControl_near)) then {
+            if (!(_itemClass in KPLIB_airSlots) || ((_itemClass in KPLIB_airSlots) && KPLIB_b_airControl_near)) then {
                 _affordable = true;
             };
         };

@@ -6,99 +6,18 @@ if (isServer) then {
     ["Only if you e.g. use a CUP preset and you get messages about missing CUP classes, then check your loaded mods.", "PRESETS"] call KPLIB_fnc_log;
 };
 
+// Load default presets
 [] call compile preprocessFileLineNumbers "Presets\Players\default.sqf";
-switch (KPLIB_presetPlayer) do {
-    case  1: {[] call compile preprocessFileLineNumbers "Presets\Players\custom.sqf";};
-    case  2: {[] call compile preprocessFileLineNumbers "Presets\Players\apex.sqf";};
-    case  3: {[] call compile preprocessFileLineNumbers "Presets\Players\baf_mtp.sqf";};
-    case  4: {[] call compile preprocessFileLineNumbers "Presets\Players\baf_des.sqf";};
-    case  5: {[] call compile preprocessFileLineNumbers "Presets\Players\bwmod.sqf";};
-    case  6: {[] call compile preprocessFileLineNumbers "Presets\Players\bwmod_des.sqf";};
-    case  7: {[] call compile preprocessFileLineNumbers "Presets\Players\rhs_usaf_wdl.sqf";};
-    case  8: {[] call compile preprocessFileLineNumbers "Presets\Players\rhs_usaf_des.sqf";};
-    case  9: {[] call compile preprocessFileLineNumbers "Presets\Players\rhs_afrf.sqf";};
-    case 10: {[] call compile preprocessFileLineNumbers "Presets\Players\gm_west.sqf";};
-    case 11: {[] call compile preprocessFileLineNumbers "Presets\Players\gm_west_win.sqf";};
-    case 12: {[] call compile preprocessFileLineNumbers "Presets\Players\gm_east.sqf";};
-    case 13: {[] call compile preprocessFileLineNumbers "Presets\Players\gm_east_win.sqf";};
-    case 14: {[] call compile preprocessFileLineNumbers "Presets\Players\csat.sqf";};
-    case 15: {[] call compile preprocessFileLineNumbers "Presets\Players\csat_apex.sqf";};
-    case 16: {[] call compile preprocessFileLineNumbers "Presets\Players\unsung.sqf";};
-    case 17: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_baf_desert.sqf";};
-    case 18: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_baf_woodland.sqf";};
-    case 19: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_usmc_desert.sqf";};
-    case 20: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_usmc_woodland.sqf";};
-    case 21: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_usa_desert.sqf";};
-    case 22: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_usa_woodland.sqf";};
-    case 23: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_cdf.sqf";};
-    case 24: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_acr_desert.sqf";};
-    case 25: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_acr_woodland.sqf";};
-    case 26: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_chdkz.sqf";};
-    case 27: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_sla.sqf";};
-    case 28: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_takistan.sqf";};
-    case 29: {[] call compile preprocessFileLineNumbers "Presets\Players\sfp_wdl.sqf";};
-    case 30: {[] call compile preprocessFileLineNumbers "Presets\Players\sfp_des.sqf";};
-    case 31: {[] call compile preprocessFileLineNumbers "Presets\Players\enoch.sqf";};
-    case 32: {[] call compile preprocessFileLineNumbers "Presets\Players\cup_aaf_deserters.sqf";};
-    default  {};
-};
-
 [] call compile preprocessFileLineNumbers "Presets\Enemies\default.sqf";
-switch (KPLIB_presetEnemy) do {
-    case  1: {[] call compile preprocessFileLineNumbers "Presets\Enemies\custom.sqf";};
-    case  2: {[] call compile preprocessFileLineNumbers "Presets\Enemies\apex.sqf";};
-    case  3: {[] call compile preprocessFileLineNumbers "Presets\Enemies\rhs_afrf.sqf";};
-    case  4: {[] call compile preprocessFileLineNumbers "Presets\Enemies\takistan.sqf";};
-    case  5: {[] call compile preprocessFileLineNumbers "Presets\Enemies\islamic_state.sqf";};
-    case  6: {[] call compile preprocessFileLineNumbers "Presets\Enemies\sla.sqf";};
-    case  7: {[] call compile preprocessFileLineNumbers "Presets\Enemies\aaf.sqf";};
-    case  8: {[] call compile preprocessFileLineNumbers "Presets\Enemies\nato.sqf";};
-    case  9: {[] call compile preprocessFileLineNumbers "Presets\Enemies\gm_west.sqf";};
-    case 10: {[] call compile preprocessFileLineNumbers "Presets\Enemies\gm_west_win.sqf";};
-    case 11: {[] call compile preprocessFileLineNumbers "Presets\Enemies\gm_east.sqf";};
-    case 12: {[] call compile preprocessFileLineNumbers "Presets\Enemies\gm_east_win.sqf";};
-    case 13: {[] call compile preprocessFileLineNumbers "Presets\Enemies\unsung.sqf";};
-    case 14: {[] call compile preprocessFileLineNumbers "Presets\Enemies\cup_sla.sqf";};
-    case 15: {[] call compile preprocessFileLineNumbers "Presets\Enemies\cup_takistan.sqf";};
-    case 16: {[] call compile preprocessFileLineNumbers "Presets\Enemies\cup_chdkz.sqf";};
-    case 17: {[] call compile preprocessFileLineNumbers "Presets\Enemies\cup_afrf_msv.sqf";};
-    case 18: {[] call compile preprocessFileLineNumbers "Presets\Enemies\cup_afrf_msv_modern.sqf";};
-    case 19: {[] call compile preprocessFileLineNumbers "Presets\Enemies\cup_cdf.sqf";};
-    case 20: {[] call compile preprocessFileLineNumbers "Presets\Enemies\cup_baf_desert.sqf";};
-    case 21: {[] call compile preprocessFileLineNumbers "Presets\Enemies\cup_baf_woodland.sqf";};
-    case 22: {[] call compile preprocessFileLineNumbers "Presets\Enemies\cup_aaf.sqf";};
-    default  {};
-};
-
 [] call compile preprocessFileLineNumbers "Presets\Resistance\default.sqf";
-switch (KPLIB_presetResistance) do {
-    case  1: {[] call compile preprocessFileLineNumbers "Presets\Resistance\custom.sqf";};
-    case  2: {[] call compile preprocessFileLineNumbers "Presets\Resistance\apex.sqf";};
-    case  3: {[] call compile preprocessFileLineNumbers "Presets\Resistance\rhs_gref.sqf";};
-    case  4: {[] call compile preprocessFileLineNumbers "Presets\Resistance\middle_eastern.sqf";};
-    case  5: {[] call compile preprocessFileLineNumbers "Presets\Resistance\racs.sqf";};
-    case  6: {[] call compile preprocessFileLineNumbers "Presets\Resistance\germany.sqf";};
-    case  7: {[] call compile preprocessFileLineNumbers "Presets\Resistance\unsung.sqf";};
-    case  8: {[] call compile preprocessFileLineNumbers "Presets\Resistance\cup_takistan.sqf";};
-    case  9: {[] call compile preprocessFileLineNumbers "Presets\Resistance\cup_napa.sqf";};
-    case  10: {[] call compile preprocessFileLineNumbers "Presets\Resistance\cup_fia.sqf";};
-    default  {};
-};
-
 [] call compile preprocessFileLineNumbers "Presets\Civilians\default.sqf";
-switch (KPLIB_presetCivilians) do {
-    case  1: {[] call compile preprocessFileLineNumbers "Presets\Civilians\custom.sqf";};
-    case  2: {[] call compile preprocessFileLineNumbers "Presets\Civilians\apex.sqf";};
-    case  3: {[] call compile preprocessFileLineNumbers "Presets\Civilians\middle_eastern.sqf";};
-    case  4: {[] call compile preprocessFileLineNumbers "Presets\Civilians\rds_civ.sqf";};
-    case  5: {[] call compile preprocessFileLineNumbers "Presets\Civilians\germany.sqf";};
-    case  6: {[] call compile preprocessFileLineNumbers "Presets\Civilians\unsung.sqf";};
-    case  7: {[] call compile preprocessFileLineNumbers "Presets\Civilians\cup_takistan.sqf";};
-    case  8: {[] call compile preprocessFileLineNumbers "Presets\Civilians\cup_cherno.sqf";};
-    case  9: {[] call compile preprocessFileLineNumbers "Presets\Civilians\cup_acw.sqf";};
-    default  {};
-};
 
+// Load selected presets on mission params
+[] call compile preprocessFileLineNumbers "Presets\get_presets.sqf";
+
+/*
+    Compatibility checks
+*/
 if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_supplyDump)}) < 0) then {
     // No supply dump found in support label, add it.
     KPLIB_b_vehSupport pushBack [KPLIB_b_supplyDump, 250,1000,0]
@@ -129,18 +48,18 @@ if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_transStorage)}) < 0) then {
     KPLIB_b_vehSupport pushBack [KPLIB_b_transStorage,100,0,0]
 };
 
-// Fortify check
-if ((KPLIB_b_vehStatic findIf {(_x#0 == KPLIB_b_fortify_small)}) < 0) then {
-    KPLIB_b_vehStatic pushBack [KPLIB_b_fortify_small, 50,0,0]
-};
-
-if ((KPLIB_b_vehStatic findIf {(_x#0 == KPLIB_b_fortify_medium)}) < 0) then {
-    KPLIB_b_vehStatic pushBack [KPLIB_b_fortify_medium, 100,0,0]
+// Outpost compat
+if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_outpostBox)}) < 0) then {
+    // No outpost found in support label, add it
+    KPLIB_b_vehSupport pushBack [KPLIB_b_outpostBox,300,300,0],
 };
 
 // Compatibility check and fix for vehicles to unlock
 KPLIB_b_vehToUnlock = KPLIB_b_vehToUnlock apply {if (_x isEqualType "") then {[_x, ""]} else {_x}};
 
+/*
+    Squad build list
+*/
 // Prices for the blufor infantry squads (supplies, ammo, fuel)
 KPLIB_b_allSquads = [
     [KPLIB_b_squadLight,50,0,0],
@@ -178,9 +97,11 @@ KPLIB_b_squadAT                 = KPLIB_b_squadAT                   select {[_x]
 KPLIB_b_squadAA                 = KPLIB_b_squadAA                   select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_b_squadRecon              = KPLIB_b_squadRecon                select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_b_squadPara               = KPLIB_b_squadPara                 select {[_x] call KPLIB_fnc_checkClass};
+KPLIB_b_vehToUnlock             = KPLIB_b_vehToUnlock               select {[( (_x select 0))] call KPLIB_fnc_checkClass};
 private _elite_crosscheck = (KPLIB_b_vehLight + KPLIB_b_vehHeavy + KPLIB_b_vehAir + KPLIB_b_vehStatic + KPLIB_b_vehSupport) apply {(_x#0);};
 KPLIB_b_vehToUnlockClasses      = KPLIB_b_vehToUnlock               apply {if (_x isEqualType "") then {_x} else {_x#0};};
 KPLIB_b_vehToUnlockClasses      = KPLIB_b_vehToUnlockClasses        arrayIntersect _elite_crosscheck;
+
 
 // Opfor
 KPLIB_o_militiaInfantry         = KPLIB_o_militiaInfantry           select {[_x] call KPLIB_fnc_checkClass};
@@ -363,7 +284,7 @@ KPLIB_collisionIgnoreObjects = [];
     KPLIB_collisionIgnoreObjects pushBack _x;
 }forEach (KPLIB_b_deco_classes + KPLIB_b_static_classes + (KPLIB_b_support_classes select {!(_x isKindOf "allVehicles")}));
 
-// Military alphabet used for FOBs and convoys
+// Military alphabet used for FOBs/outposts and convoys
 KPLIB_militaryAlphabet = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "X-Ray", "Yankee", "Zulu"];
 
 // Misc variables

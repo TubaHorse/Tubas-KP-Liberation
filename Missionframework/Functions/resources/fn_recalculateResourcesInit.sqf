@@ -16,7 +16,7 @@
 [{
     !isNil "KPLIB_saveLoaded" && {KPLIB_saveLoaded}
 }, {
-    KPLIB_fob_resources = [];
+    KPLIB_base_resources = [];
     KPLIB_supplies_global = 0;
     KPLIB_ammo_global = 0;
     KPLIB_fuel_global = 0;

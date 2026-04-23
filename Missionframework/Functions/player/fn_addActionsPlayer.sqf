@@ -2,7 +2,7 @@
     File: fn_addActionsPlayer.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-04-13
-    Last Update: 2026-02-07
+    Last Update: 2026-04-12
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -47,16 +47,16 @@ _player addAction [
     false,
     true,
     "",
-    "
+    toString{
         KPLIB_param_halo > 0
         && {isNull (objectParent _originalTarget)}
         && {alive _originalTarget}
         && {
-            _originalTarget getVariable ['KPLIB_fobDist', 99999] < 20
+            ((_originalTarget getVariable ['KPLIB_nearestBaseDist', 99999] < 20) && {_originalTarget getVariable ['KPLIB_isNearFob', false]})
             || {_originalTarget getVariable ['KPLIB_isNearStart', false]}
         }
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
-    "
+    }
 ];
 
 // Redeploy
@@ -72,7 +72,7 @@ _player addAction [
         isNull (objectParent _originalTarget)
         && {alive _originalTarget}
         && {
-            _originalTarget getVariable ['KPLIB_fobDist', 99999] < 20
+            _originalTarget getVariable ['KPLIB_nearestBaseDist', 99999] < 20
             || {_originalTarget getVariable ['KPLIB_isNearMobRespawn', false]}
             || {_originalTarget getVariable ['KPLIB_isNearStart', false]}
         }
@@ -111,6 +111,7 @@ _player addAction [
     toString {
         isNull (objectParent _originalTarget)
         && {alive _originalTarget}
+        && {_originalTarget getVariable ['KPLIB_isNearFob', false]}
         && {
             _originalTarget getVariable ['KPLIB_b_supplyDump', false]
             || {_originalTarget getVariable ['KPLIB_isNearArsenal', false]}
@@ -135,7 +136,12 @@ _player addAction [
     toString {
         isNull (objectParent _originalTarget)
         && {alive _originalTarget}
-        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (KPLIB_range_fob * 0.8)}
+        && {
+            private _buildPos = [getPos _originalTarget] call KPLIB_fnc_getNearestBuildPos;
+            _buildPos params ["_posBuild", "_range"];
+
+            (_posBuild distance2D _originalTarget) < (_range * 0.8)
+        }
         && {
             _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
             || {[3] call KPLIB_fnc_hasPermission}
@@ -154,11 +160,11 @@ _player addAction [
     false,
     true,
     "",
-    "
+    toString {
         isNull (objectParent _originalTarget)
         && {alive _originalTarget}
         && {
-            _originalTarget getVariable ['KPLIB_fobDist', 99999] < 20
+            ((_originalTarget getVariable ['KPLIB_nearestBaseDist', 99999]) < 20 && {_originalTarget getVariable ['KPLIB_isNearFob', false]})
             || {_originalTarget getVariable ['KPLIB_isNearStart', false]}
         }
         && {
@@ -166,7 +172,7 @@ _player addAction [
             || {[5] call KPLIB_fnc_hasPermission}
         }
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
-    "
+    }
 ];
 
 // Build sector storage
@@ -292,11 +298,12 @@ _player addAction [
     false,
     true,
     "",
-    "
+    toString {
         alive _originalTarget
-        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (KPLIB_range_fob * 0.8)}
+        && {_originalTarget getVariable ['KPLIB_nearestBaseDist', 99999] < (KPLIB_range_fob * 0.8)} 
+        && {_originalTarget getVariable ['KPLIB_isNearFob', false]}
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
-    "
+    }
 ];
 
 // Production
@@ -314,7 +321,7 @@ _player addAction [
         && {alive _originalTarget}
         && {!(count KPLIB_production < 1)}
         && {
-            _originalTarget getVariable ['KPLIB_fobDist', 99999] < (KPLIB_range_fob * 0.8)
+            (_originalTarget getVariable ['KPLIB_nearestBaseDist', 99999] < (KPLIB_range_fob * 0.8) && {_originalTarget getVariable ['KPLIB_isNearFob', false]})
             || {!(_originalTarget getVariable ['KPLIB_nearProd', []] isEqualTo [])}
         }
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
@@ -335,9 +342,10 @@ if (KPLIB_param_logistic) then {
             _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
             && {isNull (objectParent _originalTarget)}
             && {alive _originalTarget}
-            && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (KPLIB_range_fob * 0.8)}
+            && {_originalTarget getVariable ['KPLIB_nearestBaseDist', 99999] < (KPLIB_range_fob * 0.8)} 
+            && {_originalTarget getVariable ['KPLIB_isNearFob', false]}
             && {!(
-                KPLIB_sectors_fob isEqualTo []
+                KPLIB_player_fobs isEqualTo []
                 || (count KPLIB_production < 1)
             )}
             && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
@@ -354,48 +362,49 @@ _player addAction [
     false,
     true,
     "",
-    "
+    toString {
         KPLIB_param_permissions
         && {_originalTarget getVariable ['KPLIB_hasDirectAccess', false]}
         && {alive _originalTarget}
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
-    "
+    }
 ];
 
 // Create small FOB clearance
 _player addAction [
     ["<t color='#FFFF00'>", localize "STR_CLEARANCE_ACTION", "</t>"] joinString "",
-    {[player getVariable ["KPLIB_fobPos", [0, 0, 0]], KPLIB_range_fob * 0.4, true] call KPLIB_fnc_createClearanceConfirm;},
+    {[player getVariable ["KPLIB_nearestBasePos", [0, 0, 0]], KPLIB_range_fob * 0.4, true] call KPLIB_fnc_createClearanceConfirm;},
     nil,
     -850,
     false,
     true,
     "",
-    "
+    toString {
         _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
         && {isNull (objectParent _originalTarget)}
         && {alive _originalTarget}
-        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (KPLIB_range_fob * 0.4)}
+        && {_originalTarget getVariable ['KPLIB_nearestBaseDist', 99999] < (KPLIB_range_fob * 0.4)} 
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
-    "
+    }
 ];
 
 // Create big FOB clearance
 _player addAction [
     ["<t color='#FFFF00'>", localize "STR_BIG_CLEARANCE_ACTION", "</t>"] joinString "",
-    {[player getVariable ["KPLIB_fobPos", [0, 0, 0]], KPLIB_range_fob * 0.8, true] call KPLIB_fnc_createClearanceConfirm;},
+    {[player getVariable ["KPLIB_nearestBasePos", [0, 0, 0]], KPLIB_range_fob * 0.8, true] call KPLIB_fnc_createClearanceConfirm;},
     nil,
     -851,
     false,
     true,
     "",
-    "
+    toString {
         _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
         && {isNull (objectParent _originalTarget)}
         && {alive _originalTarget}
-        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (KPLIB_range_fob * 0.8)}
+        && {_originalTarget getVariable ['KPLIB_nearestBaseDist', 99999] < (KPLIB_range_fob * 0.8)}
+        && {_originalTarget getVariable ['KPLIB_isNearFob', false]}
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
-    "
+    }
 ];
 
 // Time Skip and Clear Fog
@@ -412,7 +421,7 @@ _player addAction [
         && _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
         && {isNull (objectParent _originalTarget)}
         && {alive _originalTarget}
-        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (KPLIB_range_fob * 0.8)}
+        && {_originalTarget getVariable ['KPLIB_nearestBaseDist', 99999] < (KPLIB_range_fob * 0.8)}
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
     "
 ];
@@ -420,41 +429,61 @@ _player addAction [
 // Full Heal
 _player addAction [
     ["<t color='#80FF80'>", localize "STR_FULLHEAL_ACTION", "</t> <img size='2' image='Images\ui_fullheal.paa'/>"] joinString "",
-    {[player getVariable ["KPLIB_fobPos", [0, 0, 0]], KPLIB_range_fob * 0.9, player] call KPLIB_fnc_fullheal;},
+    {[player getVariable ["KPLIB_nearestBasePos", [0, 0, 0]], KPLIB_range_fob * 0.9, player] call KPLIB_fnc_fullheal;},
     nil,
     -690,
     false,
     true,
     "",
-    "
+    toString {
         KPLIB_param_fullHeal
         && KPLIB_medical_facilities_near
         && {isNull (objectParent _originalTarget)}
         && {alive _originalTarget}
-        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (KPLIB_range_fob * 0.5)}
+        && {_originalTarget getVariable ['KPLIB_nearestBaseDist', 99999] < (KPLIB_range_fob * 0.5)}
+        && {_originalTarget getVariable ['KPLIB_isNearFob', false]}
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
-    "
+    }
 ];
 
-// Clear gargabe
+
 if (player == ([] call KPLIB_fnc_getCommander)) then {
-_player addAction [
-    ["<t color='#FF0000'>", localize "STR_CLEARGARBAGE_ACTION", "</t><img size='2' image='a3\3den\data\displays\display3den\panelleft\entitylist_delete_ca.paa'/>"] joinString "",
-    {[] spawn KPLIB_fnc_clearGarbage;},
-    nil,
-    -860,
-    false,
-    true,
-    "",
-    "
-        isNull (objectParent _originalTarget)
-        && {alive _originalTarget}
-        && {
-            _originalTarget getVariable ['KPLIB_fobDist', 99999] < 20
-            || {_originalTarget getVariable ['KPLIB_isNearStart', false]}
+    // Clear gargabe
+    _player addAction [
+        ["<t color='#FF0000'>", localize "STR_CLEARGARBAGE_ACTION", "</t><img size='2' image='a3\3den\data\displays\display3den\panelleft\entitylist_delete_ca.paa'/>"] joinString "",
+        {[] spawn KPLIB_fnc_clearGarbage;},
+        nil,
+        -860,
+        false,
+        true,
+        "",
+        "
+            isNull (objectParent _originalTarget)
+            && {alive _originalTarget}
+            && {
+                _originalTarget getVariable ['KPLIB_nearestBaseDist', 99999] < 20
+                || {_originalTarget getVariable ['KPLIB_isNearStart', false]}
+            }
+            && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
+        "
+    ];
+    _player addAction [
+        ["<t color='#FFFF00'>", "-- CHANGE BASE NAME --"] joinString "",
+        {
+            private _base = [getPosATL (_this # 0)] call KPLIB_fnc_getNearestPlayerBase;
+            [_base] call KPLIB_fnc_baseName_createMenuRsc;
+        },
+        nil,
+        -865,
+        false,
+        true,
+        "",
+        toString {
+            isNull (objectParent _originalTarget)
+            && {alive _originalTarget}
+            && {_originalTarget getVariable ['KPLIB_nearestBaseDist', 99999] < 20}
+            && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
         }
-        && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
-    "
     ];
 };
 

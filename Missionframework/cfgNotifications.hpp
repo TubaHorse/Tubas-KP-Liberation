@@ -70,6 +70,35 @@ class lib_fob_lost: lib_default_notification {
     color[] = { 1, 0, 0, 1 };
     sound = "taskFailed";
 };
+class lib_outpost_built: lib_default_notification {
+    title = $STR_NOTIFICATION_OUTPOSTBUILT_TITLE;
+    description = $STR_NOTIFICATION_OUTPOSTBUILT_TEXT;
+    iconPicture = "Images\notif\ui_notif_fob_new.paa";
+    color[] = { 0, 0.35, 1, 1 };
+    sound = "taskUpdated";
+};
+class lib_outpost_safe: lib_default_notification {
+    title = $STR_NOTIFICATION_OUTPOSTSAFE_TITLE;
+    description = $STR_NOTIFICATION_OUTPOSTSAFE_TEXT;
+    iconPicture = "Images\notif\ui_notif_fob_sec.paa";
+    color[] = { 0, 0.35, 1, 1 };
+    sound = "taskUpdated";
+    priority = 3;
+};
+class lib_outpost_attacked: lib_default_notification {
+    title = $STR_NOTIFICATION_OUTPOSTATTACKED_TITLE;
+    description = $STR_NOTIFICATION_OUTPOSTATTACKED_TEXT;
+    iconPicture = "Images\notif\ui_notif_fob_und.paa";
+    color[] = { 1, 1, 0, 1 };
+    sound = "taskCanceled";
+};
+class lib_outpost_lost: lib_default_notification {
+    title = $STR_NOTIFICATION_OUTPOSTLOST_TITLE;
+    description = $STR_NOTIFICATION_OUTPOSTLOST_TEXT;
+    iconPicture = "Images\notif\ui_notif_fob_los.paa";
+    color[] = { 1, 0, 0, 1 };
+    sound = "taskFailed";
+};
 class lib_battlegroup: lib_default_notification {
     title = $STR_NOTIFICATION_BATTLEGROUP_TITLE;
     description = $STR_NOTIFICATION_BATTLEGROUP_TEXT;
@@ -247,4 +276,3 @@ class lib_asymm_guerilla_incoming: lib_reinforcements {
 };
 #include "Extensions\Arty_Framework\cfgNotifications.hpp"
 #include "Extensions\SAM_Sites\cfgNotifications.hpp"
-#include "Extensions\Enemy_Fighters\cfgNotifications.hpp"

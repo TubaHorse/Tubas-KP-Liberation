@@ -18,25 +18,35 @@ scriptName "KPLIB_playerNamespace";
 //waitUntil {one_synchro_done};
 //waitUntil {one_eco_done};
 
-private _fobPos = [0, 0, 0];
-private _fobDist = 99999;
-private _fobName = "";
+private _basePos = [0, 0, 0];
+private _baseDist = 99999;
+private _baseName = "";
 
 while {true} do {
     // FOB distance, name and position
-    if !(KPLIB_sectors_fob isEqualTo []) then {
-        _fobPos = [] call KPLIB_fnc_getNearestFob;
-        _fobDist = player distance2d _fobPos;
-        _fobName = ["", ["FOB", [_fobPos] call KPLIB_fnc_getFobName] joinString " "] select (_fobDist < KPLIB_range_fob);
+    if ((KPLIB_player_fobs isNotEqualTo []) || (KPLIB_player_outposts isNotEqualTo [])) then {
+        _basePos = [] call KPLIB_fnc_getNearestPlayerBase;
+        _baseDist = player distance2d _basePos;
+        switch (true) do {
+            case (_basePos in KPLIB_player_fobs) : {
+                _baseName = ["", ["FOB", [_basePos] call KPLIB_fnc_getBaseName] joinString " "] select (_baseDist < KPLIB_range_fob);
+                player setVariable ["KPLIB_isNearFob", true];
+                player setVariable ["KPLIB_isNearOutpost", false];
+            };
+            case (_basePos in KPLIB_player_outposts) : {
+                _baseName = ["", ["Out", [_basePos] call KPLIB_fnc_getBaseName] joinString " "] select (_baseDist < KPLIB_range_outpost);
+                player setVariable ["KPLIB_isNearFob", false];
+                player setVariable ["KPLIB_isNearOutpost", true];
+            };
+        }    
     } else {
-        _fobPos = [0, 0, 0];
-        _fobDist = 99999;
-        _fobName = "";
+        _basePos = [0, 0, 0];
+        _baseDist = 99999;
+        _baseName = "";
     };
-    // TODO more self explanatory names, KPLIB_nearestFobDist, KPLIB_currentFobName, KPLIB_nearestFobPos
-    player setVariable ["KPLIB_fobDist", _fobDist];
-    player setVariable ["KPLIB_fobName", _fobName];
-    player setVariable ["KPLIB_fobPos", _fobPos];
+    player setVariable ["KPLIB_nearestBaseDist", _baseDist];
+    player setVariable ["KPLIB_currentBaseName", _baseName];
+    player setVariable ["KPLIB_nearestBasePos", _basePos];
 
     // Direct acces due to config, commander or quartermaster or admin
     player setVariable ["KPLIB_hasDirectAccess", (getPlayerUID player) in KPLIB_whitelist_cmdrActions || {player == ([] call KPLIB_fnc_getCommander)} || {player isEqualto (missionnamespace getVariable ['quartermaster',objNull])} || {serverCommandAvailable "#kick"}];

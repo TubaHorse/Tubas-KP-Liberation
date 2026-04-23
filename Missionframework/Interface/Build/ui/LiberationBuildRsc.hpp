@@ -58,7 +58,7 @@ class LiberationBuildRsc {
         h = 0.02 * safezoneH;
         y = 0.195 * safezoneH + safezoneY;
         text = "X";
-        action = "closeDialog 0";
+        onButtonClick = "(ctrlParent (_this # 0)) closeDisplay 1";
     };
     class BuildTypeImage {
         idc = -1;

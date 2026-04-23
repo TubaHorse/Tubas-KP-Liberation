@@ -68,6 +68,9 @@ KPLIB_save_interval = 60;
 // Build range around the main FOB building.
 KPLIB_range_fob = 125;
 
+// Build range around an outpost
+KPLIB_range_outpost = 50;
+
 // Maximum terrain steepness allowed for FOB deployment (0 to 1).
 KPLIB_terrainGradient_fob = 0.2; 
 
@@ -93,8 +96,8 @@ KPLIB_range_radioTowerScan = 2500;
 // Military base replenish outposts range.
 KPLIB_range_replenishRadius = 2500;
 
-// Minimum distance to next FOB.
-KPLIB_distance_fob = 1000;
+// Minimum distance to next FOB or Outpost.
+KPLIB_distance_base = 1000;
 
 // Minimum distance to next sector.
 KPLIB_distance_sector = KPLIB_range_sectorCapture + KPLIB_range_fob;

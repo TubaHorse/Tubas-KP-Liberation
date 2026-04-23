@@ -118,7 +118,7 @@ class RscTitles {
             PicturePlaneShadow, PicturePlane, LabelPlane,
             PictureCombatReadinessShadow, PictureCombatReadiness, LabelCombatReadiness,
             PictureCivRepShadow, PictureCivRep, LabelCivRep,
-            PictureIntelShadow, PictureIntel, LabelIntel,
+            PictureIntelShadow, PictureIntel, LabelIntel, PictureTower,
             BGPictureActiveSectors, BGPictureSector,
             CaptureFrame_OPFOR, CaptureFrame_BLUFOR, CaptureFrame,
             LabelPoint, CentralShadow, CentralLabel,
@@ -202,6 +202,8 @@ class RscTitles {
             idc = 758004;
             text = "";
             y = (0.39 + ( ICONE_SPACY * 0 ) ) * safezoneH + safezoneY;
+            x = 0.885 * safezoneW + safezoneX;
+            w = 0.10 * safezoneW;
             colorText[] = {0.8, 0.8, 0.8, 1};
         };
         class PictureSupplies: GenericPicture69 {
@@ -357,6 +359,12 @@ class RscTitles {
             text = "";
             y = (0.39 + ( ICONE_SPACY * 9 ) ) * safezoneH + safezoneY;
             colorText[] = {0, 0.45, 0.95, 1};
+        };
+        class PictureTower: GenericPicture69 {
+            idc = 758032;
+            colorText[] = COLOR_OPFOR_NOALPHA;
+            y = (0.4 + ( ICONE_SPACY * 10 ) ) * safezoneH + safezoneY;
+            text = "a3\ui_f\data\map\mapcontrol\transmitter_ca.paa";
         };
         class CaptureFrameStandard {
             idc = -1;

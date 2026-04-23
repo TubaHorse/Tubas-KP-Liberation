@@ -1,8 +1,8 @@
 scriptName "counter_battle_group";
 
-if (isNil "infantry_weight") then {infantry_weight = 33;};
-if (isNil "armor_weight") then {armor_weight = 33;};
-if (isNil "air_weight") then {air_weight = 33;};
+if (isNil "KPLIB_infantryWeight") then {KPLIB_infantryWeight = 33;};
+if (isNil "KPLIB_armorWeight") then {KPLIB_armorWeight = 33;};
+if (isNil "KPLIB_airWeight") then {KPLIB_airWeight = 33;};
 
 sleep 1800;
 private _sleeptime = 0;
@@ -18,14 +18,14 @@ while {KPLIB_param_aggressivity >= 0.9 && KPLIB_endgame == 0} do {
     sleep _sleeptime;
 
     waitUntil {sleep 5;
-        KPLIB_enemyReadiness >= 70 && {armor_weight >= 50 || air_weight >= 50}
+        KPLIB_enemyReadiness >= 70 && {KPLIB_armorWeight >= 50 || KPLIB_airWeight >= 50}
     };
 
     _target_player = objNull;
     {
         if (
-            (armor_weight >= 50 && {(objectParent _x) isKindOf "Tank"})
-            || (air_weight >= 50 && {(objectParent _x) isKindOf "Air"})
+            (KPLIB_armorWeight >= 50 && {(objectParent _x) isKindOf "Tank"})
+            || (KPLIB_airWeight >= 50 && {(objectParent _x) isKindOf "Air"})
         ) exitWith {
             _target_player = _x;
         };

@@ -7,7 +7,7 @@ switch (true) do {
     case (_liberated_sector in KPLIB_sectors_military):   {_KPLIB_enemyReadiness_increase = 5 + (floor (random 12)) * KPLIB_param_difficulty;};
     case (_liberated_sector in KPLIB_sectors_factory):    {_KPLIB_enemyReadiness_increase = 3 + (floor (random 7)) * KPLIB_param_difficulty;};
     case (_liberated_sector in KPLIB_sectors_tower):      {_KPLIB_enemyReadiness_increase = 3 + (floor (random 3)) * KPLIB_param_difficulty;};
-    case (_liberated_sector in KPLIB_sectors_outpost):      {_KPLIB_enemyReadiness_increase = 3 + (floor (random 3)) * KPLIB_param_difficulty;};
+    case (_liberated_sector in KPLIB_fillers_patrol):      {_KPLIB_enemyReadiness_increase = 3 + (floor (random 3)) * KPLIB_param_difficulty;};
 };
 
 KPLIB_enemyReadiness = KPLIB_enemyReadiness + _KPLIB_enemyReadiness_increase;
@@ -17,7 +17,7 @@ stats_readiness_earned = stats_readiness_earned + _KPLIB_enemyReadiness_increase
 KPLIB_sectors_player pushback _liberated_sector; publicVariable "KPLIB_sectors_player";
 
 // Outpost
-if (_liberated_sector in KPLIB_sectors_outpost) exitWith {
+if (_liberated_sector in KPLIB_fillers_patrol) exitWith {
     ["lib_enemy_pos_destroyed", [mapGridPosition (markerPos _liberated_sector)]] remoteExec ["BIS_fnc_showNotification"];
 
     // 1 hour delay to be able to spawn it again if there's military sector nearby to replenish it
@@ -28,7 +28,7 @@ if (_liberated_sector in KPLIB_sectors_outpost) exitWith {
         [{
             params["_liberated_sector"];
 
-            private _base = [markerPos _liberated_sector,  KPLIB_side_enemy, KPLIB_range_replenishRadius] call KPLIB_fnc_getNearestBase;
+            private _base = [markerPos _liberated_sector,  KPLIB_side_enemy, KPLIB_range_replenishRadius] call KPLIB_fnc_getNearestMilitaryBase;
             if !(isNil "_base") then {
                 // Check distance
                 if ((markerPos _base) distance2D (markerPos _liberated_sector) >= 1000) then {

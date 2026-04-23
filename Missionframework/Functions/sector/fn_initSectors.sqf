@@ -2,7 +2,7 @@
     File: fn_initSectors.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-04-29
-    Last Update: 2026-01-14
+    Last Update: 2026-04-15
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -24,8 +24,8 @@ KPLIB_sectors_military = [];
 KPLIB_sectors_spawn = [];
 KPLIB_road_spawn = [];
 KPLIB_sectors_tower = [];
-KPLIB_sectors_outpost = [];
-KPLIB_sectors_filler = [];
+KPLIB_fillers_patrol = [];
+KPLIB_fillers_all = [];
 
 {
     switch (true) do {
@@ -37,7 +37,7 @@ KPLIB_sectors_filler = [];
         case (_x find "opfor_point" == 0): {KPLIB_sectors_spawn pushBack _x;};
         case (_x find "opfor_spawn_road" == 0): {KPLIB_road_spawn pushBack _x;};
         case (_x find "tower" == 0): {KPLIB_sectors_tower pushBack _x; if (isServer) then {_x setMarkerText format ["%1 %2",markerText _x, mapGridPosition (markerPos _x)];}; KPLIB_sectors_all pushBack _x;};
-        case (_x find "outpost" == 0): {KPLIB_sectors_outpost pushBack _x; _x setMarkerAlpha 0; KPLIB_sectors_filler pushBack _x;};
+        case (_x find "filler_inf" == 0): {KPLIB_fillers_patrol pushBack _x; _x setMarkerAlpha 0; KPLIB_fillers_all pushBack _x;};
     };
 } forEach allMapMarkers;
 

@@ -2,7 +2,7 @@ waitUntil {!isNil "KPLIB_saveLoaded"};
 waitUntil {KPLIB_saveLoaded};
 
 // Check if there is no FOB yet (new campaign)
-if (KPLIB_sectors_fob isEqualTo []) then {
+if (KPLIB_player_fobs isEqualTo []) then {
 
     // Prebuild FOB (parameter setting) or spawn FOB box
     if (KPLIB_param_firstFobBuilt) then {
@@ -14,11 +14,11 @@ if (KPLIB_sectors_fob isEqualTo []) then {
         };
 
         // Spawn first FOB on random valid spawnpoint
-        [markerPos (selectRandom _validPlaces), true] remoteExec ["build_fob_remote_call", 2];
+        [markerPos (selectRandom _validPlaces), true] remoteExec ["KPLIB_fnc_createFob", 2];
     } else {
         // Spawn FOB box and wait until the first FOB was built
         private _fobbox = objNull;
-        while {KPLIB_sectors_fob isEqualTo []} do {
+        while {KPLIB_player_fobs isEqualTo []} do {
             _fobbox = ([KPLIB_b_fobBox, KPLIB_b_fobTruck] select KPLIB_param_fobVehicle) createVehicle (getposATL base_boxspawn);
             _fobbox setdir getDir base_boxspawn;
             _fobbox setposATL (getposATL base_boxspawn);
@@ -28,7 +28,7 @@ if (KPLIB_sectors_fob isEqualTo []) then {
             // If the FOB box has fallen into the sea or is destroyed, start again with spawning a new one
             waitUntil {
                 sleep 1;
-                !(alive _fobbox) || !(KPLIB_sectors_fob isEqualTo []) || (((getPosASL _fobbox) select 2) < 0)
+                !(alive _fobbox) || !(KPLIB_player_fobs isEqualTo []) || (((getPosASL _fobbox) select 2) < 0)
             };
             sleep 10;
         };
@@ -36,7 +36,7 @@ if (KPLIB_sectors_fob isEqualTo []) then {
     };
 
     // Wait a short time before paradropping the start resource crates
-    waitUntil {sleep 1; !(KPLIB_sectors_fob isEqualTo [])};
+    waitUntil {sleep 1; !(KPLIB_player_fobs isEqualTo [])};
     if (KPLIB_param_tutorial && {["KPLIB_Tasks_Tutorial_Fob"] call BIS_fnc_taskExists}) then {
         waitUntil {sleep 1; ["KPLIB_Tasks_Tutorial_Fob_02"] call BIS_fnc_taskCompleted};
         sleep 3;
@@ -62,7 +62,7 @@ if (KPLIB_sectors_fob isEqualTo []) then {
     for "_i" from 1 to 9 do {
         _crate = createVehicle [
             (KPLIB_crates select (_i % 3)),
-            [((KPLIB_sectors_fob select 0) select 0), ((KPLIB_sectors_fob select 0) select 1), 150],
+            [((KPLIB_player_fobs select 0) select 0), ((KPLIB_player_fobs select 0) select 1), 150],
             [],
             80,
             "FLY"

@@ -1,5 +1,8 @@
 # KP LIBERATION PIG
 
+## 0.97.1 NOTE
+The features for this branch are still under development and requires further testing.
+
 ## DESCRIPTION
 Welcome to PiG's Liberation. This fork of APR is aimed to add several features but maintaining the original feeling of Liberation. This is **not** an overhaul of the gamemode.
 

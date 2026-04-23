@@ -61,7 +61,7 @@ if ((!(_sector in KPLIB_sectors_player)) && (_unitsCount > 0)) then {
     };
 
     // Handle outpost
-    if (_sector in KPLIB_sectors_outpost) then {
+    if (_sector in KPLIB_fillers_patrol) then {
         [_sector, _localCaptureSize * 0.5] call KPLIB_fnc_sectorOutpostSpawns;
     };
 } else {

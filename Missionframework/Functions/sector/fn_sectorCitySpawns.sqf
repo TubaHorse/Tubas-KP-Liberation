@@ -2,7 +2,7 @@
     File: fn_sectorCitySpawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 03/02/2026
+    Last Update: 20/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -53,6 +53,8 @@ if ((random 100) > (33 / KPLIB_param_difficulty)) then {
     };
 
     _sectorUnits = _sectorUnits + (units _grp);
+
+    _grp setVariable ["KPLIB_enemy_grpPatrol", true, true];
 
     sleep 1;
 }forEach [_squad1, _squad2, _squad3];
@@ -176,6 +178,8 @@ if (_infType == "army") then {
         // Remove this event handler
         _unit removeEventHandler [_thisEvent, _thisEventHandler];
     }];
+
+    (group(effectiveCommander _vehicle)) setVariable ["KPLIB_enemy_vehPatrol", true, false]; 
 
     sleep 1;
 } forEach _vehToSpawn;

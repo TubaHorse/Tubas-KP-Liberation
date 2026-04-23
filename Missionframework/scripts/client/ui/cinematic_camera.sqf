@@ -1,7 +1,7 @@
 scriptName "cinematic_camera";
 
 if ( isNil "KPLIB_sectors_active" ) then { KPLIB_sectors_active = [] };
-if ( isNil "KPLIB_sectors_fob" ) then { KPLIB_sectors_fob = [] };
+if ( isNil "KPLIB_player_fobs" ) then { KPLIB_player_fobs = [] };
 
 cinematic_camera_started = true;
 private _last_transition = -1;
@@ -26,9 +26,9 @@ while { cinematic_camera_started } do {
         private _positions = [ getpos startbase ];
         if ( !first_camera_round ) then {
 
-            if ( count KPLIB_sectors_fob > 0 ) then {
+            if ( count (KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]}) > 0 ) then {
                 for [ {_idx=0},{_idx < 2},{_idx=_idx+1} ] do {
-                    _positions pushback (selectRandom KPLIB_sectors_fob);
+                    _positions pushback (selectRandom KPLIB_player_fobs);
                 };
             };
 
@@ -258,9 +258,9 @@ while { cinematic_camera_started } do {
                     if ( _nearest_sector != "" ) then {
                         _nearest_sector = markertext _nearest_sector;
                     } else {
-                        _nearfobs = KPLIB_sectors_fob select {_x distance _position < 300};
+                        _nearfobs = KPLIB_player_fobs select {_x distance _position < 300};
                         if ( count _nearfobs > 0 ) then {
-                            _nearest_sector = format [ "FOB %1", KPLIB_militaryAlphabet select ( KPLIB_sectors_fob find ( _nearfobs select 0 ) ) ];
+                            _nearest_sector = format [ "FOB %1", KPLIB_fobNames select ( KPLIB_player_fobs find ( _nearfobs select 0 ) ) ];
                         };
                     };
                 };

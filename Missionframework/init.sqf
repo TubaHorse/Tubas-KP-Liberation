@@ -56,6 +56,11 @@ if (KPLIB_param_sectorEvents > 0) then {
 // Set up CBA settings
 [] call compile preprocessFileLineNumbers 'CBA_initSettings.sqf';
 
+if (KPLIB_param_playerMenu) then {
+    // KP player menu
+    [] call KPPLM_fnc_postInit;
+};
+
 // Load saved game and initiate server scripts
 if (isServer) then {
     [] call KPLIB_fnc_loadSavedGame; 
@@ -91,8 +96,11 @@ if (isServer) then {
         }];
     }];
 
-    waitUntil {sleep 0.1; time > 30};
+    // Create bases markers
+    ["KPLIB_updateBaseMarkers", []] call CBA_fnc_serverEvent;
 
+    waitUntil {sleep 0.1; time > 30};
+    
     KPLIB_initServerDone = true;
     publicVariable "KPLIB_initServerDone";
 
@@ -152,7 +160,7 @@ if (!isDedicated && hasInterface) then {
 
     if !(KPLIB_param_playerMenu) then {
         // Dynamic groups
-    ["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;	
+        ["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;	
     };
 
     // Execute fnc_reviveInit again (by default it executes in postInit)

@@ -6,9 +6,9 @@ params ["_unit", "_killer"];
 
 
     // Failsafe if something gets killed before the save manager is finished
-    if (isNil "infantry_weight") then {infantry_weight = 33};
-    if (isNil "armor_weight") then {armor_weight = 33};
-    if (isNil "air_weight") then {air_weight = 33};
+    if (isNil "KPLIB_infantryWeight") then {KPLIB_infantryWeight = 33};
+    if (isNil "KPLIB_armorWeight") then {KPLIB_armorWeight = 33};
+    if (isNil "KPLIB_airWeight") then {KPLIB_airWeight = 33};
 
     // BLUFOR Killer handling
     if ((side _killer) == KPLIB_side_player) then {
@@ -23,26 +23,26 @@ params ["_unit", "_killer"];
 
         // Weights adjustments depending on what vehicle the BLUFOR killer used
         if (_killer isKindOf "CAManBase") then {
-            infantry_weight = infantry_weight + 1;
-            armor_weight = armor_weight - 0.66;
-            air_weight = air_weight - 0.66;
+            KPLIB_infantryWeight = KPLIB_infantryWeight + 1;
+            KPLIB_armorWeight = KPLIB_armorWeight - 0.66;
+            KPLIB_airWeight = KPLIB_airWeight - 0.66;
         } else {
             if ((toLowerANSI (typeOf (vehicle _killer))) in KPLIB_allLandVeh_classes) then  {
-                infantry_weight = infantry_weight - 0.66;
-                armor_weight = armor_weight + 1;
-                air_weight = air_weight - 0.66;
+                KPLIB_infantryWeight = KPLIB_infantryWeight - 0.66;
+                KPLIB_armorWeight = KPLIB_armorWeight + 3;
+                KPLIB_airWeight = KPLIB_airWeight - 0.66;
             };
             if ((toLowerANSI (typeOf (vehicle _killer))) in KPLIB_allAirVeh_classes) then  {
-                infantry_weight = infantry_weight - 0.66;
-                armor_weight = armor_weight - 0.66;
-                air_weight = air_weight + 1;
+                KPLIB_infantryWeight = KPLIB_infantryWeight - 0.66;
+                KPLIB_armorWeight = KPLIB_armorWeight - 0.66;
+                KPLIB_airWeight = KPLIB_airWeight + 5;
             };
         };
 
         // Keep within ranges
-        infantry_weight = 0 max (infantry_weight min 100);
-        armor_weight = 0 max (armor_weight min 100);
-        air_weight = 0 max (air_weight min 100);
+        KPLIB_infantryWeight = 0 max (KPLIB_infantryWeight min 100);
+        KPLIB_armorWeight = 0 max (KPLIB_armorWeight min 100);
+        KPLIB_airWeight = 0 max (KPLIB_airWeight min 100);
     };
 
     // Player was killed

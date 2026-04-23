@@ -40,8 +40,8 @@ private _showResources = false;
 private _currentFob = "";
 
 while {true} do {
-    _currentFob = player getVariable ["KPLIB_fobName", ""];
-    _showHud = alive player && {!dialog && {isNull curatorCamera && {!cinematic_camera_started && !halojumping}}};
+    _currentFob = player getVariable ["KPLIB_currentBaseName", ""];
+    _showHud = alive player && {!dialog && {isNull curatorCamera && {!cinematic_camera_started && !halojumping} && {!(player getVariable ["KPLIB_playerOnRedeploy", false])}}};
     _visibleMap = visibleMap;
 
     if (_showHud && {!_overlayVisible}) then {
@@ -51,16 +51,16 @@ while {true} do {
     if (!_showHud && {_overlayVisible}) then {
         "KPLIB_ui" cutText ["", "PLAIN"];
     };
-
+    
     _overlay = uiNamespace getVariable ["KPLIB_overlay", displayNull];
     _overlayVisible = !isNull _overlay;
 
-    // Player is at FOB
-    if (_currentFob != "" || {_visibleMap}) then {
+    // Player is at FOB/Outpost
+    if ((_currentFob != "") || {_visibleMap}) then {
         _showResources = true;
 
-        private _nearestFob = player getVariable "KPLIB_fobPos";
-        ([_nearestFob] call KPLIB_fnc_getFobResources) params ["", "_supplies", "_ammo", "_fuel", "_hasAir", "_hasRecycling", "_hasMedical"];
+        private _nearestFob = player getVariable "KPLIB_nearestBasePos";
+        ([_nearestFob] call KPLIB_fnc_getBaseResources) params ["", "_supplies", "_ammo", "_fuel", "_hasAir", "_hasRecycling", "_hasMedical"];
 
         if (KPLIB_resources_global || {_visibleMap}) then {
             // Overwrite FOB name in global mode
@@ -116,6 +116,14 @@ while {true} do {
         ] call KPLIB_fnc_overlayUpdateResources;
 
         if (_uiticks % 25 == 0) then {
+            
+            // Inside a tower range
+            private _tower = [getPosATL player, KPLIB_side_enemy, KPLIB_range_radioTowerScan] call KPLIB_fnc_getNearestTower;
+            if (!isNil "_tower") then {
+                (_overlay displayCtrl (758032)) ctrlShow true;
+            } else {
+                (_overlay displayCtrl (758032)) ctrlShow false;
+            };
 
             if (!isNil "KPLIB_sectors_active" && ([] call KPLIB_fnc_getOpforCap >= KPLIB_cap_enemySide)) then {
                 (_overlay displayCtrl (517)) ctrlShow true;
@@ -138,7 +146,7 @@ while {true} do {
             };
 
             _nearest_active_sector = [KPLIB_range_sectorActivation] call KPLIB_fnc_getNearestSector;
-            if ( _nearest_active_sector != "" && !(_nearest_active_sector in KPLIB_sectors_filler)) then {
+            if ( _nearest_active_sector != "" && !(_nearest_active_sector in KPLIB_fillers_all)) then {
                 _zone_size = KPLIB_range_sectorCapture;
                 if ( _nearest_active_sector in KPLIB_sectors_capital ) then {
                     _zone_size = KPLIB_range_sectorCapture * 1.4;

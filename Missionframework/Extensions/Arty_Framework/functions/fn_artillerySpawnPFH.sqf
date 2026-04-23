@@ -19,7 +19,7 @@ params["_delay"];
 
 [{
     params ["_args", "_handler"];
-    if ((!isNil "KPLIB_sectors_fob") && {KPLIB_sectors_fob isNotEqualTo []}) then {
+    if ((!isNil "KPLIB_player_fobs") && {KPLIB_player_fobs isNotEqualTo []}) then {
         // Spawns the artillery position
         if ((KPLIB_o_artilleryUnits isEqualTo []) && {KPLIB_enemyReadiness >= 15}) then {
             if ((count (allPlayers - entities "HeadlessClient_F") >= (1 / KPLIB_param_aggressivity))) then {

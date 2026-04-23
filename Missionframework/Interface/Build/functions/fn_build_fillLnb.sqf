@@ -3,7 +3,7 @@
     File: fn_build_fillLnb.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 09/11/2025
-    Last Update: 13/01/2026
+    Last Update: 22/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -47,9 +47,21 @@ private _cfg = configFile >> "cfgVehicles";
 
 {
     // Get prices
+    private _itemClass = _x # 0;
+    if !(_itemClass isEqualType []) then {
+        _itemClass = toLowerANSI (_x # 0);
+    };
     private _supplies = _x # 1;
     private _ammo = _x # 2;
     private _fuel = _x # 3;
+
+    // Update cost to box and truck fob containers per fob builded
+    if (_itemClass in ([KPLIB_b_fobBox, KPLIB_b_fobTruck] apply {toLowerANSI _x})) then {
+        private _fobsBuilded = count (KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]});
+        _supplies = _supplies * _fobsBuilded;
+        _ammo = _ammo * _fobsBuilded;
+        _fuel = _fuel * _fobsBuilded;
+    };
 
     // Update values based on civilian reputation
     private _priceAdd = -(KPLIB_civ_rep/1000);

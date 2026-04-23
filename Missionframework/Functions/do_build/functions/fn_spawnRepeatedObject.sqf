@@ -2,7 +2,7 @@
     File: fn_spawnRepeatedObject.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 03/09/2025
-    Last update: 22/02/2026
+    Last update: 12/04/2026
 
     Description:
         Functions like fn_spawnPreplaceObject.sqf, but get some information about the copied object
@@ -60,10 +60,13 @@ localNamespace setVariable ["KPLIB_BUILD_heightMode", _heightMode];
 localNamespace setVariable ["KPLIB_BUILD_yMode", _yMode];
 
 // Create spheres
-private _posFOB = [getPosATL _player] call KPLIB_fnc_getNearestFob;
-[_posFOB, _player] call KPLIB_fnc_spawnSpheresArea;
+//private _posFOB = [getPosATL _player] call KPLIB_fnc_getNearestFob;
+private _nearestBuildPos = [getPosATL _player] call KPLIB_fnc_getNearestBuildPos;
+
+_nearestBuildPos params ["_buildCenterPos", "_buildRange"];
+[_buildCenterPos, _buildRange, _player] call KPLIB_fnc_spawnSpheresArea;
 //[_object, _posFOB, _player] call KPLIB_fnc_spawnSpheresObject;
-[_object, _player, _posFOB] call KPLIB_fnc_buildEachFrame;
+[{_this call KPLIB_fnc_buildEachFrame}, [_object, _player, _buildCenterPos]] call CBA_fnc_execNextFrame;
 
 private _hiddenSelection = getArray(configFile >> "CfgVehicles" >> _objectClass >> "hiddenSelections");
 {

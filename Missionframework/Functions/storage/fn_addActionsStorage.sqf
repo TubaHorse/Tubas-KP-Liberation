@@ -101,28 +101,4 @@ _storage addAction [
     12
 ];
 
-// Outpost creation
-if ((typeOf _storage) == KPLIB_b_transStorage) then {
-    _storage addAction ["SET UP OUTPOST", {
-        params["_storage"];
-        [_storage] execVM "Functions\fn_createOutpost.sqf";
-    }],
-    "",
-    -508,
-    true,
-    true,
-    "",
-    toString {
-        !(_this getVariable ['KPLIB_BUILD_isBuilding', false])
-        && {
-            _this getVariable ['KPLIB_hasDirectAccess', false]
-            || {[3] call KPLIB_fnc_hasPermission}
-        } &&
-        {isNull objectParent _this} &&
-        {isNull (_this getVariable ["KPLIB_carriedObject", objNull])} &&
-        {(KPLIB_sectors_fob findIf {_x distance2D _originalTarget < (KPLIB_range_fob * 2)} < 0)}
-    },
-    12
-};
-
 true

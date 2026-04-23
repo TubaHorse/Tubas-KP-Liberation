@@ -2,7 +2,7 @@
     File: fn_artilleryCreateDrone.sqf
     Author: PiG13BR - https://github.com/PiG13BR
 	Date: 14/12/2025
-	Last Update: 14/12/2025
+	Last Update: 15/04/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -18,7 +18,7 @@ missionNamespace setVariable ["KPLIB_artilleryFob", true, true];
 // Define how many artillery attacks that can happen while the drone is alive
 #define MAX_ARTILLERY_ATTACKS 3
 
-private _nearestSector = [2000, _centerPos, true, true] call KPLIB_fnc_getNearestSector;
+private _nearestSector = [2000, _centerPos, KPLIB_sectors_all, true] call KPLIB_fnc_getNearestSector;
 if (_nearestSector isEqualTo "") exitWith {}; 
 
 // Find position to spawn

@@ -3,7 +3,7 @@
     File: fn_deploy_handleButton.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 04/11/2025
-    Last Update: 17/11/2025
+    Last Update: 12/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -51,14 +51,14 @@ if (count (KPLIB_respawnPositionsList select _lbCurSel) == 3) then {
 if (_destPos isEqualTo [0,0,0]) exitWith {};
 
 // Respawn cost
-if (KPLIB_param_respawnCost > 0 && {KPLIB_sectors_FOB isNotEqualTo []}) then {
+if (KPLIB_param_respawnCost > 0 && {(KPLIB_player_fobs isNotEqualTo []) || {KPLIB_player_outposts isNotEqualTo []}}) then {
     // Ignore cost if there are barracks in the FOB
     if ([_destPos] call KPLIB_fnc_deploy_barracksNearby) exitWith {}; 
     
-    private _nearestFob = [_destPos] call KPLIB_fnc_getNearestFob;
+    private _nearestFob = [_destPos] call KPLIB_fnc_getNearestPlayerBase;
 
     // Check for the nearest fob distance and compare destination and origin positions distance
-    if (((_destPos distance2D _nearestFob) < KPLIB_distance_fob) && {(_redeployOrigin distance2D _destPos) > KPLIB_range_fob}) then {
+    if (((_destPos distance2D _nearestFob) < KPLIB_distance_base) && {(_redeployOrigin distance2D _destPos) > KPLIB_range_fob}) then {
         // Respawn cost
         private _supplies = KPLIB_param_respawnCost;
         private _ammo = KPLIB_param_respawnCost;

@@ -2,7 +2,7 @@
     File: fn_handlePlacedZeusObject.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-04-11
-    Last Update: 2025-11-25
+    Last Update: 2026-04-20
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -53,7 +53,7 @@ if !(_crate) then {
     // Log
     ["KPLIB_generateLog", 
         [
-            format["Curator: %1, placed an object/entity (%2) in position %3", _curator, typeOf _obj, getPosATL _obj],
+            format["Curator %1, placed an object/entity (%2) in position %3", name (getAssignedCuratorUnit _curator), typeOf _obj, getPosATL _obj],
             "ZEUS PLACED OBJECT"
         ]
     ] call CBA_fnc_serverEvent;
@@ -66,7 +66,7 @@ if !(_crate) then {
     // Log
     ["KPLIB_generateLog", 
         [
-            format["Curator: %1, placed a resource crate (%2) in position %2", _curator, typeOf _obj, getPosATL _obj],
+            format["Curator %1, placed a resource crate (%2) in position %2", name (getAssignedCuratorUnit _curator), typeOf _obj, getPosATL _obj],
             "ZEUS PLACED OBJECT"
         ]
     ] call CBA_fnc_serverEvent;

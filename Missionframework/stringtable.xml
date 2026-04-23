@@ -663,20 +663,24 @@
             <Czech>-- POSTAVIT FOB --</Czech>
             <Japanese>-- FOBを設置する --</Japanese>
         </Key>
+        <Key ID="STR_OUTPOST_ACTION">
+            <Original>-- DEPLOY OUTPOST --</Original>
+            <Portuguese>-- INSTALAR POSTO AV. --</Portuguese>
+        </Key>
         <Key ID="STR_FOB_BUILDING_IMPOSSIBLE">
-            <Original>Can't deploy a new FOB here, you must be at least %1 meters away from every other FOB. Nearest FOB is %2 meters away.</Original>
-            <French>Impossible de déployer une nouvelle FOB ici, vous devez être à au moins %1 mètres de toutes les autres FOB. La FOB la plus proche est à %2 mètres d'ici.</French>
-            <German>Kann hier keine FOB platzieren, du musst min. %1 Meter von der anderen FOB entfernt sein. Die nächste FOB ist %2 Meter entfernt.</German>
-            <Spanish>Imposible desplegar una nueva FOB aquí, debes estar al menos a 1% metros de cualquier otra FOB. La FOB más cercana está a %2 metros.</Spanish>
-            <Russian>Нельзя развернуть FOB здесь, так как вы должны находится в %1 метрах от другой FOB. Ближайшая FOB в %2 метрах.</Russian>
-            <Italian>Impossibile creare la nuova FOB qui, devi essere almeno %1 metri distante dalla FOB più vicina. La FOB più vicina si trova a %2 metri.</Italian>
+            <Original>Can't deploy a new FOB here, you must be at least %1 meters away from every other FOB/Outpost. Nearest FOB/Outpost is %2 meters away.</Original>
+            <French>Impossible de déployer une nouvelle FOB ici, vous devez être à au moins %1 mètres de toutes les autres FOB/Outpost. La FOB/Outpost la plus proche est à %2 mètres d'ici.</French>
+            <German>Kann hier keine FOB platzieren, du musst min. %1 Meter von der anderen FOB/Outpost entfernt sein. Die nächste FOB/Outpost ist %2 Meter entfernt.</German>
+            <Spanish>Imposible desplegar una nueva FOB aquí, debes estar al menos a 1% metros de cualquier otra FOB/Outpost. La FOB/Outpost más cercana está a %2 metros.</Spanish>
+            <Russian>Нельзя развернуть FOB здесь, так как вы должны находится в %1 метрах от другой FOB/Outpost. Ближайшая FOB/Outpost в %2 метрах.</Russian>
+            <Italian>Impossibile creare la nuova FOB qui, devi essere almeno %1 metri distante dalla FOB/Outpost più vicina. La FOB/Outpost più vicina si trova a %2 metri.</Italian>
             <Chinesesimp>无法在此部署前哨，前哨之间的距离不得低于%1米。最近的前哨在%2米开外。</Chinesesimp>
             <Chinese>無法在這裡佈署前線基地，前線基地之間的距離不得低於 %1 公尺，最近的前線基地離此 %2 公尺。</Chinese>
-            <Turkish>Buraya FOB kurulamaz, diğer FOB'lerden en az %1 metre uzakta olmalısın. Şuan en yakındaki FOB %2 metre uzakta.</Turkish>
-            <Portuguese>Não é possível instalar a FOB aqui, você precisa estar no mínimo a %1 metros de distância de outra FOB. A FOB mais próxima está a %2 metros.</Portuguese>
+            <Turkish>Buraya FOB kurulamaz, diğer FOB/Outpost'lerden en az %1 metre uzakta olmalısın. Şuan en yakındaki FOB/Outpost %2 metre uzakta.</Turkish>
+            <Portuguese>Não é possível instalar a FOB aqui, você precisa estar no mínimo a %1 metros de distância de outra FOB/Outpost. A FOB/Outpost mais próxima está a %2 metros.</Portuguese>
             <Korean>전초기지를 설치할 수 없습니다. 다른 전초기지로부터 %1 미터 떨어져 있어야 합니다. 현재 가장 가까운 전초기지와 %2 미터 떨어져 있습니다.</Korean>
-            <Czech>Zde Nelze postavit nové FOB, musí být vzdáleno %1 metrů od jakékoliv jiné FOB. Nejbližší FPB je vzdáleno %2 metrů.</Czech>
-            <Japanese>FOBをここに設置することはできません。 %1 メートル以上他のFOBから離す必要があります。 最も近いFOBは %2 にあります。</Japanese>
+            <Czech>Zde Nelze postavit nové FOB, musí být vzdáleno %1 metrů od jakékoliv jiné FOB/Outpost. Nejbližší FPB je vzdáleno %2 metrů.</Czech>
+            <Japanese>FOBをここに設置することはできません。 %1 メートル以上他のFOB/Outpostから離す必要があります。 最も近いFOB/Outpostは %2 にあります。</Japanese>
         </Key>
         <Key ID="STR_FOB_BUILDING_IMPOSSIBLE_SECTOR">
             <Original>Can't deploy a new FOB here, you must be at least %1 meters away from every capturable zone. Nearest zone is %2 meters away.</Original>
@@ -696,6 +700,18 @@
         <Key ID="STR_FOB_BUILDING_IMPOSSIBLE_GRADIENT">
             <Original>Can't deploy a new FOB here, find a more suitable terrain (flatter)</Original>
             <Portuguese>Não é possível instalar a FOB aqui, encontre um terreno mais adequado (mais plano).</Portuguese>
+        </Key>
+        <Key ID="STR_OUTPOST_BUILDING_IMPOSSIBLE">
+            <Original>Can't deploy a new outpost here, you must be at least %1 meters away from every other outpost/FOB. Nearest outpost/FOB is %2 meters away.</Original>
+            <Portuguese>Não é possível instalar o outpost aqui, você precisa estar no mínimo a %1 metros de distância de outro outpost/FOB. O outpost/FOB mais próximo está a %2 metros.</Portuguese>
+        </Key>
+        <Key ID="STR_OUTPOST_BUILDING_IMPOSSIBLE_SECTOR">
+            <Original>Can't deploy a new outpost here, you must be at least %1 meters away from every capturable zone. Nearest zone is %2 meters away.</Original>
+            <Portuguese>Não é possível instalar o outpost aqui, você precisa estar no mínimo a %1 metros de distância de qualquer setor capturável. O setor mais próximo está a %2 metros.</Portuguese>
+        </Key>
+        <Key ID="STR_OUTPOST_BUILDING_IMPOSSIBLE_GRADIENT">
+            <Original>Can't deploy a new outpost here, find a more suitable terrain.</Original>
+            <Portuguese>Não é possível instalar o outpost aqui, encontre um terreno mais adequado.</Portuguese>
         </Key>
         <Key ID="STR_BUILD_ERROR_WATER">
             <Original>Can't build on water.</Original>
@@ -727,7 +743,7 @@
             <Czech>Nemůžeš stavět dál než %1 metrů od FOB.</Czech>
             <Japanese>%1 メートル以上離れて製造することはできません。</Japanese>
         </Key>
-        <Key ID="STR_FOBBOX">
+        <Key ID="STR_FOB_BOX">
             <Original>FOB Container</Original>
             <French>Container FOB</French>
             <German>FOB Container</German>
@@ -742,7 +758,7 @@
             <Czech>FOB Kontejner</Czech>
             <Japanese>FOB コンテナ</Japanese>
         </Key>
-        <Key ID="STR_FOBTRUCK">
+        <Key ID="STR_FOB_TRUCK">
             <Original>FOB Truck</Original>
             <French>Camion FOB</French>
             <German>FOB Lastwagen</German>
@@ -757,35 +773,17 @@
             <Czech>FOB Náklaďák</Czech>
             <Japanese>FOB トラック</Japanese>
         </Key>
-        <Key ID="STR_FORTIFY_SMALL_ENTRY">
-            <Original>Small fortify box</Original>
-            <French>Petite caisse de fortification</French>
-            <German>Kleine Befestigungskiste</German>
-            <Spanish>Caja pequeña de fortificación</Spanish>
-            <Russian>Малый ящик укреплений</Russian>
-            <Italian>Piccola cassa di fortificazione</Italian>
-            <Chinesesimp>小型工事箱</Chinesesimp>
-            <Chinese>小型工事箱</Chinese>
-            <Turkish>Küçük tahkimat kutusu</Turkish>
-            <Portuguese>Caixa pequena de fortificação</Portuguese>
-            <Korean>소형 방어 상자</Korean>
-            <Czech>Malá fortifikační bedna</Czech>
-            <Japanese>小型要塞化ボックス</Japanese>
-        </Key>
-        <Key ID="STR_FORTIFY_MEDIUM_ENTRY">
-            <Original>Medium fortify box</Original>
-            <French>Caisse moyenne de fortification</French>
-            <German>Mittlere Befestigungskiste</German>
-            <Spanish>Caja mediana de fortificación</Spanish>
-            <Russian>Средний ящик укреплений</Russian>
-            <Italian>Cassa media di fortificazione</Italian>
-            <Chinesesimp>中型工事箱</Chinesesimp>
-            <Chinese>中型工事箱</Chinese>
-            <Turkish>Orta tahkimat kutusu</Turkish>
-            <Portuguese>Caixa média de fortificação</Portuguese>
-            <Korean>중형 방어 상자</Korean>
-            <Czech>Střední fortifikační bedna</Czech>
-            <Japanese>中型要塞化ボックス</Japanese>
+        <Key ID="STR_OUTPOST_BOX">
+            <Original>Outpost Container</Original>
+            <French>Container Outpost</French>
+            <German>Outpost Container</German>
+            <Spanish>Contenedor de Outpost</Spanish>
+            <Russian>Outpost Контейнер</Russian>
+            <Italian>Outpost Container</Italian>
+            <Turkish>Outpost Konteynırı</Turkish>
+            <Portuguese>Outpost no Contêiner</Portuguese>
+            <Czech>Outpost Kontejner</Czech>
+            <Japanese>Outpost コンテナ</Japanese>
         </Key>
         <Key ID="STR_RESPAWN_TRUCK">
             <Original>Mobile respawn</Original>
@@ -1449,6 +1447,38 @@
             <Korean>전초기지 %1 이 파괴되었습니다!</Korean>
             <Czech>FOB %1 bylo zničeno</Czech>
             <Japanese>FOB %1 が破壊されちまった!</Japanese>
+        </Key>
+        <Key ID="STR_NOTIFICATION_OUTPOSTBUILT_TITLE">
+            <Original>NEW OUTPOST BUILT</Original>
+            <Portuguese>NOVO OUTPOST CONSTRUÍDO</Portuguese>
+        </Key>
+        <Key ID="STR_NOTIFICATION_OUTPOSTBUILT_TEXT">
+            <Original>Outpost %1 is now operational.</Original>
+            <Portuguese>Outpost %1 está operacional.</Portuguese>
+        </Key>
+        <Key ID="STR_NOTIFICATION_OUTPOSTSAFE_TITLE">
+            <Original>OUTPOST SAFE</Original>
+            <Portuguese>Outpost SEGURO</Portuguese>
+        </Key>
+        <Key ID="STR_NOTIFICATION_OUTPOSTSAFE_TEXT">
+            <Original>Outpost %1 is no longer under threat.</Original>
+            <Portuguese>Outpost %1 não está mais sob ameaça.</Portuguese>
+        </Key>
+        <Key ID="STR_NOTIFICATION_OUTPOSTATTACKED_TITLE">
+            <Original>OUTPOST ATTACKED</Original>
+            <Portuguese>OUTPOST ATACADO</Portuguese>
+        </Key>
+        <Key ID="STR_NOTIFICATION_OUTPOSTATTACKED_TEXT">
+            <Original>Outpost %1 is under attack!</Original>
+            <Portuguese>Outpost %1 está sob ataque!</Portuguese>
+        </Key>
+        <Key ID="STR_NOTIFICATION_OUTPOSTLOST_TITLE">
+            <Original>OUTPOST DESTROYED</Original>
+            <Portuguese>OUTPOST DESTRUÍDO</Portuguese>
+        </Key>
+        <Key ID="STR_NOTIFICATION_OUTPOSTLOST_TEXT">
+            <Original>FOB %1 has been destroyed!</Original>
+            <Portuguese>Outpost %1 foi destruído!</Portuguese>
         </Key>
         <Key ID="STR_NOTIFICATION_BATTLEGROUP_TITLE">
             <Original>HOSTILE FORCES INCOMING</Original>
@@ -3187,50 +3217,74 @@
             <Czech>Výchozí</Czech>
             <Japanese>標準</Japanese>
         </Key>
-        <Key ID="STR_FOB_REPACKAGE">
-            <Original>-- REPACKAGE FOB --</Original>
-            <French>-- REPLIER FOB --</French>
-            <German>-- FOB EINPACKEN --</German>
-            <Spanish>-- EMPAQUETAR FOB --</Spanish>
-            <Russian>-- СВЕРНУТЬ FOB --</Russian>
-            <Italian>-- SMONTA FOB --</Italian>
+        <Key ID="STR_BASE_REPACKAGE">
+            <Original>-- REPACKAGE BASE --</Original>
+            <French>-- REPLIER BASE --</French>
+            <German>-- BASE EINPACKEN --</German>
+            <Spanish>-- EMPAQUETAR BASE --</Spanish>
+            <Russian>-- СВЕРНУТЬ BASE --</Russian>
+            <Italian>-- SMONTA BASE --</Italian>
             <Chinesesimp>-- 收起前哨 --</Chinesesimp>
             <Chinese>-- 收起前線基地 --</Chinese>
-            <Turkish>-- FOB'Yİ TOPLA --</Turkish>
-            <Portuguese>-- MOBILIZAR FOB --</Portuguese>
+            <Turkish>-- BASE'Yİ TOPLA --</Turkish>
+            <Portuguese>-- MOBILIZAR BASE --</Portuguese>
             <Korean>-- 전초기지 재배치 --</Korean>
-            <Czech>-- ZABALIT FOB --</Czech>
-            <Japanese>-- FOBを撤収する --</Japanese>
+            <Czech>-- ZABALIT BASE --</Czech>
+            <Japanese>-- BASEを撤収する --</Japanese>
         </Key>
-        <Key ID="STR_FOB_REPACKAGE_TITLE">
-            <Original>REPACKAGE FOB</Original>
-            <French>REPLIER FOB</French>
-            <German>FOB EINPACKEN</German>
-            <Spanish>EMPAQUETAR FOB</Spanish>
-            <Russian>СВЕРНУТЬ FOB</Russian>
-            <Italian>SMONTA FOB</Italian>
+        <Key ID="STR_BASE_REPACKAGE_TITLE">
+            <Original>REPACKAGE BASE</Original>
+            <French>REPLIER BASE</French>
+            <German>BASE EINPACKEN</German>
+            <Spanish>EMPAQUETAR BASE</Spanish>
+            <Russian>СВЕРНУТЬ BASE</Russian>
+            <Italian>SMONTA BASE</Italian>
             <Chinesesimp>收起前哨</Chinesesimp>
             <Chinese>收起前線基地</Chinese>
-            <Turkish>FOB'Yİ TOPLA</Turkish>
-            <Portuguese>MOBILIZAR FOB</Portuguese>
+            <Turkish>BASE'Yİ TOPLA</Turkish>
+            <Portuguese>MOBILIZAR BASE</Portuguese>
             <Korean>전초기지 재배치</Korean>
-            <Czech>ZABALIT FOB</Czech>
-            <Japanese>FOBを撤収します</Japanese>
+            <Czech>ZABALIT BASE</Czech>
+            <Japanese>BASEを撤収します</Japanese>
         </Key>
-        <Key ID="STR_FOB_REPACKAGE_CONFIRM">
-            <Original>Are you sure you want to repackage this FOB?</Original>
-            <French>Etes-vous sur de vouloir replier cette fob?</French>
-            <German>Bist du dir sicher, dass du deine FOB einpacken willst?</German>
-            <Spanish>¿Estas seguro de querer reempaquetar esta FOB?</Spanish>
-            <Russian>Вы уверены что вы хотите свернуть эту FOB?</Russian>
-            <Italian>Sei sicuro di voler smontare la FOB?</Italian>
+        <Key ID="STR_BASE_REPACKAGE_CONFIRM">
+            <Original>Are you sure you want to repackage this base?</Original>
+            <French>Etes-vous sur de vouloir replier cette base?</French>
+            <German>Bist du dir sicher, dass du deine base einpacken willst?</German>
+            <Spanish>¿Estas seguro de querer reempaquetar esta base?</Spanish>
+            <Russian>Вы уверены что вы хотите свернуть эту base?</Russian>
+            <Italian>Sei sicuro di voler smontare la base?</Italian>
             <Chinesesimp>你确定要收起这个前哨？</Chinesesimp>
             <Chinese>你確定要收起這個前線基地？</Chinese>
-            <Turkish>Bu FOB'yi toplamak istediğinizden emin misiniz?</Turkish>
-            <Portuguese>Você tem certeza que quer mobilizar esta FOB?</Portuguese>
+            <Turkish>Bu base'yi toplamak istediğinizden emin misiniz?</Turkish>
+            <Portuguese>Você tem certeza que quer mobilizar esta base?</Portuguese>
             <Korean>이 전초기지를 재배치하시겠습니까?</Korean>
-            <Czech>Jste si jistý že chcete zabalit FOB?</Czech>
-            <Japanese>FOBを撤収しますか?</Japanese>
+            <Czech>Jste si jistý že chcete zabalit base?</Czech>
+            <Japanese>Baseを撤収しますか?</Japanese>
+        </Key>
+        <Key ID="STR_REPACKAGE_BOX">
+            <Original>Container</Original>
+            <French>Container</French>
+            <German>Container</German>
+            <Spanish>Contenedor</Spanish>
+            <Russian>Контейнер</Russian>
+            <Italian>Container</Italian>
+            <Turkish>Konteynırı</Turkish>
+            <Portuguese>Contêiner</Portuguese>
+            <Czech>Kontejner</Czech>
+            <Japanese>コンテナ</Japanese>
+        </Key>
+        <Key ID="STR_REPACKAGE_TRUCK">
+            <Original>Truck</Original>
+            <French>Camion</French>
+            <German>Lastwagen</German>
+            <Spanish>Camión</Spanish>
+            <Russian>Грузовик</Russian>
+            <Italian>FOB</Italian>
+            <Turkish>Kamyonu</Turkish>
+            <Portuguese>Caminhão</Portuguese>
+            <Czech>Náklaďák</Czech>
+            <Japanese>トラック</Japanese>
         </Key>
         <Key ID="STR_HALO_PARAM">
             <Original>HALO Jump</Original>
@@ -7704,15 +7758,15 @@
             <Original>-- Clear area around FOB (Large)</Original>
             <Japanese>-- FOBの周辺を一掃 (大)</Japanese>
         </Key>
-        <Key ID="STR_FOB_REPACKAGE_HINT">
-            <Original>FOB repackaged.\nPossibly created clearance will be reverted upon server restart.</Original>
-            <German>FOB eingepackt.\nEventuelle Gebietsräumung wird zum Serverneustart rückgängig gemacht.</German>
-            <Spanish>FOB empacado. \nProbablemente el permiso de creación será revertido después de reiniciar el servidor.</Spanish>
-            <Russian>FOB свернуто.\nЕсли вы очищали место для FOB, оно будет восстановлено после перезапуска сервера.</Russian>
-            <Italian>FOB ripiegata.\nL'autorizzazione eventualmente creata verrà ripristinata al riavvio del server.</Italian>
-            <Korean>FOB가 재포장됩니다. 이 상태로 서버 재시작시 이 부근의 건물이나 장비들은 사라집니다.</Korean>
-            <Czech>FOB je zabalen.\Po restartování serveru bude pravděpodobně vytvořené oprávnění zrušeno.</Czech>
-            <Japanese>FOBを撤収しました。\nFOBの周辺を一掃していた場合は、サーバーの再起動後に原状復帰します。</Japanese>
+        <Key ID="STR_BASE_REPACKAGE_HINT">
+            <Original>Base repackaged.\nPossibly created clearance will be reverted upon server restart.</Original>
+            <German>Base eingepackt.\nEventuelle Gebietsräumung wird zum Serverneustart rückgängig gemacht.</German>
+            <Spanish>Base empacado. \nProbablemente el permiso de creación será revertido después de reiniciar el servidor.</Spanish>
+            <Russian>Base свернуто.\nЕсли вы очищали место для FOB, оно будет восстановлено после перезапуска сервера.</Russian>
+            <Italian>Base ripiegata.\nL'autorizzazione eventualmente creata verrà ripristinata al riavvio del server.</Italian>
+            <Korean>Base가 재포장됩니다. 이 상태로 서버 재시작시 이 부근의 건물이나 장비들은 사라집니다.</Korean>
+            <Czech>Base je zabalen.\Po restartování serveru bude pravděpodobně vytvořené oprávnění zrušeno.</Czech>
+            <Japanese>Baseを撤収しました。\nFOBの周辺を一掃していた場合は、サーバーの再起動後に原状復帰します。</Japanese>
         </Key>
         <Key ID="STR_FOG_PARAM">
             <Original>Dynamic fog (A3 Vanilla)</Original>
@@ -8062,12 +8116,12 @@
             <Portuguese>DESABILITADO</Portuguese>
         </Key>
         <Key ID="STR_DEPLOY_NORESOURCES">
-            <Original>No resources available in the FOB %1 to redeploy</Original>
-            <Portuguese>Não há recursos disponíveis na FOB %1 para o realocamento</Portuguese>
+            <Original>No resources available in the %1 to redeploy</Original>
+            <Portuguese>Não há recursos disponíveis para o realocamento em %1</Portuguese>
         </Key>
         <Key ID="STR_DEPLOY_COST_WARNING">
-            <Original>This redeploy will cost %1 of each resource for the FOB %2</Original>
-            <Portuguese>Essa realocação ira custar %1 de cada recurso para a FOB %2</Portuguese>
+            <Original>This redeploy will cost %1 of each resource for the %2</Original>
+            <Portuguese>Essa realocação ira custar %1 de cada recurso para %2</Portuguese>
         </Key>
         <Key ID="STR_DEPLOY_NOCOST_WARNING">
             <Original>This redeploy won't have resources costs</Original>
@@ -8983,6 +9037,25 @@
 		</Container>
 
 
+        <Container name="Base Name GUI">
+			<Key ID="STR_BASE_NAME_HEADER">
+				<Original>Change Base Name</Original>
+				<Portuguese>Mudar Nome da Base</Portuguese>
+			</Key>
+            <Key ID="STR_BASE_NAME_DEFAULT_TOOLTIP">
+				<Original>Restore to the default name</Original>
+				<Portuguese>Restaurar para o nome padrão</Portuguese>
+			</Key>
+            <Key ID="STR_BASE_NAME_UNIQUE_WARN">
+				<Original>The name must be unique for this type of base</Original>
+				<Portuguese>O nome deve ser unico para este tipo de base</Portuguese>
+			</Key>
+
+            
+            
+        </Container>
+
+
         <Container name="PIG's Build Menu">
 			<Key ID="STR_BUILD_MENU_CAMERA_ASSIST">
 				<Original>Building Camera Assist</Original>
@@ -9008,7 +9081,7 @@
                 <Japanese>製造</Japanese>
 			</Key>
 			<Key ID="STR_BUILD_ACTION_BUILDREPEAT">
-				<Original>BUILD AND REPEAT</Original>
+				<Original>REPEAT</Original>
 				<Portuguese>COPIAR CONSTRUÇÃO</Portuguese>
                 <French>CONSTRUIRE ET RÉPÉTER</French>
                 <German>BAUEN UND WIEDERHOLEN</German>

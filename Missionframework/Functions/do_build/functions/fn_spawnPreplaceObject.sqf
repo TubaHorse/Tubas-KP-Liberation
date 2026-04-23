@@ -3,7 +3,7 @@
     File: fn_spawnPreplaceObject.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 28/08/2025
-    Last update: 22/02/2026
+    Last update: 11/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -64,23 +64,26 @@ _object setVectorUp (surfaceNormal _startPos);
 
 // Create spheres
 private _buildType = localNamespace getVariable ["KPLIB_BUILD_buildType", 1];
-private _buildCenterPos = [getPosATL _player] call KPLIB_fnc_getNearestFob; // Get FOB Pos
+//private _buildCenterPos = [getPosATL _player] call KPLIB_fnc_getNearestFob; // Get FOB Pos
+private _nearestBuildPos = [getPosATL _player] call KPLIB_fnc_getNearestBuildPos;
+
+_nearestBuildPos params ["_buildCenterPos", "_buildRange"];
 
 if (_buildType == BUILDTYPE_FACTORY_STORAGE) then {
     // For storage building, get the nearest sector
     _buildCenterPos = markerPos ([100] call KPLIB_fnc_getNearestSector);
 };
 
-if (_buildType != BUILDTYPE_FOB) then {
+if ((_buildType != BUILDTYPE_FOB) && (_buildType != BUILDTYPE_OUTPOST)) then {
     // Buildings
-    [_buildCenterPos, _player] call KPLIB_fnc_spawnSpheresArea;
+    [_buildCenterPos, _buildRange, _player] call KPLIB_fnc_spawnSpheresArea;
 } else {
-    // Fob
+    // Fob or outpost
     _buildCenterPos = getPosATL _player;
 };
 
 // Manage build each frame
-[_object, _player, _buildCenterPos] call KPLIB_fnc_buildEachFrame;
+[_object, _player, _buildCenterPos, _buildRange] call KPLIB_fnc_buildEachFrame;
 
 private _hiddenSelection = getArray(configFile >> "CfgVehicles" >> _objectClass >> "hiddenSelections");
 {

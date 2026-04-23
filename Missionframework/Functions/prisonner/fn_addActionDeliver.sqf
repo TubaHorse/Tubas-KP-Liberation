@@ -32,7 +32,7 @@ private _actionID = _unit addAction [
     "",
     toString{
         [5] call KPLIB_fnc_hasPermission &&
-        {KPLIB_sectors_fob isNotEqualTo [] && 
+        {KPLIB_player_fobs isNotEqualTo [] && 
         {(_target distance2D ([getPosATL _target] call KPLIB_fnc_getNearestFob)) < 30}} && 
         {isNull objectParent _this} && 
         {side (group _target) != KPLIB_side_player} && 

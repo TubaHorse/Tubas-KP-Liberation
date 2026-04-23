@@ -22,6 +22,18 @@
     [_fobObject] call KPLIB_fnc_addActionsFob;
 }] call CBA_fnc_addEventHandler;
 
+// Add Outpost Build Actions
+["KPLIB_outpostActions", {
+    params["_outpostObject"];
+
+    if ((typeOf _outpostObject) isEqualTo KPLIB_b_outpostBox) then {
+        [_outpostObject] call KPLIB_fnc_setFobMass;
+        [_outpostObject] call KPLIB_fnc_setLoadableViV;
+    };
+
+    [_outpostObject] call KPLIB_fnc_addActionsOutpost;
+}] call CBA_fnc_addEventHandler;
+
 // Add Unflip action
 ["KPLIB_addUnflipAction", {
     _this spawn {
@@ -76,7 +88,7 @@
                 {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} &&
                 {isNull objectParent _this} &&
                 {[4] call KPLIB_fnc_hasPermission} &&
-                {KPLIB_sectors_fob isNotEqualTo [] && {(_target distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}} &&
+                {KPLIB_player_fobs isNotEqualTo [] && {(_target distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}} &&
                 {(({alive _x} count (crew _target)) == 0) || {unitIsUAV _target}} &&
                 //{locked _target == -1 || {locked _target == 0} || {locked _target == 1}} &&
                 {(((toLowerANSI (typeOf _target)) in KPLIB_storageBuildings) && (_target getVariable ["KPLIB_fobStorage", false])) || {!((toLowerANSI (typeOf _target)) in KPLIB_storageBuildings)}} &&
@@ -101,7 +113,7 @@
                 {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} &&
                 {isNull objectParent _this} &&
                 {[4] call KPLIB_fnc_hasPermission} &&
-                {KPLIB_sectors_fob isNotEqualTo [] && {(_target distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}} &&
+                {KPLIB_player_fobs isNotEqualTo [] && {(_target distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}} &&
                 {(({alive _x} count (crew _target)) == 0) || {unitIsUAV _target}} &&
                 //{locked _target == -1 || {locked _target == 0} || {locked _target == 1}} &&
                 {(((toLowerANSI (typeOf _target)) in KPLIB_storageBuildings) && (_target getVariable ["KPLIB_fobStorage", false])) || {!((toLowerANSI (typeOf _target)) in KPLIB_storageBuildings)}} &&
@@ -201,7 +213,7 @@
 
 // Subtract Resources
 ["KPLIB_subtractResources", {
-    params[["_buildSelected", [], [[]]], ["_buildType", 1, [0]], ["_fobPos", [0,0,0], [[]]]];
+    params[["_buildSelected", [], [[]]], ["_buildType", 1, [0]], ["_buildPos", [0,0,0], [[]]]];
 
     if (_buildSelected isEqualTo []) exitWith {};
 
@@ -224,7 +236,7 @@
     };
 
     // Get storage areas
-    private _storageAreas = (_fobPos nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    private _storageAreas = (_buildPos nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
 
     [_supplyPrice, _ammoPrice, _fuelPrice, _classname, _buildType, _storageAreas] call KPLIB_fnc_subtractResources;
 }] call CBA_fnc_addEventHandler;
@@ -242,22 +254,32 @@
     private _fuelPrice = _prices # 2;
 
     // Get storage areas
-    private _nearfob = [_respawnPos] call KPLIB_fnc_getNearestFob;
-    private _storageAreas = (_nearfob nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false]};
-
+    ([_respawnPos] call KPLIB_fnc_getNearestBuildPos) params ["_buildPos", "_range"];
+    
+    //private _nearBase = [_respawnPos] call KPLIB_fnc_getNearestPlayerBase;
+    private _storageAreas = (_buildPos nearobjects (_range * 2)) select {_x getVariable ["KPLIB_fobStorage", false]};
     [_supplyPrice, _ammoPrice, _fuelPrice, "", -1, _storageAreas] call KPLIB_fnc_subtractResources;
 }] call CBA_fnc_addEventHandler;
 
 // Restore resources (cancel building)
 ["KPLIB_restoreResources", {
-    params["_buildSelected", "_fobPos"];
+    params["_buildSelected", "_buildPos", "_player"];
 
     if (_buildSelected isEqualTo []) exitWith {};
 
     // Get item cost
+    private _itemClass = toLowerANSI (_buildSelected # 0);
     private _supplyPrice = _buildSelected # 1;
     private _ammoPrice = _buildSelected # 2;
     private _fuelPrice = _buildSelected # 3;
+
+    // Update cost to box and truck fob/outpost containers per fob builded
+    if (_itemClass in ([KPLIB_b_fobBox, KPLIB_b_fobTruck] apply {toLowerANSI _x})) then {
+        private _fobsBuilded = count (KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]});
+        _supplyPrice = _supplyPrice * _fobsBuilded;
+        _ammoPrice = _ammoPrice * _fobsBuilded;
+        _fuelPrice = _fuelPrice * _fobsBuilded;
+    };
 
     // Update values based on civilian reputation
     private _priceAdd = -(KPLIB_civ_rep/1000);
@@ -272,7 +294,7 @@
     };
 
     // Get storage areas
-    private _storage_areas = (_fobPos nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    private _storage_areas = (_buildPos nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
 
     private _storages = [];
     private _totalLimit = 0;
@@ -288,7 +310,30 @@
     } forEach _storage_areas;
 
     if ((_storages isEqualTo []) || (_sum >= _totalLimit)) then {
-        [localize "STR_CANCEL_ERROR", true, 3] call KPLIB_fnc_hint;
+
+        // Storage has no space left. Create crates around the player instead.
+        [localize "STR_CANCEL_ERROR", true, 3] remoteExecCall ["KPLIB_fnc_hint", _player];
+
+        while {(_supplyPrice > 0) || (_ammoPrice > 0) || (_fuelPrice > 0)} do {
+            if (_supplyPrice > 0) then {
+                private _price = _supplyPrice min 100;
+                [KPLIB_b_crateSupply, _price, getPosATL _player] call KPLIB_fnc_createCrate;
+                _supplyPrice = _supplyPrice - _price;
+            };
+
+            if (_ammoPrice > 0) then {
+                private _price = _ammoPrice min 100;
+                [KPLIB_b_crateAmmo, _price, getPosATL _player] call KPLIB_fnc_createCrate;
+                _ammoPrice = _ammoPrice - _price;
+            };
+
+            if (_fuelPrice > 0) then {
+                private _price = _fuelPrice min 100;
+                [KPLIB_b_crateFuel, _price, getPosATL _player] call KPLIB_fnc_createCrate;
+                _fuelPrice = _fuelPrice - _price;
+            };
+        };
+
     } else {
         [_supplyPrice, _ammoPrice, _fuelPrice, _storages] call KPLIB_fnc_restoreResources;
     };

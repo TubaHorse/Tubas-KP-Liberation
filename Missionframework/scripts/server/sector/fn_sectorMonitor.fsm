@@ -146,7 +146,7 @@ class FSM
                 {
                         name = "Start_new_monitoring";
                         itemno = 6;
-                        init = /*%FSM<STATEINIT""">*/"_allSectors = (KPLIB_sectors_all + KPLIB_sectors_filler) - KPLIB_sectors_player;" \n
+                        init = /*%FSM<STATEINIT""">*/"_allSectors = (KPLIB_sectors_all + KPLIB_fillers_all) - KPLIB_sectors_player;" \n
                          "_allSectors = _allSectors - KPLIB_sectors_active;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links

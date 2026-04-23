@@ -2,7 +2,7 @@
     File: fn_getOpforSpawnPointSAM.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-09-29
-    Last Update: 2026-03-08
+    Last Update: 2026-04-12
     License: MIT License - http://www.opensource.org/licenses/MIT
     Description:
         Gets a random opfor spawn point marker name respecting following conditions:
@@ -43,8 +43,8 @@ private ["_valid", "_current", "_distances"];
     _valid = true;
     _current = _x;
 
-    // Fetch distances to FOBs
-    _distances = (KPLIB_sectors_fob apply {(markerPos _current) distance2d _x}) select {_x < _max};
+    // Fetch distances to FOBs and outposts
+    _distances = ((KPLIB_player_fobs + KPLIB_player_outposts) apply {(markerPos _current) distance2d _x}) select {_x < _max};
 
     // Fetch distances to blufor sectors
     _distances append ((KPLIB_sectors_player apply {(markerPos _current) distance2d (markerPos _x)}) select {_x < _max});
@@ -55,11 +55,11 @@ private ["_valid", "_current", "_distances"];
     // Not near roads
     if (count ((markerPos _current) nearRoads 75) > 0) then {_valid = false};
 
-    // Invalid, if all sectors and FOBs are further away than given max distance
+    // Invalid, if all sectors and bases are further away than given max distance
     if (_distances isEqualTo []) then {
         _valid = false;
     } else {
-        // Invalid, if one sector or FOB is closer than min distance
+        // Invalid, if one sector or base is closer than min distance
         _distances sort true;
         if ((_distances select 0) < _min) then {
             _valid = false;

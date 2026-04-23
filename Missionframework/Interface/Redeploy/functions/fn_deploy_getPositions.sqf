@@ -3,7 +3,7 @@
     File: fn_deploy_getPositions.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 04/11/2025
-    Last Update: 17/11/2025
+    Last Update: 13/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -28,11 +28,21 @@ KPLIB_respawnPositionsList = [[_basenamestr, getposATL startbase]];
 
 // Get FOBs
 {
+    if (_x isEqualTo [0,0,0]) then {continue};
     KPLIB_respawnPositionsList pushBack [
-        format ["FOB %1 - %2", (KPLIB_militaryAlphabet select _forEachIndex), mapGridPosition _x],
+        format ["FOB %1 - %2", (KPLIB_fobNames select _forEachIndex), mapGridPosition _x],
         _x
     ];
-} forEach KPLIB_sectors_fob;
+} forEach KPLIB_player_fobs;
+
+// Get Outposts
+{
+    if (_x isEqualTo [0,0,0]) then {continue};
+    KPLIB_respawnPositionsList pushBack [
+        format ["Outpost %1 - %2", (KPLIB_outpostNames select _forEachIndex), mapGridPosition _x],
+        _x
+    ];
+} forEach KPLIB_player_outposts;
 
 // Get mobile respawns
 if (KPLIB_param_mobileRespawn) then {

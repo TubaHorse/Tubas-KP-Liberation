@@ -17,7 +17,7 @@
 */
 [{
     // Conditions
-    !isNil "KPLIB_sectors_fob" &&
+    !isNil "KPLIB_player_fobs" &&
     {!isNil "KPLIB_sectors_player"} &&
     {!isNil "KPLIB_saveLoaded"} &&
     {KPLIB_saveLoaded} &&

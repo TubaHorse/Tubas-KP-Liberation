@@ -45,7 +45,7 @@ if ((_buildType == BUILDTYPE_INFANTRY) && (count (units (group player)) >= KPLIB
 // Check if there are barracks to buy IA/Squads
 private _barracksNearby = true;
 if (_buildType == BUILDTYPE_INFANTRY || _buildType == BUILDTYPE_SQUAD) then {
-    private _nearestFob = player getVariable ["KPLIB_fobPos", []];
+    private _nearestFob = player getVariable ["KPLIB_nearestBasePos", []];
     _barracksNearby = if (count (_nearestFob nearObjects [KPLIB_b_barrack, KPLIB_range_fob]) > 1) then {true} else {false};
 };
 

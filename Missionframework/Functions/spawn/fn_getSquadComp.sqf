@@ -27,24 +27,24 @@ switch _type do {
         private _randomchance = 0;
         _squadcomp = KPLIB_o_squadStd;
 
-        if (armor_weight > 40 && !_selected) then {
-            _randomchance = (armor_weight - 35) * 1.4;
+        if (KPLIB_armorWeight > 40 && !_selected) then {
+            _randomchance = (KPLIB_armorWeight - 35) * 1.4;
             if ((random 100) < _randomchance) then {
                 _selected = true;
                 _squadcomp = KPLIB_o_squadTank;
             };
         };
 
-        if (air_weight > 40 && !_selected) then {
-            _randomchance = (air_weight - 35) * 1.4;
+        if (KPLIB_airWeight > 40 && !_selected) then {
+            _randomchance = (KPLIB_airWeight - 35) * 1.4;
             if ((random 100) < _randomchance) then {
                 _selected = true;
                 _squadcomp = KPLIB_o_squadAir;
             };
         };
 
-        if (infantry_weight > 40 && !_selected) then {
-            _randomchance = (infantry_weight - 35) * 1.4;
+        if (KPLIB_infantryWeight > 40 && !_selected) then {
+            _randomchance = (KPLIB_infantryWeight - 35) * 1.4;
             if ((random 100) < _randomchance) then {
                 _selected = true;
                 _squadcomp = KPLIB_o_squadInf;

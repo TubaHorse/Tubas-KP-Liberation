@@ -2,7 +2,7 @@
     File: fn_battlegroupTransportHeli.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 16/10/2025
-    Last Update: 08/11/2025
+    Last Update: 15/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -12,6 +12,7 @@
         _heliClass - vehicle classname [STRING, defaults to ""]
         _sector - spawn point or sector reference [STRING, defaults to ""]
         _targetPos - position to attack [POSITION, defaults to []]
+        _notify - notify players [BOOL, defaults to true]
 
     Returns:
         Group spawned [GROUP]
@@ -120,7 +121,7 @@ _newHeli landAt [_heliPad, "GetOut", 30];
     [(units _infGrp)] allowGetIn false;
     [(units _infGrp)] orderGetIn false;
     {
-        _x setUnitPos "MIDDLE";
+        [_x, "MIDDLE"] remoteExec ["setUnitPos", _x];
         unassignVehicle _x;
         moveout _x;
     } forEach (units _infGrp);

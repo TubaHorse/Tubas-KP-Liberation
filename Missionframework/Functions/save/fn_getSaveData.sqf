@@ -2,7 +2,7 @@
     File: fn_getSaveData.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-03-29
-    Last Update: 2026-01-28
+    Last Update: 2026-04-13
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -31,11 +31,16 @@ private _allBlueGroups = allGroups select {
     {!(((units _x) select {alive _x}) isEqualTo [])}    // At least one unit has to be alive
 };
 
-// Fetch all objects and AI groups near each FOB
-private ["_fobPos", "_fobObjects", "_grpUnits", "_fobMines"];
+// Fetch all objects and AI groups near each FOB and outpost
+private ["_basePos", "_baseObjects", "_grpUnits", "_baseMines"];
+
 {
-    _fobPos = _x;
-    _fobObjects = (_fobPos nearObjects (KPLIB_range_fob * 1.2)) select {
+    _basePos = _x;
+    private _range = switch (true) do {
+        case (_basePos in KPLIB_player_outposts) : {KPLIB_range_outpost};
+        default {KPLIB_range_fob};
+    };
+    _baseObjects = (_basePos nearObjects (_range * 1.2)) select {
         ((toLowerANSI (typeof _x)) in KPLIB_classnamesToSave) &&        // Exclude classnames which are not in the presets
         {alive _x} &&                                               // Exclude dead or broken objects
         {getObjectType _x >= 8} &&                                  // Exclude preplaced terrain objects
@@ -47,8 +52,8 @@ private ["_fobPos", "_fobObjects", "_grpUnits", "_fobMines"];
         {!((toLowerANSI (typeOf _x)) in KPLIB_crates)}                  // Exclude storage crates (those are handled separately)
     };
 
-    _allObjects = _allObjects + (_fobObjects select {!((toLowerANSI (typeOf _x)) in KPLIB_storageBuildings)});
-    _allStorages = _allStorages + (_fobObjects select {_x getVariable ["KPLIB_fobStorage", false]});
+    _allObjects = _allObjects + (_baseObjects select {!((toLowerANSI (typeOf _x)) in KPLIB_storageBuildings)});
+    _allStorages = _allStorages + (_baseObjects select {_x getVariable ["KPLIB_fobStorage", false]});
 
     // Process all groups near this FOB
     {
@@ -56,17 +61,17 @@ private ["_fobPos", "_fobObjects", "_grpUnits", "_fobMines"];
         _grpUnits = (units _x) select {!(isPlayer _x) && (alive _x) && !((typeOf _x) in KPLIB_o_inf_classes) && !((typeOf _x) in KPLIB_o_militiaInfantry)};
         // Add to save array
         _aiGroups pushBack [getPosATL (leader _x), (_grpUnits apply {typeOf _x})];
-    } forEach (_allBlueGroups select {(_fobPos distance2D (leader _x)) < (KPLIB_range_fob * 1.2)});
+    } forEach (_allBlueGroups select {(_basePos distance2D (leader _x)) < (_range * 1.2)});
 
     // Save all mines around FOB
-    _fobMines = allMines inAreaArray [_fobPos, KPLIB_range_fob * 1.2, KPLIB_range_fob * 1.2];
-    _allMines append (_fobMines apply {[
+    _baseMines = allMines inAreaArray [_basePos, _range * 1.2, _range * 1.2];
+    _allMines append (_baseMines apply {[
         getPosWorld _x,
         [vectorDirVisual _x, vectorUpVisual _x],
         typeOf _x,
         _x mineDetectedBy KPLIB_side_player
     ]});
-} forEach KPLIB_sectors_fob;
+} forEach (KPLIB_player_fobs + KPLIB_player_outposts);
 
 // Save all fetched objects
 private ["_savedPos", "_savedVecDir", "_savedVecUp", "_class", "_hasCrew"];
@@ -174,9 +179,9 @@ private _stats = [
 
 // Pack the weights in one array
 private _weights = [
-    infantry_weight,
-    armor_weight,
-    air_weight
+    KPLIB_infantryWeight,
+    KPLIB_armorWeight,
+    KPLIB_airWeight
 ];
 
 // Pack the save data in the save array
@@ -190,7 +195,7 @@ private _weights = [
     _aiGroups,
     KPLIB_sectors_player,
     KPLIB_enemyReadiness,
-    KPLIB_sectors_fob,
+    KPLIB_player_fobs,
     KPLIB_permissions,
     KPLIB_sector_vehicleLinks,
     KPLIB_civ_rep,
@@ -205,5 +210,8 @@ private _weights = [
     KPLIB_sectorTowers,
     KPLIB_sectorLiberated,
     KPLIB_sector_arsenalLink,
-    KPLIB_blockedFactories
+    KPLIB_blockedFactories,
+    KPLIB_player_outposts,
+    KPLIB_fobNames,
+    KPLIB_outpostNames
 ] // return
