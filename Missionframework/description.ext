@@ -220,7 +220,7 @@ class CfgDebriefing {
 };
 
 class CfgDiscordRichPresence {
-    applicationID="1459325132584652946";
+    applicationID="";
     defaultDetails="KP Liberation 0.97.0pig";
     defaultState="Standing by....";
     defaultLargeImageKey="";
