@@ -51,7 +51,7 @@ if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_transStorage)}) < 0) then {
 // Outpost compat
 if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_outpostBox)}) < 0) then {
     // No outpost found in support label, add it
-    KPLIB_b_vehSupport pushBack [KPLIB_b_outpostBox,300,300,0],
+    KPLIB_b_vehSupport pushBack [KPLIB_b_outpostBox,300,300,0]
 };
 
 // Compatibility check and fix for vehicles to unlock
