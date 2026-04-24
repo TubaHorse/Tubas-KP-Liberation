@@ -62,7 +62,6 @@ if (count _vehicles > 0) then {
         private _apcCount = ("TrackedAPC" countType _vehicles);
         _apcCount = _apcCount + ("Wheeled_APC_F" countType _vehicles);
         private _carCount = ("Car" countType _vehicles);
-        systemChat str [_apcCount, _carCount];
         private _typeSelection = [{(((vehicle (leader _x)) isKindOf "TrackedAPC") || ((vehicle (leader _x)) isKindOf "Wheeled_APC_F"))}, {((vehicle (leader _x)) isKindOf "Car")}] selectRandomWeighted [_apcCount, _carCount];
         _vehPatrols = _allGroups select {
             _x getVariable ["KPLIB_enemy_vehPatrol", false] && _typeSelection; 
@@ -98,7 +97,7 @@ if (count _bluforInf > 0) then {
 
 if ((count _vehPatrols < 1) && (count _infPatrols < 1)) then {
     [format["Failed to find QRF groups in sector %1. Spawning QRF instead.", markerText _sector], "QRF"] call KPLIB_fnc_log;
-    [_qrfPos, _sector, _vehicles] execVM "Extensions\Enemy_QRF\functions\fn_spawnQRF.sqf";
+    [_qrfPos, _sector, _vehicles] call KPLIB_fnc_spawnQRF;
 };
 
 true

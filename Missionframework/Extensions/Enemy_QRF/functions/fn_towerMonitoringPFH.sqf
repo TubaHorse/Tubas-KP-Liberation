@@ -16,7 +16,7 @@ if (isNil "KPLIB_towers_QRF") then {KPLIB_towers_QRF = []};
         private _towerSector = _x;
 
 
-        if ((KPLIB_param_difficulty < 1) && KPLIB_enemyReadiness < 25) then {continue}; // Skip on low enemy readiness and lower difficulty 
+        if ((KPLIB_param_difficulty < 1) || KPLIB_enemyReadiness < 25) then {continue}; // Skip on low enemy readiness and lower difficulty 
         if (_towerSector in KPLIB_towers_QRF) then {continue}; // Skip on cooldown
 
         // Check for blufor units inside tower range
@@ -95,11 +95,11 @@ if (isNil "KPLIB_towers_QRF") then {KPLIB_towers_QRF = []};
             if (count _nearbyActiveBases > 0) then {
                 // Military base active
                 _responseSector = [KPLIB_range_radioTowerScan, _qrfPos, _nearbyActiveBases, true] call KPLIB_fnc_getNearestSector;
-                [_responseSector, _qrfPos, _bluforInArea]  execVM "Extensions\Enemy_QRF\functions\fn_sendQRFPatrol.sqf";
+                [_responseSector, _qrfPos, _bluforInArea] call KPLIB_fnc_sendQRFPatrol;
             } else {
                 // Military base not active
                 _responseSector = [KPLIB_range_radioTowerScan, _qrfPos, _nearbyBasesNotActivated, true] call KPLIB_fnc_getNearestSector;
-                [_qrfPos, _responseSector, _bluforInArea]  execVM "Extensions\Enemy_QRF\functions\fn_spawnQRF.sqf";
+                [_qrfPos, _responseSector, _bluforInArea] call KPLIB_fnc_spawnQRF;
             };
 
             // Fail-safe

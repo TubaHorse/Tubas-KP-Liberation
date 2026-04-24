@@ -8,6 +8,7 @@
 * Added: `get_presets.sqf` file. It reads the presets selected on mission parameters.
 * Added: Readme file for presets to help mission makers understand them.
 * Added: Some new main functions for the new features.
+* Added: Ampersand's AHDNC framework (https://github.com/ampersand38/ai-heli-decel-no-climb/tree/main)
 * Tweaked: FOB build limit reduced. Each builded FOB will add costs to the next box/truck.
 * Tweaked: Added KPLIB tag to Armor/Air/Inf weights variables. Added more weight for Armor and Air kills.
 * Tweaked: FOB variable (KPLIB_sectors_fob to KPLIB_player_fobs).

@@ -57,6 +57,7 @@ execVM "Scripts\Server\sector\lose_sectors.sqf";
 [] call KPLIB_fnc_FactoryToDiscord;
 [{[] call KPLIB_fnc_factoriesBlock}, 3600] call CBA_fnc_waitAndExecute;
 if (KPLIB_param_enemyFighters) then {[] call KPLIB_fnc_enemyFighterPFH;};
+[] call KPLIB_fnc_towerMonitoringPFH;
 
 KPLIB_fsm_sectorMonitor = [] call KPLIB_fnc_sectorMonitor;
 if (KPLIB_param_highCommand) then {KPLIB_fsm_highcommand = [] call KPLIB_fnc_highcommand;};
@@ -144,3 +145,21 @@ if (count KPLIB_whitelist_Zeus > 0) then {
         deleteVehicle _x
     }forEach allCurators;
 };
+
+// Ampersand's AI Helicopter Decelerate No Climbing (https://github.com/ampersand38/ai-heli-decel-no-climb/tree/main)
+KPLIB_AHDNC_helicopters = [];
+KPLIB_AHDNC_helisDecel = [];
+
+if (isNil "KPLIB_AHDNC_PsID") then {
+  KPLIB_AHDNC_PsID = [{[] call KPLIB_fnc_AHDNC_perSecond}, 1, nil] call CBA_fnc_addPerFrameHandler;
+};
+
+{
+  [_x, "Init", {
+      params ["_heli"];
+      KPLIB_AHDNC_helicopters pushBack _heli;
+  }, true, [], true] call CBA_fnc_addClassEventHandler;
+} forEach [
+  "VTOL_Base_F",
+  "Helicopter"
+];
