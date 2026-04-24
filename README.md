@@ -25,7 +25,7 @@ Feel free to report issues and make pull requests, I eventually will take a look
 The devkit had some small additions, but still uses the same logic that you can follow in [official tutorial page](https://github.com/KillahPotatoes/KP-Liberation/wiki/EN_Devkit).
 
 Below are listed the additions so far, all optional:
-- New sector: Outpost (marker name: `outpost`). This is an invisible sector aimed to be a filler. It spawns some patrol units and garrisons. Doesn't spawn vehicles.
+- New sector: Infantry Filler (marker name: `filler_inf`). This is an invisible sector aimed to be a filler. It spawns some patrol units and garrisons. Doesn't spawn vehicles.
 - Factory sector: You can choose what the factory can produce at start by adding `supply`, `ammo` or `fuel` in the marker name (i.e: `factory_supply_1`).
 - Enemy road spawn points (marker name: `spawn_opfor_road_point`). Enemy vehicles will use them. This marker will also be used for the convoy secondary objective.
 
@@ -74,6 +74,21 @@ Below are listed the additions so far, all optional:
     - For SAM Sites, there is a mission parameters that enables to customize the radar target range and it's altitude detection. The numbers related to this can be changed via CBA settings, you can find them in the KP Liberation label.
 - **Teamspeak Verification:**
     - In CBA Settings, under KP Liberation label, there is an option for blocking players from playing the mission without a teamspeak verification (for using radio). It works for both ACRE2 and TFAR mods. This was fully tested in a 24/7 server and worked nicely.
+- **Outpost vs FOBs:**
+    - Players can build Outposts now. The outpost box is available in the support tab of the build menu.
+
+    | | OUTPOSTS | FOBS |
+    | --- | --- | --- |
+    | BUILDING NUMBERS | `KPLIB_militaryAlphabet` count | Very limited |
+    | BUILD RANGE | 50m radius | 125m radius |
+    | BUILD LIST | Only static and decorations items | All available |
+    | REDEPLOY | Yes | Yes |
+    | ARSENAL* | No | Yes |
+    | STORAGES** | Transportable Storage | Any type of storage |
+    | SAVE ASSETS | Yes | Yes |
+
+    *Note on arsenal: you can still fly the arsenal box to the outpost if mobile arsenal mission parameter is enabled.
+    **Note on storages: for the outposts, players need to slingload transportable storages to the outposts to detect resources there.
 
 ## ISSUES
 If you having gameplay issues with this version of liberation, please, report them.

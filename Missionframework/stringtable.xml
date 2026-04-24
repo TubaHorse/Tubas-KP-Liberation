@@ -4288,6 +4288,18 @@
             <Czech>Nemůžete postavit víc jak %1 FOB</Czech>
             <Japanese>FOBを同時に %1 個以上設置することはできません。</Japanese>
         </Key>
+        <Key ID="STR_HINT_OUTPOSTS_EXCEEDED">
+            <Original>You are not allowed to deploy more than %1 Outposts at the same time.</Original>
+            <French>Vous n'êtes pas autorisé à déployer plus de %1 Outposts en même temps.</French>
+            <German>Sie haben nicht die Erlaubnis, mehr als %1 Outposts zur selben Zeit zu errichten.</German>
+            <Spanish>No se permite desplegar más de %1 Outposts al mismo tiempo</Spanish>
+            <Russian>Вам не разрешено развертывать более %1 Outpost одновременно.</Russian>
+            <Italian>Non sei autorizzato a costruire piè di %1 Outpost allo stesso tempo</Italian>
+            <Turkish>Buraya %1 den fazla Outpost koyamazsınız.</Turkish>
+            <Portuguese>Você não está autorizado a instalar mais de %1 Outpost(s) ao mesmo tempo.</Portuguese>
+            <Czech>Nemůžete postavit víc jak %1 Outpost</Czech>
+            <Japanese>Outpostを同時に %1 個以上設置することはできません。</Japanese>
+        </Key>
         <Key ID="STR_HINT_LOADOUT_LOADED">
             <Original>%1 loadout successfully loaded.</Original>
             <French>Equipement %1 chargé avec succès.</French>

@@ -29,11 +29,13 @@ if (isNil "KPLIB_towers_QRF") then {KPLIB_towers_QRF = []};
             (([300, getPosATL _x] call KPLIB_fnc_getNearestSector) == "") 
             && {!((vehicle _x) isKindOf "Air")} 
             && {((getPosATL _x) # 2) < 15}
-            && {([(getPosATL _x), 200, KPLIB_side_player] call KPLIB_fnc_getUnitsCount) > 1}
         }; 
 
+        private _vehiclesSize = "LandVehicle" countType _bluforInArea;
+        private _bluforInfSize = "CAManBase" countType _bluforInArea;
+
         // Low blufor count >> Skip
-        if (count _bluforInArea < 3) then {continue};
+        if ((_bluforInfSize < 3) && (_vehiclesSize < 1)) then {continue};
 
         // Give units in area some heat if there are enemies inside the tower's radius
         {
@@ -74,14 +76,13 @@ if (isNil "KPLIB_towers_QRF") then {KPLIB_towers_QRF = []};
         private _chance = 10; // Start chance
 
         // Size of blufor forces
-        private _vehicles = _bluforInArea select {_x isKindOf "LandVehicle"};
-        private _bluforSize = (count _bluforInArea) + (5 * count _vehicles);
+        private _bluforSize = (_bluforInfSize) + (5 * _vehiclesSize);
 
         if (_bluforSize >= 5) then {
             _chance = _chance + (_bluforSize * 2);
         };
         if (KPLIB_enemyReadiness >= (50 - (5 * KPLIB_param_difficulty))) then {
-            _chance = _chance + (KPLIB_enemyReadiness/2);
+            _chance = _chance + round(KPLIB_enemyReadiness/2);
         };
         if (count _militaryBases > 0) then {
             _chance = _chance + ((count _militaryBases) * 4);
@@ -110,7 +111,7 @@ if (isNil "KPLIB_towers_QRF") then {KPLIB_towers_QRF = []};
             [format["QRF called for %1 area from %2", markerText _towerSector, markerText _responseSector], "QRF"] call KPLIB_fnc_log;
             [{
                 KPLIB_towers_QRF deleteAt (KPLIB_towers_QRF find _this)
-            }, _towerSector, 1800] call CBA_fnc_waitAndExecute;
+            }, _towerSector, round(random [1600, 1800, 2000])] call CBA_fnc_waitAndExecute;
         };
     }forEach KPLIB_sectors_tower;
 }, 120, []] call CBA_fnc_addPerFrameHandler;

@@ -70,6 +70,10 @@ if ((typeOf _obj) isEqualTo KPLIB_b_outpostBox) exitWith {
             [_object] call KPLIB_fnc_doBuildOutpost
         },
         {
+            if ( count (KPLIB_player_outposts select {_x isNotEqualTo [0,0,0]}) >= count KPLIB_militaryAlphabet) exitWith {
+                [format [ localize "STR_HINT_OUTPOSTS_EXCEEDED", count KPLIB_militaryAlphabet], true, 3] call KPLIB_fnc_hint;
+            };
+
             // Check for nearest fobs and outposts
             private _index = (KPLIB_player_fobs + KPLIB_player_outposts) findIf {(_x distance2D _target) < KPLIB_distance_base};
             if (_index >= 0) exitWith {
