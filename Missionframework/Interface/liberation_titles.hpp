@@ -101,6 +101,29 @@ class RscTitles {
             text = $STR_DEPLOY_IN_PROGRESS;
         };
     };
+    class DroneLosingSignal
+    {
+        name = "DroneLosingSignal";
+        idd = -1;
+        duration = 1;
+        movingEnable = true;
+        controls[] = {LosingSignalText};
+        class LosingSignalText
+        {
+            idc = 404;
+            style = ST_CENTER;
+            sizeEx = 0.1 * safezoneH;
+            font = FontM;
+            colorBackground[] = {0,0,0,1};
+            colorText[] = COLOR_WHITE;
+            type = CT_STATIC;
+            text = $STR_LOSING_SIGNAL;
+            x = 0.270394 * safezoneW + safezoneX;
+            y = 0.443988 * safezoneH + safezoneY;
+            w = 0.459212 * safezoneW;
+            h = 0.0840187 * safezoneH;
+        }
+    };
     class KPLIB_overlay {
         name = "KPLIB_overlay";
         duration = 999999;

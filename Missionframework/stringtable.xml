@@ -8777,6 +8777,14 @@
         </Container>
 
 
+        <Container name="Drone Jammer">
+            <Key ID="STR_LOSING_SIGNAL">
+                <Original>LOSING SIGNAL</Original>
+                <Portuguese>PERDENDO SINAL</Portuguese>
+            </Key>
+        </Container>
+
+
         <Container name="Enemy Fighter">
             <Key ID="STR_TITLE_ENEMYFIGHTER">
                 <Original>Enemy Fighter</Original>

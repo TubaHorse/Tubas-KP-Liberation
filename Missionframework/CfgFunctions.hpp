@@ -275,6 +275,7 @@ class KPLIB {
     #include "Extensions\Base_Name\cfgFunctions.hpp"
     #include "Extensions\Clear_Brushes\cfgFunctions.hpp"
     #include "Extensions\Discord_Log\cfgFunctions.hpp"
+    #include "Extensions\Drone_Jammer\cfgFunctions.hpp"
     #include "Extensions\Enemy_Fighters\cfgFunctions.hpp"
     #include "Extensions\Enemy_QRF\cfgFunctions.hpp"
     #include "Extensions\Lock_Arsenal\cfgFunctions.hpp"

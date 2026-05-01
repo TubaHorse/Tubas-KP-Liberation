@@ -36,3 +36,4 @@ if (KPLIB_param_enemyFighters) then {
 };
 
 #include "Extensions\Sector_Objects\CBA_addEventHandler.sqf"
+#include "Extensions\Drone_Jammer\CBA_addEventHandler.sqf"

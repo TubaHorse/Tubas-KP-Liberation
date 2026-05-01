@@ -1,9 +1,10 @@
 # Changelog
 
-## 0.97.1 (23/03/2026)
+## 0.97.1 (01/05/2026)
 * Added Extension: Enemy QRF from military bases based on tower detection. 
 * Added Extension: Commander can edit FOB/Outpost names (for Outpost and FOB).
 * Added Extension: Discord log for FOB resources (Added by Fernandim).
+* Added Extension: UI jammer effects for drones near enemy towers.
 * Added: Players can build Outposts.
 * Added: `get_presets.sqf` file. It reads the presets selected on mission parameters.
 * Added: Readme file for presets to help mission makers understand them.
