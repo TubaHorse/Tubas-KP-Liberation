@@ -79,6 +79,8 @@ class KPLIB {
         class addActionsFullHeal        {};
         class addObjectInit             {};
         class addRopeAttachEh           {};
+        class AHDNC_perFrame            {};
+        class AHDNC_perSecond           {};
         class allowCrewInImmobile       {};
         class checkClass                {};
         class cleanOpforVehicle         {};
@@ -98,8 +100,6 @@ class KPLIB {
         class getResistanceTier         {};
         class getUnitPositionId         {};
         class getUnitsCount             {};
-        class AHDNC_perFrame             {};
-        class AHDNC_perSecond            {};
         class hint                      {};
         class lambs_enableReinforcements{};
         class protectObject             {};

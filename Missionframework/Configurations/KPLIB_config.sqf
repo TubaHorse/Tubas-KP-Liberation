@@ -258,9 +258,6 @@ KPLIB_production_interval = 60;
 // Percentage of resources you get back from recycling.
 KPLIB_recycling_percentage = 0.5;
 
-// Multiplier for defenders in buildings.
-KPLIB_defended_buildingpos_part = 0.4;
-
 // Time in seconds how long a captured sector is vulnerable to enemy troops.
 KPLIB_vulnerability_timer = 1200;
 

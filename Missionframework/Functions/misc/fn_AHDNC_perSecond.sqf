@@ -16,6 +16,8 @@
 #define MIN_SPEED 60;
 #define MIN_ALT 20;
 
+if (isClass (configFile >> "CfgPatches" >> "AHDNC_main")) exitWith {["AHDNC mod from Ampersand found. Exiting framework.", "AHDNC"] call KPLIB_fnc_log};
+
 params ["", "_pfhId"];
 
 private _time = cba_missionTime;
