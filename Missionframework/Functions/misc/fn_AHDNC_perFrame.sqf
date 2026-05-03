@@ -21,7 +21,7 @@ params ["_time", "_pfhId"];
 if (isGamePaused) exitWith {};
 
 {
-    if (isNil KPLIB_AHDNC_PfID || {count KPLIB_AHDNC_helisDecel == 0}) exitWith {
+    if (isNil "KPLIB_AHDNC_PfID" || {count KPLIB_AHDNC_helisDecel == 0}) exitWith {
         [KPLIB_AHDNC_PfID] call CBA_fnc_removePerFrameHandler;
         KPLIB_AHDNC_PfID = nil;
     };
