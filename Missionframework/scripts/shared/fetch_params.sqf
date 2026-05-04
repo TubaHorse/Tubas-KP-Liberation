@@ -183,7 +183,7 @@ switch (KPLIB_param_civActivity) do {
     case 1: {KPLIB_param_civActivity = 0.5;};
     case 2: {KPLIB_param_civActivity = 1;};
     case 3: {KPLIB_param_civActivity = 2;};
-    default {KPLIB_param_aggressivity = 1;};
+    default {KPLIB_param_civActivity = 1;};
 };
 
 switch (KPLIB_param_resourcesMulti) do {
