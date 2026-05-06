@@ -57,6 +57,10 @@ if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_outpostBox)}) < 0) then {
 // Compatibility check and fix for vehicles to unlock
 KPLIB_b_vehToUnlock = KPLIB_b_vehToUnlock apply {if (_x isEqualType "") then {[_x, ""]} else {_x}};
 
+// Force storages to be containers
+KPLIB_b_smallStorage    = "Land_Cargo20_brick_red_F";
+KPLIB_b_largeStorage    = "Land_Cargo40_brick_red_F"; 
+
 /*
     Squad build list
 */
