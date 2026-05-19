@@ -6,7 +6,7 @@ The features for this branch are still under development and requires further te
 ## DESCRIPTION
 Welcome to PiG's Liberation. This fork of APR is aimed to add several features but maintaining the original feeling of Liberation. This is **not** an overhaul of the gamemode.
 
-The majority of the gameplay is the same, but there are more to it. Check the [CHANGELOG](https://github.com/PiG13BR/KP-Liberation-PIG/blob/v0.97.0-PIG-UNSTABLE/CHANGELOG.md) for further details.
+The majority of the gameplay is the same, but there are more to it. Check the [CHANGELOG](https://github.com/PiG13BR/KP-Liberation-PIG/blob/v0.97.1-PIG-UNSTABLE/CHANGELOG.md) for further details.
 
 There are new system in `Extensions` folder, some of them you can find details in README.md files.
 
