@@ -2,7 +2,7 @@
 
 ## 0.97.1 (01/05/2026)
 * Added Extension: Enemy QRF from military bases based on tower detection. 
-* Added Extension: Commander can edit FOB/Outpost names (for Outpost and FOB).
+* Added Extension: Commander can edit FOB/Outpost names.
 * Added Extension: Discord log for FOB resources (Added by Fernandim).
 * Added Extension: UI jammer effects for drones near enemy towers.
 * Added: Players can build Outposts.

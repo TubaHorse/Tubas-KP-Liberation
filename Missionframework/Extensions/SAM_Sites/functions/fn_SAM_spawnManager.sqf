@@ -2,7 +2,7 @@
     File: fn_SAM_spawnManager.sqf
     Author: PiG13BR (https://github.com/PiG13BR) - original idea from Nicoman
     Date: 05/12/2025
-    Last Update: 14/12/2025
+    Last Update: 07/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -43,7 +43,7 @@ if (KPLIB_killedTurretsSAM > 0) then {
     if (_maxSAMnumber > (count KPLIB_sectors_all - count KPLIB_sectors_player)) then {_maxSAMnumber = count KPLIB_sectors_all - count KPLIB_sectors_player};
 
     // If maximum amount of SAM turrets has not been reached yet, add one to the map
-    if (count KPLIB_SAM_sitePositions < _maxSAMnumber) then {
+    if (count KPLIB_usedOpforSpawnPoints < _maxSAMnumber) then {
         [] call KPLIB_fnc_SAM_createSite;
     };
 

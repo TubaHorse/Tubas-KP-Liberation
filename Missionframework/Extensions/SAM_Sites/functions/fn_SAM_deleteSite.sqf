@@ -2,7 +2,7 @@
     File: fn_SAM_deleteSite.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 05/12/2025
-    Last Update: 02/02/2026
+    Last Update: 07/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -43,8 +43,8 @@ params[
 
 }, [_radar, _samTurrets, _samObjects, _samShorads, _staticGroup, _infGarrison, _infPatrols], 30] call CBA_fnc_waitAndExecute;
 
-KPLIB_SAM_sitePositions deleteAt (KPLIB_SAM_sitePositions find _spawnMarker);
-publicVariable "KPLIB_SAM_sitePositions";
+KPLIB_usedOpforSpawnPoints deleteAt (KPLIB_usedOpforSpawnPoints find _spawnMarker);
+publicVariable "KPLIB_usedOpforSpawnPoints";
 
 
 KPLIB_killedTurretsSAM = KPLIB_killedTurretsSAM + 1;

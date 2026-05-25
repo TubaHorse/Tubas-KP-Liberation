@@ -11,7 +11,7 @@ The `init_presets.sqf`:
 - Compatibility checks default.sqf vs. other presets.
 - Check presets for missing mods.
 - Classnames collection.
-- Squads build list is in this file.
+- Squads build list is located in this file.
 
 The `get_presets.sqf`:
 - Reads the presets selected on mission parameters.

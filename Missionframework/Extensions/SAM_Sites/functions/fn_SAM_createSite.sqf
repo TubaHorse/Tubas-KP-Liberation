@@ -2,7 +2,7 @@
     File: fn_SAM_createSite.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 05/12/2025
-    Last Update: 27/01/2026
+    Last Update: 2026-05-07
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -19,8 +19,8 @@
 private _spawnMarker = [] call KPLIB_fnc_SAM_getOpforSpawnPoint;
 if (_spawnMarker isEqualTo "") exitWith {false};
 
-KPLIB_SAM_sitePositions pushBack _spawnMarker;
-publicVariable "KPLIB_SAM_sitePositions";
+KPLIB_usedOpforSpawnPoints pushBack _spawnMarker;
+publicVariable "KPLIB_usedOpforSpawnPoints";
 
 private _samSitePos = markerpos _spawnMarker;
 private _samSiteObjects = [];

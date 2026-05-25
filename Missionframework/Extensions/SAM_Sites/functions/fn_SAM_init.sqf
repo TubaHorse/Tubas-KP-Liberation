@@ -2,7 +2,7 @@
     File: fn_SAM_init.sqf
     Author: PiG13BR (https://github.com/PiG13BR) - original ideia from Nicoman
     Date: 05/12/2025
-    Last Update: 05/03/2026
+    Last Update: 07/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -22,9 +22,9 @@ if (KPLIB_param_difficulty < 0.75) exitWith {[format ["difficulty is easy: %1", 
 
 [] call compile preprocessFileLineNumbers "Extensions\Sam_Sites\init_templates.sqf";
 
-if (isNil "KPLIB_SAM_sitePositions") then {
-    KPLIB_SAM_sitePositions = []; 
-    publicVariable "KPLIB_SAM_sitePositions";
+if (isNil "KPLIB_usedOpforSpawnPoints") then {
+    KPLIB_usedOpforSpawnPoints = []; 
+    publicVariable "KPLIB_usedOpforSpawnPoints";
 };
 
 KPLIB_killedTurretsSAM = 0;

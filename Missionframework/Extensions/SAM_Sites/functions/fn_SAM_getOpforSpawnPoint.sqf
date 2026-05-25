@@ -2,7 +2,7 @@
     File: fn_getOpforSpawnPointSAM.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-09-29
-    Last Update: 2026-04-12
+    Last Update: 2026-05-07
     License: MIT License - http://www.opensource.org/licenses/MIT
     Description:
         Gets a random opfor spawn point marker name respecting following conditions:
@@ -34,8 +34,8 @@ private _possibleSpawns = [];
 
 // Only check for opfor spawn points which aren't used already in the current session
 private _sectorsToCheck = KPLIB_sectors_spawn;
-if (!isNil "KPLIB_SAM_sitePositions") then {
-    _sectorsToCheck = KPLIB_sectors_spawn - KPLIB_SAM_sitePositions;
+if (!isNil "KPLIB_usedOpforSpawnPoints") then {
+    _sectorsToCheck = KPLIB_sectors_spawn - KPLIB_usedOpforSpawnPoints;
 };
 
 private ["_valid", "_current", "_distances"];
@@ -68,7 +68,7 @@ private ["_valid", "_current", "_distances"];
 
     if (_valid) then {
         // Make sure not to spawn near another SAM Site
-        if (KPLIB_SAM_sitePositions findIf {((markerPos _current) distance2D (markerPos _x)) < 2000} >= 0) then {_valid = false};
+        if (KPLIB_usedOpforSpawnPoints findIf {((markerPos _current) distance2D (markerPos _x)) < 2000} >= 0) then {_valid = false};
     };
 
     // Make sure that there is an opfor sector in sensible range to spawn
