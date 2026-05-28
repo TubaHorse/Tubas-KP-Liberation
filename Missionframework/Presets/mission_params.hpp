@@ -4,6 +4,24 @@ class Spacer11 {
     texts[] = {""};
     default = "";
 };
+class sideOptions {
+    title = $STR_PARAMS_SIDE_OPTION;
+    values[] = {""};
+    texts[] = {""};
+    default = "";
+};
+class playerSide {
+    title = $STR_PARAMS_CHOOSE_SIDE;
+    values[] = {0, 1};
+    texts[] = {"BLUFOR", "OPFOR"};
+    default = 0;
+};
+class Spacer12 {
+    title = "";
+    values[] = {""};
+    texts[] = {""};
+    default = "";
+};
 class PresetCustomization {
     title = $STR_PARAMS_PRESET_CUSTOMIZATION;
     values[] = {""};

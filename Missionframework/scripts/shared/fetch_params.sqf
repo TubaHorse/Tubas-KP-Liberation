@@ -46,6 +46,7 @@ if(isServer) then {
 
     // Presets
     ["--- Presets ---", "PARAM"] call KPLIB_fnc_log;
+    GET_PARAM(KPLIB_sidePlayer, "playerSide", 0);
     GET_PARAM(KPLIB_presetPlayer, "BLUFORPreset", 0);
     GET_PARAM(KPLIB_presetEnemy, "OPFORPreset", 0);
     GET_PARAM(KPLIB_presetResistance, "guerPreset", 0);
@@ -197,6 +198,58 @@ switch (KPLIB_param_resourcesMulti) do {
     case 7: {KPLIB_param_resourcesMulti = 3;};
     default {KPLIB_param_resourcesMulti = 1;};
 };
+
+// Side colors
+switch KPLIB_sidePlayer do {
+    // Blufor
+    case 0 : {
+        // Player side.
+        KPLIB_side_player = WEST;
+        // Enemy side.
+        KPLIB_side_enemy = EAST;
+        // Player owned sector marker color.
+        KPLIB_color_player = "ColorBLUFOR";
+        // Enemy sector marker color.
+        KPLIB_color_enemy = "ColorOPFOR";
+        // Enemy sector marker color. (activated)
+        KPLIB_color_enemyActive = "ColorRED";
+        // Player owned sector
+        KPLIB_player_sector_color = [0,0.3,1,1];
+        // Enemy sector color UI
+        KPLIB_enemy_sector_color = [0.85,0,0,1];
+        // Capture frame OPFOR color
+        KPLIB_captureFrame_opfor_color = [0.6, 0, 0, 1];
+        // Capture frame BLUFOR color
+        KPLIB_captureFrame_blufor_color = [0, 0.2, 0.6, 1];
+    };
+
+    // Opfor
+    case 1 : {
+        // Player side.
+        KPLIB_side_player = EAST;
+        // Enemy side.
+        KPLIB_side_enemy = WEST;
+        // Player owned sector marker color.
+        KPLIB_color_player = "ColorOPFOR";
+        // Enemy sector marker color.
+        KPLIB_color_enemy = "ColorBLUFOR";
+        // Enemy sector marker color. (activated)
+        KPLIB_color_enemyActive = "ColorBLUE";
+        // Player sector UI
+        KPLIB_player_sector_color = [0.85,0,0,1];
+        // Enemy sector color UI
+        KPLIB_enemy_sector_color = [0,0.3,1,1];
+        // Capture frame OPFOR color
+        KPLIB_captureFrame_opfor_color = [0, 0, 0.6, 1];
+        // Capture frame BLUFOR color
+        KPLIB_captureFrame_blufor_color = [0.6, 0, 0, 1];
+    };
+};
+
+// Start base marker
+"startbase_marker" setMarkerColorLocal KPLIB_color_player;
+// Huron Marker
+"huronmarker" setMarkerColorLocal KPLIB_color_player;
 
 switch (KPLIB_param_victoryCondition) do {
     case 1: {

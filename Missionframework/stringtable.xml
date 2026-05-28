@@ -8173,8 +8173,17 @@
         
 
         <Container name="Presets">
+            <Key ID="STR_PARAMS_SIDE_OPTION">
+                <English>== SIDE ==</English>
+                <Portuguese>== LADO/FACÇÃO ==</Portuguese>
+            </Key>
+            <Key ID="STR_PARAMS_CHOOSE_SIDE">
+                <English>Choose Side</English>
+                <Portuguese>Escolha o lado/facção</Portuguese>
+            </Key>
             <Key ID="STR_PARAMS_PRESET_CUSTOMIZATION">
                 <English>== PRESET CUSTOMIZATION ==</English>
+                <Portuguese>== COSTUMIZAÇÃO DOS PRESETS ==</Portuguese>
             </Key>
             <Key ID="STR_PARAMS_ARSENALUSEPRESET">
                 <Original>Arsenal Mode</Original>

@@ -168,10 +168,18 @@ while {true} do {
 
                 (_overlay displayCtrl (205)) ctrlSetText (markerText _nearest_active_sector);
                 {(_overlay displayCtrl (_x)) ctrlShow true;} forEach _sectorcontrols;
+                
+                // Capture frame OPFOR color
+                (_overlay displayCtrl 203) ctrlSetTextColor KPLIB_captureFrame_opfor_color;
+                (_overlay displayCtrl 203) ctrlSetBackgroundColor KPLIB_captureFrame_opfor_color;
+                // Capture frame BLUFOR color
+                (_overlay displayCtrl 244) ctrlSetTextColor KPLIB_captureFrame_blufor_color;
+                (_overlay displayCtrl 244) ctrlSetBackgroundColor KPLIB_captureFrame_blufor_color;
+                
                 if (_nearest_active_sector in KPLIB_sectors_player) then {
-                    (_overlay displayCtrl (205)) ctrlSetTextColor [0,0.3,1.0,1];
+                    (_overlay displayCtrl (205)) ctrlSetTextColor KPLIB_player_sector_color;
                 } else {
-                    (_overlay displayCtrl (205)) ctrlSetTextColor [0.85,0,0,1];
+                    (_overlay displayCtrl (205)) ctrlSetTextColor KPLIB_enemy_sector_color;
                 };
 
                 "zone_capture" setMarkerSizeLocal [ _zone_size,_zone_size ];
