@@ -2,7 +2,7 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 23/04/2026
+    Last Update: 27/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -218,7 +218,7 @@ if (!isNil "_saveData") then {
         KPLIB_enemyReadiness                        = _saveData select  8;
         KPLIB_player_fobs                           = _saveData select  9;
         KPLIB_permissions                           = _saveData select 10;
-        KPLIB_sector_vehicleLinks                   = _saveData select 11;
+        KPLIB_sector_vehicleLinks                   = _saveData param [11, []];
         KPLIB_civ_rep                               = _saveData select 12;
         KPLIB_clearances                            = _saveData select 13;
         KPLIB_guerilla_strength                     = _saveData select 14;
@@ -772,11 +772,11 @@ if ((_lockedVehCount < (count KPLIB_sectors_all)) && (_lockedVehCount < (count K
         if (_nextBase isEqualTo "") then {
             // Select a random base
             _nextBase = selectRandom ((KPLIB_sectors_military + KPLIB_sectors_capital) - _assignedBases);
-            _assignedBases pushBack _nextBase;
-        } else {
-            _assignedBases pushBack _nextBase;
         };
 
+        if (isNil "_nextBase") exitWith {}; // Run out of military bases
+
+        _assignedBases pushBack _nextBase;
         KPLIB_sector_vehicleLinks pushBack [_nextVehicle, _nextBase];
 
     }forEach KPLIB_b_vehToUnlock;

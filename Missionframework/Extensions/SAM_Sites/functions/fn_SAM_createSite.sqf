@@ -2,7 +2,7 @@
     File: fn_SAM_createSite.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 05/12/2025
-    Last Update: 2026-05-07
+    Last Update: 27/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -19,8 +19,8 @@
 private _spawnMarker = [] call KPLIB_fnc_SAM_getOpforSpawnPoint;
 if (_spawnMarker isEqualTo "") exitWith {false};
 
-KPLIB_usedOpforSpawnPoints pushBack _spawnMarker;
-publicVariable "KPLIB_usedOpforSpawnPoints";
+KPLIB_SAM_sitePositions pushBack _spawnMarker;
+publicVariable "KPLIB_SAM_sitePositions";
 
 private _samSitePos = markerpos _spawnMarker;
 private _samSiteObjects = [];
@@ -45,7 +45,7 @@ private _relDir = _samSitePos getDir _fobPos;
 _radarCenter params ["_classRadar", "_posRadar", "_dirRadar"];
 if (_dirRadar > 0 && _dirRadar < 360) then {_dirRadar = 0};
 //private _objPos = [((_samSitePos select 0) + (_posRadar select 0)), ((_samSitePos select 1) + (_posRadar select 1)), 0];
-private _radar = [_samSitePos, (selectRandom _classRadar), true] call KPLIB_fnc_spawnVehicle;
+private _radar = [_samSitePos, (selectRandom _classRadar), 0] call KPLIB_fnc_spawnVehicle;
 
 // Find driver and delete it
 if (!isNull (driver _radar)) then {_radar deleteVehicleCrew (driver _radar)};
@@ -64,6 +64,18 @@ _radar setDir (_relDir - _dirRadar);
 _radar setAutonomous true;
 _radar setVehicleReceiveRemoteTargets true;
 _radar setVehicleReportRemoteTargets true;
+
+// Mostly for Pook SAM Pack
+_radar deleteVehicleCrew (driver _radar);
+
+// In Pook SAM Pack, when trying to target a jet, gunners in radar assets gets out
+_radar addEventHandler ["GetOut", {
+	params ["_vehicle", "_role", "_unit", "_turret", "_isEject"];
+	if (_role ==  "gunner") then {
+		_unit assignAsGunner _vehicle;
+		_unit moveInGunner _vehicle;
+	};
+}];
 
 _radar setVariable ["KPLIB_samSiteGroup", _group]; // Save to avoid grpNull
 
@@ -215,7 +227,6 @@ private _groupStatic = createGroup [KPLIB_side_enemy, true];
 	private _staticPos = (_radar modelToWorld _pos);
 	_staticPos = +_staticPos;
 	_staticPos set [2, (_pos # 2)];
-	//private _static = [_staticPos, _staticClass, true] call KPLIB_fnc_spawnVehicle;
 	private _static = createVehicle [_staticClass, _staticPos, [], 0, "CAN_COLLIDE"];
 	_static allowDamage false;
 
@@ -283,5 +294,3 @@ if (KPLIB_param_SAMSite == 2) then {
 [format["Enemy SAM Site created in position %1", _samSitePos], "SAM SITE"] call KPLIB_fnc_log;
 
 true
-
-

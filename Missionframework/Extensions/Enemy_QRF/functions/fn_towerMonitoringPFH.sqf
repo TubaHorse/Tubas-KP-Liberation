@@ -1,8 +1,20 @@
 /*
+    File: fn_towerMonitoringPFH.sqf
+    Author: PiG13BR - https://github.com/PiG13BR
+    Date: 23/04/2026
+    Last Update: 28/05/2026
+    License: MIT License - http://www.opensource.org/licenses/MIT
+
     Description:
         Enemy towers scans for blufor forces inside their radius of effect each 5 minutes.
         Calls for QRF if the conditions are met.
         The QRF has a cooldown per tower
+
+    Parameter(s):
+        -
+
+    Returns:
+        -
 */
 
 ["TOWER MONITORING STARTED", "QRF"] call KPLIB_fnc_log;
@@ -29,6 +41,7 @@ if (isNil "KPLIB_towers_QRF") then {KPLIB_towers_QRF = []};
             (([300, getPosATL _x] call KPLIB_fnc_getNearestSector) == "") 
             && {!((vehicle _x) isKindOf "Air")} 
             && {((getPosATL _x) # 2) < 15}
+            && {(_x distance2d startbase) > 500}
         }; 
 
         private _vehiclesSize = "LandVehicle" countType _bluforInArea;

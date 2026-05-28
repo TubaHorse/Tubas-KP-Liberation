@@ -2,7 +2,7 @@
     File: fn_spawnEnemyFighter.sqf
     Author: PiG13BR - (https://github.com/PiG13BR)
     Date: 04/02/2026
-    Last update: 01/03/2026
+    Last update: 27/05/2026
 
     Description:
         Spawns enemy fighter and fill its pylon with air-to-air missiles
@@ -41,10 +41,6 @@ _plane addMPEventHandler ["MPKilled", {
         ["KPLIB_manageKills", [_unit,_killer]] call CBA_fnc_localEvent;
     }];
 } forEach (crew _plane);
-
-_plane addEventHandler ["Killed", {
-    ["lib_enemy_fighter_destroyed", []] remoteExec ["BIS_fnc_showNotification"];
-}];
 
 // Fill aircraft's pylons with air-to-air missiles
 private _pylonsIndex = (getAllPylonsInfo _plane);

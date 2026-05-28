@@ -2,7 +2,7 @@
     File: fn_restoreResources.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 10/09/2025
-    Last update: 28/01/2026
+    Last update: 25/05/2026
 
     Description:
         Return resources to storage areas when building is cancelled
@@ -49,7 +49,7 @@ if ((_priceSupplies > 0) || (_priceAmmo > 0) || (_priceFuel > 0)) then {
                 private _adjust = (_sum + _amount) - _storageLimit;
                 _amount = _amount - _adjust; // Only the necessary amount to fill storage
             };
-            _resources set [AMMO_INDEX, _supply + _amount];
+            _resources set [AMMO_INDEX, _ammo + _amount];
 
             _priceAmmo = _priceAmmo - _amount
         };
@@ -60,7 +60,7 @@ if ((_priceSupplies > 0) || (_priceAmmo > 0) || (_priceFuel > 0)) then {
                 private _adjust = (_sum + _amount) - _storageLimit;
                 _amount = _amount - _adjust; // Only the necessary amount to fill storage
             };
-            _resources set [FUEL_INDEX, _supply + _amount];
+            _resources set [FUEL_INDEX, _fuel + _amount];
 
             _priceFuel = _priceFuel - _amount
         };

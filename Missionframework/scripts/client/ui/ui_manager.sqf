@@ -119,7 +119,7 @@ while {true} do {
             
             // Inside a tower range
             private _tower = [getPosATL player, KPLIB_side_enemy, KPLIB_range_radioTowerScan] call KPLIB_fnc_getNearestTower;
-            if (!isNil "_tower") then {
+            if (!isNil "_tower" && !((vehicle player) isKindOf "Air") && ((player distance2D startbase) >= 500)) then {
                 (_overlay displayCtrl (758032)) ctrlShow true;
             } else {
                 (_overlay displayCtrl (758032)) ctrlShow false;

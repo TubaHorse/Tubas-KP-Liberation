@@ -1,11 +1,26 @@
+/*
+    File: fn_spawnQRF.sqf
+    Author: PiG13BR - https://github.com/PiG13BR
+    Date: 23/04/2026
+    Last Update: 28/05/2026
+    License: MIT License - http://www.opensource.org/licenses/MIT
+
+    Description:
+        Spawns QRF enemy units
+
+    Parameter(s):
+        _qrfPos - position where QRF needs to go [POSITION]
+        _sector - sector where the QRF will spawn in [STRING]
+        _bluforUnits - Blufor units detected [ARRAY]
+        
+    Returns:
+        -
+*/
+
 params["_qrfPos", "_sector", "_bluforUnits"];
 
 if (_qrfPos isEqualTo []) exitWith {false};
 if (_sector isEqualTo "") exitWith {false};
-if (_bluforUnits isEqualTo []) then {
-    // Find blufor units in the qrfPos
-
-};
 
 // Count type of units
 private _bluforInf = _bluforUnits select {_x isKindOf "CAManBase"};

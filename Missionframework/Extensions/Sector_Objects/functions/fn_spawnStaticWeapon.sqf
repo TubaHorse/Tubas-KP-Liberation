@@ -2,7 +2,7 @@
     File: fn_spawnStaticWeapon.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 22/11/2024 
-    Last Update: 02/12/2025
+    Last Update: 28/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -17,7 +17,7 @@
         All static weapons [ARRAY]
 */
 
-params ["_relPos", "_class", "_relDir", ["_crewGrp", grpNull ,[grpNull]]];
+params ["_relPos", "_class", ["_relDir", random 360, [0]], ["_crewGrp", grpNull ,[grpNull]]];
 
 private _weapon = createVehicle [_class, _relPos, [], 0, "CAN_COLLIDE"];
 private _crewArray = [];
@@ -32,49 +32,6 @@ _crewArray pushBack (units _crewGrp);
 
 _weapon allowdamage false;
 _weapon enableSimulation false;
-//private _crewGrp = createGroup KPLIB_side_enemy;
-//_crewGrp createVehicleCrew _weapon;
-
-
-/*
-{
-    _checkSeat = _x select 0; // Unit - For empty seat must retun <NULL-object>
-	_role = _x select 1; // Role - "driver", "gunner", "turret", "cargo", "commander"
-    _turretPath = _x select 3; // Turret Path - [number]
-
-    if (isNull _checkSeat) then {
-        switch _role do {
-            case "gunner" : {
-                _crew = [KPLIB_o_rifleman, _weapon getPos [10, 180], _crewGrp] call KPLIB_fnc_createManagedUnit;
-                _crew assignAsGunner _weapon;
-                _crew moveInGunner _weapon;
-                _crewArray pushBack _crew;
-            };
-            case "commander" : {
-                _crew = [KPLIB_o_rifleman, _weapon getPos [10, 180], _crewGrp] call KPLIB_fnc_createManagedUnit;
-                _crew assignAsCommander _weapon;
-                _crew moveInCommander _weapon;
-                _crewArray pushBack _crew;
-            };
-            case "turret" : {
-                _crew = [KPLIB_o_rifleman, _weapon getPos [10, 180], _crewGrp] call KPLIB_fnc_createManagedUnit;
-                _crew assignAsTurret [_weapon, _turretPath];
-                _crew moveInTurret [_weapon, _turretPath];
-                _crewArray pushBack _crew;
-            };
-            case "cargo" : {
-                _crew = [KPLIB_o_rifleman, _weapon getPos [10, 180], _crewGrp] call KPLIB_fnc_createManagedUnit;
-                _crew assignAsCargo _weapon;
-                _crew moveInCargo _weapon;
-                _crewArray pushBack _crew;
-
-            };
-            default {};
-        }
-    };
-    
-}forEach (fullCrew [_weapon, "", true]);
-*/
 _weapon setDir _relDir;
 _weapon setVectorUp surfaceNormal getPosASL _weapon;
 

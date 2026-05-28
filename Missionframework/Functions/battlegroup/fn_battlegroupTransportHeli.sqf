@@ -2,7 +2,7 @@
     File: fn_battlegroupTransportHeli.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 16/10/2025
-    Last Update: 15/04/2026
+    Last Update: 27/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -29,10 +29,7 @@ if (!isServer) exitWith {[]};
 
 // Get heli class if not provided
 if (_heliClass isEqualTo "") then {
-    _heliClass = selectRandom KPLIB_o_helicopters;
-    while {!(_heliClass in KPLIB_o_troopTransports)} do {
-        _heliClass = selectRandom KPLIB_o_helicopters;
-    };
+    _heliClass = selectRandom (KPLIB_o_helicopters select {_x in KPLIB_o_troopTransports});
 };
 if (_heliClass isEqualTo "") exitWith {[]};
 
@@ -70,9 +67,11 @@ if (isNil "KPLIB_usedOpforSpawnPoints") then {
 };
 KPLIB_usedOpforSpawnPoints pushBack _spawnPoint;
 
-private _newHeli = createVehicle [_heliClass, markerpos _spawnPoint, [], 0, "FLY"];
+//private _newHeli = createVehicle [_heliClass, markerpos _spawnPoint, [], 0, "FLY"];
+private _newHeli = [markerpos _spawnPoint, _heliClass] call KPLIB_fnc_spawnVehicle;
 if (isNull _newHeli) exitWith {[format["No helicopter spawned %1", _targetPos], "HELICOPTER TRANSPORT"] call KPLIB_fnc_log; []};
-private _pilot_group = [_newHeli, KPLIB_side_enemy] call KPLIB_fnc_createCrew;
+//private _pilot_group = [_newHeli, KPLIB_side_enemy] call KPLIB_fnc_createCrew;
+private _pilot_group = (group (driver _newHeli));
 
 _newHeli addMPEventHandler ["MPKilled", {
     params ["_unit", "_killer"];

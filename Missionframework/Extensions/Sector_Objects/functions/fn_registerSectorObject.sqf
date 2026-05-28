@@ -2,7 +2,7 @@
     File: fn_registerSectorObject.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 20/12/2024
-    Last Update: 15/04/2026
+    Last Update: 25/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -10,7 +10,7 @@
         Can be any object. Static weapons will spawn only in configurated objects.
         Put this code in the object's init to register as a sector object:
             [this] call KPLIB_fnc_registerSectorObject
-		Only object close enough to sectors will be registered (KPLIB_objectsGrabber_radius). If the object isn't near any sectors, it will not be registered and it will be deleted from the map.
+		Only object close enough to sectors will be registered (KPLIB_sectorObject_radius). If the object isn't near any sectors, it will not be registered and it will be deleted from the map.
         Objects classnames under KPLIB_staticsConfigs.sqf have an option to disable static weapons from spawning it
             [this, false] call KPLIB_fnc_registerSectorObject
         The registered object can be deleted or not in the beginning of the mission. In this case a different variable will manage those objects.
@@ -22,7 +22,7 @@
 
     Parameter(s):
         _object - object that will be registered [OBJECT, defaults to objNull]
-        _canGarrison - Spawning of static weapons is enabled for this object? (provided if the object classname is refered in KPLIB_staticsConfigs.sqf) [BOOL, defaults to true]
+        _staticSpawn - Spawning of static weapons is enabled for this object? (provided if the object classname is refered in KPLIB_staticsConfigs.sqf) [BOOL, defaults to true]
 
     Returns:
         -
@@ -32,20 +32,24 @@ if (!isServer) exitWith {};
 
 params [
     ["_object", objNull, [ObjNull]],
-    ["_canGarrison", true, [false]], // Only works for buildings or structures under KPLIB_staticsConfigs
+    ["_staticSpawn", true, [false]], // Only works for buildings or structures under KPLIB_staticsConfigs
     ["_initDelete", true, [false]] // This will NOT work for map objects if it's TRUE
 ];
 
 [{(!isNil "KPLIB_sectors_all")}, {
-	_this params ["_object", "_canGarrison", "_initDelete"];
+	_this params ["_object", "_staticSpawn", "_initDelete"];
 
 	// Find the nearest sector
-	private _sector = [KPLIB_objectsGrabber_radius, getPosATL _object, (KPLIB_sectors_all + KPLIB_fillers_all)] call KPLIB_fnc_getNearestSector;
+	private _sector = [KPLIB_sectorObject_radius, getPosATL _object, (KPLIB_sectors_all + KPLIB_fillers_all)] call KPLIB_fnc_getNearestSector;
+    
+    [format["REGISTERING OBJECT FOR SECTOR %1", _sector], "OBJECT REGISTER"] call KPLIB_fnc_log;
 
     if (_sector isEqualTo "") exitWith {
         [format ["%1 in position %2 is too far away from any sectors. Deleting the object.", (typeOf _object), (getPos _object)], "REGISTERING OBJECT FAILED"] call KPLIB_fnc_log; 
         deleteVehicle _object;
     };
+
+    [format["REGISTERING OBJECT FOR SECTOR %1", _sector], "OBJECT REGISTER"] call KPLIB_fnc_log;
     
     if (isNil "KPLIB_sectorObjects_hashMap") then {
         // Creates the hashmap
@@ -57,13 +61,12 @@ params [
         KPLIB_sectorMapObject_hashMap = createHashMap;
     };
 
-    if (!_canGarrison) then {
-        if !(typeOf _object in KPLIB_allGarrionsConfigs_classe) exitWith {};
+    if (!_staticSpawn) then {
+        if !(typeOf _object in KPLIB_staticConfigs_classes) exitWith {};
         // Placeholder solution for disabling garrison. The objects will stay on the map. 
         _initDelete = false; // ToDo: Find something to get reference of the spawned object to disable garrison. Array position doesn't work good.
 		// Because a deleted object will give a <NULL-OBJECT> in the garrison array, save the position of the object instead to find a match later.
         private _objectPos = [round parseNumber (((getPosATL _object) # 0) toFixed 2), round parseNumber (((getPosATL _object) # 1) toFixed 2), round parseNumber (((getPosATL _object) # 2) toFixed 2)];
-        private _sector = [_radius, getPosATL _object, (KPLIB_sectors_all + KPLIB_fillers_all)] call KPLIB_fnc_getNearestSector;
 
         if !(_sector in KPLIB_GarrisonsBlacklist_HashMap) then {
         // Create a new key with a value
@@ -112,4 +115,4 @@ params [
         deleteVehicle _object;
     };
 
-}, [_object, _canGarrison, _initDelete]] call CBA_fnc_waitUntilAndExecute;
+}, [_object, _staticSpawn, _initDelete]] call CBA_fnc_waitUntilAndExecute;

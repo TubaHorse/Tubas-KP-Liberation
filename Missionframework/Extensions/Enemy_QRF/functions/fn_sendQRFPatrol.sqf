@@ -1,15 +1,26 @@
 /*
-    Make a sector patrol go to a position 
+    File: fn_sendQRFPatrol.sqf
+    Author: PiG13BR - https://github.com/PiG13BR
+    Date: 23/04/2026
+    Last Update: 28/05/2026
+    License: MIT License - http://www.opensource.org/licenses/MIT
+
+    Description:
+        Take units from a sector to QRF a position
+
+    Parameter(s):
+        _sector - sector where it'll take units to patrol [STRING]
+        _qrfPos - position where QRF needs to go [POSITION]
+        _bluforUnits - Blufor units detected [ARRAY]
+        
+    Returns:
+        -
 */
 
 params["_sector", "_qrfPos", "_bluforUnits"];
 
 if (_sector isEqualTo "") exitWith {false};
 if (_qrfPos isEqualTo []) exitWith {false};
-if (_bluforUnits isEqualTo []) then {
-    // Find blufor units in the qrfPos
-
-};
 
 // Count type of units
 private _bluforInf = _bluforUnits select {_x isKindOf "CAManBase"};
