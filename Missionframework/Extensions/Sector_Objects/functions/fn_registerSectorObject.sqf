@@ -2,7 +2,7 @@
     File: fn_registerSectorObject.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 20/12/2024
-    Last Update: 25/05/2026
+    Last Update: 29/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -41,15 +41,11 @@ params [
 
 	// Find the nearest sector
 	private _sector = [KPLIB_sectorObject_radius, getPosATL _object, (KPLIB_sectors_all + KPLIB_fillers_all)] call KPLIB_fnc_getNearestSector;
-    
-    [format["REGISTERING OBJECT FOR SECTOR %1", _sector], "OBJECT REGISTER"] call KPLIB_fnc_log;
 
     if (_sector isEqualTo "") exitWith {
         [format ["%1 in position %2 is too far away from any sectors. Deleting the object.", (typeOf _object), (getPos _object)], "REGISTERING OBJECT FAILED"] call KPLIB_fnc_log; 
         deleteVehicle _object;
     };
-
-    [format["REGISTERING OBJECT FOR SECTOR %1", _sector], "OBJECT REGISTER"] call KPLIB_fnc_log;
     
     if (isNil "KPLIB_sectorObjects_hashMap") then {
         // Creates the hashmap

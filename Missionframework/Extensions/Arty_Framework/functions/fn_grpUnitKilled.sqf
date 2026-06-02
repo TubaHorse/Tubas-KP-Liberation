@@ -1,8 +1,8 @@
 /*
 	File: fn_grpUnitKilled.sqf
-	Author: PiG13BR
-	Date: 2024-10-11
-    Last Update: 2025-11-07
+	Author: PiG13BR - https://github.com/PiG13BR
+	Date: 11/10/2024
+    Last Update: 28/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -32,7 +32,7 @@ if (!isNil "KPLIB_o_artilleryUnits") then {
 	private _minDist = 100; // This is the minumun distance from the killer that the leader can call the artillery
 
 	// Check distance from killer and artillery availability
-	if ((_unit distance2d _killer >= _minDist) || {KPLIB_o_artilleryUnits isNotEqualTo []}) then {
+	if ((_unit distance2d _killer >= _minDist) && {KPLIB_o_artilleryUnits isNotEqualTo []}) then {
 		if ((side _killer) == KPLIB_side_player) then {
 			// Only leaders (from preset) can call artillery strike
 			private _grpLeader = leader _grp;

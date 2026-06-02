@@ -2,7 +2,7 @@
 	File: fn_fireArtillery.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
 	Date: 04/09/2024 
-	Last Update: 26/11/2025 
+	Last Update: 28/05/2026 
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -48,7 +48,7 @@ if (isNull _artillery) then {
 	_artillery = selectRandom _artillery_battery;
 };
 
-if (isNull _artillery) exitWith {["No artillery available in the pool", "FIRE MISSION FAILED"] call KPLIB_fnc_log; [false, []]};
+if (isNil "_artillery") exitWith {["No artillery available in the pool", "FIRE MISSION FAILED"] call KPLIB_fnc_log; [false, []]};
 
 // ---------------------------------------------------------- SET ARTILLERY TO BUSY
 _gunnerArty = gunner _artillery;

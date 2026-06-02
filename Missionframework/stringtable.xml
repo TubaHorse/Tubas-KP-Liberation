@@ -52,10 +52,10 @@
 <Project name="Liberation">
     <Package name="Liberation">
         <Key ID="STR_MISSION_TITLE">
-            <Original>CTI 34 KP Liberation v0.97.0pig</Original>
+            <Original>CTI 34 KP Liberation v0.97.1pig</Original>
         </Key>
         <Key ID="STR_MISSION_VERSION">
-            <Original>v0.97.0pig</Original>
+            <Original>v0.97.1pig</Original>
         </Key>
         <Key ID="STR_MISSION_DESCRIPTION">
             <Original>Liberate the region from the enemy oppression! Strategy will be key! Good luck soldiers.</Original>

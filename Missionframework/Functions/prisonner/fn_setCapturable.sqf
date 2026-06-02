@@ -2,7 +2,7 @@
     File: fn_setCapturable.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 24/11/2025
-    Last Update: 01/03/2026
+    Last Update: 28/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -62,7 +62,7 @@ if ((side group _unit == KPLIB_side_enemy) && (_unit isKindOf "CAManBase") && (a
             _this addEventHandler ["Killed", {
                 params["_unit", "_killer"];
 
-                if (side (group _killer) == KPLIB_side_player) then {
+                if (side (group _killer) == KPLIB_side_player && (isPlayer _killer)) then {
                     
                     [format[localize "STR_POW_KILLED", name _killer]] remoteExec ["systemChat"];
 

@@ -2,7 +2,7 @@
     File: fn_spawnStaticWeapon.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 22/11/2024 
-    Last Update: 28/05/2026
+    Last Update: 31/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -42,6 +42,7 @@ if (_crewArray isEqualTo []) exitWith {["No crew spawned in static weapon, delet
 
 _weapon allowdamage true;
 _weapon enableSimulation true;
+_weapon enableWeaponDisassembly false;
 
 {
     // Make sure it watches the right direction once spawned, to avoid trying to look at the leader

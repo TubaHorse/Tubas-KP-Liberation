@@ -2,7 +2,7 @@
     File: fn_recalculateResources.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 10/09/2025
-    Last update: 10/04/2026
+    Last update: 31/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -26,7 +26,7 @@ private _local_infantry_cap = 50 * KPLIB_param_resourcesMulti;
 private _range = KPLIB_range_fob;
 
 {
-    if (_x in KPLIB_player_outposts) then {_range = KPLIB_range_outpost};
+    if (_x in KPLIB_player_outposts) then {_range = KPLIB_range_outpost} else {_range = KPLIB_range_fob};
 
     private _fob_buildings = _x nearobjects _range;
     private _storage_areas = _fob_buildings select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
