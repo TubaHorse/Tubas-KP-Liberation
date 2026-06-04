@@ -52,6 +52,10 @@ KPLIB_o_fuelContainer = "Land_Pod_Heli_Transport_04_fuel_F";            // Taru 
 KPLIB_o_ammoContainer = "Land_Pod_Heli_Transport_04_ammo_F";            // Taru Ammo Pod
 KPLIB_o_flag = "Flag_CSAT_F";                                           // Flag
 
+// Enemy mines types (CfgVehicles classes as explained here https://community.bistudio.com/wiki/createMine)
+KPLIB_o_APMine = "APERSMine";
+KPLIB_o_ATMine = "ATMine";
+
 /* Adding a value to these arrays below will add them to a one out of however many in the array, random pick chance.
 Therefore, adding the same value twice or three times means they are more likely to be chosen more often. */
 
