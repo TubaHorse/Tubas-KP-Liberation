@@ -2,7 +2,7 @@
     File: fn_sectorCapitalSpawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 22/04/2026
+    Last Update: 04/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -25,6 +25,9 @@ private _sectorPos = markerPos _sector;
 
 // Create objects
 ["KPLIB_createSectorObjects", [_sector]] call CBA_fnc_serverEvent;
+
+// Create mines
+["KPLIB_createSectorMines", _sector] call CBA_fnc_serverEvent;
 
 // Get unit cap
 private _popfactor = 1;
@@ -86,10 +89,11 @@ if (KPLIB_enemyReadiness > 25) then {
 {
     private _roadSpawn = [[[_sectorPos, 200]], [], {
         isOnRoad _this && 
-        ((_this nearEntities [["LandVehicle"], 10]) isEqualTo []) &&
-        !(_this isFlatEmpty [-1, -1, 0.3, 10, 0] isEqualTo [])
+        ((_this nearEntities [["LandVehicle"], 10]) isEqualTo []) 
+        && (_this isFlatEmpty [-1, -1, -1, -1, 0] isNotEqualTo []) 
+        && {nearestTerrainObjects [_this, ["Tree", "Rock", "Rocks", "HIDE"], 10] isEqualTo []}
     }] call BIS_fnc_randomPos;
-    private _vehicle = [_roadSpawn, _x] call KPLIB_fnc_spawnVehicle;
+    private _vehicle = [_roadSpawn, _x, 3] call KPLIB_fnc_spawnVehicle;
     //[group ((crew _vehicle) select 0),_sectorPos] spawn add_defense_waypoints;
     _sectorUnits pushback _vehicle;
     {_sectorUnits pushback _x;} foreach (crew _vehicle);
@@ -97,6 +101,19 @@ if (KPLIB_enemyReadiness > 25) then {
     // Vehicle patrol streets
     private _groupVeh = (group (driver _vehicle));
     {deleteWaypoint _x}forEachReversed (waypoints _groupVeh);
+
+    // Tanks and apcs types don't patrol
+    if ((_vehicle isKindOf "Tank") || (_vehicle isKindOf "Wheeled_Apc_F")) then {
+        _vehicle setDir (_sectorPos getDir _vehicle);
+        continue
+    };
+
+    // Random chance patrol
+    if ((random 100) < 55) then {
+        _vehicle setDir (_sectorPos getDir _vehicle);
+        continue
+    };
+
     private _lastPos = _roadSpawn;
     for "_i" from 0 to 3 do {
         private _pos = [[[markerPos _sector, 250]], [], {isOnRoad _this && {_this distance2D (markerPos _sector) >= 100} && {_lastPos distance2D _this >= 150}}] call BIS_fnc_randomPos;

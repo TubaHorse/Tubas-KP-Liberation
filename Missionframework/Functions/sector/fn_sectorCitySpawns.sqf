@@ -2,7 +2,7 @@
     File: fn_sectorCitySpawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 20/04/2026
+    Last Update: 01/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -24,6 +24,9 @@ private _sectorPos = markerPos _sector;
 
 // Create objects
 ["KPLIB_createSectorObjects", [_sector]] call CBA_fnc_serverEvent;
+
+// Create mines
+["KPLIB_createSectorMines", _sector] call CBA_fnc_serverEvent;
 
 // Get unit cap
 private _popfactor = 1;
@@ -74,16 +77,17 @@ if (_infType == "army") then {
 {
     private _roadSpawn = [[[_sectorPos, 200]], [], {
         isOnRoad _this && 
-        ((_this nearEntities [["LandVehicle"], 10]) isEqualTo []) &&
-        !(_this isFlatEmpty [-1, -1, 0.3, 10, 0] isEqualTo [])
+        ((_this nearEntities [["LandVehicle"], 10]) isEqualTo []) 
+        && (_this isFlatEmpty [1, -1, -1, -1, 0] isNotEqualTo []) 
+        && {nearestTerrainObjects [_this, ["Tree", "Rock", "Rocks", "HIDE"], 10] isEqualTo []}
     }] call BIS_fnc_randomPos;
-    private _vehicle = [_roadSpawn, _x] call KPLIB_fnc_spawnVehicle;
+    private _vehicle = [_roadSpawn, _x, 3] call KPLIB_fnc_spawnVehicle;
     _sectorUnits pushback _vehicle;
     {_sectorUnits pushback _x;} foreach (crew _vehicle);
 
     // Vehicle patrol streets
-    {deleteWaypoint _x}forEachReversed (waypoints (group driver _vehicle));
-    private _lastPos = _roadSpawn;
+    private _groupVeh = (group (driver _vehicle));
+    {deleteWaypoint _x}forEachReversed (waypoints _groupVeh);
 
     // Tanks and apcs types don't patrol
     if ((_vehicle isKindOf "Tank") || (_vehicle isKindOf "Wheeled_Apc_F")) then {
@@ -97,15 +101,16 @@ if (_infType == "army") then {
         continue
     };
 
+    private _lastPos = _roadSpawn;
     for "_i" from 0 to 2 do {
-        private _pos = [[[_sectorPos, 200]], [], {isOnRoad _this && {_lastPos distance _this >= 150}}] call BIS_fnc_randomPos;
+        private _pos = [[[markerPos _sector, 250]], [], {isOnRoad _this && {_this distance2D (markerPos _sector) >= 100} && {_lastPos distance2D _this >= 150}}] call BIS_fnc_randomPos;
         if (_pos isEqualTo [0,0]) then {continue};
         _lastPos = _pos;
-        _wp = (group (driver _vehicle)) addWaypoint [_pos, 0];
+        _wp = _groupVeh addWaypoint [_pos, 0];
         _wp setWaypointType "MOVE";
         _wp setWaypointSpeed "LIMITED";
         // Last waypoint
-        if (_i >= 3) then {
+        if (_i >= 3 && (waypointType [_groupVeh, currentWaypoint _groupVeh]) == "MOVE") then {
             _wp setWaypointType "CYCLE";
         };
     };

@@ -2221,6 +2221,10 @@
             <Czech>Zvýšená</Czech>
             <Japanese>多い</Japanese>
         </Key>
+        <Key ID="STR_PARAMS_CIVILIANS_VEHICLES">
+            <Original>Civilian Vehicles</Original>
+            <Portuguese>Veículos Civis</Portuguese>
+        </Key>
         <Key ID="STR_FRIENDLY_FIRE">
             <Original>Warning: friendly fire</Original>
             <French>Attention: tirs alliés</French>
@@ -8810,6 +8814,14 @@
             <Key ID="STR_ENEMY_FIGHTER_TITLE">
                 <Original>Enemy Fighters</Original>
                 <Portuguese>Caças Inimigos</Portuguese>
+            </Key>
+        </Container>
+
+
+        <Container name="Enemy Mines">
+            <Key ID="STR_ENEMY_MINES_TITLE">
+                <Original>Enemy Minefield on Sectors</Original>
+                <Portuguese>Campos Minados Inimigo nos Setores</Portuguese>
             </Key>
         </Container>
 

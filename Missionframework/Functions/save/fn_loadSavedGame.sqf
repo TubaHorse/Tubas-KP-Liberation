@@ -2,12 +2,12 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 27/05/2026
+    Last Update: 04/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
         Loads saved game at start (save_manager.sqf)
-        0.97.0pig is compatible to 0.96.8apr
+        0.97.1pig is compatible to 0.96.8apr
 
     Parameter(s):
         -
@@ -52,7 +52,7 @@ if (hasInterface) then {
 };
 
 // All classnames of objects which should be saved
-KPLIB_classnamesToSave = [toLowerANSI KPLIB_b_fobBuilding, toLowerANSI KPLIB_b_potato01];
+KPLIB_classnamesToSave = [toLowerANSI KPLIB_b_potato01];
 
 /*
     --- Locals ---
@@ -131,6 +131,8 @@ resources_intel = 0;
 KPLIB_saveLoaded = false;
 // Blocked factory by resistance
 KPLIB_blockedFactories = [];
+// Sector mines positions
+KPLIB_sectorMinesPositionsHash = [];
 
 // Add all buildings for saving and kill manager ignore
 _noKillHandler append KPLIB_b_deco_classes;
@@ -235,6 +237,7 @@ if (!isNil "_saveData") then {
         KPLIB_player_outposts                       = _saveData param [25, []];
         KPLIB_fobNames                              = _saveData param [26, KPLIB_militaryAlphabet];
         KPLIB_outpostNames                          = _saveData param [27, KPLIB_militaryAlphabet];
+        KPLIB_sectorMinesPositionsHash              = _saveData param [28, []];
 
 
         stats_ammo_produced                         = _stats select  0;
@@ -661,7 +664,7 @@ if (!isNil "_saveData") then {
     // Check for captured outposts that can be replenished (mission closed before replenishment happened)
     {
         if !(_x in KPLIB_fillers_patrol) then {continue};
-        [_x] call KPLIB_fnc_replenishOutpost
+        [_x] call KPLIB_fnc_replenishFiller
     }forEach KPLIB_sectors_player;
 
 
@@ -706,6 +709,77 @@ if (!isNil "_saveData") then {
 if (KPLIB_fobNames isEqualTo []) then {KPLIB_fobNames = KPLIB_militaryAlphabet};
 if (KPLIB_outpostNames isEqualTo []) then {KPLIB_outpostNames = KPLIB_militaryAlphabet};
 
+// Sector mines positions. The saved data returns as an array. Transform into a hashmap.
+private _sectorMinesPositionsHash = createHashMapFromArray [];
+
+if (count KPLIB_sectorMinesPositionsHash > 0) then {
+	{
+		private _key = _x # 0;
+		private _array = _x # 1;
+		
+		_sectorMinesPositionsHash set [
+			_key,
+			[ 
+				_array # 0,
+				_array # 1
+			]
+		]
+	} forEach KPLIB_sectorMinesPositionsHash;
+};
+
+KPLIB_sectorMinesPositionsHash = _sectorMinesPositionsHash; // It's now a hashmap
+
+// Look for mines position for each sector in the game start. These positions are going to be fixed and saved.
+if (KPLIB_param_enemyMines) then {
+    {
+        // Find sectors without mine positions
+
+        private _sector = _x;
+        if (_sector in KPLIB_sectorMinesPositionsHash) then {continue}; // Skip sectors with mines pos
+
+        [format["Trying to find mine positions for sector %1 (%2)", markerText _sector, _sector], "MINE POSITIONS"] call KPLIB_fnc_log;
+
+        // AP mines positions
+        private _minesApPos = [];
+        private _lastPos = markerPos _sector;
+        for "_i" from 0 to 6 do {
+            private _pos = [[[markerPos _sector, 250]], [], {
+                //((_this nearEntities [["LandVehicle"], 10]) isEqualTo []) 
+                (_this isFlatEmpty [-1, -1, 1, 10, 0] isNotEqualTo []) 
+                && ((_lastPos distance2d _this) > 100)
+                && {([200, _this] call KPLIB_fnc_getNearestSector) isEqualTo ""}
+                && {!isOnRoad _this}
+                && {nearestTerrainObjects [_this, ["building", "house"], 25] isEqualTo []}
+            }] call BIS_fnc_randomPos;
+            
+            if (_pos isEqualTo [0,0]) then {continue};
+
+            _minesApPos pushBack _pos;
+        };
+
+        // AT mines positions
+        private _minesATPos = [];
+        private _lastPos = markerPos _sector;
+        for "_i" from 0 to 6 do {
+            private _pos = [[[markerPos _sector, 250]], [], {
+                (isOnRoad _this) 
+                //&& ((_this nearEntities [["LandVehicle"], 10]) isEqualTo []) 
+                && (_this isFlatEmpty [-1, -1, 1, 10, 0] isNotEqualTo []) 
+                && (_this distance2d (markerPos _sector) > 200)
+                && ((_lastPos distance2d _this) > 100)	  
+                && {([200, _this] call KPLIB_fnc_getNearestSector) isEqualTo ""}
+                //&& {nearestTerrainObjects [_this, ["Tree", "Rock", "Rocks"], 1] isEqualTo []}
+            }] call BIS_fnc_randomPos;
+            
+            if (_pos isEqualTo [0,0]) then {continue};
+
+            _minesATPos pushBack _pos;
+        };
+
+        KPLIB_sectorMinesPositionsHash set [_sector, [_minesApPos, _minesATPos]];
+    }forEach KPLIB_sectors_all;
+};
+
 publicVariable "stats_civilian_vehicles_seized";
 publicVariable "stats_ieds_detonated";
 publicVariable "KPLIB_sectors_player";
@@ -720,6 +794,7 @@ publicVariable "KPLIB_blockedFactories";
 publicVariable "KPLIB_player_outposts";
 publicVariable "KPLIB_fobNames";
 publicVariable "KPLIB_outpostNames";
+publicVariable "KPLIB_sectorMinesPositionsHash";
 
 // Check for deleted military sectors or deleted classnames in the locked vehicles array
 KPLIB_sector_vehicleLinks = KPLIB_sector_vehicleLinks select {
@@ -731,6 +806,9 @@ KPLIB_sector_vehicleLinks = KPLIB_sector_vehicleLinks select {
 // Double crosscheck if sector changed
 {
     _x params ["_class", "_base"];
+
+    // Ignore empty strings
+    if (_base isEqualTo "") then {continue};
 
     private _index = KPLIB_sector_vehicleLinks findIf {_class == (_x # 0)};
     if (_index >= 0) then {

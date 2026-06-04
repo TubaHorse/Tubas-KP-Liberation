@@ -179,6 +179,7 @@ class KPLIB {
         class activateSector            {};
         class deactivateSector          {};
         class findSectorGarrisons       {};
+        class fillerInfSpawns           {};
         class getBluforObjective        {};
         class getLocationName           {};
         class getNearestBluforObjective {};
@@ -192,11 +193,10 @@ class KPLIB {
         class liberatedSector           {};
         class manageSectorPFH           {};
         class prepareSector             {};
-        class replenishOutpost          {};
+        class replenishFiller          {};
         class sectorCapitalSpawns       {};
         class sectorCitySpawns          {};
         class sectorFactorySpawns       {};
-        class sectorOutpostSpawns       {};
         class sectorMilitarySpawns      {};
         class sectorTowerSpawns         {};
         class spawnBoatPatrol           {};
@@ -277,6 +277,7 @@ class KPLIB {
     #include "Extensions\Discord_Log\cfgFunctions.hpp"
     #include "Extensions\Drone_Jammer\cfgFunctions.hpp"
     #include "Extensions\Enemy_Fighters\cfgFunctions.hpp"
+    #include "Extensions\Enemy_Mines\cfgFunctions.hpp"
     #include "Extensions\Enemy_QRF\cfgFunctions.hpp"
     #include "Extensions\Lock_Arsenal\cfgFunctions.hpp"
     #include "Extensions\Player_Menu\KPPLM\KPPLM_functions.hpp"

@@ -34,6 +34,12 @@ class EnemyFighters {
     texts[] = {$STR_PARAMS_ENABLED, $STR_PARAMS_DISABLED};
     default = 1;
 };
+class EnemyMines {
+    title = $STR_ENEMY_MINES_TITLE;
+    values[] = {1, 0};
+    texts[] = {$STR_PARAMS_ENABLED, $STR_PARAMS_DISABLED};
+    default = 1;
+};
 class LockArsenal {
     title = $STR_LOCK_ARSENAL_TITLE;
     values[] = {0, 1};

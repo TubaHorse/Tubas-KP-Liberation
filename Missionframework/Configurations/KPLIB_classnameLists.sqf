@@ -739,12 +739,28 @@ KPLIB_intelBuildingClasses = [
 
 // Array of radio tower classnames to place at radio tower sectors. If more than one is added, it'll be selected random for each sector on campaign start.
 KPLIB_radioTowerClassnames = [
-    "Land_Communication_F"
+    "Land_Telek1"
 ];
 
 // Hangars and helipads types to add as a plane/heli slot if they're already in the map and close to a fob
-KPLIB_type_hangars = ["Land_TentHangar_V1_F", "Land_Hangar_F", "Land_Airport_01_hangar_F"];
-KPLIB_type_heliPads = ["Land_HelipadCircle_F", "Land_HelipadCivil_F", "Land_HelipadRescue_F", "Land_HelipadSquare_F"];
+KPLIB_type_hangars = [
+    "Land_TentHangar_V1_F", 
+    "Land_Hangar_F", 
+    "Land_Airport_01_hangar_F",
+    "Land_Ss_hangard",
+    "Land_Ss_hangar", 
+    "Land_Mil_hangar_EP1",
+    "Land_ServiceHangar_01_L_F",
+    "land_cwr3_hangar", 
+    "land_cwr3_hangar_2"
+];
+KPLIB_type_heliPads = [
+    "Land_HelipadCircle_F", 
+    "Land_HelipadCivil_F", 
+    "Land_HelipadRescue_F", 
+    "Land_HelipadSquare_F",
+    "cwr3_heli_h"
+];
 
 // All building classname that will be ignored on the search for structures to spawn garrison units in sectors
 KPLIP_ignoreGarrisonBuildings = [
@@ -757,5 +773,32 @@ KPLIP_ignoreGarrisonBuildings = [
     "Land_i_Garage_V1_F",
     "Land_Slum_House01_F",
     "Land_i_Garage_V1_dam_F",
-    "Land_i_Shed_Ind_F"
+    "Land_i_Shed_Ind_F",
+    "Land_Cowshed_01_A_F",
+    "Land_Barn_03_large_F",
+    "Land_Barn_03_small_F",
+    "Land_Shed_14_F",
+    "Land_Barracks_02_F", // Empty building, it's silly
+    "Land_Barracks_05_F", // Destroyed barrack
+    "Land_i_Shed_Ind_old_F",
+    "Land_GarageRow_01_large_F",
+    "Land_Sawmill_01_F",
+    "Land_Workshop_04_grey_F",
+    "Land_Workshop_02_grey_F",
+    "Land_Workshop_01_grey_F",
+    "Land_Workshop_02_F",
+    "Land_Ind_Workshop01_01",
+    "Land_Ind_Workshop01_02",
+    "Land_FuelStation_01_workshop_F",
+    "Land_FuelStation_02_workshop_F",
+    "Land_CarService_F",
+    "Land_SM_01_shed_F",
+    "Land_TentHangar_V1_F", 
+    "Land_Hangar_F",
+    "Land_Ss_hangard",
+    "Land_Ss_hangar", 
+    "Land_Mil_hangar_EP1",
+    "Land_ServiceHangar_01_L_F",
+    "land_cwr3_hangar", 
+    "land_cwr3_hangar_2"
 ];

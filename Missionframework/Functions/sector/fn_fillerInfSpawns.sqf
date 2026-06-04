@@ -1,8 +1,8 @@
 /*
-    File: fn_sectorOutpostSpawns.sqf
+    File: fn_fillerInfSpawns.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 17/12/2025
-    Last Update: 16/04/2026
+    Last Update: 01/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -20,7 +20,7 @@
 
 params["_sector", ["_localCaptureSize", KPLIB_range_sectorCapture * 0.5]];
 
-if (!canSuspend) exitWith {_this spawn KPLIB_fnc_sectorOutpostSpawns};
+if (!canSuspend) exitWith {_this spawn KPLIB_fnc_fillerInfSpawns};
 
 private _sectorUnits = [];
 private _sectorPos = markerPos _sector;
@@ -38,7 +38,7 @@ if (KPLIB_enemyReadiness < 25) then {_infType = "militia";};
 
 private _squad1 = ([_infType] call KPLIB_fnc_getSquadComp);
 private _squad2 = [];
-if (KPLIB_param_unitcap >= 1.25) then {_squad2 = ([_infType] call KPLIB_fnc_getSquadComp);};
+if (KPLIB_enemyReadiness >= 50) then {_squad2 = ([_infType] call KPLIB_fnc_getSquadComp);};
 
 // Spawn squads
 {
@@ -62,9 +62,6 @@ if (KPLIB_param_unitcap >= 1.25) then {_squad2 = ([_infType] call KPLIB_fnc_getS
 private _garrisonsCount = 1 + round(random 1);
 
 if (KPLIB_enemyReadiness >= (35 - (5 * KPLIB_param_aggressivity))) then {_garrisonsCount = _garrisonsCount + 1};
-if (KPLIB_enemyReadiness >= (50 - (5 * KPLIB_param_aggressivity))) then {_garrisonsCount = _garrisonsCount + 1};
-if (KPLIB_param_unitcap >= 1 && {KPLIB_enemyReadiness >= (65 - (5 * KPLIB_param_aggressivity))}) then {_garrisonsCount = _garrisonsCount + 1};
-if (KPLIB_param_unitcap >= 1.5 && {KPLIB_enemyReadiness >= (85 - (5 * KPLIB_param_aggressivity))}) then {_garrisonsCount = _garrisonsCount + 1};
 
 sleep 1;
 

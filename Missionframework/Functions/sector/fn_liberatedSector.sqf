@@ -16,12 +16,12 @@ stats_readiness_earned = stats_readiness_earned + _KPLIB_enemyReadiness_increase
 
 KPLIB_sectors_player pushback _liberated_sector; publicVariable "KPLIB_sectors_player";
 
-// Outpost
+// Fillers
 if (_liberated_sector in KPLIB_fillers_all) exitWith {
     ["lib_enemy_pos_destroyed", [mapGridPosition (markerPos _liberated_sector)]] remoteExec ["BIS_fnc_showNotification"];
 
     // 1 hour delay to be able to spawn it again if there's military sector nearby to replenish it
-    [{_this call KPLIB_fnc_replenishOutpost}, _liberated_sector, 3600] call CBA_fnc_waitAndExecute;
+    [{_this call KPLIB_fnc_replenishFiller}, _liberated_sector, 3600] call CBA_fnc_waitAndExecute;
 
     // 50% chance of enemy QRF (nearby military base)
     if ((random 100 <= KPLIB_enemyReadiness)) then {

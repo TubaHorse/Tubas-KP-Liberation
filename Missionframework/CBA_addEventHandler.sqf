@@ -35,5 +35,9 @@ if (KPLIB_param_enemyFighters) then {
     #include "Extensions\Enemy_Fighters\CBA_addEventHandler.sqf";
 };
 
+if (KPLIB_param_enemyMines) then {
+    #include "Extensions\Enemy_Mines\CBA_addEventHandler.sqf";
+};
+
 #include "Extensions\Sector_Objects\CBA_addEventHandler.sqf"
 #include "Extensions\Drone_Jammer\CBA_addEventHandler.sqf"

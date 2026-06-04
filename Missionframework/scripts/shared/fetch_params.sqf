@@ -62,6 +62,7 @@ if(isServer) then {
     GET_PARAM(KPLIB_param_aggressivity, "Aggressivity", 2);
     GET_PARAM_BOOL(KPLIB_param_adaptive, "AdaptToPlayercount", 1);
     GET_PARAM(KPLIB_param_civActivity, "Civilians", 1);
+    GET_PARAM_BOOL(KPLIB_param_civSpawnVehicles, "CiviliansVeh", 1);
     GET_PARAM_BOOL(KPLIB_param_firstFobBuilt, "FirstFob", 0);
     GET_PARAM_BOOL(KPLIB_param_fobVehicle, "FirstFobVehicle", 0);
     GET_PARAM(KPLIB_param_maxFobs, "MaximumFobs", 26);
@@ -101,6 +102,7 @@ if(isServer) then {
     GET_PARAM_BOOL(KPLIB_param_ArtyMenu, "ArtyMenu", 1);
     GET_PARAM_BOOL(KPLIB_param_clearBrush, "ClearBrushes", 1);
     GET_PARAM_BOOL(KPLIB_param_enemyFighters, "EnemyFighters", 1);
+    GET_PARAM_BOOL(KPLIB_param_enemyMines, "EnemyMines", 1);
     GET_PARAM(KPLIB_param_lockArsenal, "LockArsenal", 0);
     GET_PARAM_BOOL(KPLIB_param_pylonManager, "PylonManager", 1);
     GET_PARAM_BOOL(KPLIB_param_rallyPoint, "RallyPoint", 1);
@@ -484,6 +486,10 @@ if (!isDedicated && hasInterface) then {
     };
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
+    _param = localize "STR_PARAMS_CIVILIANS_VEHICLES";
+    _value = if (KPLIB_param_civSpawnVehicles) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
     _param = localize "STR_PARAMS_FIRSTFOB";
     _value = if (KPLIB_param_firstFobBuilt) then {localize "STR_YES";} else {localize "STR_NO";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
@@ -568,6 +574,10 @@ if (!isDedicated && hasInterface) then {
     
     _param = localize "STR_ENEMY_FIGHTER_TITLE";
     _value = if (KPLIB_param_enemyFighters) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_ENEMY_MINES_TITLE";
+    _value = if (KPLIB_param_enemyMines) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_LOCK_ARSENAL_TITLE";

@@ -48,6 +48,12 @@ class Params {
         texts[] = {$STR_PARAMS_CIVILIANS1, $STR_PARAMS_CIVILIANS2, $STR_PARAMS_CIVILIANS3, $STR_PARAMS_CIVILIANS4};
         default = 2;
     };
+    class CiviliansVeh {
+        title = $STR_PARAMS_CIVILIANS_VEHICLES;
+        values[] = {1, 0};
+        texts[] = {$STR_PARAMS_ENABLED, $STR_PARAMS_DISABLED};
+        default = 1;
+    };
     class FirstFob {
         title = $STR_PARAMS_FIRSTFOB;
         values[] = {1, 0};

@@ -2,7 +2,7 @@
     File: fn_sectorMilitarySpawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 22/04/2026
+    Last Update: 04/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -25,6 +25,9 @@ private _sectorPos = markerPos _sector;
 // Create objects
 ["KPLIB_createSectorObjects", [_sector]] call CBA_fnc_serverEvent;
 
+// Create mines
+["KPLIB_createSectorMines", _sector] call CBA_fnc_serverEvent;
+
 // Get unit cap
 private _popfactor = 1;
 if (KPLIB_param_unitcap < 1) then {_popfactor = KPLIB_param_unitcap;};
@@ -35,9 +38,7 @@ private _infType = "army";
 private _squad1 = ([_infType] call KPLIB_fnc_getSquadComp);
 private _squad2 = ([_infType] call KPLIB_fnc_getSquadComp);
 private _squad3 = [];
-private _squad4 = [];
 if (KPLIB_param_unitcap >= 1.5) then {_squad3 = ([_infType] call KPLIB_fnc_getSquadComp);};
-if ((random 100) > (33 / KPLIB_param_difficulty)) then {_squad4 = ([_infType] call KPLIB_fnc_getSquadComp);};
 
 // Spawn squads
 {
@@ -55,7 +56,7 @@ if ((random 100) > (33 / KPLIB_param_difficulty)) then {_squad4 = ([_infType] ca
     _grp setVariable ["KPLIB_enemy_grpPatrol", true, true];
 
     sleep 1;
-}forEach [_squad1, _squad2, _squad3, _squad4];
+}forEach [_squad1, _squad2, _squad3];
 
 // Select vehicles to spawn
 // Heavy vehicles
@@ -79,7 +80,12 @@ if ((random 100) > (66 / KPLIB_param_difficulty)) then {
 
 // Spawn vehicles
 {
-    private _vehicle = [_sectorPos, _x] call KPLIB_fnc_spawnVehicle;
+    private _spawnPos = [[[_sectorPos, _localCaptureSize]], [], {
+        ((_this nearEntities [["LandVehicle"], 10]) isEqualTo []) 
+        && (_this isFlatEmpty [3, -1, -1, -1, 0] isNotEqualTo []) 
+        && {nearestTerrainObjects [_this, ["Tree", "Rock", "Rocks", "HIDE"], 10] isEqualTo []}
+    }] call BIS_fnc_randomPos;
+    private _vehicle = [_spawnPos, _x, 0] call KPLIB_fnc_spawnVehicle;
     _sectorUnits pushback _vehicle;
     {_sectorUnits pushback _x;} foreach (crew _vehicle);
     
@@ -93,7 +99,7 @@ if ((random 100) > (66 / KPLIB_param_difficulty)) then {
 
 sleep 1;
 
-private _garrisonsCount = round ((floor (2 + (round (KPLIB_enemyReadiness / 4 )))) * _popfactor);
+private _garrisonsCount = round ((floor (2 + (round (KPLIB_enemyReadiness / 10 )))) * _popfactor);
 
 private _garrisonedUnits = [_sector, _garrisonsCount, _localCaptureSize, _infType] call KPLIB_fnc_findSectorGarrisons;
 _sectorUnits append _garrisonedUnits;
