@@ -2,7 +2,7 @@
     File: fn_FOBToDiscord.sqf
     Author: FernandimModelador (https://github.com/FernandimModelador)
     Date: 07/03/2026
-    Last Update: 07/03/2026
+    Last Update: 04/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -30,7 +30,7 @@ KPLIB_fobLogLoop_handle = [
 
         private _playerCount = [] call KPLIB_fnc_getPlayerCount;
 
-        if (count KPLIB_sectors_fob > 0 && _playerCount > 0) then {
+        if ((count (KPLIB_sectors_fob select {_x isNotEqualTo [0,0,0]}) > 0) && (_playerCount > 0)) then {
             
             diag_log "--- FOB_DATA_START ---";
 

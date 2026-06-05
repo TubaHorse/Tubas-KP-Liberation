@@ -59,7 +59,7 @@ while {true} do {
     if ((_currentFob != "") || {_visibleMap}) then {
         _showResources = true;
 
-        private _nearestFob = player getVariable "KPLIB_nearestBasePos";
+        private _nearestFob = [] call KPLIB_fnc_getNearestPlayerBase;
         ([_nearestFob] call KPLIB_fnc_getBaseResources) params ["", "_supplies", "_ammo", "_fuel", "_hasAir", "_hasRecycling", "_hasMedical"];
 
         if (KPLIB_resources_global || {_visibleMap}) then {

@@ -2,7 +2,7 @@ waitUntil {!isNil "KPLIB_saveLoaded"};
 waitUntil {KPLIB_saveLoaded};
 
 // Check if there is no FOB yet (new campaign)
-if (KPLIB_player_fobs isEqualTo []) then {
+if ((KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]}) isEqualTo []) then {
 
     // Prebuild FOB (parameter setting) or spawn FOB box
     if (KPLIB_param_firstFobBuilt) then {
@@ -18,7 +18,7 @@ if (KPLIB_player_fobs isEqualTo []) then {
     } else {
         // Spawn FOB box and wait until the first FOB was built
         private _fobbox = objNull;
-        while {KPLIB_player_fobs isEqualTo []} do {
+        while {(KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]}) isEqualTo []} do {
             _fobbox = ([KPLIB_b_fobBox, KPLIB_b_fobTruck] select KPLIB_param_fobVehicle) createVehicle (getposATL base_boxspawn);
             _fobbox setdir getDir base_boxspawn;
             _fobbox setposATL (getposATL base_boxspawn);
@@ -28,7 +28,7 @@ if (KPLIB_player_fobs isEqualTo []) then {
             // If the FOB box has fallen into the sea or is destroyed, start again with spawning a new one
             waitUntil {
                 sleep 1;
-                !(alive _fobbox) || !(KPLIB_player_fobs isEqualTo []) || (((getPosASL _fobbox) select 2) < 0)
+                !(alive _fobbox) || !((KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]}) isEqualTo []) || (((getPosASL _fobbox) select 2) < 0)
             };
             sleep 10;
         };
@@ -36,7 +36,7 @@ if (KPLIB_player_fobs isEqualTo []) then {
     };
 
     // Wait a short time before paradropping the start resource crates
-    waitUntil {sleep 1; !(KPLIB_player_fobs isEqualTo [])};
+    waitUntil {sleep 1; !((KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]}) isEqualTo [])};
     if (KPLIB_param_tutorial && {["KPLIB_Tasks_Tutorial_Fob"] call BIS_fnc_taskExists}) then {
         waitUntil {sleep 1; ["KPLIB_Tasks_Tutorial_Fob_02"] call BIS_fnc_taskCompleted};
         sleep 3;

@@ -470,6 +470,30 @@ if (!isNil "_saveData") then {
         //_x setdamage 0;
         //_x allowdamage true;
     } forEach _spawnedObjects;
+
+    // Check for missing fobs/outposts buildings
+    {
+        private _fobObject = (nearestObject [_x, KPLIB_b_fobBuilding]);
+        diag_log format ["CHECKING FOB OBJECT: %1", _fobObject];
+        if (isNull _fobObject) then {
+            // Fob object not found, spawn it
+            _object = createVehicle [KPLIB_b_fobBuilding, _x, [], 0, "CAN_COLLIDE"];
+            diag_log format ["SPAWNING FOB OBJECT: %1", _object];
+            _object setPosATL _x;
+            [_object] call KPLIB_fnc_addObjectInit;
+        };
+    }forEach KPLIB_player_fobs;
+
+    {
+        private _outpostObject = (nearestObject [_x, KPLIB_b_outpostBuilding]);
+        
+        if (isNull _outpostObject) then {
+            // Fob object not found, spawn it
+            _object = createVehicle [KPLIB_b_outpostBuilding, _x, [], 0, "CAN_COLLIDE"];
+            _object setPosWorld _x;
+            [_object] call KPLIB_fnc_addObjectInit;
+        };
+    }forEach KPLIB_player_outposts;
     ["Saved buildings and vehicles placed", "SAVE"] call KPLIB_fnc_log;
 
     // Spawn all saved mines

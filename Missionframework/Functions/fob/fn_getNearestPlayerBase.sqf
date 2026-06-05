@@ -2,7 +2,7 @@
     File: fn_getNearestPlayerBase.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 11/04/2026
-    Last Update: 14/04/2026
+    Last Update: 04/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -19,11 +19,11 @@ params [
     ["_pos", getPosATL player, [[]], [2, 3]]
 ];
 
-if (KPLIB_player_fobs isNotEqualTo []) then {
-    // Check for nearby fobs and outposts
-    private _fobs = ((KPLIB_player_fobs + KPLIB_player_outposts) select {_x isNotEqualTo [0,0,0]}) apply {[_pos distance2d _x, _x]};
-    _fobs sort true;
-    (_fobs select 0) select 1
+private _bases = ((KPLIB_player_fobs + KPLIB_player_outposts) select {_x isNotEqualTo [0,0,0]}) apply {[_pos distance2d _x, _x]};
+
+if (count _bases > 0) then {
+    _bases sort true;
+    (_bases select 0) select 1
 } else {
-    []
+    [0,0,0]
 };

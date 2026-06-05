@@ -24,7 +24,7 @@ private _baseName = "";
 
 while {true} do {
     // FOB distance, name and position
-    if ((KPLIB_player_fobs isNotEqualTo []) || (KPLIB_player_outposts isNotEqualTo [])) then {
+    if (((KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]}) isNotEqualTo []) || ((KPLIB_player_outposts select {_x isNotEqualTo [0,0,0]}) isNotEqualTo [])) then {
         _basePos = [] call KPLIB_fnc_getNearestPlayerBase;
         _baseDist = player distance2d _basePos;
         switch (true) do {
