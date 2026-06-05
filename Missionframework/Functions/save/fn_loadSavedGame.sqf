@@ -52,7 +52,7 @@ if (hasInterface) then {
 };
 
 // All classnames of objects which should be saved
-KPLIB_classnamesToSave = [toLowerANSI KPLIB_b_potato01];
+KPLIB_classnamesToSave = [toLowerANSI KPLIB_b_fobBuilding, toLowerANSI KPLIB_b_outpostBuilding, toLowerANSI KPLIB_b_potato01];
 
 /*
     --- Locals ---
@@ -63,7 +63,7 @@ private _aiGroups = [];
 // Current campaign date and time
 private _dateTime = [];
 // Vehicles which shouldn't be handled in the kill manager
-private _noKillHandler = [toLowerANSI KPLIB_b_fobBuilding, toLowerANSI KPLIB_b_potato01];
+private _noKillHandler = [toLowerANSI KPLIB_b_fobBuilding, toLowerANSI KPLIB_b_outpostBuilding, toLowerANSI KPLIB_b_potato01];
 // All objects which should be loaded/saved
 private _objectsToSave = [];
 // All storages which are handled for resource persistence
@@ -488,7 +488,7 @@ if (!isNil "_saveData") then {
         private _outpostObject = (nearestObject [_x, KPLIB_b_outpostBuilding]);
         
         if (isNull _outpostObject) then {
-            // Fob object not found, spawn it
+            // Outpost object not found, spawn it
             _object = createVehicle [KPLIB_b_outpostBuilding, _x, [], 0, "CAN_COLLIDE"];
             _object setPosWorld _x;
             [_object] call KPLIB_fnc_addObjectInit;
