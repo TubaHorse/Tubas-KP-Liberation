@@ -1,8 +1,8 @@
     /*
     File: fn_addActionsOutpost.sqf
     Author: PiG13BR - https://github.com/PiG13BR
-    Date: 2026-04-22
-    Last Update: 2026-04-22
+    Date: 22/04/2026
+    Last Update: 01/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -60,8 +60,8 @@ if ((typeOf _obj) isEqualTo KPLIB_b_outpostBox) exitWith {
         }, 
         toString {
             _caller distance _target < 10
-            && {(KPLIB_player_fobs findIf {(_x distance2D _target) < (KPLIB_distance_base)} < 0)}
-            && {(KPLIB_player_outposts findIf {(_x distance2D _target) < (KPLIB_distance_base)} < 0)}
+            && {(KPLIB_player_fobs findIf {(_x distance2D _target) < (KPLIB_distance_base/3)} < 0)}
+            && {(KPLIB_player_outposts findIf {(_x distance2D _target) < (KPLIB_distance_base/3)} < 0)}
         },
         {},
         {},
@@ -75,10 +75,10 @@ if ((typeOf _obj) isEqualTo KPLIB_b_outpostBox) exitWith {
             };
 
             // Check for nearest fobs and outposts
-            private _index = (KPLIB_player_fobs + KPLIB_player_outposts) findIf {(_x distance2D _target) < KPLIB_distance_base};
+            private _index = (KPLIB_player_fobs + KPLIB_player_outposts) findIf {(_x distance2D _target) < KPLIB_distance_base/3};
             if (_index >= 0) exitWith {
                 private _distFob = _target distance ([getPosATL _target] call KPLIB_fnc_getNearestPlayerBase);
-                [format [localize "STR_OUTPOST_BUILDING_IMPOSSIBLE", floor KPLIB_distance_base, floor _distFob], true, 3] call KPLIB_fnc_hint;
+                [format [localize "STR_OUTPOST_BUILDING_IMPOSSIBLE", floor KPLIB_distance_base/3, floor _distFob], true, 3] call KPLIB_fnc_hint;
             };
 
             // Check for nearest sector

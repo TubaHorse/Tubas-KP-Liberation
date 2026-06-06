@@ -2,7 +2,7 @@
     File: fn_getNearestSector.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2019-12-03
-    Last Update: 2026-14-04
+    Last Update: 2026-05-25
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -32,7 +32,7 @@ if (_sectors isNotEqualTo []) then {
         // Only enemy sectors
         _sectors = _sectors - KPLIB_sectors_player select {((markerPos _x) distance2d _pos) < _radius};
     } else {
-        _sectors = KPLIB_sectors_all select {((markerPos _x) distance2d _pos) < _radius};
+        _sectors = _sectors select {((markerPos _x) distance2d _pos) < _radius};
     };
 
 } else {

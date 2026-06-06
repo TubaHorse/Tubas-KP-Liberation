@@ -2,7 +2,7 @@
     File: fn_spawnVehicle.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2019-12-03
-    Last Update: 2025-27-10
+    Last Update: 2026-27-05
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -11,7 +11,7 @@
     Parameter(s):
         _pos        - Position to spawn the vehicle                                         [POSITION, defaults to [0, 0, 0]]
         _classname  - Classname of the vehicle to spawn                                     [STRING, defaults to ""]
-        _precise    - Selector if the vehicle should spawned precisely on given position    [BOOL, defaults to false]
+        _radius    - Selector if the vehicle should spawned precisely on given position     [NUMBER, defaults to 0]
         _rndDir     - Selector if the direction should be randomized                        [BOOL, defaults to true]
 
     Returns:
@@ -21,7 +21,7 @@
 params [
     ["_pos", [0, 0, 0], [[]], [2, 3]],
     ["_classname", "", [""]],
-    ["_precise", false, [false]],
+    ["_radius", 0, [0]],
     ["_rndDir", true, [false]]
 ];
 
@@ -31,16 +31,20 @@ if (_classname isEqualTo "") exitWith {["Empty string given"] call BIS_fnc_error
 private _newvehicle = objNull;
 private _spawnpos = [];
 
-if (_precise) then {
-    // Directly use given pos, if precise placement is true
+if (_radius < 1) then {
+    // Directly use given pos
     _spawnpos = _pos;
 } else {
     // Otherwise find a suitable position for vehicle spawning near given pos
     private _i = 0;
-    while {_spawnPos isEqualTo []} do {
+    while {_spawnpos isEqualTo []} do {
         _i = _i + 1;
-        _spawnpos = (_pos getPos [random 150, random 360]) findEmptyPosition [10, 100, _classname];
-        if (_i isEqualTo 10) exitWith {_spawnPos = zeroPos};
+        _spawnpos = [[[_pos, _radius]], [], {
+            ((_this nearEntities [["LandVehicle"], 10]) isEqualTo []) &&
+            !(_this isFlatEmpty [-1, -1, 0.3, 10, 0] isEqualTo [])
+        }] call BIS_fnc_randomPos;
+        //_spawnpos = (_pos getPos [random 150, random 360]) findEmptyPosition [10, _radius, _classname];
+        if (_i isEqualTo 10) exitWith {_spawnpos = zeroPos};
     };
 };
 
@@ -52,11 +56,11 @@ if (_spawnPos isEqualTo []) exitWith {
 
 // If it's a chopper, spawn it flying
 if (_classname in KPLIB_o_helicopters) then {
-    _newvehicle = createVehicle [_classname, _spawnpos, [], 0, 'FLY'];
+    _newvehicle = createVehicle [_classname, _pos, [], 0, 'FLY'];
     _newvehicle flyInHeight (100 + (random 120));
     _newvehicle allowDamage false;
 } else {
-    _newvehicle = _classname createVehicle _spawnpos;
+    _newvehicle = createVehicle [_classname, _pos, [], _radius, "NONE"];
     _newvehicle allowDamage false;
 
     [_newvehicle] call KPLIB_fnc_allowCrewInImmobile;
@@ -65,8 +69,11 @@ if (_classname in KPLIB_o_helicopters) then {
     if (_rndDir) then {
         _newvehicle setDir (random 360);
     };
-    _newvehicle setPos _spawnpos;
-    _newvehicle setVectorUp surfaceNormal position _newvehicle;
+
+    [{    
+        _this setPos (getPosATL _this);
+        _this setVectorUp surfaceNormal position _this;
+    }, _newvehicle, 3] call CBA_fnc_waitAndExecute;
 };
 
 _newVehicle lock true;
@@ -100,6 +107,6 @@ _newvehicle addMPEventHandler ["MPKilled", {
     _this allowDamage true;
     _this setDamage 0;
     _this lock false;
-}, _newvehicle, 1] call CBA_fnc_waitAndExecute;
+}, _newvehicle, 5] call CBA_fnc_waitAndExecute;
 
 _newvehicle

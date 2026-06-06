@@ -2,7 +2,7 @@
     File: fn_manageSectorPFH.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 19/12/2025
+    Last Update: 30/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -10,7 +10,7 @@
 
     Parameter(s):
         _sector - sector to manage [STRING]
-        _localCaptureSize - capture radius [NUMBER]
+        _localCaptureSize - capture radius [NUMBER or ARRAY]
         _sectorUnits - spawned sector units [ARRAY]
 
     Returns:
@@ -57,13 +57,23 @@ private _maximum_additional_tickets = (KPLIB_param_maxDespawnDelay * 60 / SECTOR
         };
 
         // Prisonners
-        {
-            if (captive _x) then {
-                [_x, true] call KPLIB_fnc_setCapturable;
-            } else {
-                [_x] call KPLIB_fnc_setCapturable;
-            };
-        } forEach ((markerPos _sector) nearEntities [["CAManBase"], _localCaptureSize * 1.2]);
+        if (_localCaptureSize isEqualType []) then {
+            {
+                if (captive _x) then {
+                    [_x, true] call KPLIB_fnc_setCapturable;
+                } else {
+                    [_x] call KPLIB_fnc_setCapturable;
+                };
+            } forEach ((markerPos _sector) nearEntities [["CAManBase"], (_localCaptureSize # 0) + (_localCaptureSize # 1)]) select {_x inArea _sector};
+        } else {
+            {
+                if (captive _x) then {
+                    [_x, true] call KPLIB_fnc_setCapturable;
+                } else {
+                    [_x] call KPLIB_fnc_setCapturable;
+                };
+            } forEach ((markerPos _sector) nearEntities [["CAManBase"], _localCaptureSize * 1.2]);
+        };
 
         // Initiate sector deactivation
         [

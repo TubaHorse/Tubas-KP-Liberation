@@ -45,6 +45,13 @@ if ((!(_sector in KPLIB_sectors_player)) && (_unitsCount > 0)) then {
         [_sector, _localCaptureSize] call KPLIB_fnc_sectorMilitarySpawns;
     };
 
+    // Handle airport
+    if (_sector in KPLIB_sectors_airport) then {
+        _localCaptureSize = getMarkerSize _sector;
+        //_localCaptureSize = (_localCaptureSize # 0) + (_localCaptureSize # 1);
+        [_sector, _localCaptureSize] call KPLIB_fnc_sectorAirportSpawns;
+    };
+
     // Handle city
     if (_sector in KPLIB_sectors_city) then {
         [_sector, _localCaptureSize] call KPLIB_fnc_sectorCitySpawns;
@@ -60,9 +67,14 @@ if ((!(_sector in KPLIB_sectors_player)) && (_unitsCount > 0)) then {
         [_sector, _localCaptureSize] call KPLIB_fnc_sectorFactorySpawns;
     };
 
-    // Handle outpost
+    // Handle filler inf
     if (_sector in KPLIB_fillers_patrol) then {
-        [_sector, _localCaptureSize * 0.5] call KPLIB_fnc_sectorOutpostSpawns;
+        [_sector, _localCaptureSize * 0.5] call KPLIB_fnc_fillerInfSpawns;
+    };
+
+    // Handle filler AA
+    if (_sector in KPLIB_fillers_aa) then {
+        [_sector, _localCaptureSize * 0.5] call KPLIB_fnc_fillerAASpawns;
     };
 } else {
     // Friendly sector

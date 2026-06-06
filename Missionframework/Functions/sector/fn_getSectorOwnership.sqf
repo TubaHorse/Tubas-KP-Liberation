@@ -2,7 +2,7 @@
     File: fn_getSectorOwnership.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2019-12-03
-    Last Update: 2020-05-22
+    Last Update: 2025-05-30
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -10,7 +10,7 @@
 
     Parameter(s):
         _pos    - Position to get owner [POSITION, defaults to [0, 0, 0]]
-        _radius - Radius to count units [NUMBER, defaults to KPLIB_range_sectorCapture]
+        _radius - Radius to count units [NUMBER or ARRAY, defaults to KPLIB_range_sectorCapture]
 
     Returns:
         Owner of the position [SIDE]
@@ -18,7 +18,7 @@
 
 params [
     ["_pos", [0, 0, 0], [[]], [2, 3]],
-    ["_radius", KPLIB_range_sectorCapture, [0]]
+    ["_radius", KPLIB_range_sectorCapture, [0, []]]
 ];
 
 private _capCount = 3;

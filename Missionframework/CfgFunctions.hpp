@@ -179,6 +179,7 @@ class KPLIB {
         class activateSector            {};
         class deactivateSector          {};
         class findSectorGarrisons       {};
+        class fillerAASpawns            {};
         class fillerInfSpawns           {};
         class getBluforObjective        {};
         class getLocationName           {};
@@ -188,12 +189,14 @@ class KPLIB {
         class getNearestTower           {};
         class getSectorOwnership        {};
         class getSectorRange            {};
+        class initAirportSector         {};
         class initSectors               {};
         class isCapitalActive           {};
         class liberatedSector           {};
         class manageSectorPFH           {};
         class prepareSector             {};
-        class replenishFiller          {};
+        class replenishFiller           {};
+        class sectorAirportSpawns       {};
         class sectorCapitalSpawns       {};
         class sectorCitySpawns          {};
         class sectorFactorySpawns       {};

@@ -2,7 +2,7 @@
     File: fn_battlegroupAttackHeli.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 30/10/2025 
-    Last Update: 08/11/2025
+    Last Update: 29/05/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -83,7 +83,7 @@ KPLIB_fnc_findTargetsInSector = {
 
     if (!alive _helicopter || {!alive (driver _helicopter)}) exitWith {[_handle] call CBA_fnc_removePerFrameHandler;};
 
-    private _bluforEntities = ([_targetPos, 150, 150, 0, false] nearEntities [["CAManBase", "Landvehicle", "Helicopter"], false, true, true]) select {(side _x) == KPLIB_side_player};
+    private _bluforEntities = ([_targetPos, 250, 250, 0, false] nearEntities [["CAManBase", "Landvehicle", "Helicopter"], false, true, true]) select {(side _x) == KPLIB_side_player};
     
     private _heliGroup = (group (driver _helicopter));
 

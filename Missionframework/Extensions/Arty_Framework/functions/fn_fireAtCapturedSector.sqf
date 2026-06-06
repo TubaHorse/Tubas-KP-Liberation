@@ -2,7 +2,7 @@
 	File: fn_fireAtCapturedSector.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
 	Date: 07/11/2025
-	Last Update: 18/12/2025
+	Last Update: 05/06/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -32,6 +32,9 @@ if (!isNil "KPLIB_o_artilleryUnits" && {KPLIB_o_artilleryUnits isNotEqualTo []})
             switch (true) do {
                 case (_sectorToFire in KPLIB_sectors_military) : {
                     _chance = (25 + KPLIB_enemyReadiness * ([] call KPLIB_fnc_getOpforFactor)) min 75;
+                };
+                case (_sectorToFire in KPLIB_sectors_airport) : {
+                    _chance = 100;
                 };
                 case (_sectorToFire in KPLIB_sectors_tower) : {
                     _chance = (10 + KPLIB_enemyReadiness * ([] call KPLIB_fnc_getOpforFactor)) min 50;
