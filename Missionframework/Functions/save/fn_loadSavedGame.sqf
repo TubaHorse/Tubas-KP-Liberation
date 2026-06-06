@@ -2,7 +2,7 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 04/06/2026
+    Last Update: 06/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -474,11 +474,9 @@ if (!isNil "_saveData") then {
     // Check for missing fobs/outposts buildings
     {
         private _fobObject = (nearestObject [_x, KPLIB_b_fobBuilding]);
-        diag_log format ["CHECKING FOB OBJECT: %1", _fobObject];
         if (isNull _fobObject) then {
             // Fob object not found, spawn it
             _object = createVehicle [KPLIB_b_fobBuilding, _x, [], 0, "CAN_COLLIDE"];
-            diag_log format ["SPAWNING FOB OBJECT: %1", _object];
             _object setPosATL _x;
             [_object] call KPLIB_fnc_addObjectInit;
         };
@@ -873,7 +871,7 @@ if ((_lockedVehCount < (count KPLIB_sectors_all)) && (_lockedVehCount < (count K
 
         if (_nextBase isEqualTo "") then {
             // Select a random base
-            _nextBase = selectRandom ((KPLIB_sectors_military + KPLIB_sectors_capital) - _assignedBases);
+            _nextBase = selectRandom ((KPLIB_sectors_military + KPLIB_sectors_capital + KPLIB_sectors_airport) - _assignedBases);
         };
 
         if (isNil "_nextBase") exitWith {}; // Run out of military bases
