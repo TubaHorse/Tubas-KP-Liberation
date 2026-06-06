@@ -150,6 +150,14 @@ while {true} do {
                 _zone_size = KPLIB_range_sectorCapture;
                 if ( _nearest_active_sector in KPLIB_sectors_capital ) then {
                     _zone_size = KPLIB_range_sectorCapture * 1.4;
+                    "zone_capture" setMarkerSizeLocal [_zone_size, _zone_size];
+                };
+
+                if ((markerShape _nearest_active_sector == "RECTANGLE") || (markerShape _nearest_active_sector == "ELLIPSE")) then {
+                    _zone_size = markerSize _nearest_active_sector;
+                    "zone_capture" setMarkerSizeLocal _zone_size;
+                    "zone_capture" setMarkerShapeLocal (markerShape _nearest_active_sector);
+                    "zone_capture" setMarkerDirLocal (markerDir _nearest_active_sector);
                 };
 
                 "zone_capture" setmarkerposlocal (markerpos _nearest_active_sector);
@@ -181,8 +189,6 @@ while {true} do {
                 } else {
                     (_overlay displayCtrl (205)) ctrlSetTextColor KPLIB_enemy_sector_color;
                 };
-
-                "zone_capture" setMarkerSizeLocal [ _zone_size,_zone_size ];
             } else {
                 {(_overlay displayCtrl (_x)) ctrlShow false;} forEach _sectorcontrols;
                 "zone_capture" setmarkerposlocal markers_reset;

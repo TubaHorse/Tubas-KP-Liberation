@@ -286,6 +286,36 @@ switch (KPLIB_param_victoryCondition) do {
             (count KPLIB_sectors_player) == (count KPLIB_sectors_all)
         };
     };
+    case 5: {
+        KPLIB_victoryCheck = {
+            (count (KPLIB_sectors_player select {_x in KPLIB_sectors_airport})) == (count KPLIB_sectors_airport)
+        };
+    };
+    case 6: {
+        KPLIB_victoryCheck = {(count (KPLIB_sectors_player select {_x in KPLIB_sectors_airport})) == (count KPLIB_sectors_airport)
+            &&
+            {
+                (count (KPLIB_sectors_player select {_x in KPLIB_sectors_capital})) == (count KPLIB_sectors_capital)
+            }
+        }
+    };
+    case 7: {
+        KPLIB_victoryCheck = {(count (KPLIB_sectors_player select {_x in KPLIB_sectors_airport})) == (count KPLIB_sectors_airport)
+            &&
+            {
+                (count (KPLIB_sectors_player select {_x in KPLIB_sectors_military})) == (count KPLIB_sectors_military)
+            }
+        }
+    };
+    case 8: {
+        KPLIB_victoryCheck = {
+            (count (KPLIB_sectors_player select {_x in KPLIB_sectors_airport})) == (count KPLIB_sectors_airport)
+            &&
+            {
+                (count (KPLIB_sectors_player select {!(_x in KPLIB_sectors_airport)})) >= ((count (KPLIB_sectors_all - KPLIB_sectors_airport)) * 0.8)
+            }
+        };
+    };
     default {
         KPLIB_victoryCheck = {
             (count (KPLIB_sectors_player select {_x in KPLIB_sectors_capital})) == (count KPLIB_sectors_capital)

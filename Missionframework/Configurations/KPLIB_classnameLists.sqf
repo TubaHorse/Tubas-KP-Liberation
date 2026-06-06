@@ -802,3 +802,17 @@ KPLIP_ignoreGarrisonBuildings = [
     "land_cwr3_hangar", 
     "land_cwr3_hangar_2"
 ];
+
+// Force spawn garrison in these type of objects
+KPLIB_guardTowers = [
+    "Land_GuardTower_02_F",
+    "Land_GuardBox_01_brown_F"
+];
+
+// Force sniper spawn garrison in these type of objects
+KPLIB_guardTowers_marksman = [
+    "Land_Sawmill_01_illuminati_tower_F",
+    "Land_Ind_IlluminantTower",
+    "Land_Vez_svetla",
+    "Land_Hlaska"
+];

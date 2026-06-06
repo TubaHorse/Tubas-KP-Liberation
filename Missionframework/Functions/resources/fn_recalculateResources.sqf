@@ -2,7 +2,7 @@
     File: fn_recalculateResources.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 10/09/2025
-    Last update: 31/05/2026
+    Last update: 01/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -24,14 +24,32 @@ private _local_heli_slots = 0;
 private _local_plane_slots = 0;
 private _local_infantry_cap = 50 * KPLIB_param_resourcesMulti;
 private _range = KPLIB_range_fob;
+private _airport_buildings = [];
+
+{
+    private _airportMk = _x;
+    if !(_airportMk in KPLIB_sectors_player) then {continue};
+
+    private _airportPos = markerPos _airportMk;
+    private _airportArea = markerSize _airportMk;
+
+    _airport_buildings = (_airportPos nearObjects ((_airportArea # 0) + (_airportArea # 1))) select {_x inArea _airportMk};
+
+    private _heliSlots = {(KPLIB_type_heliPads find (typeOf _x) >= 0)} count _airport_buildings;
+    private _planeSlots = {(KPLIB_type_hangars find (typeOf _x) >= 0)} count _airport_buildings;
+
+    _local_heli_slots = _local_heli_slots + _heliSlots;
+    _local_plane_slots = _local_plane_slots + _planeSlots;
+
+} forEach KPLIB_sectors_airport;
 
 {
     if (_x in KPLIB_player_outposts) then {_range = KPLIB_range_outpost} else {_range = KPLIB_range_fob};
 
     private _fob_buildings = _x nearobjects _range;
     private _storage_areas = _fob_buildings select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
-    private _heliSlots = {KPLIB_type_heliPads find (typeOf _x) >= 0} count _fob_buildings;
-    private _planeSlots = {KPLIB_type_hangars find (typeOf _x) >= 0} count _fob_buildings;
+    private _heliSlots = {KPLIB_type_heliPads find (typeOf _x) >= 0 && !(_x in _airport_buildings)} count _fob_buildings;
+    private _planeSlots = {KPLIB_type_hangars find (typeOf _x) >= 0 && !(_x in _airport_buildings)} count _fob_buildings;
     private _hasAirBuilding = {(typeOf _x) == KPLIB_b_airControl;} count _fob_buildings;
     if (_hasAirBuilding > 0) then {_hasAirBuilding = true;} else {_hasAirBuilding = false;};
     private _hasRecBuilding = {(typeOf _x) == KPLIB_b_logiStation;} count _fob_buildings;

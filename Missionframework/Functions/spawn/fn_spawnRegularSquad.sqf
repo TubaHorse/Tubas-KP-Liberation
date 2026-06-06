@@ -2,7 +2,7 @@
     File: fn_spawnRegularSquad.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2019-12-03
-    Last Update: 2023-05-11
+    Last Update: 2026-05-28
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -24,13 +24,17 @@ params [
 if (_sector isEqualTo "") exitWith {["Empty string given"] call BIS_fnc_error; grpNull};
 
 // Get spawn position for squad
-private _sectorPos = (markerPos _sector) getPos [random 100, random 360];
 private _spawnPos = [];
-private _i = 0;
-while {_spawnPos isEqualTo []} do {
-    _i = _i + 1;
-    _spawnPos = (_sectorPos getPos [random 50, random 360]) findEmptyPosition [5, 100, "B_Heli_Light_01_F"];
-    if (_i isEqualTo 10) exitWith {_spawnPos = (_sectorPos getPos [random 50, random 360]) findEmptyPosition [0, 100, "B_Heli_Light_01_F"];};
+if ((markerShape _sector == "RECTANGLE") || (markerShape _sector == "ELLIPSE")) then {
+    _spawnPos = [[[_sector] call BIS_fnc_getArea], [], {true}] call BIS_fnc_randomPos;
+} else {
+    private _sectorPos = (markerPos _sector) getPos [random 100, random 360];
+    private _i = 0;
+    while {_spawnPos isEqualTo []} do {
+        _i = _i + 1;
+        _spawnPos = (_sectorPos getPos [random 50, random 360]) findEmptyPosition [5, 100, "B_Heli_Light_01_F"];
+        if (_i isEqualTo 10) exitWith {_spawnPos = (_sectorPos getPos [random 50, random 360]) findEmptyPosition [0, 100, "B_Heli_Light_01_F"];};
+    };
 };
 
 if (_spawnPos isEqualTo []) exitWith {

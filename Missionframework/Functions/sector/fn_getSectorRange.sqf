@@ -2,7 +2,7 @@
     File: fn_getSectorRange.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2019-11-25
-    Last Update: 2020-05-22
+    Last Update: 2026-05-28
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -29,6 +29,7 @@ switch (true) do {
     case (_sector in KPLIB_sectors_tower):    { _activationRange = KPLIB_range_towerActivation; };
     case (_sector in KPLIB_sectors_factory):  { _activationRange = KPLIB_range_factoryActivation; };
     case (_sector in KPLIB_sectors_military): { _activationRange = KPLIB_range_militaryActivation; };
+    case (_sector in KPLIB_sectors_airport):  { _activationRange = KPLIB_range_airportActivation; };
     case (_sector in KPLIB_sectors_capital):  { _activationRange = KPLIB_range_capitalActivation; };
     case (_sector in KPLIB_sectors_airSpawn): { _activationRange = KPLIB_range_airSpawnActivation; };
 };

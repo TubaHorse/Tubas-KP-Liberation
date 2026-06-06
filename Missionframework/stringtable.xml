@@ -7154,6 +7154,22 @@
             <Czech>Všechny sektory</Czech>
             <Japanese>全セクター</Japanese>
         </Key>
+        <Key ID="STR_PARAMS_VICTORYCONDITION_5">
+            <Original>All airports</Original>
+            <Portuguese>Todos os aeroportos</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_VICTORYCONDITION_6">
+            <Original>All airports and capitals</Original>
+            <Portuguese>Todos os aeroportos e capitais</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_VICTORYCONDITION_7">
+            <Original>All airports and military bases</Original>
+            <Portuguese>Todos os aeroportos e bases militares</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_VICTORYCONDITION_8">
+            <Original>All airports and 80% of the sectors</Original>
+            <Portuguese>Todos os aeroportos e 80% dos setores</Portuguese>
+        </Key>
         <Key ID="STR_PARAMS_RESPAWNCOST">
             <Original>FOB Respawn/Redeploy Cost</Original>
             <Portuguese>Custo de Teleportar para uma FOB</Portuguese>
