@@ -56,7 +56,7 @@ diag_log text "    // Move buildings that can spawn static weapons (from KPLIB_s
 diag_log text "];";
 
 diag_log text "";
-diag_log text "private _building_static_weapons = [";
+diag_log text "private _building_to_garrison = [";
 diag_log text "    // Move buildings that can spawn infantry garrison to this array. You can repeat builings from static weapons.";
 diag_log text "];";
 
@@ -69,7 +69,7 @@ diag_log text "    [-40, 40, 0],";
 diag_log text "];";
 
 diag_log text "";
-diag_log text "[_objects_to_build, _objectives_to_build, _defenders_to_build, _base_corners]";
+diag_log text "[_objects_to_build, _objectives_to_build, _building_static_weapons, _building_to_garrison, _base_corners]";
 
 diag_log text "";
 diag_log text "[KPLIB] [FOB EXPORT] ---------- END ----------";

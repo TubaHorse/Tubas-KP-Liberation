@@ -1,5 +1,5 @@
 switch (KPLIB_presetEnemy) do {
-    case 1: {
+    case 2: {
         KPLIB_fob_templates = [
             "Presets\Secondary\Fob_Hunting\templates\apex\template1.sqf",
             "Presets\Secondary\Fob_Hunting\templates\apex\template2.sqf",
@@ -8,7 +8,7 @@ switch (KPLIB_presetEnemy) do {
             "Presets\Secondary\Fob_Hunting\templates\apex\template5.sqf"
         ];
     };
-    case 12: {
+    case 13: {
         KPLIB_fob_templates = [
             "Presets\Secondary\Fob_Hunting\templates\unsung\template1.sqf",
             "Presets\Secondary\Fob_Hunting\templates\unsung\template2.sqf",
