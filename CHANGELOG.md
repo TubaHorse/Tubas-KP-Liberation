@@ -12,6 +12,8 @@
 * Added: Some new main functions for the new features.
 * Added: Ampersand's AHDNC framework (https://github.com/ampersand38/ai-heli-decel-no-climb/tree/main)
 * Added: Mission parameter to change player side. It will change markers and UI colors.
+* Added: Airport sector.
+* Added: `filler_aa` sector.
 * Tweaked: FOB build limit reduced. Each builded FOB will add costs to the next box/truck.
 * Tweaked: Added KPLIB tag to Armor/Air/Inf weights variables. Added more weight for Armor and Air kills.
 * Tweaked: FOB variable (KPLIB_sectors_fob to KPLIB_player_fobs).
@@ -23,6 +25,7 @@
 * Tweaked: FOB/Outpost markers update by CBA Event Handler.
 * Tweaked: More enemy vehicle spawn on capitals and military sectors.
 * Tweaked: Enemy fighters PFH now directly checks for player's side aircrafts on air.
+* Tweaked: Battlegroup functions.
 * Removed: Enemy fighter notifications.
 * Removed: ACE Fortify compatibility.
 * Removed: Some KP Liberation script files no longer required for the current version.

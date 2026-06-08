@@ -1,8 +1,8 @@
 /*
-    File: fn_battlegroupParatroopers.sqf
+    File: fn_battlegroupLandVehicle.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 30/10/2025
-    Last Update: 04/11/2025
+    Last Update: 08/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -10,8 +10,8 @@
 
     Parameter(s):
         _vehClass - vehicle classname [STRING, defaults to ""]
-        _sector - spawn point or sector reference [STRING, defaults to ""]
-        _targetPos - position to attack [POSITION, defaults to []]
+		_targetPos - position to attack [POSITION, defaults to [0 ,0 ,0]
+        _spawnPoint - spawn point or sector reference [STRING, defaults to ""]
         _notify - notify players [BOOL, defaults to true]
 
     Returns:

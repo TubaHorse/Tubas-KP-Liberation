@@ -28,6 +28,11 @@ if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_barrack)}) < 0) then {
     KPLIB_b_vehSupport pushBack [KPLIB_b_barrack, 200,0,0]
 };
 
+if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_medicalFacility)}) < 0) then {
+    // No barrack found in support label, add it
+    KPLIB_b_vehSupport pushBack [KPLIB_b_medicalFacility, 300,0,0]
+};
+
 // Add crates to the support label
 {
     private _class = _x # 0;
@@ -171,7 +176,7 @@ KPLIB_o_squadStd        = [KPLIB_o_squadLeader, KPLIB_o_medic, KPLIB_o_machinegu
 KPLIB_o_squadInf        = [KPLIB_o_squadLeader, KPLIB_o_medic, KPLIB_o_machinegunner, KPLIB_o_heavyGunner, KPLIB_o_heavyGunner, KPLIB_o_marksman, KPLIB_o_sharpshooter, KPLIB_o_sniper];
 KPLIB_o_squadTank       = [KPLIB_o_squadLeader, KPLIB_o_medic, KPLIB_o_machinegunner, KPLIB_o_atSpecialist, KPLIB_o_atSpecialist, KPLIB_o_atSpecialist, KPLIB_o_riflemanLAT, KPLIB_o_riflemanLAT];
 KPLIB_o_squadAir        = [KPLIB_o_squadLeader, KPLIB_o_medic, KPLIB_o_machinegunner, KPLIB_o_aaSpecialist, KPLIB_o_aaSpecialist, KPLIB_o_aaSpecialist, KPLIB_o_riflemanLAT, KPLIB_o_riflemanLAT];
-KPLIB_o_paratroopers    = [KPLIB_o_squadLeader, KPLIB_o_medic, KPLIB_o_medic, KPLIB_o_machinegunner, KPLIB_o_heavyGunner, KPLIB_o_medic, KPLIB_o_marksman, KPLIB_o_grenadier, KPLIB_o_riflemanLAT, KPLIB_o_riflemanLAT, KPLIB_o_atSpecialist, KPLIB_o_aaSpecialist, KPLIB_o_rifleman, KPLIB_o_rifleman];
+KPLIB_o_paratroopers    = [KPLIB_o_squadLeader, KPLIB_o_medic, KPLIB_o_medic, KPLIB_o_machinegunner, KPLIB_o_heavyGunner, KPLIB_o_medic, KPLIB_o_marksman, KPLIB_o_grenadier, KPLIB_o_riflemanLAT, KPLIB_o_riflemanLAT, KPLIB_o_atSpecialist, KPLIB_o_aaSpecialist, KPLIB_o_atSpecialist, KPLIB_o_aaSpecialist];
 /*
     Liberation specific collections
 */

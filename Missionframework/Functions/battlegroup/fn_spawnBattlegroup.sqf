@@ -2,7 +2,7 @@
     File: fn_spawnBattlegroup.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 29/10/2025
-    Last Update: 15/12/2025
+    Last Update: 08/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -62,21 +62,27 @@ private _paraTrooperSpawnedOnce = false; // Spawns only once paratroopers
         // Handle air units
         if (_class isKindOf "Helicopter") then {
             // Helicopters
-            if (_class in KPLIB_o_troopTransports) then {
-                // Spawn helicopter transport
-                _spawnPoint = [1500, 4000, false, _objPos] call KPLIB_fnc_getOpforSpawnPoint;
-                [_class, _objPos, _spawnPoint] call KPLIB_fnc_battlegroupTransportHeli;
-            } else {
-                // Spawn attack helicopter
-                if ((_class in KPLIB_o_attackHelicopters) && {!_heliAspawnedOnce}) then {
+            switch (true) do {
+                case ((_class in KPLIB_o_attackHelicopters) && {!_heliAspawnedOnce}) : {
+                    // Spawn Attack helicopter
                     _spawnPoint = [2000, 4000, false, _objPos] call KPLIB_fnc_getOpforSpawnPoint;
                     [_class, _objPos, _spawnPoint] call KPLIB_fnc_battlegroupAttackHeli;
                     _heliAspawnedOnce = true;
                 };
+                case (_class in KPLIB_o_slingHelicopters) : {
+                    // Spawn helicopter + slingload vehicle
+                    _spawnPoint = [1500, 4000, false, _objPos] call KPLIB_fnc_getOpforSpawnPoint;
+                    [_class, _objPos, _spawnPoint] call KPLIB_fnc_battlegroupSlingloadVeh;
+                };
+                default {                
+                    // Spawn helicopter transport
+                    _spawnPoint = [1500, 4000, false, _objPos] call KPLIB_fnc_getOpforSpawnPoint;
+                    [_class, _objPos, _spawnPoint] call KPLIB_fnc_battlegroupTransportHeli;
+                }
             };
         } else {
             // Probably planes. Use the sector as reference, not spawn point.
-            if ((_class in KPLIB_o_troopTransports) && {!_paraTrooperSpawnedOnce}) then {
+            if ((_class in KPLIB_o_paradropPlanes) && {!_paraTrooperSpawnedOnce}) then {
 
                 // Spawn paratroopers
                 _spawnPoint = ([KPLIB_sectors_airSpawn, [_objPos], {(markerPos _x) distance _input0}, "ASCEND"] call BIS_fnc_sortBy) select 0;

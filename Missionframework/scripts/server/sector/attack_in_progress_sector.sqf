@@ -1,13 +1,20 @@
-params [ "_sector" ];
-private [ "_attacktime", "_ownership", "_grp", "_squad_type" ];
+params ["_sector"];
+
+private "_ownership";
+private "_grp";
 
 sleep 5;
 
-_ownership = [ markerpos _sector ] call KPLIB_fnc_getSectorOwnership;
-if ( _ownership != KPLIB_side_enemy ) exitWith {};
+if ((markerShape _x == "RECTANGLE") || (markerShape _x == "ELLIPSE")) then {
+    _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+} else {
+    _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+};
 
-_squad_type = KPLIB_b_squadLight;
-if ( _sector in KPLIB_sectors_military ) then {
+if (_ownership != KPLIB_side_enemy) exitWith {};
+
+private _squad_type = KPLIB_b_squadLight;
+if (_sector in KPLIB_sectors_military) then {
     _squad_type = KPLIB_b_squadInf;
 };
 
@@ -22,7 +29,12 @@ if ( KPLIB_param_bluforDefenders ) then {
 
 sleep 60;
 
-_ownership = [ markerpos _sector ] call KPLIB_fnc_getSectorOwnership;
+if ((markerShape _x == "RECTANGLE") || (markerShape _x == "ELLIPSE")) then {
+    _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+} else {
+    _ownership = [markerpos _x] call KPLIB_fnc_getSectorOwnership;
+};
+
 if ( _ownership == KPLIB_side_player ) exitWith {
     if ( KPLIB_param_bluforDefenders ) then {
         {
@@ -32,22 +44,39 @@ if ( _ownership == KPLIB_side_player ) exitWith {
 };
 
 [_sector, 1] remoteExec ["remote_call_sector"];
-_attacktime = KPLIB_vulnerability_timer;
+private _attacktime = KPLIB_vulnerability_timer;
 
-while { _attacktime > 0 && ( _ownership == KPLIB_side_enemy || _ownership == KPLIB_side_resistance ) } do {
-    _ownership = [markerpos _sector] call KPLIB_fnc_getSectorOwnership;
+while {((_attacktime > 0) && ((_ownership == KPLIB_side_enemy)) || (_ownership == KPLIB_side_resistance))} do {
+    if ((markerShape _x == "RECTANGLE") || (markerShape _x == "ELLIPSE")) then {
+        _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+    } else {
+        _ownership = [markerpos _x] call KPLIB_fnc_getSectorOwnership;
+    };
     _attacktime = _attacktime - 1;
     sleep 1;
 };
 
 waitUntil {
+
     sleep 1;
-    [markerpos _sector] call KPLIB_fnc_getSectorOwnership != KPLIB_side_resistance;
+
+    if ((markerShape _x == "RECTANGLE") || (markerShape _x == "ELLIPSE")) then {
+        _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+    } else {
+        _ownership = [markerpos _x] call KPLIB_fnc_getSectorOwnership;
+    };
+
+    _ownership != KPLIB_side_resistance;
 };
 
 if ( KPLIB_endgame == 0 ) then {
-    if ( _attacktime <= 1 && ( [markerpos _sector] call KPLIB_fnc_getSectorOwnership == KPLIB_side_enemy ) ) then {
-        KPLIB_sectors_player = KPLIB_sectors_player - [ _sector ];
+    if ((markerShape _x == "RECTANGLE") || (markerShape _x == "ELLIPSE")) then {
+        _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+    } else {
+        _ownership = [markerpos _x] call KPLIB_fnc_getSectorOwnership;
+    };
+    if (_attacktime <= 1 && (_ownership == KPLIB_side_enemy)) then {
+        KPLIB_sectors_player deleteAt (KPLIB_sectors_player find _sector);
         publicVariable "KPLIB_sectors_player";
         [_sector, 2] remoteExec ["remote_call_sector"];
         ["KPLIB_ResetBattleGroups"] call CBA_fnc_serverEvent;
@@ -64,14 +93,16 @@ if ( KPLIB_endgame == 0 ) then {
             } else {
                 [_x] call KPLIB_fnc_setCapturable;
             };
-        } foreach (((markerpos _sector) nearEntities ["CAManBase", KPLIB_range_sectorCapture * 0.8]) select {side group _x == KPLIB_side_enemy});
+        } foreach (((markerpos _sector) nearEntities ["CAManBase", KPLIB_range_sectorCapture * 0.8]) select {side (group _x) == KPLIB_side_enemy});
     };
 };
 
 sleep 60;
 
-if ( KPLIB_param_bluforDefenders ) then {
+if (KPLIB_param_bluforDefenders) then {
     {
-        if ( alive _x ) then { if (isNull objectParent _x) then {deleteVehicle _x} else {(objectParent _x) deleteVehicleCrew _x}; };
-    } foreach units _grp;
+        if (alive _x) then { 
+            if (isNull objectParent _x) then {deleteVehicle _x} else {(objectParent _x) deleteVehicleCrew _x}; 
+        };
+    } foreach (units _grp);
 };

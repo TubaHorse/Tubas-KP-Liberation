@@ -357,6 +357,13 @@ if (!isNil "_saveData") then {
         [_x select 0, _x select 1] call KPLIB_fnc_createClearance;
     } forEach KPLIB_clearances;
 
+    // Get total area of the map with the created trigger to be used as whitelist to avoid bad positions for units off map
+    private _axis = worldSize / 2;
+    private _center = [_axis, _axis , 0];
+    KPLIB_centerArea = createTrigger ["EmptyDetector", _center];
+    KPLIB_centerArea setTriggerArea [_axis, _axis, 0, true, -1];
+    publicVariable "KPLIB_centerArea"; 
+
     // Collection array for all objects which are loaded
     private _spawnedObjects = [];
 

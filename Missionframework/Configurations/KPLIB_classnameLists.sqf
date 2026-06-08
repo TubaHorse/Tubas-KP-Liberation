@@ -750,7 +750,8 @@ KPLIB_type_hangars = [
     "Land_Ss_hangard",
     "Land_Ss_hangar", 
     "Land_Mil_hangar_EP1",
-    "Land_ServiceHangar_01_L_F",
+    "Land_ServiceHangar_01_L_F", // This hangar can provide 2 slots
+    "Land_ServiceHangar_01_R_F", // This hangar can provide 2 slots
     "land_cwr3_hangar", 
     "land_cwr3_hangar_2"
 ];
@@ -800,7 +801,25 @@ KPLIP_ignoreGarrisonBuildings = [
     "Land_Mil_hangar_EP1",
     "Land_ServiceHangar_01_L_F",
     "land_cwr3_hangar", 
-    "land_cwr3_hangar_2"
+    "land_cwr3_hangar_2",
+    "Land_Barn_W_01_dam",
+    "Land_Barn_W_01",
+    "Land_Barn_W_02",
+    "Land_Sara_stodola",
+    "Land_Sara_stodola3",
+    "Land_Hut_old02",
+    "Land_Sara_stodola2",
+    "Land_Stodola_old",
+    "Land_Stodola_old_open",
+    "Land_Stodola_open",
+    "land_cwr3_stodola_open",
+    "land_cwr3_stodola_old_open",
+    "land_cwr3_sara_stodola",
+    "cwr3_sara_stodola",
+    "Land_Barn_02_F",
+    "Land_Barn_01_F",
+    "Land_HaulTruck_01_abandoned_F", // wtf why there are building positions in this one lmao
+    "Land_MiningShovel_01_abandoned_F"
 ];
 
 // Force spawn garrison in these type of objects
@@ -814,5 +833,9 @@ KPLIB_guardTowers_marksman = [
     "Land_Sawmill_01_illuminati_tower_F",
     "Land_Ind_IlluminantTower",
     "Land_Vez_svetla",
-    "Land_Hlaska"
+    "Land_Hlaska",
+    "Land_Misc_deerstand",
+    "Land_Posed",
+    "Land_DeerStand_01_F",
+    "Land_DeerStand_02_F"
 ];

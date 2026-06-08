@@ -1,8 +1,8 @@
 /*
     File: default.sqf
-    Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
-    Date: 2017-10-07
-    Last Update: 2024-06-20
+    Author: PiG13BR - https://github.com/PiG13BR
+    Date: 07/10/2017 (Original file from KP Liberation Team)
+    Last Update: 01/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -58,6 +58,7 @@ KPLIB_b_crateAmmo       = "B_CargoNet_01_ammo_F";                       // This 
 KPLIB_b_crateFuel       = "CargoNet_01_barrels_F";                      // This defines the fuel crates.
 KPLIB_b_supplyDump      = "Land_Cargo20_military_green_F";              // This defines supply dump for the supply menu
 KPLIB_b_barrack         = "Land_Cargo_House_V1_F";                      // The building defined to unlock FOB redeploy and IA/squads buying
+KPLIB_b_medicalFacility = "Land_Medevac_house_V1_F";                    // This is the medical facility building
 
 // Basic uniform to spawn with
 KPLIB_b_basic_uniform = "U_B_CombatUniform_mcam";
@@ -273,8 +274,6 @@ KPLIB_b_objectsDeco = [
     ["BWA3_Flag_Ger_F",0,0,0],
     ["Flag_UK_F",0,0,0],
     ["Flag_White_F",0,0,0],
-    ["Land_Medevac_house_V1_F",0,0,0],
-    ["Land_Medevac_HQ_V1_F",0,0,0],
     ["Flag_RedCrystal_F",0,0,0],
     ["CamoNet_BLUFOR_F",0,0,0],
     ["CamoNet_BLUFOR_open_F",0,0,0],
@@ -369,11 +368,12 @@ KPLIB_b_vehSupport = [
     [KPLIB_b_airControl,1000,0,0],
     [KPLIB_b_slotHeli,500,0,0],
     [KPLIB_b_slotPlane,1000,0,0],
-    [KPLIB_b_supplyDump, 250,1000,0],                                  // Supply dump
-    [KPLIB_b_barrack, 200,0,0],                                        // Barrack
-    ["B_UAV_01_F", 50, 0, 0],
-    ["B_UAV_06_medical_F", 50, 0, 0],
-    ["C_IDAP_UAV_06_antimine_F", 50, 50, 0],
+    [KPLIB_b_supplyDump,250,1000,0],                                  // Supply dump
+    [KPLIB_b_barrack,200,0,0],                                        // Barrack
+    [KPLIB_b_medicalFacility,300,0,0],                                // Medical facility
+    ["B_UAV_01_F",50,0,0],
+    ["B_UAV_06_medical_F",50,0,0],
+    ["C_IDAP_UAV_06_antimine_F",50,50,0],
     ["ACE_medicalSupplyCrate_advanced",50,0,0],
     ["ACE_Box_82mm_Mo_HE",50,40,0],
     ["ACE_Box_82mm_Mo_Smoke",50,10,0],
