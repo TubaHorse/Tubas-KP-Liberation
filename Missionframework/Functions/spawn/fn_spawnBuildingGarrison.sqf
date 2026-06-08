@@ -2,7 +2,7 @@
     File: fn_spawnBuildingGarrison.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 12/12/2025
-    Last Update: 29/05/2026
+    Last Update: 07/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -80,11 +80,16 @@ if (!(typeOf _garrison in KPLIB_guardTowers_marksman) && !(typeOf _garrison in K
 
 } else {
     // Sentry/Marksman
-    _buildingPositions resize 1;
+    _buildingPositions = _buildingPositions select {
+        private _pos = _x;
+        (_pos # 2) > 2
+    };
+
+    if (count _buildingPositions < 1) exitWith {};
 
     private _posATL = (ASLToATL (AGLToASL (_buildingPositions # 0)));
 
-     private "_unit";
+    private "_unit";
     switch (true) do {
         case (typeOf _garrison in KPLIB_guardTowers_marksman) : {
             // Force spawn marksman
@@ -92,14 +97,39 @@ if (!(typeOf _garrison in KPLIB_guardTowers_marksman) && !(typeOf _garrison in K
             _unit setSkill ["aimingAccuracy", 0.65];
             _unit setSkill ["spotTime", 1];
             _unit setSkill ["spotDistance", 1];
+
+            // Avoid prone (only if garrisoned)
+            _unit addEventHandler ["AnimChanged", {
+                params ["_unit", "_anim"];
+                if !(_unit getVariable ["KPLIB_garrisoned", false]) exitWith {_unit removeEventHandler [_thisEvent, _thisEventHandler]};
+
+                if (unitPos _unit == "Down") then {_unit setUnitPos "UP"};
+            }];
         };
         case (typeOf _garrison in KPLIB_guardTowers) : {
             // Force spawn rifleman
             _unit = [KPLIB_o_sentry, _posATL, _grp] call KPLIB_fnc_createManagedUnit;
+
+            // Avoid prone and knee pos (only if garrisoned)
+            _unit addEventHandler ["AnimChanged", {
+                params ["_unit", "_anim"];
+                if !(_unit getVariable ["KPLIB_garrisoned", false]) exitWith {_unit removeEventHandler [_thisEvent, _thisEventHandler]};
+
+                if ((unitPos _unit == "Down") || (unitPos _unit == "Middle")) then {_unit setUnitPos "UP"};
+            }];
+
         };
         default {
             // Spawn squad unit
             _unit = [_x, _posATL, _grp] call KPLIB_fnc_createManagedUnit;
+
+            // Avoid prone (only if garrisoned)
+            _unit addEventHandler ["AnimChanged", {
+                params ["_unit", "_anim"];
+                if !(_unit getVariable ["KPLIB_garrisoned", false]) exitWith {_unit removeEventHandler [_thisEvent, _thisEventHandler]};
+
+                if (unitPos _unit == "Down") then {_unit setUnitPos "UP"};
+            }];
         };
     };
 
@@ -108,14 +138,6 @@ if (!(typeOf _garrison in KPLIB_guardTowers_marksman) && !(typeOf _garrison in K
     _unit doWatch (_garrison getPos [200, (_garrison getDir _posATL)]);
     _unit disableAI "PATH";
     _unit setVariable ["KPLIB_garrisoned", true]; // Set garrison status
-
-    // Avoid prone (only if garrisoned)
-    _unit addEventHandler ["AnimChanged", {
-        params ["_unit", "_anim"];
-        if !(_unit getVariable ["KPLIB_garrisoned", false]) exitWith {_unit removeEventHandler [_thisEvent, _thisEventHandler]};
-
-        if (unitPos _unit == "Down") then {_unit setUnitPos "UP"};
-    }];
 
     _unit addEventHandler ["Hit", {
         params ["_unit"];

@@ -2,7 +2,7 @@
     File: fn_spawnInfCargo.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 29/10/2025 
-    Last Update: 14/04/2025
+    Last Update: 08/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -29,11 +29,14 @@ private _infClasses = [KPLIB_o_inf_classes, KPLIB_o_militiaInfantry] select (KPL
 private _emptySeats = ((_vehicle emptyPositions "CargoNoFFV") min 8); // Count empty cargo seats, max 8 seats
 
 // If Air unit, fill more seats
-if (_vehicle isKindOf "Air") then {_emptySeats = (_vehicle emptyPositions "CargoNoFFV") min 14;};
-
-// Fix for Mi-290 Taru
-if (typeOf _vehicle == "O_Heli_Transport_04_bench_F") then {
-    _emptySeats = (_vehicle emptyPositions "Cargo") min 8;
+if (_vehicle isKindOf "Air") then {
+    _emptySeats = (_vehicle emptyPositions "CargoNoFFV") min 14;
+    // Fix for Mi-290 Taru
+    if (typeOf _vehicle == "O_Heli_Transport_04_bench_F") then {
+        _emptySeats = (_vehicle emptyPositions "Cargo") min 8;
+    };
+} else {
+    _emptySeats = (_vehicle emptyPositions "Cargo");
 };
 
 if ((typeOf _vehicle) in KPLIB_o_paradropPlanes) then {
@@ -56,7 +59,7 @@ if ((typeOf _vehicle) in KPLIB_o_paradropPlanes) then {
 
 {
     //_x assignAsCargo _vehicle;
-    _x moveInCargo _vehicle;
+    _x moveInAny _vehicle;
 } forEach (units _group);
 
 _group

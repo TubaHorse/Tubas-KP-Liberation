@@ -2,7 +2,7 @@
     File: fn_battlegroupParatroopers.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 29/10/2025
-    Last Update: 20/11/2025
+    Last Update: 08/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -11,8 +11,8 @@
 
     Parameter(s):
         _planeClass - vehicle classname [STRING, defaults to ""]
-        _marker - spawn point or sector reference [STRING, defaults to ""]
-        _targetPos - position to attack [ARRAY, defaults to []]
+		_targetPos - position to attack [POSITION, defaults to [0 ,0 ,0]
+        _spawnPoint - spawn point or sector reference [STRING, defaults to ""]
         _notify - notify players [BOOL, defaults to true]
 
     Returns:
@@ -45,29 +45,15 @@ if (_targetPos isEqualTo []) exitWith {[]};
 
 // Get spawn point if not provided
 if (_spawnPoint isEqualTo "") then {
-    _spawnPoint = ([KPLIB_sectors_airSpawn, [_targetPos], {(markerPos _x) distance _input0}, "ASCEND"] call BIS_fnc_sortBy) select 0;
+    // Avoid getting air spawns close by
+    _airSpawns = KPLIB_sectors_airSpawn select {(markerPos _x) distance _targetPos > 3000};
+    _spawnPoint = ([_airSpawns, [_targetPos], {(markerPos _x) distance _input0}, "ASCEND"] call BIS_fnc_sortBy) select 0;
 };
 if (_spawnPoint isEqualTo "") exitWith {grpNull};
 
-private _paradropArea = [0,0];
-private _tries = 0;
-while {_tries < 8} do {
-    _tries = _tries + 1; // Count tries to exit while loop
+private _paradropArea = [_targetPos, 800] call KPLIB_fnc_findPlaceToParadrop;
 
-    // Find paradrop area
-    _paradropArea = [[[_targetPos, 1100]], [], 
-    {
-        (_this distance2D _targetPos > 700) && 
-        (_this distance2D _targetPos < 1000) && 
-        {_this isFlatEmpty [10, -1, 0.3, 5, 0, false] isNotEqualTo []} &&
-        {([[[_this, 500]], [], {(surfaceIsWater _this)}] call BIS_fnc_randomPos) isEqualTo [0,0]} // Find body of water nearby (to avoid dropping paratroopers close to the water)
-    }] call BIS_fnc_randomPos;
-
-    //if (_checkSurface isNotEqualTo [0,0]) then {continue}; // Nearby water surface found, go to the next try
-    if (_paradropArea isNotEqualTo [0,0]) exitWith {}; // Exit on pos found
-};
-
-if (_paradropArea isEqualTo [0,0]) exitWith {[format["No paradrop area found in %1", _targetPos], "PARADROP"] call KPLIB_fnc_log; []};
+if (_paradropArea isEqualTo [0,0]) exitWith {[]};
 private _newPlane = createVehicle [_planeClass, markerpos _spawnPoint, [], 100, "FLY"];
 _newPlane setVariable ["KPLIB_planeSpawnMarker", _spawnPoint];
 //_newPlane setPosASL [markerpos _spawnPoint # 0, markerpos _spawnPoint # 1, (getTerrainHeightASL (markerpos _spawnPoint)) + 300];
@@ -177,7 +163,7 @@ _pilot_group addEventHandler ["WaypointComplete",{
         private _plane = assignedVehicle (_driver # 0);
         private _infGrp = _plane getVariable ["KPLIB_groupCargoPlane", grpNull];
 
-        if (!alive _plane || {({alive _x} count (units _infGrp) < 1) && {isNull _infGrp}}) exitWith {_group removeEventHandler ["WaypointComplete", _thisID]};
+        if (!alive _plane || {({alive _x} count (units _infGrp) < 1) && {isNull _infGrp}}) exitWith {_group removeEventHandler ["WaypointComplete", _thisEventHandler]};
 
         // Add a waypoint to maintain path
         private _wp3 = _group addWaypoint [_plane getPos [1000, (getDir _plane)], 0];
@@ -205,23 +191,9 @@ _pilot_group addEventHandler ["WaypointComplete",{
 }];
 
 
-/*
-[{
-    _this params ["_newPlane", "_infGrp"];
-
-    ({_x in _newPlane} count (units _infGrp) < 1)
-}, {
-    _this params ["_newPlane", "_infGrp", "_spawnPoint"];
-
-    if !(alive _newPlane) exitWith {};
-
-    [_newPlane, _spawnPoint] call KPLIB_fnc_planeRTB; // Plane RTB
-}, [_newPlane, _infGrp, _spawnPoint]
-] call CBA_fnc_waitUntilAndExecute;
-*/
 // Units arriving at regroup locations
 KPLIB_fnc_assemblingArea = {
-    params["_grpInf", "_paradropArea"];
+    params["_grpInf", "_paradropArea", "_targetPos"];
 
     [{
         params["_args", "_handle"];
@@ -246,7 +218,7 @@ KPLIB_fnc_assemblingArea = {
 // Check landing
 [{
     params["_args", "_handle"];
-    _args params ["_grpInf", "_paradropArea"];
+    _args params ["_grpInf", "_paradropArea", "_targetPos"];
 
     if (({alive _x && [_x] call KPLIB_fnc_ace_isAwake} count (units _grpInf)) < 1) exitWith {[_handle] call CBA_fnc_removePerFrameHandler;}; // Delete PFH
 
@@ -259,72 +231,12 @@ KPLIB_fnc_assemblingArea = {
 
     // Check if all units from the group landed and exit loop
     if ({isTouchingGround _x || ((getPosATL _x # 2) < 2)} count (units _grpInf) >= count (units _grpInf)) then {
-        [_grpInf, _paradropArea] remoteExecCall ["KPLIB_fnc_assemblingArea", groupOwner _grpInf];
+        [_grpInf, _paradropArea, _targetPos] remoteExecCall ["KPLIB_fnc_assemblingArea", groupOwner _grpInf];
 
         [_handle] call CBA_fnc_removePerFrameHandler; // Delete PFH
     };
-}, 10, [_infGrp, _paradropArea]] call CBA_fnc_addPerFrameHandler;
+}, 10, [_infGrp, _paradropArea, _targetPos]] call CBA_fnc_addPerFrameHandler;
 
-/*
-{
-    // Check landing
-    [{
-        _this params ["_unit"];
-
-        isTouchingGround _unit || {(getPosASL _unit # 2) < 1}
-    }, {
-        _this params ["_unit", "_infGrp", "_paradropArea"];
-
-        if (!alive _unit) exitWith {};
-        if !([_unit] call KPLIB_fnc_ace_isAwake) exitWith {_unit setDamage 1};
-        if (surfaceIsWater (getPosASL _unit)) exitWith {deleteVehicle _unit}; // Landing on water, gets deleted
-
-        // Get backpack back
-        private _backpackArray = _unit getVariable ["KPLIB_paratrooper_backpack", []];
-        _backpackArray params ["_backpackClass", "_backpackItems"];
-        _unit addBackpack _backpackClass;
-        
-        {
-            _unit addItemToBackpack _x;
-        }forEach _backpackItems;
-
-        _unit setVariable ["KPLIB_paratrooper_backpack", nil];
-        
-        [_unit, _paradropArea] remoteExecCall ["KPLIB_fnc_assemblingArea", owner _unit];
-
-    }, [_x, _infGrp, _paradropArea, _targetPos]
-    ] call CBA_fnc_waitUntilAndExecute;
-
-    [{
-        _this params ["_unit", "_infGrp", "_paradropArea"];
-
-        (isTouchingGround _unit && {_unit distance _paradropArea <= 50}) || {!alive _unit}
-    }, {
-        _this params ["_unit", "_infGrp", "_paradropArea", "_targetPos"];
-
-        if (!alive _unit) exitWith {};
-        if !([_unit] call KPLIB_fnc_ace_isAwake) exitWith {_unit setDamage 1};
-
-    }, [_x, _infGrp, _paradropArea, _targetPos]
-    ] call CBA_fnc_waitUntilAndExecute;
-
-
-}forEach units _infGrp;
-*/
-/*
-// Wait for units to regroup first, then attack
-[{
-    _this params ["_newPlane", "_infGrp"];
-
-    {isTouchingGround _x} count (units _infGrp) >= count (units _infGrp) &&
-    {_x distance (leader _infGrp) <= 50} count (units _infGrp) >= count (units _infGrp)
-}, {
-    _this params ["_newPlane", "_infGrp", "_targetPos"];
-
-    [_infGrp, _targetPos] call KPLIB_fnc_battlegroupAttack; // Commit inf to attack
-}, [_newPlane, _infGrp, _targetPos]
-] call CBA_fnc_waitUntilAndExecute;
-*/
 if (_notify) then {
     ["KPLIB_reinfIncoming", [_spawnPoint, _targetPos]] call CBA_fnc_globalEvent;
 };

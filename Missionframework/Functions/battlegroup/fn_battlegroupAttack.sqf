@@ -2,7 +2,7 @@
     File: fn_battlegroupAttack.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 07/11/2025
-    Last Update: 18/04/2026
+    Last Update: 08/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -111,6 +111,7 @@ if (([_grp] call BIS_fnc_groupVehicles) isEqualTo []) then {
     // Veh
     _waypoint = _grp addWaypoint [_objPos, 100];
     _waypoint setWaypointType "SAD";
+    _waypoint setWaypointBehaviour "SAFE"; // Vehicles in safe mode to follow road. Tracked vehicles tends to go off road.
 };
 
 true

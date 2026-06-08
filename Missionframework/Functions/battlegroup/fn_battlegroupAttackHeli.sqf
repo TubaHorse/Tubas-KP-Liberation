@@ -2,7 +2,7 @@
     File: fn_battlegroupAttackHeli.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 30/10/2025 
-    Last Update: 29/05/2026
+    Last Update: 07/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -10,8 +10,9 @@
 
     Parameter(s):
         _heliClass - vehicle classname [STRING, defaults to ""]
-        _sector - spawn point or sector reference [STRING, defaults to ""]
-        _targetPos - position to attack [POSITION, defaults to []]
+		_targetPos - position to attack [POSITION, defaults to [0 ,0 ,0]
+        _spawnPoint - spawn point or sector reference [STRING, defaults to ""]
+        _notify - notify players [BOOL, defaults to true]
 
     Returns:
         Group spawned [GROUP]
@@ -40,7 +41,7 @@ if (_targetPos isEqualTo []) exitWith {[]};
 
 // Get spawn point if not provided
 if (_spawnPoint isEqualTo "") then {
-    _spawnPoint = [2000, 4000, false, _targetPos] call KPLIB_fnc_getOpforSpawnPoint;
+    _spawnPoint = [1200, 2500, false, _targetPos] call KPLIB_fnc_getOpforSpawnPoint;
 };
 if (_spawnPoint isEqualTo "") exitWith {grpNull};
 
@@ -68,6 +69,30 @@ _wp1 setWaypointCompletionRadius 100;
 
 _pilot_group setCombatMode "RED";
 
+// Get countermeasures
+private "_counterMeasures";
+{
+    private _currentWeapons = _heli weaponsTurret _x;
+    _counterMeasures = _currentWeapons select {tolower ((_x call bis_fnc_itemType) select 1) in ["countermeasureslauncher"]};
+    if (_counterMeasures isNotEqualTo []) exitWith {}; // Found
+}forEach ([[-1]] + allTurrets _heli);
+_attackHeli setVariable ["KPLIB_heli_counterMeasures", _counterMeasures];
+
+_attackHeli addEventHandler ["IncomingMissile", {
+	params ["_target", "_ammo", "_vehicle", "_instigator", "_missile"];
+
+    [_target] spawn {
+        params["_target"];
+        private _counterMeasures = _target getVariable ["KPLIB_heli_counterMeasures", []];
+        private _flareType = selectRandom _counterMeasures;
+		if (isNil "_flareType") exitWith {}; // Flare type not found
+        for "_i" from 1 to (random 4) do {
+            (driver _target) forceWeaponFire [_flareType, "Burst"];
+            sleep 0.2;
+        };
+    };
+}];
+
 KPLIB_fnc_findTargetsInSector = {
     params["_targets", "_heliGrp"];
     // Reveal targets inside the sector
@@ -83,13 +108,14 @@ KPLIB_fnc_findTargetsInSector = {
 
     if (!alive _helicopter || {!alive (driver _helicopter)}) exitWith {[_handle] call CBA_fnc_removePerFrameHandler;};
 
-    private _bluforEntities = ([_targetPos, 250, 250, 0, false] nearEntities [["CAManBase", "Landvehicle", "Helicopter"], false, true, true]) select {(side _x) == KPLIB_side_player};
+    //private _bluforEntities = ([_targetPos, 250, 250, 0, false] nearEntities [["CAManBase", "Landvehicle", "Helicopter"], false, true, true]) select {(side _x) == KPLIB_side_player};
+    private _bluforEntities = [_targetPos, 250, KPLIB_side_player] call KPLIB_fnc_getNearbyEntities;
     
     private _heliGroup = (group (driver _helicopter));
 
     [_bluforEntities, _heliGroup] remoteExecCall ["KPLIB_fnc_findTargetsInSector", groupOwner _heliGroup];
 
-}, 60, [_targetPos, _attackHeli]] call CBA_fnc_addPerFrameHandler;
+}, 15, [_targetPos, _attackHeli]] call CBA_fnc_addPerFrameHandler;
 
 if (_notify) then {
     ["KPLIB_reinfIncoming", [_spawnPoint, _targetPos]] call CBA_fnc_globalEvent;

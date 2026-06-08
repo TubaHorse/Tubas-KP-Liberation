@@ -25,6 +25,8 @@ class KPLIB {
         class battlegroupLandVehicle    {};
         class battlegroupParatroopers   {};
         class battlegroupTransportHeli  {};
+        class findPlaceToLand           {};
+        class findPlaceToParadrop       {};
         class handleLandTransport       {};
         class spawnBattlegroup          {};
         class spawnInfCargo             {};
@@ -177,6 +179,7 @@ class KPLIB {
         file = "Functions\sector";
 
         class activateSector            {};
+        class airportCounterAttack      {};
         class deactivateSector          {};
         class findSectorGarrisons       {};
         class fillerAASpawns            {};
@@ -199,6 +202,7 @@ class KPLIB {
         class sectorAirportSpawns       {};
         class sectorCapitalSpawns       {};
         class sectorCitySpawns          {};
+        class sectorCounterAttack       {};
         class sectorFactorySpawns       {};
         class sectorMilitarySpawns      {};
         class sectorTowerSpawns         {};
@@ -254,7 +258,7 @@ class KPLIB {
         class overlayUpdateResources    {};
     };
     class TeamSpeak {
-        file = "Extensions\TeamSpeak"
+        file = "Extensions\TeamSpeak";
 
         class TeamSpeakCheck            {};
     };
