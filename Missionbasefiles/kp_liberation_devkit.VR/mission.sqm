@@ -8,7 +8,7 @@ class EditorData
 	toggles=517;
 	class ItemIDProvider
 	{
-		nextID=185;
+		nextID=191;
 	};
 	class MarkerIDProvider
 	{
@@ -16,7 +16,7 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3994.1721,71.35614,4564.916};
+		pos[]={3969.5071,150.73613,4487.9502};
 		dir[]={0.12851943,-0.73300779,0.66799313};
 		up[]={0.13849019,0.68020827,0.71981645};
 		aside[]={0.98200554,-4.4412445e-07,-0.18893258};
@@ -108,7 +108,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=57;
+		items=63;
 		class Item0
 		{
 			dataType="Marker";
@@ -234,7 +234,7 @@ class Mission
 			dataType="Marker";
 			position[]={4500,0,4500};
 			name="capture";
-			text="city";
+			text="City";
 			type="n_art";
 			colorName="ColorEAST";
 			id=54;
@@ -245,7 +245,7 @@ class Mission
 			dataType="Marker";
 			position[]={4500,0,4550};
 			name="military";
-			text="military";
+			text="Military";
 			type="o_support";
 			colorName="ColorEAST";
 			id=55;
@@ -256,7 +256,7 @@ class Mission
 			dataType="Marker";
 			position[]={4500,0,4450};
 			name="factory";
-			text="factory";
+			text="Factory";
 			type="loc_Fuelstation";
 			colorName="ColorEAST";
 			id=56;
@@ -267,7 +267,7 @@ class Mission
 			dataType="Marker";
 			position[]={4500,0,4400};
 			name="bigtown";
-			text="capital";
+			text="Capital";
 			type="n_service";
 			colorName="ColorEAST";
 			a=1.55;
@@ -307,12 +307,11 @@ class Mission
 		class Item16
 		{
 			dataType="Marker";
-			position[]={4400,0,4700};
+			position[]={4397,5,4859};
 			name="huronmarker";
 			text="Spartan 01";
 			type="b_air";
 			id=61;
-			atlOffset=-5;
 		};
 		class Item17
 		{
@@ -489,8 +488,8 @@ class Mission
 		{
 			dataType="Marker";
 			position[]={4499.0679,5,4338.751};
-			name="outpost_43";
-			text="Outpost";
+			name="filler_inf";
+			text="Filler Infantry";
 			type="o_unknown";
 			id=70;
 		};
@@ -520,8 +519,8 @@ class Mission
 			{
 				position[]={4578.8452,5,4336.3628};
 			};
-			title="Outpost";
-			description="This is an invisible sector. It acts a filler.";
+			title="Filler Infantry (Optional)";
+			description="This is an invisible sector that spawns infantry patrols.";
 			id=76;
 		};
 		class Item28
@@ -532,6 +531,7 @@ class Mission
 				position[]={2012,10,2386};
 			};
 			title="Tower Range";
+			description="Defaults to 2500 m. You can change this in Configuration/KPLIB_config >> KPLIB_range_radioTowerScan.";
 			id=77;
 			atlOffset=5;
 		};
@@ -540,9 +540,9 @@ class Mission
 			dataType="Comment";
 			class PositionInfo
 			{
-				position[]={4337.6362,5,4340.4014};
+				position[]={4337.6362,5,4340.4009};
 			};
-			title="Road Spawn";
+			title="Road Spawn (Optional)";
 			description="Optional opfor spawn points on roads.";
 			id=78;
 		};
@@ -584,10 +584,10 @@ class Mission
 			dataType="Comment";
 			class PositionInfo
 			{
-				position[]={4581.5054,5,4598.5};
+				position[]={4581.5049,5,4598.5};
 			};
 			title="Radio Tower";
-			description="Used to call reinforcements for the enemy in activated sectors.";
+			description="Used to call reinforcements for the enemy in activated sectors." \n "Used to call QRF units." \n "Used to detected player's aircrafts on air.";
 			id=82;
 		};
 		class Item34
@@ -595,7 +595,7 @@ class Mission
 			dataType="Comment";
 			class PositionInfo
 			{
-				position[]={4658,5,4556};
+				position[]={4581,5,4761};
 			};
 			title="Sector Objects Whitelist";
 			description="Register an object as a sector object:" \n "[this] call KPLIB_fnc_registerObject" \n "" \n "Register an object as a sector object and deactive static weapons to spawn in:" \n "[this, false] call KPLIB_fnc_registerObject" \n "" \n "Register an object as a sector object, deactive static weapons to spawn in and its init deletion:" \n "[this, false, false] call KPLIB_fnc_registerObject";
@@ -2235,7 +2235,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4644,9.9050007,4540};
+				position[]={4567,9.9050007,4745};
 			};
 			side="Empty";
 			flags=5;
@@ -2252,7 +2252,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4654,9.9050007,4540};
+				position[]={4577,9.9050007,4745};
 			};
 			side="Empty";
 			flags=4;
@@ -2269,7 +2269,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4665,9.9050007,4540};
+				position[]={4588,9.9050007,4745};
 			};
 			side="Empty";
 			flags=4;
@@ -2431,6 +2431,70 @@ class Mission
 			title="Admin Zeus";
 			description="Login as an admin to have acess to it";
 			id=184;
+		};
+		class Item57
+		{
+			dataType="Marker";
+			position[]={4305,5,4280};
+			name="airport_sam";
+			type="Empty";
+			id=185;
+		};
+		class Item58
+		{
+			dataType="Marker";
+			position[]={5063,5,4463};
+			name="airport_area";
+			text="Main Airport";
+			markerType="RECTANGLE";
+			type="";
+			colorName="ColorEAST";
+			fillName="Vertical";
+			a=421.03799;
+			b=191.769;
+			id=186;
+		};
+		class Item59
+		{
+			dataType="Comment";
+			class PositionInfo
+			{
+				position[]={5071.0151,5,4616.7471};
+			};
+			title="Airport Sector";
+			description="Airport sector. It requires an area to work. The main airport marker will be spawned on mission start. Make sure to name this marker.";
+			id=187;
+		};
+		class Item60
+		{
+			dataType="Comment";
+			class PositionInfo
+			{
+				position[]={4341,5,4283};
+			};
+			title="Airport Sam positions (Optional)";
+			description="This should be inside the airport area. Put at least two (one for radar and the other for the launcher).";
+			id=188;
+		};
+		class Item61
+		{
+			dataType="Marker";
+			position[]={4499.9209,5,4289.8901};
+			name="filler_aa";
+			text="Filler Anti Air";
+			type="o_unknown";
+			id=189;
+		};
+		class Item62
+		{
+			dataType="Comment";
+			class PositionInfo
+			{
+				position[]={4581,5,4291};
+			};
+			title="Filler Anti-air (Optional)";
+			description="This is an invisible sector that spawns AA vehicle and infantry patrols";
+			id=190;
 		};
 	};
 };
