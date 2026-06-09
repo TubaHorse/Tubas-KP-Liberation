@@ -31,6 +31,7 @@
 * Fixed: Boats spawning on puddles (Reported by Dooby).
 * Fixed: KP Player menu not showing up (Reported by Preflop).
 * Fixed: Unable to repeat building using the new build actions (Reported by Fernandim).
+* Fixed: Mobile Arsenal was available even if it was disabled by mission parameter (Reported by Preflop).
 
 ## 0.97.0 (07/03/2026)
 * Added Extension: Enemy artillery.

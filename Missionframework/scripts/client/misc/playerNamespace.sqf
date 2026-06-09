@@ -56,7 +56,10 @@ while {true} do {
 
     // Is near an arsenal object
     if (KPLIB_param_mobileArsenal) then {
-        player setVariable ["KPLIB_isNearArsenal", !(((player nearObjects [KPLIB_b_arsenal, 5]) select {getObjectType _x >= 8}) isEqualTo [])];
+        player setVariable ["KPLIB_isNearArsenal", 
+            !(((player nearObjects [KPLIB_b_arsenal, 5]) select {getObjectType _x >= 8}) isEqualTo [])
+            || !((player nearEntities [(KPLIB_b_mobileRespawns)+ [KPLIB_b_potato01], 10]) isEqualTo [])
+        ];
     };
 
     // Is near a mobile respawn
