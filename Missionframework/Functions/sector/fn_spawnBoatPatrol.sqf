@@ -7,11 +7,13 @@ params["_sector"];
 
 private _boatCrewGrp = createGroup KPLIB_side_enemy;
 private _sectorPos = markerPos _sector;
+private _boatVeh = objNull;
+
 private _waterPos = [[[_sectorPos, KPLIB_range_sectorCapture * 2]], [], {(_this isFlatEmpty [-1, -1, -1, -1, 2, false]) isNotEqualTo [] && {(abs (getTerrainHeightASL (AGLToASL (ASLToATL _this)))) > 25}}] call BIS_fnc_randomPos;
 if (_waterPos isNotEqualTo [0,0]) then {
-    private _boatVeh = (selectRandom KPLIB_o_boats) createVehicle _waterPos;
+    _boatVeh = (selectRandom KPLIB_o_boats) createVehicle _waterPos;
     [_boatVeh, KPLIB_side_enemy, _boatCrewGrp] call KPLIB_fnc_createCrew;
-
+    
     private _lastPos = _waterPos;
     for "_i" from 0 to 2 do {
         private _waterPos = [[[_sectorPos, KPLIB_range_sectorCapture * 3]], [], {(_this isFlatEmpty [-1, -1, -1, -1, 2, false]) isNotEqualTo [] && (_lastPos distance2D _this >= 200) && {(abs (getTerrainHeightASL (AGLToASL (ASLToATL _this)))) > 25}}] call BIS_fnc_randomPos;
@@ -32,4 +34,4 @@ if (_waterPos isNotEqualTo [0,0]) then {
     };
 };
 
-units _boatCrewGrp
+(units _boatCrewGrp) + [_boatVeh]
