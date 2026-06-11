@@ -2,7 +2,7 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 04/06/2026
+    Last Update: 10/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -755,52 +755,9 @@ KPLIB_sectorMinesPositionsHash = _sectorMinesPositionsHash; // It's now a hashma
 
 // Look for mines position for each sector in the game start. These positions are going to be fixed and saved.
 if (KPLIB_param_enemyMines) then {
+    // Find sectors without mine positions
     {
-        // Find sectors without mine positions
-
-        private _sector = _x;
-        if (_sector in KPLIB_sectorMinesPositionsHash) then {continue}; // Skip sectors with mines pos
-
-        [format["Trying to find mine positions for sector %1 (%2)", markerText _sector, _sector], "MINE POSITIONS"] call KPLIB_fnc_log;
-
-        // AP mines positions
-        private _minesApPos = [];
-        private _lastPos = markerPos _sector;
-        for "_i" from 0 to 6 do {
-            private _pos = [[[markerPos _sector, 250]], [], {
-                //((_this nearEntities [["LandVehicle"], 10]) isEqualTo []) 
-                (_this isFlatEmpty [-1, -1, 1, 10, 0] isNotEqualTo []) 
-                && ((_lastPos distance2d _this) > 100)
-                && {([200, _this] call KPLIB_fnc_getNearestSector) isEqualTo ""}
-                && {!isOnRoad _this}
-                && {nearestTerrainObjects [_this, ["building", "house"], 25] isEqualTo []}
-            }] call BIS_fnc_randomPos;
-            
-            if (_pos isEqualTo [0,0]) then {continue};
-
-            _minesApPos pushBack _pos;
-        };
-
-        // AT mines positions
-        private _minesATPos = [];
-        private _lastPos = markerPos _sector;
-        for "_i" from 0 to 6 do {
-            private _pos = [[[markerPos _sector, 250]], [], {
-                (isOnRoad _this) 
-                //&& ((_this nearEntities [["LandVehicle"], 10]) isEqualTo []) 
-                && (_this isFlatEmpty [-1, -1, 1, 10, 0] isNotEqualTo []) 
-                && (_this distance2d (markerPos _sector) > 200)
-                && ((_lastPos distance2d _this) > 100)	  
-                && {([200, _this] call KPLIB_fnc_getNearestSector) isEqualTo ""}
-                //&& {nearestTerrainObjects [_this, ["Tree", "Rock", "Rocks"], 1] isEqualTo []}
-            }] call BIS_fnc_randomPos;
-            
-            if (_pos isEqualTo [0,0]) then {continue};
-
-            _minesATPos pushBack _pos;
-        };
-
-        KPLIB_sectorMinesPositionsHash set [_sector, [_minesApPos, _minesATPos]];
+        [_x] call KPLIB_fnc_registerMinePositions
     }forEach KPLIB_sectors_all;
 };
 

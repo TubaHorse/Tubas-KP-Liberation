@@ -27,11 +27,12 @@
 
 	// Save active mines only
 	private _sectorAPMines = (_sectorMines # 0) select {mineActive _x};
-	private _sectorATMines = (_sectorMines # 1) select {mineActive _x};
-	KPLIB_savedMinesPosHash set [_this, [_sectorAPMines apply {ASLToAGL (ATLtoASL getPosATL _x)}, _sectorATMines apply {ASLToAGL (ATLtoASL getPosATL _x)}]]; 
+	private _APMinesSigns = (_sectorMines # 1);
+	private _sectorATMines = (_sectorMines # 2) select {mineActive _x};
+	KPLIB_savedMinesPosHash set [_this, [_sectorAPMines apply {ASLToAGL (ATLtoASL getPosATL _x)}, _APMinesSigns apply {[ASLToAGL (ATLtoASL getPosATL _x), getDir _x]}, _sectorATMines apply {ASLToAGL (ATLtoASL getPosATL _x)}]]; 
 	{
 		[_x] call KPLIB_fnc_despawnObject;
-    }forEach (_sectorAPMines + _sectorATMines);
+    }forEach (_sectorAPMines + _sectorATMines + _APMinesSigns);
 
     KPLIB_sectorMinesHash deleteAt _sector // Clear sector key
 }] call CBA_fnc_addEventHandler;

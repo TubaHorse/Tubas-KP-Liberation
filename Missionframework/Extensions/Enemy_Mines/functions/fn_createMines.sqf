@@ -1,8 +1,8 @@
 /*
     File: fn_createMines.sqf
-    Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
+    Author: PiG13BR - https://github.com/PiG13BBR
     Date: 02/06/2026
-    Last Update: 04/06/2026
+    Last Update: 10/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -17,15 +17,23 @@
 params["_sector"];
 
 private _APMinesObj = [];
+private _APMinesSigns = [];
 private _ATMinesObj = [];
 
 // Spawn AP Mines
-private _APMinesPos = (KPLIB_sectorMinesPositionsHash get _sector) # 0;
+private _APMinesPos = (KPLIB_sectorMinesPositionsHash getOrDefault [_sector, []]) # 0;
 if (count _APMinesPos > 0) then {
+	// Signs class
+	private _mineSignClass = "Land_Sign_MinesTall_F"; // Vanilla
+	if (isClass(configFile >> "CfgPatches" >> "CUP_CAMisc_ACR_Sign_Mines")) then {
+		_mineSignClass = "Sign_DangerMines_ACR"; // CUP
+	};
+
 	// AP Mine
 	{
-		for "_i" from 0 to (4 + (random 3)) do {
-			private _mine = createMine [KPLIB_o_APMine, _x, [], 15];
+		private _center = _x;
+		for "_i" from 0 to (6 + (random 3)) do {
+			private _mine = createMine [KPLIB_o_APMine, _center, [], 30];
 			_APMinesObj pushBack _mine;
 
 			//private _mk = createMarker [format["mine_%1", getPosATL _mine], getPosATL _mine];
@@ -35,12 +43,27 @@ if (count _APMinesPos > 0) then {
 			KPLIB_side_enemy revealMine _mine;
 			KPLIB_side_civilian revealMine _mine;
 			if ((KPLIB_side_resistance getFriend KPLIB_side_enemy) > 0) then {KPLIB_side_resistance revealMine _mine};
-		}
+		};
+
+		{
+			private _pos = _center getPos [32, _x];
+			if (isOnRoad _pos || surfaceIsWater _pos || !(_pos inArea KPLIB_centerArea)) then {continue};
+			private _sign = createVehicle [_mineSignClass, _pos, [], 0, "CAN_COLLIDE"];
+			if (_mineSignClass == "Land_Sign_MinesTall_F") then {
+				_sign setDir (_pos getDir _center) - 180;
+			} else {
+				_sign setDir (_pos getDir _center);
+			};
+			_sign enableSimulationGlobal false;
+			
+			_APMinesSigns pushBack _sign;
+		}forEach [0, 45, 90, 135, 180, 225, 270, 315];
+
 	}forEach _APMinesPos;
 };
 
 // Spawn AT Mines
-private _ATMinesPos = (KPLIB_sectorMinesPositionsHash get _sector) # 1;
+private _ATMinesPos = (KPLIB_sectorMinesPositionsHash getOrDefault [_sector, []]) # 1;
 if (count _ATMinesPos > 0) then {
 	{
 		for "_i" from 0 to (2 + (random 2)) do {
@@ -48,7 +71,7 @@ if (count _ATMinesPos > 0) then {
 			_ATMinesObj pushBack _mine;
 
 			//private _mk = createMarker [format["mine_%1", getPosATL _mine], getPosATL _mine];
-			//mk setMarkerType "hd_dot";
+			//_mk setMarkerType "hd_dot";
 			//_mk setMarkerColor "colorRed";
 			
 			KPLIB_side_enemy revealMine _mine;
@@ -58,7 +81,7 @@ if (count _ATMinesPos > 0) then {
 	}forEach _ATMinesPos;
 };
 
-KPLIB_sectorMinesHash set [_sector, [_APMinesObj, _ATMinesObj]];
-KPLIB_savedMinesPosHash set [_sector, [_APMinesObj apply {ASLToAGL (ATLtoASL getPosATL _x)}, _ATMinesObj apply {ASLToAGL (ATLtoASL getPosATL _x)}]];
+KPLIB_sectorMinesHash set [_sector, [_APMinesObj, _APMinesSigns, _ATMinesObj]];
+KPLIB_savedMinesPosHash set [_sector, [_APMinesObj apply {ASLToAGL (ATLtoASL getPosATL _x)}, _APMinesSigns apply {[ASLToAGL (ATLtoASL getPosATL _x), getDir _x]}, _ATMinesObj apply {ASLToAGL (ATLtoASL getPosATL _x)}]];
 
 [_APMinesObj, _ATMinesObj]
