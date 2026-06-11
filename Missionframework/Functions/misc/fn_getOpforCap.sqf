@@ -1,8 +1,8 @@
 /*
     File: fn_getOpforCap.sqf
-    Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
-    Date: 2019-12-03
-    Last Update: 2026-15-04
+    Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
+    Date: 03/12/2019
+    Last Update: 10/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -15,14 +15,14 @@
         Total opfor units in actual sectors [NUMBER]
 */
 
-private _unitsCap = [];
+private _unitsCap = 0;
 
+private _range = KPLIB_range_sectorCapture * 1.4;
 {
-    // Get closest sector
-    private _sector = [KPLIB_range_sectorCapture * 1.4, getPosATL _x, [], true] call KPLIB_fnc_getNearestSector;
-    if (isNil "_sector") then {continue};
+    if (_x in KPLIB_fillers_all) then {continue}; // Skip fillers
+    if (markerShape _x == "ICON") then {_range = KPLIB_range_sectorCapture * 1.4} else {_range = markerSize _x};
+    private _unitCount = [markerPos _x, _range, KPLIB_side_enemy] call KPLIB_fnc_getUnitsCount;
+    _unitsCap = _unitsCap + _unitCount;
+}forEach KPLIB_sectors_active;
 
-    _unitsCap pushBackUnique _x;
-}forEach (units KPLIB_side_enemy);
-
-count _unitsCap
+_unitsCap

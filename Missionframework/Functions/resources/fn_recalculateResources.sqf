@@ -2,7 +2,7 @@
     File: fn_recalculateResources.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 10/09/2025
-    Last update: 01/06/2026
+    Last update: 08/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -16,7 +16,6 @@
 */
 
 private _local_base_resource = [];
-private _local_outpost_resources = [];
 private _local_supplies_global = 0;
 private _local_ammo_global = 0;
 private _local_fuel_global = 0;
@@ -44,9 +43,20 @@ private _airport_buildings = [];
 } forEach KPLIB_sectors_airport;
 
 {
+    private _basePos = _x;
     if (_x in KPLIB_player_outposts) then {_range = KPLIB_range_outpost} else {_range = KPLIB_range_fob};
+    private _fob_buildings = _basePos nearobjects _range;
 
-    private _fob_buildings = _x nearobjects _range;
+    // Fob in airport area. Collect information about the airport area.
+    {
+        private _airportArea = _x;
+        if (_basePos inArea _x) exitWith {
+            _range = ((markerSize _x)#0 + (markerSize _x)#1);
+            _fob_buildings = _basePos nearobjects _range;
+            _fob_buildings = _fob_buildings select {_x inArea _airportArea};
+        };
+    }forEach KPLIB_sectors_airport;
+    
     private _storage_areas = _fob_buildings select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
     private _heliSlots = {KPLIB_type_heliPads find (typeOf _x) >= 0 && !(_x in _airport_buildings)} count _fob_buildings;
     private _planeSlots = {KPLIB_type_hangars find (typeOf _x) >= 0 && !(_x in _airport_buildings)} count _fob_buildings;
@@ -76,28 +86,6 @@ private _airport_buildings = [];
     _local_heli_slots = _local_heli_slots + _heliSlots;
     _local_plane_slots = _local_plane_slots + _planeSlots;
 } forEach (KPLIB_player_fobs + KPLIB_player_outposts);
-
-{
-    private _outpost_buildings = _x nearobjects KPLIB_range_outpost;
-    private _storage_areas = _outpost_buildings select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
-
-    private _supplyValue = 0;
-    private _ammoValue = 0;
-    private _fuelValue = 0;
-
-    {
-        private _resources = [_x] call KPLIB_fnc_getStorageValues;
-        _resources params ["_supply", "_ammo", "_fuel"];
-        _supplyValue = _supplyValue + _supply;
-        _ammoValue = _ammoValue + _ammo;
-        _fuelValue = _fuelValue + _fuel;
-    } forEach _storage_areas;
-
-    _local_outpost_resources pushBack [_x, _supplyValue, _ammoValue, _fuelValue, _hasAirBuilding, _hasRecBuilding, _hasMedBuilding];
-    _local_supplies_global = _local_supplies_global + _supplyValue;
-    _local_ammo_global = _local_ammo_global + _ammoValue;
-    _local_fuel_global = _local_fuel_global + _fuelValue;
-} forEach KPLIB_player_outposts;
 
 {
     if ( _x in KPLIB_sectors_city ) then {
