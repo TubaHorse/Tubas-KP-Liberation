@@ -81,6 +81,7 @@ class KPLIB {
         class addActionsFullHeal        {};
         class addObjectInit             {};
         class addRopeAttachEh           {};
+        class AHDNC_init                {postInit=1;};
         class AHDNC_perFrame            {};
         class AHDNC_perSecond           {};
         class allowCrewInImmobile       {};
