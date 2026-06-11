@@ -20,6 +20,24 @@ if ( _status == 2 ) then {
     [ "lib_sector_lost", [ markerText _sector ] ] call BIS_fnc_showNotification;
     "opfor_capture_marker" setMarkerPosLocal markers_reset;
     sector_timer = 0;
+
+    // Fobs and outpost inside the captured airport area will be destroyed
+    if (_sector in KPLIB_sectors_airport) then {
+        {
+            if (_x inArea _sector) then {
+                [_x] call KPLIB_fnc_destroyFob;
+                [] spawn KPLIB_fnc_doSave;
+                stats_fobs_lost = stats_fobs_lost + 1;
+            };
+        }forEach KPLIB_player_fobs;
+
+        {
+            if (_x inArea _sector) then {
+                [_x] call KPLIB_fnc_destroyOutpost;
+                [] spawn KPLIB_fnc_doSave;
+            };
+        }forEach KPLIB_player_outposts;
+    }
 };
 
 if ( _status == 3 ) then {

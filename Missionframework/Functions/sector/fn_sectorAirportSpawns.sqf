@@ -2,7 +2,7 @@
     File: fn_sectorAirportSpawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 13/05/2026
-    Last Update: 01/06/2026
+    Last Update: 10/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -68,19 +68,17 @@ if (KPLIB_param_unitcap >= 1.5) then {
 
 // Select vehicles to spawn
 // Heavy vehicles
-private _vehToSpawn = [([] call KPLIB_fnc_getAdaptiveVehicle), ([] call KPLIB_fnc_getAdaptiveVehicle)];
+private _vehToSpawn = [([] call KPLIB_fnc_getAdaptiveVehicle), ([] call KPLIB_fnc_getAdaptiveVehicle), ([] call KPLIB_fnc_getAdaptiveVehicle)];
 if (KPLIB_enemyReadiness > 25) then {
     _vehToSpawn pushback ([] call KPLIB_fnc_getAdaptiveVehicle);
     if ((random 100) > (33 / KPLIB_param_difficulty)) then {
         _vehToSpawn pushback ([] call KPLIB_fnc_getAdaptiveVehicle);
-        
     };
     if (KPLIB_enemyReadiness > 50) then {
         _vehToSpawn pushback ([] call KPLIB_fnc_getAdaptiveVehicle);
         _vehToSpawn pushback ([] call KPLIB_fnc_getAdaptiveVehicle);
         if ((random 100) > (33 / KPLIB_param_difficulty)) then {
             _vehToSpawn pushback ([] call KPLIB_fnc_getAdaptiveVehicle);
-            
         };
     };
 };
@@ -90,8 +88,10 @@ if (KPLIB_enemyReadiness > 25) then {
     private _vehSpawnPos = [[_sector], [], {
         ((_this nearEntities [["LandVehicle"], 10]) isEqualTo []) 
         && (_this isFlatEmpty [10, -1, 0.3, 10, 0] isNotEqualTo []) 
-        && {nearestTerrainObjects [_this, ["Tree", "Rock", "Rocks", "HIDE"], 25] isEqualTo []}
+        && {nearestTerrainObjects [_this, ["Tree", "Rock", "Rocks", "HIDE"], 10] isEqualTo []}
     }] call BIS_fnc_randomPos;
+
+    if (_vehSpawnPos isEqualTo [0,0]) then {[format["Couldn't find a position to spawn vehicle in sector: %1", markerText _sector], "SECTOR"] call KPLIB_fnc_log; continue};
     private _vehicle = [_vehSpawnPos, _x] call KPLIB_fnc_spawnVehicle;
     //[group ((crew _vehicle) select 0),_sectorPos] spawn add_defense_waypoints;
     _sectorUnits pushback _vehicle;
@@ -210,7 +210,7 @@ if (((random 100) <= KPLIB_resistance_sector_chance) && (([] call KPLIB_fnc_crGe
 sleep 1;
 
 // Garrisons
-private _garrisonsCount = 8;
+private _garrisonsCount = 4;
 
 if (KPLIB_enemyReadiness >= (35 - (5 * KPLIB_param_aggressivity))) then {_garrisonsCount = _garrisonsCount + 1};
 if (KPLIB_enemyReadiness >= (50 - (5 * KPLIB_param_aggressivity))) then {_garrisonsCount = _garrisonsCount + 1};

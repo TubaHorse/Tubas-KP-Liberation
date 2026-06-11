@@ -2,7 +2,7 @@
     File: fn_battlegroupLandVehicle.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 30/10/2025
-    Last Update: 08/06/2026
+    Last Update: 10/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -59,7 +59,7 @@ _vehicle limitSpeed 50;
 
 if ((_vehClass in KPLIB_o_troopTransports) && ([] call KPLIB_fnc_getOpforCap < KPLIB_cap_battlegroup)) then {
     // Transport vehicle
-    [_vehicle, _spawnPoint, _targetPos] call KPLIB_fnc_handleLandTransport;
+    [_vehicle, _spawnPoint, _targetPos] spawn KPLIB_fnc_handleLandTransport;
 };
 
 [{[_this # 0, _this # 1] call KPLIB_fnc_battlegroupAttack;}, [_grp, _targetPos]] call CBA_fnc_execNextFrame; // Commit attack

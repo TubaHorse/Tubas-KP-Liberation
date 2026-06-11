@@ -12,10 +12,10 @@
 
 ## HOW TO
 - To register a structure in the map, you must put in its init this line:
-    - `[this] call KPLIB_fnc_registerSectorObject`.
-- Only objects close enough to sectors will be registered (KPLIB_objectsGrabber_radius). If the object isn't near any sectors, it will not be registered, and it will be deleted from the map.
+    - `[this] spawn KPLIB_fnc_registerSectorObject`.
+- Only objects close enough to sectors will be registered (KPLIB_sectorObject_radius). If the object isn't near any sectors, it will not be registered, and it will be deleted from the map.
 - Objects classnames under KPLIB_staticsConfigs.sqf have an option to disable static weapons/vehicles from spawning it.
-    - `[this, false] call KPLIB_fnc_registerSectorObject`.
+    - `[this, false] spawn KPLIB_fnc_registerSectorObject`.
 - The deletion of the registered object in the beginning of the mission can be disabled. In this case, a different variable will manage those objects. This is crucial to able the spawning of static weapons/vehicles in those buildings once the sectors activates:
-    - `[this, true, false] call KPLIB_fnc_registerSectorObject`.
+    - `[this, true, false] spawn KPLIB_fnc_registerSectorObject`.
 - As default, map objects classnames that matches those in `KPLIB_staticsConfigs.sqf` will NOT spawn any static weapon nor vehicles. In theory, you can call the function in those map structures by getting the object data type by using Game Logic and the command nearObjects/nearObject.

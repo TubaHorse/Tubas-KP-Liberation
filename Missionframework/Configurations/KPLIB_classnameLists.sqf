@@ -819,7 +819,15 @@ KPLIP_ignoreGarrisonBuildings = [
     "Land_Barn_02_F",
     "Land_Barn_01_F",
     "Land_HaulTruck_01_abandoned_F", // wtf why there are building positions in this one lmao
-    "Land_MiningShovel_01_abandoned_F"
+    "Land_MiningShovel_01_abandoned_F",
+    "Land_GuardHouse_01_F",
+    "Land_GuardHouse_02_F",
+    "Land_GuardHouse_02_grey_F",
+    "Land_GuardHouse_03_F",
+    "Land_Mil_Guardhouse",
+    "Land_Mil_Guardhouse_EP1",
+    "Land_Barracks_03_F", // It's silly
+    "Land_Barracks_04_F" // It's silly
 ];
 
 // Force spawn garrison in these type of objects
