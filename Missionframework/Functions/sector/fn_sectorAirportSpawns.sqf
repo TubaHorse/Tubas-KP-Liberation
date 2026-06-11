@@ -2,7 +2,7 @@
     File: fn_sectorAirportSpawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 13/05/2026
-    Last Update: 10/06/2026
+    Last Update: 11/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -28,6 +28,9 @@ private _sectorPos = markerPos _sector;
 
 // Create objects
 ["KPLIB_createSectorObjects", [_sector]] call CBA_fnc_serverEvent;
+
+// Create mines
+["KPLIB_createSectorMines", _sector] call CBA_fnc_serverEvent;
 
 // Get unit cap
 private _popfactor = 1;
@@ -226,6 +229,7 @@ sleep 1;
 private _samPositions = (KPLIB_airportSectorHash get _sector) # 1;
 //private _samPositions = (KPLIB_sam_airport select {(markerPos _x) inArea _sector}) apply {markerPos _x};
 private "_samRadarPos";
+private _samGrp = createGroup [KPLIB_side_enemy, true];
 if (count _samPositions > 0) then {
     // Select SAM position preplaced on editor
     _samRadarPos = _samPositions deleteAt (_samPositions find (selectRandom _samPositions));
@@ -246,7 +250,8 @@ if (_samRadarPos isNotEqualTo [0,0]) then {
     _samRadar setVehicleReceiveRemoteTargets true;
     _samRadar setVehicleReportRemoteTargets true;
     _samRadar deleteVehicleCrew (driver _samRadar);
-    private _crewRadar = units _samRadar;
+    private _crewRadar = crew _samRadar;
+    _crewRadar join _samGrp;
     {
         _x setSkill ["spotDistance", 1];
         _x setSkill ["aimingAccuracy", 0.8];
@@ -287,7 +292,8 @@ if (_samRadarPos isNotEqualTo [0,0]) then {
     _sam setVehicleReceiveRemoteTargets true;
     _sam setVehicleReportRemoteTargets true;
     _sam setAutonomous true;
-    private _crewSam = units _samRadar;
+    private _crewSam = crew _sam;
+    _crewSam join _samGrp;
     {
         _x setSkill ["spotDistance", 1];
         _x setSkill ["aimingAccuracy", 1];
@@ -297,7 +303,11 @@ if (_samRadarPos isNotEqualTo [0,0]) then {
     _sectorUnits pushback _sam;
     {_sectorUnits pushback _x;} foreach _crewSam;
 
-    [_crewSam] join (group (gunner _samRadar));
+    _samGrp addEventHandler ["KnowsAboutChanged", {
+        params ["_group", "_targetUnit", "_newKnowsAbout", "_oldKnowsAbout"];
+        // Pook SAM tends to fire at ground units
+        if (((getPosATL _targetUnit) # 2) < 2) then {_group forgetTarget _targetUnit};
+    }];
 };
 
 // Manage reinforcements and sector
