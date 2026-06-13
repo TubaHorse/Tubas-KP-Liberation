@@ -2,7 +2,7 @@
     File: fn_findSectorGarrisons.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 29/05/2026
+    Last Update: 12/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -28,7 +28,7 @@ private _sectorPos = markerPos _sector;
 
 // Find buildings to garrison. Ignore those in KPLIP_ignoreGarrisonBuildings
 private _allBuildings = [];
-if ((markerShape _sector == "RECTANGLE") || (markerShape _sector == "ELLIPSE")) then {
+if (_sector in KPLIB_sectors_airport) then {
     _allBuildings = (nearestObjects [_sectorPos, ["House", "Strategic", "Ruins"], ((_radius # 0) + (_radius # 1))]) select {alive _x && (_x inArea _sector) && !((toLowerANSI (typeOf _x)) in (KPLIP_ignoreGarrisonBuildings apply {toLowerANSI _x}))};
 } else {
     _allBuildings = (nearestObjects [_sectorPos, ["House", "Strategic", "Ruins"], _radius]) select {alive _x && !((toLowerANSI (typeOf _x)) in (KPLIP_ignoreGarrisonBuildings apply {toLowerANSI _x}))};

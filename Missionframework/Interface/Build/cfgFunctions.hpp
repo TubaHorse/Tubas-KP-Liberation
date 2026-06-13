@@ -16,4 +16,5 @@ class Build_UI
     class build_updateBuildCtrl {};
     class build_updateLabelPage {};
     class build_updateResourcesCtrl {};
+    class build_updateTypesButtons {};
 }

@@ -2,7 +2,7 @@
     File: fn_spawnRegularSquad.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2019-12-03
-    Last Update: 2026-06-10
+    Last Update: 2026-06-12
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -25,7 +25,7 @@ if (_sector isEqualTo "") exitWith {["Empty string given"] call BIS_fnc_error; g
 
 // Get spawn position for squad
 private _spawnPos = [];
-if ((markerShape _sector == "RECTANGLE") || (markerShape _sector == "ELLIPSE")) then {
+if (_sector in KPLIB_sectors_airport) then {
     _spawnPos = [[_sector], [], {true}] call BIS_fnc_randomPos;
 } else {
     private _sectorPos = (markerPos _sector) getPos [random 100, random 360];

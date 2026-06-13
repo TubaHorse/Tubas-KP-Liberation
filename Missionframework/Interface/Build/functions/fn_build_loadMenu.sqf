@@ -3,7 +3,7 @@
     File: fn_build_loadMenu.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 10/11/2025
-    Last Update: 15/03/2026
+    Last Update: 12/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -35,6 +35,9 @@ _mannedButtonCtrl ctrlEnable _iscommandant;
 //_squadImageCtrl ctrlShow _iscommandant;
 //_mannedButtonCtrl ctrlShow _iscommandant;
 
+private _crewButtonCtrl = _display displayCtrl IDC_CREW_BUTTON;
+_crewButtonCtrl ctrlEnable false;
+
 // Fob or outpost
 private _buildPos = ([getPos _originalTarget] call KPLIB_fnc_getNearestBuildPos) # 0;
 
@@ -53,6 +56,8 @@ if (_buildPos in KPLIB_player_outposts) then {
     // Fob
     [BUILDTYPE_INFANTRY, _display] call KPLIB_fnc_build_fillLnb; // Always opens the menu showing the infantry tab
 };
+
+[_display] call KPLIB_fnc_build_updateTypesButtons;
 
 // Disable user actions
 inGameUISetEventHandler ["PrevAction", "true"];

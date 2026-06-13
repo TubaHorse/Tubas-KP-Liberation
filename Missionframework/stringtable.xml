@@ -6,7 +6,7 @@
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Localization contributors:
-        English | Updated: 0.97.0pig
+        English | Updated: 0.97.1pig
             KP Liberation Dev Team  - https://github.com/KillahPotatoes
             PiG13BR                 - https://github.com/PiG13BR
 
@@ -26,7 +26,7 @@
         Italian | Updated: 0.96.8
             k4s0                    - https://github.com/k4s0
 
-        Portuguese | Updated: 0.97.0pig
+        Portuguese | Updated: 0.97.1pig
             NomadRomeo              - https://github.com/NomadRomeo
             AngusDLX                - https://github.com/AngusDLX
             PiG13BR                 - https://github.com/PiG13BR
@@ -2439,6 +2439,50 @@
             <Czech>ODEMKNUTO OD</Czech>
             <Japanese>アンロックされました:</Japanese>
         </Key>
+        <Key ID="STR_PLANE_LOCKED_AIRPORT">
+            <Original>You can only build airplanes on airports. Make sure the FOB is within an airport area.</Original>
+            <Portuguese>Você só pode construir aeronaves em aeroportos. Certifique que a FOB esteja dentro da área de algum aeroporto.</Portuguese>
+        </Key>
+        <Key ID="STR_NEED_FLIGHT_CONTROL">
+            <Original>This FOB requires the Flight Control building (available in the support tab).</Original>
+            <Portuguese>Essa FOB necessita uma Torre de Controle (disponível na aba de suporte).</Portuguese>
+        </Key>
+        <Key ID="STR_NEED_BARRACKS">
+            <Original>This FOB requires at least 2 Barracks (available in the support tab).</Original>
+            <Portuguese>Essa FOB necessita ao menos 2 Alojamentos (disponível na aba de suporte).</Portuguese>
+        </Key>
+        <Key ID="STR_BUILD_TOOLTIP_INFANTRY">
+            <Original>Infantry/AI</Original>
+            <Portuguese>Infantaria/IA</Portuguese>
+        </Key>
+        <Key ID="STR_BUILD_TOOLTIP_TRANSPORT">
+            <Original>Light Vehicles</Original>
+            <Portuguese>Veículos Leves</Portuguese>
+        </Key>
+        <Key ID="STR_BUILD_TOOLTIP_COMBATVEH">
+            <Original>Heavy Vehicles</Original>
+            <Portuguese>Veículos Pesados</Portuguese>
+        </Key>
+        <Key ID="STR_BUILD_TOOLTIP_AERIAL">
+            <Original>Aircrafts</Original>
+            <Portuguese>Aeronaves</Portuguese>
+        </Key>
+        <Key ID="STR_BUILD_TOOLTIP_DEFENCES">
+            <Original>Defences/Static Weapons</Original>
+            <Portuguese>Defesas/Armas Estáticas</Portuguese>
+        </Key>
+        <Key ID="STR_BUILD_TOOLTIP_BUILDINGS">
+            <Original>Decorative Buildings</Original>
+            <Portuguese>Construções decorativas</Portuguese>
+        </Key>
+        <Key ID="STR_BUILD_TOOLTIP_SUPPORT">
+            <Original>Support</Original>
+            <Portuguese>Suporte</Portuguese>
+        </Key>
+        <Key ID="STR_BUILD_TOOLTIP_SQUAD">
+            <Original>Squads</Original>
+            <Portuguese>Esquadrões</Portuguese>
+        </Key>
         <Key ID="STR_VEHICLE_CANNOT_ENTER">
             <Original>You cannot enter this vehicle</Original>
             <Portuguese>Você não pode entrar neste veículo</Portuguese>
@@ -4551,7 +4595,7 @@
             <Chinesesimp>空管塔台</Chinesesimp>
             <Chinese>空管塔台</Chinese>
             <Turkish>Uçuş Kontrol</Turkish>
-            <Portuguese>Controle de tráfego aéreo</Portuguese>
+            <Portuguese>Torre de Controle</Portuguese>
             <Korean>비행 관제소</Korean>
             <Czech>Letecká kontrola</Czech>
             <Japanese>フライトコントロール</Japanese>
@@ -4587,6 +4631,10 @@
         <Key ID="STR_BARRACK_ENTRY">
 			<Original>Barrack</Original>
 			<Portuguese>Alojamento</Portuguese>
+        </Key>
+        <Key ID="STR_MEDICAL_ENTRY">
+			<Original>Medical Facility</Original>
+			<Portuguese>Instalação Médica</Portuguese>
         </Key>
         <Key ID="STR_BOX_CANTSTORE">
             <Original>There is no free storage area nearby.</Original>
@@ -9107,9 +9155,6 @@
 				<Original>The name must be unique for this type of base</Original>
 				<Portuguese>O nome deve ser unico para este tipo de base</Portuguese>
 			</Key>
-
-            
-            
         </Container>
 
 

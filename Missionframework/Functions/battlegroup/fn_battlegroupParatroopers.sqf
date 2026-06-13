@@ -2,7 +2,7 @@
     File: fn_battlegroupParatroopers.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 29/10/2025
-    Last Update: 08/06/2026
+    Last Update: 12/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -194,6 +194,13 @@ _pilot_group addEventHandler ["WaypointComplete",{
 // Units arriving at regroup locations
 KPLIB_fnc_assemblingArea = {
     params["_grpInf", "_paradropArea", "_targetPos"];
+
+    {
+        private _unit = _x;
+        private _backpackContents = _unit getVariable ["KPLIB_paratrooper_backpack", []];
+        _unit addBackpack (_backpackContents # 0);
+        {_unit addItemToBackpack _x} foreach (_backpackContents # 1);
+    }forEach (units _grpInf);
 
     [{
         params["_args", "_handle"];

@@ -65,6 +65,9 @@ if ([
 // Opens redeploy menu
 [] call KPLIB_fnc_deploy_createMenuRsc;
 
+// Overlay manager
+[_newUnit] spawn KPLIB_fnc_overlayManager;
+
 sleep 5;
 
 // Check if there's already a managed zeus module for this player, if so we can just reassign

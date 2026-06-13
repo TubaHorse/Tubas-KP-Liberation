@@ -10,7 +10,7 @@ private _ownership = KPLIB_side_player;
 
 while {KPLIB_endgame == 0} do {
     {
-        if ((markerShape _x == "RECTANGLE") || (markerShape _x == "ELLIPSE")) then {
+        if (_x in KPLIB_sectors_airport) then {
             _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
         } else {
             _ownership = [markerpos _x] call KPLIB_fnc_getSectorOwnership;

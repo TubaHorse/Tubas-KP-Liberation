@@ -2,7 +2,7 @@
     File: fn_doRecycle.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 22/11/2025
-    Last Update: 28/01/2026
+    Last Update: 12/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -19,10 +19,14 @@ params ["_vehToRecycle"];
 private _gains = localNamespace getVariable ["KPLIB_recycleGain", []];
 if (_gains isEqualTo []) exitWith {};
 
+private _fob = [] call KPLIB_fnc_getNearestFob;
+_fobData = [_fob] call KPLIB_fnc_getBaseResources;
+(_fobData) params ["", "_fobSupplies", "_fobAmmo", "_fobFuel", "_hasAir", "_hasRecycling", "_hasMedical"];
+
 _gains params ["_vehToRecycle", "_price_s", "_price_a", "_price_f"];
 
 if (!(isnull _vehToRecycle) && {alive _vehToRecycle}) then {
-    if (!(KPLIB_b_logiStation_near) && ((_price_s + _price_a + _price_f) > 0)) exitWith {
+    if (!(_hasRecycling) && ((_price_s + _price_a + _price_f) > 0)) exitWith {
         [localize "STR_NORECBUILDING_ERROR", true, 2] call KPLIB_fnc_hint;
     };
 

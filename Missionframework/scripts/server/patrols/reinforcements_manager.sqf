@@ -3,7 +3,7 @@ params ["_targetsector"];
 if (KPLIB_enemyReadiness > 15) then {
     
     private _range = [KPLIB_range_sectorCapture, KPLIB_range_sectorCapture * 1.4] select (_targetsector in KPLIB_sectors_capital);
-    if ((markerShape _targetsector == "RECTANGLE") || (markerShape _targetsector == "ELLIPSE")) then {
+    if (_targetsector in KPLIB_sectors_airport) then {
         _range = markerSize _targetsector;
     };
     private _init_units_count = (([markerPos _targetsector, _range, KPLIB_side_enemy] call KPLIB_fnc_getUnitsCount));
@@ -42,14 +42,15 @@ if (KPLIB_enemyReadiness > 15) then {
                     };
                 };
                 if (_targetsector in KPLIB_sectors_airport) then {
-                    ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupTransportHeli;
-                    ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupTransportHeli;
+                    [{["", markerPos _this, "", false] call KPLIB_fnc_battlegroupAttackHeli}, _targetsector] call CBA_fnc_execNextFrame;
+                    [{["", markerPos _this, "", false] call KPLIB_fnc_battlegroupTransportHeli;}, _targetsector] call CBA_fnc_execNextFrame;
+                    [{["", markerPos _this, "", false] call KPLIB_fnc_battlegroupTransportHeli;}, _targetsector] call CBA_fnc_execNextFrame;
+                    [{["", markerPos _this, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh;}, _targetsector] call CBA_fnc_execNextFrame;
                     if ((random KPLIB_enemyReadiness) > (20 + (30 / KPLIB_param_aggressivity))) then {
-                        ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupAttackHeli;
+                        [{["", markerPos _this, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh;}, _targetsector] call CBA_fnc_execNextFrame;
                     } else {
-                        ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupTransportHeli;
+                        [{["", markerPos _this, "", false] call KPLIB_fnc_battlegroupTransportHeli;}, _targetsector] call CBA_fnc_execNextFrame;
                     };
-                    ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupAttackHeli;
                 };
                 stats_reinforcements_called = stats_reinforcements_called + 1;
             };

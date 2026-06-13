@@ -763,6 +763,50 @@ KPLIB_type_heliPads = [
     "cwr3_heli_h"
 ];
 
+// All barracks buildings that can unlock infantry/squad build and ignore redeploy costs if enabled.
+KPLIB_type_barracks = [
+    "Land_Barracks_03_F",
+    "Land_Barracks_04_F",
+    "Land_Budova4",
+    "Land_Budova4_in",
+    "Land_Barrack2",
+    "Barrack2",
+    "Land_Barrack2_EP1",
+    "Land_Mil_Barracks_L_EP1",
+    "Land_Mil_Barracks_no_interior_EP1_CUP",
+    "Land_Mil_Barracks_i_EP1",
+    "Land_Mil_Barracks_EP1",
+    "Land_Mil_Barracks_L",
+    "Land_Mil_Barracks_no_interior_CUP",
+    "Land_Mil_Barracks_i",
+    "Land_Mil_Barracks",
+    "Land_Barracks_01_camo_F",
+    "Land_Barracks_01_grey,_F",
+    "Land_Barracks_01_dilapidated_F",
+    "Land_Barracks_05_F",
+    "Land_Barracks_04_F",
+    "Land_Barracks_03_F",
+    "Land_Barracks_02_F",
+    "Land_Barracks_06_F",
+    "Land_u_Barracks_V2_F",
+    "Land_i_Barracks_V2_F",
+    "Land_i_Barracks_V1_F",
+    "land_cwr3_tent1a",
+    "land_cwr3_tent1a_beds",
+    "land_cwr3_tent1",
+    "land_cwr3_tent1_beds",
+    "land_cwr3_tent2",
+    "land_cwr3_tent2_beds",
+    "land_cwr3_tent2_medium",
+    "land_cwr3_tent3_beds",
+    "land_cwr3_tent3",
+    "land_cwr3_tent4_beds",
+    "land_cwr3_tent4",
+    "Camp_EP1",
+    "CampEast_EP1",
+    "Land_tent_east"
+];
+
 // All building classname that will be ignored on the search for structures to spawn garrison units in sectors
 KPLIP_ignoreGarrisonBuildings = [
     "Land_Metal_Shed_F",

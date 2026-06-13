@@ -24,7 +24,6 @@ if (!KPLIB_ace) then {execVM "Scripts\Client\misc\resupply_manager.sqf";};
 execVM "Scripts\Client\misc\secondary_jip.sqf";
 execVM "Scripts\Client\misc\synchronise_vars.sqf";
 execVM "Scripts\Client\misc\playerNamespace.sqf";
-execVM "Scripts\Client\ui\ui_manager.sqf";
 execVM "Scripts\Client\ui\tutorial_manager.sqf";
 
 execVM "Scripts\Client\ui\intro.sqf";

@@ -2,7 +2,7 @@
     File: fn_build_isItemAffordable.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 10/11/2025
-    Last Update: 22/04/2026
+    Last Update: 13/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -52,15 +52,10 @@ if (_priceAdd < 0) then {
 
 // Check fob available supplies
 private _nearBase = [] call KPLIB_fnc_getNearestPlayerBase;
-private _range = switch (true) do {
-    case (_nearBase in KPLIB_player_outposts) : {KPLIB_range_outpost};
-    default {KPLIB_range_fob};
-};
-private _baseData = KPLIB_base_resources select {((_x select 0) distance _nearBase) < _range};
+private _baseData = ([_nearBase] call KPLIB_fnc_getBaseResources);
+(_baseData) params ["", "_fobSupplies", "_fobAmmo", "_fobFuel", "_hasAir", "_hasRecycling", "_hasMedical", "_hasBarracks", "_inAirport"];
 
 private _affordable = false;
-
-(_baseData # 0) params ["", "_fobSupplies", "_fobAmmo", "_fobFuel"];
 
 if (((_supplies == 0 ) || (_supplies <= _fobSupplies)) && ((_ammo == 0 ) || (_ammo <= _fobAmmo)) && ((_fuel == 0 ) || (_fuel <= _fobFuel))) then {
     // Squad Comp
@@ -69,13 +64,18 @@ if (((_supplies == 0 ) || (_supplies <= _fobSupplies)) && ((_ammo == 0 ) || (_am
     } else {
         // Others
         if (_itemClass in KPLIB_b_air_classes && !([_itemToCheck # 0] call KPLIB_fnc_isClassUAV)) then {
-        
-            if (KPLIB_b_airControl_near && (((_itemClass isKindOf "Helicopter") && (KPLIB_heli_count < KPLIB_heli_slots)) || ((_itemClass isKindOf "Plane") && (KPLIB_plane_count < KPLIB_plane_slots)))) then {
-                _affordable = true;
+            if (_hasAir && (((_itemClass isKindOf "Helicopter") && (KPLIB_heli_count < KPLIB_heli_slots)) || ((_itemClass isKindOf "Plane") && (KPLIB_plane_count < KPLIB_plane_slots)))) then {
+                // Check there are airport sectors in this mission
+                if ((_itemClass isKindOf "Plane") && (count KPLIB_sectors_airport > 0)) then {
+                    if (_inAirport) then {
+                        _affordable = true;
+                    };
+                } else {
+                    _affordable = true;
+                };
             };
-
         } else {
-            if (!(_itemClass in KPLIB_airSlots) || ((_itemClass in KPLIB_airSlots) && KPLIB_b_airControl_near)) then {
+            if (!(_itemClass in KPLIB_airSlots) || ((_itemClass in KPLIB_airSlots) && _hasAir)) then {
                 _affordable = true;
             };
         };

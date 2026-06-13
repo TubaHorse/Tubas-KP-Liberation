@@ -82,7 +82,7 @@ class LiberationBuildRsc {
         text = "";
     };
     class BuildInfantryImage: BuildTypeImage {
-        idc = -1;
+        idc = IDC_INFANTRY_IMG;
         x = (0.402 * safezoneW + safezoneX);
         text = "\a3\Ui_F_Curator\Data\Displays\RscDisplayCurator\modeUnits_ca.paa";
     };
@@ -94,7 +94,7 @@ class LiberationBuildRsc {
         x = (0.4 * safezoneW + safezoneX);
     };
     class BuildTransportVehicleImage: BuildTypeImage {
-        idc = -1;
+        idc = IDC_TRANSPORT_IMG;
         x = (0.427 * safezoneW + safezoneX);
         text = "\A3\ui_f\data\map\vehicleicons\iconCar_ca.paa";
     };
@@ -106,7 +106,7 @@ class LiberationBuildRsc {
         x = (0.425 * safezoneW + safezoneX);
     };
     class BuildCombatVehicleImage: BuildTypeImage {
-        idc = -1;
+        idc = IDC_COMBATVEH_IMG;
         x = (0.452 * safezoneW + safezoneX);
         text = "\A3\ui_f\data\map\vehicleicons\iconTank_ca.paa";
     };
@@ -118,7 +118,7 @@ class LiberationBuildRsc {
         x = (0.45 * safezoneW + safezoneX);
     };
     class BuildAerialImage: BuildTypeImage {
-        idc = -1;
+        idc = IDC_AERIAL_IMG;
         x = (0.477 * safezoneW + safezoneX);
         text = "\A3\ui_f\data\map\vehicleicons\iconHelicopter_ca.paa";
     };
@@ -130,7 +130,7 @@ class LiberationBuildRsc {
         x = (0.475 * safezoneW + safezoneX);
     };
     class BuildDefenceImage: BuildTypeImage {
-        idc = -1;
+        idc = IDC_DEFENCE_IMG;
         x = (0.502 * safezoneW + safezoneX);
         text = "\A3\ui_f\data\map\vehicleicons\iconStaticCannon_ca.paa";
     };
@@ -142,7 +142,7 @@ class LiberationBuildRsc {
         x = (0.5 * safezoneW + safezoneX);
     };
     class BuildBuildingImage: BuildTypeImage {
-        idc = -1;
+        idc = IDC_BUILDING_IMG;
         x = (0.527 * safezoneW + safezoneX);
         text = "\A3\ui_f\data\map\mapcontrol\Bunker_CA.paa";
     };
@@ -154,7 +154,7 @@ class LiberationBuildRsc {
         x = (0.525 * safezoneW + safezoneX);
     };
     class BuildSupportImage: BuildTypeImage {
-        idc = -1;
+        idc = IDC_SUPPORT_IMG;
         x = (0.552 * safezoneW + safezoneX);
         text = "\A3\ui_f\data\map\vehicleicons\iconCrateAmmo_ca.paa";
     };
@@ -166,7 +166,7 @@ class LiberationBuildRsc {
         x = (0.55 * safezoneW + safezoneX);
     };
     class BuildSquadImage: BuildTypeImage {
-        idc = IDC_SQUAD_IMAGE;
+        idc = IDC_SQUAD_IMG;
         x = (0.577 * safezoneW + safezoneX);
         text = "\a3\Ui_F_Curator\Data\Displays\RscDisplayCurator\modeGroups_ca.paa";
     };

@@ -5,10 +5,10 @@ private "_grp";
 
 sleep 5;
 
-if ((markerShape _x == "RECTANGLE") || (markerShape _x == "ELLIPSE")) then {
-    _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+if (_sector in KPLIB_sectors_airport) then {
+    _ownership = [markerpos _sector, getMarkerSize _sector] call KPLIB_fnc_getSectorOwnership;
 } else {
-    _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+    _ownership = [markerpos _sector, getMarkerSize _sector] call KPLIB_fnc_getSectorOwnership;
 };
 
 if (_ownership != KPLIB_side_enemy) exitWith {};
@@ -29,10 +29,10 @@ if ( KPLIB_param_bluforDefenders ) then {
 
 sleep 60;
 
-if ((markerShape _x == "RECTANGLE") || (markerShape _x == "ELLIPSE")) then {
-    _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+if (_sector in KPLIB_sectors_airport) then {
+    _ownership = [markerpos _sector, getMarkerSize _sector] call KPLIB_fnc_getSectorOwnership;
 } else {
-    _ownership = [markerpos _x] call KPLIB_fnc_getSectorOwnership;
+    _ownership = [markerpos _sector] call KPLIB_fnc_getSectorOwnership;
 };
 
 if ( _ownership == KPLIB_side_player ) exitWith {
@@ -47,10 +47,10 @@ if ( _ownership == KPLIB_side_player ) exitWith {
 private _attacktime = KPLIB_vulnerability_timer;
 
 while {((_attacktime > 0) && ((_ownership == KPLIB_side_enemy)) || (_ownership == KPLIB_side_resistance))} do {
-    if ((markerShape _x == "RECTANGLE") || (markerShape _x == "ELLIPSE")) then {
-        _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+    if (_sector in KPLIB_sectors_airport) then {
+        _ownership = [markerpos _sector, getMarkerSize _sector] call KPLIB_fnc_getSectorOwnership;
     } else {
-        _ownership = [markerpos _x] call KPLIB_fnc_getSectorOwnership;
+        _ownership = [markerpos _sector] call KPLIB_fnc_getSectorOwnership;
     };
     _attacktime = _attacktime - 1;
     sleep 1;
@@ -60,20 +60,20 @@ waitUntil {
 
     sleep 1;
 
-    if ((markerShape _x == "RECTANGLE") || (markerShape _x == "ELLIPSE")) then {
-        _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+    if (_sector in KPLIB_sectors_airport) then {
+        _ownership = [markerpos _sector, getMarkerSize _sector] call KPLIB_fnc_getSectorOwnership;
     } else {
-        _ownership = [markerpos _x] call KPLIB_fnc_getSectorOwnership;
+        _ownership = [markerpos _sector] call KPLIB_fnc_getSectorOwnership;
     };
 
     _ownership != KPLIB_side_resistance;
 };
 
 if ( KPLIB_endgame == 0 ) then {
-    if ((markerShape _x == "RECTANGLE") || (markerShape _x == "ELLIPSE")) then {
-        _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+    if (_sector in KPLIB_sectors_airport) then {
+        _ownership = [markerpos _sector, getMarkerSize _sector] call KPLIB_fnc_getSectorOwnership;
     } else {
-        _ownership = [markerpos _x] call KPLIB_fnc_getSectorOwnership;
+        _ownership = [markerpos _sector] call KPLIB_fnc_getSectorOwnership;
     };
     if (_attacktime <= 1 && (_ownership == KPLIB_side_enemy)) then {
         KPLIB_sectors_player deleteAt (KPLIB_sectors_player find _sector);

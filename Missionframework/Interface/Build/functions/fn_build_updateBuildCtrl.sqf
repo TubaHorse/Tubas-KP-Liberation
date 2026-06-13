@@ -3,7 +3,7 @@
     File: fn_build_updateBuildCtrl.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 10/11/2025
-    Last Update: 03/01/2026
+    Last Update: 13/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -42,17 +42,14 @@ if ((_buildType == BUILDTYPE_INFANTRY) && (count (units (group player)) >= KPLIB
     _squad_full = true;
 };
 
-// Check if there are barracks to buy IA/Squads
-private _barracksNearby = true;
-if (_buildType == BUILDTYPE_INFANTRY || _buildType == BUILDTYPE_SQUAD) then {
-    private _nearestFob = player getVariable ["KPLIB_nearestBasePos", []];
-    _barracksNearby = if (count (_nearestFob nearObjects [KPLIB_b_barrack, KPLIB_range_fob]) > 1) then {true} else {false};
-};
+private _nearBase = [] call KPLIB_fnc_getNearestPlayerBase;
+private _baseData = ([_nearBase] call KPLIB_fnc_getBaseResources);
+(_baseData) params ["", "_fobSupplies", "_fobAmmo", "_fobFuel", "_hasAir", "_hasRecycling", "_hasMedical", "_hasBarracks", "_inAirport"];
 
-if (!_barracksNearby) then {
-    _affordable = false;
-    _linkedSectorTextCtrl ctrlSetStructuredText parseText ("<t color='#e00000' align='center'>" + localize "STR_INF_BARRACKS_REQUIRED"  +  "<br/>" + "2" + "</t>");
-}; 
+private _canBuildPlane = true;
+if ((_buildType == BUILDTYPE_AERIAL) && {_buildClass isKindOf "Plane"} && {count KPLIB_sectors_airport > 0}) then {
+    if !(_inAirport) then {_canBuildPlane = false;};
+};
 
 // Check linked item
 private _linked = false;
@@ -68,7 +65,7 @@ if (_buildType != BUILDTYPE_SQUAD) then {
     // Check if returned a linked base
     if (_base_link isNotEqualTo "") then {_linked = true}; 
 
-    // Check is unlocked
+    // Check if it is unlocked
     if (_linked) then {
         if (!(_base_link in KPLIB_sectors_player)) then {_linked_unlocked = false};
     };
@@ -84,8 +81,13 @@ if (_linked) then {
     // Add linked sector text
     _linkedSectorTextCtrl ctrlSetStructuredText parseText ("<t color='" + _link_color + "' align='center'>" + _link_str +  "<br/>" + ( markerText _base_link ) + "</t>");
 } else {
-    if (_barracksNearby) then {_linkedSectorTextCtrl ctrlSetStructuredText parseText "";};
+    _linkedSectorTextCtrl ctrlSetStructuredText parseText "";
 };
+
+if (((_buildType == BUILDTYPE_INFANTRY) || (_buildType == BUILDTYPE_SQUAD)) && {!_hasBarracks}) then {
+    _affordable = false;
+    _linkedSectorTextCtrl ctrlSetStructuredText parseText ("<t color='#e00000' align='center'>" + localize "STR_INF_BARRACKS_REQUIRED"  +  "<br/>" + "2" + "</t>");
+}; 
 
 // Check affordable crew
 private _affordable_crew = _affordable;
@@ -97,5 +99,24 @@ if (unitcap >= ([] call KPLIB_fnc_getLocalCap)) then {
 };
 
 // Disable/Enable ctrl build buttons by checking generated bools
-_buildButtonCtrl ctrlEnable (_affordable && _linked_unlocked && !(_squad_full));
-_crewButtonCtrl ctrlEnable (_affordable_crew && _linked_unlocked);
+_buildButtonCtrl ctrlEnable (_affordable && _linked_unlocked && !(_squad_full) && _canBuildPlane);
+_crewButtonCtrl ctrlEnable (_affordable_crew && _linked_unlocked && _canBuildPlane && !(_buildType == BUILDTYPE_INFANTRY) && !(_buildType == BUILDTYPE_SQUAD));
+_buildButtonCtrl ctrlSetTooltip "";
+_crewButtonCtrl ctrlSetTooltip "";
+
+if !(_canBuildPlane) then {
+    // Warn player that planes can only be builded on FOBs within airport area.
+    _buildButtonCtrl ctrlSetTooltip (localize "STR_PLANE_LOCKED_AIRPORT");
+    _crewButtonCtrl ctrlSetTooltip (localize "STR_PLANE_LOCKED_AIRPORT");
+};
+
+if ((_buildType == BUILDTYPE_AERIAL) && !_affordable && !_hasAir) then {
+    // Set tooltip to tell player that he needs to buy air control
+    _buildButtonCtrl ctrlSetTooltip (localize "STR_NEED_FLIGHT_CONTROL");
+    _crewButtonCtrl ctrlSetTooltip (localize "STR_NEED_FLIGHT_CONTROL");
+};
+
+if ((_buildType == BUILDTYPE_INFANTRY || _buildType == BUILDTYPE_SQUAD) && !_affordable && !_hasBarracks) then {
+    // Set tooltip to tell player that he needs to buy air control
+    _buildButtonCtrl ctrlSetTooltip (localize "STR_NEED_BARRACKS");
+};

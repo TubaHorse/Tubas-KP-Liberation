@@ -256,7 +256,9 @@ class KPLIB {
     class functions_ui {
         file = "Functions\ui";
 
+        class overlayManager            {};
         class overlayUpdateResources    {};
+        
     };
     class TeamSpeak {
         file = "Extensions\TeamSpeak";

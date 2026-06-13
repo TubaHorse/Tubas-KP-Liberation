@@ -2,7 +2,7 @@
     File: fn_recalculateResources.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 10/09/2025
-    Last update: 08/06/2026
+    Last update: 13/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -48,12 +48,14 @@ private _airport_buildings = [];
     private _fob_buildings = _basePos nearobjects _range;
 
     // Fob in airport area. Collect information about the airport area.
+    private _inAirport = false;
     {
         private _airportArea = _x;
         if (_basePos inArea _x) exitWith {
             _range = ((markerSize _x)#0 + (markerSize _x)#1);
             _fob_buildings = _basePos nearobjects _range;
             _fob_buildings = _fob_buildings select {_x inArea _airportArea};
+            _inAirport = true;
         };
     }forEach KPLIB_sectors_airport;
     
@@ -66,6 +68,8 @@ private _airport_buildings = [];
     if (_hasRecBuilding > 0) then {_hasRecBuilding = true;} else {_hasRecBuilding = false;};
     private _hasMedBuilding = {(typeOf _x) in KPLIB_medical_facilities;} count _fob_buildings;
     if (_hasMedBuilding > 0) then {_hasMedBuilding = true;} else {_hasMedBuilding = false;};
+    private _hasBarracks = {(typeOf _x) in KPLIB_type_barracks;} count _fob_buildings;
+    if (_hasBarracks > 0) then {_hasBarracks = true;} else {_hasBarracks = false;};
 
     private _supplyValue = 0;
     private _ammoValue = 0;
@@ -79,7 +83,7 @@ private _airport_buildings = [];
         _fuelValue = _fuelValue + _fuel;
     } forEach _storage_areas;
 
-    _local_base_resource pushBack [_x, _supplyValue, _ammoValue, _fuelValue, _hasAirBuilding, _hasRecBuilding, _hasMedBuilding];
+    _local_base_resource pushBack [_x, _supplyValue, _ammoValue, _fuelValue, _hasAirBuilding, _hasRecBuilding, _hasMedBuilding, _hasBarracks, _inAirport];
     _local_supplies_global = _local_supplies_global + _supplyValue;
     _local_ammo_global = _local_ammo_global + _ammoValue;
     _local_fuel_global = _local_fuel_global + _fuelValue;

@@ -3,7 +3,7 @@
     File: fn_deploy_handleButton.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 04/11/2025
-    Last Update: 12/04/2026
+    Last Update: 13/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -33,7 +33,7 @@ if (count (KPLIB_respawnPositionsList select _lbCurSel) == 3) then {
     _destPos = (getPosATL _respawnObject);
 
     if (KPLIB_b_mobileRespawns find (typeOf _respawnObject) >= 0) then {
-        _player setposATL (_respawnObject getPos [5 + (random 3), random 360]);
+        _player setposATL (_respawnObject getPos [10 + (random 3), random 360]);
         _player setDir (random 360);
         KPLIB_respawn_mobile_done = true;
     } else {
@@ -42,9 +42,9 @@ if (count (KPLIB_respawnPositionsList select _lbCurSel) == 3) then {
         _player setDir (random 360);
     };
 } else {
-    // Fob or base
+    // Fob/outpost or base
     _destPos = ((KPLIB_respawnPositionsList select _lbCurSel) select 1);
-    _player setposATL [((_destPos select 0) + 5) - (random 10),((_destPos select 1) + 5) - (random 10),(_destPos select 2)];
+    _player setposATL [((_destPos select 0) + 15) + (random 10),((_destPos select 1) + 15) + (random 10),(_destPos select 2)];
     _player setDir (random 360);
 };
 

@@ -297,23 +297,20 @@
     private _storage_areas = (_buildPos nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
 
     private _storages = [];
-    private _totalLimit = 0;
-    private _sum = _supplyPrice + _ammoPrice + _fuelPrice;
     {
         if ([_x] call KPLIB_fnc_isStorageFull) then {continue}; // Skip iteration
 
         private _storageLimit = [_x] call KPLIB_fnc_getStorageLimit;
-        _totalLimit = _totalLimit + _storageLimit;
 
         // Pushback storage with space
         _storages pushBack _x;
     } forEach _storage_areas;
 
-    if ((_storages isEqualTo []) || (_sum >= _totalLimit)) then {
-
-        // Storage has no space left. Create crates around the player instead.
-        [localize "STR_CANCEL_ERROR", true, 3] remoteExecCall ["KPLIB_fnc_hint", _player];
-
+    if (count _storages > 0) then {
+        // Storages found and they are not full
+        [_supplyPrice, _ammoPrice, _fuelPrice, _storages] call KPLIB_fnc_restoreResources;
+    } else {
+        // All storages full or no storages found. Spawn crates instead.
         while {(_supplyPrice > 0) || (_ammoPrice > 0) || (_fuelPrice > 0)} do {
             if (_supplyPrice > 0) then {
                 private _price = _supplyPrice min 100;
@@ -333,9 +330,6 @@
                 _fuelPrice = _fuelPrice - _price;
             };
         };
-
-    } else {
-        [_supplyPrice, _ammoPrice, _fuelPrice, _storages] call KPLIB_fnc_restoreResources;
     };
 }] call CBA_fnc_addEventHandler;
 
