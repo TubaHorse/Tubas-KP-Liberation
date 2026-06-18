@@ -2,7 +2,7 @@
     File: fn_callEnemyFighter.sqf
     Author: PiG13BR - (https://github.com/PiG13BR)
     Date: 17/08/2025
-    Last update: 18/04/2026
+    Last update: 18/06/2026
 
     Description:
         Handles enemy air fighter
@@ -18,7 +18,7 @@ params[["_target", objNull, [objNull]]];
 
 if (isNull _target) exitWith {["No target provided to spawn enemy fighter"] call BIS_fnc_error};
 
-private _targetPos = getPosASL _targetPos;
+private _targetPos = getPos _target;
 
 if (count KPLIB_bluforAircrafts < 1) exitWith {};
 

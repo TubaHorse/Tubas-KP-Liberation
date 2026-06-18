@@ -2,7 +2,7 @@
     File: fn_spawnEnemyFighter.sqf
     Author: PiG13BR - (https://github.com/PiG13BR)
     Date: 04/02/2026
-    Last update: 27/05/2026
+    Last update: 18/06/2026
 
     Description:
         Spawns enemy fighter and fill its pylon with air-to-air missiles
@@ -23,7 +23,8 @@ private _class = selectRandom KPLIB_o_fighters;
 private _spawnPoint = ([KPLIB_sectors_airSpawn, [_targetPos], {(markerPos _x) distance _input0}, "ASCEND"] call BIS_fnc_sortBy) select 0;
 
 private _spawnPos = markerPos _spawnPoint;
-_spawnPos = [(((_spawnPos select 0) + 500) - random 1000), (((_spawnPos select 1) + 500) - random 1000), 200];
+private _targetAlt = _targetPos # 2;
+_spawnPos = [(((_spawnPos select 0) + 500) - random 1000), (((_spawnPos select 1) + 500) - random 1000), (_targetAlt) max 200];
 
 private _plane = createVehicle [_class, _spawnPos, [], 0, "FLY"];
 [_plane] call KPLIB_fnc_createCrew;

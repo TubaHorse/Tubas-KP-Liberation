@@ -2,7 +2,7 @@
     File: fn_enemyFighterPFH.sqf
     Author: PiG13BR - (https://github.com/PiG13BR)
     Date: 04/02/2026
-    Last update: 27/05/2026
+    Last update: 18/06/2026
 
     Description:
         Runs a CBA PFH to check some conditions to spawn enemy fighters
@@ -28,7 +28,7 @@ if (isNil "KPLIB_enemy_jetInAir") then {KPLIB_enemy_jetInAir = []; publicVariabl
     // Count air assets (particullary airplanes)
     private _planeCount = "Plane" countType _bluforAir;
     if (((count KPLIB_enemy_jetInAir) > 0) && (_planeCount < 1)) then {continue}; // Skip iteration
-    if (_planeCount >= count KPLIB_enemy_jetInAir) then {continue}; // Skip iteration
+    if (_planeCount <= count KPLIB_enemy_jetInAir) then {continue}; // Skip iteration
 
     if (KPLIB_enemyReadiness > (50 - (5 * KPLIB_param_difficulty))) then {
         {
