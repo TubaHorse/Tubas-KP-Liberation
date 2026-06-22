@@ -111,7 +111,6 @@ _player addAction [
     toString {
         isNull (objectParent _originalTarget)
         && {alive _originalTarget}
-        && {_originalTarget getVariable ['KPLIB_isNearFob', false]}
         && {
             _originalTarget getVariable ['KPLIB_b_supplyDump', false]
             || {_originalTarget getVariable ['KPLIB_isNearArsenal', false]}
@@ -119,7 +118,7 @@ _player addAction [
             || {_originalTarget getVariable ['KPLIB_isNearDump', false]}
         }
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} &&
-        {isNull (_this getVariable ["KPLIB_carriedObject", objNull])}
+        {isNull (_originalTarget getVariable ["KPLIB_carriedObject", objNull])}
     }
 ];
 
