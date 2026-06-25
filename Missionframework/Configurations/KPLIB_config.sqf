@@ -83,6 +83,7 @@ KPLIB_range_capitalActivation  = 1250;
 KPLIB_range_cityActivation     = 1000;
 KPLIB_range_factoryActivation  = 750;
 KPLIB_range_militaryActivation = 1500;
+KPLIB_range_airportActivation = 3000;
 KPLIB_range_towerActivation    = 500;
 KPLIB_range_airSpawnActivation = 1500;
 KPLIB_range_pointActivation    = 1000;

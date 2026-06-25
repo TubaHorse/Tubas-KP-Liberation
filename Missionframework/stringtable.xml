@@ -8284,10 +8284,10 @@
                 <Portuguese>Arsenal Filtrado por Função</Portuguese>
             </Key>
             <Key ID="STR_PARAMS_BLUFORPRESET">
-                <English>BLUFOR Preset</English>
+                <English>Player Preset</English>
             </Key>
             <Key ID="STR_PARAMS_OPFORPRESET">
-                <English>OPFOR Preset</English>
+                <English>Enemy Preset</English>
             </Key>
             <Key ID="STR_PARAMS_GUERPRESET">
                 <English>Guerilla Preset</English>
