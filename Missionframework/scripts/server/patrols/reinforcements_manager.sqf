@@ -42,14 +42,18 @@ if (KPLIB_enemyReadiness > 15) then {
                     };
                 };
                 if (_targetsector in KPLIB_sectors_airport) then {
-                    [{["", markerPos _this, "", false] call KPLIB_fnc_battlegroupAttackHeli}, _targetsector] call CBA_fnc_execNextFrame;
-                    [{["", markerPos _this, "", false] call KPLIB_fnc_battlegroupTransportHeli;}, _targetsector] call CBA_fnc_execNextFrame;
-                    [{["", markerPos _this, "", false] call KPLIB_fnc_battlegroupTransportHeli;}, _targetsector] call CBA_fnc_execNextFrame;
-                    [{["", markerPos _this, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh;}, _targetsector] call CBA_fnc_execNextFrame;
-                    if ((random KPLIB_enemyReadiness) > (20 + (30 / KPLIB_param_aggressivity))) then {
-                        [{["", markerPos _this, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh;}, _targetsector] call CBA_fnc_execNextFrame;
-                    } else {
-                        [{["", markerPos _this, "", false] call KPLIB_fnc_battlegroupTransportHeli;}, _targetsector] call CBA_fnc_execNextFrame;
+                    ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupAttackHeli;
+                    sleep 2; 
+                    ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupTransportHeli;
+                    sleep 2; 
+                    ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupTransportHeli;
+                    sleep 2; 
+                    ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh;
+                    sleep 2; 
+                    if ((random KPLIB_enemyReadiness) > (20 + (30 / KPLIB_param_aggressivity))) then { 
+                        ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh; 
+                    } else { 
+                        ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupTransportHeli; 
                     };
                 };
                 stats_reinforcements_called = stats_reinforcements_called + 1;

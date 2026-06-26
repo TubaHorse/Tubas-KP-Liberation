@@ -50,7 +50,8 @@ private _baseData = KPLIB_base_resources select {((_x select 0) distance _closes
 
 (_baseData # 0) params ["", "_fobSupplies", "_fobAmmo", "_fobFuel"];
 
-if (
+// Only for FOBs
+if ((_closestBasePos in KPLIB_player_fobs) &&
     ((_supplies > 0) && (_supplies > _fobSupplies)) ||
     ((_ammo > 0) && (_ammo > _fobAmmo)) ||
     ((_fuel > 0) && (_fuel > _fobFuel))

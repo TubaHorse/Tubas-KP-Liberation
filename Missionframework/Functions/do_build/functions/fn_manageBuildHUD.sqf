@@ -5,7 +5,7 @@
     File: fn_manageBuildHUD.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 21/02/2026
-    Last update: 12/04/2026
+    Last update: 26/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -82,6 +82,7 @@ private _buildType = localNamespace getVariable ["KPLIB_BUILD_buildType", 1];
 if (_buildType == BUILDTYPE_FOB || _buildType == BUILDTYPE_OUTPOST) then {
     //_cancelTextCtrl ctrlshow false;
     _cancelTextCtrl ctrlSetTextColor [0.4,0.4,0.4,1];
+    _repeatTextCtrl ctrlSetTextColor [0.4,0.4,0.4,1];
 };
 
 // Update scroll information
@@ -259,21 +260,13 @@ private _mouseButtonDownEH = (findDisplay MISSION_IDD) displayAddEventHandler ["
         if (_buildType != BUILDTYPE_FOB && _buildType != BUILDTYPE_OUTPOST) then {
             [_object] call KPLIB_fnc_cancelBuilding;
             "KPLIB_BUILD_hudLayer" cutRsc ["RemoveRsc","PLAIN",5, false];
-            
-            // Select previous weapon
-            private _previousWeapon = _player getVariable "KPLIB_BUILD_previousWeapon";
-
-            if (!isNil "_previousWeapon") then {
-                _player selectWeapon _previousWeapon;
-                _player setVariable ["KPLIB_BUILD_previousWeapon", nil, true];
-            };
         };
     } else {
         private _canBuild = _object getVariable ["KPLIB_BUILD_canBuild", true]; // Change value
         private _objectInArea = _object getVariable ["KPLIB_BUILD_isObjectInArea", true]; // Change value
 
         if (!_canBuild || !_objectInArea) exitWith {
-                if !((typeOf _object) in KPLIB_collisionIgnoreObjects) then {
+            if !((typeOf _object) in KPLIB_collisionIgnoreObjects) then {
                 if (_object getVariable ["KPLIB_BUILD_isObjectInArea", false]) then {
                     //private _spheres = (_object getVariable ["KPLIB_BUILD_objectSpheres", []]);
                     private _areaSpheres = localNamespace getVariable ["KPLIB_BUILD_areaSpheres", []];
@@ -289,7 +282,7 @@ private _mouseButtonDownEH = (findDisplay MISSION_IDD) displayAddEventHandler ["
         };
 
         // Build
-        if (_ctrl) then {
+        if (_ctrl && ((_buildType != BUILDTYPE_FOB) && (_buildType != BUILDTYPE_OUTPOST))) then {
             private _repeat = true;
 
             // Remove spheres

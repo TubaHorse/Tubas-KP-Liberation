@@ -14,6 +14,7 @@
 }] call CBA_fnc_addEventHandler;
 
 // Manage battlegroup groups
+// Manage battlegroup groups
 ["KPLIB_battlegroupSpawn", {
     params["_group"];
 
@@ -26,6 +27,10 @@
 
     KPLIB_enemyReadiness = (KPLIB_enemyReadiness - (round (1 + (random 1)))) max 0;
     stats_hostile_battlegroups = stats_hostile_battlegroups + 1;
+
+    [{
+        KPLIB_usedOpforSpawnPoints deleteAt (KPLIB_usedOpforSpawnPoints find _this); // Remove marker from variable
+    }, _spawn_marker, 180] call CBA_fnc_waitAndExecute;
 }] call CBA_fnc_addEventHandler;
 
 // Update production map markers

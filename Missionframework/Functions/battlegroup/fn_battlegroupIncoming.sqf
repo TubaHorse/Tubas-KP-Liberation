@@ -2,7 +2,7 @@
     File: fn_battlegroupIncoming.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 11/11/2025
-    Last Update: 13/10/2025
+    Last Update: 26/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -25,21 +25,14 @@ if (_spawnPoint isNotEqualTo "") then {
         KPLIB_usedOpforSpawnPoints = [];
     };
     KPLIB_usedOpforSpawnPoints pushBack _spawnPoint;
-
-    [{
-        _this params ["_spawnPoint"];
-
-        KPLIB_usedOpforSpawnPoints deleteAt (KPLIB_usedOpforSpawnPoints find _spawnPoint); // Remove marker from variable
-
-    }, [_spawnPoint], 180] call CBA_fnc_waitAndExecute;
 };
 
 if (missionNamespace getVariable ["KPLIB_enemy_AttackingObjective", []] isEqualTo _attackDestination) exitWith {};
 missionNamespace setVariable ["KPLIB_enemy_AttackingObjective", _attackDestination, true];
 
-if ( isNil "KPLIB_last_incoming_notif_time" ) then { KPLIB_last_incoming_notif_time = -9999 };
+if (isNil "KPLIB_last_incoming_notif_time") then {KPLIB_last_incoming_notif_time = -9999};
 
-if ( time > KPLIB_last_incoming_notif_time + 60 ) then {
+if (time > KPLIB_last_incoming_notif_time + 60) then {
 
     KPLIB_last_incoming_notif_time = time;
 

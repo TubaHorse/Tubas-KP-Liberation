@@ -2,7 +2,7 @@
     File: fn_battlegroupParatroopers.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 29/10/2025
-    Last Update: 12/06/2026
+    Last Update: 26/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -214,7 +214,7 @@ KPLIB_fnc_assemblingArea = {
         }forEach units (_grpInf);
         
         // Check if all units arrived at assembling area
-        if ({(_x distance (leader _grpInf) < 75) && {alive _x} && {[_x] call KPLIB_fnc_ace_isAwake}} count (units _grpInf) >= (count units _grpInf)) then {
+        if ({(_x distance (leader _grpInf) < 125) && {alive _x} && {[_x] call KPLIB_fnc_ace_isAwake}} count (units _grpInf) >= (count units _grpInf)) then {
             [_grpInf, _targetPos] call KPLIB_fnc_battlegroupAttack; // Commit inf to attack
             [_handle] call CBA_fnc_removePerFrameHandler; // Delete PFH
         };

@@ -2,7 +2,7 @@
     File: fn_deploy_PFH.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 04/11/2025
-    Last Update: 12/04/2026
+    Last Update: 25/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -46,8 +46,9 @@ KPLIB_REDEPLOY_pfhandle = [
             private _barracks = ([_objectPos] call KPLIB_fnc_deploy_barracksNearby);
             private _closestBase = [_objectPos] call KPLIB_fnc_getNearestPlayerBase;
             private _fobNearby = (KPLIB_player_fobs findIf {_closestBase distance2D _x < KPLIB_range_fob}) >= 0;
-
-            // Respawn cost (FOB/Outpost)
+            private _outpostNearby  = (KPLIB_player_outposts findIf {_closestBase distance2D _x < KPLIB_range_fob}) >= 0;
+            
+            // Respawn cost (FOB)
             if (!_canRespawn && !_barracks) then {
                 _buttonControl ctrlSetText (localize "STR_DEPLOY_DISABLED");
                 _buttonControl ctrlEnable false;
@@ -55,12 +56,12 @@ KPLIB_REDEPLOY_pfhandle = [
             } else {
                 if (_baseName isNotEqualTo "") then {
                     // Check for barracks
-                    if (_barracks && _fobNearby) then {
+                    if ((_barracks && _fobNearby) || _outpostNearby) then {
                         _buttonControl ctrlSetText (localize "STR_DEPLOY_BUTTON");
                         _buttonControl ctrlEnable true;
                         _buttonControl ctrlSetTooltip (localize "STR_DEPLOY_NOCOST_WARNING");
                     } else {
-                        // Fob or Outpost nearby or fob nearby and no barracks. Warn costs.
+                        // Fob nearby or fob nearby and no barracks. Warn costs.
                         _buttonControl ctrlSetText (localize "STR_DEPLOY_BUTTON");
                         _buttonControl ctrlEnable true;
                         _buttonControl ctrlSetTooltip format [localize "STR_DEPLOY_COST_WARNING", KPLIB_param_respawnCost, _baseName];

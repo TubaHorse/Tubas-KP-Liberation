@@ -2,7 +2,7 @@
     File: fn_battlegroupAttackHeli.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 30/10/2025 
-    Last Update: 07/06/2026
+    Last Update: 26/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -72,10 +72,10 @@ _pilot_group setCombatMode "RED";
 // Get countermeasures
 private "_counterMeasures";
 {
-    private _currentWeapons = _heli weaponsTurret _x;
+    private _currentWeapons = _attackHeli weaponsTurret _x;
     _counterMeasures = _currentWeapons select {tolower ((_x call bis_fnc_itemType) select 1) in ["countermeasureslauncher"]};
     if (_counterMeasures isNotEqualTo []) exitWith {}; // Found
-}forEach ([[-1]] + allTurrets _heli);
+}forEach ([[-1]] + allTurrets _attackHeli);
 _attackHeli setVariable ["KPLIB_heli_counterMeasures", _counterMeasures];
 
 _attackHeli addEventHandler ["IncomingMissile", {

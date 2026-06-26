@@ -3,7 +3,7 @@
     File: fn_deploy_handleButton.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 04/11/2025
-    Last Update: 13/06/2026
+    Last Update: 25/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -51,7 +51,7 @@ if (count (KPLIB_respawnPositionsList select _lbCurSel) == 3) then {
 if (_destPos isEqualTo [0,0,0]) exitWith {};
 
 // Respawn cost
-if (KPLIB_param_respawnCost > 0 && {(KPLIB_player_fobs isNotEqualTo []) || {KPLIB_player_outposts isNotEqualTo []}}) then {
+if (KPLIB_param_respawnCost > 0 && (KPLIB_player_fobs isNotEqualTo [])) then {
     // Ignore cost if there are barracks in the FOB
     if ([_destPos] call KPLIB_fnc_deploy_barracksNearby) exitWith {}; 
     

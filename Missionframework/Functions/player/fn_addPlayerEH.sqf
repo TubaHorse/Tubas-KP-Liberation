@@ -2,7 +2,7 @@
     File: fn_addPlayerEH.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 13/11/2025
-    Last Update: 20/04/2026
+    Last Update: 25/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -149,7 +149,6 @@ if (!KPLIB_param_weaponSway) then {
 };
 
 // Main map display EH for locked arsenal
-/*
 if (count KPLIB_sector_arsenalLink > 0) then {
     [{
         !isNull (findDisplay 46)
@@ -186,32 +185,38 @@ if (count KPLIB_sector_arsenalLink > 0) then {
         }];
     }] call CBA_fnc_waitUntilAndExecute;
 };
-*/
+
 
 // Show what arsenal items can be unlocked by capturing the sector by clicking on the Arsenal+ marker
 if (count KPLIB_sector_arsenalLink > 0) then {
     addMissionEventHandler ["MapSingleClick", {
         params["", "_pos"];
 
-        private _sector = [300, _pos] call KPLIB_fnc_getNearestSector;
-        if (_sector in (keys KPLIB_sector_arsenalLink)) then {
-            private _items = KPLIB_sector_arsenalLink get _sector;
-            _items = _items apply {
-                private _name = "";
-                if (isClass(configFile >> "cfgWeapons" >> _x)) then {
-                    _name = getText(configFile >> "cfgWeapons" >> _x >> "displayName");
-                };
+        private _control = (findDisplay 12) displayCtrl 51;
+        private _mapSign = ctrlMapMouseOver _control;
+        if ((_mapSign # 0) isEqualTo "marker") then {
+            getMousePosition params ["_mouseX", "_mouseY"];
+            private _mousePos = (_control ctrlMapScreenToWorld [_mouseX, _mouseY]);
+            private _sector = [300, _mousePos] call KPLIB_fnc_getNearestSector;
+            if (_sector in (keys KPLIB_sector_arsenalLink)) then {
+                private _items = KPLIB_sector_arsenalLink get _sector;
+                _items = _items apply {
+                    private _name = "";
+                    if (isClass(configFile >> "cfgWeapons" >> _x)) then {
+                        _name = getText(configFile >> "cfgWeapons" >> _x >> "displayName");
+                    };
 
-                if (isClass(configFile >> "cfgMagazines" >> _x)) then {
-                    _name = getText(configFile >> "cfgMagazines" >> _x >> "displayName");
-                };
+                    if (isClass(configFile >> "cfgMagazines" >> _x)) then {
+                        _name = getText(configFile >> "cfgMagazines" >> _x >> "displayName");
+                    };
 
-                if (isClass(configFile >> "cfgVehicles" >> _x)) then {
-                    _name = getText(configFile >> "cfgVehicles" >> _x >> "displayName");
-                };
-                _name
-            }; 
-            [parseText (format[["<t size='1.5'>", localize "STR_ARSENAL_UNLOCK_LIST", "</t><br/>", "%1", "<br/>"] joinString "", _items joinString "<br/>"]), true, 7] call KPLIB_fnc_hint;
+                    if (isClass(configFile >> "cfgVehicles" >> _x)) then {
+                        _name = getText(configFile >> "cfgVehicles" >> _x >> "displayName");
+                    };
+                    _name
+                }; 
+                [parseText (format[["<t size='1.5'>", localize "STR_ARSENAL_UNLOCK_LIST", "</t><br/>", "%1", "<br/>"] joinString "", _items joinString "<br/>"]), true, 7] call KPLIB_fnc_hint;
+            };
         };
     }];
 };
