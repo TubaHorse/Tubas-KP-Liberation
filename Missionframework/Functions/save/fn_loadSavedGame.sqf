@@ -2,7 +2,7 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 10/06/2026
+    Last Update: 27/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -356,13 +356,6 @@ if (!isNil "_saveData") then {
     {
         [_x select 0, _x select 1] call KPLIB_fnc_createClearance;
     } forEach KPLIB_clearances;
-
-    // Get total area of the map with the created trigger to be used as whitelist to avoid bad positions for units off map
-    private _axis = worldSize / 2;
-    private _center = [_axis, _axis , 0];
-    KPLIB_centerArea = createTrigger ["EmptyDetector", _center];
-    KPLIB_centerArea setTriggerArea [_axis, _axis, 0, true, -1];
-    publicVariable "KPLIB_centerArea"; 
 
     // Collection array for all objects which are loaded
     private _spawnedObjects = [];
@@ -734,6 +727,13 @@ if (!isNil "_saveData") then {
 } else {
     ["Save nil", "SAVE"] call KPLIB_fnc_log;
 };
+
+// Get total area of the map with the created trigger to be used as whitelist to avoid bad positions off map for units
+private _axis = worldSize / 2;
+private _center = [_axis, _axis , 0];
+KPLIB_centerArea = createTrigger ["EmptyDetector", _center];
+KPLIB_centerArea setTriggerArea [_axis, _axis, 0, true, -1];
+publicVariable "KPLIB_centerArea"; 
 
 if (KPLIB_fobNames isEqualTo []) then {KPLIB_fobNames = KPLIB_militaryAlphabet};
 if (KPLIB_outpostNames isEqualTo []) then {KPLIB_outpostNames = KPLIB_militaryAlphabet};
