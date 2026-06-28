@@ -2,7 +2,7 @@
     File: fn_SAM_createSite.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 05/12/2025
-    Last Update: 27/05/2026
+    Last Update: 28/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -287,7 +287,7 @@ if (KPLIB_param_SAMSite == 2) then {
 	private _watchDir = (_radar getVariable ["KPLIB_radarWatchDir", getDir _radar]) + 30;
 	_radar doWatch (_radar getPos [300, _watchDir]);
 	_radar setVariable ["KPLIB_radarWatchDir", _watchDir];
-}, 10, _radar] call CBA_fnc_addPerFrameHandler;
+}, 3, _radar] call CBA_fnc_addPerFrameHandler;
 
 [_spawnMarker, _radar, _samSiteTurrets, _samSiteObjects, _samShorads, _staticGroup, _infGarrison, _infPatrols] call KPLIB_fnc_SAM_monitorSitePFH;
 

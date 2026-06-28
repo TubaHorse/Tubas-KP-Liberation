@@ -433,9 +433,11 @@ KPLIB_objectInits = [
 
     // Radars
     [
-        ["B_SAM_System_03_F","B_AAA_System_01_F", "B_Radar_System_01_F"],
+        KPLIB_radarType,
         {
             _this setVehicleRadar 1;
+            _this setVehicleReceiveRemoteTargets true;
+            _this setVehicleReportRemoteTargets true;
         }
     ],
 

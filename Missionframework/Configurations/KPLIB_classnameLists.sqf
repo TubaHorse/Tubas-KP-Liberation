@@ -891,3 +891,20 @@ KPLIB_guardTowers_marksman = [
     "Land_DeerStand_01_F",
     "Land_DeerStand_02_F"
 ];
+
+// Put here all ground vehicles classnames that has radar to force emission controls on
+KPLIB_radarType = [
+    "B_SAM_System_03_F",
+    "B_AAA_System_01_F", 
+    "B_Radar_System_01_F",
+    "O_Radar_System_02_F",
+    "O_APC_Tracked_02_AA_F",
+    "O_SAM_System_04_F",
+    "pook_BCP_USMC",
+    "pook_MIM23_USMC",
+    "cwr3_b_usmc_m163",
+    "pook_SA3_static",
+    "pook_5P85D_RU",
+    "pook_30N6E2_RU",
+    "pook_30N6E_RU"
+];

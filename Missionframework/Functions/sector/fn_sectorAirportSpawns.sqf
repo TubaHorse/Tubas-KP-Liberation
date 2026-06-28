@@ -2,7 +2,7 @@
     File: fn_sectorAirportSpawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 13/05/2026
-    Last Update: 11/06/2026
+    Last Update: 27/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -247,8 +247,6 @@ if (_samRadarPos isNotEqualTo [0,0]) then {
     private _samRadar = [_samRadarPos, selectRandom KPLIB_o_SAM_radars, 0, true] call KPLIB_fnc_spawnVehicle;
     [_samRadar] call KPLIB_fnc_clearCargo;
     _samRadar setAutonomous true;
-    _samRadar setVehicleReceiveRemoteTargets true;
-    _samRadar setVehicleReportRemoteTargets true;
     _samRadar deleteVehicleCrew (driver _samRadar);
     private _crewRadar = crew _samRadar;
     _crewRadar join _samGrp;
@@ -267,6 +265,16 @@ if (_samRadarPos isNotEqualTo [0,0]) then {
             _unit moveInGunner _vehicle;
         };
     }];
+
+    [{
+        params["_radar", "_handle"];
+
+        if (!alive _radar || {!alive (gunner _radar)}) exitWith {[_handle] call CBA_fnc_removePerFrameHandler};
+
+        private _watchDir = (_radar getVariable ["KPLIB_radarWatchDir", getDir _radar]) + 30;
+        _radar doWatch (_radar getPos [300, _watchDir]);
+        _radar setVariable ["KPLIB_radarWatchDir", _watchDir];
+    }, 3, _samRadar] call CBA_fnc_addPerFrameHandler;
 
     _sectorUnits pushback _samRadar;
     {_sectorUnits pushback _x;} foreach _crewRadar;
@@ -289,8 +297,6 @@ if (_samRadarPos isNotEqualTo [0,0]) then {
     };
     private _sam = [_samLauncherPos, selectRandom KPLIB_o_SAM_launchers, 0, true] call KPLIB_fnc_spawnVehicle;
     [_sam] call KPLIB_fnc_clearCargo;
-    _sam setVehicleReceiveRemoteTargets true;
-    _sam setVehicleReportRemoteTargets true;
     _sam setAutonomous true;
     private _crewSam = crew _sam;
     _crewSam join _samGrp;
@@ -306,8 +312,12 @@ if (_samRadarPos isNotEqualTo [0,0]) then {
     _samGrp addEventHandler ["KnowsAboutChanged", {
         params ["_group", "_targetUnit", "_newKnowsAbout", "_oldKnowsAbout"];
         // Pook SAM tends to fire at ground units
-        if (((getPosATL _targetUnit) # 2) < 2) then {_group forgetTarget _targetUnit};
+        if (((getPosATL _targetUnit) # 2) < 20) then {_group forgetTarget _targetUnit};
     }];
+
+    if (KPLIB_param_SAMSite == 2) then {
+        [_samRadar, [_sam]] call KPLIB_fnc_SAM_customRadarRange;
+    };
 };
 
 // Manage reinforcements and sector
