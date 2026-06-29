@@ -2,7 +2,7 @@
     File: fn_registerStorageSector.sqf
     Author: PiG13BR - https://github.com/KillahPotatoes
     Date: 20/11/2025
-    Last Update: 22/11/2025
+    Last Update: 29/11/2025
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -39,9 +39,6 @@ _storage setVariable ["KPLIB_factoryStorage", true, true];
     _production set [2, [(getPosATL _storage), (getDir _storage), (vectorUpVisual _storage)]];
     publicVariable "KPLIB_production";
 
-    _storage remoteExecCall ["KPLIB_fnc_addActionsStorage"];
-
     [format["Storage builded in %1. Storage Object: %2", markerText _sector, _storage], "BUILD"] call KPLIB_fnc_log;
 
 }, [_storage], 1] call CBA_fnc_waitAndExecute;
-

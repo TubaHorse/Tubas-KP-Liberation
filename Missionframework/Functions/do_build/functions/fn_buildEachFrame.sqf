@@ -3,7 +3,7 @@
     File: fn_buildEachFrame.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 11/11/2025
-    Last update: 08/03/2026
+    Last update: 29/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -43,6 +43,11 @@ if (isNil "_previousWeapon") then {
 KPLIB_doBuild_eachFrame = addMissionEventHandler ["EachFrame", { 
     
     _thisArgs params ["_object", "_player", "_posCenter", "_maxDist", "_typeNumber"];
+
+    // Failsafe
+    if (!alive _player || !([_player] call KPLIB_fnc_ace_isAwake)) exitWith {
+        [_object] call KPLIB_fnc_cancelBuilding;
+    };
 
     private _areaSpheres = localNamespace getVariable ["KPLIB_BUILD_areaSpheres", []];
     private _objectSize = (boundingBoxReal _object # 2) * 1.05;

@@ -3,7 +3,7 @@
     File: fn_baseName_setNewName.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 13/04/2026
-    Last Update: 14/04/2026
+    Last Update: 29/04/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -34,6 +34,7 @@ if (_newName isEqualTo "") exitWith {["No name provided", true, 3] call KPLIB_fn
 private _index = KPLIB_player_fobs findIf {(_x distance2d _base) < 100};
 if (_index >= 0) exitWith {
     KPLIB_fobNames set [_index, _newName];
+    publicVariable "KPLIB_fobNames";
     ["KPLIB_updateBaseMarkers", []] call CBA_fnc_serverEvent;
     true
 };
@@ -41,6 +42,7 @@ if (_index >= 0) exitWith {
 private _index = KPLIB_player_outposts findIf {(_x distance2d _base) < 100};
 if (_index >= 0) exitWith {
     KPLIB_outpostNames set [_index, _newName];
+    publicVariable "KPLIB_outpostNames";
     ["KPLIB_updateBaseMarkers", []] call CBA_fnc_serverEvent;
     true;
 };

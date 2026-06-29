@@ -5,7 +5,7 @@
     File: fn_manageBuildHUD.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 21/02/2026
-    Last update: 26/06/2026
+    Last update: 29/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -77,12 +77,19 @@ _cameraTextCtrl ctrlSetTextColor [0,1,0,1];
 // Camera on (default)
 [_player] call KPLIB_fnc_buildCameraAssist;
 
-// Unshow cancel control if it's a FOB or Outpost
+// Check if it can repeat build
+localNamespace setVariable ["KPLIB_canRepeatBuild", true];
 private _buildType = localNamespace getVariable ["KPLIB_BUILD_buildType", 1];
-if (_buildType == BUILDTYPE_FOB || _buildType == BUILDTYPE_OUTPOST) then {
+if (
+    _buildType == BUILDTYPE_FOB 
+    || _buildType == BUILDTYPE_OUTPOST 
+    || _buildType == BUILDTYPE_FACTORY_STORAGE 
+    || !([localNamespace getVariable ["KPLIB_BUILD_itemToBuild", []]] call KPLIB_fnc_build_isItemAffordable)
+) then {
     //_cancelTextCtrl ctrlshow false;
     _cancelTextCtrl ctrlSetTextColor [0.4,0.4,0.4,1];
     _repeatTextCtrl ctrlSetTextColor [0.4,0.4,0.4,1];
+    localNamespace setVariable ["KPLIB_canRepeatBuild", false];
 };
 
 // Update scroll information
@@ -255,7 +262,7 @@ private _mouseButtonDownEH = (findDisplay MISSION_IDD) displayAddEventHandler ["
     private _player = localNamespace getVariable ["KPLIB_BUILD_player", objNull];
     private _buildType = localNamespace getVariable ["KPLIB_BUILD_buildType", 1];
 
-    if (_button > 0) then {
+    if (_button == 1) then {
         // Cancel
         if (_buildType != BUILDTYPE_FOB && _buildType != BUILDTYPE_OUTPOST) then {
             [_object] call KPLIB_fnc_cancelBuilding;
@@ -282,8 +289,9 @@ private _mouseButtonDownEH = (findDisplay MISSION_IDD) displayAddEventHandler ["
         };
 
         // Build
-        if (_ctrl && ((_buildType != BUILDTYPE_FOB) && (_buildType != BUILDTYPE_OUTPOST))) then {
-            private _repeat = true;
+        // ToDo: use MMB to repeat build (_button == 2)
+        if (_ctrl && (localNamespace getVariable ["KPLIB_canRepeatBuild", false])) then {
+            private _repeat = true; 
 
             // Remove spheres
             private _spheres =  (localNamespace getVariable ["KPLIB_BUILD_areaSpheres", []]);

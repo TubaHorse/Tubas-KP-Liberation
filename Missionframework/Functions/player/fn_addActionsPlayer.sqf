@@ -2,7 +2,7 @@
     File: fn_addActionsPlayer.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-04-13
-    Last Update: 2026-06-09
+    Last Update: 2026-06-29
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -112,8 +112,7 @@ _player addAction [
         isNull (objectParent _originalTarget)
         && {alive _originalTarget}
         && {
-            _originalTarget getVariable ['KPLIB_b_supplyDump', false]
-            || {_originalTarget getVariable ['KPLIB_isNearArsenal', false]}
+            _originalTarget getVariable ['KPLIB_isNearArsenal', false]
             || {_originalTarget getVariable ['KPLIB_isNearStart', false]}
             || {_originalTarget getVariable ['KPLIB_isNearDump', false]}
         }

@@ -1,4 +1,4 @@
-#include "Pylon_Armament_Selector\ui\RscPylonManagerMenu.hpp"
+#include "Pylon_Armament_Selector\ui\RscPASMenu.hpp"
 #include "Arty_Menu\ui\RscArtyMenu.hpp"
 #include "Supply_Menu\ui\RscSupplyMenu.hpp"
 #include "Base_Name\ui\LiberationBaseNameRsc.hpp"

@@ -37,23 +37,24 @@
 ["KPLIB_updateProductionMarkers", {
     params["_sector"];
 
+    private _prodList = KPLIB_production get _sector;
     private _prodMarkers = KPLIB_production_markers get _sector;
-    _prodMarkers set [0, (_y # 3)];
-    _prodMarkers set [1, (_y # 4)];
-    _prodMarkers set [2, (_y # 5)];
+    _prodMarkers set [0, (_prodList # 3)];
+    _prodMarkers set [1, (_prodList # 4)];
+    _prodMarkers set [2, (_prodList # 5)];
 
     private _originalMarkerName = _prodMarkers # 3;
     
     // Update map marker
     private _markerText = _originalMarkerName + " [";
-    if (_y # 3) then {_markerText = _markerText + "S";}; // Can produce supply
-    if (_y # 4) then {_markerText = _markerText + "A";}; // Can produce ammo
-    if (_y # 5) then {_markerText = _markerText + "F";}; // Can produce fuel
+    if (_prodList # 3) then {_markerText = _markerText + "S";}; // Can produce supply
+    if (_prodList # 4) then {_markerText = _markerText + "A";}; // Can produce ammo
+    if (_prodList # 5) then {_markerText = _markerText + "F";}; // Can produce fuel
     _markerText = _markerText + "]";
 
     _sector setMarkerText _markerText;
     publicVariable "KPLIB_production_markers";
-}] call CBA_fnc_addEventHandler; 
+}] call CBA_fnc_addEventHandler;
 
 // Ace captive listen event
 ["ace_captiveStatusChanged", {

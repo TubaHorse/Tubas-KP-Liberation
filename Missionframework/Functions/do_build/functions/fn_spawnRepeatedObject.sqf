@@ -2,7 +2,7 @@
     File: fn_spawnRepeatedObject.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 03/09/2025
-    Last update: 12/04/2026
+    Last update: 29/06/2026
 
     Description:
         Functions like fn_spawnPreplaceObject.sqf, but get some information about the copied object
@@ -30,9 +30,10 @@ private _heightMode = localNamespace getVariable ["KPLIB_BUILD_heightMode", fals
 private _yMode = localNamespace getVariable ["KPLIB_BUILD_yMode", false];
 
 // Substract resources from storages
-private _itemToBuild = localNamespace getVariable ["KPLIB_BUILD_itemToBuild", []]; // Save building array
+private _itemToBuild = localNamespace getVariable ["KPLIB_BUILD_itemToBuild", []];
 private _buildType = localNamespace getVariable ["KPLIB_BUILD_buildType", 1];
-["KPLIB_subtractResources", [_itemToBuild, _buildType]] call CBA_fnc_serverEvent;
+private _buildPos = ([getPosATL _player] call KPLIB_fnc_getNearestBuildPos) # 0;
+["KPLIB_subtractResources", [_itemToBuild, _buildType, _buildPos]] call CBA_fnc_serverEvent;
 
 // Create preplaced object (locally)
 private _object = createVehicleLocal [_objectClass, markerPos "spawn_ghost_structure"]; // Placeholder object and in a placeholder spawn pos
@@ -48,6 +49,10 @@ private _simpleObject = [
     true // LOCAL!
 ] call BIS_fnc_createSimpleObject;
 if (!isNull _simpleObject) then {deleteVehicle _object; _object = _simpleObject;}; // If creation not fails, delete the preplaced object and replace _object variable 
+
+// Simulation and collision flag
+_object enableSimulationGlobal false;
+_object setPhysicsCollisionFlag false;
 
 // Clear cargo
 [_object] call KPLIB_fnc_clearCargo;
