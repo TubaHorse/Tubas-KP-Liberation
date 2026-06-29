@@ -29,22 +29,22 @@ if (KPLIB_param_clearBrush && KPLIB_ace) then {
     ] call CBA_fnc_addSetting;
 };
 
-if (KPLIB_param_pylonManager && KPLIB_ace) then {
+if (KPLIB_param_PAS && KPLIB_ace) then {
     // Invert camera movement
     [
-        "PIG_PylonManager_camInverted",
+        "PIG_PAS_camInverted",
         "CHECKBOX",
         localize "STR_TITLE_SETTING_INVERT_CAMERA",
-        localize "STR_TITLE_PYLONMANAGER",
+        ["KP Liberation", localize "STR_PAS_TITLE"],
         false
     ] call CBA_fnc_addSetting;
 
     // Required objects nearby
     [
-        "PIG_PylonManager_RequireNearby", 
+        "PIG_PAS_RequireNearby", 
         "EDITBOX",  
-        [localize "STR_PYLONMANAGER_SETTING_NEARBYOBJECTS_DESCRIPTION", localize "STR_PYLONMANAGER_SETTING_NEARBYOBJECTS_TOOLTIP"], 
-        ["KP Liberation", localize "STR_TITLE_PYLONMANAGER"], 
+        [localize "STR_PAS_SETTING_NEARBYOBJECTS_DESCRIPTION", localize "STR_PAS_SETTING_NEARBYOBJECTS_TOOLTIP"], 
+        ["KP Liberation", localize "STR_PAS_TITLE"], 
         "['Land_Missle_Trolley_02_F', 'Land_Bomb_Trolley_01_F']",
         true // Global
     ] call CBA_fnc_addSetting;

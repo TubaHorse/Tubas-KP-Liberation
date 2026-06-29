@@ -291,7 +291,7 @@ class KPLIB {
     #include "Extensions\Enemy_QRF\cfgFunctions.hpp"
     #include "Extensions\Lock_Arsenal\cfgFunctions.hpp"
     #include "Extensions\Player_Menu\KPPLM\KPPLM_functions.hpp"
-    #include "Extensions\Pylon_Manager\cfgFunctions.hpp"
+    #include "Extensions\Pylon_Armament_Selector\cfgFunctions.hpp"
     #include "Extensions\Rally_Point\cfgFunctions.hpp"
     #include "Extensions\SAM_Sites\cfgFunctions.hpp"
     #include "Extensions\Sector_Objects\cfgFunctions.hpp"

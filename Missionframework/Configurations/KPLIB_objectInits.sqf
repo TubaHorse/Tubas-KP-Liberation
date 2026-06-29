@@ -360,7 +360,7 @@ KPLIB_objectInits = [
                 }, {
                     params["_air"];
 
-                    ["KPLIB_addActionPylonManager", _air] call CBA_fnc_globalEventJIP;
+                    ["KPLIB_addActionPAS", _air] call CBA_fnc_globalEventJIP;
                 }, [_this]] call CBA_fnc_waitUntilAndExecute;
             };
 

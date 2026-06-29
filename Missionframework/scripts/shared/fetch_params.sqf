@@ -104,7 +104,7 @@ if(isServer) then {
     GET_PARAM_BOOL(KPLIB_param_enemyFighters, "EnemyFighters", 1);
     GET_PARAM_BOOL(KPLIB_param_enemyMines, "EnemyMines", 1);
     GET_PARAM(KPLIB_param_lockArsenal, "LockArsenal", 0);
-    GET_PARAM_BOOL(KPLIB_param_pylonManager, "PylonManager", 1);
+    GET_PARAM_BOOL(KPLIB_param_PAS, "PylonManager", 1);
     GET_PARAM_BOOL(KPLIB_param_rallyPoint, "RallyPoint", 1);
     GET_PARAM(KPLIB_param_SAMSite, "SAMSites", 1);
     GET_PARAM(KPLIB_param_SectorEvents, "SectorEvents", 0);
@@ -618,7 +618,7 @@ if (!isDedicated && hasInterface) then {
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_TITLE_PYLONMANAGER";
-    _value = if (KPLIB_param_pylonManager) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _value = if (KPLIB_param_PAS) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_TITLE_RALLYPOINT";

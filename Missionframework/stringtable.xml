@@ -9058,26 +9058,126 @@
 		</Container>
 
 
-        <Container name="Pylon Manager">
-            <Key ID="STR_ACTION_PYLONMANAGER">
-				<Original>Pylon Manager</Original>
-				<Portuguese>Gerenciar Pilones</Portuguese>
+		<Container name="PiG's PAS">
+			<Key ID="STR_PAS_TITLE">
+				<Original>Pylon Armament Selector</Original>
+				<Portuguese>Seletor de Armamento</Portuguese>
 			</Key>
-            <Key ID="STR_TITLE_PYLONMANAGER">
-				<Original>Pylon Management</Original>
-				<Portuguese>Gerenciamento de Pilones</Portuguese>
+			<Key ID="STR_SAVE_BUTTON">
+				<Original>Save</Original>
+				<Portuguese>Salvar</Portuguese>
 			</Key>
-            <Key ID="STR_TITLE_SETTING_INVERT_CAMERA">
+			<Key ID="STR_LOAD_BUTTON">
+				<Original>Load</Original>
+				<Portuguese>Carregar</Portuguese>
+			</Key>
+			<Key ID="STR_DELETE_BUTTON">
+				<Original>Delete</Original>
+				<Portuguese>Deletar</Portuguese>
+			</Key>
+			<Key ID="STR_RENAME_BUTTON">
+				<Original>Rename</Original>
+				<Portuguese>Renomear</Portuguese>
+			</Key>
+			<Key ID="STR_SAVENEW_BUTTON">
+				<Original>Save New Preset</Original>
+				<Portuguese>Salvar Predefinição</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_OVERWRITE_PRESET_TOOLTIP">
+				<Original>Overwrite preset</Original>
+				<Portuguese>Subustituir predefinição</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_LOAD_PRESET_TOOLTIP">
+				<Original>Load preset on aircraft</Original>
+				<Portuguese>Carregar predefinição no avião</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_DELETE_PRESET_TOOLTIP">
+				<Original>Delete preset (this can't be undone)</Original>
+				<Portuguese>Deletar predefinição (definitivamente)</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_RENAME_PRESET_TOOLTIP">
+				<Original>Rename the selected preset</Original>
+				<Portuguese>Renomear predefinição</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_SAVENEWPRESET_TOOLTIP">
+				<Original>Save this as a new preset</Original>
+				<Portuguese>Salvar como uma nova predefinição</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_AMMUNITION_TITLE">
+				<Original>Ammunition</Original>
+				<Portuguese>Armamentos</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_PRESETS_TITLE">
+				<Original>Presets / Loadouts</Original>
+				<Portuguese>Predefinições</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_CFG_WARN">
+				<Original>You can't modify configuration presets</Original>
+				<Portuguese>Você não pode modificar predefinições predeterminadas</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_DELETE_WARN">
+				<Original>No preset selected to delete</Original>
+				<Portuguese>Nenhuma predefinição selecionada para deletar</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_LOAD_WARN">
+				<Original>No preset selected to load</Original>
+				<Portuguese>Nenhuma predefinição selecionada para carregar</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_NAME_WARN">
+				<Original>Invalid Name/Already Exists</Original>
+				<Portuguese>Nome Invalido/Já existente</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_ENTER_NAME_WARN">
+				<Original>Enter a name for your preset</Original>
+				<Portuguese>Coloque um nome para seu preset</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_ENTER_NAME_ERROR">
+				<Original>This name (%1) already exist in the preset</Original>
+				<Portuguese>Esse nome (%1) já existe nas predefinições</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_NO_PRESET_OVERWRITE_WARN">
+				<Original>No preset selected to overwrite</Original>
+				<Portuguese>Nenhuma predefinição selecionada para substituir</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_NO_PRESET_RENAME_WARN">
+				<Original>No preset selected to rename</Original>
+				<Portuguese>Nenhuma predefinição selecionada para renomear</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_COMPAT_MAGAZINES">
+				<Original>All Compatible Armaments</Original>
+				<Portuguese>Todos Armamentos Compatíveis</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_FAVORITES">
+				<Original>Favorites</Original>
+				<Portuguese>Favoritos</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_DRIVER">
+				<Original>Pilot</Original>
+				<Portuguese>Piloto</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_GUNNER">
+				<Original>Gunner</Original>
+				<Portuguese>Artilheiro</Portuguese>
+			</Key>
+			<Key ID="STR_TITLE_SETTING_INVERT_CAMERA">
 				<Original>Invert camera controls</Original>
 				<Portuguese>Inverter controles da camera</Portuguese>
 			</Key>
-            <Key ID="STR_PYLONMANAGER_SETTING_NEARBYOBJECTS_DESCRIPTION">
+			<Key ID="STR_PAS_SETTING_NEARBYOBJECTS_DESCRIPTION">
 				<Original>Required nearby object</Original>
 				<Portuguese>Objeto requerido perto</Portuguese>
 			</Key>
-            <Key ID="STR_PYLONMANAGER_SETTING_NEARBYOBJECTS_TOOLTIP">
-				<Original>The aircraft must be near of the provided object in the list</Original>
-				<Portuguese>A aéronave precisa estar perto do objeto que está na lista</Portuguese>
+            <Key ID="STR_PAS_SETTING_NEARBYOBJECTS_TOOLTIP">
+				<Original>The aircraft must be near (50 m) of the provided object in the list</Original>
+				<Portuguese>A aeronave precisa estar perto (50 m) do objeto que está na lista</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_EMPTY">
+				<Original>Empty</Original>
+				<Portuguese>Vazio</Portuguese>
+			</Key>
+			<Key ID="STR_PAS_NONE">
+				<Original>NONE</Original>
+				<Portuguese>NENHUM</Portuguese>
 			</Key>
         </Container>
 

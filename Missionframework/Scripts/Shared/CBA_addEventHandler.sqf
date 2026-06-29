@@ -7,7 +7,9 @@
 // Battlegroup notifications
 ["KPLIB_reinfIncoming", {
     params[["_spawn_marker", ""], "_objPos"];
+
     [_spawn_marker, _objPos] call KPLIB_fnc_battlegroupIncoming;
+
 }] call CBA_fnc_addEventHandler;
 
 // Add FOB Build Actions
@@ -144,11 +146,6 @@
     KPLIB_sector_storage deleteAt _this;
     publicVariable "KPLIB_sector_storage";
 
-}] call CBA_fnc_addEventHandler;
-
-// Pylon manager
-["KPLIB_addActionPylonManager", {
-    _this call KPLIB_fnc_addPylonManagerAction;
 }] call CBA_fnc_addEventHandler;
 
 // Supply Dump
