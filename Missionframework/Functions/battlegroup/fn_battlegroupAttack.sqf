@@ -2,7 +2,7 @@
     File: fn_battlegroupAttack.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 07/11/2025
-    Last Update: 08/06/2026
+    Last Update: 30/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -65,6 +65,8 @@ if (([_grp] call BIS_fnc_groupVehicles) isEqualTo []) then {
             private _wp1 = _grp addWaypoint [_objPos, 25];
             _wp1 setWaypointType "SAD";
             _wp1 setWaypointFormation (selectRandom ["STAG COLUMN", "WEDGE", "VEE", "LINE", "ECH LEFT", "ECH RIGHT", "DIAMOND"]);
+            private _wp2 = _grp addWaypoint [_objPos, 25];
+            _wp2 setWaypointType "CYCLE";
         };
 
          // PFH to change mode if there are players inside sector (only with lambs)
@@ -95,6 +97,8 @@ if (([_grp] call BIS_fnc_groupVehicles) isEqualTo []) then {
                     private _wp1 = _grp addWaypoint [_objPos, 25];
                     _wp1 setWaypointType "SAD";
                     _wp1 setWaypointFormation (selectRandom ["STAG COLUMN", "WEDGE", "VEE", "LINE", "ECH LEFT", "ECH RIGHT", "DIAMOND"]);
+                    private _wp2 = _grp addWaypoint [_objPos, 25];
+                    _wp2 setWaypointType "CYCLE";
                 }
             }
         }, 60, [_objPos, _grp]] call CBA_fnc_addPerFrameHandler;
@@ -106,12 +110,16 @@ if (([_grp] call BIS_fnc_groupVehicles) isEqualTo []) then {
         private _wp1 = _grp addWaypoint [_objPos, 25];
         _wp1 setWaypointType "SAD";
         _wp1 setWaypointFormation (selectRandom ["STAG COLUMN", "WEDGE", "VEE", "LINE", "ECH LEFT", "ECH RIGHT", "DIAMOND"]);
+        private _wp2 = _grp addWaypoint [_objPos, 25];
+        _wp2 setWaypointType "CYCLE";
     };
 } else {
     // Veh
-    _waypoint = _grp addWaypoint [_objPos, 100];
-    _waypoint setWaypointType "SAD";
-    _waypoint setWaypointBehaviour "SAFE"; // Vehicles in safe mode to follow road. Tracked vehicles tends to go off road.
+    private _wp1 = _grp addWaypoint [_objPos, 100];
+    _wp1 setWaypointType "SAD";
+    _wp1 setWaypointBehaviour "SAFE"; // Vehicles in safe mode to follow road. Tracked vehicles tends to go off road.
+    private _wp2 = _grp addWaypoint [_objPos, 100];
+    _wp2 setWaypointType "CYCLE";
 };
 
 true

@@ -8,7 +8,7 @@ sleep 5;
 if (_sector in KPLIB_sectors_airport) then {
     _ownership = [markerpos _sector, getMarkerSize _sector] call KPLIB_fnc_getSectorOwnership;
 } else {
-    _ownership = [markerpos _sector, getMarkerSize _sector] call KPLIB_fnc_getSectorOwnership;
+    _ownership = [markerpos _sector] call KPLIB_fnc_getSectorOwnership;
 };
 
 if (_ownership != KPLIB_side_enemy) exitWith {};
@@ -22,6 +22,7 @@ if ( KPLIB_param_bluforDefenders ) then {
     _grp = creategroup [KPLIB_side_player, true];
     {
         [_x, markerPos _sector, _grp] call KPLIB_fnc_createManagedUnit;
+        sleep 1;
     } foreach _squad_type;
     sleep 3;
     _grp setBehaviour "COMBAT";

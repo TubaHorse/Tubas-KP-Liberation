@@ -2,7 +2,7 @@
     File: fn_setFactoryFacility.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 19/11/2025
-    Last Update: 19/11/2025
+    Last Update: 30/06/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -32,6 +32,22 @@ if !(count KPLIB_production_markers > 0) then {
 
     publicVariable "KPLIB_production_markers";
 };
+
+// Check for new factories
+{
+    if !(_x in KPLIB_production_markers) then {
+        private _sector = _x;
+        private _facility = [];
+        switch (true) do {
+            case ((_x find "supply") >= 0) : {_facility = [true,false,false]};
+            case ((_x find "ammo") >= 0) : {_facility = [false,true,false]};
+            case ((_x find "fuel") >= 0) : {_facility = [false,false,true]};
+            default {_facility = selectRandom [[true,false,false], [false,true,false], [false,false,true]];};
+        };
+        KPLIB_production_markers set [_sector, [_facility # 0, _facility # 1, _facility # 2, markerText _sector]];
+        publicVariable "KPLIB_production_markers";
+    };
+}forEach KPLIB_sectors_factory;
 
 // Update all factory markers at game start
 {
