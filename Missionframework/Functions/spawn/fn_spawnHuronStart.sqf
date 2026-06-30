@@ -1,7 +1,19 @@
-scriptName "huron_manager";
+/*
+    File: fn_spawnHuronStart.sqf
+    Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
+    Date: 05/05/2026
+    Last Update: 30/06/2026
+    License: MIT License - http://www.opensource.org/licenses/MIT
 
-waitUntil {!isNil "KPLIB_saveLoaded"};
-waitUntil {KPLIB_saveLoaded};
+    Description:
+        Spawns the huron (KPLIB_b_potato01) at start
+
+    Parameter(s):
+        -
+
+    Returns:
+        -
+*/
 
 KPLIB_potato01 = objNull;
 
@@ -28,24 +40,3 @@ if !(alive KPLIB_potato01) then {
 [KPLIB_potato01] call KPLIB_fnc_clearCargo;
 KPLIB_potato01 setVariable ["ace_medical_isMedicalVehicle", true, true];
 publicVariable "KPLIB_potato01";
-
-KPLIB_potato01 respawnVehicle [KPLIB_potatoRespawnDelay, -1, true, true];
-
-KPLIB_potato01 addEventHandler ["Respawn", {
-	params ["_unit", "_corpse"];
-
-    ["Potato 01 respawned at Operation Base", "POTATO"] call KPLIB_fnc_log;
-
-    _unit spawn {
-        KPLIB_potato01 = _this;
-        _this allowdamage false; 
-        _this setDir (getDir huronspawn); 
-        _this setPosATL (getposATL huronspawn); 
-        _this setDamage 0; 
-        sleep 0.5; 
-        _this enableSimulationGlobal true; 
-        _this setDamage 0; 
-        _this allowdamage true; 
-        [_this] call KPLIB_fnc_addObjectInit; 
-    }
-}];

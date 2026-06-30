@@ -350,9 +350,9 @@ KPLIB_objectInits = [
         }
     ],
 
-    // Pylon Manager
+    // Pylon Armament Selector
     [
-        KPLIB_b_air_classes + [KPLIB_b_potato01],
+        KPLIB_b_air_classes,
         {
             if (KPLIB_ace) then {
                 [{
@@ -363,7 +363,13 @@ KPLIB_objectInits = [
                     ["KPLIB_addActionPAS", _air] call CBA_fnc_globalEventJIP;
                 }, [_this]] call CBA_fnc_waitUntilAndExecute;
             };
+        }
+    ],
 
+    // Get in/get out air assets detection
+    [
+        KPLIB_b_air_classes + [KPLIB_b_potato01],
+        {
             if (KPLIB_param_enemyFighters) then {
                 _this addEventHandler ["GetIn", {
                     params ["_vehicle", "_role", "_unit", "_turret"];
@@ -393,6 +399,17 @@ KPLIB_objectInits = [
                     publicVariable "KPLIB_bluforAircrafts";
                 }]; 
             }
+        }
+    ],
+
+    // Potato 01 respawn
+    [
+        [KPLIB_b_potato01],
+        {
+            _this addEventHandler ["Killed", {
+                params["_huron"];
+                [{deleteVehicle _this; ["KPLIB_respawnHuron", nil] call CBA_fnc_serverEvent;}, _huron, KPLIB_potatoRespawnDelay] call CBA_fnc_waitAndExecute;
+            }];
         }
     ],
 
