@@ -2,7 +2,7 @@
     File: fn_battlegroupSlingLoadVeh.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 06/06/2026
-    Last Update: 12/06/2026
+    Last Update: 01/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -48,7 +48,7 @@ if (_spawnPoint isEqualTo "") exitWith {[]};
 // Find land area
 private _landArea = [_targetPos, 700] call KPLIB_fnc_findPlaceToLand;
 
-if (_landArea isEqualTo []) exitWith {[format["No land area found in %1", _targetPos], "HELICOPTER TRANSPORT"] call KPLIB_fnc_log; []};
+if (_landArea isEqualTo [0,0]) exitWith {[]};
 
 // Put spawn marker in a cooldown. Not going to be used for the next minutes.
 if (isNil "KPLIB_usedOpforSpawnPoints") then {
@@ -176,7 +176,8 @@ if (getMass _veh > _vehMass) then {
 
 	[_heli, _spawnPoint, _heliPad] spawn KPLIB_fnc_heliRTB; // Heli RTB
 
-	[_grpVeh, _targetPos] call KPLIB_fnc_battlegroupAttack;
+	[_veh, _targetPos] call KPLIB_fnc_vehicleAttack;
+	_grpVeh setVariable ["KPLIB_isBattleGroup", true];
 };
 
 if (_notify) then {

@@ -2,7 +2,7 @@
     File: fn_liberatedSector.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: -
-    Last Update: 2026-06-05
+    Last Update: 2026-07-01
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -62,7 +62,7 @@ if (_liberated_sector in KPLIB_fillers_all) exitWith {
 [_liberated_sector, 0] remoteExecCall ["remote_call_sector"];
 stats_sectors_liberated = stats_sectors_liberated + 1;
 
-["KPLIB_ResetBattleGroups", _liberated_sector] call CBA_fnc_serverEvent;
+["KPLIB_ResetBattleGroups", markerPos _liberated_sector] call CBA_fnc_serverEvent;
 
 if (_liberated_sector in KPLIB_sectors_factory) then {
 

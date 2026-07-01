@@ -2,7 +2,7 @@
     File: fn_sectorFactorySpawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 04/05/2026
+    Last Update: 01/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -72,6 +72,8 @@ if ((random 100) > 66) then {_vehToSpawn pushback ([] call KPLIB_fnc_getAdaptive
         && (_this isFlatEmpty [3, -1, -1, -1, 0] isNotEqualTo []) 
         && {nearestTerrainObjects [_this, ["Tree", "Rock", "Rocks", "HIDE"], 10] isEqualTo []}
     }] call BIS_fnc_randomPos;
+
+    if (_spawnPos isEqualTo [0,0]) then {[format["Couldn't find a position to spawn vehicle in sector: %1", markerText _sector], "SECTOR"] call KPLIB_fnc_log; continue};
     private _vehicle = [_spawnPos, _x, _localCaptureSize] call KPLIB_fnc_spawnVehicle;
     _sectorUnits pushback _vehicle;
     {_sectorUnits pushback _x;} foreach (crew _vehicle);

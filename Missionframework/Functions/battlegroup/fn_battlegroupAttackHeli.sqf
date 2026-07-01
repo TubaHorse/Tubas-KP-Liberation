@@ -2,7 +2,7 @@
     File: fn_battlegroupAttackHeli.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 30/10/2025 
-    Last Update: 26/06/2026
+    Last Update: 01/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -47,6 +47,7 @@ if (_spawnPoint isEqualTo "") exitWith {grpNull};
 
 private _attackHeli = createVehicle [_heliClass, markerpos _spawnPoint, [], 0, "FLY"];
 private _pilot_group = [_attackHeli, KPLIB_side_enemy] call KPLIB_fnc_createCrew;
+_pilot_group setVariable ["KPLIB_isBattleGroup", true];
 
 _attackHeli addMPEventHandler ["MPKilled", {
     params ["_unit", "_killer"];
@@ -60,14 +61,6 @@ _attackHeli addMPEventHandler ["MPKilled", {
 } forEach (crew _attackHeli);
 
 { deleteWaypoint _x } forEachReversed waypoints _pilot_group;
-
-_wp1 = _pilot_group addWaypoint [_targetPos, 25];
-_wp1 setWaypointType "SAD";
-_wp1 setWaypointSpeed "NORMAL";
-_wp1 setWaypointBehaviour "COMBAT";
-_wp1 setWaypointCompletionRadius 100;
-
-_pilot_group setCombatMode "RED";
 
 // Get countermeasures
 private "_counterMeasures";
@@ -93,29 +86,8 @@ _attackHeli addEventHandler ["IncomingMissile", {
     };
 }];
 
-KPLIB_fnc_findTargetsInSector = {
-    params["_targets", "_heliGrp"];
-    // Reveal targets inside the sector
-    {
-        if ((_heliGrp knowsAbout _x) >= 2.5) then {continue};
-        _heliGrp reveal [_x, 2.5];
-    }forEach _targets;
-};
-
-[{
-    params["_args", "_handle"];
-    _args params ["_targetPos", "_helicopter"];
-
-    if (!alive _helicopter || {!alive (driver _helicopter)}) exitWith {[_handle] call CBA_fnc_removePerFrameHandler;};
-
-    //private _bluforEntities = ([_targetPos, 250, 250, 0, false] nearEntities [["CAManBase", "Landvehicle", "Helicopter"], false, true, true]) select {(side _x) == KPLIB_side_player};
-    private _bluforEntities = [_targetPos, 250, KPLIB_side_player] call KPLIB_fnc_getNearbyEntities;
-    
-    private _heliGroup = (group (driver _helicopter));
-
-    [_bluforEntities, _heliGroup] remoteExecCall ["KPLIB_fnc_findTargetsInSector", groupOwner _heliGroup];
-
-}, 15, [_targetPos, _attackHeli]] call CBA_fnc_addPerFrameHandler;
+// Commit to attack
+[_attackHeli, _targetPos] call KPLIB_fnc_vehicleAttack;
 
 if (_notify) then {
     ["KPLIB_reinfIncoming", [_spawnPoint, _targetPos]] call CBA_fnc_globalEvent;

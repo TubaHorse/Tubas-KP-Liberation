@@ -2,7 +2,7 @@
     File: fn_battlegroupTransportHeli.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 16/10/2025
-    Last Update: 08/06/2026
+    Last Update: 01/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -77,6 +77,7 @@ _newHeli addMPEventHandler ["MPKilled", {
 
 // Spawn inf in cargo
 private _infGrp = [_newHeli] call KPLIB_fnc_spawnInfCargo;
+
 if (isNull _infGrp) exitWith {deleteVehicle _newHeli; []};
 
 _newHeli flyInHeight 100;
@@ -179,7 +180,8 @@ _newHeli landAt [_heliPad, "GetOut", 30];
     if !(alive _heli) exitWith {deleteVehicle _heliPad;};
 
     [_heli, _spawnPoint, _heliPad] spawn KPLIB_fnc_heliRTB; // Heli RTB
-    [_infGrp, _targetPos] call KPLIB_fnc_battlegroupAttack; // Commit inf to attack
+    [_infGrp, _targetPos] call KPLIB_fnc_infantryAttack; // Commit inf to attack
+    _infGrp setVariable ["KPLIB_isBattleGroup", true];
 };
 
 if (_notify) then {

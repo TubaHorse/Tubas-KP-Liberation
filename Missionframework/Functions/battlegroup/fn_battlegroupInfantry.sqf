@@ -2,7 +2,7 @@
     File: fn_battlegroupInfantry.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 30/10/2025
-    Last Update: 05/11/2025
+    Last Update: 01/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -63,7 +63,7 @@ for "_i" from 1 to _squadNumber do {
     _grp setVariable ["KPLIB_isBattleGroup", true];
 
     // Commit attack
-    [_grp, _targetPos] call KPLIB_fnc_battlegroupAttack;
+    [_grp, _targetPos] call KPLIB_fnc_infantryAttack;
 };
 
 if (_notify) then {

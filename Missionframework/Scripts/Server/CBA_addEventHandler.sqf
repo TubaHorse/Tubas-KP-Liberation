@@ -8,9 +8,14 @@
 ["KPLIB_ResetBattleGroups", {
     {
         if (_x getVariable ["KPLIB_isBattleGroup", false]) then {
-            [_x, markerPos _this] call KPLIB_fnc_battlegroupAttack;
+            private _vehicles = [_x] call BIS_fnc_groupVehicles;
+            if (count _vehicles > 0) then {
+                [_vehicles # 0, _this] call KPLIB_fnc_vehicleAttack;
+            } else {
+                [_x, _this] call KPLIB_fnc_infantryAttack;
+            }
         }
-    } foreach allGroups;
+    } foreach (allGroups select {side _x == KPLIB_side_enemy});
 }] call CBA_fnc_addEventHandler;
 
 // Manage battlegroup groups
@@ -145,10 +150,5 @@
         [KPLIB_potato01] call KPLIB_fnc_clearCargo;
         KPLIB_potato01 setVariable ["ace_medical_isMedicalVehicle", true, true];
         publicVariable "KPLIB_potato01";
-
-        KPLIB_potato01 addEventHandler ["Killed", {
-            params["_huron"];
-            [{deleteVehicle _this; ["KPLIB_respawnHuron", nil] call CBA_fnc_serverEvent;}, _huron, KPLIB_potatoRespawnDelay] call CBA_fnc_waitAndExecute;
-        }];
     };
 }] call CBA_fnc_addEventHandler;

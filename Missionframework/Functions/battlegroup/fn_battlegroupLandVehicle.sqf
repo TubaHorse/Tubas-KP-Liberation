@@ -2,7 +2,7 @@
     File: fn_battlegroupLandVehicle.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 30/10/2025
-    Last Update: 10/06/2026
+    Last Update: 01/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -53,16 +53,22 @@ private _grp = (group (driver _vehicle));
 private _roadPos = [[[getPosATL _vehicle, 100]], [], {isOnRoad _this}] call BIS_fnc_randomPos;
 if (_roadPos isNotEqualTo [0,0]) then {_vehicle setVehiclePosition [_roadPos, [], 2, "NONE"];};
 
-_grp setVariable ["KPLIB_isBattleGroup", true];
-
 _vehicle limitSpeed 50;
 
-if ((_vehClass in KPLIB_o_troopTransports) && ([] call KPLIB_fnc_getOpforCap < KPLIB_cap_battlegroup)) then {
-    // Transport vehicle
-    [_vehicle, _spawnPoint, _targetPos] spawn KPLIB_fnc_handleLandTransport;
+// Transport vehicle
+if (_vehClass in KPLIB_o_troopTransports) then {
+    // Check cap
+    if ([] call KPLIB_fnc_getOpforCap < KPLIB_cap_battlegroup) then { 
+        [_vehicle, _spawnPoint, _targetPos] spawn KPLIB_fnc_handleLandTransport;
+    } else {
+        [_vehicle] call KPLIB_fnc_despawnObject;
+    };
+} else {
+    _grp setVariable ["KPLIB_isBattleGroup", true];
 };
 
-[{[_this # 0, _this # 1] call KPLIB_fnc_battlegroupAttack;}, [_grp, _targetPos]] call CBA_fnc_execNextFrame; // Commit attack
+// Commit attack
+[_vehicle, _targetPos] call KPLIB_fnc_vehicleAttack;
 
 if (_notify) then {
     ["KPLIB_reinfIncoming", [_spawnPoint, _targetPos]] call CBA_fnc_globalEvent;

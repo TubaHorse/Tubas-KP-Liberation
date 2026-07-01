@@ -17,7 +17,6 @@ class KPLIB {
     class Battlegroup {
         file = "Functions\battlegroup";
 
-        class battlegroupAttack         {};
         class battlegroupAttackHeli     {};
         class battlegroupIncoming       {};
         class battlegroupInfantry       {};
@@ -28,8 +27,10 @@ class KPLIB {
         class findPlaceToLand           {};
         class findPlaceToParadrop       {};
         class handleLandTransport       {};
+        class infantryAttack            {};
         class spawnBattlegroup          {};
         class spawnInfCargo             {};
+        class vehicleAttack             {};
     };
     class Cargo {
         file = "Functions\cargo";

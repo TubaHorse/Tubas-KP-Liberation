@@ -2,7 +2,7 @@
     File: fn_battlegroupParatroopers.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 29/10/2025
-    Last Update: 26/06/2026
+    Last Update: 01/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -198,6 +198,7 @@ KPLIB_fnc_assemblingArea = {
     {
         private _unit = _x;
         private _backpackContents = _unit getVariable ["KPLIB_paratrooper_backpack", []];
+        if (count _backpackContents < 1) then {continue};
         _unit addBackpack (_backpackContents # 0);
         {_unit addItemToBackpack _x} foreach (_backpackContents # 1);
     }forEach (units _grpInf);
@@ -215,7 +216,8 @@ KPLIB_fnc_assemblingArea = {
         
         // Check if all units arrived at assembling area
         if ({(_x distance (leader _grpInf) < 125) && {alive _x} && {[_x] call KPLIB_fnc_ace_isAwake}} count (units _grpInf) >= (count units _grpInf)) then {
-            [_grpInf, _targetPos] call KPLIB_fnc_battlegroupAttack; // Commit inf to attack
+            [_grpInf, _targetPos] call KPLIB_fnc_infantryAttack; // Commit inf to attack
+            _grpInf setVariable ["KPLIB_isBattleGroup", true];
             [_handle] call CBA_fnc_removePerFrameHandler; // Delete PFH
         };
 

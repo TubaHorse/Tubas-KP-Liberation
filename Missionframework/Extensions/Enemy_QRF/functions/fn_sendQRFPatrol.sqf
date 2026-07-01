@@ -2,7 +2,7 @@
     File: fn_sendQRFPatrol.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 23/04/2026
-    Last Update: 28/05/2026
+    Last Update: 01/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -81,7 +81,7 @@ if (count _vehicles > 0) then {
 
     if (count _vehPatrols > 0) then {
         private _qrfGrp = [_vehPatrols, _qrfPos] call BIS_fnc_nearestPosition;
-        [_qrfGrp, _qrfPos] call KPLIB_fnc_battlegroupAttack;
+        {[_x, _qrfPos] call KPLIB_fnc_vehicleAttack;}forEach ([_qrfGrp] call BIS_fnc_groupVehicles);
         [format["QRF group (%3) of sector %1 is moving to position %2", markerText _sector, _qrfPos, _qrfGrp], "QRF"] call KPLIB_fnc_log;
     };
 };
@@ -94,7 +94,7 @@ if (count _bluforInf > 0) then {
 
     if (count _infPatrols > 0) then {
         private _qrfGrp = [_infPatrols, _qrfPos] call BIS_fnc_nearestPosition;
-        [_qrfGrp, _qrfPos] call KPLIB_fnc_battlegroupAttack;
+        [_qrfGrp, _qrfPos] call KPLIB_fnc_infantryAttack;
         [format["QRF group (%3) of sector %1 is moving to position %2", markerText _sector, _qrfPos, _qrfGrp], "QRF"] call KPLIB_fnc_log;
     } else {
         // Spawn it
