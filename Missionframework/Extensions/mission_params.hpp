@@ -53,7 +53,7 @@ class PlayerMenu {
     default = 0;
 };
 class PylonManager {
-    title = $STR_TITLE_PYLONMANAGER;
+    title = $STR_PAS_TITLE;
     values[] = {1, 0};
     texts[] = {$STR_PARAMS_ENABLED, $STR_PARAMS_DISABLED};
     default = 1;

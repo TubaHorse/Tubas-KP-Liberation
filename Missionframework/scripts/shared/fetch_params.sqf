@@ -617,7 +617,7 @@ if (!isDedicated && hasInterface) then {
     };
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
-    _param = localize "STR_TITLE_PYLONMANAGER";
+    _param = localize "STR_PAS_TITLE";
     _value = if (KPLIB_param_PAS) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 

@@ -248,6 +248,6 @@ if (_notify) then {
     ["KPLIB_reinfIncoming", [_spawnPoint, _targetPos]] call CBA_fnc_globalEvent;
 };
 
-["KPLIB_battlegroupSpawn", [_infGrp]] call CBA_fnc_serverEvent; // Pass only inf group to HC
+["KPLIB_battlegroupSpawn", [_infGrp, _spawnPoint]] call CBA_fnc_serverEvent; // Pass only inf group to HC
 
 [_pilot_group, _infGrp]

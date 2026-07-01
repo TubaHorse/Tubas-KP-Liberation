@@ -121,6 +121,6 @@ if (_notify) then {
     ["KPLIB_reinfIncoming", [_spawnPoint, _targetPos]] call CBA_fnc_globalEvent;
 };
 
-["KPLIB_battlegroupSpawn", [_pilot_group]] call CBA_fnc_serverEvent;
+["KPLIB_battlegroupSpawn", [_pilot_group, _spawnPoint]] call CBA_fnc_serverEvent;
 
 _pilot_group

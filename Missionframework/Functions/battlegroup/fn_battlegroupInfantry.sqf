@@ -71,7 +71,7 @@ if (_notify) then {
 };
 
 {
-    ["KPLIB_battlegroupSpawn", [_x]] call CBA_fnc_serverEvent;
+    ["KPLIB_battlegroupSpawn", [_x, _spawnPoint]] call CBA_fnc_serverEvent;
 }forEach _groups;
 
 _groups
