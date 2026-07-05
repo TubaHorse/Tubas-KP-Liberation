@@ -2,7 +2,7 @@
     File: fn_sectorCitySpawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 01/07/2026
+    Last Update: 03/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -81,7 +81,7 @@ if (_infType == "army") then {
         && (_this isFlatEmpty [1, -1, -1, -1, 0] isNotEqualTo []) 
         && {nearestTerrainObjects [_this, ["Tree", "Rock", "Rocks", "HIDE"], 10] isEqualTo []}
     }] call BIS_fnc_randomPos;
-
+    
     if (_roadSpawn isEqualTo [0,0]) then {[format["Couldn't find a position to spawn vehicle in sector: %1", markerText _sector], "SECTOR"] call KPLIB_fnc_log; continue};
     private _vehicle = [_roadSpawn, _x, 3] call KPLIB_fnc_spawnVehicle;
     _sectorUnits pushback _vehicle;
@@ -240,10 +240,7 @@ _sectorUnits append _boatUnits;
     params["_sector", "_localCaptureSize", "_sectorUnits"];
 
     // Reinforcements
-    if ((_sector in KPLIB_sectors_factory) || (_sector in KPLIB_sectors_city) || (_sector in KPLIB_sectors_capital) || (_sector in KPLIB_sectors_military)) then {
-        //[_sector] remoteExec ["reinforcements_remote_call",2];
-        ["KPLIB_enemyReinforcements", _sector] call CBA_fnc_serverEvent
-    };
+    ["KPLIB_enemyReinforcements", _sector] call CBA_fnc_serverEvent;
 
     if (KPLIB_sectorspawn_debug > 0) then {[format ["Sector %1 (%2) - populating done", (markerText _sector), _sector], "SECTORSPAWN"] remoteExecCall ["KPLIB_fnc_log", 2];};
 

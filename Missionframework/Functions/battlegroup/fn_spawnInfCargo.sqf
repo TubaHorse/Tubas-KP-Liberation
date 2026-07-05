@@ -2,7 +2,7 @@
     File: fn_spawnInfCargo.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 29/10/2025 
-    Last Update: 08/06/2026
+    Last Update: 03/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -42,24 +42,26 @@ if (_vehicle isKindOf "Air") then {
 if ((typeOf _vehicle) in KPLIB_o_paradropPlanes) then {
     // Paratroopers
     private _paraSquad = ["paratroopers"] call KPLIB_fnc_getSquadComp;
-
+    if (count _paraSquad > _emptySeats) then {_squad resize _emptySeats;};
     {
-        if (_forEachIndex > _emptySeats) exitWith {};
-        [_x, markerPos "ghost_spot", _group, "PRIVATE", 0.5] call KPLIB_fnc_createManagedUnit;
+        //if (_forEachIndex > _emptySeats) exitWith {};
+        private _unit = [_x, markerPos "ghost_spot", _group, "PRIVATE", 0.5] call KPLIB_fnc_createManagedUnit;
+        _unit moveInAny _vehicle;
     } foreach _paraSquad;
 } else {
     private _squad = [] call KPLIB_fnc_getSquadComp;
+    if (count _squad > _emptySeats) then {_squad resize _emptySeats;};
+    
     {
-        if (_forEachIndex > _emptySeats) exitWith {};
-        [_x, markerPos "ghost_spot", _group, "PRIVATE", 0.5] call KPLIB_fnc_createManagedUnit;
+        //if (_forEachIndex > _emptySeats) exitWith {};
+        private _unit = [_x, _vehicle getPos [5 + random 10, random 360], _group, "PRIVATE", 0.5] call KPLIB_fnc_createManagedUnit;
+        _unit moveInAny _vehicle;
     } foreach _squad;
 };
 
-[_group] call KPLIB_fnc_LAMBS_enableReinforcements;
-
+// Check for infantry not in cargo
 {
-    //_x assignAsCargo _vehicle;
-    _x moveInAny _vehicle;
-} forEach (units _group);
+    if (isNull objectParent _x) then {deleteVehicle _x};
+}forEach (units _group);
 
 _group

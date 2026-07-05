@@ -2,7 +2,7 @@
     File: fn_spawnSquadRP.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 27/10/2025
-    Last update: 12/02/2026
+    Last update: 03/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -83,7 +83,7 @@ _group addEventHandler ["UnitJoined", {
 if (PIG_RallyPoint_Setting_Cooldown > 0) then {
     _group setVariable ["KPLIB_RP_squadCooldown", true, true];
     [{
-        [_this] call KPLIB_fnc_deleteSquadRP;
+        //[_this] call KPLIB_fnc_deleteSquadRP;
         _this setVariable ["KPLIB_RP_squadCooldown", false, true]
     
     }, _group, (60 * PIG_RallyPoint_Setting_Cooldown)] call CBA_fnc_waitAndExecute;

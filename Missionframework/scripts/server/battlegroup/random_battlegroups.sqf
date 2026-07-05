@@ -24,6 +24,34 @@ while {KPLIB_param_aggressivity > 0.9 && KPLIB_endgame == 0} do {
         && {[] call KPLIB_fnc_getOpforCap < KPLIB_cap_battlegroup}
         && {diag_fps > 15.0}
     ) then {
-        [] call KPLIB_fnc_spawnBattlegroup;
+        private _playerAirports = KPLIB_sectors_player select {_x in KPLIB_sectors_airport};
+        if ((random 100 <= 50) && ((count _playerAirports) > 0)) then {
+            // Raid Random Airport
+            private _sector = selectRandom _playerAirports;
+            private _targetPos = markerPos _sector;
+
+            // Paradrop or heli transport + slingload vehicles
+            if (random 100 <= 50) then {
+                ["", _targetPos, ""] call KPLIB_fnc_battlegroupParatroopers;
+                sleep 3;
+                ["", _targetPos, ""] call KPLIB_fnc_battlegroupParatroopers;
+                sleep 3;
+                if (KPLIB_enemyReadiness >= 75) then {
+                    ["", _targetPos, ""] call KPLIB_fnc_battlegroupParatroopers;
+                };
+            } else {
+                ["", _targetPos, "", false] call KPLIB_fnc_battlegroupTransportHeli;
+                sleep 3;
+                ["", _targetPos, "", false] call KPLIB_fnc_battlegroupTransportHeli;
+                sleep 3;
+                ["", _targetPos, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh;
+                sleep 3;
+                ["", _targetPos, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh;
+                sleep 3;
+            };
+        } else {
+            // Random battlegroup for random sector closer to the front
+            [] call KPLIB_fnc_spawnBattlegroup;
+        }
     };
 };

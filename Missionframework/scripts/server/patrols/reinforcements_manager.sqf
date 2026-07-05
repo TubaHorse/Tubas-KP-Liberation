@@ -30,15 +30,20 @@ if (KPLIB_enemyReadiness > 15) then {
             sleep 15;
 
             if ((_targetsector in KPLIB_sectors_active) && !(_targetsector in KPLIB_sectors_player) && !(_nearestower in KPLIB_sectors_player) && (!([] call KPLIB_fnc_isCapitalActive) || _targetsector in KPLIB_sectors_capital)) then {
-                reinforcements_sector_under_attack = _targetsector;
-                reinforcements_set = true;
-                ["lib_reinforcements",[markertext _targetsector]] remoteExec ["bis_fnc_shownotification"];
                 if ((random KPLIB_enemyReadiness) > (20 + (30 / KPLIB_param_aggressivity))) then {
                     private _amount = 1;
                     if (KPLIB_param_difficulty > 1) then {_amount = round((KPLIB_enemyReadiness/10)/4)};
+                    private _groups = [];
                     for "_i" from 0 to _amount do {
-                        ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupTransportHeli;
+                        private _reinf = ["", markerPos _targetsector, "", false] call KPLIB_fnc_battlegroupTransportHeli;
                         sleep 1;
+                        _groups pushBack _reinf;
+                    };
+                    // Only notify if reinforcements managed to spawn in
+                    if (count _groups > 0) then {
+                        reinforcements_sector_under_attack = _targetsector;
+                        reinforcements_set = true;
+                        ["lib_reinforcements",[markertext _targetsector]] remoteExec ["bis_fnc_shownotification"];
                     };
                 };
                 if (_targetsector in KPLIB_sectors_airport) then {

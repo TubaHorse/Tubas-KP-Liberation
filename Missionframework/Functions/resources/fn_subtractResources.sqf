@@ -2,7 +2,7 @@
     File: fn_subtractResources.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 10/09/2025
-    Last update: 29/06/2026
+    Last update: 03/07/2026
 
     Description:
         Remove resources to storage areas when building
@@ -36,22 +36,37 @@ if ((_priceSupplies > 0) || (_priceAmmo > 0) || (_priceFuel > 0)) then {
         private _resources = [_x] call KPLIB_fnc_getStorageValues;
         _resources params ["_supply", "_ammo", "_fuel"];
 
-        if (_priceSupplies > 0) then {
+        if (_priceSupplies > 0 && (_supply > 0)) then {
             private _amount = _priceSupplies;
-            _resources set [SUPPLY_INDEX, _supply - _amount];
-            _priceSupplies = _priceSupplies - _amount
+            private _dif = (_supply - _amount);
+            _resources set [SUPPLY_INDEX, _dif max 0];
+            if (_dif >= 0) then {
+                _priceSupplies = _priceSupplies - _amount;
+            } else {
+                _priceSupplies = abs(_dif);
+            };
         };
 
-        if (_priceAmmo > 0) then {
+        if (_priceAmmo > 0 && (_ammo > 0)) then {
             private _amount = _priceAmmo;
-            _resources set [AMMO_INDEX, _ammo - _amount];
-            _priceAmmo = _priceAmmo - _amount
+            private _dif = (_ammo - _amount);
+            _resources set [AMMO_INDEX, _dif max 0];
+            if (_dif >= 0) then {
+                _priceAmmo = _priceAmmo - _amount;
+            } else {
+                _priceAmmo = abs(_dif);
+            };
         };
 
-        if (_priceFuel > 0) then {
+        if (_priceFuel > 0 && (_fuel > 0)) then {
             private _amount = _priceFuel;
-            _resources set [FUEL_INDEX, _fuel - _amount];
-            _priceFuel = _priceFuel - _amount
+            private _dif = (_fuel - _amount);
+            _resources set [FUEL_INDEX, _dif max 0];
+            if (_dif >= 0) then {
+                _priceFuel = _priceFuel - _amount;
+            } else {
+                _priceFuel = abs(_dif);
+            };
         };
 
         _x setVariable ["KPLIB_storageResources", _resources, true];

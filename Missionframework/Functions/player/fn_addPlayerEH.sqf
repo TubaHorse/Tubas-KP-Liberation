@@ -2,7 +2,7 @@
     File: fn_addPlayerEH.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 13/11/2025
-    Last Update: 25/06/2026
+    Last Update: 04/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -76,7 +76,7 @@ _player addEventHandler ["GetInMan", {
     params ["_unit", "_role", "_vehicle", "_turret"];
 
     private _type = typeOf _vehicle;
-    if ((toLowerANSI _type) in KPLIB_o_allVeh_classes && {(_type isKindOf "Tank") || {_type isKindOf "Wheeled_Apc_F"}}) then {
+    if ((toLowerANSI _type) in KPLIB_o_allVeh_classes && {(_type isKindOf "Tank") || {_type isKindOf "Wheeled_Apc_F"} || {_type isKindOf "Air"}}) then {
         _unit action ["Eject", _vehicle];
         [localize "STR_VEHICLE_CANNOT_ENTER", true, 3] call KPLIB_fnc_hint;
     };

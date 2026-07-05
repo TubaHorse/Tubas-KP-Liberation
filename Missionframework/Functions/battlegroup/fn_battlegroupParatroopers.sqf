@@ -2,7 +2,7 @@
     File: fn_battlegroupParatroopers.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 29/10/2025
-    Last Update: 01/07/2026
+    Last Update: 04/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -55,7 +55,6 @@ private _paradropArea = [_targetPos, 800] call KPLIB_fnc_findPlaceToParadrop;
 
 if (_paradropArea isEqualTo [0,0]) exitWith {[]};
 private _newPlane = createVehicle [_planeClass, markerpos _spawnPoint, [], 100, "FLY"];
-_newPlane setVariable ["KPLIB_planeSpawnMarker", _spawnPoint];
 //_newPlane setPosASL [markerpos _spawnPoint # 0, markerpos _spawnPoint # 1, (getTerrainHeightASL (markerpos _spawnPoint)) + 300];
 private _pilot_group = [_newPlane, KPLIB_side_enemy] call KPLIB_fnc_createCrew;
 _newPlane setDir (getDir _newPlane + (_newPlane getRelDir _targetPos));
@@ -76,7 +75,6 @@ _newPlane addMPEventHandler ["MPKilled", {
 
 private _infGrp = [_newPlane] call KPLIB_fnc_spawnInfCargo;
 if (isNull _infGrp) exitWith {deleteVehicle _newPlane; []};
-_newPlane setVariable ["KPLIB_groupCargoPlane", _infGrp];
 
 _newPlane flyInHeightASL [300, 300, 300];
 
@@ -104,147 +102,111 @@ _infGrp setVariable ["KPLIB_infparadropWp", _wp1Inf];
 
 _infGrp setSpeedMode "FULL";
 
-_infGrp addEventHandler ["WaypointComplete",{
-    params ["_group", "_waypointIndex"];
+// Drop off units
+[_newPlane, _paradropArea, _pilot_group, _infGrp, _spawnPoint, _targetPos] spawn {
+    params ["_newPlane", "_paradropArea", "_pilot_group", "_infGrp", "_spawnPoint", "_targetPos"];
 
-    private _wpIndex = _group getVariable ["KPLIB_infparadropWp", []];
-    
-    if (_wpIndex # 1 == _waypointIndex) then {
+    waitUntil {sleep 1; (_newPlane distance2D _paradropArea < 400) || (!alive _newPlane) || ({alive _x} count (units _infGrp) < 1)};
 
-        // Spawns an orange smoke in the paradrop assembling area
-        private _moduleGroup = createGroup [sideLogic, true];
-        "ModuleSmokeOrange_F" createUnit [
-            (waypointPosition _wpIndex),
-            _moduleGroup,
-            "this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true];"
-        ];
-        _group removeEventHandler [_thisEvent, _thisEventHandler];
+    if ((!alive _newPlane) || ({alive _x} count (units _infGrp) < 1)) exitWith {};
+
+    _fnc_planeRTB = {
+        params["_newPlane", "_returnMarker"];
+
+        _newPlane flyInHeightASL [500, 500, 500];
+
+        _waypoint = (group (driver _newPlane)) addWaypoint [getMarkerPos _returnMarker, 1000];
+        _waypoint setWaypointType "MOVE";
+        _waypoint setWaypointSpeed "FULL";
+        _waypoint setWaypointBehaviour "CARELESS";
+        _waypoint setWaypointCombatMode "BLUE";
+        _waypoint setWaypointCompletionRadius 400;
+
+        waitUntil {sleep 1; _newPlane distance2D getMarkerPos _returnMarker < 300};
+
+        if (!alive _newPlane) exitWith {};
+        deleteVehicleCrew _newPlane;
+        deleteVehicle _newPlane;
     };
-}];
 
+    // Add a waypoint to maintain path
+    private _wp3 = _pilot_group addWaypoint [_newPlane getPos [1000, (getDir _newPlane)], 0];
+    _wp3 setWaypointType "MOVE";
+    _wp3 setWaypointCompletionRadius 400;
 
-// Plane RTB
-KPLIB_fnc_planeRTB = {
-    params["_plane", "_returnMarker"];
+    {deleteWaypoint _x}forEachReversed waypoints _infGrp;
+    [(units _infGrp)] allowGetIn false;
+    [(units _infGrp)] orderGetIn false;
+    {_x allowDamage false}forEach (units _infGrp);
 
-    _plane flyInHeightASL [500, 500, 500];
+    // Paradrop infantry
+    {
+        _x setVariable ["KPLIB_paratrooper_backpack", [backpack _x, backpackItems _x]];
+        removeBackpack _x; 
+        _x addBackPack KPLIB_o_parachuteType;
+        sleep 0.5;
+        unassignVehicle _x;
+        moveout _x;
+    } forEach (units _infGrp);
 
-    _waypoint = (group (driver _plane)) addWaypoint [getMarkerPos _returnMarker, 1000];
-    _waypoint setWaypointType "MOVE";
-    _waypoint setWaypointSpeed "FULL";
-    _waypoint setWaypointBehaviour "CARELESS";
-    _waypoint setWaypointCombatMode "BLUE";
-    _waypoint setWaypointCompletionRadius 400;
-    (group (driver _plane)) setVariable ["KPLIB_planeDeleteWp", _waypoint];
+    {_x allowDamage true}forEach (units _infGrp);
 
+    // Plane RTB
+    [_newPlane, _spawnPoint] spawn _fnc_planeRTB;
 
-    (group (driver _plane)) addEventHandler ["WaypointComplete",{
-        params ["_group", "_waypointIndex"];
+    _fnc_checkLanding = {
+        params ["_infGrp", "_paradropArea", "_targetPos"];
 
-        private _driver = (units _group) select {(assignedVehicleRole _x) isEqualTo ["driver"]}; 
-        private _plane = assignedVehicle (_driver # 0);
-        private _wpIndex = _group getVariable ["KPLIB_planeDeleteWp", []];
-        if (_wpIndex # 1 == _waypointIndex) then {
-            if (!alive _plane) exitWith {};
-            deleteVehicleCrew _plane;
-            deleteVehicle _plane;
-        }
-    }];
-};
+        if (({alive _x && [_x] call KPLIB_fnc_ace_isAwake} count (units _infGrp)) < 1) exitWith {};
 
-// Drop off units 
-_pilot_group addEventHandler ["WaypointComplete",{
-    params ["_group", "_waypointIndex"];
+        // Detect units that landed on water or uncounsionus, delete them
+        private _unableUnits = (units _infGrp) select {(isTouchingGround _x || ((getPosATL _x # 2) < 2)) && {surfaceIsWater (getPosATL _x) || !([_x] call KPLIB_fnc_ace_isAwake)} };
 
-    private _wpIndex = _group getVariable ["KPLIB_paradropWp", []];
-    if (_wpIndex # 1 == _waypointIndex) then {
+        {
+            if !([_x] call KPLIB_fnc_ace_isAwake) then {_x setDamage 1} else {deleteVehicle _x};
+        }forEach _unableUnits;
 
-        private _driver = (units _group) select {(assignedVehicleRole _x) isEqualTo ["driver"]}; 
-        private _plane = assignedVehicle (_driver # 0);
-        private _infGrp = _plane getVariable ["KPLIB_groupCargoPlane", grpNull];
-
-        if (!alive _plane || {({alive _x} count (units _infGrp) < 1) && {isNull _infGrp}}) exitWith {_group removeEventHandler ["WaypointComplete", _thisEventHandler]};
-
-        // Add a waypoint to maintain path
-        private _wp3 = _group addWaypoint [_plane getPos [1000, (getDir _plane)], 0];
-        _wp3 setWaypointType "MOVE";
-        _wp3 setWaypointCompletionRadius 400;
-
-        [(units _infGrp)] allowGetIn false;
-        [_infGrp, _plane] spawn {
-            params ["_infGrp", "_plane"];
-            {
-                _x setVariable ["KPLIB_paratrooper_backpack", [backpack _x, backpackItems _x]];
-                removeBackpack _x; 
-                _x addBackPack KPLIB_o_parachuteType;
-                sleep 0.5;
-                unassignVehicle _x;
-                moveout _x;
-            } forEach (units _infGrp);
-            private _spawnMarker = _plane getVariable ["KPLIB_planeSpawnMarker", []];
-
-            [_plane, _spawnMarker] call KPLIB_fnc_planeRTB; // Plane RTB
-        };
-        
-        _group removeEventHandler [_thisEvent, _thisEventHandler];
+        {isTouchingGround _x || ((getPosATL _x # 2) < 2)} count (units _infGrp) >= count (units _infGrp)
     };
-}];
 
+    // Check landing
+    waitUntil {sleep 1; [_infGrp, _paradropArea, _targetPos] call _fnc_checkLanding};
 
-// Units arriving at regroup locations
-KPLIB_fnc_assemblingArea = {
-    params["_grpInf", "_paradropArea", "_targetPos"];
+    // Spawns an orange smoke in the paradrop assembling area
+    private _moduleGroup = createGroup [sideLogic, true];
+    "ModuleSmokeOrange_F" createUnit [
+        _paradropArea,
+        _moduleGroup,
+        "this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true];"
+    ];
 
+    // Return the backpack contents for each unit
     {
         private _unit = _x;
         private _backpackContents = _unit getVariable ["KPLIB_paratrooper_backpack", []];
         if (count _backpackContents < 1) then {continue};
         _unit addBackpack (_backpackContents # 0);
         {_unit addItemToBackpack _x} foreach (_backpackContents # 1);
-    }forEach (units _grpInf);
+    }forEach (units _infGrp);
 
-    [{
-        params["_args", "_handle"];
-        _args params ["_grpInf", "_paradropArea", "_targetPos"];
-        
-        if (({alive _x && [_x] call KPLIB_fnc_ace_isAwake} count (units _grpInf)) < 1) exitWith {[_handle] call CBA_fnc_removePerFrameHandler;}; // Delete PFH
-
+    // Units arriving at regroup locations
+    waitUntil {
+        sleep 5;
         // Keep IA units moving to reach assembling area
         {
-            if (_X distance _paradropArea > 100) then {_x doMove _paradropArea;};
-        }forEach units (_grpInf);
-        
-        // Check if all units arrived at assembling area
-        if ({(_x distance (leader _grpInf) < 125) && {alive _x} && {[_x] call KPLIB_fnc_ace_isAwake}} count (units _grpInf) >= (count units _grpInf)) then {
-            [_grpInf, _targetPos] call KPLIB_fnc_infantryAttack; // Commit inf to attack
-            _grpInf setVariable ["KPLIB_isBattleGroup", true];
-            [_handle] call CBA_fnc_removePerFrameHandler; // Delete PFH
-        };
+            if (_x distance _paradropArea > 100) then {_x doMove _paradropArea;};
+        }forEach units (_infGrp);
 
-    }, 15, [_grpInf, _paradropArea, _targetPos]] call CBA_fnc_addPerFrameHandler;
-};
-
-// Check landing
-[{
-    params["_args", "_handle"];
-    _args params ["_grpInf", "_paradropArea", "_targetPos"];
-
-    if (({alive _x && [_x] call KPLIB_fnc_ace_isAwake} count (units _grpInf)) < 1) exitWith {[_handle] call CBA_fnc_removePerFrameHandler;}; // Delete PFH
-
-    // Detect units that landed on water or uncounsionus, delete them
-    private _unableUnits = (units _grpInf) select {(isTouchingGround _x || ((getPosATL _x # 2) < 2)) && {surfaceIsWater (getPosATL _x) || !([_x] call KPLIB_fnc_ace_isAwake)} };
-
-    {
-        if !([_x] call KPLIB_fnc_ace_isAwake) then {_x setDamage 1} else {deleteVehicle _x};
-    }forEach _unableUnits;
-
-    // Check if all units from the group landed and exit loop
-    if ({isTouchingGround _x || ((getPosATL _x # 2) < 2)} count (units _grpInf) >= count (units _grpInf)) then {
-        [_grpInf, _paradropArea, _targetPos] remoteExecCall ["KPLIB_fnc_assemblingArea", groupOwner _grpInf];
-
-        [_handle] call CBA_fnc_removePerFrameHandler; // Delete PFH
+        {(_x distance (leader _infGrp) < 125) && {alive _x} && {[_x] call KPLIB_fnc_ace_isAwake}} count (units _infGrp) >= (count units _infGrp)
     };
-}, 10, [_infGrp, _paradropArea, _targetPos]] call CBA_fnc_addPerFrameHandler;
+
+    if (({alive _x && [_x] call KPLIB_fnc_ace_isAwake} count (units _infGrp)) < 1) exitWith {};
+
+
+    [_infGrp, _targetPos] call KPLIB_fnc_infantryAttack; // Commit inf to attack
+    _infGrp setVariable ["KPLIB_isBattleGroup", true];
+    [_infGrp] call KPLIB_fnc_LAMBS_enableReinforcements;
+};
 
 if (_notify) then {
     ["KPLIB_reinfIncoming", [_spawnPoint, _targetPos]] call CBA_fnc_globalEvent;

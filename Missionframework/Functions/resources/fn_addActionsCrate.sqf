@@ -2,7 +2,7 @@
     File: fn_addActionsCrate.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 26/05/2017
-    Last Update: 26/01/2026
+    Last Update: 04/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -26,7 +26,7 @@ private _loadAction = _crate addAction [
         if (_loaded) then {["KPLIB_removeAllActionsCrate", _crate] call CBA_fnc_globalEventJIP;};
     },
     "",
-    -501,
+    -502,
     true,
     true,
     "",
@@ -50,7 +50,7 @@ private _storeAction = _crate addAction [
         [_crate, (nearestObjects [player, KPLIB_storageBuildings, 20]) # 0,true] call KPLIB_fnc_crateToStorage;
     },
     "",
-    -502,
+    -501,
     true,
     true,
     "",
@@ -122,7 +122,7 @@ private _carryAction = _crate addAction [
                 _player removeAction _actionId; // Remove action from player
             },
             nil,
-            -504,
+            -500,
             true,
             false,
             "",

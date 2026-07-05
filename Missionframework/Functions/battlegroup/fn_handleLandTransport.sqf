@@ -2,7 +2,7 @@
     File: fn_handleLandTransport.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 30/10/2025
-    Last Update: 01/07/2026
+    Last Update: 03/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -23,7 +23,6 @@ if (!isServer) exitWith {};
 if (!canSuspend) exitWith {_this spawn KPLIB_fnc_handleLandTransport};
 
 private _infGrp = [_vehicle] call KPLIB_fnc_spawnInfCargo;
-_infGrp setVariable ["KPLIB_isBattleGroup", true];
 
 private _hasGun = false;
 if (count ((typeOf _vehicle) call BIS_fnc_allTurrets) > 0) then {
@@ -97,6 +96,9 @@ if !(alive _vehicle) exitWith {};
 {
     unassignVehicle _x;
 } forEach (units _infGrp);
+
+_infGrp setVariable ["KPLIB_isBattleGroup", true];
+[_grpInf] call KPLIB_fnc_LAMBS_enableReinforcements;
 
 // Vehicle move out
 waitUntil {sleep 1; (({_x in _vehicle} count (units _infGrp)) isEqualTo 0) || {!alive _vehicle || {!alive (driver _vehicle)}}};

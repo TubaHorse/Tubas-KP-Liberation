@@ -2,7 +2,7 @@
 	File: fn_clearGarbage.sqf
 	Author: PIG13BR - https://github.com/PiG13BR
 	Date: 16/08/2024
-	Last Update: 22/12/2025
+	Last Update: 03/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 	
 	Description:
@@ -21,8 +21,8 @@ if (!canSuspend) then {[] spawn KPLIB_fnc_clearGarbage};
 private _deadVehicles = vehicles select {
 	((_x isKindOf "landVehicle") || {_x isKindOf "Air"}) && 
 	{(((toLower (typeOf _x)) in KPLIB_o_allVeh_classes) && {!(_x getVariable ["KPLIB_captured", false])}) || {((typeOf _x) in KPLIB_c_vehicles) && {!(_x getVariable ["KPLIB_seized", false])}}} && 
-	{damage _x > 0.01} && 
-	{({alive _x} count (crew _x)) < 1}
+	{({alive _x} count (crew _x)) < 1} &&
+	{count ([getPosATL _x, 300, KPLIB_side_player] call KPLIB_fnc_getNearbyEntities) < 1}
 };
 
 // Get weapon holders (don't count/hint these)

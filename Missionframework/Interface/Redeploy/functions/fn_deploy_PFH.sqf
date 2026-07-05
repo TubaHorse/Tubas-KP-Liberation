@@ -2,7 +2,7 @@
     File: fn_deploy_PFH.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 04/11/2025
-    Last Update: 25/06/2026
+    Last Update: 03/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -49,7 +49,7 @@ KPLIB_REDEPLOY_pfhandle = [
             private _outpostNearby  = (KPLIB_player_outposts findIf {_closestBase distance2D _x < KPLIB_range_fob}) >= 0;
             
             // Respawn cost (FOB)
-            if (!_canRespawn && !_barracks) then {
+            if (_fobNearby && !_canRespawn && !_barracks) then {
                 _buttonControl ctrlSetText (localize "STR_DEPLOY_DISABLED");
                 _buttonControl ctrlEnable false;
                 _buttonControl ctrlSetTooltip format [localize "STR_DEPLOY_NORESOURCES", _baseName];
