@@ -13,6 +13,7 @@ class PIG_PAS_RscMainMenu
 	onUnload = "[_this # 0] call KPLIB_fnc_unloadPASMenu";
 	onMouseButtonDown = "['onMouseButtonDown', _this, PIG_PAS_RscMainMenu] call KPLIB_fnc_mouseButtonDown";
     onMouseButtonUp = "['onMouseButtonUp', _this, PIG_PAS_RscMainMenu] call KPLIB_fnc_mouseButtonUp";
+	onKeyDown = "_this call KPLIB_fnc_handleKeyDown";
 	class ControlsBackground
 	{
 		class PAS_Background_1: PAS_Frame_Base

@@ -3,7 +3,7 @@
     Author: Alganthe
     Adaptation made by PiG13BR for Air Spawner Menu
     Date: 14/10/2025
-    Update Date: 14/10/2025
+    Update Date: 06/07/2026
     
     Description:
         Unloads EH and deletes variables from the camera handle
@@ -33,5 +33,6 @@ PIG_PAS_cameraHelper = nil;
 PIG_PAS_mouseButtonState = nil;
 PIG_PAS_center = nil;
 PIG_PAS_cameraPos = nil;
+PIG_PAS_visionMode = nil;
 
 ["hideHud", []] call ace_common_fnc_showHud;

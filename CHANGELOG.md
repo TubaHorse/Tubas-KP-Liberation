@@ -29,6 +29,7 @@
 * Tweaked: Battlegroup functions.
 * Tweaked: Build Menu with some tooltips and edits related to airport sector.
 * Tweaked: FOB/Outpost resources information collection.
+* Tweaked: Pylon Armament Selector reviewed.
 * Removed: Enemy fighter notifications.
 * Removed: ACE Fortify compatibility.
 * Removed: Some KP Liberation script files no longer required for the current version.

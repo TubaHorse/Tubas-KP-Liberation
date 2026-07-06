@@ -40,6 +40,7 @@ class Camera_Freelook
 {
     file = "Extensions\Pylon_Armament_Selector\camera";
     
+    class handleKeyDown {};
     class handleMouse {};
     class handleScrollWheel {};
     class loadCameraHandle {};
