@@ -46,4 +46,21 @@ if (_vehicle isKindOf "Air") then {
     ["KPLIB_addActionParadropCrates", _vehicle] call CBA_fnc_globalEventJIP;
 };
 
+_vehicle addEventHandler ["RopeAttach", {
+	params ["_heli", "_rope", "_cargo"];
+
+	if (typeOf _cargo == KPLIB_b_transStorage) then {
+		_cargo setVariable ["KPLIB_ropeAttached", true, true];
+	};
+}];
+
+_vehicle addEventHandler ["RopeBreak", {
+	params ["_heli", "_rope", "_cargo"];
+
+	if (typeOf _cargo == KPLIB_b_transStorage) then {
+		_cargo setVariable ["KPLIB_ropeAttached", false, true];
+	};
+}];
+
+
 true

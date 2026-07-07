@@ -2,7 +2,7 @@
 	File: fn_doLoadCrate.sqf
 	Author: PiG13BR (https://github.com/PiG13BR)
 	Date: 21/10/2025
-	Last update: 11/02/2026
+	Last update: 07/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -48,7 +48,7 @@ removeAllActions _cargo; // Remove all actions (add them back on unload)
 // Add mass
 private _crateValue = _crate getVariable ["KPLIB_crateValue", 0];
 private _oldMass = getMass _transport;
-private _newMass = _oldMass + _crateValue;
+private _newMass = _oldMass + (_crateValue * 2);
 _transport setMass _newMass;
 
 // Disable ViV

@@ -2,7 +2,7 @@
 	File: fn_doUnloadCrate.sqf
 	Author: PiG13BR (https://github.com/PiG13BR)
 	Date: 21/10/2025
-	Last update: 16/01/2026
+	Last update: 07/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -79,7 +79,7 @@ _transport setVariable ["KPLIB_CARGO_loadedCargo", _cargoLoaded, true];
 // Remove mass
 private _crateValue = _crate getVariable ["KPLIB_crateValue", 0];
 private _oldMass = getMass _transport;
-private _newMass = _oldMass - _crateValue;
+private _newMass = _oldMass - (_crateValue * 2);
 _transport setMass _newMass;
 
 // Enable ViV again if the var is empty

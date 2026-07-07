@@ -2,7 +2,7 @@
     File: fn_crateFromStorage.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 2017-03-27
-    Last Update: 2026-02-01
+    Last Update: 2026-07-07
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -53,7 +53,7 @@ private _resourceValue = _resources # _index;
 if (_resourceValue < 1) exitWith {}; // NO RESOURCE FOR THIS TYPE
 
 private _valueToCrate = _resourceValue min 100;
-_resources set [_index, (_resources # _index) - _valueToCrate];
+_resources set [_index, ((_resources # _index) - _valueToCrate) max 0];
 
 private _crate = [_cratetype, _valueToCrate] call KPLIB_fnc_createCrate;
 
@@ -109,7 +109,7 @@ _storage setVariable ["KPLIB_storageResources", _resources, true];
 // Remove mass to a transportable storage
 if (typeOf _storage == KPLIB_b_transStorage) then {
     private _oldMass = getMass _storage;
-    private _newMass = _oldMass - (_crate getVariable ["KPLIB_crateValue", 0]);
+    private _newMass = _oldMass - ((_crate getVariable ["KPLIB_crateValue", 0]) * 2);
     _storage setMass _newMass;
 };
 
