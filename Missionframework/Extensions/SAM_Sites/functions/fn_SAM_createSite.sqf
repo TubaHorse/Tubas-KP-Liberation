@@ -2,7 +2,7 @@
     File: fn_SAM_createSite.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 05/12/2025
-    Last Update: 28/06/2026
+    Last Update: 07/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -60,6 +60,10 @@ _radar setDir (_relDir - _dirRadar);
 [_radar] call KPLIB_fnc_clearCargo;
 //_radar setPosATL _objPos;
 [{_this allowDamage true}, _radar, 3] call CBA_fnc_waitAndExecute;
+
+_radar setPosATL _samSitePos;
+_radar setDir (_relDir - _dirRadar);
+_radar setVectorUp [0, 0, 1];
 
 _radar setAutonomous true;
 _radar setVehicleReceiveRemoteTargets true;
@@ -126,6 +130,10 @@ if (KPLIB_enemyReadiness >= 100) then {_samCount = _samCount + 1};
 		_x setSkill ["spotTime", 1];
 	}forEach _crew;
 
+	_sam setPosATL _samPos;
+	_sam setDir (_dir + _relDir);
+	_sam setVectorUp [0, 0, 1];
+
 	_samSiteTurrets pushBack _sam;
 } forEach _turrets;
 
@@ -162,6 +170,10 @@ if (KPLIB_enemyReadiness >= 100) then {_samCount = _samCount + 1};
 		_x setSkill ["spotTime", 1];
 	}forEach _crew;
 
+	_shorad setPosATL _shoradPos;
+	_shorad setDir (_dir + _relDir);
+	_shorad setVectorUp [0, 0, 1];
+
 	_samShorads pushBack _shorad;
 } forEach _shorads;
 
@@ -189,6 +201,10 @@ if (_samShorads isNotEqualTo []) then {
 	if (_object isKindOf "landVehicle") then {_object setVehicleLock "LOCKED"};
 
 	[{_this allowDamage true}, _object, 3] call CBA_fnc_waitAndExecute;
+
+	_object setPosATL _objPos;
+	_object setDir (_dir + _relDir);
+	_object setVectorUp [0, 0, 1];
  
 	_samSiteObjects pushBack _object;
 } forEach _objects;
@@ -212,6 +228,10 @@ if (_samShorads isNotEqualTo []) then {
 	[{_this allowDamage true}, _garrison, 3] call CBA_fnc_waitAndExecute;
 
 	private _squadGrp = [_garrison] call KPLIB_fnc_spawnBuildingGarrison;
+
+	_garrison setPosATL _objPos;
+	_garrison setDir (_dir + _relDir);
+	_garrison setVectorUp [0, 0, 1];
 	
 	_samSiteObjects pushBack _garrison;
 	_infGarrison pushBack _squadGrp;
@@ -242,6 +262,9 @@ private _groupStatic = createGroup [KPLIB_side_enemy, true];
 	[{_this allowDamage true}, _static, 3] call CBA_fnc_waitAndExecute;
 
 	[{_this doWatch (_this getPos [300, (getDir _this)]);}, _static, 10] call CBA_fnc_waitAndExecute;
+
+	_static setPosATL _staticPos;
+	_static setDir (_dir + _relDir);
 
 	_staticGroup pushBack _groupStatic;
 	_samSiteObjects pushBack _static;

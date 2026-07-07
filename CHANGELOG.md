@@ -41,6 +41,7 @@
 * Fixed: Unable to repeat building using the new build actions (Reported by Fernandim).
 * Fixed: Mobile Arsenal was available even if it was disabled by mission parameter (Reported by Preflop).
 * Fixed: Cancelling build was not restoring the resources right. Crates spawns around
+* Fixed: SAM site templates were not spawning correctly.
 
 ## 0.97.0 (07/03/2026)
 * Added Extension: Enemy artillery.

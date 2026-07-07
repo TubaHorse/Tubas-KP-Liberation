@@ -3,7 +3,7 @@
     File: fn_repackage_doRepackage.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 14/04/2026
-    Last Update: 14/04/2026
+    Last Update: 06/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -37,16 +37,8 @@ switch (true) do {
         KPLIB_outpostNames set [_index, _defaultName];
         publicVariable "KPLIB_outpostNames";
 
-        if (_type == "BOX") exitWith {
-            // Create box
-            private _baseBox = KPLIB_b_fobBox createVehicle _nearestBase;
-            [_baseBox] call KPLIB_fnc_addObjectInit;
-        };
-        if (_type == "TRUCK") exitWith {
-            // Truck
-            private _baseTruck = KPLIB_b_fobTruck createVehicle _nearestBase;
-            [_baseTruck] call KPLIB_fnc_addObjectInit;
-        };
+        private _baseBox = KPLIB_b_outpostBox createVehicle _nearestBase;
+        [_baseBox] call KPLIB_fnc_addObjectInit;
     };
     default {
         // Delete FOB object
