@@ -105,6 +105,7 @@ class KPLIB {
         class getUnitPositionId         {};
         class getUnitsCount             {};
         class hint                      {};
+        class huronManager              {};
         class lambs_enableReinforcements{};
         class protectObject             {};
         class setLoadableViV            {};
@@ -226,7 +227,6 @@ class KPLIB {
         class spawnGarrisonUnit         {};
         class spawnGuerillaGroup        {};
         class spawnGuerInFactory        {};
-        class spawnHuronStart           {};
         class spawnMilitiaCrew          {};
         class spawnRegularSquad         {};
         class spawnVehicle              {};
