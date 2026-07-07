@@ -2,7 +2,7 @@
     File: fn_FOBToDiscord.sqf
     Author: FernandimModelador (https://github.com/FernandimModelador)
     Date: 07/03/2026
-    Last Update: 04/06/2026
+    Last Update: 07/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -23,24 +23,26 @@ KPLIB_fobLogLoop_handle = [
     {
         params ["_args", "_handle"];
 
-        if (!KPLIB_fob_logging_enabled) exitWith {
+        if (!KPLIB_discord_logging_enabled) exitWith {
             [_handle] call CBA_fnc_removePerFrameHandler;
             KPLIB_fobLogLoop_handle = nil;
         };
 
         private _playerCount = [] call KPLIB_fnc_getPlayerCount;
 
-        if ((count (KPLIB_sectors_fob select {_x isNotEqualTo [0,0,0]}) > 0) && (_playerCount > 0)) then {
+        if ((count (KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]}) > 0) && (_playerCount > 0)) then {
             
             diag_log "--- FOB_DATA_START ---";
 
             {
                 private _fobPos = _x;
+                if (_fobPos isEqualTo [0,0,0]) then {continue};
+                
                 private _fobName = [_fobPos] call KPLIB_fnc_getBaseName;
                 private _fobData = [_fobPos] call KPLIB_fnc_getBaseResources;
 
                 _fobData params [
-                    "_pos",
+                    "",
                     "_supplies",
                     "_ammo",
                     "_fuel"
@@ -55,7 +57,7 @@ KPLIB_fobLogLoop_handle = [
                 ];
                 
                 diag_log _fobJson;
-            } forEach KPLIB_sectors_fob;
+            } forEach KPLIB_player_fobs;
 
             diag_log "--- FOB_DATA_END ---";
         };

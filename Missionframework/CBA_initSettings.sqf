@@ -196,16 +196,17 @@ if (KPLIB_param_SAMSite > 0) then {
 ] call CBA_fnc_addSetting;
 
 [
-    "KPLIB_factory_logging_enabled",
+    "KPLIB_discord_logging_enabled",
     "CHECKBOX",
     [localize "STR_FDC_TITLE", localize "STR_FDC_DESC"],
-    ["KP Liberation", "Factory Logging"],
+    ["KP Liberation", "Factory & Fob Logging"],
     false,
     1,
     {
         params ["_value"];
         if (_value && isServer) then {
-            [] spawn KPLIB_fnc_factoryLogLoop;
+            [] call KPLIB_fnc_factoryToDiscord;
+            [] call KPLIB_fnc_FOBToDiscord;
         };
     }
 ] call CBA_fnc_addSetting;

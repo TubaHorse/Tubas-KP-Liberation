@@ -86,17 +86,17 @@
             true, 
             "", 
             toString{
-                alive _target &&
+                alive _originalTarget &&
                 {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} &&
-                {isNull objectParent _this} &&
+                {isNull objectParent _originalTarget} &&
                 {[4] call KPLIB_fnc_hasPermission} &&
-                {KPLIB_player_fobs isNotEqualTo [] && {(_target distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}} &&
-                {(({alive _x} count (crew _target)) == 0) || {unitIsUAV _target}} &&
-                //{locked _target == -1 || {locked _target == 0} || {locked _target == 1}} &&
-                {(((toLowerANSI (typeOf _target)) in KPLIB_storageBuildings) && (_target getVariable ["KPLIB_fobStorage", false])) || {!((toLowerANSI (typeOf _target)) in KPLIB_storageBuildings)}} &&
-                {(((attachedObjects _target) select {!isNull _target}) isEqualTo []) || {(typeOf _target) == "rhsusf_mkvsoc"}} // ignore null objects left by Advanced Towing (https://github.com/sethduda/AdvancedTowing/pull/46)
+                {KPLIB_player_fobs isNotEqualTo [] && {(_originalTarget distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}} &&
+                {(({alive _x} count (crew _originalTarget)) == 0) || {unitIsUAV _originalTarget}} &&
+                //{locked _originalTarget == -1 || {locked _originalTarget == 0} || {locked _originalTarget == 1}} &&
+                {(((toLowerANSI (typeOf _originalTarget)) in KPLIB_storageBuildings) && (_originalTarget getVariable ["KPLIB_fobStorage", false])) || {!((toLowerANSI (typeOf _originalTarget)) in KPLIB_storageBuildings)}} &&
+                {(((attachedObjects _originalTarget) select {!isNull _originalTarget}) isEqualTo []) || {(typeOf _originalTarget) == "rhsusf_mkvsoc"}} // ignore null objects left by Advanced Towing (https://github.com/sethduda/AdvancedTowing/pull/46)
             },
-            5
+            ((boundingBoxReal _this) # 2) * 1.2
         ];
 
         // Add Delete Action for dead structures 
@@ -111,17 +111,17 @@
             true, 
             "", 
             toString{
-                !alive _target &&
+                !alive _originalTarget &&
                 {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} &&
-                {isNull objectParent _this} &&
+                {isNull objectParent _originalTarget} &&
                 {[4] call KPLIB_fnc_hasPermission} &&
-                {KPLIB_player_fobs isNotEqualTo [] && {(_target distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}} &&
-                {(({alive _x} count (crew _target)) == 0) || {unitIsUAV _target}} &&
-                //{locked _target == -1 || {locked _target == 0} || {locked _target == 1}} &&
-                {(((toLowerANSI (typeOf _target)) in KPLIB_storageBuildings) && (_target getVariable ["KPLIB_fobStorage", false])) || {!((toLowerANSI (typeOf _target)) in KPLIB_storageBuildings)}} &&
-                {(((attachedObjects _target) select {!isNull _target}) isEqualTo []) || {(typeOf _target) == "rhsusf_mkvsoc"}} // ignore null objects left by Advanced Towing (https://github.com/sethduda/AdvancedTowing/pull/46)
+                {KPLIB_player_fobs isNotEqualTo [] && {(_originalTarget distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}} &&
+                {(({alive _x} count (crew _originalTarget)) == 0) || {unitIsUAV _originalTarget}} &&
+                //{locked _originalTarget == -1 || {locked _originalTarget == 0} || {locked _originalTarget == 1}} &&
+                {(((toLowerANSI (typeOf _originalTarget)) in KPLIB_storageBuildings) && (_originalTarget getVariable ["KPLIB_fobStorage", false])) || {!((toLowerANSI (typeOf _originalTarget)) in KPLIB_storageBuildings)}} &&
+                {(((attachedObjects _originalTarget) select {!isNull _originalTarget}) isEqualTo []) || {(typeOf _originalTarget) == "rhsusf_mkvsoc"}} // ignore null objects left by Advanced Towing (https://github.com/sethduda/AdvancedTowing/pull/46)
             },
-            5
+            ((boundingBoxReal _this) # 2) * 1.2
         ];
     }
 }] call CBA_fnc_addEventHandler;

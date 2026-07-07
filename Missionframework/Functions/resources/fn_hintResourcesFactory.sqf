@@ -24,7 +24,7 @@ private _supply = _prodList # 8;
 private _ammo = _prodList # 9;
 private _fuel = _prodList # 10;
 
-private _typeName = localize "STR_NO_PRODUCTION";
+private _typeName = "";
 private _color = "";
 switch _type do {
     case 0 : {

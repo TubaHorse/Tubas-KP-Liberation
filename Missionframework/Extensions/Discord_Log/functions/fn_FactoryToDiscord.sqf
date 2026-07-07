@@ -1,3 +1,20 @@
+/*
+    File: fn_FOBToDiscord.sqf
+    Author: FernandimModelador (https://github.com/FernandimModelador)
+    Date: 07/03/2026
+    Last Update: 07/06/2026
+    License: MIT License - http://www.opensource.org/licenses/MIT
+    
+    Description:
+        Exports information about the factories in a json format for python parsing.
+    
+    Parameter(s):
+        -
+    
+    Returns:
+        -
+*/
+
 if (!isServer) exitWith {};
 
 if (!isNil "KPLIB_factoryLogLoop_handle") exitWith {};
@@ -6,7 +23,7 @@ KPLIB_factoryLogLoop_handle = [
     {
         params ["_args", "_handle"];
 
-        if (!KPLIB_factory_logging_enabled) exitWith {
+        if (!KPLIB_discord_logging_enabled) exitWith {
             [_handle] call CBA_fnc_removePerFrameHandler;
             KPLIB_factoryLogLoop_handle = nil;
         };

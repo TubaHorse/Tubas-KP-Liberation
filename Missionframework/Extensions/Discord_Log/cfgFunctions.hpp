@@ -1,11 +1,6 @@
-class Factory_Log
+class Discord_Log
 {
-    file = "Extensions\Discord_Log\Factory";
+    file = "Extensions\Discord_Log\functions";
     class FactoryToDiscord {};
-};
-
-class FOB_Log
-{
-    file = "Extensions\Discord_Log\FOB";
     class FOBToDiscord {};
 };

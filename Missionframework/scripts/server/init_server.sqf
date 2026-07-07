@@ -54,7 +54,8 @@ if (KPLIB_param_logistic) then {execVM "Scripts\Server\resources\manage_logistic
 [] call KPLIB_fnc_recalculateResourcesPFH;
 execVM "Scripts\Server\resources\unit_cap.sqf";
 execVM "Scripts\Server\sector\lose_sectors.sqf";
-[] call KPLIB_fnc_FactoryToDiscord;
+[] call KPLIB_fnc_factoryToDiscord;
+[] call KPLIB_fnc_FOBToDiscord;
 [{[] call KPLIB_fnc_factoriesBlock}, 3600] call CBA_fnc_waitAndExecute;
 if (KPLIB_param_enemyFighters) then {[] call KPLIB_fnc_enemyFighterPFH;};
 [] call KPLIB_fnc_towerMonitoringPFH;
