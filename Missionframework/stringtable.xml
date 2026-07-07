@@ -4854,6 +4854,18 @@
             <Original>Items to unlock:</Original>
             <Portuguese>Itens para desbloquear:</Portuguese>
         </Key>
+        <Key ID="STR_FOB_RESOURCES_LIST">
+            <Original>FOB's RESOURCES INFO:</Original>
+            <Portuguese>INFO. DA FOB:</Portuguese>
+        </Key>
+        <Key ID="STR_PRODUCTION_RESOURCES_LIST">
+            <Original>FACTORY'S RESOURCES INFO:</Original>
+            <Portuguese>INFO. DA FÁBRICA:</Portuguese>
+        </Key>
+        <Key ID="STR_PRODUCING">
+            <Original>Producing:</Original>
+            <Portuguese>Produzindo:</Portuguese>
+        </Key>
         <Key ID="STR_PRODUCTION_ACTION">
             <Original>-- Production Settings</Original>
             <German>-- Produktionseinstellungen</German>

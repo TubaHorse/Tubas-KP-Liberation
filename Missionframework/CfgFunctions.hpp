@@ -162,6 +162,8 @@ class KPLIB {
 
         class addActionsCrate           {};
         class doRecycle                 {};
+        class hintResourcesFactory      {};
+        class hintResourcesFob          {};
         class recalculateResources      {};
         class recalculateResourcesInit  {};
         class recalculateResourcesPFH   {};

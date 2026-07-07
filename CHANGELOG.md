@@ -15,6 +15,7 @@
 * Added: Airport sector (available in the devkit).
 * Added: `filler_aa` sector (available in the devkit).
 * Added: New classnames lists in KPLIB_classnameList.sqf.
+* Added: Factory's and Fob's resources hint for players.
 * Tweaked: FOB build limit reduced. Each builded FOB will add costs to the next box/truck.
 * Tweaked: Added KPLIB tag to Armor/Air/Inf weights variables. Added more weight for Armor and Air kills.
 * Tweaked: FOB variable (KPLIB_sectors_fob to KPLIB_player_fobs).
@@ -39,7 +40,7 @@
 * Fixed: KP Player menu not showing up (Reported by Preflop).
 * Fixed: Unable to repeat building using the new build actions (Reported by Fernandim).
 * Fixed: Mobile Arsenal was available even if it was disabled by mission parameter (Reported by Preflop).
-* Fixed: Cancelling build was not restoring the resources right. Crates spawns around 
+* Fixed: Cancelling build was not restoring the resources right. Crates spawns around
 
 ## 0.97.0 (07/03/2026)
 * Added Extension: Enemy artillery.

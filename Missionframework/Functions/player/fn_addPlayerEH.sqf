@@ -2,7 +2,7 @@
     File: fn_addPlayerEH.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 13/11/2025
-    Last Update: 04/07/2026
+    Last Update: 06/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -163,29 +163,38 @@ if (count KPLIB_sector_arsenalLink > 0) then {
             private _mousePos = (_control ctrlMapScreenToWorld [_mouseX, _mouseY]);
             private _sector = [300, _mousePos] call KPLIB_fnc_getNearestSector;
                 if (_mapSign # 1 == (format["arsenalunlockmarker%1", _sector])) then {
-                    private _items = KPLIB_sector_arsenalLink get _sector;
-                    _items = _items apply {
-                        private _name = "";
-                        if (isClass(configFile >> "cfgWeapons" >> _x)) then {
-                            _name = getText(configFile >> "cfgWeapons" >> _x >> "displayName");
-                        };
-
-                        if (isClass(configFile >> "cfgMagazines" >> _x)) then {
-                            _name = getText(configFile >> "cfgMagazines" >> _x >> "displayName");
-                        };
-
-                        if (isClass(configFile >> "cfgVehicles" >> _x)) then {
-                            _name = getText(configFile >> "cfgVehicles" >> _x >> "displayName");
-                        };
-                        _name
-                    }; 
-                    [parseText (format[["<t size='1.5'>", localize "STR_ARSENAL_UNLOCK_LIST", "</t><br/>", "%1", "<br/>"] joinString "", _items joinString "<br/>"]), true, 7] call KPLIB_fnc_hint;
+                    [_sector] call KPLIB_fnc_hintLockedItems;
                 };
             };
         }];
     }] call CBA_fnc_waitUntilAndExecute;
 };
 
+// Resources info
+[{
+    !isNull (findDisplay 46)
+}, {
+    ((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["MouseButtonClick", {
+        params ["_control", "_button", "_xPos", "_yPos", "_shift", "_ctrl", "_alt"];
+        
+        // Hint arsenal unlockable items by clicking on the marker
+        private _mapSign = ctrlMapMouseOver _control;
+        if ((_mapSign # 0) isEqualTo "marker") then {
+            getMousePosition params ["_mouseX", "_mouseY"];
+            private _mousePos = (_control ctrlMapScreenToWorld [_mouseX, _mouseY]);
+            if ((_mapSign # 1) find "factory" == 0) then {
+                private _sector = [300, _mousePos] call KPLIB_fnc_getNearestSector;
+                if ((_sector in KPLIB_sectors_factory) && (_sector in KPLIB_sectors_player)) then {
+                    [_sector] call KPLIB_fnc_hintResourcesFactory;
+                };
+            };
+            if ((_mapSign # 1) find "fobmarker" >= 0) then {
+                private _fob = [_mousePos] call KPLIB_fnc_getNearestFob;
+                [_fob] call KPLIB_fnc_hintResourcesFob;
+            };
+        };
+    }];
+}] call CBA_fnc_waitUntilAndExecute;
 
 // Show what arsenal items can be unlocked by capturing the sector by clicking on the Arsenal+ marker
 if (count KPLIB_sector_arsenalLink > 0) then {
