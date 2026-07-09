@@ -1,12 +1,12 @@
 /*
     File: default.sqf
-    Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
-    Date: 2025-12-19
-    Last Update: 2026-06-08
+    Author: PiG13BR - https://github.com/PiG13BR
+    Date: 19/12/2025 (Original file from KP Liberation Team)
+    Last Update: 09/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
-        Default CSAT enemy preset.
+        Default enemy preset.
 
     Needed Mods:
         - None
@@ -39,6 +39,11 @@ KPLIB_o_heliPilot = "O_Pilot_F";                                        // Jet P
 KPLIB_o_boatCrew = "O_Soldier_F";                                       // Boat Crewman
 
 KPLIB_o_parachuteType = "B_Parachute";                                  // Parachute type for the paratroopers
+
+// Enemy AI night accessories
+KPLIB_o_flashlightAcc = "acc_flashlight";                               // Flashlight (enabled by mission parameters)
+KPLIB_o_nightVision = "NVGoggles_OPFOR";                                // Night vision (enabled by mission parameters)
+KPLIB_o_laserAcc = "acc_pointer_IR";                                    // Laser accessory (enabled by mission parameters)
 
 // Enemy vehicles used by secondary objectives.
 KPLIB_o_mrap = "O_MRAP_02_F";                                           // Ifrit

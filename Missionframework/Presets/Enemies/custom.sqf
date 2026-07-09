@@ -2,11 +2,11 @@
     File: custom.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2026-04-10
-    Last Update: 2026-04-10
+    Last Update: 2026-07-09
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
-        Default CSAT enemy preset.
+        Custom (default CSAT) enemy preset.
 
     Needed Mods:
         - None
@@ -40,6 +40,11 @@ KPLIB_o_boatCrew = "O_Soldier_F";                                       // Boat 
 
 KPLIB_o_parachuteType = "B_Parachute";                                  // Parachute type for the paratroopers
 
+// Enemy AI night accessories
+KPLIB_o_flashlightAcc = "acc_flashlight";                               // Flashlight (enabled by mission parameters)
+KPLIB_o_nightVision = "NVGoggles_OPFOR";                                // Night vision (enabled by mission parameters)
+KPLIB_o_laserAcc = "acc_pointer_IR";                                    // Laser accessory (enabled by mission parameters)
+
 // Enemy vehicles used by secondary objectives.
 KPLIB_o_mrap = "O_MRAP_02_F";                                           // Ifrit
 KPLIB_o_mrapArmed = "O_MRAP_02_hmg_F";                                  // Ifrit (HMG)
@@ -51,6 +56,10 @@ KPLIB_o_ammoTruck = "O_Truck_03_ammo_F";                                // Tempe
 KPLIB_o_fuelContainer = "Land_Pod_Heli_Transport_04_fuel_F";            // Taru Fuel Pod
 KPLIB_o_ammoContainer = "Land_Pod_Heli_Transport_04_ammo_F";            // Taru Ammo Pod
 KPLIB_o_flag = "Flag_CSAT_F";                                           // Flag
+
+// Enemy mines types (CfgVehicles classes as explained here https://community.bistudio.com/wiki/createMine)
+KPLIB_o_APMine = "APERSMine";
+KPLIB_o_ATMine = "ATMine";
 
 /* Adding a value to these arrays below will add them to a one out of however many in the array, random pick chance.
 Therefore, adding the same value twice or three times means they are more likely to be chosen more often. */
@@ -99,12 +108,12 @@ KPLIB_o_armyVehiclesLight = [
     "O_APC_Tracked_02_cannon_F"                                         // BTR-K Kamysh
 ];
 
-// All enemy anti-air vehicles
+// All enemy anti-air vehicles. Used in general spawning.
 KPLIB_o_antiAirVehicles = [
     "O_APC_Tracked_02_AA_F"                                             // ZSU-39 Tigris
 ];
 
-// All enemy tank vehicles. Used in enemy adapative spawns and for static/trenched.
+// All enemy tank vehicles. Used in enemy adapative spawns and for static/trenched and QRF.
 KPLIB_o_tankVehicles = [
     "O_MBT_02_cannon_F",                                                // T-100 Varsuk
     "O_MBT_04_cannon_F",                                                // T-140 Angara
@@ -130,7 +139,8 @@ KPLIB_o_battleGrpVehicles = [
     "O_Heli_Light_02_dynamicLoadout_F",                                 // Po-30 Orca (Armed)
     "O_Heli_Light_02_dynamicLoadout_F",                                 // Po-30 Orca (Armed)
     "O_Heli_Transport_04_bench_F",                                      // Mi-290 Taru (Bench)
-    "O_Heli_Attack_02_dynamicLoadout_F"                                 // Mi-48 Kajman
+    "O_Heli_Attack_02_dynamicLoadout_F",                                // Mi-48 Kajman
+    "O_T_VTOL_02_infantry_dynamicLoadout_F"                             // Y-32 Xi'an (Ifantry Transport)
 ];
 
 // All enemy vehicles that can spawn as battlegroups, either assaulting or as reinforcements, at lower enemy combat readiness (aggression levels).
@@ -152,13 +162,20 @@ KPLIB_o_troopTransports = [
     "O_Truck_03_covered_F",                                             // Tempest Transport (Covered)
     "O_APC_Wheeled_02_rcws_F",                                          // MSE-3 Marid
     "O_Heli_Transport_04_bench_F",                                      // Mi-290 Taru (Bench)
-    "O_Heli_Light_02_dynamicLoadout_F"                                  // Po-30 Orca (Armed)
+    "O_Heli_Light_02_dynamicLoadout_F",                                 // Po-30 Orca (Armed)
+    "O_T_VTOL_02_infantry_dynamicLoadout_F"                             // Y-32 Xi'an (Ifantry Transport)
 ];
 
 // Enemy rotary-wings that will need to spawn in flight.
 KPLIB_o_helicopters = [
     "O_Heli_Transport_04_bench_F",                                      // Mi-290 Taru (Bench)
-    "O_Heli_Light_02_dynamicLoadout_F"                                  // Po-30 Orca (Armed)
+    "O_Heli_Light_02_dynamicLoadout_F",                                 // Po-30 Orca (Armed)
+    "O_Heli_Transport_04_box_F"                                         // Mi-290 Taru (Cargo)
+];
+
+// Enemy rotary-wings that will slingload vehicles.
+KPLIB_o_slingHelicopters = [
+    "O_Heli_Transport_04_box_F"                                         // Mi-290 Taru (Cargo)
 ];
 
 // Enemy attack rotary-wings
@@ -168,7 +185,7 @@ KPLIB_o_attackHelicopters = [
 
 // Planes for enemy paratroopers
 KPLIB_o_paradropPlanes = [
-    "O_T_VTOL_02_infantry_dynamicLoadout_F"                            // C-130J
+    "O_T_VTOL_02_infantry_dynamicLoadout_F"                             // Y-32 Xi'an (Ifantry Transport)
 ];
 
 // Enemy fixed-wings that will need to spawn in the air.

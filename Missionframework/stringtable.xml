@@ -7987,6 +7987,22 @@
             <Original>Airplanes can active sectors</Original>
             <Portuguese>Aviões podem ativar setores</Portuguese>
         </Key>
+        <Key ID="STR_PARAM_AI_NIGHT_ACC">
+            <Original>Enemy and Friendly AI night accessories</Original>
+            <Portuguese>Equipamento noturno para os inimigos e aliados</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_FLASHLIGHT">
+            <Original>Flashlight on weapon</Original>
+            <Portuguese>Lanterna na arma</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_NIGHTVISION">
+            <Original>Nightvision</Original>
+            <Portuguese>Visão noturna</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_NIGHTVISIONLASER">
+            <Original>Nightvision + Laser</Original>
+            <Portuguese>Visão noturna + Laser</Portuguese>
+        </Key>
         <Key ID="STR_TUTORIAL_CRATE">
             <Original>Crate</Original>
             <German>Kiste</German>

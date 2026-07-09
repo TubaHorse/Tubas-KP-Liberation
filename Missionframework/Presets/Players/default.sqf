@@ -2,11 +2,11 @@
     File: default.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 07/10/2017 (Original file from KP Liberation Team)
-    Last Update: 01/06/2026
+    Last Update: 09/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
-        Default NATO player preset.
+        Default player preset.
 
     Needed Mods:
         - None
@@ -62,6 +62,11 @@ KPLIB_b_medicalFacility = "Land_Medevac_house_V1_F";                    // This 
 
 // Basic uniform to spawn with
 KPLIB_b_basic_uniform = "U_B_CombatUniform_mcam";
+
+// Friendly AI night accessories
+KPLIB_b_flashlightAcc = "acc_flashlight";                               // Flashlight (enabled by mission parameters)
+KPLIB_b_nightVision = "NVGoggles";                                      // Night vision (enabled by mission parameters)
+KPLIB_b_laserAcc = "acc_pointer_IR";                                    // Laser accessory (enabled by mission parameters)
 
 /*
     Classnames of crates (parent of ReammoBox_F) that can be used as supply carriers and its prices

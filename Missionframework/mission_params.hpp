@@ -349,6 +349,12 @@ class Params {
         texts[] = {$STR_PARAMS_ENABLED, $STR_PARAMS_DISABLED};
         default = 0;
     };
+    class NightAcc {
+        title = $STR_PARAM_AI_NIGHT_ACC;
+        values[] = {0, 1, 2, 3};
+        texts[] = {$STR_NONE, $STR_PARAMS_FLASHLIGHT, $STR_PARAMS_NIGHTVISION, $STR_PARAMS_NIGHTVISIONLASER};
+        default = 2;
+    };
     class Spacer3 {
         title = "";
         values[] = {""};

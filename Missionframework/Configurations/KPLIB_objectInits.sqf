@@ -286,6 +286,73 @@ KPLIB_objectInits = [
         true
     ],
 
+    // AI Night accessories
+    [
+        ["CAManBase"],
+        {
+            if (side (group _this) == KPLIB_side_enemy) then {
+                switch (KPLIB_param_nightAccessories) do {
+                    case 1 : {
+                        // Add flashlight
+                        _this addPrimaryWeaponItem KPLIB_o_flashlightAcc;             
+                        _this enableGunLights "Auto";
+                    };
+                    case 2 : {
+                        // Add nightvision
+                        _this linkItem KPLIB_o_nightVision;
+                    };
+                    case 3 : {
+                        // Add nightvision + laser
+                        _this linkItem KPLIB_o_nightVision;
+                        _this addPrimaryWeaponItem KPLIB_o_laserAcc;
+                        (group _this) addEventHandler ["CombatModeChanged", {
+                            params ["_group", "_newMode"];
+
+                            if (_newMode == "COMBAT") then {
+                                _group enableIRLasers true
+                            } else {
+                                _group enableIRLasers false
+                            };
+                        }];
+                    };
+                    default {};
+                };
+            };
+            if (side (group _this) == KPLIB_side_player) then {
+                switch (KPLIB_param_nightAccessories) do {
+                    case 1 : {
+                        // Add flashlight
+                        _this addPrimaryWeaponItem KPLIB_b_flashlightAcc;             
+                        _this enableGunLights "Auto";
+                    };
+                    case 2 : {
+                        // Add nightvision
+                        _this linkItem KPLIB_b_nightVision;
+                    };
+                    case 3 : {
+                        // Add nightvision + laser
+                        _this linkItem KPLIB_b_nightVision;
+                        _this addPrimaryWeaponItem KPLIB_b_laserAcc;
+                        _this enableIRLasers true;
+                        if (leader (group _this) == _this) then {
+                            (group _this) addEventHandler ["CombatModeChanged", {
+                                params ["_group", "_newMode"];
+
+                                if (_newMode == "COMBAT") then {
+                                    _group enableIRLasers true
+                                } else {
+                                    _group enableIRLasers false
+                                };
+                            }];
+                        }
+                    };
+                    default {};
+                };
+            };
+        },
+        true
+    ],
+
     // Set transport cargo/crates config
     [
         KPLIB_transport_classes,

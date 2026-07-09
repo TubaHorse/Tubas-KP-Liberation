@@ -2,7 +2,7 @@
     File: custom.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2017-10-07
-    Last Update: 2024-06-20
+    Last Update: 2026-07-09
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -33,6 +33,8 @@ KPLIB_b_fobBuilding     = "Land_Cargo_HQ_V1_F";                         // This 
 KPLIB_b_fobBox          = "B_Slingload_01_Cargo_F";                     // This is the FOB as a container.
 KPLIB_b_fobTruck        = "B_Truck_01_box_F";                           // This is the FOB as a vehicle.
 KPLIB_b_arsenal         = "B_supplyCrate_F";                            // This is the virtual arsenal as portable supply crates.
+KPLIB_b_outpostBox      = "Land_Cargo10_military_green_F";              // This is the Outpost as a container.
+KPLIB_b_outpostBuilding = "Land_BagBunker_Large_F";                     // This is the Outpost building.
 
 // This is the mobile respawn (and medical) truck.
 KPLIB_b_mobileRespawn   = ["B_Truck_01_medical_F","B_T_Truck_01_medical_F"];
@@ -44,15 +46,43 @@ KPLIB_b_crewStatic      = "B_Soldier_F";                                // This 
 KPLIB_b_addHeli         = "B_Heli_Light_01_F";                          // These are the additional helicopters which spawn on the Freedom or at Chimera base.
 KPLIB_b_addBoat         = "B_Boat_Transport_01_F";                      // These are the boats which spawn at the stern of the Freedom.
 KPLIB_b_logiTruck       = "B_Truck_01_transport_F";                     // These are the trucks which are used in the logistic convoy system.
-KPLIB_b_smallStorage    = "ContainmentArea_02_sand_F";                  // A small storage area for resources.
-KPLIB_b_largeStorage    = "ContainmentArea_01_sand_F";                  // A large storage area for resources.
+KPLIB_b_smallStorage    = "Land_Cargo20_brick_red_F";                   // A small storage area for resources.
+KPLIB_b_largeStorage    = "Land_Cargo40_brick_red_F";                   // A large storage area for resources.
+KPLIB_b_transStorage    = "Land_Cargo10_brick_red_F";                   // This defines a transportable storage.
 KPLIB_b_logiStation     = "Land_RepairDepot_01_tan_F";                  // The building defined to unlock FOB recycling functionality.
-KPLIB_b_airControl      = "B_Radar_System_01_F";                        // The building defined to unlock FOB air vehicle functionality.
+KPLIB_b_airControl      = "Land_Radar_Small_F";                         // The building defined to unlock FOB air vehicle functionality.
 KPLIB_b_slotHeli        = "Land_HelipadSquare_F";                       // The helipad used to increase the GLOBAL rotary-wing cap.
 KPLIB_b_slotPlane       = "Land_TentHangar_V1_F";                       // The hangar used to increase the GLOBAL fixed-wing cap.
 KPLIB_b_crateSupply     = "CargoNet_01_box_F";                          // This defines the supply crates, as in resources.
 KPLIB_b_crateAmmo       = "B_CargoNet_01_ammo_F";                       // This defines the ammunition crates.
 KPLIB_b_crateFuel       = "CargoNet_01_barrels_F";                      // This defines the fuel crates.
+KPLIB_b_supplyDump      = "Land_Cargo20_military_green_F";              // This defines supply dump for the supply menu
+KPLIB_b_barrack         = "Land_Cargo_House_V1_F";                      // The building defined to unlock FOB redeploy and IA/squads buying
+KPLIB_b_medicalFacility = "Land_Medevac_house_V1_F";                    // This is the medical facility building
+
+// Basic uniform to spawn with
+KPLIB_b_basic_uniform = "U_B_CombatUniform_mcam";
+
+// Friendly AI night accessories
+KPLIB_b_flashlightAcc = "acc_flashlight";                               // Flashlight (enabled by mission parameters)
+KPLIB_b_nightVision = "NVGoggles";                                      // Night vision (enabled by mission parameters)
+KPLIB_b_laserAcc = "acc_pointer_IR";                                    // Laser accessory (enabled by mission parameters)
+
+/*
+    Classnames of crates (parent of ReammoBox_F) that can be used as supply carriers and its prices
+*/
+
+KPLIB_supply_crates = [
+    ["C_IDAP_supplyCrate_F",10,0,0],
+    ["Box_NATO_Equip_F",10,0,0],
+    ["Box_NATO_Ammo_F",10,0,0],
+    ["Box_NATO_Wps_F",10,0,0],
+    ["Box_NATO_AmmoOrd_F",10,0,0],
+    ["Box_NATO_Grenades_F",10,0,0],
+    ["Box_NATO_WpsLaunch_F",10,0,0],
+    ["Box_NATO_Support_F",10,0,0],
+    ["ACE_medicalSupplyCrate_advanced",10,0,0]
+];
 
 /*
     --- Friendly classnames ---
@@ -63,35 +93,35 @@ KPLIB_b_crateFuel       = "CargoNet_01_barrels_F";                      // This 
     IMPORTANT: The last element inside each array must have no comma at the end!
 */
 KPLIB_b_infantry = [
-    ["B_Soldier_lite_F",15,0,0],                                        // Rifleman (Light)
-    ["B_Soldier_F",20,0,0],                                             // Rifleman
-    ["B_soldier_LAT_F",30,0,0],                                         // Rifleman (AT)
-    ["B_Soldier_GL_F",25,0,0],                                          // Grenadier
-    ["B_soldier_AR_F",25,0,0],                                          // Autorifleman
-    ["B_HeavyGunner_F",35,0,0],                                         // Heavygunner
-    ["B_soldier_M_F",30,0,0],                                           // Marksman
-    ["B_Sharpshooter_F",40,0,0],                                        // Sharpshooter
-    ["B_soldier_AT_F",50,10,0],                                         // AT Specialist
-    ["B_soldier_AA_F",50,10,0],                                         // AA Specialist
-    ["B_medic_F",30,0,0],                                               // Combat Life Saver
-    ["B_engineer_F",30,0,0],                                            // Engineer
-    ["B_soldier_exp_F",30,0,0],                                         // Explosives Specialist
-    ["B_recon_F",20,0,0],                                               // Recon Scout
-    ["B_recon_LAT_F",30,0,0],                                           // Recon Scout (AT)
-    ["B_recon_M_F",30,0,0],                                             // Recon Marksman
-    ["B_Recon_Sharpshooter_F",40,0,0],                                  // Recon Sharpshooter
-    ["B_recon_medic_F",30,0,0],                                         // Recon Paramedic
-    ["B_recon_exp_F",30,0,0],                                           // Recon Demolition Expert
-    ["B_sniper_F",70,5,0],                                              // Sniper
-    ["B_ghillie_ard_F",70,5,0],                                         // Sniper (Arid)
-    ["B_ghillie_lsh_F",70,5,0],                                         // Sniper (Lush)
-    ["B_ghillie_sard_F",70,5,0],                                        // Sniper (Semi-Arid)
-    ["B_spotter_F",20,0,0],                                             // Spotter
-    ["B_crew_F",10,0,0],                                                // Crewman
-    ["B_soldier_PG_F",20,0,0],                                          // Para Trooper
-    ["B_helicrew_F",10,0,0],                                            // Helicopter Crew
-    ["B_Helipilot_F",10,0,0],                                           // Helicopter Pilot
-    ["B_Pilot_F",10,0,0]                                                // Pilot
+    ["B_Soldier_lite_F",15,10,0],                                        // Rifleman (Light)
+    ["B_Soldier_F",20,10,0],                                             // Rifleman
+    ["B_soldier_LAT_F",30,15,0],                                         // Rifleman (AT)
+    ["B_Soldier_GL_F",25,10,0],                                          // Grenadier
+    ["B_soldier_AR_F",25,15,0],                                          // Autorifleman
+    ["B_HeavyGunner_F",35,20,0],                                         // Heavygunner
+    ["B_soldier_M_F",30,10,0],                                           // Marksman
+    ["B_Sharpshooter_F",40,10,0],                                        // Sharpshooter
+    ["B_soldier_AT_F",50,50,0],                                          // AT Specialist
+    ["B_soldier_AA_F",50,50,0],                                          // AA Specialist
+    ["B_medic_F",30,10,0],                                               // Combat Life Saver
+    ["B_engineer_F",30,10,0],                                            // Engineer
+    ["B_soldier_exp_F",30,20,0],                                         // Explosives Specialist
+    ["B_recon_F",20,10,0],                                               // Recon Scout
+    ["B_recon_LAT_F",30,10,0],                                           // Recon Scout (AT)
+    ["B_recon_M_F",30,10,0],                                             // Recon Marksman
+    ["B_Recon_Sharpshooter_F",40,10,0],                                  // Recon Sharpshooter
+    ["B_recon_medic_F",30,10,0],                                         // Recon Paramedic
+    ["B_recon_exp_F",30,15,0],                                           // Recon Demolition Expert
+    ["B_sniper_F",70,10,0],                                              // Sniper
+    ["B_ghillie_ard_F",70,15,0],                                         // Sniper (Arid)
+    ["B_ghillie_lsh_F",70,15,0],                                         // Sniper (Lush)
+    ["B_ghillie_sard_F",70,15,0],                                        // Sniper (Semi-Arid)
+    ["B_spotter_F",20,10,0],                                             // Spotter
+    ["B_crew_F",10,5,0],                                                 // Crewman
+    ["B_soldier_PG_F",20,10,0],                                          // Para Trooper
+    ["B_helicrew_F",10,0,0],                                             // Helicopter Crew
+    ["B_Helipilot_F",10,0,0],                                            // Helicopter Pilot
+    ["B_Pilot_F",10,0,0]                                                 // Pilot
 ];
 
 KPLIB_b_vehLight = [
@@ -132,7 +162,8 @@ KPLIB_b_vehLight = [
     ["B_Boat_Transport_01_F",100,0,25],                                 // Assault Boat
     ["B_Boat_Armed_01_minigun_F",200,80,75],                            // Speedboat Minigun
     ["rhsusf_mkvsoc",250,200,100],                                      // Mk.V SOCOM
-    ["B_SDV_01_F",150,0,50]                                             // SDV
+    ["B_SDV_01_F",150,0,50],                                            // SDV
+    ["CUP_B_nM1036_TOW_DF_NATO", 400, 100, 100]                         // Humvee TOW
 ];
 
 KPLIB_b_vehHeavy = [
@@ -187,6 +218,7 @@ KPLIB_b_vehAir = [
     ["RHS_UH60M",250,80,150],                                           // UH-60M
     ["RHS_UH60M_MEV2",300,0,150],                                       // UH-60M MEV2
     ["RHS_CH_47F",275,80,175],                                          // CH-47 Chinook (Armed)
+    ["CUP_B_CH47F_VIV_GB", 350, 80, 175],                               // CH-47 Chinook (ViV)
     ["I_Heli_Transport_02_F",275,0,175],                                // CH-49 Mohawk
     ["rhsusf_CH53E_USMC",300,0,175],                                    // CH-53E Super Stallion
     ["rhsusf_CH53E_USMC_GAU21_D",300,100,175],                          // CH-53E Super Stallion (GAU-21)
@@ -234,6 +266,7 @@ KPLIB_b_vehStatic = [
     ["B_static_AA_F",50,100,0],                                         // Static Titan Launcher (AA)
     ["B_Mortar_01_F",80,150,0],                                         // Mk6 Mortar
     ["RHS_M119_WD",100,200,0],                                          // M119A2
+    ["B_Radar_System_01_F",700,0,0],                                    // AN/MPQ-105 Radar
     ["B_SAM_System_03_F",250,500,0]                                     // MIM-145 Defender
 ];
 
@@ -246,8 +279,6 @@ KPLIB_b_objectsDeco = [
     ["BWA3_Flag_Ger_F",0,0,0],
     ["Flag_UK_F",0,0,0],
     ["Flag_White_F",0,0,0],
-    ["Land_Medevac_house_V1_F",0,0,0],
-    ["Land_Medevac_HQ_V1_F",0,0,0],
     ["Flag_RedCrystal_F",0,0,0],
     ["CamoNet_BLUFOR_F",0,0,0],
     ["CamoNet_BLUFOR_open_F",0,0,0],
@@ -290,6 +321,18 @@ KPLIB_b_objectsDeco = [
     ["Land_BagFence_Long_F",0,0,0],
     ["Land_BagFence_Corner_F",0,0,0],
     ["Land_BagFence_End_F",0,0,0],
+    ["Land_SandbagBarricade_01_F",0,0,0],
+    ["Land_SandbagBarricade_01_half_F",0,0,0],
+    ["Land_Rampart_F",0,0,0],
+    ["Land_DragonsTeeth_01_4x2_new_F",0,0,0],
+    ["ACE_envelope_big",0,0,0],
+    ["GRAD_envelope_giant",0,0,0],
+    ["GRAD_envelope_long",0,0,0],
+    ["GRAD_envelope_short",0,0,0],
+    ["ACE_envelope_small",0,0,0],
+    ["GRAD_envelope_vehicle",0,0,0],
+    ["Land_Pier_F",20,0,0],                      // Pier block, to have a plane surface to build
+    ["Land_SandbagBarricade_01_hole_F",0,0,0],
     ["Land_BagBunker_Small_F",0,0,0],
     ["Land_BagBunker_Large_F",0,0,0],
     ["Land_BagBunker_Tower_F",0,0,0],
@@ -320,20 +363,30 @@ KPLIB_b_vehSupport = [
     [KPLIB_b_arsenal,100,200,0],
     [(KPLIB_b_mobileRespawn select 0),200,0,100],
     [(KPLIB_b_mobileRespawn select 1),200,0,100],
-    [KPLIB_b_fobBox,300,500,0],
-    [KPLIB_b_fobTruck,300,500,75],
+    [KPLIB_b_fobBox,500,500,0],
+    [KPLIB_b_fobTruck,500,500,75],
+    [KPLIB_b_outpostBox,300,300,0],
     [KPLIB_b_smallStorage,0,0,0],
     [KPLIB_b_largeStorage,0,0,0],
+    [KPLIB_b_transStorage,100,0,0],
     [KPLIB_b_logiStation,250,0,0],
     [KPLIB_b_airControl,1000,0,0],
-    [KPLIB_b_slotHeli,250,0,0],
-    [KPLIB_b_slotPlane,500,0,0],
+    [KPLIB_b_slotHeli,500,0,0],
+    [KPLIB_b_slotPlane,1000,0,0],
+    [KPLIB_b_supplyDump,250,1000,0],                                  // Supply dump
+    [KPLIB_b_barrack,200,0,0],                                        // Barrack
+    [KPLIB_b_medicalFacility,300,0,0],                                // Medical facility
+    ["B_UAV_01_F",50,0,0],
+    ["B_UAV_06_medical_F",50,0,0],
+    ["C_IDAP_UAV_06_antimine_F",50,50,0],
     ["ACE_medicalSupplyCrate_advanced",50,0,0],
     ["ACE_Box_82mm_Mo_HE",50,40,0],
     ["ACE_Box_82mm_Mo_Smoke",50,10,0],
     ["ACE_Box_82mm_Mo_Illum",50,10,0],
     ["ACE_Wheel",10,0,0],
     ["ACE_Track",10,0,0],
+    ["Land_Bomb_Trolley_01_F",0,1000,0],                                // Required to use PiG's pylon manager
+    ["Land_Missle_Trolley_02_F",0,1000,0],                              // Required to use PiG's pylon manager
     ["USAF_missileCart_W_AGM114",50,150,0],                             // Missile Cart (AGM-114)
     ["USAF_missileCart_AGMMix",50,150,0],                               // Missile Cart (AGM-65 Mix)
     ["USAF_missileCart_AGM1",50,150,0],                                 // Missile Cart (AGM-65D)
@@ -491,12 +544,3 @@ KPLIB_b_vehToUnlock = [
     ["B_Plane_Fighter_01_Stealth_F",""],                                // F/A-181 Black Wasp II (Stealth)
     ["B_T_VTOL_01_armed_F",""]                                          // V-44 X Blackfish (Armed)
 ];
-
-
-
-
-
-
-
-
-

@@ -136,6 +136,7 @@ if(isServer) then {
     GET_PARAM(KPLIB_param_supportModule, "SuppMod", 1);
     GET_PARAM_BOOL(KPLIB_param_tutorial, "Tutorial", 1);
     GET_PARAM_BOOL(KPLIB_param_airActiveSector, "airActiveSector", 0);
+    GET_PARAM(KPLIB_param_nightAccessories, "NightAcc", 1);
     
     // Technical Options
     ["--- Technical Options ---", "PARAM"] call KPLIB_fnc_log;
@@ -802,6 +803,15 @@ if (!isDedicated && hasInterface) then {
 
     _param = localize "STR_PARAM_AIR_ACTIVESECTOR";
     _value = if (KPLIB_param_airActiveSector) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_PARAM_AI_NIGHT_ACC";
+    switch (KPLIB_param_nightAccessories) do {
+        case 1: {_value = localize "STR_PARAMS_FLASHLIGHT";};
+        case 2: {_value = localize "STR_PARAMS_NIGHTVISION";};
+        case 3: {_value = localize "STR_PARAMS_NIGHTVISIONLASER";};
+        default {_value = localize "STR_NONE";};
+    };
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_PERMISSIONS_PARAM";

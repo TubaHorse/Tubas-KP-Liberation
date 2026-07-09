@@ -17,6 +17,7 @@
 * Added: New classnames lists in KPLIB_classnameList.sqf.
 * Added: Factory's and Fob's resources hint for players.
 * Added: More CBA event handlers.
+* Added: Mission parameter to select night accessories for enemy and friendly AI.
 * Tweaked: FOB build limit reduced. Each builded FOB will add costs to the next box/truck.
 * Tweaked: Added KPLIB tag to Armor/Air/Inf weights variables. Added more weight for Armor and Air kills.
 * Tweaked: FOB variable (KPLIB_sectors_fob to KPLIB_player_fobs).
