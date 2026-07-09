@@ -212,6 +212,8 @@ class KPLIB {
         class sectorFactorySpawns       {};
         class sectorMilitarySpawns      {};
         class sectorTowerSpawns         {};
+        class setSectorColors           {};
+        class setSectorLinks            {};
         
     };
     class Spawn {

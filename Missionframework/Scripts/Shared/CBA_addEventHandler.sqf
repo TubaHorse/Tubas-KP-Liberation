@@ -442,3 +442,8 @@
     }forEach _cargoLoaded;
     _this setVariable ["KPLIB_CARGO_loadedCargo", nil, true];
 }] call CBA_fnc_addEventHandler;
+
+// Change sector colors
+["KPLIB_setSectorColors", {
+    [] call KPLIB_fnc_setSectorColors;
+}] call CBA_fnc_addEventHandler;

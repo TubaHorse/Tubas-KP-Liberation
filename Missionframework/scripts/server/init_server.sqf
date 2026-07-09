@@ -59,6 +59,8 @@ execVM "Scripts\Server\sector\lose_sectors.sqf";
 [{[] call KPLIB_fnc_factoriesBlock}, 3600] call CBA_fnc_waitAndExecute;
 if (KPLIB_param_enemyFighters) then {[] call KPLIB_fnc_enemyFighterPFH;};
 [] call KPLIB_fnc_towerMonitoringPFH;
+[] call KPLIB_fnc_setSectorLinks;
+[] call KPLIB_fnc_setSectorColors;
 
 KPLIB_fsm_sectorMonitor = [] call KPLIB_fnc_sectorMonitor;
 if (KPLIB_param_highCommand) then {KPLIB_fsm_highcommand = [] call KPLIB_fnc_highcommand;};

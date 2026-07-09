@@ -84,6 +84,7 @@ if ( KPLIB_endgame == 0 ) then {
         [] spawn KPLIB_fnc_doSave;
         stats_sectors_lost = stats_sectors_lost + 1;
 
+        ["KPLIB_setSectorColors"] call CBA_fnc_serverEvent;
         ["KPLIB_removeArsenalItems", [_sector]] call CBA_fnc_globalEvent;
         ["KPLIB_removeFactoryProduction", _sector] call CBA_fnc_serverEvent;
     } else {

@@ -16,7 +16,6 @@ execVM "Scripts\Client\markers\fob_markers.sqf";
 if (!KPLIB_param_highCommand && KPLIB_param_mapMarkers) then {execVM "Scripts\Client\markers\group_icons.sqf";};
 execVM "Scripts\Client\markers\hostile_groups.sqf";
 if (KPLIB_param_mapMarkers) then {execVM "Scripts\Client\markers\huron_marker.sqf";} else {deleteMarkerLocal "huronmarker"};
-execVM "Scripts\Client\markers\sector_manager.sqf";
 execVM "Scripts\Client\markers\spot_timer.sqf";
 execVM "Scripts\Client\misc\broadcast_squad_colors.sqf";
 execVM "Scripts\Client\misc\permissions_warning.sqf";
