@@ -2,7 +2,7 @@
     File: fn_getSaveData.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-03-29
-    Last Update: 2026-04-13
+    Last Update: 2026-07-08
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -72,6 +72,40 @@ private ["_basePos", "_baseObjects", "_grpUnits", "_baseMines"];
         _x mineDetectedBy KPLIB_side_player
     ]});
 } forEach (KPLIB_player_fobs + KPLIB_player_outposts);
+
+// Fetch all objects and AI groups near each Airport with FOBs
+{
+    private _airport = _x;
+    if !(_airport in KPLIB_sectors_player) then {continue};
+    if (KPLIB_player_fobs findIf {_x inArea _airport} < 0) then {continue}; // No FOB. Ignore.
+
+    private _range = getMarkerSize _airport;
+    private _airportPos = markerPos _airport;
+
+    _airportObjects = (_airportPos nearObjects ((_range # 0) + (_range # 1))) select {
+        !(_x in _allObjects) &&
+        (_x inArea _airport) &&
+        ((toLowerANSI (typeof _x)) in KPLIB_classnamesToSave) &&        // Exclude classnames which are not in the presets
+        {alive _x} &&                                               // Exclude dead or broken objects
+        {getObjectType _x >= 8} &&                                  // Exclude preplaced terrain objects
+        {speed _x < 5} &&                                           // Exclude moving objects (like civilians driving through)
+        {isNull attachedTo _x} &&                                   // Exclude attachTo'd objects
+        {((getpos _x) select 2) < 10} &&                            // Exclude hovering helicopters and the like
+        {!(_x getVariable ["KPLIB_edenObject", false])} &&  // Exclude all objects placed via editor in mission.sqm
+        {!(_x getVariable ["KPLIB_preplaced", false])} &&   // Exclude preplaced (e.g. little birds from carrier)
+        {!((toLowerANSI (typeOf _x)) in KPLIB_crates)}                  // Exclude storage crates (those are handled separately)
+    };
+
+    _allObjects = _allObjects + (_airportObjects select {!((toLowerANSI (typeOf _x)) in KPLIB_storageBuildings)});
+
+    // Process all groups near in this Airport
+    {
+        // Get only living AI units of the group by excluding possible POWs currently in the player group
+        _grpUnits = (units _x) select {!(isPlayer _x) && (alive _x) && !((typeOf _x) in KPLIB_o_inf_classes) && !((typeOf _x) in KPLIB_o_militiaInfantry)};
+        // Add to save array
+        _aiGroups pushBack [getPosATL (leader _x), (_grpUnits apply {typeOf _x})];
+    } forEach (_allBlueGroups select {(leader _x) inArea _airport});
+}forEach (KPLIB_sectors_airport);
 
 // Save all fetched objects
 private ["_savedPos", "_savedVecDir", "_savedVecUp", "_class", "_hasCrew"];
@@ -213,5 +247,6 @@ private _weights = [
     KPLIB_blockedFactories,
     KPLIB_player_outposts,
     KPLIB_fobNames,
-    KPLIB_outpostNames
+    KPLIB_outpostNames,
+    KPLIB_sectorMinesPositionsHash
 ] // return

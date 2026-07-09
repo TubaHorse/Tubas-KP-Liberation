@@ -2,7 +2,7 @@
 	File: fn_setCargoVehConfig.sqf
 	Author: PiG13BR (https://github.com/PiG13BR)
 	Date: 21/10/2025
-	Last update: 10/02/2026
+	Last update: 09/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -28,14 +28,9 @@ _vehicle setVariable ["KPLIB_CARGO_isTransportVeh", true, true];
 _vehicle setVariable ["KPLIB_CARGO_offSets", _offsets, true];
 _vehicle setVariable ["KPLIB_CARGO_unloadOffset", (KPLIB_transportConfigs # _index) # 1, true];
 
-_vehicle addEventHandler ["Killed", {
+_vehicle addMPEventHandler ["MPKilled", {
     params ["_vehicle"];
-    private _cargoLoaded = _vehicle getVariable ["KPLIB_CARGO_loadedCargo", []];
-    // If vehicle is destroyed, delete all cargo
-    {
-        deleteVehicle _x;
-    }forEach _cargoLoaded;
-    _vehicle removeEventHandler [_thisEvent, _thisEventHandler];
+	["KPLIB_deleteCargo", _vehicle] call CBA_fnc_localEvent;
 }];
 
 // Add unload action
@@ -61,6 +56,5 @@ _vehicle addEventHandler ["RopeBreak", {
 		_cargo setVariable ["KPLIB_ropeAttached", false, true];
 	};
 }];
-
 
 true

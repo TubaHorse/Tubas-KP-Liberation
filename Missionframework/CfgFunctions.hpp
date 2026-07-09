@@ -88,6 +88,7 @@ class KPLIB {
         class allowCrewInImmobile       {};
         class checkClass                {};
         class cleanOpforVehicle         {};
+        class cleanUpVehicles           {};
         class clearCargo                {};
         class clearGarbage              {};
         class createClearance           {};
@@ -211,7 +212,6 @@ class KPLIB {
         class sectorFactorySpawns       {};
         class sectorMilitarySpawns      {};
         class sectorTowerSpawns         {};
-        class spawnBoatPatrol           {};
         
     };
     class Spawn {
@@ -224,6 +224,7 @@ class KPLIB {
         class getOpforRoadSpawnPoint    {};
         class getOpforSpawnPoint        {};
         class getSquadComp              {};
+        class spawnBoatPatrol           {};
         class spawnBuildingGarrison     {};
         class spawnCivilians            {};
         class spawnGarrisonUnit         {};

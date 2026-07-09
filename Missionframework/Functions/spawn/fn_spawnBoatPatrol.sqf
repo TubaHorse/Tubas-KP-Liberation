@@ -1,6 +1,18 @@
 /*
-    Boat spawn prototype
-    ToDo: Add EH "Hit" and make the ai turns to where the shot came from from >> some scheduler with BIS_fnc_inAngleSector
+	File: fn_spawnBoatPatrol.sqf
+	Author: PiG13BR (https://github.com/PiG13BR)
+	Date: 19/12/2025
+	Last update: 08/07/2026
+	License: MIT License - http://www.opensource.org/licenses/MIT
+
+	Description:
+		Spawns boat patrol on sector near a body of water
+
+	Parameters:
+		_sector - sector to spawn boat in water [STRING]
+
+	Return:
+		Array containing the boat and its crew
 */
 
 params["_sector"];

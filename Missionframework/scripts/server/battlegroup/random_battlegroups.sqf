@@ -19,13 +19,13 @@ while {KPLIB_param_aggressivity > 0.9 && KPLIB_endgame == 0} do {
     };
 
     if (
-        (count (allPlayers - entities "HeadlessClient_F") >= (5 / KPLIB_param_aggressivity))
+        (count (allPlayers - entities "HeadlessClient_F") >= 4)
         && {KPLIB_enemyReadiness >= (60 - (5 * KPLIB_param_aggressivity))}
         && {[] call KPLIB_fnc_getOpforCap < KPLIB_cap_battlegroup}
         && {diag_fps > 15.0}
     ) then {
         private _playerAirports = KPLIB_sectors_player select {_x in KPLIB_sectors_airport};
-        if ((random 100 <= 50) && ((count _playerAirports) > 0)) then {
+        if ((random 100 <= KPLIB_enemyReadiness) && ((count _playerAirports) > 0)) then {
             // Raid Random Airport
             private _sector = selectRandom _playerAirports;
             private _targetPos = markerPos _sector;
@@ -49,6 +49,7 @@ while {KPLIB_param_aggressivity > 0.9 && KPLIB_endgame == 0} do {
                 ["", _targetPos, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh;
                 sleep 3;
             };
+            ["KPLIB_reinfIncoming", ["", _targetPos]] call CBA_fnc_globalEvent;
         } else {
             // Random battlegroup for random sector closer to the front
             [] call KPLIB_fnc_spawnBattlegroup;

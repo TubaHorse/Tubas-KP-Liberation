@@ -432,3 +432,13 @@
 
 	}
 }] call CBA_fnc_addEventHandler;
+
+// Delete cargo if vehicle is destroyed
+["KPLIB_deleteCargo", {
+    private _cargoLoaded = _this getVariable ["KPLIB_CARGO_loadedCargo", []];
+    // If vehicle is destroyed, delete all cargo
+    {
+        deleteVehicle _x;
+    }forEach _cargoLoaded;
+    _this setVariable ["KPLIB_CARGO_loadedCargo", nil, true];
+}] call CBA_fnc_addEventHandler;

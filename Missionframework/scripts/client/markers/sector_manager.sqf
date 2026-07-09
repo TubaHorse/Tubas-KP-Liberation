@@ -38,8 +38,25 @@ while {true} do {
         count KPLIB_sectors_player != _sector_count
     };
 
-    {_x setMarkerColorLocal KPLIB_color_enemy;} forEach (KPLIB_sectors_all - KPLIB_sectors_player);
-    {_x setMarkerColorLocal KPLIB_color_player;} forEach KPLIB_sectors_player;
+    {
+        if (_x in KPLIB_sectors_airport) then {
+            private _airportData = (KPLIB_airportSectorHash getOrDefault [_x, []]);
+            if (_airportData isEqualTo []) then {continue};
+            _centerMk = _airportData # 0;
+            _centerMk setMarkerColorLocal KPLIB_color_enemy;
+        };
+        _x setMarkerColorLocal KPLIB_color_enemy;
+    } forEach (KPLIB_sectors_all - KPLIB_sectors_player);
+    
+    {
+        if (_x in KPLIB_sectors_airport) then {
+            private _airportData = (KPLIB_airportSectorHash getOrDefault [_x, []]);
+            if (_airportData isEqualTo []) then {continue};
+            _centerMk = _airportData # 0;
+            _centerMk setMarkerColorLocal KPLIB_color_player;
+        };
+        _x setMarkerColorLocal KPLIB_color_player;
+    } forEach KPLIB_sectors_player;
 
     {
         _x params ["_marker", "_base"];

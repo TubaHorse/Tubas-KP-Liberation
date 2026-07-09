@@ -31,6 +31,7 @@
 * Tweaked: Build Menu with some tooltips and edits related to airport sector.
 * Tweaked: FOB/Outpost resources information collection.
 * Tweaked: Pylon Armament Selector reviewed.
+* Tweaked: Clean up vehicles script.
 * Removed: Enemy fighter notifications.
 * Removed: ACE Fortify compatibility.
 * Removed: Some KP Liberation script files no longer required for the current version.
@@ -44,6 +45,7 @@
 * Fixed: SAM site templates were not spawning correctly.
 * Fixed: Enemy paratroopers not deploying parachutes.
 * Fixed: Discord log not showing FOB resources.
+* Fixed: Resources cargo not beign deleted when the vehicle carrying it is destroyed.
 
 ## 0.97.0 (07/03/2026)
 * Added Extension: Enemy artillery.
