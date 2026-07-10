@@ -35,6 +35,8 @@
 * Tweaked: Pylon Armament Selector reviewed.
 * Tweaked: Clean up vehicles script.
 * Tweaked: Sector markers management.
+* Tweaked: Crate store action will search for available storages in area to store the crate's value.
+* Tweaked: Moved infantry squads price list (KPLIB_b_allSquads) to preset files.
 * Removed: Enemy fighter notifications.
 * Removed: ACE Fortify compatibility.
 * Removed: Some KP Liberation script files no longer required for the current version.

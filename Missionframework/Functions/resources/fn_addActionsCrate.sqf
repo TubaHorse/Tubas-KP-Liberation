@@ -2,7 +2,7 @@
     File: fn_addActionsCrate.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 26/05/2017
-    Last Update: 07/07/2026
+    Last Update: 09/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -45,9 +45,9 @@ private _loadAction = _crate addAction [
 private _storeAction = _crate addAction [
     "<t color='#FFFF00'>" + localize "STR_ACTION_STORE_CRATE" + "</t>",
     {
-        params["_crate"];
+        params["_crate", "_player"];
 
-        [_crate, (nearestObjects [player, KPLIB_storageBuildings, 20]) # 0,true] call KPLIB_fnc_crateToStorage;
+        [_crate, (nearestObjects [_player, KPLIB_storageBuildings, 20]),true] call KPLIB_fnc_crateToStorage;
     },
     "",
     -501,
@@ -64,7 +64,6 @@ private _storeAction = _crate addAction [
         {!(_target getVariable ["KPLIB_crateInStorage", false])}
     },
     5
-    
 ];
 
 private _valueAction = _crate addAction [
@@ -136,7 +135,7 @@ private _carryAction = _crate addAction [
     -504,
     true,
     false,
-    "",
+    "lookAround",
     toString {
         !(_this getVariable ['KPLIB_BUILD_isBuilding', false]) && 
         {isNull objectParent _this} &&

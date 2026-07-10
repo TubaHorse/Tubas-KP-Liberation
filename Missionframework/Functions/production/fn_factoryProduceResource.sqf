@@ -2,7 +2,7 @@
     File: fn_factoryProduceResource.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 14/11/2025
-    Last Update: 28/01/2026
+    Last Update: 09/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -19,6 +19,10 @@ params["_factory"];
 
 if (!isServer) exitWith {false};
 if !(_factory in KPLIB_production) exitWith {["This sector is not in the production list"] call BIS_fnc_error; false};
+
+#define SUPPLY_INDEX 0
+#define AMMO_INDEX 1
+#define FUEL_INDEX 2
 
 // Only run if there are players connected
 if (([] call KPLIB_fnc_getPlayerCount) > 0) then {
@@ -74,6 +78,7 @@ if (([] call KPLIB_fnc_getPlayerCount) > 0) then {
 
         if (_sum < _storageLimit) then {
             private _crateType = KPLIB_b_crateSupply;
+            private _crateValue = 100;
 
             // Type of resource to create
             switch _typeOfResource do {
@@ -82,9 +87,25 @@ if (([] call KPLIB_fnc_getPlayerCount) > 0) then {
                 default {_crateType = KPLIB_b_crateSupply; stats_supplies_produced = stats_supplies_produced + 100;};
             };
 
-            // Produce resoures (create crate and attach to the storage)
-            private _crate = [_crateType, 100, getPosATL _storage] call KPLIB_fnc_createCrate;
-            [_crate, _storage] call KPLIB_fnc_crateToStorage;
+            if (_sum + _crateValue > _storageLimit) exitWith {
+                private _amount = (_sum + _crateValue) - _storageLimit;
+                _crateValue = _crateValue - _amount; // Only extract the necessary amount to fill storage
+            };
+
+            // Produce resources
+            switch (_crateType) do {
+                case KPLIB_b_crateSupply : {
+                    _resources set [SUPPLY_INDEX, _supply + _crateValue];
+                };
+                case KPLIB_b_crateAmmo : {
+                    _resources set [AMMO_INDEX, _ammo + _crateValue];
+                };
+                case KPLIB_b_crateFuel : {
+                    _resources set [FUEL_INDEX, _fuel + _crateValue];
+                };
+                default {}
+            };
+            _storage setVariable ["KPLIB_storageResources", _resources, true];
         };
     } else {
         // Update timer

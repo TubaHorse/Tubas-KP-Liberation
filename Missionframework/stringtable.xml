@@ -514,6 +514,10 @@
             <Original>Crate successfully loaded on the transport vehicle.</Original>
             <Portuguese>Caixa carregada com sucesso no veículo de transporte.</Portuguese>
         </Key>
+        <Key ID="STR_CRATE_CANTLOAD">
+            <Original>Couldn't load the crate. Vehicle is full.</Original>
+            <Portuguese>Não foi possível carregar a caixa. O veículo está cheio.</Portuguese>
+        </Key>
         <Key ID="STR_CRATE_UNLOADED">
             <Original>The crate was successfully unloaded from the transport vehicle.</Original>
             <Portuguese>A Caixas foi descarregada com sucesso no veículo de transporte.</Portuguese>

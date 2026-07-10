@@ -1,16 +1,16 @@
 /*
     File: fn_crateToStorage.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
-    Date: 2017-03-27
-    Last Update: 2026-07-07
+    Date: 27/03/2017
+    Last Update: 09/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
-        Attach given crate at storage area.
+        Store value from given crate to the nearest storage. If all crate's value is stored, the crate is deteled.
 
     Parameter(s):
         _crate      - Crate                     [OBJECT, defaults to objNull]
-        _storage    - Storage                   [OBJECT, defaults to objNull]
+        _storagesInArea   - Storages in area    [ARRAY, defaults to []]
         _update     - Update sector resources   [BOOL, defaults to false]
 
     Returns:
@@ -19,7 +19,7 @@
 
 params [
     ["_crate", objNull, [objNull]],
-    ["_storage", objNull, [objNull]],
+    ["_storagesInArea", [], [[objNull]]],
     ["_update", false, [false]]
 ];
 
@@ -29,7 +29,27 @@ params [
 
 // Validate parameters
 if (isNull _crate) exitWith {["Null object given"] call BIS_fnc_error; false};
-if (isNull _storage) exitWith {["Null object given"] call BIS_fnc_error; false};
+if (_storagesInArea isEqualTo []) exitWith {["Storages array is empty"] call BIS_fnc_error; false};
+
+// Filter storages
+private _availableStorages = [];
+{
+    if ([_x] call KPLIB_fnc_isStorageFull) then {continue}; // Skip on storage full
+
+    private _resources = [_x] call KPLIB_fnc_getStorageValues;
+    _resources params ["_supply", "_ammo", "_fuel"];
+
+    private _sum = _supply + _ammo + _fuel;
+
+    // Check for enough space in storage
+    private _storageLimit = [_x] call KPLIB_fnc_getStorageLimit;
+    if (_sum >= _storageLimit) then {continue}; // Skip on not enough space in storage
+
+    _availableStorages pushBack _x;
+}forEach _storagesInArea;
+
+if (_availableStorages isEqualTo []) exitWith {[localize "STR_BOX_CANTSTORE", true, 2] call KPLIB_fnc_hint;};
+private _storage = _availableStorages # 0; // Nearest storage
 
 // Get storage values
 private _resources = [_storage] call KPLIB_fnc_getStorageValues;
@@ -37,13 +57,7 @@ _resources params ["_supply", "_ammo", "_fuel"];
 
 private _sum = _supply + _ammo + _fuel;
 
-// Check for enough space in storage
 private _storageLimit = [_storage] call KPLIB_fnc_getStorageLimit;
-if (_sum >= _storageLimit) exitWith {
-    if (!isDedicated) then {
-        [localize "STR_BOX_CANTSTORE", true, 2] call KPLIB_fnc_hint;
-    };
-};
 
 // Store value
 private _crateValue = _crate getVariable ["KPLIB_crateValue", 0];
@@ -87,6 +101,7 @@ if (typeOf _storage == KPLIB_b_transStorage) then {
     _storage setMass _newMass;
 };
 
+// Delete crate if value left on it is zero
 if (_newValue < 1) then {
     deleteVehicle _crate;
 };

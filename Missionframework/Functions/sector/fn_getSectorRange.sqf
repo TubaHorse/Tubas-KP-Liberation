@@ -1,8 +1,8 @@
 /*
     File: fn_getSectorRange.sqf
-    Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
-    Date: 2019-11-25
-    Last Update: 2026-05-28
+    Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
+    Date: 25/11/2019
+    Last Update: 09/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -32,6 +32,8 @@ switch (true) do {
     case (_sector in KPLIB_sectors_airport):  { _activationRange = KPLIB_range_airportActivation; };
     case (_sector in KPLIB_sectors_capital):  { _activationRange = KPLIB_range_capitalActivation; };
     case (_sector in KPLIB_sectors_airSpawn): { _activationRange = KPLIB_range_airSpawnActivation; };
+    case (_sector in KPLIB_fillers_patrol):   { _activationRange = KPLIB_range_filler_patrol; };
+    case (_sector in KPLIB_fillers_aa):       { _activationRange = KPLIB_range_filler_aa; };
 };
 
 if (_unitCount < (KPLIB_cap_enemySide / 2)) exitWith {_activationRange};

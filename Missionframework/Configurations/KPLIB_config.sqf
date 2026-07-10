@@ -87,6 +87,8 @@ KPLIB_range_airportActivation = 3000;
 KPLIB_range_towerActivation    = 500;
 KPLIB_range_airSpawnActivation = 1500;
 KPLIB_range_pointActivation    = 1000;
+KPLIB_range_filler_patrol      = 1000;
+KPLIB_range_filler_aa          = 2000;
 
 // Range to capture a sector.
 KPLIB_range_sectorCapture = 175;

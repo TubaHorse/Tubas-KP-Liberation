@@ -66,19 +66,6 @@ KPLIB_b_vehToUnlock = KPLIB_b_vehToUnlock apply {if (_x isEqualType "") then {[_
 KPLIB_b_smallStorage    = "Land_Cargo20_brick_red_F";
 KPLIB_b_largeStorage    = "Land_Cargo40_brick_red_F"; 
 
-/*
-    Squad build list
-*/
-// Prices for the blufor infantry squads (supplies, ammo, fuel)
-KPLIB_b_allSquads = [
-    [KPLIB_b_squadLight,50,0,0],
-    [KPLIB_b_squadInf,75,25,0],
-    [KPLIB_b_squadAT,50,50,0],
-    [KPLIB_b_squadAA,50,50,0],
-    [KPLIB_b_squadRecon,75,0,0],
-    [KPLIB_b_squadPara,50,0,0]
-];
-
 // Squad names for build menu
 KPLIB_b_squadNames = [
     localize "STR_LIGHT_RIFLE_SQUAD",
