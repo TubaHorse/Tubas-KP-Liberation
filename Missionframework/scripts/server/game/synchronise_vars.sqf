@@ -14,7 +14,7 @@ waitUntil{!isNil "KPLIB_plane_count"};
 waitUntil{!isNil "KPLIB_heli_slots"};
 waitUntil{!isNil "KPLIB_plane_slots"};
 waitUntil{!isNil "resources_intel"};
-waitUntil{!isNil "infantry_cap"};
+waitUntil{!isNil "KPLIB_infantry_cap"};
 waitUntil{!isNil "KPLIB_civ_rep"};
 waitUntil{!isNil "KPLIB_guerilla_strength"};
 waitUntil{!isNil "KPLIB_infantryWeight"};
@@ -33,7 +33,7 @@ private _KPLIB_heli_slots_old = -1;
 private _KPLIB_plane_slots_old = -1;
 private _KPLIB_enemyReadiness_old = -1;
 private _resources_intel_old = -999;
-private _infantry_cap_old = -999;
+private _KPLIB_infantry_cap_old = -999;
 private _KPLIB_civ_rep_old = -999;
 private _KPLIB_guerilla_strength_old = -999;
 private _KPLIB_infantryWeight_old = -1;
@@ -53,7 +53,7 @@ while {true} do {
         || _KPLIB_plane_slots_old != KPLIB_plane_slots
         || _KPLIB_enemyReadiness_old != KPLIB_enemyReadiness
         || _resources_intel_old != resources_intel
-        || _infantry_cap_old != infantry_cap
+        || _KPLIB_infantry_cap_old != KPLIB_infantry_cap
         || _KPLIB_civ_rep_old != KPLIB_civ_rep
         || _KPLIB_guerilla_strength_old != KPLIB_guerilla_strength
         || _KPLIB_infantryWeight_old != KPLIB_infantryWeight
@@ -76,7 +76,7 @@ while {true} do {
         KPLIB_plane_slots,
         KPLIB_enemyReadiness,
         resources_intel,
-        infantry_cap,
+        KPLIB_infantry_cap,
         KPLIB_civ_rep,
         KPLIB_guerilla_strength,
         KPLIB_infantryWeight,
@@ -96,7 +96,7 @@ while {true} do {
     _KPLIB_plane_slots_old = KPLIB_plane_slots;
     _KPLIB_enemyReadiness_old = KPLIB_enemyReadiness;
     _resources_intel_old = resources_intel;
-    _infantry_cap_old = infantry_cap;
+    _KPLIB_infantry_cap_old = KPLIB_infantry_cap;
     _KPLIB_civ_rep_old = KPLIB_civ_rep;
     _KPLIB_guerilla_strength_old = KPLIB_guerilla_strength;
     _KPLIB_infantryWeight_old = KPLIB_infantryWeight;

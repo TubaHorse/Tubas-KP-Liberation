@@ -2,7 +2,7 @@
     File: fn_recalculateResources.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 10/09/2025
-    Last update: 13/06/2026
+    Last update: 12/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -33,6 +33,7 @@ private _airport_buildings = [];
     private _airportArea = markerSize _airportMk;
 
     _airport_buildings = (_airportPos nearObjects ((_airportArea # 0) + (_airportArea # 1))) select {_x inArea _airportMk};
+    _airport_buildings = _airport_buildings select {alive _x};
 
     private _heliSlots = {(KPLIB_type_heliPads find (typeOf _x) >= 0)} count _airport_buildings;
     private _planeSlots = {(KPLIB_type_hangars find (typeOf _x) >= 0)} count _airport_buildings;
@@ -46,6 +47,7 @@ private _airport_buildings = [];
     private _basePos = _x;
     if (_x in KPLIB_player_outposts) then {_range = KPLIB_range_outpost} else {_range = KPLIB_range_fob};
     private _fob_buildings = _basePos nearobjects _range;
+    _fob_buildings = _fob_buildings select {alive _x};
 
     // Fob in airport area. Collect information about the airport area.
     private _inAirport = false;
@@ -68,8 +70,9 @@ private _airport_buildings = [];
     if (_hasRecBuilding > 0) then {_hasRecBuilding = true;} else {_hasRecBuilding = false;};
     private _hasMedBuilding = {(typeOf _x) in KPLIB_medical_facilities;} count _fob_buildings;
     if (_hasMedBuilding > 0) then {_hasMedBuilding = true;} else {_hasMedBuilding = false;};
-    private _hasBarracks = {(typeOf _x) in KPLIB_type_barracks;} count _fob_buildings;
-    if (_hasBarracks > 0) then {_hasBarracks = true;} else {_hasBarracks = false;};
+    private _hasBarracks = false;
+    private _countBarracks = {(typeOf _x) in KPLIB_type_barracks;} count _fob_buildings;
+    if (_countBarracks > 1) then {_hasBarracks = true;} else {_hasBarracks = false;};
 
     private _supplyValue = 0;
     private _ammoValue = 0;
@@ -89,13 +92,8 @@ private _airport_buildings = [];
     _local_fuel_global = _local_fuel_global + _fuelValue;
     _local_heli_slots = _local_heli_slots + _heliSlots;
     _local_plane_slots = _local_plane_slots + _planeSlots;
+    _local_infantry_cap = _local_infantry_cap + ((10 * _countBarracks) * KPLIB_param_resourcesMulti);
 } forEach (KPLIB_player_fobs + KPLIB_player_outposts);
-
-{
-    if ( _x in KPLIB_sectors_city ) then {
-        _local_infantry_cap = _local_infantry_cap + (10 * KPLIB_param_resourcesMulti);
-    };
-} foreach KPLIB_sectors_player;
 
 KPLIB_base_resources = _local_base_resource;
 KPLIB_supplies_global = _local_supplies_global;
@@ -103,4 +101,4 @@ KPLIB_ammo_global = _local_ammo_global;
 KPLIB_fuel_global = _local_fuel_global;
 KPLIB_heli_slots = _local_heli_slots;
 KPLIB_plane_slots = _local_plane_slots;
-infantry_cap = _local_infantry_cap;
+KPLIB_infantry_cap = _local_infantry_cap;
