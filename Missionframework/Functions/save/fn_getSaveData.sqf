@@ -1,8 +1,8 @@
 /*
     File: fn_getSaveData.sqf
-    Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
-    Date: 2020-03-29
-    Last Update: 2026-07-08
+    Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PIG13BR - https://github.com/PiG13BR 
+    Date: 29/03/2020
+    Last Update: 11/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -36,6 +36,8 @@ private ["_basePos", "_baseObjects", "_grpUnits", "_baseMines"];
 
 {
     _basePos = _x;
+    if (_basePos isEqualTo [0,0,0]) then {continue};
+
     private _range = switch (true) do {
         case (_basePos in KPLIB_player_outposts) : {KPLIB_range_outpost};
         default {KPLIB_range_fob};
@@ -127,6 +129,7 @@ private ["_savedPos", "_savedVecDir", "_savedVecUp", "_class", "_hasCrew"];
     private _hitPoints = getAllHitPointsDamage _x;
     private _fuel = fuel _x;
     private _ammo = magazinesAllTurrets [_x, true];
+    // ToDo: pylons
 
     // Determine if vehicle is crewed
     if ((toLowerANSI _class) in KPLIB_b_allVeh_classes) then {

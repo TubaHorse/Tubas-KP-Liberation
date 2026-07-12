@@ -28,7 +28,7 @@ while { cinematic_camera_started } do {
 
             if ( count (KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]}) > 0 ) then {
                 for [ {_idx=0},{_idx < 2},{_idx=_idx+1} ] do {
-                    _positions pushback (selectRandom KPLIB_player_fobs);
+                    _positions pushback (selectRandom KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]});
                 };
             };
 
@@ -258,9 +258,9 @@ while { cinematic_camera_started } do {
                     if ( _nearest_sector != "" ) then {
                         _nearest_sector = markertext _nearest_sector;
                     } else {
-                        _nearfobs = KPLIB_player_fobs select {_x distance _position < 300};
+                        _nearfobs = KPLIB_player_fobs select {(_x isNotEqualTo [0,0,0]) && (_x distance _position) < 300};
                         if ( count _nearfobs > 0 ) then {
-                            _nearest_sector = format [ "FOB %1", KPLIB_fobNames select ( KPLIB_player_fobs find ( _nearfobs select 0 ) ) ];
+                            _nearest_sector = format [ "FOB %1", KPLIB_fobNames select ( (KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]}) find ( _nearfobs select 0 ) ) ];
                         };
                     };
                 };

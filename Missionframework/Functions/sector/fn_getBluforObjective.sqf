@@ -2,7 +2,7 @@
     File: fn_getBluforObjective.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 05/11/2025
-    Last Update: 12/04/2026
+    Last Update: 12/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -21,7 +21,7 @@ params [
 
 private _possibleBluforObjectives = [];
 
-private _objectivesToCheck = (KPLIB_player_fobs + KPLIB_player_outposts) + ((KPLIB_sectors_player - KPLIB_fillers_patrol) apply {markerPos _x});
+private _objectivesToCheck = ((KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]}) + (KPLIB_player_outposts select {_x isNotEqualTo [0,0,0]})) + ((KPLIB_sectors_player - KPLIB_fillers_all) apply {markerPos _x});
 
 {
     private _valid = true;
