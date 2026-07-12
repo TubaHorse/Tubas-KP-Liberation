@@ -25,7 +25,7 @@
         // Add all sectors objects into hashmaps to be deleted later
         {
             if (_sector in KPLIB_sectorsObjectsToManage) then {
-                private _objectsArray = KPLIB_sectorsObjectsToManage get _sector;
+                private _objectsArray = KPLIB_sectorsObjectsToManage getOrDefault [_sector, []];
                 _objectsArray pushBack _x;
                 KPLIB_sectorsObjectsToManage set [_sector, _objectsArray]
             } else {
@@ -37,19 +37,18 @@
 
 // Delete sector objects
 ["KPLIB_DeleteSectorObjects", {
-    params["_sector"];
+    params["_sector", ["_forced", false, [false]]];
 
     private _sectorObjects = KPLIB_sectorsObjectsToManage getOrDefault [_sector, []];
     if (_sectorObjects isEqualTo []) exitWith {};
     {
         if (count (crew _x) <= 0) then {
-            [_x] call KPLIB_fnc_despawnObject;
+            [_x, _forced] call KPLIB_fnc_despawnObject;
         } else {
-            [group _x] call KPLIB_fnc_despawnGroup;
-            [_x] call KPLIB_fnc_despawnObject;
+            [group _x, _forced] call KPLIB_fnc_despawnGroup;
+            [_x, _forced] call KPLIB_fnc_despawnObject;
         };
     }forEach _sectorObjects;
 
     KPLIB_sectorsObjectsToManage deleteAt _sector // Clear sector key
 }] call CBA_fnc_addEventHandler;
-

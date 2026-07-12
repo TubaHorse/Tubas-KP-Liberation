@@ -2,7 +2,7 @@
     File: fn_despawnGroup.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 18/09/2024 
-    Last Update: 18/04/2026
+    Last Update: 11/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -10,18 +10,32 @@
 
     Parameter(s):
         _group - group to despawn [GROUP, defaults to grpNull]
+		_forced - force despawn [BOOL, defaults to false]
 
     Returns:
         -
 */
 params[
-	["_group", grpNull, [grpNull]]
+	["_group", grpNull, [grpNull]], ["_forced", false, [false]]
 ];
 
 if (_group isEqualTo grpNull) exitWith {};
 
 if (_group getVariable ["KPLIB_inDespawner", false]) exitWith {};
 _group setVariable ["KPLIB_inDespawner", true];
+
+// Force despawn
+if (_forced) exitWith {
+	{
+		if (isNull objectParent _x) then {
+			deleteVehicle _x
+		} else {
+			(objectParent _x) deleteVehicleCrew _x
+		};
+	}forEach units _group;
+
+	_group setVariable ["KPLIB_inDespawner", nil];
+};
 
 [{
 	_group = _this # 0;
@@ -45,10 +59,9 @@ _group setVariable ["KPLIB_inDespawner", true];
 	};
 
 	if (_despawn) exitWith { 
-		
 		{
 			if (isNull objectParent _x) then {
-				deleteVehicle _x
+				deleteVehicle _x 
 			} else {
 				(objectParent _x) deleteVehicleCrew _x
 			};

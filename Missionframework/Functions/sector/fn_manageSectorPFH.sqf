@@ -2,7 +2,7 @@
     File: fn_manageSectorPFH.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 30/05/2026
+    Last Update: 11/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -108,7 +108,7 @@ private _maximum_additional_tickets = (KPLIB_param_maxDespawnDelay * 60 / SECTOR
         // Initiate sector deactivation once out of tickets
         if (_sector_despawn_tickets <= 0) then {
 
-            [_sector, _sectorUnits] call KPLIB_fnc_deactivateSector;
+            [_sector, _sectorUnits, 0, true] call KPLIB_fnc_deactivateSector; // Forced despawn
 
             // Exit PFH
             [_handle] call CBA_fnc_removePerFrameHandler;

@@ -2,7 +2,7 @@
     File: fn_despawnObject.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 18/09/2024 
-    Last Update: 22/12/2025 
+    Last Update: 11/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -10,17 +10,23 @@
 
     Parameter(s):
         _veh - Object to despawn [OBJECT, defaults to objNull]
+		_forced - force despawn [BOOL, defaults to false]
 
     Returns:
         -
 */
 params[
-	["_veh", objNull, [objNull]]
+	["_veh", objNull, [objNull]], ["_forced", false, [false]]
 ];
 
 if (isNull _veh) exitWith {};
 if (_veh getVariable ["KPLIB_inDespawner", false]) exitWith {};
 _veh setVariable ["KPLIB_inDespawner", true];
+
+// Force despawn
+if (_forced) exitWith {
+	[_veh] call KPLIB_fnc_cleanOpforVehicle;
+};
 
 [{
 	_veh = (_this # 0);
