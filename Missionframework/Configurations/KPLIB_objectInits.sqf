@@ -193,7 +193,6 @@ KPLIB_objectInits = [
         {if (isServer) then {[_this] call KPLIB_fnc_addRopeAttachEh;} else {[_this] remoteExecCall ["KPLIB_fnc_addRopeAttachEh", 2];};},
         true
     ],
-
     
     // Artillery Framework and Artillery Menu
     [
@@ -278,14 +277,14 @@ KPLIB_objectInits = [
     [
         ["CAManBase"],
         {
-            if (!(KPLIB_param_autodanger) && {(side _this) isEqualTo KPLIB_side_player}) then {
+            if (!(KPLIB_param_autodanger) && {(side (group _this)) isEqualTo KPLIB_side_player}) then {
                 _this disableAI "AUTOCOMBAT";
             };
             _this allowFleeing 0;
         },
         true
     ],
-
+    
     // AI Night accessories
     [
         ["CAManBase"],
@@ -400,7 +399,8 @@ KPLIB_objectInits = [
 
                 ["KPLIB_addUnflipAction", _veh] call CBA_fnc_globalEventJIP;
             }, [_this]] call CBA_fnc_waitUntilAndExecute;
-        }
+        },
+        true
     ],
 
     // Do recycle
@@ -415,6 +415,20 @@ KPLIB_objectInits = [
                 ["KPLIB_addRecycleAction", _object] call CBA_fnc_globalEventJIP;
             }, [_this]] call CBA_fnc_waitUntilAndExecute;      
         }
+    ],
+
+    // Add fuel canister to all vehicles
+    [
+        ["Tank","APC","IFV","Car"],
+        {
+            if (KPLIB_ace) then {
+                private _canister = createVehicle ["Land_CanisterFuel_F", getPosATL _this, [], 10, "NONE"];
+                [_canister, 0] call ace_cargo_fnc_setSize;
+                [_canister, _this, true] call ace_cargo_fnc_loadItem;
+                
+            };
+        },
+        true
     ],
 
     // Pylon Armament Selector
@@ -473,10 +487,7 @@ KPLIB_objectInits = [
     [
         [KPLIB_b_potato01],
         {
-            _this addEventHandler ["Killed", {
-                params["_huron"];
-                [{deleteVehicle _this; ["KPLIB_respawnHuron", nil] call CBA_fnc_serverEvent;}, _huron, KPLIB_potatoRespawnDelay] call CBA_fnc_waitAndExecute;
-            }];
+            _this setVariable ["ace_medical_isMedicalVehicle", true, true];
         }
     ],
 
@@ -522,6 +533,7 @@ KPLIB_objectInits = [
             _this setVehicleRadar 1;
             _this setVehicleReceiveRemoteTargets true;
             _this setVehicleReportRemoteTargets true;
+            (group _this) setBehaviourStrong "AWARE";
         }
     ],
 
@@ -538,6 +550,7 @@ KPLIB_objectInits = [
         ["Air"],
         {
             _this setVehicleReceiveRemoteTargets true
-        }
+        },
+        true
     ]
 ];

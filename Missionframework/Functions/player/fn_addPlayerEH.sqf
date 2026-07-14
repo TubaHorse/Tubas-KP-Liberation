@@ -2,7 +2,7 @@
     File: fn_addPlayerEH.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 13/11/2025
-    Last Update: 07/07/2026
+    Last Update: 12/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -159,7 +159,7 @@ if (count KPLIB_sector_arsenalLink > 0) then {
             getMousePosition params ["_mouseX", "_mouseY"];
             private _mousePos = (_control ctrlMapScreenToWorld [_mouseX, _mouseY]);
             private _sector = [300, _mousePos] call KPLIB_fnc_getNearestSector;
-            if ((_mapSign # 1) == (format["arsenalunlockmarker%1", _sector])) then {
+            if ((_mapSign # 1) == (format["arsenalunlockmarker_%1", _sector])) then {
                 [_sector] call KPLIB_fnc_hintLockedItems;
             };
         };

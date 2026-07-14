@@ -2,7 +2,7 @@
     File: fn_liberatedSector.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: -
-    Last Update: 2026-07-09
+    Last Update: 2026-07-12
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -18,9 +18,9 @@ params ["_liberated_sector"];
 
 private _KPLIB_enemyReadiness_increase = 0;
 switch (true) do {
-    case (_liberated_sector in KPLIB_sectors_capital) : {_KPLIB_enemyReadiness_increase = 6 + (floor (random 6)) * KPLIB_param_difficulty;};
+    case (_liberated_sector in KPLIB_sectors_capital) : {_KPLIB_enemyReadiness_increase = 20 + (floor (random 6)) * KPLIB_param_difficulty;};
     case (_liberated_sector in KPLIB_sectors_city) : {_KPLIB_enemyReadiness_increase = 6 + (floor (random 4)) * KPLIB_param_difficulty;};
-    case (_liberated_sector in KPLIB_sectors_military) : {_KPLIB_enemyReadiness_increase = 5 + (floor (random 12)) * KPLIB_param_difficulty;};
+    case (_liberated_sector in KPLIB_sectors_military) : {_KPLIB_enemyReadiness_increase = 10 + (floor (random 12)) * KPLIB_param_difficulty;};
     case (_liberated_sector in KPLIB_sectors_airport) : {_KPLIB_enemyReadiness_increase = 100};
     case (_liberated_sector in KPLIB_sectors_factory) : {_KPLIB_enemyReadiness_increase = 3 + (floor (random 7)) * KPLIB_param_difficulty;};
     case (_liberated_sector in KPLIB_sectors_tower) : {_KPLIB_enemyReadiness_increase = 3 + (floor (random 3)) * KPLIB_param_difficulty;};
@@ -98,16 +98,7 @@ if ((KPLIB_sector_arsenalLink getOrDefault [_liberated_sector, []]) isNotEqualTo
 sleep 45;
 
 if (KPLIB_endgame == 0) then {
-    if (
-        !(_liberated_sector in KPLIB_sectors_tower)
-        && {
-            (random (150 / (KPLIB_param_difficulty * KPLIB_param_aggressivity))) < (KPLIB_enemyReadiness - 15)
-            || _liberated_sector in KPLIB_sectors_capital
-        }
-        && {[] call KPLIB_fnc_getOpforCap < KPLIB_cap_battlegroup}
-    ) then {
-        [markerPos _liberated_sector] call KPLIB_fnc_spawnBattlegroup;
-    };
+    _liberated_sector call KPLIB_fnc_sectorCounterAttack;
 };
 
 [{_this call KPLIB_fnc_fireAtCapturedSector;}, _liberated_sector, 45] call CBA_fnc_waitAndExecute;

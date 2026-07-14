@@ -19,7 +19,7 @@ while {KPLIB_param_aggressivity > 0.9 && KPLIB_endgame == 0} do {
     };
 
     if (
-        (count (allPlayers - entities "HeadlessClient_F") >= 4)
+        (count (allPlayers - entities "HeadlessClient_F") >= 4) // ToDo: mission parameter to select min. amount of players to start an attack
         && {KPLIB_enemyReadiness >= (60 - (5 * KPLIB_param_aggressivity))}
         && {[] call KPLIB_fnc_getOpforCap < KPLIB_cap_battlegroup}
         && {diag_fps > 15.0}
@@ -34,7 +34,9 @@ while {KPLIB_param_aggressivity > 0.9 && KPLIB_endgame == 0} do {
             if (random 100 <= 50) then {
                 ["", _targetPos, ""] call KPLIB_fnc_battlegroupParatroopers;
                 sleep 3;
-                ["", _targetPos, ""] call KPLIB_fnc_battlegroupParatroopers;
+                if (KPLIB_param_unitCap >= 1) then {
+                    ["", _targetPos, ""] call KPLIB_fnc_battlegroupParatroopers;
+                };
                 sleep 3;
                 if (KPLIB_enemyReadiness >= 75) then {
                     ["", _targetPos, ""] call KPLIB_fnc_battlegroupParatroopers;
@@ -42,12 +44,18 @@ while {KPLIB_param_aggressivity > 0.9 && KPLIB_endgame == 0} do {
             } else {
                 ["", _targetPos, "", false] call KPLIB_fnc_battlegroupTransportHeli;
                 sleep 3;
-                ["", _targetPos, "", false] call KPLIB_fnc_battlegroupTransportHeli;
+                if (KPLIB_param_unitCap >= 1) then {
+                    ["", _targetPos, "", false] call KPLIB_fnc_battlegroupTransportHeli;
+                };
                 sleep 3;
+                if (KPLIB_enemyReadiness >= 75) then {
+                    ["", _targetPos, ""] call KPLIB_fnc_battlegroupAttackHeli;
+                };
                 ["", _targetPos, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh;
                 sleep 3;
-                ["", _targetPos, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh;
-                sleep 3;
+                if (KPLIB_param_unitCap >= 1) then {
+                    ["", _targetPos, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh;
+                };
             };
             ["KPLIB_reinfIncoming", ["", _targetPos]] call CBA_fnc_globalEvent;
         } else {

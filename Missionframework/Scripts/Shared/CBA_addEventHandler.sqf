@@ -73,6 +73,10 @@
 ["KPLIB_addRecycleAction", {
     _this spawn {
         waitUntil {sleep 1; alive player};
+
+        private _radius = ((boundingBoxReal _this) # 2) * 1.2;
+        if (_radius < 2) then {_radius = 2};
+
         _this addAction [
             "<t color='#FFFF00'>" + localize "STR_RECYCLE" + "</t> <img size='2' image='Images\ui_recycle.paa'/>", 
             {
@@ -96,7 +100,7 @@
                 {(((toLowerANSI (typeOf _originalTarget)) in KPLIB_storageBuildings) && (_originalTarget getVariable ["KPLIB_fobStorage", false])) || {!((toLowerANSI (typeOf _originalTarget)) in KPLIB_storageBuildings)}} &&
                 {(((attachedObjects _originalTarget) select {!isNull _originalTarget}) isEqualTo []) || {(typeOf _originalTarget) == "rhsusf_mkvsoc"}} // ignore null objects left by Advanced Towing (https://github.com/sethduda/AdvancedTowing/pull/46)
             },
-            ((boundingBoxReal _this) # 2) * 1.2
+            _radius
         ];
 
         // Add Delete Action for dead structures 
@@ -121,10 +125,11 @@
                 {(((toLowerANSI (typeOf _originalTarget)) in KPLIB_storageBuildings) && (_originalTarget getVariable ["KPLIB_fobStorage", false])) || {!((toLowerANSI (typeOf _originalTarget)) in KPLIB_storageBuildings)}} &&
                 {(((attachedObjects _originalTarget) select {!isNull _originalTarget}) isEqualTo []) || {(typeOf _originalTarget) == "rhsusf_mkvsoc"}} // ignore null objects left by Advanced Towing (https://github.com/sethduda/AdvancedTowing/pull/46)
             },
-            ((boundingBoxReal _this) # 2) * 1.2
+            _radius
         ];
     }
 }] call CBA_fnc_addEventHandler;
+
 
 // Add factory sector to the production list
 ["KPLIB_addFactoryProduction", {

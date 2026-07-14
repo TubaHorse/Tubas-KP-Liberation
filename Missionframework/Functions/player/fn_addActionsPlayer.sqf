@@ -2,7 +2,7 @@
     File: fn_addActionsPlayer.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-04-13
-    Last Update: 2026-07-03
+    Last Update: 2026-07-12
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -137,7 +137,7 @@ _player addAction [
             private _buildPos = [getPos _originalTarget] call KPLIB_fnc_getNearestBuildPos;
             _buildPos params ["_posBuild", "_range"];
 
-            (_posBuild distance2D _originalTarget) < (_range * 0.8)
+            (_posBuild distance2D _originalTarget) < (_range)
         }
         && {
             _originalTarget getVariable ['KPLIB_hasDirectAccess', false]

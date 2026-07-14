@@ -2,7 +2,7 @@
     File: fn_towerMonitoringPFH.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 23/04/2026
-    Last Update: 28/05/2026
+    Last Update: 12/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -25,8 +25,9 @@ if (isNil "KPLIB_towers_QRF") then {KPLIB_towers_QRF = []};
     params["_args", "_handler"];
 
     {
-        private _towerSector = _x;
+        if (missionNamespace getVariable ["KPLIB_QRFCoolDown", false]) exitWith {}; // Skip iterations on general cooldown
 
+        private _towerSector = _x;
 
         if ((KPLIB_param_difficulty < 1) || KPLIB_enemyReadiness < 25) then {continue}; // Skip on low enemy readiness and lower difficulty 
         if (_towerSector in KPLIB_towers_QRF) then {continue}; // Skip on cooldown
@@ -119,12 +120,18 @@ if (isNil "KPLIB_towers_QRF") then {KPLIB_towers_QRF = []};
             // Fail-safe
             if (_responseSector isEqualTo "") then {continue};
 
-            // Cooldown
+            // Tower cooldown
             KPLIB_towers_QRF pushBack _towerSector;
             [format["QRF called for %1 area from %2", markerText _towerSector, markerText _responseSector], "QRF"] call KPLIB_fnc_log;
             [{
                 KPLIB_towers_QRF deleteAt (KPLIB_towers_QRF find _this)
             }, _towerSector, round(random [1600, 1800, 2000])] call CBA_fnc_waitAndExecute;
+
+            // General cooldown
+            missionNamespace setVariable ["KPLIB_QRFCoolDown", true, true];
+            [{
+                missionNamespace setVariable ["KPLIB_QRFCoolDown", false, true];
+            }, [], 600] call CBA_fnc_waitAndExecute;
         };
     }forEach KPLIB_sectors_tower;
 }, 120, []] call CBA_fnc_addPerFrameHandler;

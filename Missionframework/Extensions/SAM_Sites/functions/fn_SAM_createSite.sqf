@@ -2,7 +2,7 @@
     File: fn_SAM_createSite.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 05/12/2025
-    Last Update: 07/07/2026
+    Last Update: 10/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -69,10 +69,6 @@ _radar setAutonomous true;
 _radar setVehicleReceiveRemoteTargets true;
 _radar setVehicleReportRemoteTargets true;
 
-// Mostly for Pook SAM Pack
-_radar deleteVehicleCrew (driver _radar);
-
-// In Pook SAM Pack, when trying to target a jet, gunners in radar assets gets out
 _radar addEventHandler ["GetOut", {
 	params ["_vehicle", "_role", "_unit", "_turret", "_isEject"];
 	if (_role ==  "gunner") then {

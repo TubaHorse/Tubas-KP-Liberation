@@ -37,6 +37,7 @@
 * Tweaked: Sector markers management.
 * Tweaked: Crate store action will search for available storages in area to store the crate's value.
 * Tweaked: Moved infantry squads price list (KPLIB_b_allSquads) to preset files.
+* Tweaked: Adaptations of random battlegroups script for the new airport sector.
 * Removed: Enemy fighter notifications.
 * Removed: ACE Fortify compatibility.
 * Removed: Some KP Liberation script files no longer required for the current version.
