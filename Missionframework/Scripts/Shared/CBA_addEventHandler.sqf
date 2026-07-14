@@ -75,7 +75,7 @@
         waitUntil {sleep 1; alive player};
 
         private _radius = ((boundingBoxReal _this) # 2) * 1.2;
-        if (_radius < 2) then {_radius = 2};
+        if (_radius < 4) then {_radius = 4};
 
         _this addAction [
             "<t color='#FFFF00'>" + localize "STR_RECYCLE" + "</t> <img size='2' image='Images\ui_recycle.paa'/>", 

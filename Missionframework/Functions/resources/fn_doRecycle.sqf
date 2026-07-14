@@ -2,7 +2,7 @@
     File: fn_doRecycle.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 22/11/2025
-    Last Update: 12/06/2026
+    Last Update: 13/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -44,7 +44,7 @@ if (!(isnull _vehToRecycle) && {alive _vehToRecycle}) then {
         _storages pushBack _x;
     } forEach _storage_areas;
 
-    if (_storages isEqualTo []) then {
+    if (_storages isEqualTo [] && (_sum > 0)) then {
         [localize "STR_CANCEL_ERROR", true, 2] call KPLIB_fnc_hint;
     } else {
         ["KPLIB_recycleResources", [_vehToRecycle, _price_s, _price_a, _price_f, _storages]] call CBA_fnc_serverEvent;
