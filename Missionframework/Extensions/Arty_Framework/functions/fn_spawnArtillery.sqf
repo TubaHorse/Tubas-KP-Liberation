@@ -1,8 +1,8 @@
 /* 
 	File: fn_spawnArtillery.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
-	Date: 2024-09-04
-	Last Update: 2025-11-03
+	Date: 09/04/2024
+	Last Update: 13/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -71,9 +71,7 @@ _newartillery setDir (getDir _newartillery + (_newartillery getRelDir _fob));
 [_newartillery] call KPLIB_fnc_addObjectInit;
 
 // Spawn crew of vehicle
-//private _crewGrp = createGroup KPLIB_side_enemy;
-//_crewGrp createVehicleCrew _newartillery;
-[_newartillery] call KPLIB_fnc_createCrew;
+private _crewGrp = [_newartillery] call KPLIB_fnc_createCrew;
 
 // Lock vehicle 
 [_newartillery, "LOCKEDPLAYER"] remoteExec ["setVehicleLock"];
@@ -125,12 +123,14 @@ if (_newartillery isKindOf "StaticWeapon") then {
 	{
 		// Eject crew if hit
 		_x addEventHandler ["Hit", {
-		params ["_unit", "_source", "_damage", "_instigator"];
+			params ["_unit", "_source", "_damage", "_instigator"];
+			_unit setVariable ["KPLIB_artyUnitGotHit", true];
+
 			private _grp = group _unit;
-			private _veh = vehicle _unit;
 			{
-				_unit action ["eject", _veh];
-			}forEach units _grp;
+				moveOut _x;
+				[_x] allowGetIn false;
+			}forEach (units _grp);
 		}];
 
 		// Force eject crew if dead 
@@ -140,6 +140,15 @@ if (_newartillery isKindOf "StaticWeapon") then {
 		}];
 	}forEach units _crewGrp;
 };
+
+// Avoid crew ejecting for no reason
+_newartillery addEventHandler ["GetOut", {
+	params ["_vehicle", "_role", "_unit", "_turret", "_isEject"];
+	if (_role ==  "gunner" && !(_unit getVariable ["KPLIB_artyUnitGotHit", false]) && (alive _unit)) then {
+		_unit assignAsGunner _vehicle;
+		_unit moveInGunner _vehicle;
+	};
+}];
 
 // LAMBS Register artillery 
 [_newartillery] call lambs_wp_fnc_taskArtilleryRegister;;

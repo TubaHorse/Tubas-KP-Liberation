@@ -2,7 +2,7 @@
 	File: fn_fireAtCapturedSector.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
 	Date: 07/11/2025
-	Last Update: 05/06/2026
+	Last Update: 11/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -31,13 +31,13 @@ if (!isNil "KPLIB_o_artilleryUnits" && {KPLIB_o_artilleryUnits isNotEqualTo []})
             // Call artillery if players captured a military or a tower sector 
             switch (true) do {
                 case (_sectorToFire in KPLIB_sectors_military) : {
-                    _chance = (25 + KPLIB_enemyReadiness * ([] call KPLIB_fnc_getOpforFactor)) min 75;
+                    _chance = (40 + KPLIB_enemyReadiness * ([] call KPLIB_fnc_getOpforFactor)) min 80;
                 };
                 case (_sectorToFire in KPLIB_sectors_airport) : {
                     _chance = 100;
                 };
                 case (_sectorToFire in KPLIB_sectors_tower) : {
-                    _chance = (10 + KPLIB_enemyReadiness * ([] call KPLIB_fnc_getOpforFactor)) min 50;
+                    _chance = (25 + KPLIB_enemyReadiness * ([] call KPLIB_fnc_getOpforFactor)) min 50;
                 };
                 default {_chance = -1}; // Don't fire at cities and capitals
             };
@@ -45,7 +45,7 @@ if (!isNil "KPLIB_o_artilleryUnits" && {KPLIB_o_artilleryUnits isNotEqualTo []})
             // ---------------------------------------------------------- FIRE MISSION
             if ((random 100) <= _chance) then {
                 _targetPos = getMarkerPos _sectorToFire;
-                _ammoType = [["HE", (3 + (random 7))], ["CLUSTER", (2 + (random 1))]] selectRandomWeighted [0.8, 0.2];
+                _ammoType = [["HE", (10 + (random 2))], ["CLUSTER", (2 + (random 1))]] selectRandomWeighted [0.8, 0.2];
                 _ammoType params ["_shell", "_rounds"];
 
                 if (sunOrMoon == 0) then {

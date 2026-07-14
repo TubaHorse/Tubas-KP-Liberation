@@ -2,7 +2,7 @@
     File: fn_sectorCounterAttack.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 05/06/2026
-    Last Update: 13/07/2026
+    Last Update: 14/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -30,7 +30,7 @@ if (KPLIB_param_unitCap >= 1) then {
 };
 sleep 2;
 ["", markerPos _airport, "", false] call KPLIB_fnc_battlegroupTransportHeli;
-sleep 2;,
+sleep 2;
 if (KPLIB_param_unitCap >= 1) then {
     ["", markerPos _airport, "", false] call KPLIB_fnc_battlegroupSlingLoadVeh;
 };

@@ -1,8 +1,8 @@
 /*
     File: fn_artilleryPositionManager.sqf
     Author: PiG13BR - https://github.com/PiG13BR
-	Date: 2024-10-06
-	Last Update: 2025-10-17
+	Date: 06/10/2024
+	Last Update: 13/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -17,10 +17,69 @@
 
 if ((_despawnObjects isEqualTo []) || {count _despawnObjects < 2}) exitWith {};
 
+// Replenish function
+KPLIB_fnc_replenishArty = {
+	[{
+		if (!alive _this) exitWith {};
+		if (count ([getPosASL _this, 300, KPLIB_side_player] call KPLIB_fnc_getNearbyEntities) > 0) exitWith {
+			_this call KPLIB_fnc_replenishArty;
+		};
+
+		// Fix arty
+		_this setDamage 0;
+		_this setVehicleAmmo 1;
+		_this setVehicleAmmoDef 1;
+		[_this, 1] remoteExec ["setFuel"];
+
+		// Create new crew
+		if ((gunner _this) isEqualTo objNull) then {
+			if (!alive (gunner _this) || !([_this] call KPLIB_fnc_ace_isAwake)) then {
+				deleteVehicleCrew _this;
+			};
+			private _crewGrp = [_this] call KPLIB_fnc_createCrew;
+
+			{
+				// Eject crew if hit
+				_x addEventHandler ["Hit", {
+					params ["_unit", "_source", "_damage", "_instigator"];
+					_unit setVariable ["KPLIB_artyUnitGotHit", true];
+
+					private _grp = group _unit;
+					private _veh = vehicle _unit;
+					{
+						_unit action ["eject", _veh];
+					}forEach units _grp;
+				}];
+
+				// Force eject crew if dead 
+				_x addMPEventHandler ["MPKilled", {
+					params ["_unit", "_killer"];
+					moveOut _unit;
+				}];
+			}forEach units _crewGrp;
+		};
+		_this setVariable ["KPLIB_artyReplenishing", false, true];
+	}, _x, round (random [1200, 1800, 2400])] call CBA_fnc_waitAndExecute;
+};
 // Add PFH to update the artillery units variable
 [{
 	params["_args", "_handler"];
-	KPLIB_o_artilleryUnits = KPLIB_o_artilleryUnits select {(alive _x) && {canFire _x} && {!(gunner _x isEqualTo objNull)} && {alive (gunner _x)}}; // Check arty status.
+
+	// Check arty status
+	KPLIB_o_artilleryUnits = KPLIB_o_artilleryUnits select {(alive _x)};
+
+	// Find empty arty pieces to replenish
+	private _emptyPieces = KPLIB_o_artilleryUnits select {
+		!(_x getVariable ["KPLIB_artyReplenishing", false])
+		&& ((gunner _x isEqualTo objNull) || {!alive (gunner _x)} || {!canFire _x})
+	};
+
+	if (count _emptyPieces > 0) then {
+		// Start replenishment
+		{
+			_this call KPLIB_fnc_replenishArty;
+		}forEach _emptyPieces;
+	};
 
 	if (KPLIB_o_artilleryUnits isEqualTo []) then {
 		// Despawner
