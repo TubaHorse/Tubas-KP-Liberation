@@ -39,6 +39,7 @@
 * Tweaked: Moved infantry squads price list (KPLIB_b_allSquads) to preset files.
 * Tweaked: Adaptations of random battlegroups script for the new airport sector.
 * Tweaked: Blufor defenders will no longer active nearby sectors by themselves.
+* Tweaked: It's possible to add multiple types of helicopter and plane slots in presets.
 * Removed: Enemy fighter notifications.
 * Removed: ACE Fortify compatibility.
 * Removed: Some KP Liberation script files no longer required for the current version.

@@ -2,7 +2,7 @@
     File: custom.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2017-10-07
-    Last Update: 2026-07-09
+    Last Update: 2026-07-14
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -51,14 +51,18 @@ KPLIB_b_largeStorage    = "Land_Cargo40_brick_red_F";                   // A lar
 KPLIB_b_transStorage    = "Land_Cargo10_brick_red_F";                   // This defines a transportable storage.
 KPLIB_b_logiStation     = "Land_RepairDepot_01_tan_F";                  // The building defined to unlock FOB recycling functionality.
 KPLIB_b_airControl      = "Land_Radar_Small_F";                         // The building defined to unlock FOB air vehicle functionality.
-KPLIB_b_slotHeli        = "Land_HelipadSquare_F";                       // The helipad used to increase the GLOBAL rotary-wing cap.
-KPLIB_b_slotPlane       = "Land_TentHangar_V1_F";                       // The hangar used to increase the GLOBAL fixed-wing cap.
 KPLIB_b_crateSupply     = "CargoNet_01_box_F";                          // This defines the supply crates, as in resources.
 KPLIB_b_crateAmmo       = "B_CargoNet_01_ammo_F";                       // This defines the ammunition crates.
 KPLIB_b_crateFuel       = "CargoNet_01_barrels_F";                      // This defines the fuel crates.
 KPLIB_b_supplyDump      = "Land_Cargo20_military_green_F";              // This defines supply dump for the supply menu
 KPLIB_b_barrack         = "Land_Cargo_House_V1_F";                      // The building defined to unlock FOB redeploy and IA/squads buying
 KPLIB_b_medicalFacility = "Land_Medevac_house_V1_F";                    // This is the medical facility building
+
+// The helipad used to increase the GLOBAL rotary-wing cap. Make sure the selected classnames are in KPLIB_type_heliPads.
+KPLIB_b_slotHeli        = ["Land_HelipadSquare_F", "Land_HelipadCircle_F", "Land_HelipadRescue_F"];
+
+// The hangar used to increase the GLOBAL fixed-wing cap.  Make sure the selected classnames are in KPLIB_type_hangars.             
+KPLIB_b_slotPlane       = ["Land_TentHangar_V1_F"];
 
 // Basic uniform to spawn with
 KPLIB_b_basic_uniform = "U_B_CombatUniform_mcam";
@@ -289,8 +293,6 @@ KPLIB_b_objectsDeco = [
     ["Land_LampHalogen_F",0,0,0],
     ["Land_LampStreet_small_F",0,0,0],
     ["Land_LampAirport_F",0,0,0],
-    ["Land_HelipadCircle_F",0,0,0],                                     // Strictly aesthetic - as in it does not increase helicopter cap!
-    ["Land_HelipadRescue_F",0,0,0],                                     // Strictly aesthetic - as in it does not increase helicopter cap!
     ["PortableHelipadLight_01_blue_F",0,0,0],
     ["PortableHelipadLight_01_green_F",0,0,0],
     ["PortableHelipadLight_01_red_F",0,0,0],
@@ -371,8 +373,10 @@ KPLIB_b_vehSupport = [
     [KPLIB_b_transStorage,100,0,0],
     [KPLIB_b_logiStation,250,0,0],
     [KPLIB_b_airControl,1000,0,0],
-    [KPLIB_b_slotHeli,500,0,0],
-    [KPLIB_b_slotPlane,1000,0,0],
+    [(KPLIB_b_slotHeli select 0),500,0,0],
+    [(KPLIB_b_slotHeli select 1),500,0,0],
+    [(KPLIB_b_slotHeli select 2),500,0,0],
+    [(KPLIB_b_slotPlane select 0),1000,0,0],
     [KPLIB_b_supplyDump,250,1000,0],                                  // Supply dump
     [KPLIB_b_barrack,200,0,0],                                        // Barrack
     [KPLIB_b_medicalFacility,300,0,0],                                // Medical facility

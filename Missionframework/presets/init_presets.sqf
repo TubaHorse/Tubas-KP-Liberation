@@ -41,7 +41,7 @@ if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_medicalFacility)}) < 0) then {
 
 KPLIB_supply_cratesClasses = KPLIB_supply_crates apply {toLowerANSI (_x#0)};
 
-if (typeName KPLIB_b_mobileRespawn == typeName "") then {
+if (KPLIB_b_mobileRespawn isEqualType "") then {
     KPLIB_b_mobileRespawns = [KPLIB_b_mobileRespawn];
 } else {
     KPLIB_b_mobileRespawns = KPLIB_b_mobileRespawn;
@@ -65,6 +65,26 @@ KPLIB_b_vehToUnlock = KPLIB_b_vehToUnlock apply {if (_x isEqualType "") then {[_
 // Force storages to be containers
 KPLIB_b_smallStorage    = "Land_Cargo20_brick_red_F";
 KPLIB_b_largeStorage    = "Land_Cargo40_brick_red_F"; 
+
+// Compatibility data for slots and hangas
+if (KPLIB_b_slotHeli isEqualType "") then {
+    private _value = KPLIB_b_slotHeli;
+    KPLIB_b_slotHeli = []; // Change data type
+    KPLIB_b_slotHeli pushBack _value;
+};
+
+if (KPLIB_b_slotPlane isEqualType "") then {
+    private _value = KPLIB_b_slotPlane;
+    KPLIB_b_slotPlane = []; // Change data type
+    KPLIB_b_slotPlane pushBack _value;
+};
+
+// Remove any heli slots and planes from aesthetic buildings if they are in KPLIB_type_heliPads variable already
+{
+    if (_x in KPLIB_type_heliPads) then {
+        KPLIB_b_objectsDeco deleteAt _forEachIndex;
+    };
+}forEach (KPLIB_b_objectsDeco apply {_x#0});
 
 // Squad names for build menu
 KPLIB_b_squadNames = [
@@ -110,6 +130,7 @@ KPLIB_o_battleGrpVehicles       = KPLIB_o_battleGrpVehicles         select {[_x]
 KPLIB_o_battleGrpVehiclesLight  = KPLIB_o_battleGrpVehiclesLight    select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_troopTransports         = KPLIB_o_troopTransports           select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_helicopters             = KPLIB_o_helicopters               select {[_x] call KPLIB_fnc_checkClass};
+KPLIB_o_slingHelicopters        = KPLIB_o_slingHelicopters               select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_attackHelicopters       = KPLIB_o_attackHelicopters         select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_paradropPlanes          = KPLIB_o_paradropPlanes            select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_planes                  = KPLIB_o_planes                    select {[_x] call KPLIB_fnc_checkClass};
@@ -169,14 +190,17 @@ KPLIB_o_paratroopers    = [KPLIB_o_squadLeader, KPLIB_o_medic, KPLIB_o_medic, KP
 */
 KPLIB_buildList         = [[], KPLIB_b_infantry, KPLIB_b_vehLight, KPLIB_b_vehHeavy, KPLIB_b_vehAir, KPLIB_b_vehStatic, KPLIB_b_objectsDeco, KPLIB_b_vehSupport, KPLIB_b_allSquads];
 KPLIB_crates            = [KPLIB_b_crateSupply, KPLIB_b_crateAmmo, KPLIB_b_crateFuel];
-KPLIB_airSlots          = [KPLIB_b_slotHeli, KPLIB_b_slotPlane];
+
+KPLIB_airSlots          = [];
+KPLIB_airSlots append (KPLIB_b_slotHeli + KPLIB_b_slotPlane);
 KPLIB_storageBuildings  = [KPLIB_b_smallStorage, KPLIB_b_largeStorage, KPLIB_b_transStorage];
-KPLIB_upgradeBuildings  = [KPLIB_b_logiStation, KPLIB_b_airControl, KPLIB_b_slotHeli, KPLIB_b_slotPlane];
+KPLIB_upgradeBuildings  = [KPLIB_b_logiStation, KPLIB_b_airControl];
+KPLIB_upgradeBuildings append (KPLIB_b_slotHeli + KPLIB_b_slotPlane);
 KPLIB_aiResupplySources append KPLIB_b_mobileRespawns;
 KPLIB_aiResupplySources append [KPLIB_b_potato01, KPLIB_b_arsenal];
 
-KPLIB_crates            = KPLIB_crates              apply {toLowerANSI _x};
 KPLIB_airSlots          = KPLIB_airSlots            apply {toLowerANSI _x};
+KPLIB_crates            = KPLIB_crates              apply {toLowerANSI _x};
 KPLIB_storageBuildings  = KPLIB_storageBuildings    apply {toLowerANSI _x};
 KPLIB_upgradeBuildings  = KPLIB_upgradeBuildings    apply {toLowerANSI _x};
 KPLIB_aiResupplySources = KPLIB_aiResupplySources   apply {toLowerANSI _x};
@@ -207,7 +231,7 @@ KPLIB_allLandVeh_classes = KPLIB_allLandVeh_classes arrayIntersect KPLIB_allLand
 KPLIB_allAirVeh_classes = [[], [KPLIB_b_potato01]] select (KPLIB_b_potato01 isKindOf "Air");
 {
     KPLIB_allAirVeh_classes append _x;
-} forEach [KPLIB_o_helicopters apply {toLowerANSI _x}, KPLIB_o_attackHelicopters apply {toLowerANSI _x}, KPLIB_o_paradropPlanes apply {toLowerANSI _x},KPLIB_o_planes apply {toLowerANSI _x}, KPLIB_b_air_classes, KPLIB_b_support_classes select {_x isKindOf "Air"}];
+} forEach [KPLIB_o_helicopters apply {toLowerANSI _x}, KPLIB_o_slingHelicopters apply {toLowerANSI _x}, KPLIB_o_attackHelicopters apply {toLowerANSI _x}, KPLIB_o_paradropPlanes apply {toLowerANSI _x},KPLIB_o_planes apply {toLowerANSI _x}, KPLIB_b_air_classes, KPLIB_b_support_classes select {_x isKindOf "Air"}];
 
 // All blufor vehicle (land and air) classnames
 KPLIB_b_allVeh_classes = [];
@@ -229,6 +253,7 @@ KPLIB_o_allVeh_classes  = [];
     KPLIB_o_battleGrpVehiclesLight,
     KPLIB_o_troopTransports,
     KPLIB_o_helicopters,
+    KPLIB_o_slingHelicopters,
     KPLIB_o_paradropPlanes,
     KPLIB_o_planes,
     KPLIB_o_SAM_radars,

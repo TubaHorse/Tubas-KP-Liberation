@@ -3,7 +3,7 @@
     File: fn_build_getEntryText.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR, FernandimModelador https://github.com/FernandimModelador
     Date: 10/11/2025
-    Last Update: 12/04/2026
+    Last Update: 14/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -31,7 +31,7 @@ if (!isNil {_customName}) then {
 
 if (_class in KPLIB_b_mobileRespawns) then {
     if (KPLIB_param_mobileRespawn) then {
-        if (typeName KPLIB_b_mobileRespawn == typeName "") then {
+        if (KPLIB_b_mobileRespawn isEqualType "") then {
             if (_class == KPLIB_b_mobileRespawn) then {
                 _entryText = localize "STR_RESPAWN_TRUCK";
             };
@@ -46,6 +46,14 @@ if (_class in KPLIB_b_mobileRespawns) then {
 };
 
 if (_buildType == BUILDTYPE_SUPPORT) then {
+    if (_class in KPLIB_b_slotHeli) then {
+        _entryText = localize "STR_HELI_SLOT";
+    };
+
+    if (_class in KPLIB_b_slotPlane) then {
+        _entryText = localize "STR_PLANE_SLOT";
+    };
+
     // Support names
     switch (_class) do {
         case KPLIB_b_fobBox: {_entryText = localize "STR_FOB_BOX";};
@@ -57,10 +65,9 @@ if (_buildType == BUILDTYPE_SUPPORT) then {
         case KPLIB_b_transStorage: {_entryText = localize "STR_TRANS_STORAGE";};
         case KPLIB_b_logiStation: {_entryText = localize "STR_RECYCLE_BUILDING";};
         case KPLIB_b_airControl: {_entryText = localize "STR_AIRCONTROL_BUILDING";};             
-        case KPLIB_b_slotHeli: {_entryText = localize "STR_HELI_SLOT";};
-        case KPLIB_b_slotPlane: {_entryText = localize "STR_PLANE_SLOT";};
         case KPLIB_b_supplyDump : {_entryText = localize "STR_SUPPLY_DUMP_ENTRY";};
         case KPLIB_b_barrack : {_entryText = localize "STR_BARRACK_ENTRY";};
+        case KPLIB_b_medicalFacility : {_entryText = localize "STR_MEDICAL_ENTRY";};
         default {};
     };
 } else {
