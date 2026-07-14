@@ -52,6 +52,7 @@
 * Fixed: Enemy paratroopers not deploying parachutes.
 * Fixed: Discord log not showing FOB resources.
 * Fixed: Resources cargo not beign deleted when the vehicle carrying it is destroyed.
+* Fixed: MLRS enemy artillery was not firing all its rounds at once.
 
 ## 0.97.0 (07/03/2026)
 * Added Extension: Enemy artillery.

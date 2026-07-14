@@ -2,7 +2,7 @@
 	File: fn_fireArtillery.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
 	Date: 04/09/2024 
-	Last Update: 28/05/2026 
+	Last Update: 12/07/2026 
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -126,25 +126,32 @@ if ((typeOf _artillery) in KPLIB_o_artilleryMRLS) then {
 	private _magsArray = magazinesAmmo _artillery;
 	_magsArray select {_x params ["_class"]; _class == _ammoClass};
 	_rounds = ((_magsArray # 0) # 1); // Get total magazine ammo amount
-};
 
-// Fire artillery
-[_artillery, _targetPos, _areaSpread, _ammoClass, floor(_rounds), _reloadTime, _gunnerArty] spawn {
-	params["_artillery", "_targetPos", "_areaSpread", "_ammoClass", "_rounds", "_reloadTime", "_gunnerArty"];
-	[format ["The enemy artillery is firing at pos %1 with class ammo %2. Rounds: %3",_targetPos, _ammoClass, _rounds], "FIRE MISSION"] call KPLIB_fnc_log;
-	for "_i" from 1 to _rounds do {
-		_randomPos = [[[_targetPos, _areaSpread]], [], {!surfaceIsWater _this}] call BIS_fnc_randomPos;
-
-		if (local _artillery) then {
-			_artillery doArtilleryFire [_randomPos, _ammoClass, 1];
-		} else {
-			[_artillery, [_randomPos, _ammoClass, 1]] remoteExec ["doArtilleryFire", owner _artillery];
-		};
-
-		sleep (5 + _reloadTime);
+	// Fire MRLS
+	if (local _artillery) then {
+		_artillery doArtilleryFire [_targetPos, _ammoClass, _rounds];
+	} else {
+		[_artillery, [_targetPos, _ammoClass, _rounds]] remoteExec ["doArtilleryFire", owner _artillery];
 	};
-	// ---------------------------------------------------------- SET ARTILLERY TO NOT BUSY
-	_gunnerArty setVariable ["KPLIB_isArtilleryBusy", false, true];
+} else {
+	// Fire artillery
+	[_artillery, _targetPos, _areaSpread, _ammoClass, floor(_rounds), _reloadTime, _gunnerArty] spawn {
+		params["_artillery", "_targetPos", "_areaSpread", "_ammoClass", "_rounds", "_reloadTime", "_gunnerArty"];
+		[format ["The enemy artillery is firing at pos %1 with class ammo %2. Rounds: %3",_targetPos, _ammoClass, _rounds], "FIRE MISSION"] call KPLIB_fnc_log;
+		for "_i" from 1 to _rounds do {
+			_randomPos = [[[_targetPos, _areaSpread]], [], {!surfaceIsWater _this}] call BIS_fnc_randomPos;
+
+			if (local _artillery) then {
+				_artillery doArtilleryFire [_randomPos, _ammoClass, 1];
+			} else {
+				[_artillery, [_randomPos, _ammoClass, 1]] remoteExec ["doArtilleryFire", owner _artillery];
+			};
+
+			sleep (5 + _reloadTime);
+		};
+		// ---------------------------------------------------------- SET ARTILLERY TO NOT BUSY
+		_gunnerArty setVariable ["KPLIB_isArtilleryBusy", false, true];
+	};
 };
 
 [true, [_artillery, _eta, _ammoClass, _rounds, _gunnerArty]]
