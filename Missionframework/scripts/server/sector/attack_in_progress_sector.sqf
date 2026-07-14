@@ -20,6 +20,7 @@ if (_sector in KPLIB_sectors_military) then {
 
 if ( KPLIB_param_bluforDefenders ) then {
     _grp = creategroup [KPLIB_side_player, true];
+    _grp setVariable ["KPLIB_defenderGroup", true, true];  // To avoid activating sectors by themselves
     {
         [_x, markerPos _sector, _grp] call KPLIB_fnc_createManagedUnit;
         sleep 1;
@@ -40,7 +41,8 @@ if ( _ownership == KPLIB_side_player ) exitWith {
     if ( KPLIB_param_bluforDefenders ) then {
         {
             if ( alive _x ) then { deleteVehicle _x };
-        } foreach units _grp;
+        } foreach (units _grp);
+        _grp setVariable ["KPLIB_defenderGroup", nil, true]
     };
 };
 

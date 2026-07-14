@@ -51,8 +51,8 @@ link22[] = {19,6};
 link23[] = {20,21};
 link24[] = {21,15};
 link25[] = {22,23};
-globals[] = {0.000000,0,0,0,0,640,480,1,27,6316128,1,-287.153229,379.064331,876.544678,372.475830,756,572,1};
-window[] = {2,-1,-1,-1,-1,785,26,1412,26,3,774};
+globals[] = {0.000000,0,0,0,0,640,480,1,27,6316128,1,-349.085114,440.995880,749.322815,151.536697,756,572,1};
+window[] = {2,-1,-1,-1,-1,863,104,1490,104,3,774};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -207,7 +207,14 @@ class FSM
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"private _pos = markerPos _sector;" \n
                                          "" \n
-                                         "private _amount = KPLIB_side_player countSide ((_pos nearEntities [""CAManBase"", _range]) select {!(captive _x) && ((getpos _x) select 2 < 500) && lifeState _x != ""INCAPACITATED""});" \n
+                                         "private _bluforNear = (_pos nearEntities [""CAManBase"", _range]) select {" \n
+                                         "	!(captive _x) " \n
+                                         "	&& ((getpos _x) select 2 < 500) " \n
+                                         "	&& lifeState _x != ""INCAPACITATED""" \n
+                                         "	&& !((group _x) getVariable [""KPLIB_defenderGroup"", false])" \n
+                                         "};" \n
+                                         "" \n
+                                         "private _amount = KPLIB_side_player countSide _bluforNear;" \n
                                          "{" \n
                                          "    _amount = _amount + (KPLIB_side_player countSide (crew _x));" \n
                                          "} forEach ((_pos nearEntities [[""Car"", ""Tank"", ""Helicopter"", ""Ship""], _range]) select {((getpos _x) select 2 < 500) && count (crew _x) > 0});" \n

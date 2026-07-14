@@ -8,6 +8,7 @@ if ( _ownership != KPLIB_side_enemy ) exitWith {};
 
 if ( KPLIB_param_bluforDefenders ) then {
     _grp = creategroup [KPLIB_side_player, true];
+    _grp setVariable ["KPLIB_defenderGroup", true, true];  // To avoid activating sectors by themselves
     {
         [_x, _thispos, _grp] call KPLIB_fnc_createManagedUnit;
     } foreach KPLIB_b_squadInf;
@@ -26,6 +27,7 @@ if ( _ownership == KPLIB_side_player ) exitWith {
         {
             if ( alive _x ) then { deleteVehicle _x };
         } foreach units _grp;
+        _grp setVariable ["KPLIB_defenderGroup", nil, true]
     };
 };
 
@@ -53,11 +55,14 @@ if ( KPLIB_endgame == 0 ) then {
         
         switch (true) do {
             case (_thispos in KPLIB_player_outposts) : {[_thispos] call KPLIB_fnc_destroyOutpost;};
-            default {[_thispos] call KPLIB_fnc_destroyFob;};
+            default {
+                [_thispos] call KPLIB_fnc_destroyFob;    
+                stats_fobs_lost = stats_fobs_lost + 1;
+            };
         };
         
         [] spawn KPLIB_fnc_doSave;
-        stats_fobs_lost = stats_fobs_lost + 1;
+
     } else {
         [_thispos, 3] remoteExec ["remote_call_fob"];
         {
