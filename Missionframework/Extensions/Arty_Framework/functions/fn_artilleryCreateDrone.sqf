@@ -2,29 +2,34 @@
     File: fn_artilleryCreateDrone.sqf
     Author: PiG13BR - https://github.com/PiG13BR
 	Date: 14/12/2025
-	Last Update: 15/04/2026
+	Last Update: 16/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
-        PROTOTYPE
         Spawns a drone in some nearby enemy sector direction and fly towards the player's fob and start artillery attack scheduler
+    
+    Parameter(s):
+        _targetPos - artillery strike position [POSITION]
+    
+    Returns:
+        Function reached the end [BOOL]
 */
 
-params["_centerPos"];
+params["_targetPos"];
 
-if (missionNamespace getVariable ["KPLIB_artilleryFob", false]) exitWith {};
+if (missionNamespace getVariable ["KPLIB_artilleryFob", false]) exitWith {false};
 missionNamespace setVariable ["KPLIB_artilleryFob", true, true];
 
 // Define how many artillery attacks that can happen while the drone is alive
 #define MAX_ARTILLERY_ATTACKS 3
 
-private _nearestSector = [2000, _centerPos, KPLIB_sectors_all, true] call KPLIB_fnc_getNearestSector;
-if (_nearestSector isEqualTo "") exitWith {}; 
+private _nearestSector = [2000, _targetPos, KPLIB_sectors_all, true] call KPLIB_fnc_getNearestSector;
+if (_nearestSector isEqualTo "") exitWith {false}; 
 
 // Find position to spawn
-private _spawnPos = [[[_centerPos, 500]], [[_centerPos, 175]], {
+private _spawnPos = [[[_targetPos, 500]], [[_targetPos, 175]], {
     count ([_this, 250] call KPLIB_fnc_getNearbyPlayers) < 1 && 
-    {[_centerPos, (_centerPos getDir (markerPos _nearestSector)), 30, _this] call BIS_fnc_inAngleSector}
+    {[_targetPos, (_targetPos getDir (markerPos _nearestSector)), 30, _this] call BIS_fnc_inAngleSector}
 }] call BIS_fnc_randomPos;
 
 // Spawn drone
@@ -40,21 +45,25 @@ _drone enableDynamicSimulation false;
 } forEach (allCurators);
 
 // Move to location
-_drone doMove ([[[_centerPos, 50]], [], {true}] call BIS_fnc_randomPos);
+_drone doMove ([[[_targetPos, 50]], [], {true}] call BIS_fnc_randomPos);
 
 // Start fob artillery fire
-[_drone, _centerPos, _spawnPos] spawn {
-    params ["_drone", "_centerPos", "_spawnPos"];
+[_drone, _targetPos, _spawnPos] spawn {
+    params ["_drone", "_targetPos", "_spawnPos"];
 
-    waitUntil {sleep 1; !alive _drone || {_drone distance2D _centerPos < 100}};
+    waitUntil {sleep 1; !alive _drone || {_drone distance2D _targetPos < 100}};
 
     private _attackCount = 0;
     while {alive _drone && _attackCount < MAX_ARTILLERY_ATTACKS} do {
         sleep (30 + (random 30));
 
         // Arty fire
-        [_centerPos] call KPLIB_fnc_artilleryFobFiring;
-
+        if (_targetPos in KPLIB_player_fobs) then {
+            [_targetPos] call KPLIB_fnc_artilleryFobFiring;
+        } else {
+            [_targetPos, 150, "HE", (6 + (random 6))] call KPLIB_fnc_fireArtillery;
+        };
+    
         _attackCount = _attackCount + 1;
     };
 
@@ -66,3 +75,5 @@ _drone doMove ([[[_centerPos, 50]], [], {true}] call BIS_fnc_randomPos);
 
     missionNamespace setVariable ["KPLIB_artilleryFob", false, true];
 };
+
+true

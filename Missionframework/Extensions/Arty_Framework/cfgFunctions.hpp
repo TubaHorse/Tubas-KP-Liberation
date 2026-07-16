@@ -3,6 +3,7 @@ class Enemy_Artillery {
     
     class addMagazinesMortar            {};
     class artilleryCreateDrone          {};
+    class artilleryCreateSpotterHeli    {};
     class artilleryFobFiring            {};
     class artilleryFobTargeting         {};
     class artilleryFobTargetingPFH      {};

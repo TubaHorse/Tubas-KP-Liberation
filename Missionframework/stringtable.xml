@@ -8851,6 +8851,8 @@
                 <Portuguese>Exporta info de fabricas para RPT para Python parsing</Portuguese>
             </Key>
         </Container> 
+
+
         <Container name="Enemy Artillery">
             <Key ID="STR_TITLE_ENEMYARTILLERY">
                 <Original>Enemy Artillery</Original>
@@ -8867,6 +8869,18 @@
             <Key ID="STR_NOTIFICATION_ENEMYARTILLERY_DESTROYED">
                 <Original>Hostile artillery position destroyed.</Original>
                 <Portuguese>Posição da artilharia inimiga destruída</Portuguese>
+            </Key>
+            <Key ID="STR_PARAM_ENEMYARTILLERY_SPOTTER">
+                <Original>Enemy artillery spotter vehicle type</Original>
+                <Portuguese>Tipo de veículo para observador de artilharia</Portuguese>
+            </Key>
+            <Key ID="STR_PARAM_ENEMYARTILLERY_DRONE">
+                <Original>Drone (it will try to make various artillery strikes if not destroyed)</Original>
+                <Portuguese>Drone (vai tentar realizar varios ataques de artilharia se não destruido)</Portuguese>
+            </Key>
+            <Key ID="STR_PARAM_ENEMYARTILLERY_HELI">
+                <Original>Helicopter (it will loiter the target position before caling artillery)</Original>
+                <Portuguese>Helicópter (vai sobrevoar em órbita a posição alvo antes de chamar artilharia)</Portuguese>
             </Key>
         </Container>
 

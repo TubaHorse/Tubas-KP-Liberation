@@ -1,8 +1,8 @@
 /* 
 	File: fn_artilleryFobTargeting.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
-	Date: 2024-10-06
-	Last Update: 2024-12-01
+	Date: 06/10/2024
+	Last Update: 16/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -25,5 +25,3 @@ _ammoType = [["HE", (3 + (random 7))], ["CLUSTER", (1 + (random 1))], ["LG", (1 
 _ammoType params ["_shell", "_rounds"];
 
 [_targetFob, KPLIB_range_fob, _shell, _rounds] call KPLIB_fnc_fireArtillery;
-
-[] call KPLIB_fnc_artilleryFobTargeting;

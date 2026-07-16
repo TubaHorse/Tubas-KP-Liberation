@@ -2,18 +2,20 @@
     File: fn_artilleryFobTargetingPFH.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 23/11/2024 
-    Last Update: 14/04/2026
+    Last Update: 16/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
         Artillery target fobs CBA PFH. Tries to target a FOB in each execution.
 
     Parameter(s):
-        _delay - amount of time (in seconds) between executions [NUMBER]
+        _delay - amount of time (in seconds) between executions [NUMBER, defaults to 600]
 
     Returns:
         -
 */
+
+params[["_delay", 600, [0]]];
 
 [{
     params["_args", "_handler"];
@@ -85,11 +87,23 @@
             // Returns a random fob position
             private _targetFob = selectRandom _fobsAtRange; 
             
-            [_targetFob] call KPLIB_fnc_artilleryCreateDrone;
-            //[_targetFob] call KPLIB_fnc_artilleryFobFiring;
-
-            // Remove PFH
-            [_handler] call CBA_fnc_removePerFrameHandler;
+            switch (KPLIB_param_spotterArtyType) do {
+                case 1 : {
+                    private _called = [_targetFob] call KPLIB_fnc_artilleryCreateDrone;
+                    if (_called) then {[_handler] call CBA_fnc_removePerFrameHandler;};
+                    [] call KPLIB_fnc_artilleryFobTargeting;
+                };
+                case 2 :{
+                    private _called = [_targetFob] call KPLIB_fnc_artilleryCreateSpotterHeli;
+                    if (_called) then {[_handler] call CBA_fnc_removePerFrameHandler;};
+                    [] call KPLIB_fnc_artilleryFobTargeting;
+                };
+                default {
+                    [_targetFob] call KPLIB_fnc_artilleryFobFiring;
+                    [_handler] call CBA_fnc_removePerFrameHandler;
+                    [] call KPLIB_fnc_artilleryFobTargeting;
+                }
+            } 
         }
     }
-}, _sleeptime, []] call CBA_fnc_addPerFrameHandler;
+}, _delay, []] call CBA_fnc_addPerFrameHandler;

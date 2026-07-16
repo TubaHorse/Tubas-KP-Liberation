@@ -2,7 +2,7 @@
     File: fn_spawnQRF.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 23/04/2026
-    Last Update: 28/05/2026
+    Last Update: 16/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -56,5 +56,19 @@ if (count _bluforInf > 0) exitWith {
         ["", _qrfPos, _sector, false] call KPLIB_fnc_battlegroupTransportHeli
     } else {
         [selectRandom (KPLIB_o_troopTransports select {_x isKindOf "LandVehicle"}), _qrfPos, _sector, false] call KPLIB_fnc_battlegroupLandVehicle
+    };
+
+    if (random 100 <= KPLIB_enemyReadiness) then {
+        [{
+            switch (KPLIB_param_spotterArtyType) do {
+                case 1 : {
+                    _this call KPLIB_fnc_artilleryCreateDrone;
+                };
+                case 2 : {
+                    _this call KPLIB_fnc_artilleryCreateSpotterHeli;
+                };
+                default {};
+            }
+        }, [_qrfPos], 10] call CBA_fnc_waitAndExecute;
     };
 };

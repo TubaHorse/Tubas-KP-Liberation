@@ -99,6 +99,7 @@ if(isServer) then {
     // Extension Options
     ["--- Extension Options ---", "PARAM"] call KPLIB_fnc_log;
     GET_PARAM_BOOL(KPLIB_param_enemyArtillery, "EnemyArtillery", 1);
+    GET_PARAM(KPLIB_param_spotterArtyType, "EnemyArtySpotterType", 1);
     GET_PARAM_BOOL(KPLIB_param_ArtyMenu, "ArtyMenu", 1);
     GET_PARAM_BOOL(KPLIB_param_clearBrush, "ClearBrushes", 1);
     GET_PARAM_BOOL(KPLIB_param_enemyFighters, "EnemyFighters", 1);
@@ -593,6 +594,14 @@ if (!isDedicated && hasInterface) then {
 
     _param = localize "STR_TITLE_ENEMYARTILLERY";
     _value = if (KPLIB_param_enemyArtillery) then {localize "STR_PARAMS_ENABLED";} else {localize "STR_PARAMS_DISABLED";};
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_TITLE_ENEMYARTILLERY";
+    switch (KPLIB_param_spotterArtyType) do {
+        case 1: {_value = localize "STR_PARAM_ENEMYARTILLERY_DRONE";};
+        case 2: {_value = localize "STR_PARAM_ENEMYARTILLERY_HELI";};
+        default {_value = localize "STR_NONE";};
+    };
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_ARTY_MENU_TITLE";

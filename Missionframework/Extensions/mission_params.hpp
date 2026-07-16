@@ -16,6 +16,12 @@ class EnemyArtillery {
     texts[] = {$STR_PARAMS_ENABLED, $STR_PARAMS_DISABLED};
     default = 1;
 };
+class EnemyArtySpotterType {
+    title = $STR_PARAM_ENEMYARTILLERY_SPOTTER;
+    values[] = {0, 1, 2};
+    texts[] = {$STR_NONE, $STR_PARAM_ENEMYARTILLERY_DRONE, $STR_PARAM_ENEMYARTILLERY_HELI};
+    default = 1;
+};
 class ArtyMenu {
     title = $STR_ARTY_MENU_TITLE;
     values[] = {1, 0};
