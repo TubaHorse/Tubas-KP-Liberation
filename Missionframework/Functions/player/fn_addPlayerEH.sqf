@@ -2,7 +2,7 @@
     File: fn_addPlayerEH.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 13/11/2025
-    Last Update: 12/07/2026
+    Last Update: 15/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -185,39 +185,17 @@ addMissionEventHandler ["MapSingleClick", {
             private _fob = [_mousePos] call KPLIB_fnc_getNearestFob;
             [_fob] call KPLIB_fnc_hintResourcesFob;
         };
-    }
-
+    };
 }];
 
-// Link nearest military bases to a tower
-addMissionEventHandler ["Map", {
-    params["_opened"];
-    
-    if (_opened) then {
-        KPLIB_drawEH = ((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["Draw", {
-            private _player =  player;
+// Show tower's info
+addMissionEventHandler ["MapSingleClick", {
+    params["", "_pos"];
 
-            private _tower = [getPosATL _player, KPLIB_side_enemy, KPLIB_range_radioTowerScan] call KPLIB_fnc_getNearestTower;
-            
-            if !(isNil "_tower") then {
-                // Find all sectors in range
-                private _sectorsInRange = ((KPLIB_sectors_all - [_tower]) - KPLIB_sectors_player) select {((markerPos _x) distance2D (markerPos _tower)) < KPLIB_range_radioTowerScan};
+    if (localNamespace getVariable ["KPLIB_towerInfoCooldown", false]) exitWith {};
 
-                if (count _sectorsInRange < 1) then {continue}; // Skip
-                
-                // Find all military bases within tower range
-                private _militaryBases = (KPLIB_sectors_military arrayIntersect _sectorsInRange);
-                if (count _militaryBases > 0) then {
-                    // Draw lines between tower > bases
-                    {
-                        private _milPos = markerPos _x;
-                        (_this # 0) drawLine [markerPos _tower, _milPos, [1,0,0,1]];
-                    }forEach _militaryBases
-                };
-            };
+    private _sector = [50, _pos] call KPLIB_fnc_getNearestSector;
+    if (!(_sector in KPLIB_sectors_tower) || (_sector in KPLIB_sectors_player)) exitWith {};
 
-        }];
-    } else {
-        ((findDisplay 12) displayCtrl 51) ctrlRemoveEventHandler ["Draw", KPLIB_drawEH]
-    };
-}]
+    [_sector] call KPLIB_fnc_hintTowerInfo;
+}];

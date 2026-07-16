@@ -15,7 +15,8 @@
 * Added: Airport sector (available in the devkit).
 * Added: `filler_aa` sector (available in the devkit).
 * Added: New classnames lists in KPLIB_classnameList.sqf.
-* Added: Factory's and Fob's resources hint for players.
+* Added: Factory's and Fob's resources hint for players on map click.
+* Added: Shows and hint tower's information about enemy QRF availability on map click.
 * Added: More CBA event handlers.
 * Added: Mission parameter to select night accessories for enemy and friendly AI.
 * Tweaked: FOB build limit reduced. Each builded FOB will add costs to the next box/truck.

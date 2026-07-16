@@ -4854,6 +4854,10 @@
             <Czech>Následující věci nejsou dovoleny:\n%1</Czech>
             <Japanese>このアイテムは許可されていません:\n%1</Japanese>
         </Key>
+        <Key ID="STR_TOWER_NO_MILITARY_BASES">
+            <Original>NO MILITARY BASES NEARBY</Original>
+            <Portuguese>NENHUMA BASE MILITAR PERTO</Portuguese>
+        </Key>
         <Key ID="STR_ARSENAL_UNLOCK_LIST">
             <Original>Items to unlock:</Original>
             <Portuguese>Itens para desbloquear:</Portuguese>

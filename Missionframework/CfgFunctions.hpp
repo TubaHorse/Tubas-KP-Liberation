@@ -106,6 +106,7 @@ class KPLIB {
         class getUnitPositionId         {};
         class getUnitsCount             {};
         class hint                      {};
+        class hintTowerInfo             {};
         class huronManager              {};
         class lambs_enableReinforcements{};
         class protectObject             {};
