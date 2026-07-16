@@ -2,7 +2,7 @@
     File: fn_sectorFactorySpawns.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 03/07/2026
+    Last Update: 13/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -86,10 +86,6 @@ if ((random 100) > 66) then {_vehToSpawn pushback ([] call KPLIB_fnc_getAdaptive
     sleep 1;
 }forEach _vehToSpawn;
 
-if (((random 100) <= KPLIB_resistance_sector_chance) && (([] call KPLIB_fnc_crGetMulti) > 0)) then {
-    [_sector] spawn sector_guerilla;
-};
-
 sleep 1;
 
 private _garrisonsCount = round ((floor (1 + (round (KPLIB_enemyReadiness / 6 )))) * _popfactor);
@@ -128,7 +124,7 @@ _sectorUnits append _boatUnits;
     params["_sector", "_localCaptureSize", "_sectorUnits"];
 
     // Reinforcements
-    ["KPLIB_enemyReinforcements", _sector] call CBA_fnc_serverEvent;
+    ["KPLIB_sectorReinforcements", _sector] call CBA_fnc_serverEvent;
 
     if (KPLIB_sectorspawn_debug > 0) then {[format ["Sector %1 (%2) - populating done", (markerText _sector), _sector], "SECTORSPAWN"] remoteExecCall ["KPLIB_fnc_log", 2];};
 

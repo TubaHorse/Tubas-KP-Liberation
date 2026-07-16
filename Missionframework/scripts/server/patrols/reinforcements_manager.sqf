@@ -63,6 +63,13 @@ if (KPLIB_enemyReadiness > 15) then {
                 };
                 stats_reinforcements_called = stats_reinforcements_called + 1;
             };
+
+            sleep 30 + (random 30);
+
+            // Guerrilla
+            if (((random 100) <= KPLIB_resistance_sector_chance) && (([] call KPLIB_fnc_crGetMulti) > 0)) then {
+                [_targetsector] spawn sector_guerilla;
+            };
         };
     };
 };

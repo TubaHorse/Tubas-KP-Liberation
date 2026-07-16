@@ -5,44 +5,22 @@ if (KPLIB_asymmetric_debug > 0) then {[format ["Sector %1 (%2) - sector_guerilla
 private _startpos = (markerPos _sector) getPos [(1200 + (round (random 400))), (random 360)];
 
 while {(([_startpos, 500, KPLIB_side_player] call KPLIB_fnc_getUnitsCount) > 0) || (surfaceIsWater _startpos)} do {
-    _startpos = (markerPos _sector) getPos [(1200 + (round (random 400))), (random 360)];
+    _startpos = (markerPos _sector) getPos [(600 + (round (random 200))), (random 360)];
 };
 
 private _incDir = (markerPos _sector) getDir _startpos;
 private _incString = "unknown";
 
-if (_incDir < 23) then {
-    _incString = "N";
-} else {
-    if (_incDir < 68) then {
-        _incString = "NE";
-    } else {
-        if (_incDir < 113) then {
-            _incString = "E";
-        } else {
-            if (_incDir < 158) then {
-                _incString = "SE";
-            } else {
-                if (_incDir < 203) then {
-                    _incString = "S";
-                } else {
-                    if (_incDir < 248) then {
-                        _incString = "SW";
-                    } else {
-                        if (_incDir < 293) then {
-                            _incString = "W";
-                        } else {
-                            if (_incDir < 338) then {
-                                _incString = "NW";
-                            } else {
-                                _incString = "N";
-                            };
-                        };
-                    };
-                };
-            };
-        };
-    };
+switch (true) do {
+    case (_incDir < 23) : {_incString = "N"};
+    case (_incDir < 68) : {incString = "NE";};
+    case (_incDir < 113) : {_incString = "E";};
+    case (_incDir < 158) : {_incString = "SE";};
+    case (_incDir < 203) : {_incString = "S";};
+    case (_incDir < 248) : {_incString = "SW";};
+    case (_incDir < 293) : {_incString = "W";};
+    case (_incDir < 338) : {_incString = "NW";};
+    case (_incDir > 338) : {_incString = "N";};
 };
 
 [5, [(markerText _sector), _incString]] remoteExec ["KPLIB_fnc_crGlobalMsg"];
