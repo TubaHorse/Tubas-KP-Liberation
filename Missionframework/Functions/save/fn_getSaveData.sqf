@@ -129,7 +129,7 @@ private ["_savedPos", "_savedVecDir", "_savedVecUp", "_class", "_hasCrew"];
     private _hitPoints = getAllHitPointsDamage _x;
     private _fuel = fuel _x;
     private _ammo = magazinesAllTurrets [_x, true];
-    // ToDo: pylons
+    private _getPyloninfo = getAllPylonsInfo _x;
 
     // Determine if vehicle is crewed
     if ((toLowerANSI _class) in KPLIB_b_allVeh_classes) then {
@@ -143,7 +143,7 @@ private ["_savedPos", "_savedVecDir", "_savedVecUp", "_class", "_hasCrew"];
         (!(_class in KPLIB_c_vehicles) || {_x getVariable ["KPLIB_seized", false]}) &&
         (!((toLowerANSI _class) in KPLIB_o_allVeh_classes) || {_x getVariable ["KPLIB_captured", false]})
     ) then {
-        _objectsToSave pushBack [_class, _savedPos, _savedVecDir, _savedVecUp, _hasCrew, _weaponsCargo, _magsCargo, _itemsCargo, _backpacksCargo, _hitPoints, _fuel, _ammo];
+        _objectsToSave pushBack [_class, _savedPos, _savedVecDir, _savedVecUp, _hasCrew, _weaponsCargo, _magsCargo, _itemsCargo, _backpacksCargo, _hitPoints, _fuel, _ammo, _getPyloninfo];
     };
 } forEach _allObjects;
 

@@ -4859,8 +4859,8 @@
             <Portuguese>NENHUMA BASE MILITAR PERTO</Portuguese>
         </Key>
         <Key ID="STR_ARSENAL_UNLOCK_LIST">
-            <Original>Items to unlock:</Original>
-            <Portuguese>Itens para desbloquear:</Portuguese>
+            <Original>ITEMS TO UNLOCK:</Original>
+            <Portuguese>ITENS PARA DESBLOQUEAR:</Portuguese>
         </Key>
         <Key ID="STR_FOB_RESOURCES_LIST">
             <Original>FOB's RESOURCES INFO:</Original>
@@ -8879,7 +8879,7 @@
                 <Portuguese>Drone (vai tentar realizar varios ataques de artilharia se não destruido)</Portuguese>
             </Key>
             <Key ID="STR_PARAM_ENEMYARTILLERY_HELI">
-                <Original>Helicopter (it will loiter the target position before caling artillery)</Original>
+                <Original>Helicopter (it will loiter the target position before calling artillery)</Original>
                 <Portuguese>Helicópter (vai sobrevoar em órbita a posição alvo antes de chamar artilharia)</Portuguese>
             </Key>
         </Container>

@@ -2,7 +2,7 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 10/07/2026
+    Last Update: 17/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -364,7 +364,7 @@ if (!isNil "_saveData") then {
     private _object = objNull;
     {
         // Fetch data of saved object
-        _x params ["_class", "_pos", "_vecDir", "_vecUp", ["_hasCrew", false], ["_weaponsCargo", []], ["_magsCargo", [[], []]], ["_itemsCargo", [[], []]], ["_backpacksCargo", [[],[]]], ["_hitPoints", []], ["_fuel", 100], ["_ammo", []]];
+        _x params ["_class", "_pos", "_vecDir", "_vecUp", ["_hasCrew", false], ["_weaponsCargo", []], ["_magsCargo", [[], []]], ["_itemsCargo", [[], []]], ["_backpacksCargo", [[],[]]], ["_hitPoints", []], ["_fuel", 100], ["_ammo", []], ["_pylonsInfo", []]];
 
         // This will be removed if we reach a 0.96.7 due to more released Arma 3 DLCs until we finish 0.97.0
         if !(((_saveData select 0) select 0) isEqualType 0) then {
@@ -461,6 +461,17 @@ if (!isNil "_saveData") then {
                     [_object, [_class, _count, _turret]] remoteExec ["setMagazineTurretAmmo", _object turretOwner _turret];
                 }forEach _ammo;
             };
+
+            if (_pylonsInfo isNotEqualTo []) then {
+                {
+                    private _pylonIndex = _x # 0;
+                    private _turret = _x # 2;
+                    private _magazine = _x # 3;
+                    
+                    [_object, [_pylonIndex, _magazine, false, _turret]] remoteExec ["setPylonLoadout"];
+                    [_object] remoteExec ["KPLIB_fnc_removeTurretWeapons"];
+                }forEach _pylonsInfo;
+            }
         };
     } forEach _objectsToSave;
 
@@ -910,5 +921,5 @@ KPLIB_saveLoaded = true; publicVariable "KPLIB_saveLoaded";
 
 [format ["----- Saved data loaded - Time needed: %1 seconds", diag_tickTime - _start], "SAVE"] call KPLIB_fnc_log;
 
-// Start the save loop
-[] call KPLIB_fnc_autoSavePFH;
+// Start save loop after 3 minutes
+[{[] call KPLIB_fnc_autoSavePFH;}, [], 180] call CBA_fnc_waitAndExecute;

@@ -24,6 +24,7 @@ class KPLIB {
         class battlegroupLandVehicle    {};
         class battlegroupParatroopers   {};
         class battlegroupTransportHeli  {};
+        class battlegroupSlingLoadVeh   {};
         class findPlaceToLand           {};
         class findPlaceToParadrop       {};
         class handleLandTransport       {};
