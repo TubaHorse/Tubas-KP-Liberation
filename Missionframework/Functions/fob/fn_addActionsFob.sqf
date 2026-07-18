@@ -2,7 +2,7 @@
     File: fn_addActionsFob.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-04-13
-    Last Update: 2026-04-22
+    Last Update: 2026-07-17
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -47,7 +47,7 @@ if ((typeOf _obj) in [KPLIB_b_fobBox, KPLIB_b_fobTruck]) exitWith {
         "Images\ui_deployfob.paa", "Images\ui_deployfob.paa",
         toString {
             isNull (objectParent _this) 
-            && {player getVariable ['KPLIB_hasDirectAccess', false] || {[3] call KPLIB_fnc_hasPermission}} 
+            && {player getVariable ['KPLIB_hasDirectAccess', false] || {[4] call KPLIB_fnc_hasPermission}} 
             && {player getVariable ['KPLIB_isAwayFromStart', false]}
             && {!(surfaceIsWater getPos player)}
         }, 

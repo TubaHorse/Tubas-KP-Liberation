@@ -87,6 +87,7 @@ class KPLIB {
         class AHDNC_perFrame            {};
         class AHDNC_perSecond           {};
         class allowCrewInImmobile       {};
+        class applyDefaultPermissions   {};
         class checkClass                {};
         class cleanOpforVehicle         {};
         class cleanUpVehicles           {};
@@ -113,6 +114,7 @@ class KPLIB {
         class protectObject             {};
         class setLoadableViV            {};
         class skipBriefing              {preInit = 1;};
+        class vehPermissions            {};
 
     };
     class Player {
@@ -283,6 +285,8 @@ class KPLIB {
 
     // Interfaces
     #include "Interface\Build\cfgFunctions.hpp"
+    #include "Interface\Permissions\Build_Permissions\cfgFunctions.hpp"
+    #include "Interface\Permissions\General_Permissions\cfgFunctions.hpp"
     #include "Interface\Production\cfgFunctions.hpp"
     #include "Interface\Recycle\cfgFunctions.hpp"
     #include "Interface\Redeploy\cfgFunctions.hpp"

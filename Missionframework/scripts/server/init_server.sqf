@@ -35,7 +35,6 @@ execVM "Scripts\Server\base\startvehicle_spawn.sqf";
 execVM "Scripts\Server\battlegroup\counter_battlegroup.sqf";
 execVM "Scripts\Server\battlegroup\random_battlegroups.sqf";
 execVM "Scripts\Server\battlegroup\readiness_increase.sqf";
-execVM "Scripts\Server\game\apply_default_permissions.sqf";
 if (KPLIB_param_vehicleCleanup > 0) then {[] call KPLIB_fnc_cleanUpVehicles;};
 if (!KPLIB_param_vanillaFog) then {execVM "Scripts\Server\game\fucking_set_fog.sqf";};
 execVM "Scripts\Server\game\manage_time.sqf";

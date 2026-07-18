@@ -121,7 +121,7 @@ _player addAction [
     }
 ];
 
-// Build
+// Build (FOB)
 _player addAction [
     ["<t color='#FFFF00'>", localize "STR_BUILD_ACTION", "</t><img size='2' image='Images\ui_build.paa'/>"] joinString "",
     {[] call KPLIB_fnc_build_createMenuRsc},
@@ -137,11 +137,45 @@ _player addAction [
             private _buildPos = [getPos _originalTarget] call KPLIB_fnc_getNearestBuildPos;
             _buildPos params ["_posBuild", "_range"];
 
-            (_posBuild distance2D _originalTarget) < (_range)
+            (_posBuild in KPLIB_player_fobs) && ((_posBuild distance2D _originalTarget) < (_range))
         }
         && {
             _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
-            || {[3] call KPLIB_fnc_hasPermission}
+            || {[0, "BUILD"] call KPLIB_fnc_hasPermission}
+            || {[1, "BUILD"] call KPLIB_fnc_hasPermission}
+            || {[2, "BUILD"] call KPLIB_fnc_hasPermission}
+            || {[3, "BUILD"] call KPLIB_fnc_hasPermission}
+            || {[4, "BUILD"] call KPLIB_fnc_hasPermission}
+            || {[5, "BUILD"] call KPLIB_fnc_hasPermission}
+            || {[6, "BUILD"] call KPLIB_fnc_hasPermission}
+        }
+        && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} &&
+        {isNull (_originalTarget getVariable ["KPLIB_carriedObject", objNull])}
+    }
+];
+
+// Build (Outpost)
+_player addAction [
+    ["<t color='#FFFF00'>", localize "STR_BUILD_ACTION", "</t><img size='2' image='Images\ui_build.paa'/>"] joinString "",
+    {[] call KPLIB_fnc_build_createMenuRsc},
+    nil,
+    -750,
+    false,
+    true,
+    "",
+    toString {
+        isNull (objectParent _originalTarget)
+        && {alive _originalTarget}
+        && {
+            private _buildPos = [getPos _originalTarget] call KPLIB_fnc_getNearestBuildPos;
+            _buildPos params ["_posBuild", "_range"];
+
+            (_posBuild in KPLIB_player_outposts) && ((_posBuild distance2D _originalTarget) < (_range))
+        }
+        && {
+            _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
+            || {[4, "BUILD"] call KPLIB_fnc_hasPermission} 
+            || {[5, "BUILD"] call KPLIB_fnc_hasPermission}
         }
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} &&
         {isNull (_originalTarget getVariable ["KPLIB_carriedObject", objNull])}
@@ -187,7 +221,7 @@ _player addAction [
         && {alive _originalTarget}
         && {
             _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
-            || {[3] call KPLIB_fnc_hasPermission}
+            || {[4] call KPLIB_fnc_hasPermission}
         }
         && {((_originalTarget getVariable ['KPLIB_nearProd', []]) # 2) isEqualTo []}
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
@@ -218,7 +252,7 @@ _player addAction [
         && {alive _originalTarget}
         && {
             _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
-            || {[3] call KPLIB_fnc_hasPermission}
+            || {[4] call KPLIB_fnc_hasPermission}
         }
         && {!(((_originalTarget getVariable ['KPLIB_nearProd', []]) # 2) isEqualTo [])}
         && {!((_originalTarget getVariable ['KPLIB_nearProd', []]) # 3)}
@@ -248,7 +282,7 @@ _player addAction [
         && {alive _originalTarget}
         && {
             _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
-            || {[3] call KPLIB_fnc_hasPermission}
+            || {[4] call KPLIB_fnc_hasPermission}
         }
         && {!(((_originalTarget getVariable ['KPLIB_nearProd', []]) # 2) isEqualTo [])}
         && {!((_originalTarget getVariable ['KPLIB_nearProd', []]) # 4)}
@@ -278,7 +312,7 @@ _player addAction [
         && {alive _originalTarget}
         && {
             _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
-            || {[3] call KPLIB_fnc_hasPermission}
+            || {[4] call KPLIB_fnc_hasPermission}
         }
         && {!(((_originalTarget getVariable ['KPLIB_nearProd', []]) # 2) isEqualTo [])}
         && {!((_originalTarget getVariable ['KPLIB_nearProd', []]) # 5)}
@@ -350,10 +384,10 @@ if (KPLIB_param_logistic) then {
     ];
 };
 
-// Permissions
+// General Permissions
 _player addAction [
-    ["<t color='#FF8000'>", localize "STR_COMMANDER_ACTION", "</t><img size='2' image='\a3\Ui_F_Curator\Data\Displays\RscDisplayCurator\modeGroups_ca.paa'/>"] joinString "",
-    "Scripts\Client\commander\open_permissions.sqf",
+    ["<t color='#FF8000'>", localize "STR_GENERAL_PERMISSIONS_ACTION", "</t><img size='2' image='\a3\Ui_F_Curator\Data\Displays\RscDisplayCurator\modeGroups_ca.paa'/>"] joinString "",
+    {[] call KPLIB_fnc_general_perms_createMenuRsc},
     nil,
     -840,
     false,
@@ -366,6 +400,24 @@ _player addAction [
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
     }
 ];
+
+// Build Permissions
+_player addAction [
+    ["<t color='#FF8000'>", localize "STR_BUILD_PERMISSIONS_ACTION", "</t><img size='2' image='\a3\Ui_F_Curator\Data\Displays\RscDisplayCurator\modeGroups_ca.paa'/>"] joinString "",
+    {[] call KPLIB_fnc_build_perms_createMenuRsc},
+    nil,
+    -841,
+    false,
+    true,
+    "",
+    toString {
+        KPLIB_param_permissions
+        && {_originalTarget getVariable ['KPLIB_hasDirectAccess', false]}
+        && {alive _originalTarget}
+        && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
+    }
+];
+
 
 // Create small FOB clearance
 _player addAction [

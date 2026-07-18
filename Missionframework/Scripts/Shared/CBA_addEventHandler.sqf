@@ -93,7 +93,7 @@
                 alive _originalTarget &&
                 {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} &&
                 {isNull objectParent _originalTarget} &&
-                {[4] call KPLIB_fnc_hasPermission} &&
+                {[7, "BUILD"] call KPLIB_fnc_hasPermission} &&
                 {KPLIB_player_fobs isNotEqualTo [] && {(_originalTarget distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}} &&
                 {(({alive _x} count (crew _originalTarget)) == 0) || {unitIsUAV _originalTarget}} &&
                 //{locked _originalTarget == -1 || {locked _originalTarget == 0} || {locked _originalTarget == 1}} &&
@@ -118,7 +118,7 @@
                 !alive _originalTarget &&
                 {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} &&
                 {isNull objectParent _originalTarget} &&
-                {[4] call KPLIB_fnc_hasPermission} &&
+                {[7, "BUILD"] call KPLIB_fnc_hasPermission} &&
                 {KPLIB_player_fobs isNotEqualTo [] && {(_originalTarget distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}} &&
                 {(({alive _x} count (crew _originalTarget)) == 0) || {unitIsUAV _originalTarget}} &&
                 //{locked _originalTarget == -1 || {locked _originalTarget == 0} || {locked _originalTarget == 1}} &&
@@ -385,6 +385,7 @@
             toString {
                 alive _target && 
                 {isNull objectParent _this} &&
+                {[4] call KPLIB_fnc_hasPermission} &&
                 {!(_this getVariable ['KPLIB_BUILD_isBuilding', false])} &&
                 {_target getVariable ["KPLIB_CARGO_loadedCargo", []] isNotEqualTo []} &&
                 {_target getVariable ["KPLIB_CARGO_isTransportVeh", true]} &&

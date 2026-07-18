@@ -193,6 +193,34 @@ KPLIB_objectInits = [
         {if (isServer) then {[_this] call KPLIB_fnc_addRopeAttachEh;} else {[_this] remoteExecCall ["KPLIB_fnc_addRopeAttachEh", 2];};},
         true
     ],
+
+    // Take controls action permission
+    [
+        ["Air"],
+        {
+            _this addEventHandler ["ControlsShifted", {
+                params ["_vehicle", "_activeCoPilot", "_oldController"];
+                if (local _activeCoPilot) then {
+                    private _vehicleClass = toLowerANSI (typeOf _vehicle);
+                    private _permToCheck = switch (true) do {
+                        case (_vehicleClass in KPLIB_typeHeliClasses) : {
+                            2
+                        };
+                        case (_vehicleClass in KPLIB_typePlaneClasses) : {
+                            3
+                        };
+                        default {-1}
+                    };
+
+                    if ((_oldController != _activeCoPilot || (_oldController == objNull)) && !([_permToCheck] call KPLIB_fnc_hasPermission)) then {
+                        _activeCoPilot action ["SuspendVehicleControl", _vehicle];
+                        [localize "STR_PERMISSION_TAKE_CONTROL_FAILED", true, 4] call KPLIB_fnc_hint;
+                    };
+                }
+            }];
+        },
+        true
+    ],
     
     // Artillery Framework and Artillery Menu
     [

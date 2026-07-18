@@ -2849,366 +2849,355 @@
             <Original>This soldier is Player</Original>
             <Japanese>この兵士はプレイヤーです</Japanese>
         </Key>
-        <Key ID="STR_PERMISSIONS_TITLE">
-            <Original>PERMISSIONS MANAGEMENT</Original>
-            <French>GESTION DES PERMISSIONS</French>
-            <German>Rechteverwaltung</German>
-            <Spanish>GESTIÓN DE PERMISOS</Spanish>
-            <Russian>УПРАВЛЕНИЕ РАЗРЕШЕНИЯМИ</Russian>
-            <Italian>GESTIONE PERMESSI</Italian>
-            <Chinesesimp>权限管理</Chinesesimp>
-            <Chinese>權限管理</Chinese>
-            <Turkish>YETKİ YÖNETİMİ</Turkish>
-            <Portuguese>GESTÃO DE PERMISSÕES</Portuguese>
-            <Korean>사용 권한 설정</Korean>
-            <Czech>MANAŽER PRAVOMOCÍ</Czech>
-            <Japanese>権限管理</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_LIGHT">
-            <Original>Light vehicles</Original>
-            <French>Véhicules légers</French>
-            <German>Leichte Fahrzeuge</German>
-            <Spanish>Vehículos ligeros</Spanish>
-            <Russian>Лёгкая техника</Russian>
-            <Italian>Veicoli Leggeri</Italian>
-            <Chinesesimp>轻型载具</Chinesesimp>
-            <Chinese>輕型載具</Chinese>
-            <Turkish>Hafif araçlar</Turkish>
-            <Portuguese>Veículos leves</Portuguese>
-            <Korean>전투 차량</Korean>
-            <Czech>Lehká vozidla</Czech>
-            <Japanese>軽車両</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_ARMORED">
-            <Original>Armored vehicles</Original>
-            <French>Véhicules blindés</French>
-            <German>Gepanzerte Fahrzeuge</German>
-            <Spanish>Vehículos blindados</Spanish>
-            <Russian>Бронированная техника</Russian>
-            <Italian>veicoli Blindati</Italian>
-            <Chinesesimp>装甲载具</Chinesesimp>
-            <Chinese>裝甲載具</Chinese>
-            <Turkish>Zırhlı araçlar</Turkish>
-            <Portuguese>Veículos blindados</Portuguese>
-            <Korean>장갑 차량</Korean>
-            <Czech>Obrněná vozidla</Czech>
-            <Japanese>装甲車両</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_AIR">
-            <Original>Air vehicles</Original>
-            <French>Véhicules aériens</French>
-            <German>Luftfahrzeuge</German>
-            <Spanish>Vehículos aéreos</Spanish>
-            <Russian>Авиация</Russian>
-            <Italian>Aerei</Italian>
-            <Chinesesimp>空中载具</Chinesesimp>
-            <Chinese>空中載具</Chinese>
-            <Turkish>Hava araçları</Turkish>
-            <Portuguese>Veículos aéreos</Portuguese>
-            <Korean>항공기</Korean>
-            <Czech>Letectvo</Czech>
-            <Japanese>航空機</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_CONSTRUCTION">
-            <Original>Construction</Original>
-            <French>Construction</French>
-            <German>Konstruktionen</German>
-            <Spanish>Construcción</Spanish>
-            <Russian>Постройка</Russian>
-            <Italian>Costruzione</Italian>
-            <Chinesesimp>建造</Chinesesimp>
-            <Chinese>建造</Chinese>
-            <Turkish>İnşaat</Turkish>
-            <Portuguese>Construção</Portuguese>
-            <Korean>건설</Korean>
-            <Czech>Stavění</Czech>
-            <Japanese>建設</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_RECYCLING">
-            <Original>Recycling</Original>
-            <French>Recyclage</French>
-            <German>Wiederverwerten</German>
-            <Spanish>Reciclar</Spanish>
-            <Russian>Утилизация</Russian>
-            <Italian>Riciclaggio</Italian>
-            <Chinesesimp>回收</Chinesesimp>
-            <Chinese>回收</Chinese>
-            <Turkish>Geri dönüşüm</Turkish>
-            <Portuguese>Reciclando</Portuguese>
-            <Korean>재활용</Korean>
-            <Czech>Recyklování</Czech>
-            <Japanese>解体</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_MISC">
-            <Original>Others</Original>
-            <French>Autres</French>
-            <German>Andere</German>
-            <Spanish>Otros</Spanish>
-            <Russian>Остальное</Russian>
-            <Italian>Altro</Italian>
-            <Chinesesimp>其它</Chinesesimp>
-            <Chinese>其他</Chinese>
-            <Turkish>Diğer</Turkish>
-            <Portuguese>Outros</Portuguese>
-            <Korean>기타</Korean>
-            <Czech>Ostatní</Czech>
-            <Japanese>その他</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_ALL">
-            <Original>All</Original>
-            <French>Toutes</French>
-            <German>Alle</German>
-            <Spanish>Todos</Spanish>
-            <Russian>Все</Russian>
-            <Italian>Tutto</Italian>
-            <Chinesesimp>全部</Chinesesimp>
-            <Chinese>全部</Chinese>
-            <Turkish>Hepsi</Turkish>
-            <Portuguese>Todos</Portuguese>
-            <Korean>전체</Korean>
-            <Czech>Vše</Czech>
-            <Japanese>全て</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_NONE">
-            <Original>None</Original>
-            <French>Aucune</French>
-            <German>Keine</German>
-            <Spanish>Ninguno</Spanish>
-            <Russian>Сбросить</Russian>
-            <Italian>Nessuno</Italian>
-            <Chinesesimp>无</Chinesesimp>
-            <Chinese>無</Chinese>
-            <Turkish>Hiçbiri</Turkish>
-            <Portuguese>Nenhum</Portuguese>
-            <Korean>없음</Korean>
-            <Czech>Nic</Czech>
-            <Japanese>なし</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_TOOLTIP_LIGHT">
-            <Original>Allows the player to operate light vehicles as driver and gunner.</Original>
-            <French>Autorise le joueur à utiliser les véhicules légers en tant que conducteur ou tireur.</French>
-            <German>Erlaubt es dem Spieler, leichte Fahrzeuge als Fahrer und Schütze zu bedienen.</German>
-            <Spanish>Permite al jugador utilizar vehículos ligeros como conductor y artillero</Spanish>
-            <Russian>Позволяет игроку использовать легкую технику в качестве водителя или стрелка.</Russian>
-            <Italian>Permetti al giocatore di entrare nei veicoli leggeri come guidatore e artigliere</Italian>
-            <Chinesesimp>允许玩家进入轻型载具的驾驶和炮手位。</Chinesesimp>
-            <Chinese>允許玩家進入輕型載具的駕駛與砲手位置。</Chinese>
-            <Turkish>Oyuncunun hafif araçları sürücü veya taretçi olarak kullanmasına olanak verir.</Turkish>
-            <Portuguese>Permite ao jogador operar veículos leves como condutor e atirador.</Portuguese>
-            <Korean>플레이어가 전투 차량을 사용할 수 있는 권한를 허가 합니다.</Korean>
-            <Czech>Povolí hráči operovat s lehkými vozidly jako řidič nebo střelec.</Czech>
-            <Japanese>プレイヤーが軽車両の運転手と砲手へつくことを許可します。</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_TOOLTIP_ARMORED">
-            <Original>Allows the player to operate armored vehicles as driver, gunner and commander.</Original>
-            <French>Autorise le joueur à utiliser les véhicules blindés en tant que conducteur, tireur ou commandant.</French>
-            <German>Erlaubt es dem Spieler, gepanzerte Fahrzeuge als Fahrer, Schütze und Kommandant zu bedienen.</German>
-            <Spanish>Permite al jugador utilizar vehículos blindados como conductor, artillero y comandante</Spanish>
-            <Russian>Позволяет игроку использовать бронированную технику в качестве водителя, стрелка или командира.</Russian>
-            <Italian>Permetti al giocatore di entrare nei veicoli blindati come guidatore e artigliere e comandante</Italian>
-            <Chinesesimp>允许玩家进入装甲载具的驾驶、炮手和车长位。</Chinesesimp>
-            <Chinese>允許玩家進入裝甲載具的駕駛、砲手、車長位置。</Chinese>
-            <Turkish>Oyuncunun zırhlı araçları sürücü, komutan veya  taretçi olarak kullanmasına olanak verir.</Turkish>
-            <Portuguese>Permite ao jogador operar veículos blindados como condutor, atirador e comandante.</Portuguese>
-            <Korean>플레이어가 장갑 차량을 사용할 수 있는 권한를 허가 합니다.</Korean>
-            <Czech>Povolí hráči operovat s obrněnými vozidly jako řidič, střelec a velitel.</Czech>
-            <Japanese>プレイヤーが装甲車両の運転手と砲手、車長へつくことを許可します。</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_TOOLTIP_AIR">
-            <Original>Allows the player to operate air vehicles as driver and gunner.</Original>
-            <French>Autorise le joueur à utiliser les véhicules aériens en tant que conducteur ou tireur.</French>
-            <German>Erlaubt es dem Spieler, Luftfahrzeuge als Pilot und Schütze zu bedienen.</German>
-            <Spanish>Permite al jugador utilizar vehículos aéreos como conductor y artillero</Spanish>
-            <Russian>Позволяет игроку использовать авиацию в качестве пилота или стрелка.</Russian>
-            <Italian>Permetti al giocatore di entrare negli aerei come guidatore e artigliere</Italian>
-            <Chinesesimp>允许玩家进入空中载具的驾驶和炮手位。</Chinesesimp>
-            <Chinese>允許玩家進入空中載具的駕駛和砲手位置。</Chinese>
-            <Turkish>Oyuncunun bütün hava araçlarını pilot veya taretçi olarak kullanmasına olanak verir.</Turkish>
-            <Portuguese>Permite ao jogador operar veículos aéreos como piloto e atirador.</Portuguese>
-            <Korean>플레이어가 항공기를 사용할 수 있는 권한를 허가 합니다.</Korean>
-            <Czech>Povolí hráči operovat s letadly jako řidič a střelec.</Czech>
-            <Japanese>プレイヤーが航空機の運転手と砲手へつくことを許可します。</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_TOOLTIP_CONSTRUCTION">
-            <Original>Allows the player to use the BUILD menu.</Original>
-            <French>Autorise le joueur à utiliser le menu CONSTRUCTION.</French>
-            <German>Erlaubt es dem Spieler, das Baumenü zu benutzen.</German>
-            <Spanish>Permite al jugador utilizar el menú de CONSTRUCCIÓN</Spanish>
-            <Russian>Позволяет игроку использовать меню постройки.</Russian>
-            <Italian>Permetti al giocatore di Costruire</Italian>
-            <Chinesesimp>允许玩家使用建造菜单</Chinesesimp>
-            <Chinese>允許玩家使用建造選單。</Chinese>
-            <Turkish>Oyuncunun İNŞAAT menüsünü kullanmasını sağlar</Turkish>
-            <Portuguese>Permite ao jogador utilizar o menu de CONTRUÇÃO.</Portuguese>
-            <Korean>플레이어가 전초기지에서 건설메뉴를 사용할 수 있는 권한를 허가 합니다.</Korean>
-            <Czech>Povolí hráči používat menu STAVĚNÍ.</Czech>
-            <Japanese>プレイヤーが製造メニューを使用することを許可します。</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_TOOLTIP_RECYCLING">
-            <Original>Allows the player to use the RECYCLE action.</Original>
-            <French>Autorise le joueur à utiliser l'action RECYCLER.</French>
-            <German>Erlaubt es dem Spieler, die "WIEDERVERWERTEN"-Aktion zu benutzen.</German>
-            <Spanish>Permite al jugador utilizar la acción de RECICLAR</Spanish>
-            <Russian>Позволяет игроку утилизировать.</Russian>
-            <Italian>Permetti al giocatore di Riciclare</Italian>
-            <Chinesesimp>允许玩家使用回收功能。</Chinesesimp>
-            <Chinese>允許玩家使用回收功能。</Chinese>
-            <Turkish>Oyuncunun geri dönüşüm yapabilmesini sağlar</Turkish>
-            <Portuguese>Permite ao jogador utilizar a ação "RECICLAR".</Portuguese>
-            <Korean>플레이어가 필요없는 장비를 재활용할 수 있는 권한를 허가 합니다.</Korean>
-            <Czech>Povolí hráči RECYKLOVAT.</Czech>
-            <Japanese>プレイヤーが解体アクションを使用することを許可します。</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_TOOLTIP_MISC">
-            <Original>Allows the player to use other actions: unflip, resource box manipulation, prisoner capture, etc.</Original>
-            <French>Autorise le joueur à utiliser les autres actions : retournement de véhicule, manipulation des boites de munition, capture de prisoniers, etc.</French>
-            <German>Erlaubt es dem Spieler, andere Aktionen durchzuführen: Umdrehen, Interaktion mit Munitionskisten, Gefangennahme, usw.</German>
-            <Spanish>Permite al jugador usar otras acciones: Recolocar vehículo, manipulación de cajas de munición, captura de prisioneros, etc.</Spanish>
-            <Russian>Позволяет игроку другие действия: перевернуть, взаимодействие с ящиками, захват заключенных и т.д.</Russian>
-            <Italian>Permetti al giocatore di usare le altre funzioni come , catturare prigionieri,raddrizzare veicoli ecc.</Italian>
-            <Chinesesimp>允许玩家使用其他功能：翻正、货箱控制、俘虏战俘，等等。</Chinesesimp>
-            <Chinese>允許玩家使用其他功能，如：翻正、貨物控制（裝載、卸載、倉儲等）、俘虜戰俘，等等。</Chinese>
-            <Turkish>Oyuncunun araçları ters döndürme, sandıkları yönetme, esir yakalama, vb. hareketleri yapabilmesini sağlar.</Turkish>
-            <Portuguese>Permite ao jogador executar outras ações: Desvirar veículo, manipular caixas de recursos, captura de prisioneiros, etc.</Portuguese>
-            <Korean>플레이어가 차량을 바로잡거나, 군수물자를 조작하거나 포로를 생포하거나 문서를 획득할 수 있는 권한를 허가 합니다.</Korean>
-            <Czech>Povolí hráči používat funkce jako: převrátit, manipulace s bednami, zajmutí zajatce, atd.</Czech>
-            <Japanese>プレイヤーがその他のアクションを使用することを許可します。 (ひっくり返す、資源貨物の管理、捕虜の確保など)</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_TOOLTIP_ALL">
-            <Original>Gives all permissions to the player.</Original>
-            <French>Donne toutes les permissions au joueur.</French>
-            <German>Gibt dem Spieler alle Rechte</German>
-            <Spanish>Darle todos los permisos al jugador</Spanish>
-            <Russian>Выдать все разрешения игроку.</Russian>
-            <Italian>Permetti tutto al giocatore.</Italian>
-            <Chinesesimp>给予玩家所有权限。</Chinesesimp>
-            <Chinese>給予玩家所有權限。</Chinese>
-            <Turkish>Oyuncuya bütün yetkileri verir.</Turkish>
-            <Portuguese>Libera todas as permissões para o jogador.</Portuguese>
-            <Korean>플레이어에게 모든 권한을 허가 합니다.</Korean>
-            <Czech>Povolí hráči VŠE.</Czech>
-            <Japanese>プレイヤーに全てを許可します。</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_TOOLTIP_NONE">
-            <Original>Removes all permissions from the player.</Original>
-            <French>Supprime toutes les permissions du joueur.</French>
-            <German>Nimmt dem Spieler alle Rechte weg.</German>
-            <Spanish>Quitar todos los permisos al jugador</Spanish>
-            <Russian>Убрать все разрешения у игрока.</Russian>
-            <Italian>Rimuovi tutti i permessi al giocatore.</Italian>
-            <Chinesesimp>移除玩家所有权限。</Chinesesimp>
-            <Chinese>移除玩家所有權限。</Chinese>
-            <Turkish>Oyuncudan bütün yetkileri alır.</Turkish>
-            <Portuguese>Remove todas as permissões do jogador.</Portuguese>
-            <Korean>플레이어의 허가된 권한 사항을 모두 제거합니다.</Korean>
-            <Czech>Zakáže hráči VŠE.</Czech>
-            <Japanese>全ての権限を取り消します。</Japanese>
-        </Key>
-        <Key ID="STR_COMMANDER_ACTION">
-            <Original>-- PERMISSIONS</Original>
-            <French>-- PERMISSIONS</French>
-            <German>-- RECHTE</German>
-            <Spanish>-- PERMISOS</Spanish>
-            <Russian>-- РАЗРЕШЕНИЯ</Russian>
-            <Italian>-- PERMESSI</Italian>
-            <Chinesesimp>-- 权限</Chinesesimp>
-            <Chinese>-- 權限</Chinese>
-            <Turkish>-- YETKİLER</Turkish>
-            <Portuguese>-- PERMISSÕES</Portuguese>
-            <Korean>-- 사용 권한</Korean>
-            <Czech>-- PRAVOMOCE</Czech>
-            <Japanese>-- 権限</Japanese>
-        </Key>
-        <Key ID="STR_SAVE_CHANGES">
-            <Original>Save Changes</Original>
-            <French>Sauvegarder</French>
-            <German>Änderungen speichern</German>
-            <Spanish>Guardar cambios</Spanish>
-            <Russian>Сохранить</Russian>
-            <Italian>Salva Modifiche</Italian>
-            <Chinesesimp>保存更改</Chinesesimp>
-            <Chinese>儲存變更</Chinese>
-            <Turkish>Değişiklikleri Kaydet</Turkish>
-            <Portuguese>Salvar alterações</Portuguese>
-            <Korean>변경사항저장</Korean>
-            <Czech>Uložit změny</Czech>
-            <Japanese>変更を保存する</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSIONS_PARAM">
-            <Original>Permissions Management</Original>
-            <French>Gestion des Permissions</French>
-            <German>Rechteverwaltung</German>
-            <Spanish>Gestión de permisos</Spanish>
-            <Russian>Управление Разрешениями</Russian>
-            <Italian>Permessi Gestione</Italian>
-            <Chinesesimp>权限管理</Chinesesimp>
-            <Chinese>權限管理</Chinese>
-            <Turkish>Yetkileri Yönet</Turkish>
-            <Portuguese>Gestão de Permissões</Portuguese>
-            <Korean>사용 권한 설정</Korean>
-            <Czech>Manažer pravomocí</Czech>
-            <Japanese>権限管理</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSION_NO_LIGHT">
-            <Original>You don't have permission from the commander to use light vehicles.</Original>
-            <French>Vous n'avez pas la permission du commandant pour utiliser les véhicules légers.</French>
-            <German>Du hast keine Rechte zur Nutzung leichter Fahrzeuge.</German>
-            <Spanish>No tienes permiso del comandante para usar vehículos ligeros</Spanish>
-            <Russian>У вас нет разрешения от командира использовать легкую технику.</Russian>
-            <Italian>Non hai il permesso di usare veicoli leggeri</Italian>
-            <Chinesesimp>指挥官没有给你使用轻型载具的权限。</Chinesesimp>
-            <Chinese>指揮官並沒有提供你輕型載具機組員權限。</Chinese>
-            <Turkish>Hafif araçları kullanmak için komutadan yetkiniz eksik.</Turkish>
-            <Portuguese>Você não tem permissão do comandante para utilizar veículos leves.</Portuguese>
-            <Korean>당신은 전투 차량을 사용할 수 있는 권한를 받지 못하였습니다.</Korean>
-            <Czech>Nemáš pravomoc od Komandéra používat lehká vozidla.</Czech>
-            <Japanese>指揮官はあなたに軽車両を使用する権限を与えていません。</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSION_NO_ARMOR">
-            <Original>You don't have permission from the commander to use armored vehicles.</Original>
-            <French>Vous n'avez pas la permission du commandant pour utiliser les véhicules blindés.</French>
-            <German>Du hast keine Rechte zur Nutzung gepanzerter Fahrzeuge</German>
-            <Spanish>No tienes permiso del comandante para usar vehículos blindados</Spanish>
-            <Russian>У вас нет разрешения от командира использовать бронированную технику.</Russian>
-            <Italian>Non hai il permesso di usare veicoli pesanti</Italian>
-            <Chinesesimp>指挥官没有给你使用装甲载具的权限。</Chinesesimp>
-            <Chinese>指揮官並沒有提供你裝甲載具機組員權限。</Chinese>
-            <Turkish>Zırhlı araçları kullanmak için komutadan yetkiniz eksik.</Turkish>
-            <Portuguese>Você não tem permissão do comandante para utilizar veículos blindados.</Portuguese>
-            <Korean>당신은 장갑 차량을 사용할 수 있는 권한를 받지 못하였습니다.</Korean>
-            <Czech>Nemáš pravomoc od Komandéra používat obrněná vozidla.</Czech>
-            <Japanese>指揮官はあなたに装甲車両を使用する権限を与えていません。</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSION_NO_AIR">
-            <Original>You don't have permission from the commander to use air vehicles.</Original>
-            <French>Vous n'avez pas la permission du commandant pour utiliser les véhicules aériens.</French>
-            <German>Du hast keine Rechte zur Nutzung von Luftfahrzeugen</German>
-            <Spanish>No tienes permiso del comandante para usar vehículos aéreos</Spanish>
-            <Russian>У вас нет разрешения от командира использовать авиацию.</Russian>
-            <Italian>Non hai il permesso di usare veivoli</Italian>
-            <Chinesesimp>指挥官没有给你使用空中载具的权限。</Chinesesimp>
-            <Chinese>指揮官並沒有提供你空中載具機組員權限。</Chinese>
-            <Turkish>Hava araçlarını kullanmak için komutadan yetkiniz eksik.</Turkish>
-            <Portuguese>Você não tem permissão do comandante para utilizar veículos aéreos.</Portuguese>
-            <Korean>당신은 항공기를 사용할 수 있는 권한를 받지 못하였습니다.</Korean>
-            <Czech>Nemáš pravomoc od Komandéra používat letectvo.</Czech>
-            <Japanese>指揮官はあなたに航空機を使用する権限を与えていません。</Japanese>
-        </Key>
-        <Key ID="STR_PERMISSION_WARNING">
-            <Original>No permissions have been set. The commander must setup the permissions to allow player actions and vehicle usage. Alternatively, the permission system can be disabled from the mission options.</Original>
-            <French>Aucune permission n'a été définie. Le commandant doit configurer les permissions pour permettre aux joueurs d'effectuer des actions et d'utiliser les véhicules. Sinon, le système de permissions peut être désactivé dans les options de mission.</French>
-            <German>Keine Rechte wurden vergeben. Der Kommandant muss die Rechte verwalten, um Spielern Aktionen und die Nutzung von Fahrzeugen zu erlaubne. Alternativ kann das Rechtesystem in den Missionsoptionen deaktiviert werden.</German>
-            <Spanish>No hay permisos definidos. El comandante debe asignar los permisos para permitir a los jugadores el uso de los vehículos y acciones. Alternativamente, puede desactivarse el sistema de permisos desde las opciones de misión</Spanish>
-            <Russian>Разрешения не были выданы. Командир должен настроить разрешения, чтобы позволить игрокам выполнять действия и использовать транспорт. Вы можете выключить эти разрешения в настройках миссии.</Russian>
-            <Italian>I permessi non sono settati.Il comandante deve entrare nel menu e attribuire i permessi ai giocatori.</Italian>
-            <Chinesesimp>没有设定任何权限。指挥官必须为玩家设定可用功能和载具。另外，权限系统可以在任务选项中关闭。</Chinesesimp>
-            <Chinese>沒有設定任何權限。指揮官必須為玩家指定可使用的功能與載具類型。另外，權限系統可以在任務選項中關閉。</Chinese>
-            <Turkish>Yetkiler ayarlanmadı. Koumandan oyuncuların kullanabilicekleri araçlar için yetkileri ayarlamalı. Bunun yerine, bütün yetki sistemi de görev ayarlarından kapatılabilir.</Turkish>
-            <Portuguese>Nenhuma permissão foi liberada. O comandante precisa alterar as permissões para permitir que o jogador execute ações e utiliza veículos. Alternativamente, o sistema de permissão pode ser desabilitado no menu de opções da missão.</Portuguese>
-            <Korean>사용 권한를 허가 받지 못하였습니다. 관리자는 플레이어들이 장비를 사용할 수 있는 권한을 설정해야 합니다. 사용 권한 설정 메뉴에서 권한을 허가 하거나 제거할 수 있습니다.</Korean>
-            <Czech>Nejsou nastaveny pravomoce. Komandér musí nastavit pravomoce na používání funkcí a vozidel. Alternativně lze pravomoce úplně vypnou v nastaveni mise.</Czech>
-            <Japanese>権限が設定されていません。 指揮官は各プレイヤーに権限を与える必要があります。 権限システムはミッション設定から無効化することもできます。</Japanese>
-        </Key>
+
+
+        <Container name="Permissions">
+            <Key ID="STR_GENERAL_PERMISSIONS_TITLE">
+                <Original>GENERAL PERMISSIONS MANAGEMENT</Original>
+                <French>GESTION DES PERMISSIONS</French>
+                <German>Rechteverwaltung</German>
+                <Spanish>GESTIÓN DE PERMISOS</Spanish>
+                <Russian>УПРАВЛЕНИЕ РАЗРЕШЕНИЯМИ</Russian>
+                <Italian>GESTIONE PERMESSI</Italian>
+                <Chinesesimp>权限管理</Chinesesimp>
+                <Chinese>權限管理</Chinese>
+                <Turkish>YETKİ YÖNETİMİ</Turkish>
+                <Portuguese>GESTÃO DE PERMISSÕES GERAIS</Portuguese>
+                <Korean>사용 권한 설정</Korean>
+                <Czech>MANAŽER PRAVOMOCÍ</Czech>
+                <Japanese>権限管理</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_LIGHT">
+                <Original>Light vehicles</Original>
+                <French>Véhicules légers</French>
+                <German>Leichte Fahrzeuge</German>
+                <Spanish>Vehículos ligeros</Spanish>
+                <Russian>Лёгкая техника</Russian>
+                <Italian>Veicoli Leggeri</Italian>
+                <Chinesesimp>轻型载具</Chinesesimp>
+                <Chinese>輕型載具</Chinese>
+                <Turkish>Hafif araçlar</Turkish>
+                <Portuguese>Veículos leves</Portuguese>
+                <Korean>전투 차량</Korean>
+                <Czech>Lehká vozidla</Czech>
+                <Japanese>軽車両</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_ARMORED">
+                <Original>Armored vehicles</Original>
+                <French>Véhicules blindés</French>
+                <German>Gepanzerte Fahrzeuge</German>
+                <Spanish>Vehículos blindados</Spanish>
+                <Russian>Бронированная техника</Russian>
+                <Italian>veicoli Blindati</Italian>
+                <Chinesesimp>装甲载具</Chinesesimp>
+                <Chinese>裝甲載具</Chinese>
+                <Turkish>Zırhlı araçlar</Turkish>
+                <Portuguese>Veículos blindados</Portuguese>
+                <Korean>장갑 차량</Korean>
+                <Czech>Obrněná vozidla</Czech>
+                <Japanese>装甲車両</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_HELICOPTER">
+                <Original>Helicopter</Original>
+                <Portuguese>Helicópteros</Portuguese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_PLANES">
+                <Original>Airplanes</Original>
+                <Portuguese>Aviões</Portuguese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_CONSTRUCTION">
+                <Original>Construction</Original>
+                <French>Construction</French>
+                <German>Konstruktionen</German>
+                <Spanish>Construcción</Spanish>
+                <Russian>Постройка</Russian>
+                <Italian>Costruzione</Italian>
+                <Chinesesimp>建造</Chinesesimp>
+                <Chinese>建造</Chinese>
+                <Turkish>İnşaat</Turkish>
+                <Portuguese>Construção</Portuguese>
+                <Korean>건설</Korean>
+                <Czech>Stavění</Czech>
+                <Japanese>建設</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_RECYCLING">
+                <Original>Recycling</Original>
+                <French>Recyclage</French>
+                <German>Wiederverwerten</German>
+                <Spanish>Reciclar</Spanish>
+                <Russian>Утилизация</Russian>
+                <Italian>Riciclaggio</Italian>
+                <Chinesesimp>回收</Chinesesimp>
+                <Chinese>回收</Chinese>
+                <Turkish>Geri dönüşüm</Turkish>
+                <Portuguese>Reciclando</Portuguese>
+                <Korean>재활용</Korean>
+                <Czech>Recyklování</Czech>
+                <Japanese>解体</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_MISC">
+                <Original>Others</Original>
+                <French>Autres</French>
+                <German>Andere</German>
+                <Spanish>Otros</Spanish>
+                <Russian>Остальное</Russian>
+                <Italian>Altro</Italian>
+                <Chinesesimp>其它</Chinesesimp>
+                <Chinese>其他</Chinese>
+                <Turkish>Diğer</Turkish>
+                <Portuguese>Outros</Portuguese>
+                <Korean>기타</Korean>
+                <Czech>Ostatní</Czech>
+                <Japanese>その他</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_ALL">
+                <Original>All</Original>
+                <French>Toutes</French>
+                <German>Alle</German>
+                <Spanish>Todos</Spanish>
+                <Russian>Все</Russian>
+                <Italian>Tutto</Italian>
+                <Chinesesimp>全部</Chinesesimp>
+                <Chinese>全部</Chinese>
+                <Turkish>Hepsi</Turkish>
+                <Portuguese>Todos</Portuguese>
+                <Korean>전체</Korean>
+                <Czech>Vše</Czech>
+                <Japanese>全て</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_NONE">
+                <Original>None</Original>
+                <French>Aucune</French>
+                <German>Keine</German>
+                <Spanish>Ninguno</Spanish>
+                <Russian>Сбросить</Russian>
+                <Italian>Nessuno</Italian>
+                <Chinesesimp>无</Chinesesimp>
+                <Chinese>無</Chinese>
+                <Turkish>Hiçbiri</Turkish>
+                <Portuguese>Nenhum</Portuguese>
+                <Korean>없음</Korean>
+                <Czech>Nic</Czech>
+                <Japanese>なし</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_TOOLTIP_LIGHT">
+                <Original>Allows the player to operate light vehicles as driver and gunner.</Original>
+                <French>Autorise le joueur à utiliser les véhicules légers en tant que conducteur ou tireur.</French>
+                <German>Erlaubt es dem Spieler, leichte Fahrzeuge als Fahrer und Schütze zu bedienen.</German>
+                <Spanish>Permite al jugador utilizar vehículos ligeros como conductor y artillero</Spanish>
+                <Russian>Позволяет игроку использовать легкую технику в качестве водителя или стрелка.</Russian>
+                <Italian>Permetti al giocatore di entrare nei veicoli leggeri come guidatore e artigliere</Italian>
+                <Chinesesimp>允许玩家进入轻型载具的驾驶和炮手位。</Chinesesimp>
+                <Chinese>允許玩家進入輕型載具的駕駛與砲手位置。</Chinese>
+                <Turkish>Oyuncunun hafif araçları sürücü veya taretçi olarak kullanmasına olanak verir.</Turkish>
+                <Portuguese>Permite ao jogador operar veículos leves como condutor e atirador.</Portuguese>
+                <Korean>플레이어가 전투 차량을 사용할 수 있는 권한를 허가 합니다.</Korean>
+                <Czech>Povolí hráči operovat s lehkými vozidly jako řidič nebo střelec.</Czech>
+                <Japanese>プレイヤーが軽車両の運転手と砲手へつくことを許可します。</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_TOOLTIP_ARMORED">
+                <Original>Allows the player to operate armored vehicles as driver, gunner and commander.</Original>
+                <French>Autorise le joueur à utiliser les véhicules blindés en tant que conducteur, tireur ou commandant.</French>
+                <German>Erlaubt es dem Spieler, gepanzerte Fahrzeuge als Fahrer, Schütze und Kommandant zu bedienen.</German>
+                <Spanish>Permite al jugador utilizar vehículos blindados como conductor, artillero y comandante</Spanish>
+                <Russian>Позволяет игроку использовать бронированную технику в качестве водителя, стрелка или командира.</Russian>
+                <Italian>Permetti al giocatore di entrare nei veicoli blindati come guidatore e artigliere e comandante</Italian>
+                <Chinesesimp>允许玩家进入装甲载具的驾驶、炮手和车长位。</Chinesesimp>
+                <Chinese>允許玩家進入裝甲載具的駕駛、砲手、車長位置。</Chinese>
+                <Turkish>Oyuncunun zırhlı araçları sürücü, komutan veya  taretçi olarak kullanmasına olanak verir.</Turkish>
+                <Portuguese>Permite ao jogador operar veículos blindados como condutor, atirador e comandante.</Portuguese>
+                <Korean>플레이어가 장갑 차량을 사용할 수 있는 권한를 허가 합니다.</Korean>
+                <Czech>Povolí hráči operovat s obrněnými vozidly jako řidič, střelec a velitel.</Czech>
+                <Japanese>プレイヤーが装甲車両の運転手と砲手、車長へつくことを許可します。</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_TOOLTIP_HELICOPTER">
+                <Original>Allows the player to operate helicopters as pilots and take controls as co-pilot.</Original>
+                <Portuguese>Permite ao jogador operar helicópteros como piloto e conseguir pegar os controles como co-piloto.</Portuguese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_TOOLTIP_PLANES">
+                <Original>Allows the player to operate airplanes as pilot and gunner.</Original>
+                <Portuguese>Permite ao jogador operar aviões como piloto e atirador.</Portuguese>
+            </Key>
+            <Key ID="STR_PERMISSION_TAKE_CONTROL_FAILED">
+                <Original>You have no permission to take controls of this aircraft.</Original>
+                <Portuguese>Você não tem permissão de pegar os controles dessa aeronave.</Portuguese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_TOOLTIP_CONSTRUCTION">
+                <Original>Allows the player to use the BUILD menu.</Original>
+                <French>Autorise le joueur à utiliser le menu CONSTRUCTION.</French>
+                <German>Erlaubt es dem Spieler, das Baumenü zu benutzen.</German>
+                <Spanish>Permite al jugador utilizar el menú de CONSTRUCCIÓN</Spanish>
+                <Russian>Позволяет игроку использовать меню постройки.</Russian>
+                <Italian>Permetti al giocatore di Costruire</Italian>
+                <Chinesesimp>允许玩家使用建造菜单</Chinesesimp>
+                <Chinese>允許玩家使用建造選單。</Chinese>
+                <Turkish>Oyuncunun İNŞAAT menüsünü kullanmasını sağlar</Turkish>
+                <Portuguese>Permite ao jogador utilizar o menu de CONTRUÇÃO.</Portuguese>
+                <Korean>플레이어가 전초기지에서 건설메뉴를 사용할 수 있는 권한를 허가 합니다.</Korean>
+                <Czech>Povolí hráči používat menu STAVĚNÍ.</Czech>
+                <Japanese>プレイヤーが製造メニューを使用することを許可します。</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_TOOLTIP_RECYCLING">
+                <Original>Allows the player to use the RECYCLE action.</Original>
+                <French>Autorise le joueur à utiliser l'action RECYCLER.</French>
+                <German>Erlaubt es dem Spieler, die "WIEDERVERWERTEN"-Aktion zu benutzen.</German>
+                <Spanish>Permite al jugador utilizar la acción de RECICLAR</Spanish>
+                <Russian>Позволяет игроку утилизировать.</Russian>
+                <Italian>Permetti al giocatore di Riciclare</Italian>
+                <Chinesesimp>允许玩家使用回收功能。</Chinesesimp>
+                <Chinese>允許玩家使用回收功能。</Chinese>
+                <Turkish>Oyuncunun geri dönüşüm yapabilmesini sağlar</Turkish>
+                <Portuguese>Permite ao jogador utilizar a ação "RECICLAR".</Portuguese>
+                <Korean>플레이어가 필요없는 장비를 재활용할 수 있는 권한를 허가 합니다.</Korean>
+                <Czech>Povolí hráči RECYKLOVAT.</Czech>
+                <Japanese>プレイヤーが解体アクションを使用することを許可します。</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_TOOLTIP_MISC">
+                <Original>Allows the player to use other actions: unflip, resource box manipulation, prisoner capture, etc.</Original>
+                <French>Autorise le joueur à utiliser les autres actions : retournement de véhicule, manipulation des boites de munition, capture de prisoniers, etc.</French>
+                <German>Erlaubt es dem Spieler, andere Aktionen durchzuführen: Umdrehen, Interaktion mit Munitionskisten, Gefangennahme, usw.</German>
+                <Spanish>Permite al jugador usar otras acciones: Recolocar vehículo, manipulación de cajas de munición, captura de prisioneros, etc.</Spanish>
+                <Russian>Позволяет игроку другие действия: перевернуть, взаимодействие с ящиками, захват заключенных и т.д.</Russian>
+                <Italian>Permetti al giocatore di usare le altre funzioni come , catturare prigionieri,raddrizzare veicoli ecc.</Italian>
+                <Chinesesimp>允许玩家使用其他功能：翻正、货箱控制、俘虏战俘，等等。</Chinesesimp>
+                <Chinese>允許玩家使用其他功能，如：翻正、貨物控制（裝載、卸載、倉儲等）、俘虜戰俘，等等。</Chinese>
+                <Turkish>Oyuncunun araçları ters döndürme, sandıkları yönetme, esir yakalama, vb. hareketleri yapabilmesini sağlar.</Turkish>
+                <Portuguese>Permite ao jogador executar outras ações: Desvirar veículo, manipular caixas de recursos, captura de prisioneiros, etc.</Portuguese>
+                <Korean>플레이어가 차량을 바로잡거나, 군수물자를 조작하거나 포로를 생포하거나 문서를 획득할 수 있는 권한를 허가 합니다.</Korean>
+                <Czech>Povolí hráči používat funkce jako: převrátit, manipulace s bednami, zajmutí zajatce, atd.</Czech>
+                <Japanese>プレイヤーがその他のアクションを使用することを許可します。 (ひっくり返す、資源貨物の管理、捕虜の確保など)</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_TOOLTIP_ALL">
+                <Original>Gives all permissions to the player.</Original>
+                <French>Donne toutes les permissions au joueur.</French>
+                <German>Gibt dem Spieler alle Rechte</German>
+                <Spanish>Darle todos los permisos al jugador</Spanish>
+                <Russian>Выдать все разрешения игроку.</Russian>
+                <Italian>Permetti tutto al giocatore.</Italian>
+                <Chinesesimp>给予玩家所有权限。</Chinesesimp>
+                <Chinese>給予玩家所有權限。</Chinese>
+                <Turkish>Oyuncuya bütün yetkileri verir.</Turkish>
+                <Portuguese>Libera todas as permissões para o jogador.</Portuguese>
+                <Korean>플레이어에게 모든 권한을 허가 합니다.</Korean>
+                <Czech>Povolí hráči VŠE.</Czech>
+                <Japanese>プレイヤーに全てを許可します。</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_TOOLTIP_NONE">
+                <Original>Removes all permissions from the player.</Original>
+                <French>Supprime toutes les permissions du joueur.</French>
+                <German>Nimmt dem Spieler alle Rechte weg.</German>
+                <Spanish>Quitar todos los permisos al jugador</Spanish>
+                <Russian>Убрать все разрешения у игрока.</Russian>
+                <Italian>Rimuovi tutti i permessi al giocatore.</Italian>
+                <Chinesesimp>移除玩家所有权限。</Chinesesimp>
+                <Chinese>移除玩家所有權限。</Chinese>
+                <Turkish>Oyuncudan bütün yetkileri alır.</Turkish>
+                <Portuguese>Remove todas as permissões do jogador.</Portuguese>
+                <Korean>플레이어의 허가된 권한 사항을 모두 제거합니다.</Korean>
+                <Czech>Zakáže hráči VŠE.</Czech>
+                <Japanese>全ての権限を取り消します。</Japanese>
+            </Key>
+            <Key ID="STR_GENERAL_PERMISSIONS_ACTION">
+                <Original>-- GENERAL PERMISSIONS</Original>
+                <Portuguese>-- PERMISSÕES GERAIS</Portuguese>
+            </Key>
+            <Key ID="STR_SAVE_CHANGES">
+                <Original>Save Changes</Original>
+                <French>Sauvegarder</French>
+                <German>Änderungen speichern</German>
+                <Spanish>Guardar cambios</Spanish>
+                <Russian>Сохранить</Russian>
+                <Italian>Salva Modifiche</Italian>
+                <Chinesesimp>保存更改</Chinesesimp>
+                <Chinese>儲存變更</Chinese>
+                <Turkish>Değişiklikleri Kaydet</Turkish>
+                <Portuguese>Salvar alterações</Portuguese>
+                <Korean>변경사항저장</Korean>
+                <Czech>Uložit změny</Czech>
+                <Japanese>変更を保存する</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_PARAM">
+                <Original>Permissions Management</Original>
+                <French>Gestion des Permissions</French>
+                <German>Rechteverwaltung</German>
+                <Spanish>Gestión de permisos</Spanish>
+                <Russian>Управление Разрешениями</Russian>
+                <Italian>Permessi Gestione</Italian>
+                <Chinesesimp>权限管理</Chinesesimp>
+                <Chinese>權限管理</Chinese>
+                <Turkish>Yetkileri Yönet</Turkish>
+                <Portuguese>Gestão de Permissões</Portuguese>
+                <Korean>사용 권한 설정</Korean>
+                <Czech>Manažer pravomocí</Czech>
+                <Japanese>権限管理</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSION_NO_LIGHT">
+                <Original>You don't have permission from the commander to use light vehicles.</Original>
+                <French>Vous n'avez pas la permission du commandant pour utiliser les véhicules légers.</French>
+                <German>Du hast keine Rechte zur Nutzung leichter Fahrzeuge.</German>
+                <Spanish>No tienes permiso del comandante para usar vehículos ligeros</Spanish>
+                <Russian>У вас нет разрешения от командира использовать легкую технику.</Russian>
+                <Italian>Non hai il permesso di usare veicoli leggeri</Italian>
+                <Chinesesimp>指挥官没有给你使用轻型载具的权限。</Chinesesimp>
+                <Chinese>指揮官並沒有提供你輕型載具機組員權限。</Chinese>
+                <Turkish>Hafif araçları kullanmak için komutadan yetkiniz eksik.</Turkish>
+                <Portuguese>Você não tem permissão do comandante para utilizar veículos leves.</Portuguese>
+                <Korean>당신은 전투 차량을 사용할 수 있는 권한를 받지 못하였습니다.</Korean>
+                <Czech>Nemáš pravomoc od Komandéra používat lehká vozidla.</Czech>
+                <Japanese>指揮官はあなたに軽車両を使用する権限を与えていません。</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSION_NO_ARMOR">
+                <Original>You don't have permission from the commander to use armored vehicles.</Original>
+                <French>Vous n'avez pas la permission du commandant pour utiliser les véhicules blindés.</French>
+                <German>Du hast keine Rechte zur Nutzung gepanzerter Fahrzeuge</German>
+                <Spanish>No tienes permiso del comandante para usar vehículos blindados</Spanish>
+                <Russian>У вас нет разрешения от командира использовать бронированную технику.</Russian>
+                <Italian>Non hai il permesso di usare veicoli pesanti</Italian>
+                <Chinesesimp>指挥官没有给你使用装甲载具的权限。</Chinesesimp>
+                <Chinese>指揮官並沒有提供你裝甲載具機組員權限。</Chinese>
+                <Turkish>Zırhlı araçları kullanmak için komutadan yetkiniz eksik.</Turkish>
+                <Portuguese>Você não tem permissão do comandante para utilizar veículos blindados.</Portuguese>
+                <Korean>당신은 장갑 차량을 사용할 수 있는 권한를 받지 못하였습니다.</Korean>
+                <Czech>Nemáš pravomoc od Komandéra používat obrněná vozidla.</Czech>
+                <Japanese>指揮官はあなたに装甲車両を使用する権限を与えていません。</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSION_NO_AIR">
+                <Original>You don't have permission from the commander to use air vehicles.</Original>
+                <French>Vous n'avez pas la permission du commandant pour utiliser les véhicules aériens.</French>
+                <German>Du hast keine Rechte zur Nutzung von Luftfahrzeugen</German>
+                <Spanish>No tienes permiso del comandante para usar vehículos aéreos</Spanish>
+                <Russian>У вас нет разрешения от командира использовать авиацию.</Russian>
+                <Italian>Non hai il permesso di usare veivoli</Italian>
+                <Chinesesimp>指挥官没有给你使用空中载具的权限。</Chinesesimp>
+                <Chinese>指揮官並沒有提供你空中載具機組員權限。</Chinese>
+                <Turkish>Hava araçlarını kullanmak için komutadan yetkiniz eksik.</Turkish>
+                <Portuguese>Você não tem permissão do comandante para utilizar veículos aéreos.</Portuguese>
+                <Korean>당신은 항공기를 사용할 수 있는 권한를 받지 못하였습니다.</Korean>
+                <Czech>Nemáš pravomoc od Komandéra používat letectvo.</Czech>
+                <Japanese>指揮官はあなたに航空機を使用する権限を与えていません。</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSION_WARNING">
+                <Original>No permissions have been set. The commander must setup the permissions to allow player actions and vehicle usage. Alternatively, the permission system can be disabled from the mission options.</Original>
+                <French>Aucune permission n'a été définie. Le commandant doit configurer les permissions pour permettre aux joueurs d'effectuer des actions et d'utiliser les véhicules. Sinon, le système de permissions peut être désactivé dans les options de mission.</French>
+                <German>Keine Rechte wurden vergeben. Der Kommandant muss die Rechte verwalten, um Spielern Aktionen und die Nutzung von Fahrzeugen zu erlaubne. Alternativ kann das Rechtesystem in den Missionsoptionen deaktiviert werden.</German>
+                <Spanish>No hay permisos definidos. El comandante debe asignar los permisos para permitir a los jugadores el uso de los vehículos y acciones. Alternativamente, puede desactivarse el sistema de permisos desde las opciones de misión</Spanish>
+                <Russian>Разрешения не были выданы. Командир должен настроить разрешения, чтобы позволить игрокам выполнять действия и использовать транспорт. Вы можете выключить эти разрешения в настройках миссии.</Russian>
+                <Italian>I permessi non sono settati.Il comandante deve entrare nel menu e attribuire i permessi ai giocatori.</Italian>
+                <Chinesesimp>没有设定任何权限。指挥官必须为玩家设定可用功能和载具。另外，权限系统可以在任务选项中关闭。</Chinesesimp>
+                <Chinese>沒有設定任何權限。指揮官必須為玩家指定可使用的功能與載具類型。另外，權限系統可以在任務選項中關閉。</Chinese>
+                <Turkish>Yetkiler ayarlanmadı. Koumandan oyuncuların kullanabilicekleri araçlar için yetkileri ayarlamalı. Bunun yerine, bütün yetki sistemi de görev ayarlarından kapatılabilir.</Turkish>
+                <Portuguese>Nenhuma permissão foi liberada. O comandante precisa alterar as permissões para permitir que o jogador execute ações e utiliza veículos. Alternativamente, o sistema de permissão pode ser desabilitado no menu de opções da missão.</Portuguese>
+                <Korean>사용 권한를 허가 받지 못하였습니다. 관리자는 플레이어들이 장비를 사용할 수 있는 권한을 설정해야 합니다. 사용 권한 설정 메뉴에서 권한을 허가 하거나 제거할 수 있습니다.</Korean>
+                <Czech>Nejsou nastaveny pravomoce. Komandér musí nastavit pravomoce na používání funkcí a vozidel. Alternativně lze pravomoce úplně vypnou v nastaveni mise.</Czech>
+                <Japanese>権限が設定されていません。 指揮官は各プレイヤーに権限を与える必要があります。 権限システムはミッション設定から無効化することもできます。</Japanese>
+            </Key>
+            <Key ID="STR_BUILD_PERMISSIONS_TITLE">
+                <Original>BUILD PERMISSIONS MANAGEMENT</Original>
+                <Portuguese>GESTÃO DE PERMISSÕES DE CONSTRUÇÃO</Portuguese>
+            </Key>
+        </Container>
+
+
         <Key ID="STR_ARSENAL_TITLE">
             <Original>ARSENAL</Original>
             <French>ARSENAL</French>
@@ -4091,6 +4080,10 @@
             <Czech>Vedlejší mise již probíhá</Czech>
             <Japanese>副次任務作戦はすでに遂行中です</Japanese>
         </Key>
+        <Key ID="STR_NOTIFICATION_PREPARING_TEXT">
+            <Original>Hostile forces are preparing an attack towards %1.</Original>
+            <Portuguese>Forças hostis estão preparando um ataque a %1.</Portuguese>
+        </Key>
         <Key ID="STR_NOTIFICATION_INCOMING_TEXT">
             <Original>Hostile forces are heading towards %1.</Original>
             <French>Les forces hostiles se dirigent vers %1.</French>
@@ -4867,7 +4860,7 @@
             <Portuguese>INFO. DA FOB:</Portuguese>
         </Key>
         <Key ID="STR_PRODUCTION_RESOURCES_LIST">
-            <Original>FACTORY'S RESOURCES INFO:</Original>
+            <Original>FACTORY's RESOURCES INFO:</Original>
             <Portuguese>INFO. DA FÁBRICA:</Portuguese>
         </Key>
         <Key ID="STR_PRODUCING">
@@ -8883,6 +8876,7 @@
                 <Portuguese>Helicópter (vai sobrevoar em órbita a posição alvo antes de chamar artilharia)</Portuguese>
             </Key>
         </Container>
+
 
         <Container name="Clear Brushes">
             <Key ID="STR_CLEAR_BRUSHES_TITLE">

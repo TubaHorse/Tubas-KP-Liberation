@@ -7,7 +7,6 @@ spawn_camera = compile preprocessFileLineNumbers "Scripts\Client\spawn\spawn_cam
 cinematic_camera = compile preprocessFileLineNumbers "Scripts\Client\ui\cinematic_camera.sqf";
 write_credit_line = compile preprocessFileLineNumbers "Scripts\Client\ui\write_credit_line.sqf";
 kp_fuel_consumption = compile preprocessFileLineNumbers "Scripts\Client\misc\kp_fuel_consumption.sqf";
-kp_vehicle_permissions = compile preprocessFileLineNumbers "Scripts\Client\misc\vehicle_permissions.sqf";
 
 [player] call KPLIB_fnc_enforceCmdrWhitelist;
 [player] call KPLIB_fnc_enforceZeusWhitelist;

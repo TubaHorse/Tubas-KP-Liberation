@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.97.1 (01/05/2026)
+## 0.97.1 (18/07/2026)
 * Added Extension: Enemy QRF from military bases based on tower detection. 
 * Added Extension: Commander can edit FOB/Outpost names.
 * Added Extension: Discord log for FOB resources (Added by Fernandim).
@@ -19,6 +19,7 @@
 * Added: Shows and hint tower's information about enemy QRF availability on map click.
 * Added: More CBA event handlers.
 * Added: Mission parameter to select night accessories for enemy and friendly AI.
+* Added: Build permissions menu.
 * Tweaked: FOB build limit reduced. Each builded FOB will add costs to the next box/truck.
 * Tweaked: Added KPLIB tag to Armor/Air/Inf weights variables. Added more weight for Armor and Air kills.
 * Tweaked: FOB variable (KPLIB_sectors_fob to KPLIB_player_fobs).
@@ -42,6 +43,7 @@
 * Tweaked: Blufor defenders will no longer active nearby sectors by themselves.
 * Tweaked: It's possible to add multiple types of helicopter and plane slots in presets.
 * Tweaked: Guerrilla now spawns only on attacked sectors as reinforcements.
+* Tweaked: Permissions interface and framework (now called General Permissions).
 * Removed: Enemy fighter notifications.
 * Removed: ACE Fortify compatibility.
 * Removed: Some KP Liberation script files no longer required for the current version.

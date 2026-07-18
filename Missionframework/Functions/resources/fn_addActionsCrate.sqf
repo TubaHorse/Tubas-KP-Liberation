@@ -2,7 +2,7 @@
     File: fn_addActionsCrate.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 26/05/2017
-    Last Update: 09/07/2026
+    Last Update: 17/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -34,7 +34,7 @@ private _loadAction = _crate addAction [
         ((_target nearEntities [KPLIB_transport_classes, 15]) select {(alive _x) && {_x getVariable ["KPLIB_CARGO_isTransportVeh", false]} && {speed _x < 2} && {((getPosATL _x) # 2) < 5}} isNotEqualTo []) &&
         {!(_this getVariable ['KPLIB_BUILD_isBuilding', false])} &&
         {isNull objectParent _this} &&
-        {[5] call KPLIB_fnc_hasPermission} &&
+        {[4] call KPLIB_fnc_hasPermission} &&
         {isNull (_this getVariable ["KPLIB_carriedObject", objNull])} &&
         {!(_target getVariable ["KPLIB_beignCarried", false])} &&
         {!(_target getVariable ["KPLIB_crateInStorage", false])}
@@ -58,7 +58,7 @@ private _storeAction = _crate addAction [
         !(_this getVariable ['KPLIB_BUILD_isBuilding', false]) && 
         {isNull objectParent _this} && 
         {(nearestObjects [_target, KPLIB_storageBuildings, 20] select {!(_x getVariable ["KPLIB_ropeAttached", false])}) isNotEqualTo []} &&
-        {[5] call KPLIB_fnc_hasPermission} &&
+        {[4] call KPLIB_fnc_hasPermission} &&
         {isNull (_this getVariable ["KPLIB_carriedObject", objNull])} &&
         {!(_target getVariable ["KPLIB_beignCarried", false])} &&
         {!(_target getVariable ["KPLIB_crateInStorage", false])}
@@ -79,7 +79,7 @@ private _valueAction = _crate addAction [
     toString {
         !(_this getVariable ['KPLIB_BUILD_isBuilding', false]) &&
         {isNull objectParent _this} &&
-        {[5] call KPLIB_fnc_hasPermission} &&
+        {[4] call KPLIB_fnc_hasPermission} &&
         {isNull (_this getVariable ["KPLIB_carriedObject", objNull])} &&
         {!(_target getVariable ["KPLIB_beignCarried", false])} &&
         {!(_target getVariable ["KPLIB_crateInStorage", false])}
@@ -139,7 +139,7 @@ private _carryAction = _crate addAction [
     toString {
         !(_this getVariable ['KPLIB_BUILD_isBuilding', false]) && 
         {isNull objectParent _this} &&
-        {[5] call KPLIB_fnc_hasPermission} &&
+        {[4] call KPLIB_fnc_hasPermission} &&
         {isNull (_this getVariable ["KPLIB_carriedObject", objNull])} &&
         {!(_target getVariable ["KPLIB_beignCarried", false])} &&
         {!(_target getVariable ["KPLIB_crateInStorage", false])}

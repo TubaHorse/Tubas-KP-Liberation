@@ -1,9 +1,12 @@
-class liberation_permissions {
-    idd = 5118;
-    movingEnable = false;
-    controlsBackground[] = {};
+#include "..\defines.hpp"
 
-    controls[] = { "OuterBG1", "OuterBG_F1", "InnerBG1", "InnerBG_F1", "Header", "ButtonClose", "PermissionsControlGroup", "ButtonSave", "ButtonCancel" };
+class LiberationBuildPermsRsc {
+    idd = IDD_BUILD_PERMS_MENU;
+    movingEnable = false;
+    onLoad = "[_this # 0] call KPLIB_fnc_build_perms_loadMenu";
+    onUnload = "[_this # 0] call KPLIB_fnc_build_perms_unloadMenu";
+
+    controls[] = { "OuterBG1", "OuterBG_F1", "InnerBG1", "InnerBG_F1", "Header", "ButtonClose", "PermissionsControlGroup" };
 
     objects[] = {};
 
@@ -12,7 +15,7 @@ class liberation_permissions {
         x = (0.2 * safezoneW + safezoneX) - (2 * BORDERSIZE);
         y = (0.15 * safezoneH + safezoneY) - (3 * BORDERSIZE);
         w = (0.6 * safezoneW) + (4 * BORDERSIZE);
-        h = (0.65 * safezoneH) + (6 * BORDERSIZE);
+        h = (0.64 * safezoneH);
     };
     class OuterBG_F1: OuterBG1 {
         style = ST_FRAME;
@@ -32,21 +35,21 @@ class liberation_permissions {
         y = 0.14 * safezoneH + safezoneY;
         w = 0.6 * safezoneW + ( 2 * BORDERSIZE);
         h = 0.05 * safezoneH - (BORDERSIZE);
-        text = $STR_PERMISSIONS_TITLE;
+        text = $STR_BUILD_PERMISSIONS_TITLE;
     };
     class ButtonClose: StdButton {
-        idc = 750;
+        idc = IDC_PERM_BUTTON_CLOSE;
         x = 0.785 * safezoneW + safezoneX;
         y = 0.145 * safezoneH + safezoneY;
         w = 0.015 * safezoneW;
         h = 0.02 * safezoneH;
         text = "X";
-        action = "closeDialog 0";
+        onButtonClick = "(ctrlParent (_this # 0)) closeDisplay 1";
     };
     class PermissionsControlGroup {
-         type = 15;
-         idc = 9969;
-         style = 0;
+        type = 15;
+        idc = IDC_PERM_CONTROL_GRP;
+        style = 0;
         x = (0.2 * safezoneW + safezoneX)  - ( BORDERSIZE);
         y = 0.2 * safezoneH + safezoneY;
         w = (0.6 * safezoneW) +  (BORDERSIZE);
@@ -74,22 +77,4 @@ class liberation_permissions {
          };
          class Controls {};
      };
-     class ButtonSave: StdButton {
-         idc = 751;
-        x = 0.4 * safezoneW + safezoneX;
-        y = 0.77 * safezoneH + safezoneY;
-        w = 0.09 * safezoneW;
-        h = 0.035 * safezoneH;
-        text = $STR_SAVE_CHANGES;
-        action = "save_changes = 1";
-    };
-    class ButtonCancel: StdButton {
-        idc = 752;
-        x = 0.5 * safezoneW + safezoneX;
-        y = 0.77 * safezoneH + safezoneY;
-        w = 0.09 * safezoneW;
-        h = 0.035 * safezoneH;
-        text = $STR_RECYCLING_CANCEL;
-        action = "closeDialog 0";
-    };
 };

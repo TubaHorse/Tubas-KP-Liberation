@@ -2,11 +2,11 @@
     File: fn_addPlayerEH.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 13/11/2025
-    Last Update: 15/07/2026
+    Last Update: 18/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
-        Auto-saving PFH
+        Add player event handlers
 
     Parameter(s):
         _player - player to add EH [OBJECT, defaults to player]
@@ -94,7 +94,10 @@ if (KPLIB_param_fuelconsumption) then {
 };
 _player addEventHandler ["GetInMan", {[_this select 2, _this select 0] call KPLIB_fnc_setVehicleSeized;}];
 _player addEventHandler ["GetInMan", {[_this select 2] call KPLIB_fnc_setVehicleCaptured;}];
-_player addEventHandler ["GetInMan", {[_this select 2] call kp_vehicle_permissions;}];
+
+// Permission
+_player addEventHandler ["GetInMan", {[_this # 0, _this # 2] call KPLIB_fnc_vehPermissions;}];
+_player addEventHandler ["SeatSwitchedMan", {[_this # 0, _this # 2] call KPLIB_fnc_vehPermissions;}];
 
 // Generate log from players entering valuable vehicles
 _player addEventHandler ["GetInMan", {
@@ -118,7 +121,6 @@ _player addEventHandler ["GetInMan", {
     if (isNull (_player getVariable ["KPLIB_carriedObject", objNull])) exitWith {};
     moveOut _player;
 }];
-_player addEventHandler ["SeatSwitchedMan", {[_this select 2] call kp_vehicle_permissions;}];
 _player addEventHandler ["HandleRating", {if ((_this select 1) < 0) then {0};}];
 
 // Drop any crates if killed 

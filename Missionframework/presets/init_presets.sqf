@@ -290,12 +290,14 @@ KPLIB_o_inf_classes = KPLIB_o_inf_classes apply {toLowerANSI _x};
 */
 KPLIB_typeLightClasses = +KPLIB_b_light_classes;
 KPLIB_typeHeavyClasses = +KPLIB_b_heavy_classes;
-KPLIB_typeAirClasses   = +KPLIB_b_air_classes;
+KPLIB_typeHeliClasses = +(KPLIB_b_air_classes select {_x isKindOf "Helicopter"});
+KPLIB_typePlaneClasses = +(KPLIB_b_air_classes select {_x isKindOf "Plane"});
 {
     switch (true) do {
-        case (_x isKindOf "Tank"):  {KPLIB_typeHeavyClasses    pushBack _x};
-        case (_x isKindOf "Air"):   {KPLIB_typeAirClasses      pushBack _x};
-        default                     {KPLIB_typeLightClasses    pushBack _x};
+        case (_x isKindOf "Tank"): {KPLIB_typeHeavyClasses pushBack _x};
+        case (_x isKindOf "Helicopter"): {KPLIB_typeHeliClasses pushBack _x};
+        case (_x isKindOf "Plane"): {KPLIB_typePlaneClasses pushBack _x};
+        default {KPLIB_typeLightClasses pushBack _x};
     };
 } forEach (KPLIB_b_support_classes + [toLowerANSI KPLIB_b_potato01]);
 

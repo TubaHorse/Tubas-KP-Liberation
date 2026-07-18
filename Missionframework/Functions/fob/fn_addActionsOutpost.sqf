@@ -2,7 +2,7 @@
     File: fn_addActionsOutpost.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 22/04/2026
-    Last Update: 01/06/2026
+    Last Update: 17/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -50,7 +50,7 @@ if ((typeOf _obj) isEqualTo KPLIB_b_outpostBox) exitWith {
             && {KPLIB_player_fobs isNotEqualTo []} // Make available only if there are at least one fob builded
             && {
                 _this getVariable ['KPLIB_hasDirectAccess', false]
-                || {[3] call KPLIB_fnc_hasPermission}
+                || {[4] call KPLIB_fnc_hasPermission}
             }
             && {isNull objectParent _this} 
             && {isNull (_this getVariable ["KPLIB_carriedObject", objNull])}

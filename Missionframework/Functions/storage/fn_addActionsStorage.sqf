@@ -2,7 +2,7 @@
     File: fn_addActionsStorage.sqf
     Author: PiG13BR - https://github.com/KillahPotatoes
     Date: 21/11/2025
-    Last Update: 28/01/2026
+    Last Update: 17/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -31,7 +31,7 @@ _storage addAction [
     "",
     toString {
         !(_this getVariable ['KPLIB_BUILD_isBuilding', false]) && 
-        {[5] call KPLIB_fnc_hasPermission} &&
+        {[4] call KPLIB_fnc_hasPermission} &&
         {isNull objectParent _this} &&
         {(([_target] call KPLIB_fnc_getStorageValues) # 0) > 0} &&
         {isNull (_this getVariable ["KPLIB_carriedObject", objNull])}
@@ -51,7 +51,7 @@ _storage addAction [
     "",
         toString {
         !(_this getVariable ['KPLIB_BUILD_isBuilding', false]) && 
-        {[5] call KPLIB_fnc_hasPermission} &&
+        {[4] call KPLIB_fnc_hasPermission} &&
         {isNull objectParent _this} &&
         {(([_target] call KPLIB_fnc_getStorageValues) # 1) > 0} &&
         {isNull (_this getVariable ["KPLIB_carriedObject", objNull])}
@@ -71,7 +71,7 @@ _storage addAction [
     "",
     toString {
         !(_this getVariable ['KPLIB_BUILD_isBuilding', false]) && 
-        {[5] call KPLIB_fnc_hasPermission} &&
+        {[4] call KPLIB_fnc_hasPermission} &&
         {isNull objectParent _this} &&
         {(([_target] call KPLIB_fnc_getStorageValues) # 2) > 0} &&
         {isNull (_this getVariable ["KPLIB_carriedObject", objNull])}
@@ -94,7 +94,7 @@ _storage addAction [
     "",
     toString {
         !(_this getVariable ['KPLIB_BUILD_isBuilding', false]) && 
-        {[5] call KPLIB_fnc_hasPermission} &&
+        {[4] call KPLIB_fnc_hasPermission} &&
         {isNull objectParent _this} &&
         {isNull (_this getVariable ["KPLIB_carriedObject", objNull])}
     },

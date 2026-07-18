@@ -2,7 +2,7 @@
     File: fn_getSaveData.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PIG13BR - https://github.com/PiG13BR 
     Date: 29/03/2020
-    Last Update: 11/07/2026
+    Last Update: 17/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -233,7 +233,7 @@ private _weights = [
     KPLIB_sectors_player,
     KPLIB_enemyReadiness,
     KPLIB_player_fobs,
-    KPLIB_permissions,
+    KPLIB_general_permissions,
     KPLIB_sector_vehicleLinks,
     KPLIB_civ_rep,
     KPLIB_clearances,
@@ -251,5 +251,6 @@ private _weights = [
     KPLIB_player_outposts,
     KPLIB_fobNames,
     KPLIB_outpostNames,
-    KPLIB_sectorMinesPositionsHash
+    KPLIB_sectorMinesPositionsHash,
+    KPLIB_build_permissions
 ] // return

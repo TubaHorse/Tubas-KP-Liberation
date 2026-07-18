@@ -97,8 +97,10 @@ KPLIB_player_outposts = [];
 // Create variables for cosmutizable FOB/outposts names. Use military alphabet as default.
 KPLIB_fobNames = [];
 KPLIB_outpostNames = [];
-// Player permissions data
-KPLIB_permissions = [];
+// Player general permissions data
+KPLIB_general_permissions = [];
+// Player build permissions data
+KPLIB_build_permissions = [];
 // Vehicle unlock links
 KPLIB_sector_vehicleLinks = [];
 // Enemy weight for anti infantry
@@ -219,7 +221,7 @@ if (!isNil "_saveData") then {
         KPLIB_sectors_player                        = _saveData select  7;
         KPLIB_enemyReadiness                        = _saveData select  8;
         KPLIB_player_fobs                           = _saveData select  9;
-        KPLIB_permissions                           = _saveData select 10;
+        KPLIB_general_permissions                   = _saveData param [10, []];
         KPLIB_sector_vehicleLinks                   = _saveData param [11, []];
         KPLIB_civ_rep                               = _saveData select 12;
         KPLIB_clearances                            = _saveData select 13;
@@ -238,6 +240,7 @@ if (!isNil "_saveData") then {
         KPLIB_fobNames                              = _saveData param [26, KPLIB_militaryAlphabet];
         KPLIB_outpostNames                          = _saveData param [27, KPLIB_militaryAlphabet];
         KPLIB_sectorMinesPositionsHash              = _saveData param [28, []];
+        KPLIB_build_permissions                     = _saveData param [29, []];
 
 
         stats_ammo_produced                         = _stats select  0;
@@ -294,7 +297,7 @@ if (!isNil "_saveData") then {
         _stats                                      = _saveData select  8;
         _weights                                    = _saveData select  9;
         KPLIB_sector_vehicleLinks                   = _saveData select 10;
-        KPLIB_permissions                           = _saveData select 11;
+        KPLIB_general_permissions                   = _saveData select 11;
         _aiGroups                                   = _saveData select 12;
         resources_intel                             = _saveData select 13;
         KPLIB_civ_rep                               = _saveData select 15;
@@ -463,6 +466,7 @@ if (!isNil "_saveData") then {
             };
 
             if (_pylonsInfo isNotEqualTo []) then {
+                diag_log format ["LOAD PYLONS: %1", _pylonsInfo];
                 {
                     private _pylonIndex = _x # 0;
                     private _turret = _x # 2;
@@ -916,7 +920,36 @@ if (KPLIB_param_lockArsenal > 0 && !isNil "KPLIB_b_lockedArsenal") then {
 
 if (KPLIB_sector_arsenalLink isEqualType []) then {KPLIB_sector_arsenalLink = createHashMapFromArray []};
 
-publicVariable "KPLIB_permissions";
+// General permissions
+private _generalPermissionsHash = createHashMapFromArray [];
+if (count KPLIB_general_permissions > 0) then {
+    {
+        _x params ["_uid", "_array"];
+        _array params ["_name", "_permissions"];
+
+        _generalPermissionsHash set [_uid, [_name, _permissions]];
+    }forEach KPLIB_general_permissions;
+};
+
+// It's now a hashmap
+KPLIB_general_permissions = _generalPermissionsHash;
+publicVariable "KPLIB_general_permissions";
+
+// Build permissions
+private _buildPermissionsHash = createHashMapFromArray [];
+if (count KPLIB_build_permissions > 0) then {
+    {
+        _x params ["_uid", "_array"];
+        _array params ["_name", "_permissions"];
+
+        _buildPermissionsHash set [_uid, [_name, _permissions]];
+    }forEach KPLIB_build_permissions;
+};
+
+// It's now a hashmap
+KPLIB_build_permissions = _buildPermissionsHash;
+publicVariable "KPLIB_build_permissions";
+
 KPLIB_saveLoaded = true; publicVariable "KPLIB_saveLoaded";
 
 [format ["----- Saved data loaded - Time needed: %1 seconds", diag_tickTime - _start], "SAVE"] call KPLIB_fnc_log;

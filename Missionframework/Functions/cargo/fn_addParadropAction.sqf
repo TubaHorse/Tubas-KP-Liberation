@@ -2,7 +2,7 @@
 	File: fn_addParadropAction.sqf
 	Author: PiG13BR (https://github.com/PiG13BR)
 	Date: 08/12/2025
-	Last update: 08/12/2025
+	Last update: 17/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -27,6 +27,7 @@ if !(_transport isKindOf "Air") exitWith {false};
         // Condition to show
         alive _target &&
         {driver _target == _this} &&
+        {[4] call KPLIB_fnc_hasPermission} &&
         {_target getVariable ["KPLIB_CARGO_loadedCargo", []] isNotEqualTo []} &&
         {_target getVariable ["KPLIB_CARGO_isTransportVeh", false]} &&
         {isEngineOn _target && {(getPosATL _target # 2) > 20}}
