@@ -21,7 +21,7 @@ if (isServer && KPLIB_LAMBS) then {
 // Counter artillery
 ["KPLIB_counterArtillery", {
     params ["_unit", "_pos"];
-    [_unit, _pos] call KPLIB_fnc_counterArtillery;
+    [_unit, _pos] spawn KPLIB_fnc_counterArtillery;
 }] call CBA_fnc_addEventHandler;
 
 if (isServer) then {

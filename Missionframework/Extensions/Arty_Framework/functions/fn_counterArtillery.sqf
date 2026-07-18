@@ -1,8 +1,8 @@
 /*
     File: fn_counterArtillery.sqf
     Author: PiG13BR - https://github.com/PiG13BR
-    Date: 2024-09-01
-    Last Update: 2025-11-07
+    Date: 01/09/2024
+    Last Update: 18/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -19,22 +19,23 @@
 
 params["_unit", "_shellPos"];
 
+if (!canSuspend) exitWith {_this spawn KPLIB_fnc_counterArtillery};
+
 if (isNil "KPLIB_o_artilleryUnits") exitWith {};
 if (KPLIB_o_artilleryUnits isEqualTo []) exitWith {};
 if (count (((ASLToAGL _shellPos) nearEntities [["CAManBase", "landVehicle"], 200]) select {(alive _x) && (side _x == KPLIB_side_enemy)}) < 1) exitWith {};
 
 // Each time that blufor fires an artillery and targets enemy units by shell exploding near them, it will raise the chance of the counter artillery
-// Get the original value from KPLIB_config.sqf into a new variable to modifity it without modifying the original value itself
 if (isNil "KPLIB_counterArtyChance") then {
 	// Resets value if nil
 	KPLIB_counterArtyChance = 25;
-	publicVariableServer "KPLIB_counterArtyChance"
 };
 
 KPLIB_counterArtyChance = KPLIB_counterArtyChance + 5;
-publicVariableServer "KPLIB_counterArtyChance";
 
-if (KPLIB_counterArtyChance >= 100) then {KPLIB_counterArtyChance = 100; publicVariableServer "KPLIB_counterArtyChance";};
+if (KPLIB_counterArtyChance >= 100) then {KPLIB_counterArtyChance = 100;};
+
+publicVariableServer "KPLIB_counterArtyChance";
 
 if (side _unit == KPLIB_side_player) then {
 
@@ -44,10 +45,10 @@ if (side _unit == KPLIB_side_player) then {
 	private _nearestArtillery = [_shellPos, 200] call KPLIB_fnc_getNearestArtillery;
 
 	if (!isNil "_nearestArtillery") then {
-			_chanceOfFiring = 100; // Always react
-		} else {
-			_chanceOfFiring = KPLIB_counterArtyChance // Has a chance to react
-		};
+		_chanceOfFiring = 100; // Always react
+	} else {
+		_chanceOfFiring = KPLIB_counterArtyChance // Has a chance to react
+	};
 	if ((random 100) <= _chanceOfFiring) then {
 
 		if (_unit getVariable ["KPLIB_CounterArtyReaction", false]) exitWith {}; // Exit loop
