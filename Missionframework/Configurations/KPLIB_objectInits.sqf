@@ -580,5 +580,19 @@ KPLIB_objectInits = [
             _this setVehicleReceiveRemoteTargets true
         },
         true
+    ],
+
+    // Trolley missiles carry actions 
+    [
+        ["Land_Missle_Trolley_02_F", "Land_Bomb_Trolley_01_F"],
+        {
+            [{
+                time > 60
+            }, {
+                params["_object"];
+
+                ["KPLIB_addObjectCarryAction", _object] call CBA_fnc_globalEventJIP;
+            }, [_this]] call CBA_fnc_waitUntilAndExecute;
+        }
     ]
 ];

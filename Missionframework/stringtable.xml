@@ -5958,43 +5958,25 @@
             <Czech>Použít nastavení z configu</Czech>
             <Japanese>コンフィグ指定のプリセットを使用</Japanese>
         </Key>
-        <Key ID="STR_ACTION_CRATE_PUSH">
-            <Original>-- PUSH CRATE</Original>
-            <German>-- KISTE SCHIEBEN</German>
-            <Spanish>-- EMPUJAR CAJA</Spanish>
-            <Russian>-- ТОЛКНУТЬ ЯЩИК</Russian>
-            <Italian>-- SPINGI CASSA</Italian>
-            <Chinesesimp>-- 推货箱</Chinesesimp>
-            <Chinese>-- 推貨物</Chinese>
-            <Turkish>-- KUTUYU İTTİR</Turkish>
-            <Portuguese>-- EMPURRAR CAIXA --</Portuguese>
-            <Korean>-- 군수물품 밀기</Korean>
-            <Czech>-- TLAČIT KRABICI</Czech>
-            <Japanese>-- 貨物を押す</Japanese>
-        </Key>
         <Key ID="STR_ACTION_CRATE_CARRY">
             <Original>-- CARRY CRATE</Original>
             <German>-- KISTE TRAGEN</German>
             <Japanese>-- 貨物を運ぶ</Japanese>
+            <Portuguese>-- CARREGAR CAIXA</Portuguese>
         </Key>
         <Key ID="STR_ACTION_CRATE_DROP">
             <Original>-- DROP CRATE</Original>
             <German>-- KISTE ABLEGEN</German>
             <Japanese>-- 貨物を置く</Japanese>
+            <Portuguese>-- SOLTAR CAIXA</Portuguese>
         </Key>
-        <Key ID="STR_ACTION_SORT_STORAGE">
-            <Original>-- STACK AND SORT</Original>
-            <German>-- STAPELN UND SORTIEREN</German>
-            <Spanish>-- APILAR Y ORDENAR</Spanish>
-            <Russian>-- СОБРАТЬ И ОТСОРТИРОВАТЬ</Russian>
-            <Italian>-- IMPILA E ORDINA</Italian>
-            <Chinesesimp>-- 排列并分类</Chinesesimp>
-            <Chinese>-- 排列並分類</Chinese>
-            <Turkish>-- SIRALA VE DÜZENLE</Turkish>
-            <Portuguese>-- ORDENAR E CLASSIFICAR --</Portuguese>
-            <Korean>-- 군수물품 재배치/분류</Korean>
-            <Czech>-- SESKUPIT A ROZTŘÍDIT</Czech>
-            <Japanese>-- 整理整頓する</Japanese>
+        <Key ID="STR_ACTION_OBJECT_CARRY">
+            <Original>-- CARRY</Original>
+            <Portuguese>-- CARREGAR</Portuguese>
+        </Key>
+        <Key ID="STR_ACTION_OBJECT_DROP">
+            <Original>-- DROP</Original>
+            <Portuguese>-- SOLTAR</Portuguese>
         </Key>
         <!-- Added or changed in v0.96 -->
         <Key ID="STR_PARAMS_SUPPMOD">

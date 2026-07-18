@@ -2,7 +2,7 @@
 	File: fn_clearGarbage.sqf
 	Author: PIG13BR - https://github.com/PiG13BR
 	Date: 16/08/2024
-	Last Update: 12/07/2026
+	Last Update: 18/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 	
 	Description:
@@ -26,9 +26,10 @@ private _deadVehicles = vehicles select {
 
 // Get weapon holders (don't count/hint these)
 private _weaponHolders = (8 allObjects 0) select {_x isKindOf "WeaponHolder" || _x isKindOf "GroundWeaponHolder"};
-_weaponHolders pushBack ((8 allObjects 1) select {_x isKindOf "WeaponHolderSimulated"});
+private _moreStuff = (8 allObjects 1) select {_x isKindOf "WeaponHolderSimulated"};
+_weaponHolders pushBack _moreStuff;
 if (count _weaponHolders > 0) then {
-	deleteVehicle _weaponHolders;
+	{deleteVehicle _x}forEach _weaponHolders;
 };
 
 // Count dead vehicles and men

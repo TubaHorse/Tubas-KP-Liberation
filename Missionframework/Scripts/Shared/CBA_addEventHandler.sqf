@@ -453,3 +453,70 @@
 ["KPLIB_setSectorColors", {
     [] call KPLIB_fnc_setSectorColors;
 }] call CBA_fnc_addEventHandler;
+
+// Add carry action for general objects
+["KPLIB_addObjectCarryAction", {
+    if (KPLIB_ace) then {
+        [_this, true, [0, 3, 0], 10] call ace_dragging_fnc_setCarryable;
+        [_this, 4] call ace_cargo_fnc_setSize;
+    } else {
+        _this addAction [
+            "<t color='#FFFF00'>" + localize "STR_ACTION_OBJECT_CARRY" + "</t>",
+            {
+                params ["_object", "_player"];
+            
+                _object attachTo [_player, [0, 2, 1]];
+                ["KPLIB_crateCollisionChange", [_object, false]] call CBA_fnc_globalEventJIP;
+                _object setVariable ["KPLIB_beignCarried", true, true];
+                _player setVariable ["KPLIB_carriedObject", _object];
+                _object enableRopeAttach true;
+
+                // Drop action
+                _player addAction [
+                    ["<t color='#FFFF00'>", localize "STR_ACTION_OBJECT_DROP", "</t>"] joinString "",
+                    {
+                        params ["_player", "_caller", "_actionId", "_arguments"];
+                        private _object = _player getVariable ["KPLIB_carriedObject", objNull];
+
+                        // prevent players from putting crates inside vehicles
+                        private _objectSize = sizeOf typeOf _object * 1.5;
+                        private _nearObjects = (_object nearEntities [["CAManBase", "Air", "Car", "Tank"], _objectSize]) - [_object, _player];
+                        if (_nearObjects isNotEqualTo []) exitWith {
+                            [format [localize "STR_PLACEMENT_IMPOSSIBLE", count _nearObjects, _objectSize toFixed 0], true, 3] call KPLIB_fnc_hint
+                        };
+
+                        _player setVariable ["KPLIB_carriedObject", nil];
+                        _object setVariable ["KPLIB_beignCarried", false, true];
+                        ["KPLIB_crateCollisionChange", [_object, true]] call CBA_fnc_globalEventJIP;
+                        detach _object;
+                        _object awake true;
+                        _object enableRopeAttach true;
+                        _player removeAction _actionId; // Remove action from player
+                    },
+                    nil,
+                    -500,
+                    true,
+                    false,
+                    "",
+                    toString {
+                        alive _originalTarget &&
+                        {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} && {isNull (objectParent _originalTarget)} && {!isNull (_originalTarget getVariable ["KPLIB_carriedObject", objNull])}
+                    }
+                ];
+            },
+            "",
+            -500,
+            true,
+            false,
+            "lookAround",
+            toString {
+                !(_this getVariable ['KPLIB_BUILD_isBuilding', false]) && 
+                {isNull objectParent _this} &&
+                {[4] call KPLIB_fnc_hasPermission} &&
+                {isNull (_this getVariable ["KPLIB_carriedObject", objNull])} &&
+                {!(_target getVariable ["KPLIB_beignCarried", false])}
+            },
+            5
+        ];
+    }
+}] call CBA_fnc_addEventHandler;
