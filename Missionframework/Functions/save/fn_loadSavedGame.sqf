@@ -397,9 +397,6 @@ if (!isNil "_saveData") then {
             _object setPosWorld _pos;
             _object setVectorDirAndUp [_vecDir, _vecUp];
 
-            // Process KP object init
-            [_object] call KPLIB_fnc_addObjectInit;
-
             // Apply kill manager handling, if not excluded
             if !((toLower _class) in _noKillHandler) then {
                 _object addMPEventHandler ["MPKilled", {
@@ -466,17 +463,21 @@ if (!isNil "_saveData") then {
             };
 
             if (_pylonsInfo isNotEqualTo []) then {
-                diag_log format ["LOAD PYLONS: %1", _pylonsInfo];
                 {
                     private _pylonIndex = _x # 0;
                     private _turret = _x # 2;
                     private _magazine = _x # 3;
+                    private _ammoCount = _x # 4;
                     
                     [_object, [_pylonIndex, _magazine, false, _turret]] remoteExec ["setPylonLoadout"];
-                    [_object] remoteExec ["KPLIB_fnc_removeTurretWeapons"];
+                    [_object, [_pylonIndex, _ammoCount]] remoteExec ["setAmmoOnPylon"];
                 }forEach _pylonsInfo;
+                [_object] remoteExec ["KPLIB_fnc_removeTurretWeapons"];
             }
         };
+
+        // Process KP object init
+        [_object] call KPLIB_fnc_addObjectInit;
     } forEach _objectsToSave;
 
     // Re-enable physics on the spawned objects

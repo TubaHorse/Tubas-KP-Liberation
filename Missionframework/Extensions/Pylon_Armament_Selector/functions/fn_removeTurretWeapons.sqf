@@ -16,19 +16,17 @@
 */
 params["_aircraft"];
 
+// Get pylon weapon from the selected loadout
+private _weaponsPylons = [];
+{
+	_weaponsPylons pushBackUnique (getText(configFile >> "CfgMagazines" >> _x >> "pylonWeapon"));
+}forEach (getPylonMagazines _aircraft); 
+
 { 
 	private _turret = _x;
 	private _weapons = _aircraft weaponsTurret _turret; 
 	{
 		private _weapon = _x;
-
-		// Get pylon weapon from the selected loadout
-		private _weaponsPylons = [];
-		{
-			private _magazine = _x # 3;
-
-			_weaponsPylons pushBackUnique (getText(configFile >> "CfgMagazines" >> _magazine >> "pylonWeapon"));
-		}forEach (getAllPylonsInfo _aircraft); 
 
 		private _weaponState = weaponState [_aircraft, _turret, _weapon]; 
 		if (!(_weapon in _weaponsPylons) && ((_weaponState # 3 == "") || (_weapon find "mastersafe" < 0))) then { 

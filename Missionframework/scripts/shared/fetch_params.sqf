@@ -105,7 +105,7 @@ if(isServer) then {
     GET_PARAM_BOOL(KPLIB_param_enemyFighters, "EnemyFighters", 1);
     GET_PARAM_BOOL(KPLIB_param_enemyMines, "EnemyMines", 1);
     GET_PARAM(KPLIB_param_lockArsenal, "LockArsenal", 0);
-    GET_PARAM_BOOL(KPLIB_param_PAS, "PylonManager", 1);
+    GET_PARAM_BOOL(KPLIB_param_PAS, "PylonSelectArmament", 1);
     GET_PARAM_BOOL(KPLIB_param_rallyPoint, "RallyPoint", 1);
     GET_PARAM(KPLIB_param_SAMSite, "SAMSites", 1);
     GET_PARAM(KPLIB_param_SectorEvents, "SectorEvents", 0);

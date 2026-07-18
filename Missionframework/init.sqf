@@ -56,6 +56,11 @@ if (KPLIB_param_sectorEvents > 0) then {
 // Set up CBA settings
 [] call compile preprocessFileLineNumbers 'CBA_initSettings.sqf';
 
+// Pylon Armament Selector custom preset
+if (KPLIB_param_PAS && KPLIB_ace) then {
+    [] call compile preprocessFileLineNumbers "Extensions\Pylon_Armament_Selector\custom_preset.sqf";
+};
+
 if (KPLIB_param_playerMenu) then {
     // KP player menu
     [] call KPPLM_fnc_postInit;

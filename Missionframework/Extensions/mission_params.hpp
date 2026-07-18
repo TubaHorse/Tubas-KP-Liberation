@@ -58,7 +58,7 @@ class PlayerMenu {
     texts[] = {$STR_PARAMS_DISABLED, $STR_PARAMS_ENABLED};
     default = 0;
 };
-class PylonManager {
+class PylonSelectArmament {
     title = $STR_PAS_TITLE;
     values[] = {1, 0};
     texts[] = {$STR_PARAMS_ENABLED, $STR_PARAMS_DISABLED};

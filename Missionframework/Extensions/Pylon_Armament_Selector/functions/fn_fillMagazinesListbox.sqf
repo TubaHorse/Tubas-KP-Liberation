@@ -23,7 +23,14 @@ lbClear _ctrlMagazinesListBox;
 
 private _pylonIndex = localNameSpace getVariable ["PIG_PAS_pylonIndex", 0];
 private _aircraft = localNameSpace getVariable ["PIG_PAS_aircraft", objNull];
+
 private _compatibleMagazines = ((typeOf _aircraft) getCompatiblePylonMagazines (_pylonIndex + 1));
+
+// Check for custom preset
+if (!(isNil "PIG_PAS_customPreset") && {count PIG_PAS_customPreset > 0}) then {
+    // Only add compatible magazines on custom preset
+    _compatibleMagazines = _compatibleMagazines arrayIntersect PIG_PAS_customPreset;
+};
 
 // Fix compatible magazines return
 private _compatMagazines = [];
@@ -112,4 +119,6 @@ switch _index do {
 
 if (_magIndex > 0) then {
     _ctrlMagazinesListBox lbSetCurSel _magIndex;
+} else {
+    _ctrlMagazinesListBox lbSetCurSel 0;
 };

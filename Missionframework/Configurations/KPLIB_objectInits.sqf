@@ -594,5 +594,25 @@ KPLIB_objectInits = [
                 ["KPLIB_addObjectCarryAction", _object] call CBA_fnc_globalEventJIP;
             }, [_this]] call CBA_fnc_waitUntilAndExecute;
         }
+    ],
+
+    // Remove not whitelisted magazines from pylons on custom PAS preset
+    [
+        KPLIB_b_air_classes + [KPLIB_b_potato01],
+        {
+            if (count PIG_PAS_customPreset > 0) then {
+                private _checkPreset = PIG_PAS_customPreset apply {toLowerANSI _x};
+                {
+                    private _pylonIndex = _x # 0;
+                    private _turret = _x # 2;
+                    private _magazine = _x # 3;
+
+                    if !((toLowerANSI _magazine) in _checkPreset) then {
+                        [_this, [_pylonIndex, "", false, _turret]] remoteExec ["setPylonLoadout"];
+                    };
+                }forEach (getAllPylonsInfo _this);
+                [_this] remoteExec ["KPLIB_fnc_removeTurretWeapons"];
+            }
+        }
     ]
 ];
