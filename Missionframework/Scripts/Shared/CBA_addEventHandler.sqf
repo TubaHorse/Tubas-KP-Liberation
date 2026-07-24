@@ -90,15 +90,21 @@
             true, 
             "", 
             toString{
-                alive _originalTarget &&
-                {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} &&
-                {isNull objectParent _originalTarget} &&
-                {[7, "BUILD"] call KPLIB_fnc_hasPermission} &&
-                {KPLIB_player_fobs isNotEqualTo [] && {(_originalTarget distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}} &&
-                {(({alive _x} count (crew _originalTarget)) == 0) || {unitIsUAV _originalTarget}} &&
-                //{locked _originalTarget == -1 || {locked _originalTarget == 0} || {locked _originalTarget == 1}} &&
-                {(((toLowerANSI (typeOf _originalTarget)) in KPLIB_storageBuildings) && (_originalTarget getVariable ["KPLIB_fobStorage", false])) || {!((toLowerANSI (typeOf _originalTarget)) in KPLIB_storageBuildings)}} &&
-                {(((attachedObjects _originalTarget) select {!isNull _originalTarget}) isEqualTo []) || {(typeOf _originalTarget) == "rhsusf_mkvsoc"}} // ignore null objects left by Advanced Towing (https://github.com/sethduda/AdvancedTowing/pull/46)
+                alive _originalTarget 
+                && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} 
+                && {isNull objectParent _originalTarget} 
+                && {[7, "BUILD"] call KPLIB_fnc_hasPermission} 
+                && {
+                    KPLIB_player_fobs isNotEqualTo [] && 
+                    {
+                        private _fobPos = [getPosATL _target] call KPLIB_fnc_getNearestFob;
+
+                        private _resources = [_fobPos] call KPLIB_fnc_getBaseResources;
+                        private _hasRecycle = _resources # 5;
+                        _hasRecycle
+                    }
+                } 
+                && {(({alive _x && [_x] call KPLIB_fnc_ace_isAwake} count (crew _target)) == 0) || {unitIsUAV _target}}
             },
             _radius
         ];
@@ -115,15 +121,11 @@
             true, 
             "", 
             toString{
-                !alive _originalTarget &&
-                {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} &&
-                {isNull objectParent _originalTarget} &&
-                {[7, "BUILD"] call KPLIB_fnc_hasPermission} &&
-                {KPLIB_player_fobs isNotEqualTo [] && {(_originalTarget distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}} &&
-                {(({alive _x} count (crew _originalTarget)) == 0) || {unitIsUAV _originalTarget}} &&
-                //{locked _originalTarget == -1 || {locked _originalTarget == 0} || {locked _originalTarget == 1}} &&
-                {(((toLowerANSI (typeOf _originalTarget)) in KPLIB_storageBuildings) && (_originalTarget getVariable ["KPLIB_fobStorage", false])) || {!((toLowerANSI (typeOf _originalTarget)) in KPLIB_storageBuildings)}} &&
-                {(((attachedObjects _originalTarget) select {!isNull _originalTarget}) isEqualTo []) || {(typeOf _originalTarget) == "rhsusf_mkvsoc"}} // ignore null objects left by Advanced Towing (https://github.com/sethduda/AdvancedTowing/pull/46)
+                !alive _originalTarget 
+                && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} 
+                && {isNull objectParent _originalTarget} 
+                && {[7, "BUILD"] call KPLIB_fnc_hasPermission} 
+                && {KPLIB_player_fobs isNotEqualTo [] && {(_target distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}}
             },
             _radius
         ];
