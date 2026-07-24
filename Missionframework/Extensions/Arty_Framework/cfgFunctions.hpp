@@ -20,6 +20,6 @@ class Enemy_Artillery {
     class getArtySpawnPoint             {};
     class getNearestArtillery           {};
     class getReadyArtillery             {};
-    class grpUnitKilled                 {};
+    class onUnitKilled                  {};
     class spawnArtillery                {};
 };

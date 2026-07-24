@@ -1,8 +1,8 @@
 /*
     File: fn_getOpforSpawnPointSAM.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
-    Date: 2020-09-29
-    Last Update: 2026-05-07
+    Date: 29/09/2020
+    Last Update: 20/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     Description:
         Gets a random opfor spawn point marker name respecting following conditions:
@@ -16,7 +16,7 @@
         * If a position is given, the closest valid spawn point to that position is returned
     Parameter(s):
         _min        - Minimum distance to any blufor sector or FOB                      [NUMBER, defaults to 1500]
-        _max        - Maximum distance to any blufor sector or FOB                      [NUMBER, defaults to 100000]
+        _max        - Maximum distance to any blufor sector or FOB                      [NUMBER, defaults to 10000]
         _nearest    - Provide the nearest spawn point of valid points                   [BOOL, defaults to false]
         _pos        - Position if the nearest spawn point to this should be selected    [POSITION, defaults to [0, 0, 0]]
     Returns:
@@ -25,7 +25,7 @@
 
 params [
     ["_min", 1500, [0]],
-    ["_max", 100000, [0]],
+    ["_max", 10000, [0]],
     ["_nearest", false, [false]],
     ["_pos", [0, 0, 0], [[]], [2, 3]]
 ];

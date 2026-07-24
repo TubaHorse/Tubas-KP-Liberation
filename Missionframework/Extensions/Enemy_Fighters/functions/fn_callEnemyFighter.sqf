@@ -2,13 +2,14 @@
     File: fn_callEnemyFighter.sqf
     Author: PiG13BR - (https://github.com/PiG13BR)
     Date: 17/08/2025
-    Last update: 18/06/2026
+    Last update: 21/07/2026
+    License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
         Handles enemy air fighter
     
     Parameter(s)
-        _targetPos - target pos reference [POSITION, defaults to [0,0,0]]
+        _target - target player reference [OBJECT, defaults to objNull]
 
     Returns:
         -
@@ -42,12 +43,35 @@ publicVariable "KPLIB_enemy_jetInAir";
     params ["_args", "_handle"];
     _args params ["_plane", "_despawnPos"];
 
-    private _bluforAir = KPLIB_bluforAircrafts select {(count(crew _x) > 0) && (side(group(effectiveCommander _x)) == KPLIB_side_player) && ((getPos _x) # 2 > 200)};
-
     if ((alive _plane) && (canFire _plane) && (canMove _plane) && (damage _plane <= 0.5) && ({alive _x} count (crew _plane) > 0) && {((getPosATL _plane) # 2) >= 10} && {fuel _plane > 0.2} && {KPLIB_bluforAircrafts isNotEqualTo []}) then {
-        {
-            [_plane, [_x, 1.5]] remoteExec ["reveal", _plane]
-        }forEach _bluforAir; 
+        private _bluforAir = KPLIB_bluforAircrafts select {(count(crew _x) > 0) && (side(group(effectiveCommander _x)) == KPLIB_side_player) && ((getPos _x) # 2 > 200)};
+
+        private _target = _plane getVariable ["KPLIB_fighterTarget", objNull];
+        if (isNull _target) then {
+            // Set target
+            private _bluforTarget = selectRandom _bluforAir;
+            _plane setVariable ["KPLIB_fighterTarget", _bluforTarget];
+        } else {
+            // Check target status
+            if (!(alive _target) || ({alive _x} count (crew _target) < 1)) then {
+                // Change target
+                private _bluforTarget = selectRandom _bluforAir;
+                _plane setVariable ["KPLIB_fighterTarget", _bluforTarget];
+            }
+        };
+
+        if (local _plane) then {
+            _plane reveal [_target, 1.5];
+        } else {
+            [_plane, [_target, 1.5]] remoteExec ["reveal", _plane];
+        };
+
+        {deleteWaypoint _x}forEachReversed (waypoints (group _plane));
+
+        private _wp = (group _plane) addWaypoint [getPosATL _target, 0];
+        _wp setWaypointType "MOVE";
+        //_wp setWaypointBehaviour "COMBAT";
+        _wp setWaypointCombatMode "RED";
     } else {
         if (alive _plane && ({alive _x} count crew _plane > 0)) then {
             // Return to the spawn position 
@@ -63,6 +87,7 @@ publicVariable "KPLIB_enemy_jetInAir";
             }, {
                 deleteVehicleCrew (_this # 0);
                 deleteVehicle (_this # 0);
+                KPLIB_enemy_jetInAir deleteAt (KPLIB_enemy_jetInAir find (_this # 0));
             }, [_plane, _despawnPos], 180, {deleteVehicleCrew (_this # 0); deleteVehicle (_this # 0)}] call CBA_fnc_waitUntilAndExecute;
         };
         [_handle] call CBA_fnc_removePerFrameHandler;

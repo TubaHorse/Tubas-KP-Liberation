@@ -34,5 +34,5 @@ _markerBorder setMarkerColorLocal KPLIB_color_enemyActive;
 	deleteMarkerLocal (_this # 0);
 	deleteMarkerLocal (_this # 1);
 	localNamespace setVariable ["KPLIB_artyNotificationCooldown", false];
-}, [_markerBorder, _markerIcon], _eta + 60] call CBA_fnc_waitAndExecute;
+}, [_markerBorder, _markerIcon], _eta + 5] call CBA_fnc_waitAndExecute;
 

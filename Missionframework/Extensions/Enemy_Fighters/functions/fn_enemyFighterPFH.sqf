@@ -3,6 +3,7 @@
     Author: PiG13BR - (https://github.com/PiG13BR)
     Date: 04/02/2026
     Last update: 18/06/2026
+    License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
         Runs a CBA PFH to check some conditions to spawn enemy fighters

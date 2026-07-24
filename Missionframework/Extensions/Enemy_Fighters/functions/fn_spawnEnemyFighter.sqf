@@ -2,7 +2,8 @@
     File: fn_spawnEnemyFighter.sqf
     Author: PiG13BR - (https://github.com/PiG13BR)
     Date: 04/02/2026
-    Last update: 18/06/2026
+    Last update: 20/07/2026
+    License: MIT License - http://www.opensource.org/licenses/MIT 
 
     Description:
         Spawns enemy fighter and fill its pylon with air-to-air missiles
@@ -20,7 +21,9 @@ if (_targetPos isEqualTo [0,0,0]) exitWith {["No position provided to spawn enem
 
 // Spawning enemy jet
 private _class = selectRandom KPLIB_o_fighters;
-private _spawnPoint = ([KPLIB_sectors_airSpawn, [_targetPos], {(markerPos _x) distance _input0}, "ASCEND"] call BIS_fnc_sortBy) select 0;
+private _spawnPoint = [_targetPos] call KPLIB_fnc_getFighterSpawnPoint;
+
+if (_spawnPoint isEqualTo "") exitWith {};
 
 private _spawnPos = markerPos _spawnPoint;
 private _targetAlt = _targetPos # 2;
@@ -35,6 +38,7 @@ _plane setVelocityModelSpace [0, 300, 0];
 _plane addMPEventHandler ["MPKilled", {
     params ["_unit", "_killer"];
     ["KPLIB_manageKills", [_unit, _killer]] call CBA_fnc_localEvent;
+    KPLIB_enemy_jetInAir deleteAt (KPLIB_enemy_jetInAir find _unit);
 }];
 {
     _x addMPEventHandler ["MPKilled", {

@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.97.1 (18/07/2026)
+## 0.97.1 (21/07/2026)
 * Added Extension: Enemy QRF from military bases based on tower detection. 
 * Added Extension: Commander can edit FOB/Outpost names.
 * Added Extension: Discord log for FOB resources (Added by Fernandim).
@@ -25,7 +25,7 @@
 * Tweaked: Added KPLIB tag to Armor/Air/Inf weights variables. Added more weight for Armor and Air kills.
 * Tweaked: FOB variable (KPLIB_sectors_fob to KPLIB_player_fobs).
 * Tweaked: Force change of classname of storages to be containers.
-* Tweaked: Some KP functions to be more adapted for the new features.
+* Tweaked: Adapted some KP functions for the new features.
 * Tweaked: Adding objects by zeus generates logs.
 * Tweaked: Repack FOB interface.
 * Tweaked: Changed the filler/invisible sector `outpost` to `filler_inf`. `filler` will be the main tag if more of those types are created in the future.
@@ -40,11 +40,14 @@
 * Tweaked: Sector markers management.
 * Tweaked: Crate store action will search for available storages in area to store the crate's value.
 * Tweaked: Moved infantry squads price list (KPLIB_b_allSquads) to preset files.
-* Tweaked: Adaptations of random battlegroups script for the new airport sector.
+* Tweaked: Adaptations for random battlegroups script for the new airport sector.
 * Tweaked: Blufor defenders will no longer active nearby sectors by themselves.
+* Tweaked: Player's unit cap now depends on builded barracks, not by capturing cities/towns.
 * Tweaked: It's possible to add multiple types of helicopter and plane slots in presets.
 * Tweaked: Guerrilla now spawns only on attacked sectors as reinforcements.
 * Tweaked: Permissions interface and framework (now called General Permissions).
+* Tweaked: Auto-save loop starts after 3 minutes on mission launch to avoid issues with error presets.
+* Tweaked: Enemy SAM launchers on SAM sites will no longer fire multiple missiles at same time.
 * Removed: Enemy fighter notifications.
 * Removed: ACE Fortify compatibility.
 * Removed: Some KP Liberation script files no longer required for the current version.
@@ -60,6 +63,7 @@
 * Fixed: Discord log not showing FOB resources.
 * Fixed: Resources cargo not beign deleted when the vehicle carrying it is destroyed.
 * Fixed: MLRS enemy artillery was not firing all its rounds at once.
+* Fixed: Shorad in enemy SAM sites not firing at incoming missiles.
 
 ## 0.97.0 (07/03/2026)
 * Added Extension: Enemy artillery.
@@ -113,6 +117,7 @@
 * Tweaked: Replaced build actions with mouse and keyboard interaction.
 * Tweaked: More resources spawns at first builded FOB.
 * Tweaked: Adding objects by zeus generates logs.
+* Tweaked: Save vehicle's attributes (damage, fuel, ammo, cargo).
 * Removed: Push supply action.
 * Removed: GREUH player menu.
 * Removed: Useless enemy patrols.

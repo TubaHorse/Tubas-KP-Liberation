@@ -2,7 +2,7 @@
 	File: fn_fireArtillery.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
 	Date: 04/09/2024 
-	Last Update: 12/07/2026 
+	Last Update: 19/07/2026 
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -10,8 +10,8 @@
 		References: Antistasi and Lambs_danger
 
 	Parameter(s):
-		_targetPos - Fire mission position 											[POSITION, defaults to [0,0,0]]
-		_areaSpread - Spread radius, more radius = less accuracy 						[NUMBER, defaults to 125] 
+		_targetPos - Fire mission position 													[POSITION (ATL), defaults to [0,0,0]]
+		_areaSpread - Spread radius, more radius = less accuracy 							[NUMBER, defaults to 125] 
 		_ammo - Type of ammunition, can be "HE", "SMOKE", "FLARE", "CLUSTER", "LG"			[STRING, defaults to HE round]
 		_rounds - How many rounds it will fire												[NUMBER, defaults to 3]
 		_artillery - The artillery that will do this fire mission							[OBJECT, defaults to objNull]
@@ -81,8 +81,8 @@ switch (_ammo) do {
 		
 		if (_ammoClass != "") then {
 			_areaSpread = 0; // Precise strike
-			private _eta = _artillery getArtilleryETA [_targetPos, _ammoClass];
-			_laserTarget = [_targetPos, KPLIB_side_enemy, _eta, _targetObject] call KPLIB_fnc_createLaserTarget;
+			private _eta = _artillery getArtilleryETA [ASLToAGL (ATLtoASL _targetPos), _ammoClass];
+			_laserTarget = [ASLToAGL (ATLtoASL _targetPos), KPLIB_side_enemy, _eta, _targetObject] call KPLIB_fnc_createLaserTarget;
 			// Don't fire LG rounds if not found any targets to lase
 			if (isNull _laserTarget) exitWith {
 				_ammoClass = KPLIB_artyHashMap_ammo get "KPLIB_arty_HE_round"; 
@@ -101,20 +101,20 @@ if (_ammoClass == "") exitWith {["No ammo class found. Check your preset"] call 
 };
 
 // ---------------------------------------------------------- CHECK RANGE
-if !(_targetPos inRangeOfArtillery [[_artillery], _ammoClass]) exitWith {
+if !((ASLToAGL (ATLtoASL _targetPos)) inRangeOfArtillery [[_artillery], _ammoClass]) exitWith {
 	["The target is out of artillery range or wrong magazine type provided in presets or artillery is null", "FIRE MISSION FAILED"] call KPLIB_fnc_log;
 	_gunnerArty setVariable ["KPLIB_isArtilleryBusy", false, true];
 	[false, []]
 };
 
 // ---------------------------------------------------------- FIRE MISSION
-_artillery doWatch _targetPos;
+_artillery doWatch (ASLToAGL (ATLtoASL _targetPos));
 
 _weaponTurret = (_artillery weaponsTurret [0]) select 0;
 private _reloadTime = getNumber(ConfigFile >> "CfgWeapons" >> _weaponTurret >> "magazineReloadTime");
 if (_reloadTime < 1) then {_reloadTime = 1};
 
-private _eta = _artillery getArtilleryETA [_targetPos, _ammoClass];
+private _eta = _artillery getArtilleryETA [ASLToAGL (ATLtoASL _targetPos), _ammoClass];
 
 // Notify players in the target area
 private _playersInArea = allPlayers select {_x distance2d _targetPos <= _areaSpread};
@@ -129,17 +129,17 @@ if ((typeOf _artillery) in KPLIB_o_artilleryMRLS) then {
 
 	// Fire MRLS
 	if (local _artillery) then {
-		_artillery doArtilleryFire [_targetPos, _ammoClass, _rounds];
+		_artillery doArtilleryFire [ASLToAGL (ATLtoASL _targetPos), _ammoClass, _rounds];
 	} else {
-		[_artillery, [_targetPos, _ammoClass, _rounds]] remoteExec ["doArtilleryFire", owner _artillery];
+		[_artillery, [ASLToAGL (ATLtoASL _targetPos), _ammoClass, _rounds]] remoteExec ["doArtilleryFire", owner _artillery];
 	};
 } else {
 	// Fire artillery
-	[_artillery, _targetPos, _areaSpread, _ammoClass, floor(_rounds), _reloadTime, _gunnerArty] spawn {
+	[_artillery, ASLToAGL (ATLtoASL _targetPos), _areaSpread, _ammoClass, floor(_rounds), _reloadTime, _gunnerArty] spawn {
 		params["_artillery", "_targetPos", "_areaSpread", "_ammoClass", "_rounds", "_reloadTime", "_gunnerArty"];
 		[format ["The enemy artillery is firing at pos %1 with class ammo %2. Rounds: %3",_targetPos, _ammoClass, _rounds], "FIRE MISSION"] call KPLIB_fnc_log;
 		for "_i" from 1 to _rounds do {
-			_randomPos = [[[_targetPos, _areaSpread]], [], {!surfaceIsWater _this}] call BIS_fnc_randomPos;
+			private _randomPos = [[[_targetPos, _areaSpread]], [], {!surfaceIsWater _this}] call BIS_fnc_randomPos;
 
 			if (local _artillery) then {
 				_artillery doArtilleryFire [_randomPos, _ammoClass, 1];

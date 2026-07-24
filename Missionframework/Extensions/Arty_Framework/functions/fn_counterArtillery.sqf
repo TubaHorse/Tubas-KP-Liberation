@@ -2,7 +2,7 @@
     File: fn_counterArtillery.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 01/09/2024
-    Last Update: 18/07/2026
+    Last Update: 20/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -10,14 +10,15 @@
 		It's executed when a artillery shell explodes via EH
 
     Parameter(s):
-    	_unit - The artillery piece that fired [OBJECT] 
+    	_unit - The artillery piece that fired [OBJECT]
+		_unitPos - original position where the artillery fired [POSITION]
 		_shellPos - Position where the shell exploded [POSITION]
 
     Returns:
         -
 */
 
-params["_unit", "_shellPos"];
+params["_unit", "_unitPos", "_shellPos"];
 
 if (!canSuspend) exitWith {_this spawn KPLIB_fnc_counterArtillery};
 
@@ -60,19 +61,19 @@ if (side _unit == KPLIB_side_player) then {
 		if ((_unit isKindOf "StaticMortar") || {_unit isKindOf "StaticWeapon"}) then {
 			// Static target artillery
 			private _ammoType = [["HE", (3 + (random 7))], ["CLUSTER", (1 + (random 1))]] selectRandomWeighted [0.8, 0.2];
-			[getPos _unit, 20, (_ammoType select 0), (_ammoType select 1)] call KPLIB_fnc_fireArtillery;
+			[_unitPos, 20, (_ammoType select 0), (_ammoType select 1)] call KPLIB_fnc_fireArtillery;
 		} else {
 			// Heavy/Mobile target artillery
 			private _ammoType = [["HE", (3 + (random 7))], ["LG", 1]] selectRandomWeighted [0.2, 0.8]; // Heavy punishment for the use of heavy artillery
 			if (_ammoType select 0 == "LG") then {
-				[getPos _unit, 20, (_ammoType select 0), (_ammoType select 1), objNull, _unit] call KPLIB_fnc_fireArtillery;
+				[_unitPos, 20, (_ammoType select 0), (_ammoType select 1), objNull, _unit] call KPLIB_fnc_fireArtillery;
 			} else {
-				[getPos _unit, 20, (_ammoType select 0), (_ammoType select 1)] call KPLIB_fnc_fireArtillery;
+				[_unitPos, 20, (_ammoType select 0), (_ammoType select 1)] call KPLIB_fnc_fireArtillery;
 			};
 		};
 
 		// Delay
-		sleep ((10 + (random 20)) / (([] call KPLIB_fnc_getOpforFactor) * KPLIB_param_aggressivity));
+		sleep ((60 + (random 60)) / (([] call KPLIB_fnc_getOpforFactor) * KPLIB_param_aggressivity));
 		_unit setVariable ["KPLIB_CounterArtyReaction", nil];
 	}
 };

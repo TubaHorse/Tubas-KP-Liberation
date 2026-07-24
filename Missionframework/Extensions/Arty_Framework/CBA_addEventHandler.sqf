@@ -10,6 +10,7 @@ if (isServer && KPLIB_LAMBS) then {
 
         private _playersInArea = allPlayers select {_x distance2d _targetPos < 200};
         ["KPLIB_artilleryFiring", [gunner _artilleryGun, _targetPos], _playersInArea] call CBA_fnc_targetEvent;
+        ["KPLIB_generateLog", [format ["Unit (%1) called artillery fire at pos %2",_caller, _targetPos], "LAMBS ARTILLERY"]] call CBA_fnc_serverEvent;
     }] call CBA_fnc_addEventHandler;
 };
 
@@ -20,15 +21,15 @@ if (isServer && KPLIB_LAMBS) then {
 
 // Counter artillery
 ["KPLIB_counterArtillery", {
-    params ["_unit", "_pos"];
-    [_unit, _pos] spawn KPLIB_fnc_counterArtillery;
+    params ["_unit", "_unitPos", "_shellPos"];
+    [_unit, _unitPos, _shellPos] spawn KPLIB_fnc_counterArtillery;
 }] call CBA_fnc_addEventHandler;
 
 if (isServer) then {
     // Detect group unit kills
-    ["KPLIB_grpUnitKilled", {
+    ["KPLIB_onUnitKilled", {
         params ["_group", "_unit", "_killer"];
-        [_group, _unit, _killer] call KPLIB_fnc_grpUnitKilled;
+        [_group, _unit, _killer] call KPLIB_fnc_onUnitKilled;
     }] call CBA_fnc_addEventHandler;
 
     // Add CBA event to enemy groups
@@ -45,7 +46,7 @@ if (isServer) then {
 
             _group addEventHandler ["UnitKilled", {
                 params ["_group", "_unit", "_killer"];
-                ["KPLIB_grpUnitKilled", [_group, _unit, _killer]] call CBA_fnc_localEvent;
+                ["KPLIB_onUnitKilled", [_group, _unit, _killer]] call CBA_fnc_localEvent;
             }];
         }
     }];

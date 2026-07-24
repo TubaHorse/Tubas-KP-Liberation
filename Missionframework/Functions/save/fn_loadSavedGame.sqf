@@ -2,7 +2,7 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 17/07/2026
+    Last Update: 20/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -443,7 +443,7 @@ if (!isNil "_saveData") then {
                 {_object addBackpackCargoGlobal [_x, _count # _forEachIndex]}forEach _names;
             };
             
-            // Attributes
+            // Hitpoints
             if (_hitPoints isNotEqualTo []) then {
                 private _hitNames = (_hitPoints # 0);
                 private _damages = (_hitPoints # 2);
@@ -451,10 +451,17 @@ if (!isNil "_saveData") then {
                     _object setHitPointDamage [_x, _damages # _forEachIndex];
                 }forEach _hitNames;
             };
+
+            // Fuel
             [_object, _fuel] remoteExec ["setFuel"];
+
+            // Ammo
             if (_ammo isNotEqualTo []) then {
                 {
                     _x params["_class", "_turret", "_count"];
+
+                    // Handle pylon magazines below
+                    if (getText(configFile >> "cfgMagazines" >> _class >> "pylonWeapon") != "") then {continue};
 
                     _object removeMagazinesTurret [_class, _turret];
                     _object addMagazineTurret [_class, _turret, _count];
@@ -469,10 +476,9 @@ if (!isNil "_saveData") then {
                     private _magazine = _x # 3;
                     private _ammoCount = _x # 4;
                     
-                    [_object, [_pylonIndex, _magazine, false, _turret]] remoteExec ["setPylonLoadout"];
+                    ["PAS_setPylonArmament", [_object, _pylonIndex, _magazine, _turret]] call CBA_fnc_globalEvent;
                     [_object, [_pylonIndex, _ammoCount]] remoteExec ["setAmmoOnPylon"];
                 }forEach _pylonsInfo;
-                [_object] remoteExec ["KPLIB_fnc_removeTurretWeapons"];
             }
         };
 

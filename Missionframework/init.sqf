@@ -58,7 +58,7 @@ if (KPLIB_param_sectorEvents > 0) then {
 
 // Pylon Armament Selector custom preset
 if (KPLIB_param_PAS && KPLIB_ace) then {
-    [] call compile preprocessFileLineNumbers "Extensions\Pylon_Armament_Selector\custom_preset.sqf";
+    [] call compile preprocessFileLineNumbers "Extensions\Pylon_Armament_Selector\init_presets.sqf";
 };
 
 if (KPLIB_param_playerMenu) then {

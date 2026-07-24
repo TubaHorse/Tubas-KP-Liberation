@@ -237,7 +237,8 @@ KPLIB_objectInits = [
             _this addEventHandler ["Fired", {
                 params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
                 
-                if (side _gunner == KPLIB_side_player) then {
+                if (side (group _gunner) == KPLIB_side_player) then {
+                    private _unitPos = getPosATL _unit;
 
                     // Check artillery fired ammo
                     if (getNumber(configFile >> "CfgAmmo" >> _ammo >> "artilleryLock") < 1) exitWith {};
@@ -248,20 +249,23 @@ KPLIB_objectInits = [
                     // Add Deleted EH to the projectile. When explodes, run the counter artillery script
                     [_projectile, "Explode", {
                         params ["_projectile", "_pos", "_velocity"];
-                        ["KPLIB_counterArtillery", [_thisArgs, _pos]] call CBA_fnc_localEvent;
-                    }, _unit] call CBA_fnc_addBISEventHandler;
+                        _thisArgs params ["_unit", "_unitPos"]; 
+                        ["KPLIB_counterArtillery", [_unit, _unitPos, _pos]] call CBA_fnc_localEvent;
+                    }, [_unit, _unitPos]] call CBA_fnc_addBISEventHandler;
 
                     // Add EH for shells that creates submunitions
                     _unit setVariable ["KPLIB_count_subMunition", 0]; // To avoid calling the counter script multiple times
                     [_projectile, "SubmunitionCreated", {
                         params ["_projectile", "_submunitionProjectile", "_pos", "_velocity"];
+                        _thisArgs params ["_unit", "_unitPos"]; 
+
                         _countSubMunition = (_thisArgs getVariable "KPLIB_count_subMunition");
                         _countSubMunition = _countSubMunition + 1;
 
                         if (_countSubMunition > 1) exitWith {};
                         
-                        ["KPLIB_counterArtillery", [_thisArgs, _pos]] call CBA_fnc_localEvent;
-                    }, _unit] call CBA_fnc_addBISEventHandler;
+                        ["KPLIB_counterArtillery", [_unit, _unitPos, _pos]] call CBA_fnc_localEvent;
+                    }, [_unit, _unitPos]] call CBA_fnc_addBISEventHandler;
                 };
             }];
         }
@@ -608,10 +612,9 @@ KPLIB_objectInits = [
                     private _magazine = _x # 3;
 
                     if !((toLowerANSI _magazine) in _checkPreset) then {
-                        [_this, [_pylonIndex, "", false, _turret]] remoteExec ["setPylonLoadout"];
+                        ["PAS_setPylonArmament", [_this, _pylonIndex, "", _turret]] call CBA_fnc_globalEvent;
                     };
                 }forEach (getAllPylonsInfo _this);
-                [_this] remoteExec ["KPLIB_fnc_removeTurretWeapons"];
             }
         }
     ]

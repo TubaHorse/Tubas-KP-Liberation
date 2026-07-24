@@ -2,7 +2,7 @@
     File: fn_SAM_createSite.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 05/12/2025
-    Last Update: 10/07/2026
+    Last Update: 19/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -130,6 +130,18 @@ if (KPLIB_enemyReadiness >= 100) then {_samCount = _samCount + 1};
 	_sam setDir (_dir + _relDir);
 	_sam setVectorUp [0, 0, 1];
 
+	// Avoid multiple launches
+	[_sam, "Fired", {
+		params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+		private _radar = _thisArgs;
+		
+		if (_radar getVariable ["KPLIB_SAM_fired", false]) exitWith {deleteVehicle _projectile;}; // Delete fired projectile
+		_radar setVariable ["KPLIB_SAM_fired", true];
+		
+		// Cooldown
+		[{_this setVariable ["KPLIB_SAM_fired", false];}, _radar, 10 + round(random 10)] call CBA_fnc_waitAndExecute;
+	}, _radar] call CBA_fnc_addBISEventHandler;
+
 	_samSiteTurrets pushBack _sam;
 } forEach _turrets;
 
@@ -142,7 +154,6 @@ if (KPLIB_enemyReadiness >= 100) then {_samCount = _samCount + 1};
 	private _shoradPos = (_radar modelToWorld _pos);
 	private _shorad = [_shoradPos, _shoradClass] call KPLIB_fnc_spawnVehicle;
 	private _crew = units _shorad;
-    [_crew, _group] remoteExecCall ["joinSilent"];
 
 	// Find driver and delete it
 	if (!isNull (driver _shorad)) then {_shorad deleteVehicleCrew (driver _shorad)};
@@ -174,7 +185,7 @@ if (KPLIB_enemyReadiness >= 100) then {_samCount = _samCount + 1};
 } forEach _shorads;
 
 if (_samShorads isNotEqualTo []) then {
-	// Incoming missile EH >> try to defeat harm missiles
+	// Add incoming missile EH
 	[_radar, _samShorads] call KPLIB_fnc_SAM_incomingMissile;	
 };
 
@@ -189,18 +200,15 @@ if (_samShorads isNotEqualTo []) then {
 	_object setDir (_dir + _relDir); 
 	_object setPosATL _objPos;
 	[_object] call KPLIB_fnc_clearCargo;
+
 	// Fix for floating objects
-	_object setPosATL [getPos _object # 0, getPos _object # 1, 0];
+	_object setPos [getPos _object # 0, getPos _object # 1, 0];
 	// Rotation vector fix
 	_object setVectorUp surfaceNormal position _object;
 
 	if (_object isKindOf "landVehicle") then {_object setVehicleLock "LOCKED"};
 
 	[{_this allowDamage true}, _object, 3] call CBA_fnc_waitAndExecute;
-
-	_object setPosATL _objPos;
-	_object setDir (_dir + _relDir);
-	_object setVectorUp [0, 0, 1];
  
 	_samSiteObjects pushBack _object;
 } forEach _objects;
@@ -217,17 +225,13 @@ if (_samShorads isNotEqualTo []) then {
 	_garrison setPosATL _objPos;
 
 	// Fix for floating objects
-	_garrison setPosATL [getPos _garrison # 0, getPos _garrison # 1, 0];
+	_garrison setPos [getPos _garrison # 0, getPos _garrison # 1, 0];
 	// Rotation vector fix
 	_garrison setVectorUp surfaceNormal position _garrison;
 
 	[{_this allowDamage true}, _garrison, 3] call CBA_fnc_waitAndExecute;
 
 	private _squadGrp = [_garrison] call KPLIB_fnc_spawnBuildingGarrison;
-
-	_garrison setPosATL _objPos;
-	_garrison setDir (_dir + _relDir);
-	_garrison setVectorUp [0, 0, 1];
 	
 	_samSiteObjects pushBack _garrison;
 	_infGarrison pushBack _squadGrp;
