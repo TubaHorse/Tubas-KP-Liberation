@@ -617,5 +617,16 @@ KPLIB_objectInits = [
                 }forEach (getAllPylonsInfo _this);
             }
         }
+    ],
+
+    // Add ace rearm scripted loadout for tanks
+    [
+        ["Tank"],
+        {
+            if (KPLIB_ace) then {
+                _this setVariable ["ace_rearm_scriptedLoadout", true, true];
+            };
+        },
+        true
     ]
 ];

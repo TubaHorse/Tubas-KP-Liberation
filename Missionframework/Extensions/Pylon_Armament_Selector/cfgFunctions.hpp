@@ -9,6 +9,7 @@ class Pylon_Manager_Menu
     class deleteAirPreset {};
     class fillMagazinesListBox {};
     class getAllPylonsPos {};
+    class getCfgWeapons {};
     class getPylonTurret {};
     class handleAirMagazinesLb {};
     class handleAirPresetsLb {};

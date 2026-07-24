@@ -2,7 +2,7 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 23/07/2026
+    Last Update: 24/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -469,9 +469,8 @@ if (!isNil "_saveData") then {
                     // Handle pylon magazines below
                     if (getText(configFile >> "cfgMagazines" >> _class >> "pylonWeapon") != "") then {continue};
 
-                    _object removeMagazinesTurret [_class, _turret];
+                    _object removeMagazineTurret [_class, _turret];
                     _object addMagazineTurret [_class, _turret, _count];
-                    [_object, [_class, _count, _turret]] remoteExec ["setMagazineTurretAmmo", _object turretOwner _turret];
                 }forEach _ammo;
             };
 
