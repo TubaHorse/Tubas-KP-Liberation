@@ -2,7 +2,7 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 20/07/2026
+    Last Update: 23/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -420,7 +420,13 @@ if (!isNil "_saveData") then {
 
             // Add blufor crew, if it had crew or is a UAV
             if ((unitIsUAV _object) || _hascrew) then {
-                [_object] call KPLIB_fnc_forceBluforCrew;
+                [
+                    {simulationEnabled _this}, 
+                    {[_this, KPLIB_side_player] call KPLIB_fnc_createCrew;}, 
+                    _object, 
+                    60, 
+                    {["Couldn't add crew. Simulation not enabled on the object","WARNING"] call KPLIB_fnc_log}
+                ] call CBA_fnc_waitUntilAndExecute;
             };
 
             // Cargo
@@ -481,7 +487,7 @@ if (!isNil "_saveData") then {
                 }forEach _pylonsInfo;
             }
         };
-
+        
         // Process KP object init
         [_object] call KPLIB_fnc_addObjectInit;
     } forEach _objectsToSave;
@@ -579,7 +585,7 @@ if (!isNil "_saveData") then {
             [floor _supply, floor _ammo, floor _fuel, _object] call KPLIB_fnc_fillStorage;
         };
     } forEach _resourceStorages;
-    ["Saved FOB storages placed and filled", "SAVE"] call KPLIB_fnc_log;
+    ["Saved storages placed and filled", "SAVE"] call KPLIB_fnc_log;
 
     // Sector production. The saved data returns as an array. Transform into a hashmap.
     private _productionHashmap = createHashMapFromArray [];

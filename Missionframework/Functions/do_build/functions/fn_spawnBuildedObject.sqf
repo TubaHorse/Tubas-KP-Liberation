@@ -3,7 +3,7 @@
     File: fn_spawnBuildedObject.sqf
     Author: PiG13BR (https://github.com/PiG13BR), FernandimModelador https://github.com/FernandimModelador
     Date: 28/08/2025
-    Last update: 14/04/2026
+    Last update: 23/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -42,11 +42,11 @@ if (_vector) then {
     _objectSpawned setVectorUp surfaceNormal position _objectSpawned;
 };
 
-// Add object init
-[_objectSpawned] call KPLIB_fnc_addObjectInit;
-
 // Clear cargo
 [_objectSpawned] call KPLIB_fnc_clearCargo;
+
+// Add object init
+[_objectSpawned] call KPLIB_fnc_addObjectInit;
 
 if ((toLowerANSI _objectClass) in KPLIB_o_allVeh_classes) then {
     _objectSpawned setVariable ["KPLIB_captured", true, true];
@@ -57,7 +57,7 @@ if (_objectClass in KPLIB_c_vehicles) then {
 
 // Add crew
 if ((unitIsUAV _objectSpawned) || _withCrew) then {
-    [_objectSpawned] call KPLIB_fnc_forceBluforCrew;
+    [_objectSpawned, KPLIB_side_player] call KPLIB_fnc_createCrew;
 };
 
 // Get build type
@@ -93,7 +93,7 @@ if(_buildType == BUILDTYPE_FOB) then {
     ["KPLIB_fobBuilded", [_objectSpawned, false]] call CBA_fnc_serverEvent;
 };
 
-// FOB Builded
+// Outpost Builded
 if(_buildType == BUILDTYPE_OUTPOST) then {
     _objectSpawned setVectorUp [0,0,1]; // VectorUp
 

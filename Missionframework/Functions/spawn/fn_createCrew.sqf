@@ -2,7 +2,7 @@
 	File: fn_createCrew.sqf
 	Author: PiG13BR - https://github.com/PiG13BR/
 	Date: 26/08/2024 
-	Last Update: 20/04/2026
+	Last Update: 23/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -109,12 +109,12 @@ if (isNull _grp) then {
 				}
 			};
 			case "gunner" : {
-				_crew = [_typeCrew, getPos _vehicle, _grp] call KPLIB_fnc_createManagedUnit;
+				_crew = [_typeCrew, getPosATL _vehicle, _grp] call KPLIB_fnc_createManagedUnit;
 				_crew assignAsGunner _vehicle;
 				_crew moveInGunner _vehicle;
 			};
 			case "commander" : {
-				_crew = [_typeCrew, getPos _vehicle, _grp] call KPLIB_fnc_createManagedUnit;
+				_crew = [_typeCrew, getPosATL _vehicle, _grp] call KPLIB_fnc_createManagedUnit;
 				_crew assignAsCommander _vehicle;
 				_crew moveInCommander _vehicle;
 			};
