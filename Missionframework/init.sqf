@@ -137,9 +137,23 @@ if (!isDedicated && hasInterface) then {
     if (!KPLIB_CBA) exitWith {
         ["CBA_A3 not loaded. Aborting Mission! KP LIBERATION PIG requires CBA!!!"] call BIS_fnc_error;
         ["CBA_A3 not loaded. This mission requires CBA to run properly.", true, 5] remoteExec ["KPLIB_fnc_hint", 0, true];
-        sleep 1;
-        endMission "END2";
+        sleep 5;
+        endMission "End2";
         false;
+    };
+
+    // Check if Advanced Sling Loading and/or Advanced Towing are running
+    if (isClass(configFile >> "CfgPatches" >> "SA_AdvancedSlingLoading")) exitWith {
+        ["Advanced Sling Loading loaded. Aborting Mission! This mod breaks AI!!"] call BIS_fnc_error;
+        ["Advanced Sling Loading loaded. Remove this mod!!!", true, 5] remoteExec ["KPLIB_fnc_hint", 0, true];
+        sleep 5;
+        endMission "End3";
+    };
+    if (isClass(configFile >> "CfgPatches" >> "SA_AdvancedTowing")) exitWith {
+        ["Advanced Towing loaded. Aborting Mission! This mod breaks AI!!"] call BIS_fnc_error;
+        ["Advanced Towing loaded. Remove this mod!!!", true, 5] remoteExec ["KPLIB_fnc_hint", 0, true];
+        sleep 5;
+        endMission "End4";
     };
 
     if (!isDedicated && !hasInterface && isMultiplayer) then {

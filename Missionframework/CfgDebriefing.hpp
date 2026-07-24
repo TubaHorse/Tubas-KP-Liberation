@@ -21,3 +21,15 @@ class End2 {
     description = $STR_CBA_IS_REQUIRED;
     pictureBackground = "";
 };
+class End3 {
+    title = $STR_SORRY;
+    subtitle = "";
+    description = $STR_REMOVE_ADVANCED_MODS;
+    pictureBackground = "";
+};
+class End4 {
+    title = $STR_SORRY;
+    subtitle = "";
+    description = $STR_REMOVE_ADVANCED_MODS;
+    pictureBackground = "";
+};

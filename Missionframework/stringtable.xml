@@ -79,7 +79,7 @@
             <Original>[GREUH] Zbug &amp; McKeewa, KP Liberation Dev Team, Apricot_ale, MoistBois, PiG13BR</Original>
         </Key>
         <Key ID="STR_MISSION_OVERVIEW">
-            <Original>APR Tweaked KP Liberation!&lt;br/&gt;Check github.com/Apricot-ale/KP-Liberation-APR to more info.</Original>
+            <Original>PIG Tweaked KP Liberation!&lt;br/&gt;Check github.com/PiG13BR/KP-Liberation-PIG to more info.</Original>
         </Key>
         <Key ID="STR_MISSION_ONLOAD">
             <Original>PiG13BR Liberation</Original>
@@ -3661,19 +3661,23 @@
             <Japanese>あなたは指揮官スロットへ入ることをサーバーに許可されていません。</Japanese>
         </Key>
         <Key ID="STR_CBA_IS_REQUIRED">
-            <Original>CBA_A3 not loaded. KP Liberation APR requires CBA to run properly.</Original>
-            <French>CBA_A3 non chargé. KP Liberation APR nécessite CBA pour fonctionner correctement.</French>
-            <German>CBA_A3 nicht geladen. KP Liberation APR erfordert CBA, um ordnungsgemäß zu funktionieren.</German>
-            <Spanish>CBA_A3 no cargado. KP Liberation APR requiere CBA para funcionar correctamente.</Spanish>
-            <Russian>CBA_A3 не загружен. Для правильной работы KP Liberation APR требуется CBA.</Russian>
-            <Italian>CBA_A3 non caricato. KP Liberation APR richiede CBA per funzionare correttamente.</Italian>
-            <Chinesesimp>CBA_A3 未加载。KP Liberation APR 需要 CBA 才能正常运行。</Chinesesimp>
-            <Chinese>CBA_A3 未加載。KP Liberation APR 需要 CBA 才能正常運行。</Chinese>
-            <Turkish>CBA_A3 yüklenmedi. KP Liberation APR düzgün çalışması için CBA gerektirir.</Turkish>
-            <Portuguese>CBA_A3 não carregado. KP Liberation APR requer CBA para funcionar corretamente.</Portuguese>
-            <Korean>CBA_A3 가 로드되지 않았습니다. KP Liberation APR 는 정상적으로 작동하기 위해 CBA 가 필요합니다.</Korean>
-            <Czech>CBA_A3 není načteno. KP Liberation APR vyžaduje pro správný chod CBA.</Czech>
-            <Japanese>CBA_A3 が読み込まれていません。 KP Liberation APR の正常な動作には CBA が必要です。</Japanese>
+            <Original>CBA_A3 not loaded. KP Liberation PIG requires CBA to run properly.</Original>
+            <French>CBA_A3 non chargé. KP Liberation PIG nécessite CBA pour fonctionner correctement.</French>
+            <German>CBA_A3 nicht geladen. KP Liberation PIG erfordert CBA, um ordnungsgemäß zu funktionieren.</German>
+            <Spanish>CBA_A3 no cargado. KP Liberation PIG requiere CBA para funcionar correctamente.</Spanish>
+            <Russian>CBA_A3 не загружен. Для правильной работы KP Liberation PIG требуется CBA.</Russian>
+            <Italian>CBA_A3 non caricato. KP Liberation PIG richiede CBA per funzionare correttamente.</Italian>
+            <Chinesesimp>CBA_A3 未加载。KP Liberation PIG 需要 CBA 才能正常运行。</Chinesesimp>
+            <Chinese>CBA_A3 未加載。KP Liberation PIG 需要 CBA 才能正常運行。</Chinese>
+            <Turkish>CBA_A3 yüklenmedi. KP Liberation PIG düzgün çalışması için CBA gerektirir.</Turkish>
+            <Portuguese>CBA_A3 não carregado. KP Liberation PIG requer CBA para funcionar corretamente.</Portuguese>
+            <Korean>CBA_A3 가 로드되지 않았습니다. KP Liberation PIG 는 정상적으로 작동하기 위해 CBA 가 필요합니다.</Korean>
+            <Czech>CBA_A3 není načteno. KP Liberation PIG vyžaduje pro správný chod CBA.</Czech>
+            <Japanese>CBA_A3 が読み込まれていません。 KP Liberation PIG の正常な動作には CBA が必要です。</Japanese>
+        </Key>
+        <Key ID="STR_REMOVE_ADVANCED_MODS">
+            <Original>Mods like Advanced Slinging Load and Advanced Towing breaks AI. Remove these mods to play Liberation.</Original>
+            <Portuguese>Mods como Advanced Slingling Load e Advanced Towing quebra a IA do jogo. Remova esses mods para jogar Liberation.</Portuguese>
         </Key>
         <Key ID="STR_MAKE_RESPAWN_LOADOUT">
             <Original>Save respawn loadout</Original>
