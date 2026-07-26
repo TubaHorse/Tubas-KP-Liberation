@@ -2,7 +2,7 @@
     File: fn_spawnTeamRP.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 06/11/2025
-    Last update: 09/11/2025
+    Last update: 25/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -17,7 +17,7 @@
 */
 params[["_commander", player, [objNull]], ["_model", "Land_TentSolar_01_folded_bluewhite_F", [""]]];
 
-if (isNull _player) exitWith {};
+if (isNull _commander) exitWith {};
 
 private _rallyPoint = [_commander] call KPLIB_fnc_getTeamRP;
 if (!isNull _rallyPoint) then {
@@ -36,18 +36,19 @@ _rallyPoint addEventHandler ["Hit", {
     _unit removeEventHandler [_thisEvent, _thisEventHandler];
 }];
 
+if ((_commander getVariable ["KPLIB_RP_leaderEH", []]) isNotEqualTo []) then {
+    _commander removeMPEventHandler (_commander getVariable ["KPLIB_RP_leaderEH", ["", -1]]); 
+};
+
 // If commander gets killed or if the leader changes, delete RP
-_commander addEventHandler ["Killed", {
+private _killedEH = _commander addEventHandler ["Killed", {
 	params ["_unit"];
 
     [] call KPLIB_fnc_deleteTeamRP;
     _unit removeEventHandler [_thisEvent, _thisEventHandler];
 }];
 
-// Create global marker
-_sqRPmk = createMarker ["Team_RallyPoint", getPosASL _rallyPoint];
-_sqRPmk setMarkerType "loc_LetterT";
-_sqRPmk setMarkerText "Team Rally Point";
+_commander getVariable ["KPLIB_RP_leaderEH", ["Killed", _killedEH], true];
 
 [localize "STR_RALLYPOINT_DEPLOYED", false, 5, 2] call ace_common_fnc_displayText;
 
