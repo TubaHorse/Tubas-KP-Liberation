@@ -20,13 +20,18 @@ params[["_player", player, [objNull]]];
 if (isDedicated) exitWith {};
 
 // Remove/unassign item if not present in the player's allowed arsenal
-private _slotItemHandle = _player addEventHandler ["SlotItemChanged", {
+_player addEventHandler ["SlotItemChanged", {
 	params ["_unit", "_name", "_slot", "_assigned", "_weapon"];
 
     // Ace DBAL compat
     if ((toLowerANSI _name) find "ace_dbal_a3" >= 0) then {_name = "ace_dbal_a3"};
-  
-    if (_assigned && {(KPLIB_arsenalAllowed find (toLowerANSI _name)) < 0 && {(_name find "TFAR") < 0}}) then { 
+
+    // Immersion cigs
+    if (isClass (configFile >> "CfgPatches" >> "cigs_main")) then {
+        if ((toLowerANSI _name) find "cigs" >= 0) then {_name = "cigs"};
+    };
+
+    if (_assigned && {((KPLIB_arsenalAllowed findIf {_x find (toLowerANSI _name) >= 0}) < 0) && {(_name find "TFAR") < 0}}) then { 
         if (_weapon isNotEqualTo "") then {
             // Some weapon acc 
             _unit removePrimaryWeaponItem _name; // Just remove it
@@ -43,34 +48,6 @@ private _slotItemHandle = _player addEventHandler ["SlotItemChanged", {
     };
 }];
 
-// For weapons
-/*
-_player addEventHandler ["WeaponChanged", {
-	params ["_player", "_oldWeapon", "_newWeapon", "_oldMode", "_newMode", "_oldMuzzle", "_newMuzzle", "_turretIndex"];
-
-    if (_newWeapon isEqualTo "") exitWith {};
-
-    if ((KPLIB_arsenalAllowed findIf {_x == (toLowerANSI _newWeapon)}) < 0) then {
-        private _action = _player addAction [localize "STR_INVENTORY_CANNOT_USE_WEAPON", 
-            { 
-                params["_player"]; 
-                if ((!weaponLowered _player) || {((currentMuzzle _player) isNotEqualTo '')}) then { 
-                    cutText [format [localize "STR_INVENTORY_CANNOT_USE_WEAPON", getText(configFile >> "cfgWeapons" >> (currentWeapon _player) >> "displayName")],'PLAIN',0.2]; 
-                }; 
-            }, 
-            nil, 
-            -99, 
-            false, 
-            true, 
-            'defaultAction', 
-            toString {focusOn isEqualTo _originalTarget}
-        ]; 
-        _player setVariable ["KPLIB_cannotUseWeaponAction", _action];
-    } else {
-        _player removeAction (_player getVariable ["KPLIB_cannotUseWeaponAction", -1])
-    }
-}];
-*/
 // Block players from entering heavy enemy veh
 _player addEventHandler ["GetInMan", {
     params ["_unit", "_role", "_vehicle", "_turret"];
