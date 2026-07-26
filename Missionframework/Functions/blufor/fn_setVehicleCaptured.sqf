@@ -2,7 +2,7 @@
     File: fn_setVehicleCaptured.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-04-10
-    Last Update: 2026-04-20
+    Last Update: 2026-07-25
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -25,7 +25,7 @@ if (isNull _veh) exitWith {["Null object given"] call BIS_fnc_error; false};
 private _type = typeOf _veh;
 
 // Avoid capturing heavier vehicles
-if ((_type isKindOf "Tank") || {_type isKindOf "Wheeled_Apc_F"} || {_type isKindOf "ship"}) exitWith {false};
+if ((_type isKindOf "Tank") || {_type isKindOf "Wheeled_Apc_F"} || {_type isKindOf "ship"} || {_type isKindOf "Air"}) exitWith {false};
 
 if !((toLowerANSI _type) in KPLIB_o_allVeh_classes) exitWith {false};
 
