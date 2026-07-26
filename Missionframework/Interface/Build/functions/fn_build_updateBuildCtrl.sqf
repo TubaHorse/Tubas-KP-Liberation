@@ -3,7 +3,7 @@
     File: fn_build_updateBuildCtrl.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 10/11/2025
-    Last Update: 13/06/2026
+    Last Update: 23/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -114,6 +114,17 @@ if ((_buildType == BUILDTYPE_AERIAL) && !_affordable && !_hasAir) then {
     // Set tooltip to tell player that he needs to buy air control
     _buildButtonCtrl ctrlSetTooltip (localize "STR_NEED_FLIGHT_CONTROL");
     _crewButtonCtrl ctrlSetTooltip (localize "STR_NEED_FLIGHT_CONTROL");
+};
+
+if ((_buildType == BUILDTYPE_AERIAL) && _hasAir) then {
+    if ((_buildClass isKindOf "Helicopter") && (KPLIB_heli_count >= KPLIB_heli_slots)) then {
+        _buildButtonCtrl ctrlSetTooltip (localize "STR_NEED_HELI_SLOTS");
+        _crewButtonCtrl ctrlSetTooltip (localize "STR_NEED_HELI_SLOTS");
+    };
+    if ((_buildClass isKindOf "Plane") && (KPLIB_plane_count >= KPLIB_plane_slots)) then {
+        _buildButtonCtrl ctrlSetTooltip (localize "STR_NEED_PLANE_SLOTS");
+        _crewButtonCtrl ctrlSetTooltip (localize "STR_NEED_PLANE_SLOTS");
+    };
 };
 
 if ((_buildType == BUILDTYPE_INFANTRY || _buildType == BUILDTYPE_SQUAD) && !_affordable && !_hasBarracks) then {

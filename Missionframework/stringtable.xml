@@ -165,20 +165,17 @@
             <Czech>JSI V BEZVĚDOMÍ</Czech>
             <Japanese>あなたは負傷した</Japanese>
         </Key>
-        <Key ID="STR_BUILD_ACTION">
-            <Original>-- BUILD --</Original>
-            <French>-- CONSTRUIRE --</French>
-            <German>-- BAUEN --</German>
-            <Spanish>-- CONSTRUIR --</Spanish>
-            <Russian>-- ПОСТРОИТЬ --</Russian>
-            <Italian>-- COSTRUISCI --</Italian>
-            <Chinesesimp>-- 建造 --</Chinesesimp>
-            <Chinese>-- 建造 --</Chinese>
-            <Turkish>-- İNŞA ET --</Turkish>
-            <Portuguese>-- CONSTRUIR --</Portuguese>
-            <Korean>-- 건 설 --</Korean>
-            <Czech>-- STAVĚT --</Czech>
-            <Japanese>-- 製造 --</Japanese>
+        <Key ID="STR_BUILD_IN_FOB_ACTION">
+            <Original>-- BUILD IN FOB --</Original>
+            <Portuguese>-- CONSTRUIR NA FOB --</Portuguese>
+        </Key>
+        <Key ID="STR_BUILD_IN_OUTPOST_ACTION">
+            <Original>-- BUILD IN OUTPOST --</Original>
+            <Portuguese>-- CONSTRUIR NO OUTPOST --</Portuguese>
+        </Key>
+        <Key ID="STR_BUILD_IN_AIRPORT_ACTION">
+            <Original>-- BUILD IN AIRPORT --</Original>
+            <Portuguese>-- CONSTRUIR NO AEROPORTO --</Portuguese>
         </Key>
         <Key ID="STR_BUILD_TITLE">
             <Original>BUILD MENU</Original>
@@ -701,6 +698,10 @@
             <Czech>Zde Nelze postavit nové FOB, musí být vzdáleno %1 metrů od jakékoliv zabratelné zóny. Nejbližší zóna je vzdálena %2 metrů.</Czech>
             <Japanese>FOBをここに設置することはできません。 %1 メートル以上他のセクターから離す必要があります。 最も近いセクターは %2 にあります。</Japanese>
         </Key>
+        <Key ID="STR_FOB_BUILDING_IMPOSSIBLE_FOB_IN_AIRPORT">
+            <Original>Can't deploy it here, there is a FOB in this airport area.</Original>
+            <Portuguese>Não é possível instalar a FOB aqui, este aeroporto já tem uma instalada.</Portuguese>
+        </Key>
         <Key ID="STR_FOB_BUILDING_IMPOSSIBLE_GRADIENT">
             <Original>Can't deploy a new FOB here, find a more suitable terrain (flatter)</Original>
             <Portuguese>Não é possível instalar a FOB aqui, encontre um terreno mais adequado (mais plano).</Portuguese>
@@ -733,19 +734,8 @@
             <Japanese>水上に製造することはできません。</Japanese>
         </Key>
         <Key ID="STR_BUILD_ERROR_DISTANCE">
-            <Original>Can't build further than %1 meters away from the FOB.</Original>
-            <French>Impossible de construire à plus de %1 mètres de la FOB.</French>
-            <German>Kann nicht weiter als %1 Meter von der FOB entfernt sein.</German>
-            <Spanish>Imposible construir más lejos de %1 metros de la FOB</Spanish>
-            <Russian>Нельзя строить дальше чем в %1 метрах от FOB.</Russian>
-            <Italian>Impossibile costruire a più di %1 metri dalla FOB.</Italian>
-            <Chinesesimp>无法在超出前哨%1米外的区域建造。</Chinesesimp>
-            <Chinese>無法在距離前線基地 %1 公尺外的區域建造</Chinese>
-            <Turkish>FOB'den %1 metre uzakta inşaat yapılamaz.</Turkish>
-            <Portuguese>Não é possível construir com mais de %1 metros de distância da FOB.</Portuguese>
-            <Korean>전초기지에서 %1 미터 이상 떨어지면 건설(설치)할 수 없습니다. </Korean>
-            <Czech>Nemůžeš stavět dál než %1 metrů od FOB.</Czech>
-            <Japanese>%1 メートル以上離れて製造することはできません。</Japanese>
+            <Original>Outside the build area</Original>
+            <Portuguese>Fora da área de construção</Portuguese>
         </Key>
         <Key ID="STR_FOB_BOX">
             <Original>FOB Container</Original>
@@ -1205,6 +1195,10 @@
             <Korean>취소</Korean>
             <Czech>Zrušit</Czech>
             <Japanese>取り消し</Japanese>
+        </Key>
+        <Key ID="STR_REPAIR_STRUCTURE">
+            <Original>-- REPAIR</Original>
+            <Portuguese>-- REPARAR</Portuguese>
         </Key>
         <Key ID="STR_NOTIFICATION_SECTORCAPTURED_TITLE">
             <Original>SECTOR CAPTURED</Original>
@@ -2450,6 +2444,14 @@
         <Key ID="STR_NEED_FLIGHT_CONTROL">
             <Original>This FOB requires the Flight Control building (available in the support tab).</Original>
             <Portuguese>Essa FOB necessita uma Torre de Controle (disponível na aba de suporte).</Portuguese>
+        </Key>
+        <Key ID="STR_NEED_HELI_SLOTS">
+            <Original>More helicopter slots required (available in the support tab).</Original>
+            <Portuguese>É necessário mais espaços para helicópteros (disponível na aba de suporte).</Portuguese>
+        </Key>
+        <Key ID="STR_NEED_PLANE_SLOTS">
+            <Original>More plane slots required (available in the support tab).</Original>
+            <Portuguese>É necessário mais espaços para aviões (disponível na aba de suporte).</Portuguese>
         </Key>
         <Key ID="STR_NEED_BARRACKS">
             <Original>This FOB requires at least 2 Barracks (available in the support tab).</Original>

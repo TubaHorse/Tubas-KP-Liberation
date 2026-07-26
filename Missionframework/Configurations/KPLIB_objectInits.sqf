@@ -151,7 +151,7 @@ KPLIB_objectInits = [
         {_this setVariable ["ace_isRepairFacility", 1, true];}
     ],
     [
-        vehicle_repair_sources,
+        KPLIB_vehicleRepairSources,
         {_this setVariable ["ace_isRepairVehicle", 1, true];}
     ],
     [
@@ -585,7 +585,7 @@ KPLIB_objectInits = [
         },
         true
     ],
-
+    
     // Trolley missiles carry actions 
     [
         ["Land_Missle_Trolley_02_F", "Land_Bomb_Trolley_01_F"],
@@ -628,5 +628,33 @@ KPLIB_objectInits = [
             };
         },
         true
+    ],
+
+    // Add airport build action
+    [
+        KPLIB_vehicleRepairSources,
+        {
+            [{
+                time > 60
+            }, {
+                params["_repairSource"];
+
+                ["KPLIB_addBuildAirportAction", _repairSource] call CBA_fnc_globalEventJIP;
+            }, [_this]] call CBA_fnc_waitUntilAndExecute;
+        }
+    ],
+
+    // Add repair action
+    [
+        KPLIB_b_deco_classes,
+        {
+            [{
+                time > 60
+            }, {
+                params["_object"];
+
+                ["KPLIB_addRepairAction", _object] call CBA_fnc_globalEventJIP;
+            }, [_this]] call CBA_fnc_waitUntilAndExecute;
+        }
     ]
 ];

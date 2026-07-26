@@ -2,7 +2,7 @@
     File: fn_addActionsFob.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-04-13
-    Last Update: 2026-07-17
+    Last Update: 2026-07-24
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -79,6 +79,16 @@ if ((typeOf _obj) in [KPLIB_b_fobBox, KPLIB_b_fobTruck]) exitWith {
             if (_index >= 0) exitWith {
                 private _distSector = _target distance (markerPos ([KPLIB_distance_sector, getPosATL _target] call KPLIB_fnc_getNearestSector));
                 [format [localize "STR_FOB_BUILDING_IMPOSSIBLE_SECTOR", floor KPLIB_distance_sector, floor _distSector], true, 3] call KPLIB_fnc_hint;
+            };
+
+            // Check if there is a FOB in airport area
+            private _inAirport = KPLIB_sectors_airport findIf {_target inArea _x};
+            private _fobInAirport = if (_inAirport >= 0) then {
+                private _airportArea = KPLIB_sectors_airport # _index;
+                KPLIB_player_fobs findIf {_x inArea _airportArea} >= 0 
+            };
+            if (_fobInAirport) exitWith {
+                [localize "STR_FOB_BUILDING_IMPOSSIBLE_FOB_IN_AIRPORT", true, 3] call KPLIB_fnc_hint;
             };
 
             // Check if terrain is relatively flat

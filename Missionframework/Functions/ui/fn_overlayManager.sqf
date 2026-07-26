@@ -4,7 +4,7 @@
     Author: -
     Modified by PiG13BR - https://github.com/PiG13BR
     Date: 12/06/2026
-    Last Update: 12/06/2026
+    Last Update: 23/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -62,6 +62,14 @@ while {alive _player} do {
         case (_basePos in KPLIB_player_outposts) : {
             _currentFob = ["", ["Out", [_basePos] call KPLIB_fnc_getBaseName] joinString " "] select (_baseDist < KPLIB_range_outpost);
         };
+    };
+
+    if (_currentFob == "") then {
+        private _index = KPLIB_sectors_airport findIf {(_basePos inArea _x) && (_player inArea _x)};
+        if (_index >= 0) then {
+            private _airportMarker = KPLIB_sectors_airport # _index;
+            _currentFob = markerText _airportMarker;
+        }
     };
 
     private _showHud = (alive _player) && {!dialog && {isNull curatorCamera && {!cinematic_camera_started && !halojumping} && {!(_player getVariable ["KPLIB_playerOnRedeploy", false])}}};

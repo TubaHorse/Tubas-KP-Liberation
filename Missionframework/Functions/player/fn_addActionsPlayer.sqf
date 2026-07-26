@@ -2,7 +2,7 @@
     File: fn_addActionsPlayer.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-04-13
-    Last Update: 2026-07-12
+    Last Update: 2026-07-23
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -123,7 +123,7 @@ _player addAction [
 
 // Build (FOB)
 _player addAction [
-    ["<t color='#FFFF00'>", localize "STR_BUILD_ACTION", "</t><img size='2' image='Images\ui_build.paa'/>"] joinString "",
+    ["<t color='#FFFF00'>", localize "STR_BUILD_IN_FOB_ACTION", "</t><img size='2' image='Images\ui_build.paa'/>"] joinString "",
     {[] call KPLIB_fnc_build_createMenuRsc},
     nil,
     -750,
@@ -134,10 +134,10 @@ _player addAction [
         isNull (objectParent _originalTarget)
         && {alive _originalTarget}
         && {
-            private _buildPos = [getPos _originalTarget] call KPLIB_fnc_getNearestBuildPos;
+            private _buildPos = [getPosATL _originalTarget] call KPLIB_fnc_getNearestBuildPos;
             _buildPos params ["_posBuild", "_range"];
 
-            (_posBuild in KPLIB_player_fobs) && ((_posBuild distance2D _originalTarget) < (_range))
+            ((_posBuild in KPLIB_player_fobs) && ((_posBuild distance2D _originalTarget) < (_range)))
         }
         && {
             _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
@@ -156,7 +156,7 @@ _player addAction [
 
 // Build (Outpost)
 _player addAction [
-    ["<t color='#FFFF00'>", localize "STR_BUILD_ACTION", "</t><img size='2' image='Images\ui_build.paa'/>"] joinString "",
+    ["<t color='#FFFF00'>", localize "STR_BUILD_IN_OUTPOST_ACTION", "</t><img size='2' image='Images\ui_build.paa'/>"] joinString "",
     {[] call KPLIB_fnc_build_createMenuRsc},
     nil,
     -750,
@@ -167,7 +167,7 @@ _player addAction [
         isNull (objectParent _originalTarget)
         && {alive _originalTarget}
         && {
-            private _buildPos = [getPos _originalTarget] call KPLIB_fnc_getNearestBuildPos;
+            private _buildPos = [getPosATL _originalTarget] call KPLIB_fnc_getNearestBuildPos;
             _buildPos params ["_posBuild", "_range"];
 
             (_posBuild in KPLIB_player_outposts) && ((_posBuild distance2D _originalTarget) < (_range))
@@ -236,7 +236,7 @@ _player addAction [
         {
         params["_player"];
 
-        private _sector = [100, getPos _player] call KPLIB_fnc_getNearestSector;
+        private _sector = [100, getPosATL _player] call KPLIB_fnc_getNearestSector;
         if (_sector in KPLIB_production) then {
             ["KPLIB_factoryBuildFacility", [_sector, "SUPPLY", clientOwner]] call CBA_fnc_serverEvent
         };
@@ -266,7 +266,7 @@ _player addAction [
     {
         params["_player"];
 
-        private _sector = [100, getPos _player] call KPLIB_fnc_getNearestSector;
+        private _sector = [100, getPosATL _player] call KPLIB_fnc_getNearestSector;
         if (_sector in KPLIB_production) then {
             ["KPLIB_factoryBuildFacility", [_sector, "AMMO", clientOwner]] call CBA_fnc_serverEvent
         };
@@ -296,7 +296,7 @@ _player addAction [
     {
         params["_player"];
 
-        private _sector = [100, getPos _player] call KPLIB_fnc_getNearestSector;
+        private _sector = [100, getPosATL _player] call KPLIB_fnc_getNearestSector;
         if (_sector in KPLIB_production) then {
             ["KPLIB_factoryBuildFacility", [_sector, "FUEL", clientOwner]] call CBA_fnc_serverEvent
         };
@@ -417,7 +417,6 @@ _player addAction [
         && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])}
     }
 ];
-
 
 // Create small FOB clearance
 _player addAction [

@@ -204,7 +204,7 @@ KPLIB_aiResupplySources = [
 ];
 
 // Everything that can repair other vehicles.
-vehicle_repair_sources = [
+KPLIB_vehicleRepairSources = [
     "cwr3_b_uk_fv620_repair",
     "PRACS_M88",
     "PRACS_M250_Repair",

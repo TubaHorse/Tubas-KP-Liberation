@@ -17,5 +17,4 @@ class Do_Build
     class spawnPreplaceObject {};
     class spawnRepeatedObject {};
     class spawnSpheresArea {};
-    class spawnSpheresObject {};
 }

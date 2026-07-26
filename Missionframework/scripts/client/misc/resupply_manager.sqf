@@ -25,7 +25,7 @@ while { true } do {
         if ( effectiveCommander _veh == player ) then {
             if ( (speed _veh < _repair_speed) && (((getPosATL _veh) select 2) < _repair_altitude) ) then {
 
-                if ( count ( (getpos _veh) nearEntities [ vehicle_repair_sources , _resupply_dist] ) > 0 ) then {
+                if ( count ( (getpos _veh) nearEntities [ KPLIB_vehicleRepairSources , _resupply_dist] ) > 0 ) then {
                     if ( damage _veh > 0 )  then {
                         _repaired = true;
                         _average_damage = (damage _veh) - _repair_amount;

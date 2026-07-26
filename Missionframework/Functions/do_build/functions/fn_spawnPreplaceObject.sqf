@@ -37,6 +37,10 @@ private _simpleObject = [
 ] call BIS_fnc_createSimpleObject;
 if (!isNull _simpleObject) then {deleteVehicle _object; _object = _simpleObject;}; // If creation not fails, delete the preplaced object and replace _object variable 
 
+private _pos = getPosATL _object;
+_pos set [2,0];
+_object setPosATL _pos;
+
 // Clear cargo
 [_object] call KPLIB_fnc_clearCargo;
 
@@ -45,7 +49,11 @@ private _rotation = 0;
 private _yCoord = if (_object isKindOf "StaticWeapon") then {
     ceil(boundingBoxReal _object # 2) * 0.8; // Draw static weapons closer
 } else {
-    ceil(boundingBoxReal _object # 2) * 1.3;
+    if (_object distance2D _player > 10) then {
+        ceil(boundingBoxReal _object # 2);
+    } else {
+        ceil(boundingBoxReal _object # 2) * 1.3;
+    }
 };
 private _height = ((getPosATL _object) # 2);
 
@@ -75,14 +83,21 @@ if (_buildType == BUILDTYPE_FACTORY_STORAGE) then {
 };
 
 if ((_buildType != BUILDTYPE_FOB) && (_buildType != BUILDTYPE_OUTPOST)) then {
+    // If it's an airport area, replace the build range for the airport marker
+    private _inAirport = KPLIB_sectors_airport findIf {_buildCenterPos inArea _x};
+    _buildRange = if ((_inAirport >= 0) && ((_buildCenterPos distance2D _player) > _buildRange)) then {
+        KPLIB_sectors_airport # _inAirport;
+    };
+
     // Buildings
     [_buildCenterPos, _buildRange, _player] call KPLIB_fnc_spawnSpheresArea;
+
 } else {
     // Fob or outpost
     _buildCenterPos = getPosATL _player;
 };
 
-// Manage build each frame
+// Commit
 [_object, _player, _buildCenterPos, _buildRange] call KPLIB_fnc_buildEachFrame;
 
 private _hiddenSelection = getArray(configFile >> "CfgVehicles" >> _objectClass >> "hiddenSelections");
@@ -90,6 +105,3 @@ private _hiddenSelection = getArray(configFile >> "CfgVehicles" >> _objectClass 
     _object setObjectMaterial [_x, "\a3\data_f\default.rvmat"];
     _object setObjectTexture [_x, "#(rgb,8,8,3)color(0,1,0,1)"];
 }forEach _hiddenSelection;
-
-// Add build actions
-//[_object, _player] call KPLIB_fnc_addBuildActions;

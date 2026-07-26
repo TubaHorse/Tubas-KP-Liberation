@@ -5,7 +5,7 @@
     File: fn_manageBuildHUD.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 21/02/2026
-    Last update: 29/06/2026
+    Last update: 24/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -114,7 +114,7 @@ private _mouseZchanged = (findDisplay MISSION_IDD) displayAddEventHandler ["Mous
                 } else {
                     _height = (_height - 0.1) - (_boost * 0.2);
                 };
-            }
+            };
         };
         case (localNamespace getVariable ["KPLIB_BUILD_yMode", false]) : {
             if (_scroll > 0) then {
@@ -136,6 +136,10 @@ private _mouseZchanged = (findDisplay MISSION_IDD) displayAddEventHandler ["Mous
                 _rotation = ((_rotation - 5) - _boost) % 360;
             };
         }
+    };
+
+    if (localNamespace getVariable ["KPLIB_BUILD_snapToGround", false]) then {
+        _height = 0;
     };
 
     // Update variables
@@ -284,7 +288,7 @@ private _mouseButtonDownEH = (findDisplay MISSION_IDD) displayAddEventHandler ["
                 }
             };
             if !(_object getVariable ["KPLIB_BUILD_isObjectInArea", false]) then {
-                [format [localize "STR_BUILD_ERROR_DISTANCE", KPLIB_range_fob], true, 3] call KPLIB_fnc_hint;
+                [localize "STR_BUILD_ERROR_DISTANCE", true, 3] call KPLIB_fnc_hint;
             };
         };
 
@@ -339,8 +343,8 @@ private _mouseButtonDownEH = (findDisplay MISSION_IDD) displayAddEventHandler ["
             [_player, false] call KPLIB_fnc_buildCameraAssist;
             [_player] call KPLIB_fnc_deleteBuildVariables;
 
-            if !(isNil "KPLIB_doBuild_eachFrame") then {
-                removeMissionEventHandler ["EachFrame", KPLIB_doBuild_eachFrame]
+            if !(isNil "KPLIB_doBuild_pfhID") then {
+                [KPLIB_doBuild_pfhID] call CBA_fnc_removePerFrameHandler;
             };
 
             _player setVariable ["KPLIB_BUILD_isBuilding", false];

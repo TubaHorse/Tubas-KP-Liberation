@@ -2,7 +2,7 @@
     File: fn_spawnRepeatedObject.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 03/09/2025
-    Last update: 29/06/2026
+    Last update: 25/07/2026
 
     Description:
         Functions like fn_spawnPreplaceObject.sqf, but get some information about the copied object
@@ -65,19 +65,23 @@ localNamespace setVariable ["KPLIB_BUILD_heightMode", _heightMode];
 localNamespace setVariable ["KPLIB_BUILD_yMode", _yMode];
 
 // Create spheres
-//private _posFOB = [getPosATL _player] call KPLIB_fnc_getNearestFob;
 private _nearestBuildPos = [getPosATL _player] call KPLIB_fnc_getNearestBuildPos;
 
 _nearestBuildPos params ["_buildCenterPos", "_buildRange"];
+
+// If it's an airport area, replace the build range for the airport marker
+private _inAirport = KPLIB_sectors_airport findIf {_buildCenterPos inArea _x};
+_buildRange = if ((_inAirport >= 0) && ((_buildCenterPos distance2D _player) > _buildRange)) then {
+    KPLIB_sectors_airport # _inAirport;
+};
+
 [_buildCenterPos, _buildRange, _player] call KPLIB_fnc_spawnSpheresArea;
-//[_object, _posFOB, _player] call KPLIB_fnc_spawnSpheresObject;
-[{_this call KPLIB_fnc_buildEachFrame}, [_object, _player, _buildCenterPos]] call CBA_fnc_execNextFrame;
+
+// Commit
+[_object, _player, _buildCenterPos, _buildRange] call KPLIB_fnc_buildEachFrame;
 
 private _hiddenSelection = getArray(configFile >> "CfgVehicles" >> _objectClass >> "hiddenSelections");
 {
     _object setObjectMaterial [_x, "\a3\data_f\default.rvmat"];
     _object setObjectTexture [_x, "#(rgb,8,8,3)color(0,1,0,1)"];
 }forEach _hiddenSelection;
-
-// Add build actions
-//[_object, _player] call KPLIB_fnc_addBuildActions;

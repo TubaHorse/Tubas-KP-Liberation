@@ -2,7 +2,7 @@
     File: fn_getSaveData.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PIG13BR - https://github.com/PiG13BR 
     Date: 29/03/2020
-    Last Update: 17/07/2026
+    Last Update: 24/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -86,6 +86,7 @@ private ["_basePos", "_baseObjects", "_grpUnits", "_baseMines"];
 
     _airportObjects = (_airportPos nearObjects ((_range # 0) + (_range # 1))) select {
         !(_x in _allObjects) &&
+        !(_x in _allStorages) &&
         (_x inArea _airport) &&
         ((toLowerANSI (typeof _x)) in KPLIB_classnamesToSave) &&        // Exclude classnames which are not in the presets
         {alive _x} &&                                               // Exclude dead or broken objects
@@ -99,6 +100,7 @@ private ["_basePos", "_baseObjects", "_grpUnits", "_baseMines"];
     };
 
     _allObjects = _allObjects + (_airportObjects select {!((toLowerANSI (typeOf _x)) in KPLIB_storageBuildings)});
+    _allStorages = _allStorages + (_airportObjects select {_x getVariable ["KPLIB_fobStorage", false]});
 
     // Process all groups near in this Airport
     {

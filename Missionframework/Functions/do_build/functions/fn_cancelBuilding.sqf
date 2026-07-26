@@ -3,7 +3,7 @@
     File: fn_cancelBuilding.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 11/11/2025
-    Last update: 12/04/2026
+    Last update: 24/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -36,8 +36,8 @@ private _spheres = (localNamespace getVariable ["KPLIB_BUILD_areaSpheres", []]);
 deleteVehicle _object;
 
 // Remove EachFrame MEH
-if !(isNil "KPLIB_doBuild_eachFrame") then {
-    removeMissionEventHandler ["EachFrame", KPLIB_doBuild_eachFrame]
+if !(isNil "KPLIB_doBuild_pfhID") then {
+    [KPLIB_doBuild_pfhID] call CBA_fnc_removePerFrameHandler;
 };
 
 // Restore isBuilding variable

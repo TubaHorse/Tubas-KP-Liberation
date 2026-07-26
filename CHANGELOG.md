@@ -21,6 +21,7 @@
 * Added: Mission parameter to select night accessories for enemy and friendly AI.
 * Added: Build permissions menu.
 * Added: Enemy slingloading vehicles to the battlefield.
+* Added: Ability to build in airport area.
 * Tweaked: FOB build limit reduced. Each builded FOB will add costs to the next box/truck.
 * Tweaked: Added KPLIB tag to Armor/Air/Inf weights variables. Added more weight for Armor and Air kills.
 * Tweaked: FOB variable (KPLIB_sectors_fob to KPLIB_player_fobs).

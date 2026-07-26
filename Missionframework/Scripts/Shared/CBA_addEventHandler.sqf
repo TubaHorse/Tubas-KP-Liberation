@@ -78,7 +78,7 @@
         if (_radius < 4) then {_radius = 4};
 
         _this addAction [
-            "<t color='#FFFF00'>" + localize "STR_RECYCLE" + "</t> <img size='2' image='Images\ui_recycle.paa'/>", 
+            "<t color='#00af09'>" + localize "STR_RECYCLE" + "</t> <img size='2' image='Images\ui_recycle.paa'/>", 
             {
                 if ((_this # 0) getVariable ["KPLIB_preplaced", false]) exitWith {[localize "STR_PREPLACED_ERROR", true, 2] call KPLIB_fnc_hint;};
                 
@@ -90,28 +90,36 @@
             true, 
             "", 
             toString{
-                alive _originalTarget 
-                && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} 
-                && {isNull objectParent _originalTarget} 
+                (alive _originalTarget)
+                && {!(_this getVariable ['KPLIB_BUILD_isBuilding', false])} 
+                && {isNull (objectParent _this)}
                 && {[7, "BUILD"] call KPLIB_fnc_hasPermission} 
                 && {
                     KPLIB_player_fobs isNotEqualTo [] && 
                     {
-                        private _fobPos = [getPosATL _target] call KPLIB_fnc_getNearestFob;
+                        private _fobPos = [getPosATL _originalTarget] call KPLIB_fnc_getNearestFob;
 
-                        private _resources = [_fobPos] call KPLIB_fnc_getBaseResources;
-                        private _hasRecycle = _resources # 5;
-                        _hasRecycle
+                        private _airportIndex = KPLIB_sectors_airport findIf {_fobPos inArea _x};
+                        if (_airportIndex >= 0) then {
+                            private _airportArea = KPLIB_sectors_airport # _airportIndex;
+                            if (_originalTarget inArea _airportArea) then {
+                                true
+                            } else {
+                                (_fobPos distance2D _originalTarget < KPLIB_range_fob)
+                            };
+                        } else {
+                            (_fobPos distance2D _originalTarget < KPLIB_range_fob)
+                        };
                     }
                 } 
-                && {(({alive _x && [_x] call KPLIB_fnc_ace_isAwake} count (crew _target)) == 0) || {unitIsUAV _target}}
+                && {(({alive _x && [_x] call KPLIB_fnc_ace_isAwake} count (crew _originalTarget)) == 0) || {unitIsUAV _originalTarget}}
             },
             _radius
         ];
 
         // Add Delete Action for dead structures 
         _this addAction [
-            "<t color='#FFFF00'>" + localize "STR_BUILD_ACTION_DELETE" + "</t> <img size='2' image='Functions\do_build\icons\cross.paa'/>", 
+            "<t color='#ff0000'>" + localize "STR_BUILD_ACTION_DELETE" + "</t> <img size='2' image='Functions\do_build\icons\cross.paa'/>", 
             {
                 deleteVehicle (_this # 0);
             }, 
@@ -122,16 +130,57 @@
             "", 
             toString{
                 !alive _originalTarget 
-                && {!(_originalTarget getVariable ['KPLIB_BUILD_isBuilding', false])} 
-                && {isNull objectParent _originalTarget} 
+                && {!(_this getVariable ['KPLIB_BUILD_isBuilding', false])} 
+                && {isNull (objectParent _this)}
                 && {[7, "BUILD"] call KPLIB_fnc_hasPermission} 
-                && {KPLIB_player_fobs isNotEqualTo [] && {(_target distance2d ([] call KPLIB_fnc_getNearestFob)) < KPLIB_range_fob}}
+                && {KPLIB_player_fobs isNotEqualTo [] && 
+                    {
+                        private _fobPos = [getPosATL _originalTarget] call KPLIB_fnc_getNearestFob;
+
+                        private _airportIndex = KPLIB_sectors_airport findIf {_fobPos inArea _x};
+                        if (_airportIndex >= 0) then {
+                            private _airportArea = KPLIB_sectors_airport # _airportIndex;
+                            if (_originalTarget inArea _airportArea) then {
+                                true
+                            } else {
+                                (_fobPos distance2D _originalTarget < KPLIB_range_fob)
+                            };
+                        } else {
+                            (_fobPos distance2D _originalTarget < KPLIB_range_fob)
+                        };
+                    }
+                }
             },
             _radius
         ];
-    }
+    };
 }] call CBA_fnc_addEventHandler;
 
+// Add Repair action to builded decoration objects
+["KPLIB_addRepairAction", {
+    private _radius = ((boundingBoxReal _this) # 2) * 1.2; 
+    if (_radius < 4) then {_radius = 4};
+
+    _this addAction ["<t color='#FFFF00'>" + localize "STR_REPAIR_STRUCTURE" + "</t> <img size='2' image='\a3\ui_f\data\igui\cfg\actions\repair_ca.paa'/>", {
+        (_this # 0) setDamage 0
+    },  
+    "",  
+    -850,  
+    false,  
+    true,  
+    "",  
+    toString{ 
+        alive _originalTarget
+        && {(count (getAllHitPointsDamage _originalTarget) > 0) && {(((getAllHitPointsDamage _originalTarget) # 2) findIf {_x > 0}) >= 0}}
+        //&& ((["LandVehicle", "Air", "Static"] findIf {_originalTarget isKindOf _x}) < 0)  
+        && {!(_this getVariable ['KPLIB_BUILD_isBuilding', false])}  
+        && {isNull (objectParent _this)} 
+        && {[7, "BUILD"] call KPLIB_fnc_hasPermission}
+        && {(ASLToAGL (getPosASL _originalTarget)) nearEntities [KPLIB_vehicleRepairSources, 15] isNotEqualTo []}
+    }, 
+    _radius
+    ];
+}] call CBA_fnc_addEventHandler;
 
 // Add factory sector to the production list
 ["KPLIB_addFactoryProduction", {
@@ -220,7 +269,7 @@
     params[["_buildSelected", [], [[]]], ["_buildType", 1, [0]], ["_buildPos", [0,0,0], [[]]]];
 
     if (_buildSelected isEqualTo []) exitWith {};
-
+    
     // Get item cost
     private _classname = _buildSelected # 0;
     private _supplyPrice = _buildSelected # 1;
@@ -239,8 +288,18 @@
         if (_fuelPrice > 0) then {_fuelPrice = _fuelPrice + round(_fuelPrice * _priceAdd);};  
     };
 
+    [format["BUILD: %1, [%2,%3,%4]", _classname, _supplyPrice, _ammoPrice, _fuelPrice], "SUBTRACT RESOURCES"] call KPLIB_fnc_log;
+
+    // If build position is in an airport area, take resources from the nearest FOB only
+    private _inAirport = (KPLIB_sectors_airport findIf {_buildPos inArea _x});
+    
     // Get storage areas
-    private _storageAreas = (_buildPos nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    private _storageAreas = if (_inAirport >= 0) then {
+        private _airportArea = KPLIB_sectors_airport # _inAirport;
+        (vehicles inAreaArray _airportArea) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    } else {
+        (_buildPos nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    };
 
     [_supplyPrice, _ammoPrice, _fuelPrice, _classname, _buildType, _storageAreas] call KPLIB_fnc_subtractResources;
 }] call CBA_fnc_addEventHandler;
@@ -297,8 +356,16 @@
         if (_fuelPrice > 0) then {_fuelPrice = _fuelPrice + round(_fuelPrice * _priceAdd);};  
     };
 
+    // If build position is in an airport area, take resources from the nearest FOB only
+    private _inAirport = (KPLIB_sectors_airport findIf {_buildPos inArea _x});
+    
     // Get storage areas
-    private _storage_areas = (_buildPos nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    private _storageAreas = if (_inAirport >= 0) then {
+        private _airportArea = KPLIB_sectors_airport # _inAirport;
+        (vehicles inAreaArray _airportArea) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    } else {
+        (_buildPos nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    };
 
     private _storages = [];
     {
@@ -308,7 +375,7 @@
 
         // Pushback storage with space
         _storages pushBack _x;
-    } forEach _storage_areas;
+    } forEach _storageAreas;
 
     if (count _storages > 0) then {
         // Storages found and they are not full
@@ -521,4 +588,59 @@
             5
         ];
     }
+}] call CBA_fnc_addEventHandler;
+
+["KPLIB_addBuildAirportAction", {
+    _this addAction [
+        ["<t color='#FFFF00'>", localize "STR_BUILD_IN_AIRPORT_ACTION", "</t><img size='2' image='Images\ui_build.paa'/>"] joinString "",
+        {[] call KPLIB_fnc_build_createMenuRsc},
+        nil,
+        -750,
+        true,
+        true,
+        "",
+        toString {
+            !(isEngineOn _target)
+            && !(_this getVariable ['KPLIB_BUILD_isBuilding', false])
+            && isNull (objectParent _this)
+            && (alive _this)
+            && {
+                private _airportIndex = KPLIB_sectors_airport findIf {_target inArea _x};
+                if (_airportIndex < 0) exitWith {false};
+
+                private _airportArea = KPLIB_sectors_airport # _airportIndex;
+
+                private _fobPosIndex = KPLIB_player_fobs findIf {_x inArea _airportArea};
+                if (_fobPosIndex < 0) exitWith {false};
+
+                private _buildPos = [getPosATL _target] call KPLIB_fnc_getNearestBuildPos;
+                _buildPos params ["_posBuild", "_range"];
+
+                (_airportIndex >= 0) && (_fobPosIndex >= 0) && (_posBuild distance2D _target > _range)
+            }
+            && {
+                private _airportIndex = KPLIB_sectors_airport findIf {_this inArea _x};
+                if (_airportIndex < 0) exitWith {false};
+
+                private _airportArea = KPLIB_sectors_airport # _airportIndex;
+
+                private _fobPosIndex = KPLIB_player_fobs findIf {_x inArea _airportArea};
+                if (_fobPosIndex < 0) exitWith {false};
+
+                private _buildPos = [getPosATL _this] call KPLIB_fnc_getNearestBuildPos;
+                _buildPos params ["_posBuild", "_range"];
+
+                (_airportIndex >= 0) && (_fobPosIndex >= 0) && (_posBuild distance2D _this > _range)
+            }
+            && {
+                _this getVariable ['KPLIB_hasDirectAccess', false]
+                || {[3, "BUILD"] call KPLIB_fnc_hasPermission}
+                || {[4, "BUILD"] call KPLIB_fnc_hasPermission} 
+                || {[5, "BUILD"] call KPLIB_fnc_hasPermission}
+                || {[6, "BUILD"] call KPLIB_fnc_hasPermission}
+            }
+            && {isNull (_this getVariable ["KPLIB_carriedObject", objNull])}
+        },
+        15
+    ];
 }] call CBA_fnc_addEventHandler;

@@ -2,7 +2,7 @@
     File: fn_doRecycle.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 22/11/2025
-    Last Update: 13/07/2026
+    Last Update: 23/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -30,7 +30,18 @@ if (!(isnull _vehToRecycle) && {alive _vehToRecycle}) then {
         [localize "STR_NORECBUILDING_ERROR", true, 2] call KPLIB_fnc_hint;
     };
 
-    private _storage_areas = (([] call KPLIB_fnc_getNearestFob) nearobjects (KPLIB_range_fob * 1.2)) select {_x getVariable ["KPLIB_fobStorage", false]};
+    // If build position is in an airport area, take resources from the nearest FOB only
+    private _fobPos = [] call KPLIB_fnc_getNearestFob;
+    private _inAirport = (KPLIB_sectors_airport findIf {_fobPos inArea _x});
+    
+    // Get storage areas
+    private _storageAreas = if (_inAirport >= 0) then {
+        private _airportArea = KPLIB_sectors_airport # _inAirport;
+        (vehicles inAreaArray _airportArea) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    } else {
+        (_buildPos nearobjects (KPLIB_range_fob * 1.2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    };
+
     private _sum = (_price_s + _price_a + _price_f);
 
     private _storages = [];
@@ -42,7 +53,7 @@ if (!(isnull _vehToRecycle) && {alive _vehToRecycle}) then {
 
         // Pushback storage with space
         _storages pushBack _x;
-    } forEach _storage_areas;
+    } forEach _storageAreas;
 
     if (_storages isEqualTo [] && (_sum > 0)) then {
         [localize "STR_CANCEL_ERROR", true, 2] call KPLIB_fnc_hint;

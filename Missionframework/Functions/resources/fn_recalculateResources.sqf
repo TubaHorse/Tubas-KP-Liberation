@@ -2,7 +2,7 @@
     File: fn_recalculateResources.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 10/09/2025
-    Last update: 12/07/2026
+    Last update: 23/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -46,8 +46,13 @@ private _airport_buildings = [];
 {
     private _basePos = _x;
     if (_x in KPLIB_player_outposts) then {_range = KPLIB_range_outpost} else {_range = KPLIB_range_fob};
-    private _fob_buildings = _basePos nearobjects _range;
-    _fob_buildings = _fob_buildings select {alive _x};
+    private _base_buildings = _basePos nearobjects _range;
+    _base_buildings = _base_buildings select {alive _x};
+
+    private _hasMedBuilding = {(typeOf _x) in KPLIB_medical_facilities;} count _base_buildings;
+    if (_hasMedBuilding > 0) then {_hasMedBuilding = true;} else {_hasMedBuilding = false;};
+        private _hasRecBuilding = {(typeOf _x) == KPLIB_b_logiStation;} count _base_buildings;
+    if (_hasRecBuilding > 0) then {_hasRecBuilding = true;} else {_hasRecBuilding = false;};
 
     // Fob in airport area. Collect information about the airport area.
     private _inAirport = false;
@@ -55,23 +60,19 @@ private _airport_buildings = [];
         private _airportArea = _x;
         if (_basePos inArea _x) exitWith {
             _range = ((markerSize _x)#0 + (markerSize _x)#1);
-            _fob_buildings = _basePos nearobjects _range;
-            _fob_buildings = _fob_buildings select {_x inArea _airportArea};
+            _base_buildings = _basePos nearobjects _range;
+            _base_buildings = _base_buildings select {_x inArea _airportArea};
             _inAirport = true;
         };
     }forEach KPLIB_sectors_airport;
     
-    private _storage_areas = _fob_buildings select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
-    private _heliSlots = {KPLIB_type_heliPads find (typeOf _x) >= 0 && !(_x in _airport_buildings)} count _fob_buildings;
-    private _planeSlots = {KPLIB_type_hangars find (typeOf _x) >= 0 && !(_x in _airport_buildings)} count _fob_buildings;
-    private _hasAirBuilding = {(typeOf _x) == KPLIB_b_airControl;} count _fob_buildings;
+    private _storage_areas = _base_buildings select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    private _heliSlots = {KPLIB_type_heliPads find (typeOf _x) >= 0 && !(_x in _airport_buildings)} count _base_buildings;
+    private _planeSlots = {KPLIB_type_hangars find (typeOf _x) >= 0 && !(_x in _airport_buildings)} count _base_buildings;
+    private _hasAirBuilding = {(typeOf _x) == KPLIB_b_airControl;} count _base_buildings;
     if (_hasAirBuilding > 0) then {_hasAirBuilding = true;} else {_hasAirBuilding = false;};
-    private _hasRecBuilding = {(typeOf _x) == KPLIB_b_logiStation;} count _fob_buildings;
-    if (_hasRecBuilding > 0) then {_hasRecBuilding = true;} else {_hasRecBuilding = false;};
-    private _hasMedBuilding = {(typeOf _x) in KPLIB_medical_facilities;} count _fob_buildings;
-    if (_hasMedBuilding > 0) then {_hasMedBuilding = true;} else {_hasMedBuilding = false;};
     private _hasBarracks = false;
-    private _countBarracks = {(typeOf _x) in KPLIB_type_barracks;} count _fob_buildings;
+    private _countBarracks = {(typeOf _x) in KPLIB_type_barracks;} count _base_buildings;
     if (_countBarracks > 1) then {_hasBarracks = true;} else {_hasBarracks = false;};
 
     private _supplyValue = 0;

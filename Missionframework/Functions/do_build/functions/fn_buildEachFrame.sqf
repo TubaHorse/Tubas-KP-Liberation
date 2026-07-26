@@ -3,28 +3,34 @@
     File: fn_buildEachFrame.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 11/11/2025
-    Last update: 29/06/2026
+    Last update: 24/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
-        Create EachFrame MEH to check distance/collision for the preplaced object
+        Create CBA PFH to move the preplaced object around and check for distance and collision.
 
     Parameter(s)
         _object - preplaced object [OBJECT, defaults to objNull]
         _player - player who object is attached too [OBJECT, defaults to player]
-        _centerPos - Center building position [POSITION, defaults to [0,0,0]]
+        _centerPos - center building position [POSITION, defaults to [0,0,0]]
+        _buildRange - build range, can be a radius or an area [NUMBER or STRING, defaults to KPLIB_range_fob]
 
     Returns:
         -
 */
 
-params[["_object", objNull, [objnull]], ["_player", player, [objNull]], ["_centerPos", [0,0,0], []], ["_buildRange", KPLIB_range_fob, [0]]];
+params[
+    ["_object", objNull, [objnull]], 
+    ["_player", player, [objNull]], 
+    ["_centerPos", [0,0,0], [[]]], 
+    ["_buildRange", KPLIB_range_fob, [0, ""]]
+];
 
 if (isNull _object) exitWith {["Object is null"] call BIS_fnc_error};
 if (_centerPos isEqualTo [0,0,0]) exitWith {["Center position is [0,0,0]"] call BIS_fnc_error};
 
-if !(isNil "KPLIB_doBuild_eachFrame") then {
-    removeMissionEventHandler ["EachFrame", KPLIB_doBuild_eachFrame]
+if !(isNil "KPLIB_doBuild_pfhID") then {
+    [KPLIB_doBuild_pfhID] call CBA_fnc_removePerFrameHandler;
 };
 
 // Show and manage Build HUD
@@ -40,19 +46,19 @@ if (isNil "_previousWeapon") then {
     _player action ["SwitchWeapon", _player, _player, 299];
 };
 
-KPLIB_doBuild_eachFrame = addMissionEventHandler ["EachFrame", { 
-    
-    _thisArgs params ["_object", "_player", "_posCenter", "_maxDist", "_typeNumber"];
+KPLIB_doBuild_pfhID = [{
+    params["_args", "_handler"];
+    _args params ["_object", "_player", "_posCenter", "_rangeBuild", "_typeNumber"];
 
-    // Failsafe
-    if (!alive _player || !([_player] call KPLIB_fnc_ace_isAwake)) exitWith {
+        if (!alive _player || !([_player] call KPLIB_fnc_ace_isAwake)) exitWith {
         [_object] call KPLIB_fnc_cancelBuilding;
     };
 
     private _areaSpheres = localNamespace getVariable ["KPLIB_BUILD_areaSpheres", []];
     private _objectSize = (boundingBoxReal _object # 2) * 1.05;
+    if (_objectSize > 15) then {_objectSize = 15};
     private _nearObjects = nearestObjects [_object, ["AllVehicles", "Things", "ThingX", "Building", "Ruins"], _objectSize, false] - [_object, _player] - _areaSpheres; 
-    private _distanceFromFob = _object distance2D _posCenter;
+    private _distanceBuildCenter = _object distance2D _posCenter;
 
     // Object positioning
     private _basePos = positionCameraToWorld [0, 0, 5];
@@ -73,15 +79,13 @@ KPLIB_doBuild_eachFrame = addMissionEventHandler ["EachFrame", {
 
     if (_snap) then {
         // Snap into surface
-        if (((getPosATL _object) # 2) < 0) then {_height = 0;};
-
-        // Snap position
-        private _posATL = _player modelToWorld [0, _yCoord, 0];
-        _posATL set [2,0];
+        private _posATL = _player modelToWorld [0,_yCoord, 0];
+        _posATL set [2, 0];
 
         _object setPosATL _posATL;
+
         private _vector = localNamespace getVariable ["KPLIB_BUILD_vectorSurface", false];
-        private _vectorUp = if (_vector) then {[0,0,1]} else {(surfaceNormal _posATL)};
+        private _vectorUp = if (_vector) then {[0,0,1]} else {(surfaceNormal position _object)};
         _object setVectorUp _vectorUp;
     } else {
         _object setPosATL _worldPos;
@@ -106,9 +110,14 @@ KPLIB_doBuild_eachFrame = addMissionEventHandler ["EachFrame", {
     };
 
     // Check if the building can be placed and set a variable to it
-    if (((_distanceFromFob > _maxDist) && {_typeNumber != BUILDTYPE_FOB}) || {((surfaceIsWater (getPosASL _object))) && !((typeOf _object) in boats_names)} || {(_nearObjects isNotEqualTo []) && !(toLowerANSI(typeOf _object) in KPLIB_collisionIgnoreObjects)}) then {
+    private _distanceCheck = if (_rangeBuild isEqualType "") then {
+        _object inArea _rangeBuild;
+    } else {
+        (_distanceBuildCenter < _rangeBuild);
+    };
+    if ((!_distanceCheck && {_typeNumber != BUILDTYPE_FOB} && {_typeNumber != BUILDTYPE_OUTPOST}) || {((surfaceIsWater (getPosASL _object))) && !((typeOf _object) in boats_names)} || {(_nearObjects isNotEqualTo []) && !(toLowerANSI(typeOf _object) in KPLIB_collisionIgnoreObjects)}) then {
         _object setVariable ["KPLIB_BUILD_canBuild", false]; // Change value
-        if ((_distanceFromFob > _maxDist) && {_typeNumber != BUILDTYPE_FOB}) then {_object setVariable ["KPLIB_BUILD_isObjectInArea", false]} else {_object setVariable ["KPLIB_BUILD_isObjectInArea", true]}; // Change value
+        if (!_distanceCheck && {_typeNumber != BUILDTYPE_FOB} && {_typeNumber != BUILDTYPE_OUTPOST}) then {_object setVariable ["KPLIB_BUILD_isObjectInArea", false]} else {_object setVariable ["KPLIB_BUILD_isObjectInArea", true]}; // Change value
 
         //_object hideObject true; // Hide object
         drawIcon3D
@@ -139,4 +148,4 @@ KPLIB_doBuild_eachFrame = addMissionEventHandler ["EachFrame", {
         }forEach _hiddenSelection;
         //if (isObjectHidden _object) then {_object hideObject false}; // Show object
     };
-}, [_object, _player, _centerPos, _buildRange, _buildType]];
+}, 0, [_object, _player, _centerPos, _buildRange, _buildType]] call CBA_fnc_addPerFrameHandler;
