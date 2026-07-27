@@ -2,7 +2,7 @@
     File: fn_spawnStaticWeapon.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 22/11/2024 
-    Last Update: 31/05/2026
+    Last Update: 26/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -28,7 +28,7 @@ if (isNull _crewGrp) then {
     [_weapon, KPLIB_side_enemy, _crewGrp] call KPLIB_fnc_createCrew;
 };
 
-_crewArray pushBack (units _crewGrp);
+_crewArray append (units _crewGrp);
 
 _weapon allowdamage false;
 _weapon enableSimulation false;
@@ -48,19 +48,19 @@ _weapon enableWeaponDisassembly false;
     // Make sure it watches the right direction once spawned, to avoid trying to look at the leader
     [{_this doWatch (_this getPos [300, (getDir _this)]);}, _x, 10] call CBA_fnc_waitAndExecute;
     
-
 	_x addMPEventHandler ["MPKilled", {
 		params ["_unit", "_killer"];
 		["KPLIB_manageKills", [_unit, _killer]] call CBA_fnc_localEvent;
         if (_unit == gunner (vehicle _unit)) then {
             if (count (crew (vehicle _unit)) > 0) then {
-                _nextGunner = selectRandom (crew (vehicle _unit));
+                _nextGunner = selectRandom ((crew (vehicle _unit)) select {alive _x});
+                moveOut _unit;
                 moveOut _nextGunner;
                 _nextGunner moveInGunner (vehicle _unit);
             }
         };
 	}];
-} forEach _crewArray # 0;
+} forEach _crewArray;
 
 _weapon addMPEventHandler ["MPKilled", {
     params ["_unit", "_killer"];

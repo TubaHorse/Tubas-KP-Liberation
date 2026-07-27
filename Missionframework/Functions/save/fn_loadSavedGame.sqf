@@ -2,7 +2,7 @@
     File: fn_loadSavedGame.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 16/11/2025
-    Last Update: 24/07/2026
+    Last Update: 26/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -422,7 +422,10 @@ if (!isNil "_saveData") then {
             if ((unitIsUAV _object) || _hascrew) then {
                 [
                     {simulationEnabled _this}, 
-                    {[_this, KPLIB_side_player] call KPLIB_fnc_createCrew;}, 
+                    {
+                        private _crewGrp = [_this, KPLIB_side_player] call KPLIB_fnc_createCrew; 
+                        [_this, _crewGrp] call KPLIB_fnc_forceStaticCrew;
+                    }, 
                     _object, 
                     60, 
                     {["Couldn't add crew. Simulation not enabled on the object","WARNING"] call KPLIB_fnc_log}

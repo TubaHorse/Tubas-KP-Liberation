@@ -57,7 +57,8 @@ if (_objectClass in KPLIB_c_vehicles) then {
 
 // Add crew
 if ((unitIsUAV _objectSpawned) || _withCrew) then {
-    [_objectSpawned, KPLIB_side_player] call KPLIB_fnc_createCrew;
+    private _crewGrp = [_objectSpawned, KPLIB_side_player] call KPLIB_fnc_createCrew;
+    [_objectSpawned, _crewGrp] call KPLIB_fnc_forceStaticCrew;
 };
 
 // Get build type

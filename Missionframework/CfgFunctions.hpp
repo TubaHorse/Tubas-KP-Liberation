@@ -226,6 +226,7 @@ class KPLIB {
         class createCrate               {};
         class createCrew                {};
         class createManagedUnit         {};
+        class forceStaticCrew           {};
         class getOpforRoadSpawnPoint    {};
         class getOpforSpawnPoint        {};
         class getSquadComp              {};
