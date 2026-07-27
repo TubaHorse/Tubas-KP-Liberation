@@ -2,7 +2,7 @@
 	File: fn_fireAtCapturedSector.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
 	Date: 07/11/2025
-	Last Update: 11/07/2026
+	Last Update: 25/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -48,28 +48,32 @@ if (!isNil "KPLIB_o_artilleryUnits" && {KPLIB_o_artilleryUnits isNotEqualTo []})
                 _ammoType = [["HE", (10 + (random 2))], ["CLUSTER", (2 + (random 1))]] selectRandomWeighted [0.8, 0.2];
                 _ammoType params ["_shell", "_rounds"];
 
-                if (sunOrMoon == 0) then {
-                    private _artyReturns = [_targetPos, 10, "FLARE", 1] call KPLIB_fnc_fireArtillery;
-                    _artyReturns params ["_fired", "_artyElements"];
-                    if (_fired) then {
-                        private _eta = _artyElements select 1; // Gets the shell's ETA
-                        //sleep _eta + 5;
-                        [
-                            {
-                                _this params ["_targetPos", "_shell", "_rounds"];
-                                [_targetPos, KPLIB_range_sectorCapture, _shell, _rounds] call KPLIB_fnc_fireArtillery;
-                            }, 
-                            [_targetPos, _shell, _rounds], 
-                            _eta + 5
-                        ] call CBA_fnc_waitAndExecute;
+                private _pieces = count (KPLIB_o_artilleryUnits);
+
+                for "_i" from 1 to (_pieces) do {
+                    if (sunOrMoon < 1) then {
+                        private _ammoClass = KPLIB_artyHashMap_ammo get "KPLIB_arty_FLARE_round";
+                        if (_ammoClass != "") then {
+                            private _artyReturns = [_targetPos, 10, "FLARE", 1] call KPLIB_fnc_fireArtillery;
+                            _artyReturns params ["", "_artyElements"];
+                                private _eta = _artyElements select 1; // Gets the shell's ETA
+                                [
+                                    {
+                                        _this params ["_targetPos", "_shell", "_rounds"];
+                                        [_targetPos, KPLIB_range_sectorCapture, _shell, _rounds] call KPLIB_fnc_fireArtillery;
+                                    }, 
+                                    [_targetPos, _shell, _rounds], 
+                                    _eta + 5
+                                ] call CBA_fnc_waitAndExecute;
+                        } else {
+                            // No flare, fire directly
+                            [_targetPos, KPLIB_range_sectorCapture, _shell, _rounds] call KPLIB_fnc_fireArtillery;
+                        }		
                     } else {
-                        // No flare, fire directly
                         [_targetPos, KPLIB_range_sectorCapture, _shell, _rounds] call KPLIB_fnc_fireArtillery;
-                    }		
-                } else {
-                    [_targetPos, KPLIB_range_sectorCapture, _shell, _rounds] call KPLIB_fnc_fireArtillery;
+                    }
                 }
-            };
+            }
         }, 
         [_sectorToFire], 
         _delay

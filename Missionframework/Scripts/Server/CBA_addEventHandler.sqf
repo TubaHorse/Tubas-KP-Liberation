@@ -10,9 +10,9 @@
         if (_x getVariable ["KPLIB_isBattleGroup", false]) then {
             private _vehicles = [_x] call BIS_fnc_groupVehicles;
             if (count _vehicles > 0) then {
-                [_vehicles # 0, _this] call KPLIB_fnc_vehicleAttack;
+                {[_x] call KPLIB_fnc_despawnObject};
             } else {
-                [_x, _this] call KPLIB_fnc_infantryAttack;
+                [_x] call KPLIB_fnc_despawnGroup;
             }
         }
     } foreach (allGroups select {side _x == KPLIB_side_enemy});
