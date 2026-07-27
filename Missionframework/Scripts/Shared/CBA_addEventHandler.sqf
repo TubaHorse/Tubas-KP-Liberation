@@ -644,3 +644,33 @@
         15
     ];
 }] call CBA_fnc_addEventHandler;
+
+["KPLIB_addExplosionEH", {
+    // From wiki: It really needs to be added on every PC and JIP and will fire only where the explosion is originated.
+    // Expand with "AmmoExplodedNear" in 2.22
+    _this addEventHandler ["Explosion", { 
+        params ["_vehicle", "_damage", "_explosionSource"];
+        if !(isNull _explosionSource) then {
+            if (getNumber(configOf _explosionSource >> "artilleryLock") > 0) then {
+                // Valid hit
+                if (_explosionSource distance2D _vehicle < 20) then {
+                    // Check for storages
+                    if (_vehicle getVariable ["KPLIB_fobStorage", false]) then {
+                        private _resources = _vehicle getVariable ["KPLIB_storageResources", [0,0,0]];
+                        _resources params ["_supply", "_ammo", "_fuel"];
+                        private _amount = _supply + _ammo + _fuel;
+                        // Cause secondary explosion only if resources count in the storage are more than 500 in total
+                        if (_amount >= 500) then {
+                            private _ammo = createVehicle ["Bo_GBU12_LGB_MI10", _vehicle, [], 0, "CAN_COLLIDE"];
+                            triggerAmmo _ammo;
+                        };
+                    } else {
+                        private _ammo = createVehicle ["Bo_GBU12_LGB_MI10", _vehicle, [], 0, "CAN_COLLIDE"];
+                        triggerAmmo _ammo;
+                    };
+                    deleteVehicle _vehicle;
+                }        
+            }
+        }
+    }]
+}] call CBA_fnc_addEventHandler;

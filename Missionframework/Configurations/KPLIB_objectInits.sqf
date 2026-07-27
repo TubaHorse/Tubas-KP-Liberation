@@ -656,5 +656,13 @@ KPLIB_objectInits = [
                 ["KPLIB_addRepairAction", _object] call CBA_fnc_globalEventJIP;
             }, [_this]] call CBA_fnc_waitUntilAndExecute;
         }
+    ],
+
+    // Add explosion EH
+    [
+        [KPLIB_b_smallStorage, KPLIB_b_largeStorage, KPLIB_b_transStorage, KPLIB_b_supplyDump, "Land_Missle_Trolley_02_F", "Land_Bomb_Trolley_01_F"],
+        {
+            ["KPLIB_addExplosionEH", _this] call CBA_fnc_globalEventJIP
+        }
     ]
 ];
