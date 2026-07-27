@@ -1,8 +1,9 @@
+#include "..\defines.hpp"
 /*
     File: fn_build_isItemAffordable.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 10/11/2025
-    Last Update: 13/06/2026
+    Last Update: 23/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -55,6 +56,8 @@ private _nearBase = [] call KPLIB_fnc_getNearestPlayerBase;
 private _baseData = ([_nearBase] call KPLIB_fnc_getBaseResources);
 (_baseData) params ["", "_fobSupplies", "_fobAmmo", "_fobFuel", "_hasAir", "_hasRecycling", "_hasMedical", "_hasBarracks", "_inAirport"];
 
+private _buildType = (localNamespace getVariable ["KPLIB_Build_type", 1]);
+
 private _affordable = false;
 
 if (((_supplies == 0 ) || (_supplies <= _fobSupplies)) && ((_ammo == 0 ) || (_ammo <= _fobAmmo)) && ((_fuel == 0 ) || (_fuel <= _fobFuel))) then {
@@ -62,7 +65,7 @@ if (((_supplies == 0 ) || (_supplies <= _fobSupplies)) && ((_ammo == 0 ) || (_am
     if (_itemClass isEqualType []) then {
         _affordable = true
     } else {
-        // Others
+        // To build air vehicles
         if (_itemClass in KPLIB_b_air_classes && !([_itemToCheck # 0] call KPLIB_fnc_isClassUAV)) then {
             if (_hasAir && (((_itemClass isKindOf "Helicopter") && (KPLIB_heli_count < KPLIB_heli_slots)) || ((_itemClass isKindOf "Plane") && (KPLIB_plane_count < KPLIB_plane_slots)))) then {
                 // Check there are airport sectors in this mission
@@ -75,11 +78,23 @@ if (((_supplies == 0 ) || (_supplies <= _fobSupplies)) && ((_ammo == 0 ) || (_am
                 };
             };
         } else {
-            if (!(_itemClass in KPLIB_airSlots) || ((_itemClass in KPLIB_airSlots) && _hasAir)) then {
-                _affordable = true;
-            };
-        };
-    };
+            if !(_itemClass in KPLIB_b_air_classes) then {
+                // To build vehicles outside support label
+                if (_buildType != BUILDTYPE_SUPPORT && ((_itemClass isKindOf "LandVehicle") || (_itemClass isKindOf "Ship"))) then {
+                    if (_hasRecycling) then {
+                        _affordable = true;
+                    };
+                } else {
+                    _affordable = true;
+                };
+
+            } else {
+                if ((_itemClass in KPLIB_b_air_classes) && _hasAir) then {
+                    _affordable = true;
+                }
+            }
+        }
+    }
 };
 
 _affordable

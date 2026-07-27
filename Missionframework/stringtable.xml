@@ -1919,6 +1919,22 @@
             <Czech>Násobitel zdrojů</Czech>
             <Japanese>資源の倍率</Japanese>
         </Key>
+        <Key ID="STR_PARAMS_BUILDED_ASSETS_STATUS">
+            <Original>Builded assets spawn status (except for support vehicles)</Original>
+            <Portuguese>Status dos ativos ao construir (exceto para veículos de suporte)</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_BUILDED_ASSETS_STATUS_PARAM1">
+            <Original>Low fuel (10%)</Original>
+            <Portuguese>Pouco combustível (10%)</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_BUILDED_ASSETS_STATUS_PARAM2">
+            <Original>No ammo</Original>
+            <Portuguese>Sem munição</Portuguese>
+        </Key>
+        <Key ID="STR_PARAMS_BUILDED_ASSETS_STATUS_PARAM3">
+            <Original>Low fuel (10%) and no ammo</Original>
+            <Portuguese>Pouco combustível (10%) e sem munição</Portuguese>
+        </Key>
         <Key ID="STR_PARAMS_FATIGUE">
             <Original>Stamina</Original>
             <French>Stamina</French>
@@ -2452,6 +2468,10 @@
         <Key ID="STR_NEED_PLANE_SLOTS">
             <Original>More plane slots required (available in the support tab).</Original>
             <Portuguese>É necessário mais espaços para aviões (disponível na aba de suporte).</Portuguese>
+        </Key>
+        <Key ID="STR_NEED_SALVAGE_DEPOT">
+            <Original>Salvage depot required (available in the support tab).</Original>
+            <Portuguese>É necessário o centro de desmanche de veículos (disponível na aba de suporte).</Portuguese>
         </Key>
         <Key ID="STR_NEED_BARRACKS">
             <Original>This FOB requires at least 2 Barracks (available in the support tab).</Original>

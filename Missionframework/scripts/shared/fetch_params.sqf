@@ -65,7 +65,7 @@ if(isServer) then {
     GET_PARAM_BOOL(KPLIB_param_civSpawnVehicles, "CiviliansVeh", 1);
     GET_PARAM_BOOL(KPLIB_param_firstFobBuilt, "FirstFob", 0);
     GET_PARAM_BOOL(KPLIB_param_fobVehicle, "FirstFobVehicle", 0);
-    GET_PARAM(KPLIB_param_maxFobs, "MaximumFobs", 26);
+    GET_PARAM(KPLIB_param_maxFobs, "MaximumFobs", 3);
     GET_PARAM(KPLIB_param_maxSquadSize, "MaxSquadSize", 10);
     GET_PARAM_BOOL(KPLIB_param_bluforDefenders, "BluforDefenders", 1);
     GET_PARAM_BOOL(KPLIB_param_autodanger, "Autodanger", 0);
@@ -74,6 +74,7 @@ if(isServer) then {
     GET_PARAM(KPLIB_param_weather, "Weather", 3);
     GET_PARAM_BOOL(KPLIB_param_vanillaFog, "VanillaFog", 1);
     GET_PARAM(KPLIB_param_resourcesMulti, "ResourcesMultiplier", 3);
+    GET_PARAM(KPLIB_param_buildedAssetsStatus, "BuildedAssetsStatus", 3);
     GET_PARAM_BOOL(KPLIB_param_arsenalType, "ArsenalType", 0);
     GET_PARAM_BOOL(KPLIB_param_directArsenal, "DirectArsenal", 0);
     GET_PARAM_BOOL(KPLIB_param_playerMenu, "PlayerMenu", 1);
@@ -568,6 +569,15 @@ if (!isDedicated && hasInterface) then {
 
     _param = localize "STR_PARAMS_RESOURCESMULTIPLIER";
     _value = format ["x%1", KPLIB_param_resourcesMulti];
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+
+    _param = localize "STR_PARAMS_BUILDED_ASSETS_STATUS";
+    switch (KPLIB_param_buildedAssetsStatus) do {
+        case 1: {_value = localize "STR_PARAMS_BUILDED_ASSETS_STATUS_PARAM1"};
+        case 2: {_value = localize "STR_PARAMS_BUILDED_ASSETS_STATUS_PARAM2";};
+        case 3: {_value = localize "STR_PARAMS_BUILDED_ASSETS_STATUS_PARAM3";};
+        default {_value = localize "STR_PARAMS_DISABLED";};
+    };
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_PARAMS_ARSENAL";

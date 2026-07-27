@@ -120,6 +120,12 @@ class Params {
         texts[] = {"x0.25", "x0.5", "x0.75", "x1", "x1.25","x1.5","x2","x3"};
         default = 3;
     };
+    class BuildedAssetsStatus {
+        title = $STR_PARAMS_BUILDED_ASSETS_STATUS;
+        values[] = {0, 1, 2, 3};
+        texts[] = {$STR_PARAMS_DISABLED, $STR_PARAMS_BUILDED_ASSETS_STATUS_PARAM1, $STR_PARAMS_BUILDED_ASSETS_STATUS_PARAM2, $STR_PARAMS_BUILDED_ASSETS_STATUS_PARAM3};
+        default = 3;
+    };
     class ArsenalType {
         title = $STR_PARAMS_ARSENAL;
         values[] = {0, 1};

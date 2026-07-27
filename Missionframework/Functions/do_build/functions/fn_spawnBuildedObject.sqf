@@ -3,7 +3,7 @@
     File: fn_spawnBuildedObject.sqf
     Author: PiG13BR (https://github.com/PiG13BR), FernandimModelador https://github.com/FernandimModelador
     Date: 28/08/2025
-    Last update: 23/07/2026
+    Last update: 26/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -103,6 +103,56 @@ if(_buildType == BUILDTYPE_OUTPOST) then {
 // Factory storage builded
 if(_buildType == BUILDTYPE_FACTORY_STORAGE) then {
     ["KPLIB_factoryStorageBuilded", _objectSpawned] call CBA_fnc_serverEvent;
+};
+
+// Builded vehicles can spawn with little fuel and no ammo. Ignore support vehicles.
+if (((_objectClass isKindOf "LandVehicle") || (_objectClass isKindOf "Air") || (_objectClass isKindOf "StaticWeapon")) && (_buildType != BUILDTYPE_SUPPORT)) then {
+    switch (KPLIB_param_buildedAssetsStatus) do {
+        case 1 : {
+            // Fuel
+            [_objectSpawned, 0.1] remoteExec ["setFuel", 0, true];
+        };
+        case 2 : {
+            // Ammo
+            private _magazines = magazinesAllTurrets _objectSpawned;
+            {
+                _x params ["_magazineClass", "_nextTurret"];
+
+                if (getText(configFile >> "cfgMagazines" >> _magazineClass >> "pylonWeapon") != "") then {continue};
+
+                _objectSpawned removeMagazineTurret [_magazineClass, _nextTurret];
+                _objectSpawned addMagazineTurret [_magazineClass, _nextTurret, 0];
+            }forEach _magazines;
+
+            // Pylons
+            {
+                private _pylonIndex = _x # 0;
+                private _turret = _x # 2;
+                ["PAS_setPylonArmament", [_objectSpawned, _pylonIndex, "", _turret]] call CBA_fnc_globalEvent;
+            }forEach (getAllPylonsInfo _objectSpawned);
+        };
+        case 3 : {
+            // Fuel and ammo
+            [_objectSpawned, 0.1] remoteExec ["setFuel", 0, true];
+            private _magazines = magazinesAllTurrets _objectSpawned;
+            {
+                _x params ["_magazineClass", "_nextTurret"];
+
+                if (getText(configFile >> "cfgMagazines" >> _magazineClass >> "pylonWeapon") != "") then {continue};
+
+                _objectSpawned removeMagazineTurret [_magazineClass, _nextTurret];
+                _objectSpawned addMagazineTurret [_magazineClass, _nextTurret, 0];
+            }forEach _magazines;
+
+            // Pylons
+            {
+                private _pylonIndex = _x # 0;
+                private _turret = _x # 2;
+                ["PAS_setPylonArmament", [_objectSpawned, _pylonIndex, "", _turret]] call CBA_fnc_globalEvent;
+            }forEach (getAllPylonsInfo _objectSpawned);
+        };
+        default {};
+    };
 };
 
 _objectSpawned

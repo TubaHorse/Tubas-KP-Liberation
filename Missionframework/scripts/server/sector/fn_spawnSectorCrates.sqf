@@ -2,7 +2,7 @@
     File: fn_spawnSectorCrates.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-04-28
-    Last Update: 2023-05-11
+    Last Update: 2026-07-26
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -27,7 +27,26 @@ if (isNil "KPLIB_sectorCratesSpawned") then {KPLIB_sectorCratesSpawned = [];};
 if !(_sector in KPLIB_sectorCratesSpawned) then {
     KPLIB_sectorCratesSpawned pushBack _sector;
 
-    private _amount = (ceil (random 3)) * KPLIB_param_resourcesMulti;
+    private _crate = "";
+    private _min = 1;
+    // Spawn more resources on factories
+    if (_sector in KPLIB_sectors_factory) then {
+        (KPLIB_production_markers get _sector) params ["_canProdSupply", "_canProdAmmo", "_canProdFuel"];
+        _min = 4;
+        switch (true) do {
+            case _canProdSupply : {
+                _crate = KPLIB_b_crateSupply
+            };
+            case _canProdAmmo : {
+                _crate = KPLIB_b_crateAmmo
+            };
+            case _canProdFuel : {
+                _crate = KPLIB_b_crateFuel
+            };
+        }
+    };
+
+    private _amount = (_min + (ceil (random 4))) * KPLIB_param_resourcesMulti;
     private _spawnPos = [];
     private _j = 0;
 
@@ -38,8 +57,13 @@ if !(_sector in KPLIB_sectorCratesSpawned) then {
             if (_j isEqualTo 10) exitWith {_spawnPos = ((markerPos _sector) getPos [random 50, random 360]) findEmptyPosition [0, 40, KPLIB_b_crateAmmo];};
         };
         if !(_spawnPos isEqualTo []) then {
-            [selectRandom KPLIB_crates, 100, _spawnpos] call KPLIB_fnc_createCrate;
-            _spawnPos = [];
+            if (_crate != "") then {
+                [_crate, 100, _spawnpos] call KPLIB_fnc_createCrate;
+                _spawnPos = [];
+            } else {
+                [selectRandom KPLIB_crates, 100, _spawnpos] call KPLIB_fnc_createCrate;
+                _spawnPos = [];
+            }
         } else {
             ["No suitable spawn position found."] call BIS_fnc_error;
             [format ["Couldn't find spawn position for resource crate for sector %1", _sector], "WARNING"] call KPLIB_fnc_log;

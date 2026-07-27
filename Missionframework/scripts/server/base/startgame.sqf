@@ -59,7 +59,7 @@ if ((KPLIB_player_fobs select {_x isNotEqualTo [0,0,0]}) isEqualTo []) then {
     // Spawn start resource crates and attach them to parachutes
     KPLIB_startCrates = [];
     private _crate = objNull;
-    for "_i" from 1 to 9 do {
+    for "_i" from 1 to 12 do {
         _crate = createVehicle [
             (KPLIB_crates select (_i % 3)),
             [((KPLIB_player_fobs select 0) select 0), ((KPLIB_player_fobs select 0) select 1), 150],

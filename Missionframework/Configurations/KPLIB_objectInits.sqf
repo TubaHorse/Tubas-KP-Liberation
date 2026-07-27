@@ -630,7 +630,7 @@ KPLIB_objectInits = [
         true
     ],
 
-    // Add airport build action
+    // Add airport build action to repair sources
     [
         KPLIB_vehicleRepairSources,
         {
@@ -644,7 +644,7 @@ KPLIB_objectInits = [
         }
     ],
 
-    // Add repair action
+    // Add repair action (repair source nearby required)
     [
         KPLIB_b_deco_classes,
         {

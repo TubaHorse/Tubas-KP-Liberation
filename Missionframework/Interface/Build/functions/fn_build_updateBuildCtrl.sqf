@@ -127,6 +127,11 @@ if ((_buildType == BUILDTYPE_AERIAL) && _hasAir) then {
     };
 };
 
+if (!_hasRecycling && ((_buildType == BUILDTYPE_TRANSPORT) || (_buildType == BUILDTYPE_COMBATVEH))) then {
+    _buildButtonCtrl ctrlSetTooltip (localize "STR_NEED_SALVAGE_DEPOT");
+    _crewButtonCtrl ctrlSetTooltip (localize "STR_NEED_SALVAGE_DEPOT");
+};
+
 if ((_buildType == BUILDTYPE_INFANTRY || _buildType == BUILDTYPE_SQUAD) && !_affordable && !_hasBarracks) then {
     // Set tooltip to tell player that he needs to buy air control
     _buildButtonCtrl ctrlSetTooltip (localize "STR_NEED_BARRACKS");
