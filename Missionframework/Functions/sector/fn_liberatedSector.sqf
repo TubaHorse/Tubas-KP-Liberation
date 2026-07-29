@@ -91,7 +91,7 @@ sleep 1;
 sleep 1;
 
 // Update arsenal for unlocked items
-if ((KPLIB_sector_arsenalLink getOrDefault [_liberated_sector, []]) isNotEqualTo []) then {
+if (_liberated_sector in KPLIB_sector_arsenalLink) then {
     ["KPLIB_updateArsenal", _liberated_sector] call CBA_fnc_globalEvent;
 };
 

@@ -1,6 +1,13 @@
 [] call compile preprocessFileLineNumbers "Scripts\Client\misc\init_markers.sqf";
 
 [player] call KPLIB_fnc_initArsenal;
+// Unlock items
+{
+    if (_x in KPLIB_sector_arsenalLink) then {
+        ["KPLIB_updateArsenal", _x] call CBA_fnc_localEvent;
+    }
+}forEach KPLIB_sectors_player;
+
 [player] call KPLIB_fnc_addPlayerEH;
 
 spawn_camera = compile preprocessFileLineNumbers "Scripts\Client\spawn\spawn_camera.sqf";
