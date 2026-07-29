@@ -2,7 +2,7 @@
     File: fn_spawnRegularSquad.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2019-12-03
-    Last Update: 2026-06-12
+    Last Update: 2026-07-29
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -51,5 +51,11 @@ private _grp = createGroup [KPLIB_side_enemy, true];
         [_x, _spawnPos, _grp, "PRIVATE", 10] call KPLIB_fnc_createManagedUnit;
     };
 } forEach _classnames;
+
+// Add group unit killed to call support
+_grp addEventHandler ["UnitKilled", {
+    params ["_group", "_unit", "_killer"];
+    ["KPLIB_onUnitKilled", [_group, _unit, _killer]] call CBA_fnc_localEvent;
+}];
 
 _grp

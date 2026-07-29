@@ -1,8 +1,8 @@
 /*
     File: fn_getReadyArtillery.sqf
     Author: PiG13B - https://github.com/PiG13BR
-    Date: 2024-09-06
-    Last Update: 2024-12-11
+    Date: 06/09/2024
+    Last Update: 28/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -22,7 +22,7 @@ private _artillery_battery = [];
 {	
 	private _gunner = objNull;
 	_gunner = gunner _x;
-	if ((isNull _gunner) || {!alive (gunner _x)} || {!canFire _x}) then {continue};
+	if ((isNull _gunner) || {!alive (gunner _x)} || {!canFire _x} || {!simulationEnabled _x}) then {continue};
 	if (!(_gunner getVariable ["KPLIB_isArtilleryBusy", false])) then {
 		if ((getNumber(configFile >> "CfgVehicles" >> typeOf _x >> "artilleryScanner")) == 1) then {
 			if ((gunner _x) isEqualTo objNull) then {continue};

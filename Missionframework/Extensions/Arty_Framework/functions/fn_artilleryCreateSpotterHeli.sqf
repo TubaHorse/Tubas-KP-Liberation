@@ -2,7 +2,7 @@
     File: fn_artilleryCrateSpotterHeli.sqf
     Author: PiG13BR - https://github.com/PiG13BR
 	Date: 14/07/2026
-	Last Update: 16/07/2026
+	Last Update: 28/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -131,7 +131,7 @@ missionNamespace setVariable ["KPLIB_artilleryFob", true, true];
 	};
 
     private _time = serverTime;
-    while {alive _heli && (serverTime < (_time + (30 + (random [20,30,40]))))} do {
+    while {alive _heli && (serverTime < (_time + (15 + (random [10,15,20]))))} do {
         private _bluforEntities = [_targetPos, KPLIB_range_fob, KPLIB_side_player] call KPLIB_fnc_getNearbyEntities;
 
         {

@@ -2,7 +2,7 @@
 	File: fn_fireArtillery.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
 	Date: 04/09/2024 
-	Last Update: 19/07/2026 
+	Last Update: 29/07/2026 
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -120,38 +120,42 @@ private _eta = _artillery getArtilleryETA [ASLToAGL (ATLtoASL _targetPos), _ammo
 private _playersInArea = allPlayers select {_x distance2d _targetPos <= _areaSpread};
 ["KPLIB_artilleryFiring", [_gunnerArty, _targetPos, _eta, _areaSpread], _playersInArea] call CBA_fnc_targetEvent;
 
-// Check for MRLS
-if ((typeOf _artillery) in KPLIB_o_artilleryMRLS) then {
-	// Fire all its rounds
-	private _magsArray = magazinesAmmo _artillery;
-	_magsArray select {_x params ["_class"]; _class == _ammoClass};
-	_rounds = ((_magsArray # 0) # 1); // Get total magazine ammo amount
+// Fire artillery
+[_artillery, ASLToAGL (ATLtoASL _targetPos), _areaSpread, _ammoClass, floor(_rounds), _reloadTime, _gunnerArty] spawn {
+	params["_artillery", "_targetPos", "_areaSpread", "_ammoClass", "_rounds", "_reloadTime", "_gunnerArty"];
+	[format ["The enemy artillery is firing at pos %1 with class ammo %2. Rounds: %3",_targetPos, _ammoClass, _rounds], "FIRE MISSION"] call KPLIB_fnc_log;
+	
+	private _salvo = 1;
 
-	// Fire MRLS
-	if (local _artillery) then {
-		_artillery doArtilleryFire [ASLToAGL (ATLtoASL _targetPos), _ammoClass, _rounds];
-	} else {
-		[_artillery, [ASLToAGL (ATLtoASL _targetPos), _ammoClass, _rounds]] remoteExec ["doArtilleryFire", owner _artillery];
+	// Check for MRLS
+	private _isMLRS = (typeOf _artillery) in KPLIB_o_artilleryMRLS;
+	if (_isMLRS) then {
+		_areaSpread = _areaSpread * 1.5;
+		_salvo = (gunner _artillery) ammo (currentMuzzle (gunner _artillery));
+		private _coef = 3;
+		if (_salvo <= 8) then {_coef = 0.5;};
+		if (_salvo > 6 && _salvo <= 12) then {_coef = 0.4};
+		if (_salvo > 12 && _salvo <= 20) then {_coef = 0.3};
+		if (_salvo > 20) then {_coef = 0.2};
+		_rounds = floor(_salvo * _coef);
+		_salvo = _salvo / _rounds;
 	};
-} else {
-	// Fire artillery
-	[_artillery, ASLToAGL (ATLtoASL _targetPos), _areaSpread, _ammoClass, floor(_rounds), _reloadTime, _gunnerArty] spawn {
-		params["_artillery", "_targetPos", "_areaSpread", "_ammoClass", "_rounds", "_reloadTime", "_gunnerArty"];
-		[format ["The enemy artillery is firing at pos %1 with class ammo %2. Rounds: %3",_targetPos, _ammoClass, _rounds], "FIRE MISSION"] call KPLIB_fnc_log;
-		for "_i" from 1 to _rounds do {
-			private _randomPos = [[[_targetPos, _areaSpread]], [], {!surfaceIsWater _this}] call BIS_fnc_randomPos;
 
-			if (local _artillery) then {
-				_artillery doArtilleryFire [_randomPos, _ammoClass, 1];
-			} else {
-				[_artillery, [_randomPos, _ammoClass, 1]] remoteExec ["doArtilleryFire", owner _artillery];
-			};
+	// Fire rounds
+	for "_i" from 1 to _rounds do {
+		private _randomPos = [[[_targetPos, _areaSpread]], [], {!surfaceIsWater _this}] call BIS_fnc_randomPos;
 
-			sleep (5 + _reloadTime);
+		if (local _artillery) then {
+			_artillery doArtilleryFire [_randomPos, _ammoClass, _salvo];
+		} else {
+			[_artillery, [_randomPos, _ammoClass, _salvo]] remoteExec ["doArtilleryFire", owner _artillery];
 		};
-		// ---------------------------------------------------------- SET ARTILLERY TO NOT BUSY
-		_gunnerArty setVariable ["KPLIB_isArtilleryBusy", false, true];
+
+		if (_isMLRS) then {sleep 1.3;}; 
+		waitUntil {unitReady _artillery};
 	};
+	// ---------------------------------------------------------- SET ARTILLERY TO NOT BUSY
+	_gunnerArty setVariable ["KPLIB_isArtilleryBusy", false, true];
 };
 
 [true, [_artillery, _eta, _ammoClass, _rounds, _gunnerArty]]

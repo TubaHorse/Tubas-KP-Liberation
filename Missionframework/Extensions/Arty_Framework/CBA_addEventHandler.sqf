@@ -21,33 +21,41 @@ if (isServer && KPLIB_LAMBS) then {
 
 // Counter artillery
 ["KPLIB_counterArtillery", {
-    params ["_unit", "_unitPos", "_shellPos"];
-    [_unit, _unitPos, _shellPos] spawn KPLIB_fnc_counterArtillery;
+    params ["_unit", "_unitPos", "_typePos"];
+    [_unit, _unitPos, _typePos] spawn KPLIB_fnc_counterArtillery;
 }] call CBA_fnc_addEventHandler;
 
-if (isServer) then {
-    // Detect group unit kills
-    ["KPLIB_onUnitKilled", {
-        params ["_group", "_unit", "_killer"];
-        [_group, _unit, _killer] call KPLIB_fnc_onUnitKilled;
-    }] call CBA_fnc_addEventHandler;
+// Fire artillery
+["KPLIB_fireArtillery", {
+    _this call KPLIB_fnc_fireArtillery;
+}] call CBA_fnc_addEventHandler;
 
-    // Add CBA event to enemy groups
-    addMissionEventHandler ["EntityCreated", {
-        params ["_entity"];
+// Fire Flare and then strike
+["KPLIB_ArtilleryFireFlare", {
+    params["_targetPos", "_spread", "_type", "_rounds"];
 
-        if !(_entity isKindOf "CAManBase") exitWith {};
+    // Find flare magazine
+    private _ammoClass = KPLIB_artyHashMap_ammo get "KPLIB_arty_FLARE_round";
+    if (_ammoClass != "") then {
+        private _artyReturns = [_targetPos, 10, _ammoClass, 1] call KPLIB_fnc_fireArtillery;
+        _artyReturns params ["", "_artyElements"];
+            private _eta = _artyElements select 1; // Gets the shell's ETA
+            [
+                {
+                    _this params ["_targetPos", "_type", "_rounds"];
+                    [_targetPos, _spread, _type, _rounds] call KPLIB_fnc_fireArtillery;
+                }, 
+                [_targetPos, _spread, _type, _rounds], 
+                _eta + 5
+            ] call CBA_fnc_waitAndExecute;
+    } else {
+        // No flare, fire directly
+        [_targetPos, _spread, _type, _rounds] call KPLIB_fnc_fireArtillery;
+    };
+}] call CBA_fnc_addEventHandler;
 
-        private _group = group _entity;
-        private _vehicles = [_group, false] call BIS_fnc_groupVehicles;
-
-        // Add group EH "UnitKilled" for each enemy group that spawns in. This EH is responsable for enemy artillery support.
-        if ((side _group == KPLIB_side_enemy) && {_vehicles isEqualTo []} && {(typeOf (leader _group)) in [KPLIB_o_officer, KPLIB_o_squadLeader, KPLIB_o_teamLeader]}) then {
-
-            _group addEventHandler ["UnitKilled", {
-                params ["_group", "_unit", "_killer"];
-                ["KPLIB_onUnitKilled", [_group, _unit, _killer]] call CBA_fnc_localEvent;
-            }];
-        }
-    }];
-};
+// Detect group unit kills
+["KPLIB_onUnitKilled", {
+    params ["_group", "_unit", "_killer"];
+    [_group, _unit, _killer] call KPLIB_fnc_onUnitKilled;
+}] call CBA_fnc_addEventHandler;

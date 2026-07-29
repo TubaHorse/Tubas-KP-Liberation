@@ -49,6 +49,7 @@
 * Tweaked: Permissions interface and framework (now called General Permissions).
 * Tweaked: Auto-save loop starts after 3 minutes on mission launch to avoid issues with error presets.
 * Tweaked: Enemy SAM launchers on SAM sites will no longer fire multiple missiles at same time.
+* Tweaked: Artillery support calls from enemy infantry groups.
 * Removed: Enemy fighter notifications.
 * Removed: ACE Fortify compatibility.
 * Removed: Some KP Liberation script files no longer required for the current version.

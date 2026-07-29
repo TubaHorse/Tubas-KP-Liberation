@@ -2,7 +2,7 @@
     File: fn_spawnInfCargo.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 29/10/2025 
-    Last Update: 03/07/2026
+    Last Update: 29/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -63,5 +63,11 @@ if ((typeOf _vehicle) in KPLIB_o_paradropPlanes) then {
 {
     if (isNull objectParent _x) then {deleteVehicle _x};
 }forEach (units _group);
+
+// Add group unit killed to call support
+_group addEventHandler ["UnitKilled", {
+    params ["_group", "_unit", "_killer"];
+    ["KPLIB_onUnitKilled", [_group, _unit, _killer]] call CBA_fnc_localEvent;
+}];
 
 _group
