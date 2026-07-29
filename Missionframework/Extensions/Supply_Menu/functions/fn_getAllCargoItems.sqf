@@ -2,7 +2,7 @@
 	File: fn_getAllCargoItems.sqf
 	Author: PiG13BR (https://github.com/PiG13BR)
 	Date: 10/09/2025
-	Last update: 23/09/2025
+	Last update: 28/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -64,15 +64,13 @@ private _magazinesClassCount = [];
 private _itemCargo = getItemCargo _crate;
 private _itemsClassCount = [];
 {_itemsClassCount pushBack [_x, (_itemCargo # 1) # _forEachIndex]}forEach (_itemCargo # 0);
-// // diag_log format["All items cargo:%1", _itemCargo];
 
 // Weapon Filter
 _weapons = _weaponsClassCount select {
     _x params ["_weaponItems"];
     _weaponItems params ["_class"];
     if (_class isKindOf ["Rifle", configFile >> "cfgWeapons"] || _class isKindOf ["PistolCore", configFile >> "cfgWeapons"]) then {true} else {false}
-}; 
-// // diag_log format ["Weapons: %1", _weapons];
+};
 
 // Magazines filter
 _magazines = _magazinesClassCount select {
@@ -80,7 +78,6 @@ _magazines = _magazinesClassCount select {
     private _ammo = getText(configFile >> "cfgMagazines" >> _class >> "ammo");
     if (_ammo isKindOf "BulletCore" || {_ammo isKindOf "MissileCore"} || {_ammo isKindOf "RocketCore"} || {_ammo isKindOf "GrenadeCore"} || {_ammo isKindOf "SmokeShell"} || {(toLowerANSI _class) isEqualTo "laserbatteries"}) then {true} else {false}
 };
-// diag_log format ["Magazines: %1", _magazines];
 
 // Launcher Filter
 _launchers = _weaponsClassCount select {
@@ -88,14 +85,12 @@ _launchers = _weaponsClassCount select {
     _weaponItems params ["_class"];
     if (_class isKindOf ["LauncherCore", configFile >> "cfgWeapons"]) then {true} else {false}
 };
-// // diag_log format ["Launchers: %1", _launchers];
 
 // Accessories
 _acc = _itemsClassCount select {
     _x params ["_class"];
     if ("InventoryOpticsItem_Base_F" in ([configFile >> "cfgWeapons" >> _class >> "ItemInfo", true] call BIS_fnc_returnParents) || {"InventoryMuzzleItem_Base_F" in ([configFile >> "cfgWeapons" >> _class >> "ItemInfo", true] call BIS_fnc_returnParents)} || {"InventoryUnderItem_Base_F" in ([configFile >> "cfgWeapons" >> _class >> "ItemInfo", true] call BIS_fnc_returnParents)} || {"InventoryFlashLightItem_Base_F" in ([configFile >> "cfgWeapons" >> _class >> "ItemInfo", true] call BIS_fnc_returnParents)}) then {true} else {false}
 };
-// diag_log format ["Accessories: %1", _acc];
 
 // Throwables Filter "GrenadeHand"
 _throwables  = _magazinesClassCount select {
@@ -103,51 +98,43 @@ _throwables  = _magazinesClassCount select {
     private _ammo = getText(configFile >> "cfgMagazines" >> _class >> "ammo");
     if (_class isKindOf ["HandGrenade", configFile >> "cfgMagazines"] || {_ammo isEqualTo "GrenadeHand"} || {_ammo isKindOf "IRStrobeBase"}) then {true} else {false}
 };
-// diag_log format ["Throwables : %1", _throwables ];
 
 // Explosives/mines Filter
 _explosives = _magazinesClassCount select {
     _x params ["_class"];
     if (getText(configFile >> "cfgMagazines" >> _class >> "ammo") isKindOf "TimeBombCore") then {true} else {false}
 };
-// diag_log format ["Explosives: %1", _explosives];
 
 // Tools filter
 _tools = _itemsClassCount select {
     _x params ["_class"];
     if ((toLowerANSI _class) isEqualTo "toolkit" || {_class isKindOF ["DetectorCore", configFile >> "cfgWeapons"]} || {(getNumber(configFile >> "CfgWeapons" >> _class >> "ACE_isTool")) > 0}) then {true} else {false}
 };
-// diag_log format ["Tools: %1", _tools];
 
 // Medical filter
 _medical = _itemsClassCount select {
     _x params ["_class"];
     if ((toLowerANSI _class) in ["medikit", "firstaidkit"] || {getNumber(configFile >> "CfgWeapons" >> _class >> "ACE_isMedicalItem") > 0}) then {true} else {false}
 };
-// diag_log format ["Medical: %1", _medical];
 
 // Helmets Filter 
 _headgear = _itemsClassCount select {
     _x params ["_class"];
     if (_class isKindOf ["HelmetBase", configFile >> "cfgWeapons"] || {"HeadgearItem" in ([configFile >> "cfgWeapons" >> (_x # 0) >> "ItemInfo", true] call BIS_fnc_returnParents)} || {isClass(configFile >> "CfgGlasses" >> _class)} || {_class isKindOf ["NVGoggles", configFile >> "cfgWeapons"]}) then {true} else {false}
 };
-// diag_log format ["Helmets: %1", _headgear];
 
 // Uniforms container
 _uniformsContainer = (everyContainer _crate) select {(_x # 0) isKindOf ["Uniform_Base", configFile >> "cfgWeapons"] || {"UniformItem" in ([configFile >> "cfgWeapons" >> (_x # 0) >> "ItemInfo", true] call BIS_fnc_returnParents)}};
 _uniforms = [_uniformsContainer] call KPLIB_fnc_getContainerCargo;
-// diag_log format ["Uniforms: %1", _uniforms];
 
 // Vests container
 _vestsContainer = (everyContainer _crate) select {(_x # 0) isKindOf ["Vest_Camo_Base", configFile >> "cfgWeapons"] || {(_x # 0) isKindOf ["Vest_NoCamo_Base", configFile >> "cfgWeapons"]} || {(_x # 0) isKindOf ["V_Plain_base_F", configFile >> "cfgWeapons"]} || {"VestItem" in ([configFile >> "cfgWeapons" >> (_x # 0) >> "ItemInfo", true] call BIS_fnc_returnParents)}};
 _vests = [_vestsContainer] call KPLIB_fnc_getContainerCargo;
-// diag_log format ["Vests: %1", _vests];
 
 // Backpack
 // Get backpack container
 private _backpacksContainer = (everyContainer _crate) select {(_x # 0) isKindOf "Bag_Base"};
 _backpacks = [_backpacksContainer] call KPLIB_fnc_getContainerCargo;
-// diag_log format["Backpacks: %1", _backpacks];
 
 // Binos filter
 _binos = _weaponsClassCount select {
@@ -155,14 +142,12 @@ _binos = _weaponsClassCount select {
     _weaponItems params ["_class"];
     if (_class isKindOf ["Binocular", configFile >> "cfgWeapons"]) then {true} else {false}
 };
-// diag_log format ["Binoculars: %1", _binos];
 
 // Radios
 _radios = _itemsClassCount select {
     _x params ["_class"];
     if (_class isKindOf ["ItemRadio", configFile >> "cfgWeapons"] || {_class isKindOf ["ACRE_BaseRadio", configFile >> "cfgWeapons"]} || {(toLowerANSI _class) isEqualTo "itemradio"} || {(toLowerANSI _class) isEqualTo "itemcompass"} || {(toLowerANSI _class) isEqualTo "itemgps"} || {(toLowerANSI _class) isEqualTo "itemmap"} || {(toLowerANSI _class) isEqualTo "itemgps"} || {_class isKindOf ["UavTerminal_base", configFile >> "cfgWeapons"]}) then {true} else {false}
 };
-// diag_log format["Radios: %1", _radios];
 
 // Misc / Non-classified
 {
@@ -173,8 +158,5 @@ _radios = _itemsClassCount select {
     _itemsClassCount deleteAt (_itemsClassCount findIf {(_x # 0) == _class});
 }forEach (_uniforms  + _backpacks + _vests);
 _misc = _itemsClassCount + ((_magazinesClassCount) - _explosives - _throwables - _magazines); // What is left
-// diag_log format ["Misc: %1", _misc];
-
-// Optics/muzzles "InventoryOpticsItem_Base_F" in ([configFile >> "cfgWeapons" >> _class >> "ItemInfo", true] call BIS_fnc_returnParents) || {"InventoryMuzzleItem_Base_F" in ([configFile >> "cfgWeapons" >> _class >> "ItemInfo", true] call BIS_fnc_returnParents)} || {"InventoryUnderItem_Base_F" in ([configFile >> "cfgWeapons" >> _class >> "ItemInfo", true] call BIS_fnc_returnParents)} || {"InventoryFlashLightItem_Base_F" in ([configFile >> "cfgWeapons" >> _class >> "ItemInfo", true] call BIS_fnc_returnParents)}
 
 [_weapons, _magazines, _launchers, _acc, _throwables , _explosives, _tools, _medical, _headgear, _uniforms, _vests, _backpacks, _binos, _radios, _misc]

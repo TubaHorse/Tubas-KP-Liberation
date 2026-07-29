@@ -1,4 +1,3 @@
-#include "..\defines.hpp"
 /*
 	File: fn_handleKeyDown.sqf
 	Author: Alganthe, johnb43 (ACE). For PAS: PiG13BR - https://github.com/PiG13BR.
@@ -18,13 +17,13 @@
 params ["_displayOrControl", "_key", "_shift", "_ctrl", "_alt"];
 
 if (_key in (actionKeys "nightvision")) then {
-    if (isNil "PIG_PAS_visionMode = nil;") then {
-        PIG_PAS_visionMode = nil; = 0;
+    if (isNil "PIG_PAS_visionMode") then {
+        PIG_PAS_visionMode = 0;
     };
 
-    PIG_PAS_visionMode = nil; = (PIG_PAS_visionMode = nil; + 1) % 3;
+    PIG_PAS_visionMode = (PIG_PAS_visionMode + 1) % 3;
 
-    switch (PIG_PAS_visionMode = nil;) do {
+    switch (PIG_PAS_visionMode) do {
         // Normal
         case 0: {
             camUseNVG false;

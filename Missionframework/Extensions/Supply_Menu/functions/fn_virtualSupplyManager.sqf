@@ -37,6 +37,9 @@ publicVariable "PIG_SUPPLY_playersInVirtualSupply"; // Publish to all clients
 // Create GUI
 createDialog "PIG_RscSupplyMenu";
 
+// Update supply list for the client
+[] call KPLIB_fnc_lockDumpItems;
+
 // Get controls
 private _menuDisplay = (findDisplay IDD_SUPPLY_MENU);
 private _virtualSupplyLnb = (displayCtrl IDC_L_CONTAINER_LISTNBOX);

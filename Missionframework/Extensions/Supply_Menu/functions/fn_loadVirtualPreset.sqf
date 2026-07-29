@@ -49,7 +49,6 @@ private _misc = [];
 
     // Accessories
     if ("InventoryOpticsItem_Base_F" in ([configFile >> "cfgWeapons" >> _class >> "ItemInfo", true] call BIS_fnc_returnParents) || {"InventoryMuzzleItem_Base_F" in ([configFile >> "cfgWeapons" >> _class >> "ItemInfo", true] call BIS_fnc_returnParents)} || {"InventoryUnderItem_Base_F" in ([configFile >> "cfgWeapons" >> _class >> "ItemInfo", true] call BIS_fnc_returnParents)} || {"InventoryFlashLightItem_Base_F" in ([configFile >> "cfgWeapons" >> _class >> "ItemInfo", true] call BIS_fnc_returnParents)}) then {_acc pushBackUnique _x};
-    diag_log format ["Accessories: %1", _acc];
 
     // Throwables Filter
     if (isClass(configFile >> "cfgMagazines" >> _class)) then {
@@ -97,22 +96,5 @@ private _misc = [];
         _misc deleteAt (_misc find _x);
     }forEach _elements;
 }forEach [_weapons, _magazines, _launchers, _acc, _throwables , _explosives, _tools, _medical, _headgear, _uniforms, _vests, _backpacks, _binos, _radios];
-
-/*
-diag_log format ["Weapons: %1", _weapons];
-diag_log format ["Magazines: %1", _magazines];
-diag_log format ["Launchers: %1", _launchers];
-diag_log format ["Throwables : %1", _throwables];
-diag_log format ["Explosives: %1", _explosives];
-diag_log format ["Tools: %1", _tools];
-diag_log format ["Medical: %1", _medical];
-diag_log format ["Helmets: %1", _headgear];
-diag_log format ["Uniforms: %1", _uniforms];
-diag_log format ["Vests: %1", _vests];
-diag_log format["Backpacks: %1", _backpacks];
-diag_log format ["Binoculars: %1", _binos];
-diag_log format["Radios: %1", _radios];
-diag_log format ["Misc: %1", _misc];
-*/
 
 [_weapons, _magazines, _launchers, _acc, _throwables , _explosives, _tools, _medical, _headgear, _uniforms, _vests, _backpacks, _binos, _radios, _misc]

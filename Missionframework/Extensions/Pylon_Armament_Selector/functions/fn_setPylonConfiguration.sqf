@@ -23,6 +23,6 @@ if (!isNil "PIG_PAS_airLoadout") then {
 	PIG_PAS_airLoadout set [(_pylonIndex - 1), [_magazine, _turret]];
 };
 
-[_aircraft, _pylonIndex] call KPLIB_fnc_removeTurretWeapons;
+[_aircraft, _pylonIndex, _turret] call KPLIB_fnc_removeTurretWeapons;
 
 _aircraft setPylonLoadout [_pylonIndex, _magazine, false, _turret];

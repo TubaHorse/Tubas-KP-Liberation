@@ -3,7 +3,7 @@
 	File: fn_updateCrateItems.sqf
 	Author: PiG13BR (https://github.com/PiG13BR)
 	Date: 13/09/2025
-	Last update: 01/01/2026
+	Last update: 28/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -100,7 +100,6 @@ private _weaponIndex = 0;
     {
         private _item = _x # 0;
         private _amount = _x # 1;
-        //diag_log format["%1, %2", _item, _amount];
 
         private _name = "";
         private _picture = "";

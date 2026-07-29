@@ -2,7 +2,7 @@
 	File: fn_containersToVirtual.sqf
 	Author: PiG13BR (https://github.com/PiG13BR)
 	Date: 15/09/2025
-	Last update: 16/09/2025
+	Last update: 28/07/2026
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -27,13 +27,9 @@ private _item = _containterItems deleteAt 0;
 // Container class
 private _findIndex = KPLIB_supply_VirtualItems findif {(_x # 0) isEqualTo _item};
 if ((_findIndex == -1) && {_item isNotEqualTo ""}) then {
-    // pushBackUnique element
-    // diag_log format ["NEW ADD: %1", _item];
     KPLIB_supply_VirtualItems pushBackUnique [_item, 1];
 } else {
     // Already existis in preset, add it
-    // diag_log format ["ALREADY EXIST: %1", _item];
-
     private _itemAmount = (KPLIB_supply_VirtualItems # _findIndex) # 1;
     if (_itemAmount == -1) exitWith {}; // Exit on infinite amount
     private _itemAmountFinal = _itemAmount + _amount;
@@ -45,7 +41,6 @@ if ((_findIndex == -1) && {_item isNotEqualTo ""}) then {
     if (_x isEqualTo [[],[],[]]) exitWith {}; // Skip iteration on empty bag
     private _itemsArray = _x;
     {
-        // diag_log format ["CONTAINER ITEMS: %1", _x];
         private _classItem = _x # 0;
         private _amount = _x # 1;
 
@@ -55,8 +50,6 @@ if ((_findIndex == -1) && {_item isNotEqualTo ""}) then {
             private _opticItem = "";
             private _muzzleItem = "";
             {
-                // diag_log format ["WEAPON ACCESSORIES: %1", _x];
-
                 private _attachData = _x;
                 if (_x isEqualType []) then {
                     private _magClass = _attachData # 0;
@@ -64,13 +57,9 @@ if ((_findIndex == -1) && {_item isNotEqualTo ""}) then {
                     if (isClass(configFile >> "cfgMagazines" >> _magClass)) then {
                             private _findIndex = KPLIB_supply_VirtualItems findif {(_x # 0) isEqualTo _magClass};
                             if ((_findIndex == -1) && {_magClass isNotEqualTo ""}) then {
-                                // pushBackUnique element
-                                // diag_log format ["NEW ADD: %1", _magClass];
                                 KPLIB_supply_VirtualItems pushBackUnique [_magClass, 1];
                             } else {
                                 // Already existis in preset, add it
-                                // diag_log format ["ALREADY EXIST: %1", _magClass];
-
                                 private _itemAmount = (KPLIB_supply_VirtualItems # _findIndex) # 1;
                                 if (_itemAmount == -1) exitWith {}; // Exit on infinite amount
                                 private _itemAmountFinal = _itemAmount + _amount;
@@ -85,20 +74,15 @@ if ((_findIndex == -1) && {_item isNotEqualTo ""}) then {
                         _accItem = toLowerANSI(getText(configFile >> "CfgWeapons" >> _attachData >> "LinkedItems" >> "LinkedItemsAcc" >> "item"));
                         _opticItem = toLowerANSI(getText(configFile >> "CfgWeapons" >> _attachData >> "LinkedItems" >> "LinkedItemsOptic" >> "item"));
                         _muzzleItem = toLowerANSI(getText(configFile >> "CfgWeapons" >> _attachData >> "LinkedItems" >> "LinkedItemsMuzzle" >> "item"));
-                        // diag_log format ["ACC: %1, OPTIC: %2, MUZZLE: %3", _accItem, _opticItem, _muzzleItem];
                     };
 
-                    if (toLowerANSI(_attachData) isEqualTo _accItem || {toLowerANSI(_attachData) isEqualTo _opticItem} || {toLowerANSI(_attachData) isEqualTo _muzzleItem}) then {diag_log format ["SKIPED ACC: %1", _attachData]; continue}; // Ignore linked items already in the weapon
+                    if (toLowerANSI(_attachData) isEqualTo _accItem || {toLowerANSI(_attachData) isEqualTo _opticItem} || {toLowerANSI(_attachData) isEqualTo _muzzleItem}) then {continue}; // Ignore linked items already in the weapon
 
                     private _findIndex = KPLIB_supply_VirtualItems findif {(_x # 0) isEqualTo _attachData};
                     if (_findIndex == -1) then {
-                        // pushBackUnique element
-                        // diag_log format ["NEW ADD: %1", _attachData];
                         KPLIB_supply_VirtualItems pushBackUnique [_attachData, 1];
                     } else {
                         // Already existis in preset, add it
-                        // diag_log format ["ALREADY EXIST: %1", _attachData];
-
                         private _itemAmount = (KPLIB_supply_VirtualItems # _findIndex) # 1;
                         if (_itemAmount == -1) exitWith {}; // Exit on infinite amount
                         private _itemAmountFinal = _itemAmount + _amount;
@@ -110,13 +94,9 @@ if ((_findIndex == -1) && {_item isNotEqualTo ""}) then {
             // String
             private _findIndex = KPLIB_supply_VirtualItems findif {(_x # 0) isEqualTo _classItem};
             if (_findIndex == -1) then {
-                // pushBackUnique element
-                // diag_log format ["NEW ADD: %1", _classItem];
                 KPLIB_supply_VirtualItems pushBackUnique [_classItem, 1];
             } else {
                 // Already existis in preset, add it
-                // diag_log format ["ALREADY EXIST: %1", _classItem];
-
                 private _itemAmount = (KPLIB_supply_VirtualItems # _findIndex) # 1;
                 if (_itemAmount == -1) exitWith {}; // Exit on infinite amount
                 private _itemAmountFinal = _itemAmount + _amount;
