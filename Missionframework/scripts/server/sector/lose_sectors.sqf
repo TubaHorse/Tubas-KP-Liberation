@@ -10,14 +10,17 @@ private _ownership = KPLIB_side_player;
 
 while {KPLIB_endgame == 0} do {
     {
+        private _sectorRange = KPLIB_range_sectorCapture * 0.8;
         if (_x in KPLIB_sectors_airport) then {
-            _ownership = [markerpos _x, getMarkerSize _x] call KPLIB_fnc_getSectorOwnership;
+            _sectorRange = getMarkerSize _x;
+            _ownership = [markerpos _x, _sectorRange] call KPLIB_fnc_getSectorOwnership;
+
         } else {
             _ownership = [markerpos _x] call KPLIB_fnc_getSectorOwnership;
         };
         
         if (_ownership == KPLIB_side_enemy) then {
-            [_x] call attack_in_progress_sector;
+            [_x, _sectorRange] call attack_in_progress_sector;
         };
         sleep 0.5;
     } foreach (KPLIB_sectors_player - KPLIB_fillers_all);

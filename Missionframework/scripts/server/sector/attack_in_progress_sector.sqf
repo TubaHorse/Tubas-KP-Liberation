@@ -1,4 +1,4 @@
-params ["_sector"];
+params ["_sector", "_sectorRange"];
 
 private "_ownership";
 private "_grp";
@@ -91,13 +91,25 @@ if ( KPLIB_endgame == 0 ) then {
         ["KPLIB_removeFactoryProduction", _sector] call CBA_fnc_serverEvent;
     } else {
         [_sector, 3] remoteExec ["remote_call_sector"];
-        {
-            if (captive _x) then {
-                [_x, true] call KPLIB_fnc_setCapturable;
-            } else {
-                [_x] call KPLIB_fnc_setCapturable;
-            };
-        } foreach (((markerpos _sector) nearEntities ["CAManBase", KPLIB_range_sectorCapture * 0.8]) select {side (group _x) == KPLIB_side_enemy});
+        if (_sectorRange isEqualType []) then {
+            {
+                if ((count ([getPosATL _x, 25] call KPLIB_fnc_getNearbyPlayers)) < 1) then {continue};
+                if (captive _x) then {
+                    [_x, true] call KPLIB_fnc_setCapturable;
+                } else {
+                    [_x] call KPLIB_fnc_setCapturable;
+                }; 
+            } forEach ((allUnits select {side (group _x) == KPLIB_side_enemy}) inAreaArray _sector);
+        } else {
+            {
+                if ((count ([getPosATL _x, 25] call KPLIB_fnc_getNearbyPlayers)) < 1) then {continue};
+                if (captive _x) then {
+                    [_x, true] call KPLIB_fnc_setCapturable;
+                } else {
+                    [_x] call KPLIB_fnc_setCapturable;
+                };
+            } forEach ((markerPos _sector) nearEntities [["CAManBase"], _sectorRange * 1.2]);
+        };
     };
 };
 

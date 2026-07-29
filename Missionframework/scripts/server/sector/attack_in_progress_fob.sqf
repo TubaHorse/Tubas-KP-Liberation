@@ -66,6 +66,7 @@ if ( KPLIB_endgame == 0 ) then {
     } else {
         [_thispos, 3] remoteExec ["remote_call_fob"];
         {
+            if ((count ([getPosATL _x, 25] call KPLIB_fnc_getNearbyPlayers)) < 1) then {continue};
             if (captive _x) then {
                 [_x, true] call KPLIB_fnc_setCapturable;
             } else {

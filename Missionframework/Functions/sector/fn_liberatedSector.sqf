@@ -2,7 +2,7 @@
     File: fn_liberatedSector.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: -
-    Last Update: 2026-07-25
+    Last Update: 2026-07-29
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -84,21 +84,15 @@ publicVariable "asymm_blocked_sectors";
 
 ["KPLIB_sectorLiberated", _liberated_sector] call CBA_fnc_serverEvent;
 
-sleep 1;
-
-[] spawn KPLIB_fnc_doSave;
-
-sleep 1;
+[] call KPLIB_fnc_doSave;
 
 // Update arsenal for unlocked items
 if (_liberated_sector in KPLIB_sector_arsenalLink) then {
     ["KPLIB_updateArsenal", _liberated_sector] call CBA_fnc_globalEvent;
 };
 
-sleep 45;
-
 if (KPLIB_endgame == 0) then {
-    _liberated_sector call KPLIB_fnc_sectorCounterAttack;
+    [{_this call KPLIB_fnc_sectorCounterAttack;}, _liberated_sector, 45] call CBA_fnc_waitAndExecute;
 };
 
-[{_this call KPLIB_fnc_fireAtCapturedSector;}, _liberated_sector, 45] call CBA_fnc_waitAndExecute;
+[{_this call KPLIB_fnc_fireAtCapturedSector;}, _liberated_sector, 90] call CBA_fnc_waitAndExecute;

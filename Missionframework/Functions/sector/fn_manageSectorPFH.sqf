@@ -2,7 +2,7 @@
     File: fn_manageSectorPFH.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BBR
     Date: 02/12/2025
-    Last Update: 11/07/2026
+    Last Update: 29/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -51,22 +51,24 @@ private _maximum_additional_tickets = (KPLIB_param_maxDespawnDelay * 60 / SECTOR
     if (([_sectorPos, _localCaptureSize] call KPLIB_fnc_getSectorOwnership == KPLIB_side_player) && (KPLIB_endgame == 0)) then {
         // Liberate sector
         if (isServer) then {
-            [_sector] spawn KPLIB_fnc_liberatedSector;
+            [_sector] call KPLIB_fnc_liberatedSector;
         } else {
-            [_sector] remoteExec ["KPLIB_fnc_liberatedSector", 2];
+            [_sector] remoteExecCall ["KPLIB_fnc_liberatedSector", 2];
         };
 
-        // Prisonners
+        // Prisonners (only set them to be captured if there are players nearby)
         if (_localCaptureSize isEqualType []) then {
             {
+                if ((count ([getPosATL _x, 25] call KPLIB_fnc_getNearbyPlayers)) < 1) then {continue};
                 if (captive _x) then {
                     [_x, true] call KPLIB_fnc_setCapturable;
                 } else {
                     [_x] call KPLIB_fnc_setCapturable;
-                };
-            } forEach ((markerPos _sector) nearEntities [["CAManBase"], (_localCaptureSize # 0) + (_localCaptureSize # 1)]) select {_x inArea _sector};
+                }; 
+            } forEach ((allUnits select {side (group _x) == KPLIB_side_enemy}) inAreaArray _sector);
         } else {
             {
+                if ((count ([getPosATL _x, 25] call KPLIB_fnc_getNearbyPlayers)) < 1) then {continue};
                 if (captive _x) then {
                     [_x, true] call KPLIB_fnc_setCapturable;
                 } else {
