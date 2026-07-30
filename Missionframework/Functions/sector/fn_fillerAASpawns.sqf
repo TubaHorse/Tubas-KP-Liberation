@@ -2,7 +2,7 @@
     File: fn_fillerAASpawns.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 26/05/2026
-    Last Update: 30/05/2026
+    Last Update: 30/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -71,7 +71,7 @@ _sectorUnits pushback _vehicle;
     if !(unitReady _vehAA) then {continue};
 
 	private _watchDir = (_vehAA getVariable ["KPLIB__vehAAWatchDir", getDir _vehAA]) + 45;
-	_vehAA doWatch (_vehAA getPos [300, _watchDir]);
+	_vehAA doWatch ((_vehAA getPos [300, _watchDir]) vectorAdd [0,0,120]);
 	_vehAA setVariable ["KPLIB__vehAAWatchDir", _watchDir];
 }, 3, _vehicle] call CBA_fnc_addPerFrameHandler;
 

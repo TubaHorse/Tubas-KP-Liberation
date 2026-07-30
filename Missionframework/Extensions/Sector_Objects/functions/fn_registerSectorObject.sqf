@@ -2,7 +2,7 @@
     File: fn_registerSectorObject.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 20/12/2024
-    Last Update: 10/06/2026
+    Last Update: 30/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -17,12 +17,14 @@
             This is crucial to be able to spawn static weapon in those buildings once the sectors activates
         For default, map objects classnames that matches those in KPLIB_staticsConfigs.sqf will NOT spawn any static weapon.
         To enable MAP objects classnames that are under KPLIB_staticsConfigs.sqf to spawn static weapons, you can do it indirectly by placing a logic near of the object and in its init field:
-            _objects = nearestObjects [getPos this, ["classname_of_object"], 75, false];
-            {[_x] spawn KPLIB_fnc_registerSectorObject}forEach _objects;
+            _objects = nearestObjects [getPosATL this, ["classname_of_object"], 75, false];
+            {[_x, true, true] spawn KPLIB_fnc_registerSectorObject}forEach _objects;
+            deletevehicle this;
 
     Parameter(s):
         _object - object that will be registered [OBJECT, defaults to objNull]
-        _staticSpawn - Spawning of static weapons is enabled for this object? (provided if the object classname is refered in KPLIB_staticsConfigs.sqf) [BOOL, defaults to true]
+        _staticSpawn - spawning of static weapons is enabled for this object? (provided if the object classname is refered in KPLIB_staticsConfigs.sqf) [BOOL, defaults to true]
+        _terrainObject - object won't be deleted on init, or it's a terrain object [BOOL, defaults to false]
 
     Returns:
         -
@@ -33,12 +35,12 @@ if (!isServer) exitWith {};
 params [
     ["_object", objNull, [ObjNull]],
     ["_staticSpawn", true, [false]], // Only works for buildings or structures under KPLIB_staticsConfigs
-    ["_initDelete", true, [false]] // This will NOT work for map objects if it's TRUE
+    ["_terrainObject", false, [false]] // Set this to TRUE if you registering a TERRAIN OBJECT or if you don't want the object to be removed on init
 ];
 
 if (!canSuspend) exitWith {_this spawn KPLIB_fnc_registerSectorObject};
 
-waitUntil {!isNil "KPLIB_sectors_all" && !isNil "KPLIB_sectorObject_radius"};
+waitUntil {!isNil "KPLIB_sectors_all" && !isNil "KPLIB_sectorObject_radius" && !isNil "KPLIB_staticConfigs_classes"};
 
 // Find the nearest sector
 private _sector = [KPLIB_sectorObject_radius, getPosATL _object, (KPLIB_sectors_all + KPLIB_fillers_all)] call KPLIB_fnc_getNearestSector;
@@ -61,7 +63,7 @@ if (isNil "KPLIB_sectorMapObject_hashMap") then {
 if (!_staticSpawn) then {
     if !(typeOf _object in KPLIB_staticConfigs_classes) exitWith {};
     // Placeholder solution for disabling garrison. The objects will stay on the map. 
-    _initDelete = false; // ToDo: Find something to get reference of the spawned object to disable garrison. Array position doesn't work good.
+    _terrainObject = true; // ToDo: Find something to get reference of the spawned object to disable garrison. Array position doesn't work good.
     // Because a deleted object will give a <NULL-OBJECT> in the garrison array, save the position of the object instead to find a match later.
     private _objectPos = [round parseNumber (((getPosATL _object) # 0) toFixed 2), round parseNumber (((getPosATL _object) # 1) toFixed 2), round parseNumber (((getPosATL _object) # 2) toFixed 2)];
 
@@ -76,8 +78,8 @@ if (!_staticSpawn) then {
     };
 };
 
-if !(_initDelete) then {
-    // This object will not be deleted from start (or it's a map object itself)
+if (_terrainObject) then {
+    // This object will not be deleted from start (or it's a terrain object itself)
     // Check if the key (sector) is already in the hashmap
     if !(_sector in KPLIB_sectorMapObject_hashMap) then {
         // Create a new key with a value
@@ -108,6 +110,6 @@ if (isNil "KPLIB_GarrisonsBlacklist_HashMap") then {
 };
 
 // Delete the object to spawn it later when the sector is activated
-if (_initDelete) then {
+if !(_terrainObject) then {
     deleteVehicle _object;
 };

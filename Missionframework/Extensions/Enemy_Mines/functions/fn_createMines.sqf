@@ -2,7 +2,7 @@
     File: fn_createMines.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 02/06/2026
-    Last Update: 10/06/2026
+    Last Update: 30/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -49,11 +49,7 @@ if (count _APMinesPos > 0) then {
 			private _pos = _center getPos [32, _x];
 			if (isOnRoad _pos || surfaceIsWater _pos || !(_pos inArea KPLIB_centerArea)) then {continue};
 			private _sign = createVehicle [_mineSignClass, _pos, [], 0, "CAN_COLLIDE"];
-			if (_mineSignClass == "Land_Sign_MinesTall_F") then {
-				_sign setDir (_pos getDir _center) - 180;
-			} else {
-				_sign setDir (_pos getDir _center);
-			};
+			_sign setDir (_pos getDir _center);
 			_sign enableSimulationGlobal false;
 			
 			_APMinesSigns pushBack _sign;

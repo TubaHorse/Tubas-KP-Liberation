@@ -46,6 +46,10 @@ KPLIB_staticsConfigs = [
     ["Land_HBarrier_01_tower_green_F", [[["AA", "AT"], [0.163086,1.16992,0.571415], (0)], [["RAISED-HMG", "RAISED-GMG"], [-0.599121,-1.44092,0.571415], (180)]]],
     ["Land_ClutterCutter_medium_F", [[["LOWERED-HMG", "LOWERED-GMG"], [0,0,0], (0)]]],
     ["Sign_Arrow_Yellow_F", [[["RAISED-HMG", "RAISED-GMG"], [0,0,0], (0)]]],
+    ["Land_Bunker_02_left_F", [[["RAISED-HMG"], [0.63,0.9,-0.97], (270)]]],
+    ["Land_Bunker_02_right_F", [[["RAISED-HMG"], [-0.48,0.98,-0.97], (90)]]],
+    ["Land_Bunker_02_light_left_F", [[["RAISED-HMG"], [0.63,0.9,-0.97], (270)]]],
+    ["Land_Bunker_02_light_right_F", [[["RAISED-HMG"], [-0.48,0.98,-0.97], (90)]]],
     ["Land_ClutterCutter_large_F", [[["FLAK36"], [0,0,0], (0)]]], // WW2 ONLY
     // CUP
     ["Land_fort_artillery_nest", [[["AA"], [0,-2,0], (0)]]],
@@ -74,6 +78,9 @@ KPLIB_staticsConfigs = [
     ["Land_I44_Bunker_01", [[["RAISED-HMG"], [5.32346,-0.337402,-0.481478], (0)]]],
     ["Land_WW2_BET_RGB_667_Com_B", [[["RAISED-HMG", "RAISED-GMG"], [0,0.2,-1.8] , (0)]]],
     ["Land_WW2_Posed", [[["RAISED-HMG", "RAISED-GMG"], [0,0.8,0.9], (0)]]],
+    // CWR 3
+    ["land_cwr3_fortress_small", [[["RAISED-HMG", "RAISED-GMG"], [-0.25,-0.02,-0.6], (270)]]],
+    ["land_cwr3_fortress_mini", [[["AT"], [0.99,0.04,0], (180)]]], // Mostly for TOW (too high for Konkurs)
 
     // GRAD Trenches
     ["ACE_envelope_small", [[["RAISED-HMG", "RAISED-GMG"], [0,0,3], (0)]]]
@@ -88,6 +95,7 @@ KPLIB_staticVehConfigs = [
     ["CamoNet_INDP_big_F", [[[0.3,-4.15,-2], 180]]],
     ["CamoNet_ghex_big_F", [[[0.3,-4.15,-2], 180]]],
     ["CamoNet_wdl_big_F", [[[0.3,-4.15,-2], 180]]],
+    ["cwr3_shed_big", [[[2,0,0], 90]]],
 
     // WW2
     ["Land_WW2_TrenchTank", [[[0,-1.5,0], 0]]],
