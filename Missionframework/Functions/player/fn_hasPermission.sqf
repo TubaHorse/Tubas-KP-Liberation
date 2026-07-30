@@ -2,7 +2,7 @@
     File: fn_hasPermission.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2019-11-25
-    Last Update: 2026-07-17
+    Last Update: 2026-07-29
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -24,10 +24,17 @@ params [
 if (_permission isEqualTo -1) exitWith {["No permission number given"] call BIS_fnc_error; false};
 if (!KPLIB_param_permissions) exitWith {true};
 
+private _uid = getPlayerUID player;
+
 if (_type == "GENERAL") then {
-    KPLIB_permissions_cache = (KPLIB_general_permissions getOrDefault [getPlayerUID player, []]) # 1;
+    private _data = KPLIB_temp_permissions getOrDefault [_uid, []];
+
+    private _perms = _data param [1, [false,false,false,false,false,false]];
+    KPLIB_permissions_cache = _perms;
 } else {
-    KPLIB_permissions_cache = (KPLIB_build_permissions getOrDefault [getPlayerUID player, []]) # 1;
+    private _data = KPLIB_temp_permissions getOrDefault [_uid, []];
+    private _perms = _data param [1, [false,false,false,false,false,false,false,false]];
+    KPLIB_permissions_cache = _perms;
 };
 
 if (isNil "KPLIB_permissions_cache") exitWith {false};

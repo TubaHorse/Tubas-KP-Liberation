@@ -52,7 +52,7 @@
 <Project name="Liberation">
     <Package name="Liberation">
         <Key ID="STR_MISSION_TITLE">
-            <Original>CTI 34 KP Liberation v0.97.1pig</Original>
+            <Original>KP Liberation v0.97.1pig</Original>
         </Key>
         <Key ID="STR_MISSION_VERSION">
             <Original>v0.97.1pig</Original>
@@ -2458,8 +2458,8 @@
             <Portuguese>Você só pode construir aeronaves em aeroportos. Certifique que a FOB esteja dentro da área de algum aeroporto.</Portuguese>
         </Key>
         <Key ID="STR_NEED_FLIGHT_CONTROL">
-            <Original>This FOB requires the Flight Control building (available in the support tab).</Original>
-            <Portuguese>Essa FOB necessita uma Torre de Controle (disponível na aba de suporte).</Portuguese>
+            <Original>Flight Control building required (available in the support tab).</Original>
+            <Portuguese>Requer a Torre de Controle(disponível na aba de suporte).</Portuguese>
         </Key>
         <Key ID="STR_NEED_HELI_SLOTS">
             <Original>More helicopter slots required (available in the support tab).</Original>
@@ -2942,20 +2942,9 @@
                 <Czech>Stavění</Czech>
                 <Japanese>建設</Japanese>
             </Key>
-            <Key ID="STR_PERMISSIONS_RECYCLING">
-                <Original>Recycling</Original>
-                <French>Recyclage</French>
-                <German>Wiederverwerten</German>
-                <Spanish>Reciclar</Spanish>
-                <Russian>Утилизация</Russian>
-                <Italian>Riciclaggio</Italian>
-                <Chinesesimp>回收</Chinesesimp>
-                <Chinese>回收</Chinese>
-                <Turkish>Geri dönüşüm</Turkish>
-                <Portuguese>Reciclando</Portuguese>
-                <Korean>재활용</Korean>
-                <Czech>Recyklování</Czech>
-                <Japanese>解体</Japanese>
+            <Key ID="STR_PERMISSIONS_LOGISTICS">
+                <Original>Logistics</Original>
+                <Portuguese>Logística</Portuguese>
             </Key>
             <Key ID="STR_PERMISSIONS_MISC">
                 <Original>Others</Original>
@@ -3059,23 +3048,12 @@
                 <Czech>Povolí hráči používat menu STAVĚNÍ.</Czech>
                 <Japanese>プレイヤーが製造メニューを使用することを許可します。</Japanese>
             </Key>
-            <Key ID="STR_PERMISSIONS_TOOLTIP_RECYCLING">
-                <Original>Allows the player to use the RECYCLE action.</Original>
-                <French>Autorise le joueur à utiliser l'action RECYCLER.</French>
-                <German>Erlaubt es dem Spieler, die "WIEDERVERWERTEN"-Aktion zu benutzen.</German>
-                <Spanish>Permite al jugador utilizar la acción de RECICLAR</Spanish>
-                <Russian>Позволяет игроку утилизировать.</Russian>
-                <Italian>Permetti al giocatore di Riciclare</Italian>
-                <Chinesesimp>允许玩家使用回收功能。</Chinesesimp>
-                <Chinese>允許玩家使用回收功能。</Chinese>
-                <Turkish>Oyuncunun geri dönüşüm yapabilmesini sağlar</Turkish>
-                <Portuguese>Permite ao jogador utilizar a ação "RECICLAR".</Portuguese>
-                <Korean>플레이어가 필요없는 장비를 재활용할 수 있는 권한를 허가 합니다.</Korean>
-                <Czech>Povolí hráči RECYKLOVAT.</Czech>
-                <Japanese>プレイヤーが解体アクションを使用することを許可します。</Japanese>
+            <Key ID="STR_PERMISSIONS_TOOLTIP_LOGISTICS">
+                <Original>Allows the player to use logistics actions.</Original>
+                <Portuguese>Permite ao jogador utilizar as ações de logística.</Portuguese>
             </Key>
             <Key ID="STR_PERMISSIONS_TOOLTIP_MISC">
-                <Original>Allows the player to use other actions: unflip, resource box manipulation, prisoner capture, etc.</Original>
+                <Original>Allows the player to use other actions: unflip, prisoner capture, etc.</Original>
                 <French>Autorise le joueur à utiliser les autres actions : retournement de véhicule, manipulation des boites de munition, capture de prisoniers, etc.</French>
                 <German>Erlaubt es dem Spieler, andere Aktionen durchzuführen: Umdrehen, Interaktion mit Munitionskisten, Gefangennahme, usw.</German>
                 <Spanish>Permite al jugador usar otras acciones: Recolocar vehículo, manipulación de cajas de munición, captura de prisioneros, etc.</Spanish>
@@ -3084,7 +3062,7 @@
                 <Chinesesimp>允许玩家使用其他功能：翻正、货箱控制、俘虏战俘，等等。</Chinesesimp>
                 <Chinese>允許玩家使用其他功能，如：翻正、貨物控制（裝載、卸載、倉儲等）、俘虜戰俘，等等。</Chinese>
                 <Turkish>Oyuncunun araçları ters döndürme, sandıkları yönetme, esir yakalama, vb. hareketleri yapabilmesini sağlar.</Turkish>
-                <Portuguese>Permite ao jogador executar outras ações: Desvirar veículo, manipular caixas de recursos, captura de prisioneiros, etc.</Portuguese>
+                <Portuguese>Permite ao jogador executar outras ações: Desvirar veículo, captura de prisioneiros, etc.</Portuguese>
                 <Korean>플레이어가 차량을 바로잡거나, 군수물자를 조작하거나 포로를 생포하거나 문서를 획득할 수 있는 권한를 허가 합니다.</Korean>
                 <Czech>Povolí hráči používat funkce jako: převrátit, manipulace s bednami, zajmutí zajatce, atd.</Czech>
                 <Japanese>プレイヤーがその他のアクションを使用することを許可します。 (ひっくり返す、資源貨物の管理、捕虜の確保など)</Japanese>
@@ -3118,10 +3096,6 @@
                 <Korean>플레이어의 허가된 권한 사항을 모두 제거합니다.</Korean>
                 <Czech>Zakáže hráči VŠE.</Czech>
                 <Japanese>全ての権限を取り消します。</Japanese>
-            </Key>
-            <Key ID="STR_GENERAL_PERMISSIONS_ACTION">
-                <Original>-- GENERAL PERMISSIONS</Original>
-                <Portuguese>-- PERMISSÕES GERAIS</Portuguese>
             </Key>
             <Key ID="STR_SAVE_CHANGES">
                 <Original>Save Changes</Original>
@@ -3215,7 +3189,101 @@
             </Key>
             <Key ID="STR_BUILD_PERMISSIONS_TITLE">
                 <Original>BUILD PERMISSIONS MANAGEMENT</Original>
-                <Portuguese>GESTÃO DE PERMISSÕES DE CONSTRUÇÃO</Portuguese>
+                <Portuguese>GESTÃO DE PERMISSÕES PARA CONSTRUIR</Portuguese>
+            </Key>
+            <Key ID="STR_GENERAL_PERMISSIONS_ACTION">
+                <Original>-- GENERAL PERMISSIONS</Original>
+                <Portuguese>-- PERMISSÕES GERAIS</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERMISSIONS_ACTION">
+                <Original>-- BUILD PERMISSIONS</Original>
+                <Portuguese>-- PERMISSÕES P/ CONSTRUIR</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_INFANTRY">
+                <Original>Infantry/AI</Original>
+                <Portuguese>Infantaria/IA</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_INFANTRY_TOOLTIP">
+                <Original>Allows the player to build Infantry/AI units</Original>
+                <Portuguese>Permite ao jogador comprar Infantaria/IA</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_TRANSPORT">
+                <Original>Light Vehicles</Original>
+                <Portuguese>Veículos Leves</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_TRANSPORT_TOOLTIP">
+                <Original>Allows the player to build light vehicles</Original>
+                <Portuguese>Permite ao jogador comprar veículos leves</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_COMBATVEH">
+                <Original>Heavy Vehicles</Original>
+                <Portuguese>Veículos Pesados</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_COMBATVEH_TOOLTIP">
+                <Original>Allows the player to build heavy/armored vehicles</Original>
+                <Portuguese>Permite ao jogador comprar veículos pesados/blindados</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_AERIAL">
+                <Original>Aircrafts</Original>
+                <Portuguese>Aeronaves</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_AERIAL_TOOLTIP">
+                <Original>Allows the player to build air vehicles</Original>
+                <Portuguese>Permite ao jogador comprar veículos aéreos</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_DEFENCES">
+                <Original>Defences</Original>
+                <Portuguese>Defesas</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_DEFENCES_TOOLTIP">
+                <Original>Allows the player to build static weapons/defences</Original>
+                <Portuguese>Permite ao jogador comprar armas estáticas/defesas</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_BUILDINGS">
+                <Original>Decorative</Original>
+                <Portuguese>Decoração</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_BUILDINGS_TOOLTIP">
+                <Original>Allows the player to build decorative buildings</Original>
+                <Portuguese>Permite ao jogador comprar construções decorativas</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_SUPPORT">
+                <Original>Support</Original>
+                <Portuguese>Suporte</Portuguese>
+            </Key>
+            <Key ID="STR_BUILD_PERM_SUPPORT_TOOLTIP">
+                <Original>Allows the player to build support vehicles/building</Original>
+                <Portuguese>Permite ao jogador comprar veículos/construções de supporte</Portuguese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_RECYCLING">
+                <Original>Recycling</Original>
+                <French>Recyclage</French>
+                <German>Wiederverwerten</German>
+                <Spanish>Reciclar</Spanish>
+                <Russian>Утилизация</Russian>
+                <Italian>Riciclaggio</Italian>
+                <Chinesesimp>回收</Chinesesimp>
+                <Chinese>回收</Chinese>
+                <Turkish>Geri dönüşüm</Turkish>
+                <Portuguese>Reciclando</Portuguese>
+                <Korean>재활용</Korean>
+                <Czech>Recyklování</Czech>
+                <Japanese>解体</Japanese>
+            </Key>
+            <Key ID="STR_PERMISSIONS_TOOLTIP_RECYCLING">
+                <Original>Allows the player to use the RECYCLE and DELETE actions.</Original>
+                <French>Autorise le joueur à utiliser l'action RECYCLER.</French>
+                <German>Erlaubt es dem Spieler, die "WIEDERVERWERTEN"-Aktion zu benutzen.</German>
+                <Spanish>Permite al jugador utilizar la acción de RECICLAR</Spanish>
+                <Russian>Позволяет игроку утилизировать.</Russian>
+                <Italian>Permetti al giocatore di Riciclare</Italian>
+                <Chinesesimp>允许玩家使用回收功能。</Chinesesimp>
+                <Chinese>允許玩家使用回收功能。</Chinese>
+                <Turkish>Oyuncunun geri dönüşüm yapabilmesini sağlar</Turkish>
+                <Portuguese>Permite ao jogador utilizar as ações de "RECICLAR" e "DELETAR".</Portuguese>
+                <Korean>플레이어가 필요없는 장비를 재활용할 수 있는 권한를 허가 합니다.</Korean>
+                <Czech>Povolí hráči RECYKLOVAT.</Czech>
+                <Japanese>プレイヤーが解体アクションを使用することを許可します。</Japanese>
             </Key>
         </Container>
 
@@ -4632,7 +4700,7 @@
             <Chinesesimp>直升机生产槽</Chinesesimp>
             <Chinese>直升機生產槽</Chinese>
             <Turkish>Helikopter Üretim Yuvası</Turkish>
-            <Portuguese>Fenda de Produção de Helicópteros</Portuguese>
+            <Portuguese>Espaço para Helicópteros</Portuguese>
             <Korean>헬리콥터 제조 슬롯</Korean>
             <Czech>Slot pro výrobu vrtulníků</Czech>
             <Japanese>ヘリコプター製造スロット</Japanese>
@@ -4646,7 +4714,7 @@
             <Chinesesimp>飞机生产槽</Chinesesimp>
             <Chinese>飛機生產槽</Chinese>
             <Turkish>Uçak Üretim Yuvası</Turkish>
-            <Portuguese>Fenda de Produção de Aviões</Portuguese>
+            <Portuguese>Espaço para Aviões</Portuguese>
             <Korean>비행기 제조 슬롯</Korean>
             <Czech>Slot pro výrobu letadel</Czech>
             <Japanese>航空機製造スロット</Japanese>

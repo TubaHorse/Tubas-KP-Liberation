@@ -13,5 +13,5 @@
 #define ARMORED_VEH_PERM 1
 #define HELICOPTER_PERM 2
 #define PLANE_PERM 3
-#define RECYCLING_PERM 4
+#define LOGISTIC_PERM 4
 #define MISC_PERM 5

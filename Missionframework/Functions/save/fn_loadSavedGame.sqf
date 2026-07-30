@@ -940,7 +940,7 @@ private _generalPermissionsHash = createHashMapFromArray [];
 if (count KPLIB_general_permissions > 0) then {
     {
         _x params ["_uid", "_array"];
-        _array params ["_name", "_permissions"];
+        _array params ["_name", ["_permissions", [false,false,false,false,false,false]]];
 
         _generalPermissionsHash set [_uid, [_name, _permissions]];
     }forEach KPLIB_general_permissions;
@@ -955,7 +955,7 @@ private _buildPermissionsHash = createHashMapFromArray [];
 if (count KPLIB_build_permissions > 0) then {
     {
         _x params ["_uid", "_array"];
-        _array params ["_name", "_permissions"];
+        _array params ["_name", ["_permissions", [false,false,false,false,false,false,false,false]]];
 
         _buildPermissionsHash set [_uid, [_name, _permissions]];
     }forEach KPLIB_build_permissions;

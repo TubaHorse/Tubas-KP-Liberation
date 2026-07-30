@@ -43,8 +43,8 @@ if ((typeOf _obj) isEqualTo KPLIB_b_outpostBuilding) exitWith {
 if ((typeOf _obj) isEqualTo KPLIB_b_outpostBox) exitWith {
     [
     _obj,
-        ["<t color='#FFFF00'>", localize "STR_OUTPOST_ACTION", "</t> <img size='2' image='Images\ui_deployfob.paa'/>"] joinString "",
-        "", "",
+        ["<t color='#FFFF00'>", localize "STR_OUTPOST_ACTION", "</t> <img size='2' image='Images\ui_deployoutpost.paa'/>"] joinString "",
+        "Images\ui_deployoutpost.paa", "Images\ui_deployoutpost.paa",
         toString {
             !(_this getVariable ['KPLIB_BUILD_isBuilding', false])
             && {KPLIB_player_fobs isNotEqualTo []} // Make available only if there are at least one fob builded

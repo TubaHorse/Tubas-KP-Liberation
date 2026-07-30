@@ -3,7 +3,7 @@
     File: fn_buildEachFrame.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 11/11/2025
-    Last update: 24/07/2026
+    Last update: 29/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -42,8 +42,8 @@ private _buildType = localNamespace getVariable ["KPLIB_BUILD_buildType", 1]; //
 private _previousWeapon = _player getVariable "KPLIB_BUILD_previousWeapon";
 
 if (isNil "_previousWeapon") then {
-    _player setVariable ["KPLIB_BUILD_previousWeapon", (weaponState _player) select [0, 3], true];
-    _player action ["SwitchWeapon", _player, _player, 299];
+    _player setVariable ["KPLIB_BUILD_previousWeapon", (weaponState _player) # 1];
+    _player action ["SwitchWeapon", _player, _player, -1];
 };
 
 KPLIB_doBuild_pfhID = [{

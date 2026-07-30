@@ -2,7 +2,7 @@ KPLIB_endgame = 0;
 KPLIB_respawn_marker = "respawn";
 
 // Version of the KP Liberation framework
-KPLIB_version = [0, 97, "0pig"];
+KPLIB_version = [0, 97, "1pig"];
 
 enableSaving [false, false];
 

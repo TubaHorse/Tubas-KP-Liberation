@@ -5,7 +5,7 @@
     File: fn_manageBuildHUD.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 21/02/2026
-    Last update: 24/07/2026
+    Last update: 29/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -41,7 +41,7 @@ private _scrollTextCtrl = _hudDisplay displayCtrl MODE_ACTIONS_TEXT;
 
 _scrollTextCtrl ctrlSetStructuredText (parseText format["<img size='1.5' image='Functions\do_build\icons\mmb.paa'/> %1", localize "STR_BUILD_MODE_ACTIONS"]);
 _buildTextCtrl ctrlSetStructuredText (parseText format["<img size='1.5' image='Functions\do_build\icons\lmb.paa'/> - %1", localize "STR_BUILD_ACTION_BUILD"]);
-_repeatTextCtrl ctrlSetStructuredText (parseText format["<img size='1.5' image='Functions\do_build\icons\lmb.paa'/> + CTRL - %1", localize "STR_BUILD_ACTION_BUILDREPEAT"]);
+_repeatTextCtrl ctrlSetStructuredText (parseText format["<img size='1.5' image='Functions\do_build\icons\mmb.paa'/> (CLICK) - %1", localize "STR_BUILD_ACTION_BUILDREPEAT"]);
 _cancelTextCtrl ctrlSetStructuredText (parseText format["<img size='1.5' image='Functions\do_build\icons\rmb.paa'/> - %1", localize "STR_BUILD_ACTION_CANCEL"]);
 
 private _rotationTextCtrl = _hudDisplay displayCtrl ROTATE_MODE_TEXT;
@@ -258,7 +258,7 @@ private _keyUpEH = (findDisplay MISSION_IDD) displayAddEventHandler ["KeyUp", {
     };
 }];
 
-// Build-Repeat
+// Cancel-Build-Repeat
 private _mouseButtonDownEH = (findDisplay MISSION_IDD) displayAddEventHandler ["MouseButtonDown", {
     params ["_displayOrControl", "_button", "_xPos", "_yPos", "_shift", "_ctrl", "_alt"];
 
@@ -266,63 +266,47 @@ private _mouseButtonDownEH = (findDisplay MISSION_IDD) displayAddEventHandler ["
     private _player = localNamespace getVariable ["KPLIB_BUILD_player", objNull];
     private _buildType = localNamespace getVariable ["KPLIB_BUILD_buildType", 1];
 
-    if (_button == 1) then {
-        // Cancel
-        if (_buildType != BUILDTYPE_FOB && _buildType != BUILDTYPE_OUTPOST) then {
-            [_object] call KPLIB_fnc_cancelBuilding;
-            "KPLIB_BUILD_hudLayer" cutRsc ["RemoveRsc","PLAIN",5, false];
-        };
-    } else {
-        private _canBuild = _object getVariable ["KPLIB_BUILD_canBuild", true]; // Change value
-        private _objectInArea = _object getVariable ["KPLIB_BUILD_isObjectInArea", true]; // Change value
-
-        if (!_canBuild || !_objectInArea) exitWith {
-            if !((typeOf _object) in KPLIB_collisionIgnoreObjects) then {
-                if (_object getVariable ["KPLIB_BUILD_isObjectInArea", false]) then {
-                    //private _spheres = (_object getVariable ["KPLIB_BUILD_objectSpheres", []]);
-                    private _areaSpheres = localNamespace getVariable ["KPLIB_BUILD_areaSpheres", []];
-                    private _nearestObjects = (nearestObjects [_object, ["AllVehicles", "Things", "ThingX", "Building", "Ruins"], (boundingBoxReal _object # 2) * 1.05, false] - ([_object, _player] - _areaSpheres));
-                    if (_nearestObjects isNotEqualTo []) then {
-                        [format [localize "STR_PLACEMENT_IMPOSSIBLE", count _nearestObjects, ((boundingBoxReal _object # 2) * 1.05) toFixed 0], true, 3] call KPLIB_fnc_hint;
-                    };
-                }
+    switch (_button) do {
+        case 1 : {
+            // Cancel (RMB)
+            if (_buildType != BUILDTYPE_FOB && _buildType != BUILDTYPE_OUTPOST) then {
+                [_object] call KPLIB_fnc_cancelBuilding;
+                "KPLIB_BUILD_hudLayer" cutRsc ["RemoveRsc","PLAIN",5, false];
             };
-            if !(_object getVariable ["KPLIB_BUILD_isObjectInArea", false]) then {
-                [localize "STR_BUILD_ERROR_DISTANCE", true, 3] call KPLIB_fnc_hint;
+
+            _player spawn {
+                // Select previous weapon
+                private _previousWeapon = _this getVariable ["KPLIB_BUILD_previousWeapon", ""];
+
+                sleep 0.5;
+
+                if (_previousWeapon != "") then {
+                    _this selectWeapon _previousWeapon;
+                    _this setVariable ["KPLIB_BUILD_previousWeapon", nil];
+                };
             };
         };
+        case 0 : {
+            // Build (LMB)
+            private _canBuild = _object getVariable ["KPLIB_BUILD_canBuild", true]; // Change value
+            private _objectInArea = _object getVariable ["KPLIB_BUILD_isObjectInArea", true]; // Change value
 
-        // Build
-        // ToDo: use MMB to repeat build (_button == 2)
-        if (_ctrl && (localNamespace getVariable ["KPLIB_canRepeatBuild", false])) then {
-            private _repeat = true; 
+            if (!_canBuild || !_objectInArea) exitWith {
+                if !((typeOf _object) in KPLIB_collisionIgnoreObjects) then {
+                    if (_object getVariable ["KPLIB_BUILD_isObjectInArea", false]) then {
+                        //private _spheres = (_object getVariable ["KPLIB_BUILD_objectSpheres", []]);
+                        private _areaSpheres = localNamespace getVariable ["KPLIB_BUILD_areaSpheres", []];
+                        private _nearestObjects = (nearestObjects [_object, ["AllVehicles", "Things", "ThingX", "Building", "Ruins"], (boundingBoxReal _object # 2) * 1.05, false] - ([_object, _player] - _areaSpheres));
+                        if (_nearestObjects isNotEqualTo []) then {
+                            [format [localize "STR_PLACEMENT_IMPOSSIBLE", count _nearestObjects, ((boundingBoxReal _object # 2) * 1.05) toFixed 0], true, 3] call KPLIB_fnc_hint;
+                        };
+                    }
+                };
+                if !(_object getVariable ["KPLIB_BUILD_isObjectInArea", false]) then {
+                    [localize "STR_BUILD_ERROR_DISTANCE", true, 3] call KPLIB_fnc_hint;
+                };
+            };
 
-            // Remove spheres
-            private _spheres =  (localNamespace getVariable ["KPLIB_BUILD_areaSpheres", []]);
-            {deleteVehicle _x}forEach _spheres;
-
-            // Reset variables
-            localNamespace setVariable ["KPLIB_BUILD_preplacedObject", nil];
-
-            // Spawn builded object
-
-            // Get local object attributes
-            private _objectClass = (typeOf _object);
-            private _objPos = getPosATL _object;
-            private _objDir = getDir _object;
-            private _vector = localNamespace getVariable ["KPLIB_BUILD_vectorSurface", false];
-            private _buildType = localNamespace getVariable ["KPLIB_BUILD_buildType", 1];
-            private _withCrew = localNamespace getVariable ["KPLIB_BUILD_requireCrew", false];
-
-            deleteVehicle _object;
-
-            "KPLIB_BUILD_hudLayer" cutRsc ["RemoveRsc","PLAIN",5, false];
-            _player removeAction (localNamespace getVariable ["KPLIB_BUILD_blockFire", -1]);
-
-            // Build and repeat
-            ["KPLIB_buildObject", [_objectClass, _objPos, _objDir, _vector, _buildType, _withCrew, _player, _repeat]] call CBA_fnc_serverEvent;
-
-        } else {
             // Remove spheres
             private _spheres = (localNamespace getVariable ["KPLIB_BUILD_areaSpheres", []]);
             {deleteVehicle _x}forEach _spheres;
@@ -349,16 +333,68 @@ private _mouseButtonDownEH = (findDisplay MISSION_IDD) displayAddEventHandler ["
 
             _player setVariable ["KPLIB_BUILD_isBuilding", false];
 
-            // Select previous weapon
-            private _previousWeapon = _player getVariable "KPLIB_BUILD_previousWeapon";
+            _player spawn {
+                // Select previous weapon
+                private _previousWeapon = _this getVariable ["KPLIB_BUILD_previousWeapon", ""];
 
-            if (!isNil "_previousWeapon") then {
-                _player selectWeapon _previousWeapon;
-                _player setVariable ["KPLIB_BUILD_previousWeapon", nil, true];
+                sleep 0.5;
+                
+                if (_previousWeapon != "") then {
+                    _this selectWeapon _previousWeapon;
+                    _this setVariable ["KPLIB_BUILD_previousWeapon", nil];
+                };
             };
-        };
 
-        "KPLIB_BUILD_hudLayer" cutRsc ["RemoveRsc","PLAIN",5, false];
+            "KPLIB_BUILD_hudLayer" cutRsc ["RemoveRsc","PLAIN",5, false];
+        };
+        case 2 : {
+            // Repeat (MMB)
+            private _canBuild = _object getVariable ["KPLIB_BUILD_canBuild", true]; // Change value
+            private _objectInArea = _object getVariable ["KPLIB_BUILD_isObjectInArea", true]; // Change value
+
+            if (!_canBuild || !_objectInArea) exitWith {
+                if !((typeOf _object) in KPLIB_collisionIgnoreObjects) then {
+                    if (_object getVariable ["KPLIB_BUILD_isObjectInArea", false]) then {
+                        //private _spheres = (_object getVariable ["KPLIB_BUILD_objectSpheres", []]);
+                        private _areaSpheres = localNamespace getVariable ["KPLIB_BUILD_areaSpheres", []];
+                        private _nearestObjects = (nearestObjects [_object, ["AllVehicles", "Things", "ThingX", "Building", "Ruins"], (boundingBoxReal _object # 2) * 1.05, false] - ([_object, _player] - _areaSpheres));
+                        if (_nearestObjects isNotEqualTo []) then {
+                            [format [localize "STR_PLACEMENT_IMPOSSIBLE", count _nearestObjects, ((boundingBoxReal _object # 2) * 1.05) toFixed 0], true, 3] call KPLIB_fnc_hint;
+                        };
+                    }
+                };
+                if !(_object getVariable ["KPLIB_BUILD_isObjectInArea", false]) then {
+                    [localize "STR_BUILD_ERROR_DISTANCE", true, 3] call KPLIB_fnc_hint;
+                };
+            };
+
+            private _repeat = true; 
+
+            // Remove spheres
+            private _spheres =  (localNamespace getVariable ["KPLIB_BUILD_areaSpheres", []]);
+            {deleteVehicle _x}forEach _spheres;
+
+            // Reset variables
+            localNamespace setVariable ["KPLIB_BUILD_preplacedObject", nil];
+
+            // Spawn builded object
+
+            // Get local object attributes
+            private _objectClass = (typeOf _object);
+            private _objPos = getPosATL _object;
+            private _objDir = getDir _object;
+            private _vector = localNamespace getVariable ["KPLIB_BUILD_vectorSurface", false];
+            private _buildType = localNamespace getVariable ["KPLIB_BUILD_buildType", 1];
+            private _withCrew = localNamespace getVariable ["KPLIB_BUILD_requireCrew", false];
+
+            deleteVehicle _object;
+
+            "KPLIB_BUILD_hudLayer" cutRsc ["RemoveRsc","PLAIN",5, false];
+            _player removeAction (localNamespace getVariable ["KPLIB_BUILD_blockFire", -1]);
+
+            // Build and repeat
+            ["KPLIB_buildObject", [_objectClass, _objPos, _objDir, _vector, _buildType, _withCrew, _player, _repeat]] call CBA_fnc_serverEvent;
+        }
     };
 }];
 

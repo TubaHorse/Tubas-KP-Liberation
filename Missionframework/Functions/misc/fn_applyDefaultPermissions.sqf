@@ -2,7 +2,7 @@
     File: fn_applyDefaultPermissions.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 18/07/2026
-    Last Update: 18/07/2026
+    Last Update: 29/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -17,13 +17,16 @@
 params[["_player", player, [objNull]]];
 
 private _uid = (getPlayerUID _player);
+
+// Get default permissions
 private _defaultGeneral = KPLIB_general_permissions getOrDefault ["Default", [], true];
-_defaultGeneral = _defaultGeneral param [1, [false,false,false,false,false]];
+_defaultGeneral = _defaultGeneral param [1, [false,false,false,false,false,false]];
 private _defaultBuild = KPLIB_build_permissions getOrDefault ["Default", [], true];
 _defaultBuild = _defaultBuild param [1, [false,false,false,false,false,false,false,false]];
 
+// Get player's permissions
 private _generalPerm = KPLIB_general_permissions getOrDefault [(getPlayerUID player), [], true];
-_generalPerm = _generalPerm param [1, [false,false,false,false,false]];
+_generalPerm = _generalPerm param [1, [false,false,false,false,false,false]];
 private _buildPerm = KPLIB_build_permissions getOrDefault [(getPlayerUID player), [], true];
 _buildPerm = _buildPerm param [1, [false,false,false,false,false,false,false,false]];
 

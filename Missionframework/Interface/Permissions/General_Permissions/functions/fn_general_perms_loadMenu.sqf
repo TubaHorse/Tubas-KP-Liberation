@@ -3,7 +3,7 @@
     File: fn_general_perms_loadMenu.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 16/07/2026
-    Last Update: 17/07/2026
+    Last Update: 29/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -48,7 +48,7 @@ private _idx = 2;
 
     // Set temporary key on non-existent
     if !(_uid in KPLIB_temp_permissions) then {
-        KPLIB_temp_permissions set [_uid, [_displayName, [false,false,false,false,false]]]
+        KPLIB_temp_permissions set [_uid, [_displayName, [false,false,false,false,false,false]]]
     };
 
     _idx = _idx + 1;
@@ -93,7 +93,7 @@ _idx = _idx + 1;
     [_display, _controlGrp, _x, 2, ARMORED_VEH_PERM, localize "STR_PERMISSIONS_ARMORED", localize "STR_PERMISSIONS_TOOLTIP_ARMORED"] call KPLIB_fnc_general_perms_createActiveText;
     [_display, _controlGrp, _x, 3, HELICOPTER_PERM, localize "STR_PERMISSIONS_HELICOPTER", localize "STR_PERMISSIONS_TOOLTIP_HELICOPTER"] call KPLIB_fnc_general_perms_createActiveText;
     [_display, _controlGrp, _x, 4, PLANE_PERM, localize "STR_PERMISSIONS_PLANES", localize "STR_PERMISSIONS_TOOLTIP_PLANES"] call KPLIB_fnc_general_perms_createActiveText;
-    [_display, _controlGrp, _x, 5, RECYCLING_PERM, localize "STR_PERMISSIONS_LOGISTICS", localize "STR_PERMISSIONS_TOOLTIP_LOGISTICS"] call KPLIB_fnc_general_perms_createActiveText;
+    [_display, _controlGrp, _x, 5, LOGISTIC_PERM, localize "STR_PERMISSIONS_LOGISTICS", localize "STR_PERMISSIONS_TOOLTIP_LOGISTICS"] call KPLIB_fnc_general_perms_createActiveText;
     [_display, _controlGrp, _x, 6, MISC_PERM, localize "STR_PERMISSIONS_MISC", localize "STR_PERMISSIONS_TOOLTIP_MISC"] call KPLIB_fnc_general_perms_createActiveText;
 
     // All button
