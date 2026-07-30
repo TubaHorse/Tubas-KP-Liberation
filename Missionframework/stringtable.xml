@@ -4949,6 +4949,10 @@
             <Original>ITEMS TO UNLOCK:</Original>
             <Portuguese>ITENS PARA DESBLOQUEAR:</Portuguese>
         </Key>
+        <Key ID="STR_ARSENAL_UNLOCK_WARN">
+            <Original>Edit preset files in Extensions\Lock_Arsenal\presets</Original>
+            <Portuguese>Edite o arquivo de preset em Extensions\Lock_Arsenal\presets</Portuguese>
+        </Key>
         <Key ID="STR_FOB_RESOURCES_LIST">
             <Original>FOB's RESOURCES INFO:</Original>
             <Portuguese>INFO. DA FOB:</Portuguese>

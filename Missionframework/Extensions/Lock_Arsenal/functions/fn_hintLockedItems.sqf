@@ -2,7 +2,7 @@
     File: fn_hintLockedItems.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 06/07/2026
-    Last update: 06/07/2026
+    Last update: 30/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
     
     Description:
@@ -33,5 +33,13 @@ _items = _items apply {
         _name = getText(configFile >> "cfgVehicles" >> _x >> "displayName");
     };
     _name
-}; 
-[parseText (format[["<t size='1.3'>", localize "STR_ARSENAL_UNLOCK_LIST", "</t><br/>", "%1", "<br/>"] joinString "", _items joinString "<br/>"]), true, 7] call KPLIB_fnc_hint;
+};
+_items = _items select {_x != ""};
+
+if (count _items < 1) then {
+    // Warn
+    [parseText (format[["<t size='1.3'>", localize "STR_ARSENAL_UNLOCK_LIST", "</t><br/>", "%1", "<br/>"] joinString "", localize "STR_ARSENAL_UNLOCK_WARN"]), true, 7] call KPLIB_fnc_hint;
+} else {
+    // Hint locked preset
+    [parseText (format[["<t size='1.3'>", localize "STR_ARSENAL_UNLOCK_LIST", "</t><br/>", "%1", "<br/>"] joinString "", _items joinString "<br/>"]), true, 7] call KPLIB_fnc_hint;
+}
