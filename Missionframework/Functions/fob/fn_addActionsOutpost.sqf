@@ -2,7 +2,7 @@
     File: fn_addActionsOutpost.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 22/04/2026
-    Last Update: 17/07/2026
+    Last Update: 30/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -22,7 +22,7 @@ if (isNull _obj) exitWith {["Null object given"] call BIS_fnc_error; false};
 
 if ((typeOf _obj) isEqualTo KPLIB_b_outpostBuilding) exitWith {
     _obj addAction [
-        ["<t color='#FFFF00'>", localize "STR_BASE_REPACKAGE", "</t> <img size='2' image='Images\ui_deployfob.paa'/>"] joinString "",
+        ["<t color='#FFFF00'>", localize "STR_BASE_REPACKAGE", "</t> <img size='2' image='Images\ui_repackoutpost.paa'/>"] joinString "",
         {[_this # 0] call KPLIB_fnc_repackage_createMenuRsc},
         nil,
         -754,

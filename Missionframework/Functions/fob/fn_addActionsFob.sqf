@@ -2,7 +2,7 @@
     File: fn_addActionsFob.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes
     Date: 2020-04-13
-    Last Update: 2026-07-24
+    Last Update: 2026-07-30
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -23,7 +23,7 @@ if (isNull _obj) exitWith {["Null object given"] call BIS_fnc_error; false};
 
 if ((typeOf _obj) isEqualTo KPLIB_b_fobBuilding) exitWith {
     _obj addAction [
-        ["<t color='#FFFF00'>", localize "STR_BASE_REPACKAGE", "</t> <img size='2' image='Images\ui_deployfob.paa'/>"] joinString "",
+        ["<t color='#FFFF00'>", localize "STR_BASE_REPACKAGE", "</t> <img size='2' image='Images\ui_repackfob.paa'/>"] joinString "",
         {[_this # 0] call KPLIB_fnc_repackage_createMenuRsc},
         nil,
         -754,
