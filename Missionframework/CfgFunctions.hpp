@@ -182,8 +182,14 @@ class KPLIB {
         class autoSavePFH               {};
         class doSave                    {};
         class getSaveableParam          {};
+        class linkItemsToUnlock         {};
+        class linkVehToUnlock           {};
         class getSaveData               {};
         class loadSavedGame             {};
+        class setSavedPermissions       {};
+        class spawnSavedFactoryStorage  {};
+        class spawnSavedObject          {};
+        class spawnSavedStorage         {};      
     }
     class Sector {
         file = "Functions\sector";

@@ -364,141 +364,18 @@ if (!isNil "_saveData") then {
     private _spawnedObjects = [];
 
     // Spawn all saved objects
-    private _object = objNull;
     {
         // Fetch data of saved object
-        _x params ["_class", "_pos", "_vecDir", "_vecUp", ["_hasCrew", false], ["_weaponsCargo", []], ["_magsCargo", [[], []]], ["_itemsCargo", [[], []]], ["_backpacksCargo", [[],[]]], ["_hitPoints", []], ["_fuel", 100], ["_ammo", []], ["_pylonsInfo", []]];
-
-        // This will be removed if we reach a 0.96.7 due to more released Arma 3 DLCs until we finish 0.97.0
-        if !(((_saveData select 0) select 0) isEqualType 0) then {
-            // Pre 0.96.5 compatibility with repair building, as it was replaced by default with a different classname
-            if ((KPLIB_b_logiStation != "Land_CarService_F") && (_class == "Land_CarService_F")) then {
-                _class = KPLIB_b_logiStation;
-            };
-
-            // Pre 0.96.5 compatibility with air building, as it was replaced by default with a different classname
-            if ((KPLIB_b_airControl != "Land_Radar_Small_F") && (_class == "Land_Radar_Small_F")) then {
-                _class = KPLIB_b_airControl;
-            };
-        };
-
-        // Only spawn, if the classname is still in the presets
-        if ((toLowerANSI _class) in KPLIB_classnamesToSave) then {
-
-            // Create object without damage handling and simulation
-            _object = createVehicle [_class, _pos, [], 0, "CAN_COLLIDE"];
-            //_object allowdamage false;
-            _object enableSimulation false;
-
-            // Add object to spawned objects collection
+        private _object = _x call KPLIB_fnc_spawnSavedObject;
+        // Add object to spawned objects collection
+        if (!isNull _object) then {
             _spawnedObjects pushBack _object;
-
-            // Reposition spawned object
-            _object setPosWorld _pos;
-            _object setVectorDirAndUp [_vecDir, _vecUp];
-
-            // Apply kill manager handling, if not excluded
-            if !((toLower _class) in _noKillHandler) then {
-                _object addMPEventHandler ["MPKilled", {
-                    params ["_unit", "_killer"];
-                    ["KPLIB_manageKills", [_unit, _killer]] call CBA_fnc_localEvent;
-                }];
-            };
-
-            // Set enemy vehicle as captured
-            if ((toLowerANSI _class) in KPLIB_o_allVeh_classes) then {
-                _object setVariable ["KPLIB_captured", true, true];
-            };
-
-            // Set civilian vehicle as seized
-            if (_class in KPLIB_c_vehicles) then {
-                _object setVariable ["KPLIB_seized", true, true];
-            };
-
-            // Determine if cargo should be cleared
-            [_object] call KPLIB_fnc_clearCargo;
-
-            // Add blufor crew, if it had crew or is a UAV
-            if ((unitIsUAV _object) || _hascrew) then {
-                [
-                    {simulationEnabled _this}, 
-                    {
-                        private _crewGrp = [_this, KPLIB_side_player] call KPLIB_fnc_createCrew; 
-                        [_this, _crewGrp] call KPLIB_fnc_forceStaticCrew;
-                    }, 
-                    _object, 
-                    60, 
-                    {["Couldn't add crew. Simulation not enabled on the object","WARNING"] call KPLIB_fnc_log}
-                ] call CBA_fnc_waitUntilAndExecute;
-            };
-
-            // Cargo
-            if (_weaponsCargo isNotEqualTo []) then {
-                {_object addWeaponWithAttachmentsCargoGlobal [_x, 1]}forEach _weaponsCargo;
-            };
-            if (_magsCargo isNotEqualTo [[],[]]) then {
-                private _names = _magsCargo # 0;
-                private _count = _magsCargo # 1;
-                {_object addMagazineCargoGlobal [_x, _count # _forEachIndex]}forEach _names;
-            };
-            if (_itemsCargo isNotEqualTo [[],[]]) then {
-                private _names = _itemsCargo # 0;
-                private _count = _itemsCargo # 1;
-                {_object addItemCargoGlobal [_x, _count # _forEachIndex]}forEach _names;
-            };
-            if (_backpacksCargo isNotEqualTo [[],[]]) then {
-                private _names = _backpacksCargo # 0;
-                private _count = _backpacksCargo # 1;
-                {_object addBackpackCargoGlobal [_x, _count # _forEachIndex]}forEach _names;
-            };
-            
-            // Hitpoints
-            if (_hitPoints isNotEqualTo []) then {
-                private _hitNames = (_hitPoints # 0);
-                private _damages = (_hitPoints # 2);
-                {
-                    _object setHitPointDamage [_x, _damages # _forEachIndex];
-                }forEach _hitNames;
-            };
-
-            // Fuel
-            [_object, _fuel] remoteExec ["setFuel"];
-
-            // Ammo
-            if (_ammo isNotEqualTo []) then {
-                {
-                    _x params["_class", "_turret", "_count"];
-
-                    // Handle pylon magazines below
-                    if (getText(configFile >> "cfgMagazines" >> _class >> "pylonWeapon") != "") then {continue};
-
-                    _object removeMagazineTurret [_class, _turret];
-                    _object addMagazineTurret [_class, _turret, _count];
-                }forEach _ammo;
-            };
-
-            if (_pylonsInfo isNotEqualTo []) then {
-                {
-                    private _pylonIndex = _x # 0;
-                    private _turret = _x # 2;
-                    private _magazine = _x # 3;
-                    private _ammoCount = _x # 4;
-                    
-                    ["PAS_setPylonArmament", [_object, _pylonIndex, _magazine, _turret]] call CBA_fnc_globalEvent;
-                    [_object, [_pylonIndex, _ammoCount]] remoteExec ["setAmmoOnPylon"];
-                }forEach _pylonsInfo;
-            }
         };
-        
-        // Process KP object init
-        [_object] call KPLIB_fnc_addObjectInit;
     } forEach _objectsToSave;
 
     // Re-enable physics on the spawned objects
     {
         _x enableSimulation true;
-        //_x setdamage 0;
-        //_x allowdamage true;
     } forEach _spawnedObjects;
 
     // Check for missing fobs/outposts buildings
@@ -546,46 +423,7 @@ if (!isNil "_saveData") then {
 
     // Spawn saved resource storages and their content
     {
-        _x params ["_class", "_pos", "_vecDir", "_vecUp", ["_supply", 0], ["_ammo", 0], ["_fuel", 0]];
-
-        // Compatibility check for the new resource model.
-        switch (toLowerANSI _class) do {
-            case (toLowerANSI "ContainmentArea_02_sand_F") : {
-                _class = "Land_Cargo20_brick_red_F";
-            };
-            case (toLowerANSI "ContainmentArea_01_sand_F") : {
-                _class = "Land_Cargo40_brick_red_F"
-            } 
-        };
-
-        // Only spawn, if the classname is still in the presets
-        if ((toLowerANSI _class) in KPLIB_classnamesToSave) then {
-
-            // Create object without damage handling and simulation
-            private _posATL = +_pos;
-            _posATL set [2, 1];
-            _object = createVehicle [_class, _posATL, [], 0, "CAN_COLLIDE"];
-            _object allowdamage false;
-            _object enableSimulation false;
-
-            // Reposition spawned object
-            _object setPosATL _posATL;
-            _object setVectorDirAndUp [_vecDir, _vecUp];
-
-            // Re-enable physics on spawned object
-            _object setdamage 0;
-            _object enableSimulation true;
-            _object allowdamage true;
-
-            // Mark it as FOB storage
-            _object setVariable ["KPLIB_fobStorage", true, true];
-
-            // Add actions to storage
-            [_object] call KPLIB_fnc_addObjectInit;
-
-            // Fill storage with saved resources
-            [floor _supply, floor _ammo, floor _fuel, _object] call KPLIB_fnc_fillStorage;
-        };
+        _x call KPLIB_fnc_spawnSavedStorage;
     } forEach _resourceStorages;
     ["Saved storages placed and filled", "SAVE"] call KPLIB_fnc_log;
 
@@ -615,50 +453,14 @@ if (!isNil "_saveData") then {
             ]
         } forEach KPLIB_production;
     };
- 
+
     KPLIB_production = _productionHashmap; // It's now a hashmap
-    
-    // Spawn saved sector storages and their content
 
     {
         private _sector = _x;
-        private _productionArray = _y;
         private _storage = _y # 2;
 
-        // Spawn storage, if sector has valid storage
-        if ((count _storage) == 3) then {
-            _storage params ["_pos", "_dir", "_vecUp"];
-
-            // Create object without damage handling and simulation
-            _object = createVehicle [KPLIB_b_smallStorage, _pos, [], 0, "CAN_COLLIDE"];
-            _object enableSimulationGlobal false;
-            _object allowdamage false;
-
-            // Reposition spawned object
-            _object setdir _dir;
-            _object setVectorUp _vecUp;
-            _object setPosATL _pos;
-
-            // Re-enable physics on spawned object
-            _object setdamage 0;
-            _object enableSimulation true;
-            _object allowdamage true;
-
-            // Mark it as sector storage
-            _object setVariable ["KPLIB_factoryStorage", true, true];
-
-            // Save sector marker for this storage object
-            _object setVariable ["KPLIB_storageSector", _sector];
-
-            // Save storage object for this sector
-            KPLIB_sector_storage set [_sector, _object];
-            publicVariable "KPLIB_sector_storage";
-
-            [_object] call KPLIB_fnc_addObjectInit;
-
-            // Fill storage
-            [floor (_y # 8), floor (_y # 9), floor (_y # 10), _object] call KPLIB_fnc_fillStorage;
-        }
+        [_sector, _storage] call KPLIB_fnc_spawnSavedFactoryStorage
     }forEach KPLIB_production;
     ["Saved sector storages placed and filled", "SAVE"] call KPLIB_fnc_log;
 
@@ -816,154 +618,17 @@ publicVariable "KPLIB_outpostNames";
 publicVariable "KPLIB_sectorMinesPositionsHash";
 
 // Check for deleted military sectors or deleted classnames in the locked vehicles array
-KPLIB_sector_vehicleLinks = KPLIB_sector_vehicleLinks select {
-    _x params ["_class", "_marker"];
-    // EV which shall have already been validated, class checked, cross checked with build
-    _class in KPLIB_b_vehToUnlockClasses && {_marker in KPLIB_sectors_all};
-};
-
-// Double crosscheck if sector changed
-{
-    _x params ["_class", "_base"];
-
-    // Ignore empty strings
-    if (_base isEqualTo "") then {continue};
-
-    private _index = KPLIB_sector_vehicleLinks findIf {_class == (_x # 0)};
-    if (_index >= 0) then {
-        private _selection = KPLIB_sector_vehicleLinks # _index;
-        if ((_selection # 1) != _base) then {
-            // Different base
-            //KPLIB_sector_vehicleLinks deleteAt _index;  // Delete to update below
-            KPLIB_sector_vehicleLinks set [_index, [_class, _base]];
-            [format["Different base detected for %1", _class], "SAVE"] call KPLIB_fnc_log;
-        }
-    };
-}forEach KPLIB_b_vehToUnlock;
-
-// Check for additions in the locked vehicles array
-private _lockedVehCount = count KPLIB_sector_vehicleLinks;
-
-if ((_lockedVehCount < (count KPLIB_sectors_all)) && (_lockedVehCount < (count KPLIB_b_vehToUnlock))) then {
-    private _assignedBases = [];
-    private _nextVehicle = "";
-    private _nextBase = "";
-
-    private _assignedVehicles = KPLIB_sector_vehicleLinks apply {
-        _assignedBases pushBack (_x select 1);
-        (_x select 0);
-    };
-
-    // Add new entries, when there are elite vehicles and military sectors are not yet assigned 
-    {
-        _x params ["_nextVehicle", "_nextBase"];
-
-        if (KPLIB_sector_vehicleLinks findIf {_nextVehicle == (_x#0)} >= 0) then {continue};
-
-        // Check if the sector exists
-        if ((_nextBase isNotEqualTo "") && !(_nextBase in KPLIB_sectors_all)) then {
-            [format["Couldn't find the sector %1 to link vehicle %2", _nextBase, _nextVehicle], "SAVE"] call KPLIB_fnc_log;
-            _nextBase = "";
-        };
-
-        if (_nextBase isEqualTo "") then {
-            // Select a random base
-            _nextBase = selectRandom ((KPLIB_sectors_military + KPLIB_sectors_capital + KPLIB_sectors_airport) - _assignedBases);
-        };
-
-        if (isNil "_nextBase") exitWith {}; // Run out of military bases
-
-        _assignedBases pushBack _nextBase;
-        KPLIB_sector_vehicleLinks pushBack [_nextVehicle, _nextBase];
-
-    }forEach KPLIB_b_vehToUnlock;
-    ["Additional sectors or unlockable vehicles detected and assigned", "SAVE"] call KPLIB_fnc_log;
-};
+[] call KPLIB_fnc_linkVehToUnlock;
 publicVariable "KPLIB_sector_vehicleLinks";
 
 if (KPLIB_param_lockArsenal > 0 && !isNil "KPLIB_b_lockedArsenal") then {
-    // Arsenal lock Crosscheck
-    KPLIB_sector_arsenalLink = KPLIB_sector_arsenalLink select {
-        _x params ["_marker", "_items"];
-        ((KPLIB_b_lockedArsenal apply {_x#1}) find _items >= 0) && {_marker in KPLIB_sectors_all}
-    };
-
-    private _lockedArsenalCount = count KPLIB_sector_arsenalLink;
-    if ((_lockedArsenalCount < (count KPLIB_sectors_all)) && (_lockedArsenalCount < (count KPLIB_b_lockedArsenal))) then {
-
-        private _assignedSector = [];
-        private _nextArsenal = "";
-        private _nextSector = "";
-
-        /*
-        private _assignedArsenal = KPLIB_sector_arsenalLink apply {
-            _assignedArsenal pushBack (_x select 0);
-            (_x select 1);
-        };
-        */
-
-        // Add new entries, when there are elite vehicles and military sectors are not yet assigned 
-        {
-            _x params ["_nextSector", "_nextArsenal"];
-
-            if (_nextSector isEqualTo "") then {
-                // Select a random base
-                _nextSector = selectRandom ((KPLIB_sectors_military) - _assignedSector);
-                _assignedSector pushBack _nextSector;
-            } else {
-                _assignedSector pushBack _nextSector;
-            };
-
-            KPLIB_sector_arsenalLink pushBack [_nextSector, _nextArsenal];
-        }forEach KPLIB_b_lockedArsenal;
-
-        ["Additional sectors or unlockable arsenal detected and assigned", "SAVE"] call KPLIB_fnc_log;
-    };
-
-    _lockedArsenalHash = createHashMapFromArray [];
-
-    {
-        _lockedArsenalHash set [_x # 0, _x # 1];
-    }forEach KPLIB_sector_arsenalLink;
-
-    // It's now a hashmap
-    KPLIB_sector_arsenalLink = _lockedArsenalHash;
-    publicVariable "KPLIB_sector_arsenalLink";
-
-    [format["Sectors with arsenal link: %1", (keys KPLIB_sector_arsenalLink) apply {markerText _x}], "ARSENAL LINK"] call KPLIB_fnc_log;
+    [] call KPLIB_fnc_linkItemsToUnlock
 };
 
 if (KPLIB_sector_arsenalLink isEqualType []) then {KPLIB_sector_arsenalLink = createHashMapFromArray []};
+publicVariable "KPLIB_sector_arsenalLink";
 
-// General permissions
-private _generalPermissionsHash = createHashMapFromArray [];
-if (count KPLIB_general_permissions > 0) then {
-    {
-        _x params ["_uid", "_array"];
-        _array params ["_name", ["_permissions", [false,false,false,false,false,false]]];
-
-        _generalPermissionsHash set [_uid, [_name, _permissions]];
-    }forEach KPLIB_general_permissions;
-};
-
-// It's now a hashmap
-KPLIB_general_permissions = _generalPermissionsHash;
-publicVariable "KPLIB_general_permissions";
-
-// Build permissions
-private _buildPermissionsHash = createHashMapFromArray [];
-if (count KPLIB_build_permissions > 0) then {
-    {
-        _x params ["_uid", "_array"];
-        _array params ["_name", ["_permissions", [false,false,false,false,false,false,false,false]]];
-
-        _buildPermissionsHash set [_uid, [_name, _permissions]];
-    }forEach KPLIB_build_permissions;
-};
-
-// It's now a hashmap
-KPLIB_build_permissions = _buildPermissionsHash;
-publicVariable "KPLIB_build_permissions";
+[] call KPLIB_fnc_setSavedPermissions;
 
 KPLIB_saveLoaded = true; publicVariable "KPLIB_saveLoaded";
 
