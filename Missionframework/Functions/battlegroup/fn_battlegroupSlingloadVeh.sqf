@@ -2,7 +2,7 @@
     File: fn_battlegroupSlingLoadVeh.sqf
     Author: PiG13BR - https://github.com/PiG13BBR
     Date: 06/06/2026
-    Last Update: 01/07/2026
+    Last Update: 30/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -57,23 +57,48 @@ if (isNil "KPLIB_usedOpforSpawnPoints") then {
 KPLIB_usedOpforSpawnPoints pushBack _spawnPoint;
 
 // Select vehicles in pool that can be slingloaded
-private _vehiclesToSling = KPLIB_o_battleGrpVehicles select {
-	(count (getArray(configFile >> "CfgVehicles" >> _x >> "slingLoadCargoMemoryPoints")) > 0) &&
-	(count (_x call BIS_fnc_allTurrets) > 0) &&
-	!(_x isKindOf "Car") // Avoid light vehicles
-};
+private _vehClass = selectRandom KPLIB_o_slingVehicles;
 
-// Create vehicles
-private _vehClass = selectRandom _vehiclesToSling;
+// Create vehicle to sling
 private _veh = [markerPos _spawnPoint, _vehClass, 10] call KPLIB_fnc_spawnVehicle;
 private _grpVeh = (group (driver _veh));
 _veh allowCrewInImmobile true;
+
+// Disable some features while beign carried
+if (local _veh) then {
+	_veh disableAI "AUTOTARGET";
+	_veh disableAI "TARGET";
+	_veh disableAI "FIREWEAPON";
+} else {
+	[_veh, "AUTOTARGET"] remoteExec ["disableAI", _veh];
+	[_veh, "TARGET"] remoteExec ["disableAI", _veh];
+	[_veh, "FIREWEAPON"] remoteExec ["disableAI", _veh];
+};
+
+// Create helicopter
 private _heli = [markerPos _spawnPoint, _heliClass, 50] call KPLIB_fnc_spawnVehicle;
 private _grpHeli = (group (driver _heli));
-//private _wp = _grpHeli addWaypoint [getMarkerPos "unloadPoint", 0];
+// private _wp = _grpHeli addWaypoint [getMarkerPos "unloadPoint", 0];
 // _wp setWaypointType "UNHOOK"; // It fails, nothing in arma is easy
+
+// Helicopter attributes
 _grpHeli setBehaviour "CARELESS";
 _heli flyInHeightASL [100,100,100];
+
+// Make hooked vehicle explode once it touches ground if the helicopter get shows down
+_heli addEventHandler ["Killed", {
+	params["_helicopter"];
+	private _cargo = getSlingLoad _helicopter;
+	if ((!isNull _cargo) && {((getPosATL _cargo) # 2) >= 10}) then {
+		[
+			{isTouchingGround _this || ((getPosATL _this) # 2) < 1}, 
+			{_this setDamage 1}, 
+			_cargo,
+			15, // Timeout
+			{_this setDamage 1}
+		] call CBA_fnc_waitUntilAndExecute;
+	};
+}];
 
 // Mass
 _veh setVariable ["KPLIB_OriginalMass", (getMass _veh)];
@@ -113,6 +138,10 @@ if (getMass _veh > _vehMass) then {
 
 	// Sling load vehicle
 	_heli setSlingLoad _veh;
+	if (isNull (getSlingLoad _heli)) exitWith {
+		[_heli] call KPLIB_fnc_cleanOpforVehicle; 
+		[_veh] call KPLIB_fnc_cleanOpforVehicle
+	};
 
 	// Return slingloaded vehicle to its normal mass
 	_heli addEventHandler ["RopeBreak", {
@@ -169,10 +198,22 @@ if (getMass _veh > _vehMass) then {
 
 	if ((!alive _heli) || (({alive _x || [_x] call KPLIB_fnc_ace_isAwake} count (crew _heli)) < 1)) exitWith {deleteVehicle _heliPad};
 
-	_heli setSlingLoad objNull; // Unhook cargo
+	// Unhook cargo
+	_heli setSlingLoad objNull; 
 	_veh setVectorUp surfaceNormal (position _veh); // Unflip vehicle
 	[_veh] call KPLIB_fnc_allowCrewInImmobile;
 	_heli flyInHeightASL [75,75,75];
+
+	// Enable features back
+	if (local _veh) then {
+		_veh enableAI "AUTOTARGET";
+		_veh enableAI "TARGET";
+		_veh enableAI "FIREWEAPON";
+	} else {
+		[_veh, "AUTOTARGET"] remoteExec ["enableAI", _veh];
+		[_veh, "TARGET"] remoteExec ["enableAI", _veh];
+		[_veh, "FIREWEAPON"] remoteExec ["enableAI", _veh];
+	};
 
 	[_heli, _spawnPoint, _heliPad] spawn KPLIB_fnc_heliRTB; // Heli RTB
 

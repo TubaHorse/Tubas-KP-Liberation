@@ -1,12 +1,12 @@
 /*
     File: default.sqf
-    Author: PiG13BR - https://github.com/PiG13BR
-    Date: 19/12/2025 (Original file from KP Liberation Team)
-    Last Update: 09/07/2026
+    Author: PiG13BR - https://github.com/PiG13BBR 
+    Date: 19/12/2025
+    Last Update: 30/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
-        Default enemy preset.
+        Default CSAT enemy preset.
 
     Needed Mods:
         - None
@@ -58,7 +58,7 @@ KPLIB_o_ammoContainer = "Land_Pod_Heli_Transport_04_ammo_F";            // Taru 
 KPLIB_o_flag = "Flag_CSAT_F";                                           // Flag
 
 // Enemy mines types (CfgVehicles classes as explained here https://community.bistudio.com/wiki/createMine)
-KPLIB_o_APMine = "APERSMine";
+KPLIB_o_APMine = "APERSBoundingMine";
 KPLIB_o_ATMine = "ATMine";
 
 /* Adding a value to these arrays below will add them to a one out of however many in the array, random pick chance.
@@ -176,6 +176,14 @@ KPLIB_o_helicopters = [
 // Enemy rotary-wings that will slingload vehicles.
 KPLIB_o_slingHelicopters = [
     "O_Heli_Transport_04_box_F"                                         // Mi-290 Taru (Cargo)
+];
+
+// Enemy vehicles to slingload to the battlefield
+KPLIB_o_slingVehicles = [
+    "O_APC_Wheeled_02_rcws_F",                                          // MSE-3 Marid,
+    "O_APC_Wheeled_02_rcws_F",                                          // MSE-3 Marid
+    "O_APC_Tracked_02_cannon_F",                                        // BTR-K Kamysh
+    "O_APC_Tracked_02_AA_F"                                             // ZSU-39 Tigris
 ];
 
 // Enemy attack rotary-wings

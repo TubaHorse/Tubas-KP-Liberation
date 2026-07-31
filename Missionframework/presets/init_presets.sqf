@@ -130,7 +130,8 @@ KPLIB_o_battleGrpVehicles       = KPLIB_o_battleGrpVehicles         select {[_x]
 KPLIB_o_battleGrpVehiclesLight  = KPLIB_o_battleGrpVehiclesLight    select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_troopTransports         = KPLIB_o_troopTransports           select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_helicopters             = KPLIB_o_helicopters               select {[_x] call KPLIB_fnc_checkClass};
-KPLIB_o_slingHelicopters        = KPLIB_o_slingHelicopters               select {[_x] call KPLIB_fnc_checkClass};
+KPLIB_o_slingHelicopters        = KPLIB_o_slingHelicopters          select {[_x] call KPLIB_fnc_checkClass};
+KPLIB_o_slingVehicles           = KPLIB_o_slingVehicles             select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_attackHelicopters       = KPLIB_o_attackHelicopters         select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_paradropPlanes          = KPLIB_o_paradropPlanes            select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_planes                  = KPLIB_o_planes                    select {[_x] call KPLIB_fnc_checkClass};
@@ -172,6 +173,8 @@ KPLIB_b_static_classes          = KPLIB_b_vehStatic                 apply {toLow
 KPLIB_b_deco_classes            = KPLIB_b_objectsDeco               apply {toLowerANSI (_x select 0)};
 KPLIB_b_support_classes         = KPLIB_b_vehSupport                apply {toLowerANSI (_x select 0)};
 KPLIB_transport_classes         = KPLIB_transportConfigs            apply {toLowerANSI (_x select 0)};
+
+KPLIB_b_air_classes append (KPLIB_b_support_classes select {_x isKindOf "Air"});
 
 KPLIB_b_inf_classes append (KPLIB_b_squadLight + KPLIB_b_squadInf + KPLIB_b_squadAT + KPLIB_b_squadAA + KPLIB_b_squadRecon + KPLIB_b_squadPara);
 KPLIB_b_inf_classes             = KPLIB_b_inf_classes               apply {toLowerANSI _x};
@@ -239,6 +242,9 @@ KPLIB_b_allVeh_classes = [];
     KPLIB_b_allVeh_classes append _x;
 } forEach [KPLIB_b_light_classes, KPLIB_b_heavy_classes, KPLIB_b_air_classes, KPLIB_b_static_classes, KPLIB_b_support_classes];
 
+// Check for memory points to slingload
+KPLIB_o_slingVehicles = KPLIB_o_slingVehicles select {count (getArray(configFile >> "CfgVehicles" >> _x >> "slingLoadCargoMemoryPoints")) > 0};
+
 // All opfor vehicle (land and air) classnames
 KPLIB_o_allVeh_classes  = [];
 {
@@ -254,6 +260,7 @@ KPLIB_o_allVeh_classes  = [];
     KPLIB_o_troopTransports,
     KPLIB_o_helicopters,
     KPLIB_o_slingHelicopters,
+    KPLIB_o_slingVehicles,
     KPLIB_o_paradropPlanes,
     KPLIB_o_planes,
     KPLIB_o_SAM_radars,
