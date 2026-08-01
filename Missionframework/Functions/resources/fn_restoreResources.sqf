@@ -2,23 +2,29 @@
     File: fn_restoreResources.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 10/09/2025
-    Last update: 11/06/2026
+    Last update: 31/07/2026
 
     Description:
         Return resources to storage areas when building is cancelled
 
     Parameter(s):
-        _supplyPrice - Supplies value to return [NUMBER]
-        _ammoPrice - Ammo value to return [NUMBER]
-        _fuelPrice - Fuel value to return [NUMBER]
-        _storages - Fob storages [ARRAY]
+        _supplyPrice - Supplies value to return [NUMBER, defaults 0]
+        _ammoPrice - Ammo value to return [NUMBER, defaults 0]
+        _fuelPrice - Fuel value to return [NUMBER, defaults 0]
+        _storages - Base storages [ARRAY, defaults []]
     
     Returns:
         -
 */
-params ["_supplyPrice", "_ammoPrice", "_fuelPrice", "_storages"];
+params [
+    ["_priceSupplies", 0, [0]], 
+    ["_priceAmmo", 0, [0]], 
+    ["_priceFuel", 0, [0]], 
+    ["_storages", [], [[]]]
+];
 
 if (!isServer) exitWith {};
+if (_storageAreas isEqualTo []) exitWith {};
 
 #define SUPPLY_INDEX 0
 #define AMMO_INDEX 1

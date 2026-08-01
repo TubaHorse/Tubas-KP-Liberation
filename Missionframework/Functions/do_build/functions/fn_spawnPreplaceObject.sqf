@@ -3,7 +3,7 @@
     File: fn_spawnPreplaceObject.sqf
     Author: PiG13BR (https://github.com/PiG13BR)
     Date: 28/08/2025
-    Last update: 11/04/2026
+    Last update: 31/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -77,25 +77,25 @@ private _nearestBuildPos = [getPosATL _player] call KPLIB_fnc_getNearestBuildPos
 
 _nearestBuildPos params ["_buildCenterPos", "_buildRange"];
 
-if (_buildType == BUILDTYPE_FACTORY_STORAGE) then {
-    // For storage building, get the nearest sector
-    _buildCenterPos = markerPos ([100] call KPLIB_fnc_getNearestSector);
-};
-
-if ((_buildType != BUILDTYPE_FOB) && (_buildType != BUILDTYPE_OUTPOST)) then {
+if ((_buildType != BUILDTYPE_FOB) && (_buildType != BUILDTYPE_OUTPOST) && (_buildType != BUILDTYPE_FACTORY_STORAGE)) then {
     // If it's an airport area, replace the build range for the airport marker
     private _inAirport = KPLIB_sectors_airport findIf {_buildCenterPos inArea _x};
     _buildRange = if ((_inAirport >= 0) && ((_buildCenterPos distance2D _player) > _buildRange)) then {
         KPLIB_sectors_airport # _inAirport;
     };
-
-    // Buildings
-    [_buildCenterPos, _buildRange, _player] call KPLIB_fnc_spawnSpheresArea;
-
 } else {
-    // Fob or outpost
-    _buildCenterPos = getPosATL _player;
+    // Fob/outpost/factory
+    if (_buildType == BUILDTYPE_FACTORY_STORAGE) then {
+        // For storage building, get the nearest sector
+        _buildCenterPos = markerPos ([100] call KPLIB_fnc_getNearestSector);
+        _buildRange = 125;
+    } else {
+        _buildCenterPos = getPosATL _player;
+    };
 };
+
+// Spawn area spheres
+[_buildCenterPos, _buildRange, _player] call KPLIB_fnc_spawnSpheresArea;
 
 // Commit
 [_object, _player, _buildCenterPos, _buildRange] call KPLIB_fnc_buildEachFrame;

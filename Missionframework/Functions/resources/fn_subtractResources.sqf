@@ -2,25 +2,29 @@
     File: fn_subtractResources.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR (https://github.com/PiG13BR)
     Date: 10/09/2025
-    Last update: 03/07/2026
+    Last update: 31/07/2026
 
     Description:
         Remove resources to storage areas when building
 
     Parameter(s):
-        _priceSupplies - Supplies value to return [NUMBER]
-        _priceAmmo - Ammo value to return [NUMBER]
-        _priceFuel - Fuel value to return [NUMBER]
-        _typeName - classname of the item to build [STRING]
-        _localType - build type [NUMBER]
-        _storageAreas - Fob storages [ARRAY]
+        _priceSupplies - Supplies value to return [NUMBER, defaults to 0]
+        _priceAmmo - Ammo value to return [NUMBER, defaults to 0]
+        _priceFuel - Fuel value to return [NUMBER, defaults to 0]
+        _storageAreas - Base storages [ARRAY, defaults to []]
     
     Returns:
         -
 */
-params ["_priceSupplies", "_priceAmmo", "_priceFuel", "_typeName", "_localType", "_storageAreas"];
+params [
+    ["_priceSupplies", 0, [0]], 
+    ["_priceAmmo", 0, [0]], 
+    ["_priceFuel", 0, [0]], 
+    ["_storageAreas", [], [[]]]
+];
 
 if (!isServer) exitWith {};
+if (_storageAreas isEqualTo []) exitWith {};
 
 #define SUPPLY_INDEX 0
 #define AMMO_INDEX 1
@@ -73,18 +77,6 @@ if ((_priceSupplies > 0) || (_priceAmmo > 0) || (_priceFuel > 0)) then {
 
         if ((_priceSupplies == 0) && (_priceAmmo == 0) && (_priceFuel == 0)) exitWith {};
     } forEach _storageAreas;
-
-    if (_localType == 8) then {
-        stats_blufor_soldiers_recruited = stats_blufor_soldiers_recruited + 10;
-    } else {
-        if (_typeName isKindOf "CAManBase") then {
-            stats_blufor_soldiers_recruited = stats_blufor_soldiers_recruited + 1;
-        } else {
-            if (!(_typeName isKindOf "Building")) then {
-                stats_blufor_vehicles_built = stats_blufor_vehicles_built + 1;
-            };
-        };
-    };
 
     ["KPLIB_recalculateResources", []] call CBA_fnc_serverEvent;
 };

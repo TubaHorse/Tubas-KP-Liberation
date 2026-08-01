@@ -3,7 +3,7 @@
     File: fn_spawnBuildedObject.sqf
     Author: PiG13BR (https://github.com/PiG13BR), FernandimModelador https://github.com/FernandimModelador
     Date: 28/08/2025
-    Last update: 26/07/2026
+    Last update: 31/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -153,6 +153,18 @@ if (((_objectClass isKindOf "LandVehicle") || (_objectClass isKindOf "Air") || (
             }forEach (getAllPylonsInfo _objectSpawned);
         };
         default {};
+    };
+};
+
+if (_buildType == BUILDTYPE_SQUAD) then {
+    stats_blufor_soldiers_recruited = stats_blufor_soldiers_recruited + 10;
+} else {
+    if (_objectClass isKindOf "CAManBase") then {
+        stats_blufor_soldiers_recruited = stats_blufor_soldiers_recruited + 1;
+    } else {
+        if (!(_objectClass isKindOf "Building")) then {
+            stats_blufor_vehicles_built = stats_blufor_vehicles_built + 1;
+        };
     };
 };
 

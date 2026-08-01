@@ -288,20 +288,10 @@
         if (_fuelPrice > 0) then {_fuelPrice = _fuelPrice + round(_fuelPrice * _priceAdd);};  
     };
 
-    [format["BUILD: %1, [%2,%3,%4]", _classname, _supplyPrice, _ammoPrice, _fuelPrice], "SUBTRACT RESOURCES"] call KPLIB_fnc_log;
-
     // If build position is in an airport area, take resources from the nearest FOB only
-    private _inAirport = (KPLIB_sectors_airport findIf {_buildPos inArea _x});
-    
-    // Get storage areas
-    private _storageAreas = if (_inAirport >= 0) then {
-        private _airportArea = KPLIB_sectors_airport # _inAirport;
-        (vehicles inAreaArray _airportArea) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
-    } else {
-        (_buildPos nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
-    };
+    private _storages = [_buildPos] call KPLIB_fnc_getAllStorages;
 
-    [_supplyPrice, _ammoPrice, _fuelPrice, _classname, _buildType, _storageAreas] call KPLIB_fnc_subtractResources;
+    [_supplyPrice, _ammoPrice, _fuelPrice, _storages] call KPLIB_fnc_subtractResources;
 }] call CBA_fnc_addEventHandler;
 
 // Subtract Resources in FOB deployment
@@ -319,9 +309,8 @@
     // Get storage areas
     ([_respawnPos] call KPLIB_fnc_getNearestBuildPos) params ["_buildPos", "_range"];
     
-    //private _nearBase = [_respawnPos] call KPLIB_fnc_getNearestPlayerBase;
-    private _storageAreas = (_buildPos nearobjects (_range * 2)) select {_x getVariable ["KPLIB_fobStorage", false]};
-    [_supplyPrice, _ammoPrice, _fuelPrice, "", -1, _storageAreas] call KPLIB_fnc_subtractResources;
+    private _storages = [_buildPos] call KPLIB_fnc_getAllStorages;
+    [_supplyPrice, _ammoPrice, _fuelPrice, _storages] call KPLIB_fnc_subtractResources;
 }] call CBA_fnc_addEventHandler;
 
 // Restore resources (cancel building)
@@ -357,15 +346,7 @@
     };
 
     // If build position is in an airport area, take resources from the nearest FOB only
-    private _inAirport = (KPLIB_sectors_airport findIf {_buildPos inArea _x});
-    
-    // Get storage areas
-    private _storageAreas = if (_inAirport >= 0) then {
-        private _airportArea = KPLIB_sectors_airport # _inAirport;
-        (vehicles inAreaArray _airportArea) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
-    } else {
-        (_buildPos nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
-    };
+    private _storageAreas = [_buildPos] call KPLIB_fnc_getAllStorages;
 
     private _storages = [];
     {
