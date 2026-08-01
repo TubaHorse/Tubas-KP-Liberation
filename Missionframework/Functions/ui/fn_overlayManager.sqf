@@ -4,7 +4,7 @@
     Author: -
     Modified by PiG13BR - https://github.com/PiG13BR
     Date: 12/06/2026
-    Last Update: 23/07/2026
+    Last Update: 31/07/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -36,7 +36,6 @@ if (isNil "halojumping") then {halojumping = false;};
 
 private _uiticks = 0;
 private _sectorsActiveHint = false;
-private _attacked_string = "";
 private _nearestSector = "";
 private _zone_size = 0;
 private _colorzone = "ColorGrey";
@@ -120,8 +119,9 @@ while {alive _player} do {
 
         // Check if the enemy capture marker has moved from its reset pos
         if ((markerPos "opfor_capture_marker") distance2D markers_reset > 100) then {
-
-            private _attackedSector = [markerpos "opfor_capture_marker"] call KPLIB_fnc_getLocationName;
+            
+            private _bluforObjective = [markerpos "opfor_capture_marker"] call KPLIB_fnc_getNearestBluforObjective;
+            private _attackedSector = [_bluforObjective] call KPLIB_fnc_getLocationName;
 
             (_overlay displayCtrl ALERT_BG_PIC) ctrlShow true;
             (_overlay displayCtrl ALERT_LABEL) ctrlSetText _attackedSector;
