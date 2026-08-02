@@ -66,6 +66,7 @@
 * Fixed: Resources cargo not beign deleted when the vehicle carrying it is destroyed.
 * Fixed: MLRS enemy artillery was not firing all its rounds at once.
 * Fixed: Shorad in enemy SAM sites not firing at incoming missiles.
+* Fixed: Presets with spill spud for storages not converting to containers.
 
 ## 0.97.0 (07/03/2026)
 * Added Extension: Enemy artillery.

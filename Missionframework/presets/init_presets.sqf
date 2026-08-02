@@ -18,25 +18,27 @@ if (isServer) then {
 /*
     Compatibility checks
 */
-if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_supplyDump)}) < 0) then {
+private _tempSupport = +KPLIB_b_vehSupport;
+
+if ((_tempSupport findIf {(_x#0 == KPLIB_b_supplyDump)}) < 0) then {
     // No supply dump found in support label, add it.
-    KPLIB_b_vehSupport pushBack [KPLIB_b_supplyDump, 250,1000,0]
+    _tempSupport pushBack [KPLIB_b_supplyDump, 250,1000,0]
 };
 
-if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_barrack)}) < 0) then {
+if ((_tempSupport findIf {(_x#0 == KPLIB_b_barrack)}) < 0) then {
     // No barrack found in support label, add it
-    KPLIB_b_vehSupport pushBack [KPLIB_b_barrack, 200,0,0]
+    _tempSupport pushBack [KPLIB_b_barrack, 200,0,0]
 };
 
-if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_medicalFacility)}) < 0) then {
+if ((_tempSupport findIf {(_x#0 == KPLIB_b_medicalFacility)}) < 0) then {
     // No barrack found in support label, add it
-    KPLIB_b_vehSupport pushBack [KPLIB_b_medicalFacility, 300,0,0]
+    _tempSupport pushBack [KPLIB_b_medicalFacility, 300,0,0]
 };
 
 // Add crates to the support label
 {
     private _class = _x # 0;
-    if ((KPLIB_b_vehSupport findIf {(_x#0 == _class)}) < 0) then {KPLIB_b_vehSupport pushBack _x};
+    if ((_tempSupport findIf {(_x#0 == _class)}) < 0) then {_tempSupport pushBack _x};
 }forEach KPLIB_supply_crates;
 
 KPLIB_supply_cratesClasses = KPLIB_supply_crates apply {toLowerANSI (_x#0)};
@@ -48,23 +50,34 @@ if (KPLIB_b_mobileRespawn isEqualType "") then {
 };
 
 // Add transportable storage to support list if not available
-if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_transStorage)}) < 0) then {
+if ((_tempSupport findIf {(_x#0 == KPLIB_b_transStorage)}) < 0) then {
     // No barrack found in support label, add it
-    KPLIB_b_vehSupport pushBack [KPLIB_b_transStorage,100,0,0]
+    _tempSupport pushBack [KPLIB_b_transStorage,100,0,0]
 };
 
 // Outpost compat
-if ((KPLIB_b_vehSupport findIf {(_x#0 == KPLIB_b_outpostBox)}) < 0) then {
+if ((_tempSupport findIf {(_x#0 == KPLIB_b_outpostBox)}) < 0) then {
     // No outpost found in support label, add it
-    KPLIB_b_vehSupport pushBack [KPLIB_b_outpostBox,300,300,0]
+    _tempSupport pushBack [KPLIB_b_outpostBox,300,300,0]
+};
+
+// Check for spill spud storages on preset and force them to be containers
+private _index = _tempSupport findIf {_x#0 == "ContainmentArea_02_sand_F"};
+if (_index != -1) then {
+    KPLIB_b_smallStorage = "Land_Cargo20_brick_red_F";
+    (_tempSupport # _index) set [0, KPLIB_b_smallStorage];
+};
+
+private _index = _tempSupport findIf {_x#0 == "ContainmentArea_01_sand_F"};
+if (_index != -1) then {
+    KPLIB_b_largeStorage = "Land_Cargo40_brick_red_F";
+    (_tempSupport # _index) set [0, KPLIB_b_largeStorage];
 };
 
 // Compatibility check and fix for vehicles to unlock
 KPLIB_b_vehToUnlock = KPLIB_b_vehToUnlock apply {if (_x isEqualType "") then {[_x, ""]} else {_x}};
 
-// Force storages to be containers
-KPLIB_b_smallStorage    = "Land_Cargo20_brick_red_F";
-KPLIB_b_largeStorage    = "Land_Cargo40_brick_red_F"; 
+KPLIB_b_vehSupport = +_tempSupport;
 
 // Compatibility data for slots and hangas
 if (KPLIB_b_slotHeli isEqualType "") then {

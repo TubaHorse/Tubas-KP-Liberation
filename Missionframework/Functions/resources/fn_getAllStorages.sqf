@@ -2,7 +2,7 @@
     File: fn_getAllStorages.sqf
     Author: Author: PiG13BR (https://github.com/PiG13BR)
     Date: 31/07/2026
-    Last Update: 31/07/2026
+    Last Update: 02/08/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -23,9 +23,9 @@ private _inAirport = (KPLIB_sectors_airport findIf {_centerPos inArea _x});
 // Get storage areas
 private _storages = if (_inAirport >= 0) then {
     private _airportArea = KPLIB_sectors_airport # _inAirport;
-    (vehicles inAreaArray _airportArea) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    (vehicles inAreaArray _airportArea) select {((_x getVariable ["KPLIB_fobStorage", false]) || (_x getVariable ["KPLIB_factoryStorage", false])) && {((getPosATL _x) # 2) < 1}};
 } else {
-    (_centerPos nearobjects (KPLIB_range_fob * 2)) select {_x getVariable ["KPLIB_fobStorage", false] && {((getPosATL _x) # 2) < 1}};
+    (_centerPos nearobjects (KPLIB_range_fob * 2)) select {((_x getVariable ["KPLIB_fobStorage", false]) || (_x getVariable ["KPLIB_factoryStorage", false])) && {((getPosATL _x) # 2) < 1}};
 };
 
 _storages
