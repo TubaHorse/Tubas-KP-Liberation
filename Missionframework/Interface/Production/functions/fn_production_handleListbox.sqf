@@ -3,7 +3,7 @@
     File: fn_production_handleListBox.sqf
     Author: KP Liberation Dev Team - https://github.com/KillahPotatoes, PiG13BR - https://github.com/PiG13BR
     Date: 15/11/2025
-    Last Update: 07/02/2026
+    Last Update: 01/08/2026
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -25,7 +25,7 @@ if (_lbCurSel == -1) then {
 private _sector = _lbControl lbData _lbCurSel;
 
 // Map control
-//"spawn_marker" setMarkerPosLocal (markerPos _sector); // ???
+"spawn_marker" setMarkerPosLocal (markerPos _sector);
 private _display = ctrlParent _lbControl;
 private _mapCtrl = _display displayCtrl IDC_MAP;
 _mapCtrl ctrlMapAnimAdd [0.5, 0.2, (markerPos _sector)];
